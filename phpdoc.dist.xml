@@ -26,4 +26,5 @@
             <include-source>true</include-source>
         </api>
     </version>
+    <setting name="template.color" value="deep-purple"/>
 </phpdocumentor>
