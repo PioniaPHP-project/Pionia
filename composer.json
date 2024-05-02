@@ -1,0 +1,29 @@
+{
+    "name": "jetezra/rest-php",
+    "description": "First PhP framework that does it right",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["php", "framework", "jet2018", "service", "j2j", "architecture", "performance"],
+    "autoload": {
+        "psr-4": {
+            "JetPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "jet2018",
+            "email": "ezrajet9@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "php": ">=8.0",
+        "symfony/http-kernel": "6.4.x-dev",
+        "symfony/routing": "6.4.x-dev",
+        "symfony/console": "6.4.x-dev",
+        "symfony/process": "6.4.x-dev"
+    }
+}
