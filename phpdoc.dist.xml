@@ -5,6 +5,7 @@
         xmlns="https://www.phpdoc.org"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/phpDocumentor/phpDocumentor/master/data/xsd/phpdoc.xsd"
 >
+    <title>JetPhp Core</title>
     <paths>
         <output>build/docs</output>
         <cache>build/cache</cache>
