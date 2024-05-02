@@ -3,3 +3,6 @@ settings.ini
 .idea
 .DM_Store
 composer.lock
+build
+.phpdoc
+
