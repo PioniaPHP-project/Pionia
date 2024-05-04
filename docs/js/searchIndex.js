@@ -1,948 +1,948 @@
 Search.appendIndex(
     [
                 {
-            "fqsen": "\\JetPhp\\Command\\BaseCommand",
+            "fqsen": "\\jetPhp\\command\\BaseCommand",
             "name": "BaseCommand",
             "summary": "This\u0020is\u0020the\u0020base\u0020command\u0020class,\u0020it\u0020extends\u0020the\u0020Symfony\u0020console\u0020command\u0020class\u0020and\u0020provides\u0020some\u0020helper\u0020methods\nthat\u0020can\u0020be\u0020used\u0020in\u0020all\u0020commands.\u0020All\u0020commands\u0020should\u0020extend\u0020this\u0020class.",
-            "url": "classes/JetPhp-Command-BaseCommand.html"
+            "url": "classes/jetPhp-command-BaseCommand.html"
         },                {
-            "fqsen": "\\JetPhp\\Command\\BaseCommand\u003A\u003Abase\u0028\u0029",
+            "fqsen": "\\jetPhp\\command\\BaseCommand\u003A\u003Abase\u0028\u0029",
             "name": "base",
             "summary": "Return\u0020the\u0020base\u0020app,\u0020via\u0020this,\u0020you\u0020can\u0020access\u0020all\u0020the\u0020app\u0020settings,\u0020and\u0020current\u0020app\u0020environment",
-            "url": "classes/JetPhp-Command-BaseCommand.html#method_base"
+            "url": "classes/jetPhp-command-BaseCommand.html#method_base"
         },                {
-            "fqsen": "\\JetPhp\\Command\\BaseCommand\u003A\u003Aconnection\u0028\u0029",
+            "fqsen": "\\jetPhp\\command\\BaseCommand\u003A\u003Aconnection\u0028\u0029",
             "name": "connection",
             "summary": "Returns\u0020the\u0020current\u0020database\u0020connection",
-            "url": "classes/JetPhp-Command-BaseCommand.html#method_connection"
+            "url": "classes/jetPhp-command-BaseCommand.html#method_connection"
         },                {
-            "fqsen": "\\JetPhp\\Command\\CommandInterface",
+            "fqsen": "\\jetPhp\\command\\CommandInterface",
             "name": "CommandInterface",
             "summary": "",
-            "url": "classes/JetPhp-Command-CommandInterface.html"
+            "url": "classes/jetPhp-command-CommandInterface.html"
         },                {
-            "fqsen": "\\JetPhp\\Command\\CommandInterface\u003A\u003AaddCommand\u0028\u0029",
+            "fqsen": "\\jetPhp\\command\\CommandInterface\u003A\u003AaddCommand\u0028\u0029",
             "name": "addCommand",
             "summary": "",
-            "url": "classes/JetPhp-Command-CommandInterface.html#method_addCommand"
+            "url": "classes/jetPhp-command-CommandInterface.html#method_addCommand"
         },                {
-            "fqsen": "\\JetPhp\\Command\\CommandInterface\u003A\u003Arun\u0028\u0029",
+            "fqsen": "\\jetPhp\\command\\CommandInterface\u003A\u003Arun\u0028\u0029",
             "name": "run",
             "summary": "",
-            "url": "classes/JetPhp-Command-CommandInterface.html#method_run"
+            "url": "classes/jetPhp-command-CommandInterface.html#method_run"
         },                {
-            "fqsen": "\\JetPhp\\Command\\CommandInterface\u003A\u003AsetUp\u0028\u0029",
+            "fqsen": "\\jetPhp\\command\\CommandInterface\u003A\u003AsetUp\u0028\u0029",
             "name": "setUp",
             "summary": "",
-            "url": "classes/JetPhp-Command-CommandInterface.html#method_setUp"
+            "url": "classes/jetPhp-command-CommandInterface.html#method_setUp"
         },                {
-            "fqsen": "\\JetPhp\\Command\\CommandInterface\u003A\u003A\u0024commands",
+            "fqsen": "\\jetPhp\\command\\CommandInterface\u003A\u003A\u0024commands",
             "name": "commands",
             "summary": "These\u0020are\u0020the\u0020core\u0020commands\u0020that\u0020are\u0020available\u0020in\u0020the\u0020framework",
-            "url": "classes/JetPhp-Command-CommandInterface.html#property_commands"
+            "url": "classes/jetPhp-command-CommandInterface.html#property_commands"
         },                {
-            "fqsen": "\\JetPhp\\Command\\ConsoleApplication",
-            "name": "ConsoleApplication",
-            "summary": "",
-            "url": "classes/JetPhp-Command-ConsoleApplication.html"
-        },                {
-            "fqsen": "\\JetPhp\\Command\\ConsoleApplication\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/JetPhp-Command-ConsoleApplication.html#method___construct"
-        },                {
-            "fqsen": "\\JetPhp\\Command\\Core\\StartServer",
+            "fqsen": "\\jetPhp\\command\\commands\\StartServer",
             "name": "StartServer",
             "summary": "For\u0020starting\u0020the\u0020php\u0020server",
-            "url": "classes/JetPhp-Command-Core-StartServer.html"
+            "url": "classes/jetPhp-command-commands-StartServer.html"
         },                {
-            "fqsen": "\\JetPhp\\Command\\Core\\StartServer\u003A\u003Aconfigure\u0028\u0029",
+            "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003Aconfigure\u0028\u0029",
             "name": "configure",
             "summary": "",
-            "url": "classes/JetPhp-Command-Core-StartServer.html#method_configure"
+            "url": "classes/jetPhp-command-commands-StartServer.html#method_configure"
         },                {
-            "fqsen": "\\JetPhp\\Command\\Core\\StartServer\u003A\u003Aexecute\u0028\u0029",
+            "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003Aexecute\u0028\u0029",
             "name": "execute",
             "summary": "",
-            "url": "classes/JetPhp-Command-Core-StartServer.html#method_execute"
+            "url": "classes/jetPhp-command-commands-StartServer.html#method_execute"
         },                {
-            "fqsen": "\\JetPhp\\Command\\Core\\StartServer\u003A\u003A\u0024title",
+            "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003A\u0024title",
             "name": "title",
             "summary": "",
-            "url": "classes/JetPhp-Command-Core-StartServer.html#property_title"
+            "url": "classes/jetPhp-command-commands-StartServer.html#property_title"
         },                {
-            "fqsen": "\\JetPhp\\Command\\Core\\StartServer\u003A\u003A\u0024description",
+            "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003A\u0024description",
             "name": "description",
             "summary": "",
-            "url": "classes/JetPhp-Command-Core-StartServer.html#property_description"
+            "url": "classes/jetPhp-command-commands-StartServer.html#property_description"
         },                {
-            "fqsen": "\\JetPhp\\Command\\Core\\StartServer\u003A\u003A\u0024name",
+            "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003A\u0024name",
             "name": "name",
             "summary": "",
-            "url": "classes/JetPhp-Command-Core-StartServer.html#property_name"
+            "url": "classes/jetPhp-command-commands-StartServer.html#property_name"
         },                {
-            "fqsen": "\\JetPhp\\Command\\Core\\StartServer\u003A\u003A\u0024command",
+            "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003A\u0024command",
             "name": "command",
             "summary": "",
-            "url": "classes/JetPhp-Command-Core-StartServer.html#property_command"
+            "url": "classes/jetPhp-command-commands-StartServer.html#property_command"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Base",
+            "fqsen": "\\jetPhp\\command\\ConsoleApplication",
+            "name": "ConsoleApplication",
+            "summary": "",
+            "url": "classes/jetPhp-command-ConsoleApplication.html"
+        },                {
+            "fqsen": "\\jetPhp\\command\\ConsoleApplication\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/jetPhp-command-ConsoleApplication.html#method___construct"
+        },                {
+            "fqsen": "\\jetPhp\\core\\Base",
             "name": "Base",
             "summary": "",
-            "url": "classes/JetPhp-Core-Base.html"
+            "url": "classes/jetPhp-core-Base.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Base\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\Base\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/JetPhp-Core-Base.html#method___construct"
+            "url": "classes/jetPhp-core-Base.html#method___construct"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Base\u003A\u003AgetSettings\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\Base\u003A\u003AgetSettings\u0028\u0029",
             "name": "getSettings",
             "summary": "",
-            "url": "classes/JetPhp-Core-Base.html#method_getSettings"
+            "url": "classes/jetPhp-core-Base.html#method_getSettings"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Base\u003A\u003AgetSetting\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\Base\u003A\u003AgetSetting\u0028\u0029",
             "name": "getSetting",
             "summary": "",
-            "url": "classes/JetPhp-Core-Base.html#method_getSetting"
+            "url": "classes/jetPhp-core-Base.html#method_getSetting"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Base\u003A\u003AgetSettingOrDefault\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\Base\u003A\u003AgetSettingOrDefault\u0028\u0029",
             "name": "getSettingOrDefault",
             "summary": "",
-            "url": "classes/JetPhp-Core-Base.html#method_getSettingOrDefault"
+            "url": "classes/jetPhp-core-Base.html#method_getSettingOrDefault"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Base\u003A\u003AresolveSettingsFromIni\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\Base\u003A\u003AresolveSettingsFromIni\u0028\u0029",
             "name": "resolveSettingsFromIni",
             "summary": "",
-            "url": "classes/JetPhp-Core-Base.html#method_resolveSettingsFromIni"
+            "url": "classes/jetPhp-core-Base.html#method_resolveSettingsFromIni"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Base\u003A\u003A\u0024settings",
+            "fqsen": "\\jetPhp\\core\\Base\u003A\u003A\u0024settings",
             "name": "settings",
             "summary": "",
-            "url": "classes/JetPhp-Core-Base.html#property_settings"
+            "url": "classes/jetPhp-core-Base.html#property_settings"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Base\u003A\u003A\u0024version",
+            "fqsen": "\\jetPhp\\core\\Base\u003A\u003A\u0024version",
             "name": "version",
             "summary": "",
-            "url": "classes/JetPhp-Core-Base.html#property_version"
+            "url": "classes/jetPhp-core-Base.html#property_version"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Base\u003A\u003A\u0024name",
+            "fqsen": "\\jetPhp\\core\\Base\u003A\u003A\u0024name",
             "name": "name",
             "summary": "",
-            "url": "classes/JetPhp-Core-Base.html#property_name"
+            "url": "classes/jetPhp-core-Base.html#property_name"
         },                {
-            "fqsen": "\\JetPhp\\Core\\BaseApiController",
+            "fqsen": "\\jetPhp\\core\\BaseApiController",
             "name": "BaseApiController",
             "summary": "",
-            "url": "classes/JetPhp-Core-BaseApiController.html"
+            "url": "classes/jetPhp-core-BaseApiController.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\BaseApiController\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\BaseApiController\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/JetPhp-Core-BaseApiController.html#method___construct"
+            "url": "classes/jetPhp-core-BaseApiController.html#method___construct"
         },                {
-            "fqsen": "\\JetPhp\\Core\\BaseApiController\u003A\u003Aping\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\BaseApiController\u003A\u003Aping\u0028\u0029",
             "name": "ping",
             "summary": "This\u0020just\u0020is\u0020for\u0020checking\u0020the\u0020server\u0020status",
-            "url": "classes/JetPhp-Core-BaseApiController.html#method_ping"
+            "url": "classes/jetPhp-core-BaseApiController.html#method_ping"
         },                {
-            "fqsen": "\\JetPhp\\Core\\BaseApiController\u003A\u003A\u0024settings",
+            "fqsen": "\\jetPhp\\core\\BaseApiController\u003A\u003A\u0024settings",
             "name": "settings",
             "summary": "",
-            "url": "classes/JetPhp-Core-BaseApiController.html#property_settings"
+            "url": "classes/jetPhp-core-BaseApiController.html#property_settings"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel",
             "name": "CoreKernel",
             "summary": "",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html"
+            "url": "classes/jetPhp-core-config-CoreKernel.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#method___construct"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#method___construct"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003AregisterMiddleware\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003AregisterMiddleware\u0028\u0029",
             "name": "registerMiddleware",
             "summary": "",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#method_registerMiddleware"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#method_registerMiddleware"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003AregisterAuthBackends\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003AregisterAuthBackends\u0028\u0029",
             "name": "registerAuthBackends",
             "summary": "",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#method_registerAuthBackends"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#method_registerAuthBackends"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003Aresolve\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003Aresolve\u0028\u0029",
             "name": "resolve",
             "summary": "",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#method_resolve"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#method_resolve"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003Ahandle\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003Ahandle\u0028\u0029",
             "name": "handle",
             "summary": "",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#method_handle"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#method_handle"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003AresolveMiddlewares\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003AresolveMiddlewares\u0028\u0029",
             "name": "resolveMiddlewares",
             "summary": "Runs\u0020every\u0020registered\u0020middleware\u0020pre\u0020and\u0020post\u0020controller\u0020execution.\u0020Exposing\u0020both\u0020the\u0020request\u0020and\u0020response\u0020the\u0020middleware",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#method_resolveMiddlewares"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#method_resolveMiddlewares"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003AresolveAuthenticationBackend\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003AresolveAuthenticationBackend\u0028\u0029",
             "name": "resolveAuthenticationBackend",
             "summary": "",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#method_resolveAuthenticationBackend"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#method_resolveAuthenticationBackend"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003AauthenticationBackendWorker\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003AauthenticationBackendWorker\u0028\u0029",
             "name": "authenticationBackendWorker",
             "summary": "This\u0020will\u0020run\u0020until\u0020any\u0020of\u0020the\u0020backends\u0020successfully\u0020authenticates\u0020the\u0020user",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#method_authenticationBackendWorker"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#method_authenticationBackendWorker"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003A\u0024context",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A\u0024context",
             "name": "context",
             "summary": "",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#property_context"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#property_context"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003A\u0024matcher",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A\u0024matcher",
             "name": "matcher",
             "summary": "",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#property_matcher"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#property_matcher"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003A\u0024middleware",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A\u0024middleware",
             "name": "middleware",
             "summary": "",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#property_middleware"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#property_middleware"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003A\u0024authBackends",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A\u0024authBackends",
             "name": "authBackends",
             "summary": "",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#property_authBackends"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#property_authBackends"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\CoreKernel\u003A\u003A\u0024routes",
+            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A\u0024routes",
             "name": "routes",
             "summary": "",
-            "url": "classes/JetPhp-Core-Config-CoreKernel.html#property_routes"
+            "url": "classes/jetPhp-core-config-CoreKernel.html#property_routes"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\Sessions",
+            "fqsen": "\\jetPhp\\core\\config\\Sessions",
             "name": "Sessions",
-            "summary": "",
-            "url": "classes/JetPhp-Core-Config-Sessions.html"
+            "summary": "This\u0020class\u0020is\u0020responsible\u0020for\u0020handling\u0020all\u0020session\u0020related\u0020operations",
+            "url": "classes/jetPhp-core-config-Sessions.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\Sessions\u003A\u003Adestroy\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Adestroy\u0028\u0029",
             "name": "destroy",
             "summary": "Destroys\u0020all\u0020data\u0020registered\u0020to\u0020a\u0020session",
-            "url": "classes/JetPhp-Core-Config-Sessions.html#method_destroy"
+            "url": "classes/jetPhp-core-config-Sessions.html#method_destroy"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\Sessions\u003A\u003Astart\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Astart\u0028\u0029",
             "name": "start",
             "summary": "Initialize\u0020session\u0020data",
-            "url": "classes/JetPhp-Core-Config-Sessions.html#method_start"
+            "url": "classes/jetPhp-core-config-Sessions.html#method_start"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\Sessions\u003A\u003Aset\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Aset\u0028\u0029",
             "name": "set",
             "summary": "Sets\u0020the\u0020given\u0020key\u0020to\u0020the\u0020given\u0020value\u0020into\u0020the\u0020session\u0020and\u0020returns\u0020the\u0020current\u0020entire\u0020session\u0020values",
-            "url": "classes/JetPhp-Core-Config-Sessions.html#method_set"
+            "url": "classes/jetPhp-core-config-Sessions.html#method_set"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\Sessions\u003A\u003Aget\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Aget\u0028\u0029",
             "name": "get",
             "summary": "Gets\u0020and\u0020returns\u0020a\u0020certain\u0020value\u0020from\u0020the\u0020session",
-            "url": "classes/JetPhp-Core-Config-Sessions.html#method_get"
+            "url": "classes/jetPhp-core-config-Sessions.html#method_get"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\Sessions\u003A\u003Ahas\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Ahas\u0028\u0029",
             "name": "has",
             "summary": "Checks\u0020if\u0020a\u0020certain\u0020key\u0020is\u0020already\u0020in\u0020the\u0020session",
-            "url": "classes/JetPhp-Core-Config-Sessions.html#method_has"
+            "url": "classes/jetPhp-core-config-Sessions.html#method_has"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\Sessions\u003A\u003Aremove\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Aremove\u0028\u0029",
             "name": "remove",
             "summary": "Destroys\u0020a\u0020specific\u0020key\u0020in\u0020the\u0020session",
-            "url": "classes/JetPhp-Core-Config-Sessions.html#method_remove"
+            "url": "classes/jetPhp-core-config-Sessions.html#method_remove"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\Sessions\u003A\u003AregerateKey\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003AregerateKey\u0028\u0029",
             "name": "regerateKey",
             "summary": "Update\u0020the\u0020current\u0020session\u0020id\u0020with\u0020a\u0020newly\u0020generated\u0020one",
-            "url": "classes/JetPhp-Core-Config-Sessions.html#method_regerateKey"
+            "url": "classes/jetPhp-core-config-Sessions.html#method_regerateKey"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config\\Sessions\u003A\u003Aconfigure\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Aconfigure\u0028\u0029",
             "name": "configure",
             "summary": "Set\u0020the\u0020session\u0020cookie\u0020parameters",
-            "url": "classes/JetPhp-Core-Config-Sessions.html#method_configure"
+            "url": "classes/jetPhp-core-config-Sessions.html#method_configure"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\ContextUserObject",
+            "fqsen": "\\jetPhp\\core\\helpers\\ContextUserObject",
             "name": "ContextUserObject",
             "summary": "",
-            "url": "classes/JetPhp-Core-Helpers-ContextUserObject.html"
+            "url": "classes/jetPhp-core-helpers-ContextUserObject.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\ContextUserObject\u003A\u003A\u0024user",
+            "fqsen": "\\jetPhp\\core\\helpers\\ContextUserObject\u003A\u003A\u0024user",
             "name": "user",
             "summary": "You\u0020can\u0020store\u0020here\u0020your\u0020user\u0020object",
-            "url": "classes/JetPhp-Core-Helpers-ContextUserObject.html#property_user"
+            "url": "classes/jetPhp-core-helpers-ContextUserObject.html#property_user"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\ContextUserObject\u003A\u003A\u0024authenticated",
+            "fqsen": "\\jetPhp\\core\\helpers\\ContextUserObject\u003A\u003A\u0024authenticated",
             "name": "authenticated",
             "summary": "Turn\u0020this\u0020to\u0020true\u0020if\u0020the\u0020user\u0020is\u0020authenticated",
-            "url": "classes/JetPhp-Core-Helpers-ContextUserObject.html#property_authenticated"
+            "url": "classes/jetPhp-core-helpers-ContextUserObject.html#property_authenticated"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\ContextUserObject\u003A\u003A\u0024permissions",
+            "fqsen": "\\jetPhp\\core\\helpers\\ContextUserObject\u003A\u003A\u0024permissions",
             "name": "permissions",
             "summary": "Set\u0020this\u0020to\u0020the\u0020user\u0027s\u0020object",
-            "url": "classes/JetPhp-Core-Helpers-ContextUserObject.html#property_permissions"
+            "url": "classes/jetPhp-core-helpers-ContextUserObject.html#property_permissions"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\ContextUserObject\u003A\u003A\u0024authExtra",
+            "fqsen": "\\jetPhp\\core\\helpers\\ContextUserObject\u003A\u003A\u0024authExtra",
             "name": "authExtra",
             "summary": "this\u0020holds\u0020any\u0020other\u0020data\u0020about\u0020the\u0020logged\u002Din\u0020session\u0020holder,\u0020can\u0020be\u0020user\u0020to\u0020hold\u0020user\u0020domain,\u0020user\u0020role\u0020etc",
-            "url": "classes/JetPhp-Core-Helpers-ContextUserObject.html#property_authExtra"
+            "url": "classes/jetPhp-core-helpers-ContextUserObject.html#property_authExtra"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\SupportedHttpMethods",
+            "fqsen": "\\jetPhp\\core\\helpers\\SupportedHttpMethods",
             "name": "SupportedHttpMethods",
             "summary": "",
-            "url": "classes/JetPhp-Core-Helpers-SupportedHttpMethods.html"
+            "url": "classes/jetPhp-core-helpers-SupportedHttpMethods.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\SupportedHttpMethods\u003A\u003APOST",
+            "fqsen": "\\jetPhp\\core\\helpers\\SupportedHttpMethods\u003A\u003APOST",
             "name": "POST",
             "summary": "",
-            "url": "classes/JetPhp-Core-Helpers-SupportedHttpMethods.html#constant_POST"
+            "url": "classes/jetPhp-core-helpers-SupportedHttpMethods.html#constant_POST"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\SupportedHttpMethods\u003A\u003AGET",
+            "fqsen": "\\jetPhp\\core\\helpers\\SupportedHttpMethods\u003A\u003AGET",
             "name": "GET",
             "summary": "",
-            "url": "classes/JetPhp-Core-Helpers-SupportedHttpMethods.html#constant_GET"
+            "url": "classes/jetPhp-core-helpers-SupportedHttpMethods.html#constant_GET"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\Utilities",
+            "fqsen": "\\jetPhp\\core\\helpers\\Utilities",
             "name": "Utilities",
             "summary": "These\u0020are\u0020just\u0020helpers\u0020to\u0020quickly\u0020staff\u0020done",
-            "url": "classes/JetPhp-Core-Helpers-Utilities.html"
+            "url": "classes/jetPhp-core-helpers-Utilities.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\Utilities\u003A\u003AarrayToCommaSepString\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\helpers\\Utilities\u003A\u003AarrayToCommaSepString\u0028\u0029",
             "name": "arrayToCommaSepString",
             "summary": "",
-            "url": "classes/JetPhp-Core-Helpers-Utilities.html#method_arrayToCommaSepString"
+            "url": "classes/jetPhp-core-helpers-Utilities.html#method_arrayToCommaSepString"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\Utilities\u003A\u003Ajsonify\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\helpers\\Utilities\u003A\u003Ajsonify\u0028\u0029",
             "name": "jsonify",
             "summary": "",
-            "url": "classes/JetPhp-Core-Helpers-Utilities.html#method_jsonify"
+            "url": "classes/jetPhp-core-helpers-Utilities.html#method_jsonify"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\Utilities\u003A\u003Aextends\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\helpers\\Utilities\u003A\u003Aextends\u0028\u0029",
             "name": "extends",
             "summary": "",
-            "url": "classes/JetPhp-Core-Helpers-Utilities.html#method_extends"
+            "url": "classes/jetPhp-core-helpers-Utilities.html#method_extends"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers\\Utilities\u003A\u003Aimplements\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\helpers\\Utilities\u003A\u003Aimplements\u0028\u0029",
             "name": "implements",
             "summary": "",
-            "url": "classes/JetPhp-Core-Helpers-Utilities.html#method_implements"
+            "url": "classes/jetPhp-core-helpers-Utilities.html#method_implements"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Interceptions\\BaseAuthenticationBackend",
+            "fqsen": "\\jetPhp\\core\\interceptions\\BaseAuthenticationBackend",
             "name": "BaseAuthenticationBackend",
-            "summary": "Document\u0020me\u0021",
-            "url": "classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html"
+            "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020all\u0020authentication\u0020backends.",
+            "url": "classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Interceptions\\BaseAuthenticationBackend\u003A\u003Aauthenticate\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\interceptions\\BaseAuthenticationBackend\u003A\u003Aauthenticate\u0028\u0029",
             "name": "authenticate",
             "summary": "",
-            "url": "classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#method_authenticate"
+            "url": "classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#method_authenticate"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Interceptions\\BaseMiddleware",
+            "fqsen": "\\jetPhp\\core\\interceptions\\BaseMiddleware",
             "name": "BaseMiddleware",
             "summary": "Middleware\u0020can\u0020run\u0020on\u0020every\u0020request\u0020and\u0020every\u0020response.",
-            "url": "classes/JetPhp-Core-Interceptions-BaseMiddleware.html"
+            "url": "classes/jetPhp-core-interceptions-BaseMiddleware.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Interceptions\\BaseMiddleware\u003A\u003Arun\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\interceptions\\BaseMiddleware\u003A\u003Arun\u0028\u0029",
             "name": "run",
             "summary": "",
-            "url": "classes/JetPhp-Core-Interceptions-BaseMiddleware.html#method_run"
+            "url": "classes/jetPhp-core-interceptions-BaseMiddleware.html#method_run"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\BaseRoute",
+            "fqsen": "\\jetPhp\\core\\routing\\BaseRoute",
             "name": "BaseRoute",
             "summary": "",
-            "url": "classes/JetPhp-Core-Routing-BaseRoute.html"
+            "url": "classes/jetPhp-core-routing-BaseRoute.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\BaseRoutes",
+            "fqsen": "\\jetPhp\\core\\routing\\BaseRoutes",
             "name": "BaseRoutes",
             "summary": "",
-            "url": "classes/JetPhp-Core-Routing-BaseRoutes.html"
+            "url": "classes/jetPhp-core-routing-BaseRoutes.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\JetRouter",
+            "fqsen": "\\jetPhp\\core\\routing\\JetRouter",
             "name": "JetRouter",
             "summary": "Changing\u0020how\u0020we\u0020define\u0020our\u0020routes\u0020in\u0020the\u0020app",
-            "url": "classes/JetPhp-Core-Routing-JetRouter.html"
+            "url": "classes/jetPhp-core-routing-JetRouter.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\JetRouter\u003A\u003AgetRoutes\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003AgetRoutes\u0028\u0029",
             "name": "getRoutes",
             "summary": "",
-            "url": "classes/JetPhp-Core-Routing-JetRouter.html#method_getRoutes"
+            "url": "classes/jetPhp-core-routing-JetRouter.html#method_getRoutes"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\JetRouter\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/JetPhp-Core-Routing-JetRouter.html#method___construct"
+            "url": "classes/jetPhp-core-routing-JetRouter.html#method___construct"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\JetRouter\u003A\u003AresolveController\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003AresolveController\u0028\u0029",
             "name": "resolveController",
             "summary": "",
-            "url": "classes/JetPhp-Core-Routing-JetRouter.html#method_resolveController"
+            "url": "classes/jetPhp-core-routing-JetRouter.html#method_resolveController"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\JetRouter\u003A\u003Apost\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003Apost\u0028\u0029",
             "name": "post",
             "summary": "",
-            "url": "classes/JetPhp-Core-Routing-JetRouter.html#method_post"
+            "url": "classes/jetPhp-core-routing-JetRouter.html#method_post"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\JetRouter\u003A\u003AaddGroup\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003AaddGroup\u0028\u0029",
             "name": "addGroup",
             "summary": "",
-            "url": "classes/JetPhp-Core-Routing-JetRouter.html#method_addGroup"
+            "url": "classes/jetPhp-core-routing-JetRouter.html#method_addGroup"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\JetRouter\u003A\u003Aget\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003Aget\u0028\u0029",
             "name": "get",
             "summary": "",
-            "url": "classes/JetPhp-Core-Routing-JetRouter.html#method_get"
+            "url": "classes/jetPhp-core-routing-JetRouter.html#method_get"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\JetRouter\u003A\u003AaddRoute\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003AaddRoute\u0028\u0029",
             "name": "addRoute",
             "summary": "",
-            "url": "classes/JetPhp-Core-Routing-JetRouter.html#method_addRoute"
+            "url": "classes/jetPhp-core-routing-JetRouter.html#method_addRoute"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\JetRouter\u003A\u003A\u0024routes",
+            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003A\u0024routes",
             "name": "routes",
             "summary": "",
-            "url": "classes/JetPhp-Core-Routing-JetRouter.html#property_routes"
+            "url": "classes/jetPhp-core-routing-JetRouter.html#property_routes"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\JetRouter\u003A\u003A\u0024controller",
+            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003A\u0024controller",
             "name": "controller",
             "summary": "",
-            "url": "classes/JetPhp-Core-Routing-JetRouter.html#property_controller"
+            "url": "classes/jetPhp-core-routing-JetRouter.html#property_controller"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing\\JetRouter\u003A\u003A\u0024basePath",
+            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003A\u0024basePath",
             "name": "basePath",
             "summary": "",
-            "url": "classes/JetPhp-Core-Routing-JetRouter.html#property_basePath"
+            "url": "classes/jetPhp-core-routing-JetRouter.html#property_basePath"
         },                {
-            "fqsen": "\\JetPhp\\Database\\ConnectionInterface",
+            "fqsen": "\\jetPhp\\database\\ConnectionInterface",
             "name": "ConnectionInterface",
             "summary": "Extend\u0020this\u0020to\u0020define\u0020your\u0020own\u0020database\u0020driver\u0020implementation.",
-            "url": "classes/JetPhp-Database-ConnectionInterface.html"
+            "url": "classes/jetPhp-database-ConnectionInterface.html"
         },                {
-            "fqsen": "\\JetPhp\\Database\\ConnectionInterface\u003A\u003A__connect_internal\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\ConnectionInterface\u003A\u003A__connect_internal\u0028\u0029",
             "name": "__connect_internal",
             "summary": "",
-            "url": "classes/JetPhp-Database-ConnectionInterface.html#method___connect_internal"
+            "url": "classes/jetPhp-database-ConnectionInterface.html#method___connect_internal"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Connector",
+            "fqsen": "\\jetPhp\\database\\Connector",
             "name": "Connector",
             "summary": "",
-            "url": "classes/JetPhp-Database-Connector.html"
+            "url": "classes/jetPhp-database-Connector.html"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Connector\u003A\u003A__connect_internal\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\Connector\u003A\u003A__connect_internal\u0028\u0029",
             "name": "__connect_internal",
             "summary": "",
-            "url": "classes/JetPhp-Database-Connector.html#method___connect_internal"
+            "url": "classes/jetPhp-database-Connector.html#method___connect_internal"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Connector\u003A\u003AwithSqlite\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\Connector\u003A\u003AwithSqlite\u0028\u0029",
             "name": "withSqlite",
             "summary": "",
-            "url": "classes/JetPhp-Database-Connector.html#method_withSqlite"
+            "url": "classes/jetPhp-database-Connector.html#method_withSqlite"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Connector\u003A\u003Aconnect\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\Connector\u003A\u003Aconnect\u0028\u0029",
             "name": "connect",
             "summary": "",
-            "url": "classes/JetPhp-Database-Connector.html#method_connect"
+            "url": "classes/jetPhp-database-Connector.html#method_connect"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Connector\u003A\u003A\u0024dbType",
+            "fqsen": "\\jetPhp\\database\\Connector\u003A\u003A\u0024dbType",
             "name": "dbType",
             "summary": "",
-            "url": "classes/JetPhp-Database-Connector.html#property_dbType"
+            "url": "classes/jetPhp-database-Connector.html#property_dbType"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator",
+            "fqsen": "\\jetPhp\\database\\Paginator",
             "name": "Paginator",
             "summary": "This\u0020class\u0020helps\u0020us\u0020to\u0020perform\u0020paginated\u0020queries\u0020from\u0020the\u0020database.\u0020The\u0020fast\u0020that\u0020counting\u0020and\u0020querying\u0020happens\n\u0020in\u0020the\u0020db,\u0020it\u0020makes\u0020this\u0020somewhat\u0020optimal.",
-            "url": "classes/JetPhp-Database-Paginator.html"
+            "url": "classes/jetPhp-database-Paginator.html"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#method___construct"
+            "url": "classes/jetPhp-database-Paginator.html#method___construct"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003ALimitBy\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003ALimitBy\u0028\u0029",
             "name": "LimitBy",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#method_LimitBy"
+            "url": "classes/jetPhp-database-Paginator.html#method_LimitBy"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003AstartFrom\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003AstartFrom\u0028\u0029",
             "name": "startFrom",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#method_startFrom"
+            "url": "classes/jetPhp-database-Paginator.html#method_startFrom"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003Apaginate\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003Apaginate\u0028\u0029",
             "name": "paginate",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#method_paginate"
+            "url": "classes/jetPhp-database-Paginator.html#method_paginate"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003Apager\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003Apager\u0028\u0029",
             "name": "pager",
             "summary": "We\u0020use\u0020this\u0020method\u0020if\u0020we\u0020still\u0020want\u0020to\u0020play\u0020with\u0020the\u0020class\u0020object",
-            "url": "classes/JetPhp-Database-Paginator.html#method_pager"
+            "url": "classes/jetPhp-database-Paginator.html#method_pager"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003A\u0024query",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024query",
             "name": "query",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#property_query"
+            "url": "classes/jetPhp-database-Paginator.html#property_query"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003A\u0024limit",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024limit",
             "name": "limit",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#property_limit"
+            "url": "classes/jetPhp-database-Paginator.html#property_limit"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003A\u0024offset",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024offset",
             "name": "offset",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#property_offset"
+            "url": "classes/jetPhp-database-Paginator.html#property_offset"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003A\u0024next_offset",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024next_offset",
             "name": "next_offset",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#property_next_offset"
+            "url": "classes/jetPhp-database-Paginator.html#property_next_offset"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003A\u0024results",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024results",
             "name": "results",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#property_results"
+            "url": "classes/jetPhp-database-Paginator.html#property_results"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003A\u0024previous_offset",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024previous_offset",
             "name": "previous_offset",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#property_previous_offset"
+            "url": "classes/jetPhp-database-Paginator.html#property_previous_offset"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003A\u0024has_next_page",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024has_next_page",
             "name": "has_next_page",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#property_has_next_page"
+            "url": "classes/jetPhp-database-Paginator.html#property_has_next_page"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003A\u0024has_prev_page",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024has_prev_page",
             "name": "has_prev_page",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#property_has_prev_page"
+            "url": "classes/jetPhp-database-Paginator.html#property_has_prev_page"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003A\u0024number_of_records",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024number_of_records",
             "name": "number_of_records",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#property_number_of_records"
+            "url": "classes/jetPhp-database-Paginator.html#property_number_of_records"
         },                {
-            "fqsen": "\\JetPhp\\Database\\Paginator\u003A\u003A\u0024total_records",
+            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024total_records",
             "name": "total_records",
             "summary": "",
-            "url": "classes/JetPhp-Database-Paginator.html#property_total_records"
+            "url": "classes/jetPhp-database-Paginator.html#property_total_records"
         },                {
-            "fqsen": "\\JetPhp\\Database\\QueryBuilder",
+            "fqsen": "\\jetPhp\\database\\QueryBuilder",
             "name": "QueryBuilder",
             "summary": "",
-            "url": "classes/JetPhp-Database-QueryBuilder.html"
+            "url": "classes/jetPhp-database-QueryBuilder.html"
         },                {
-            "fqsen": "\\JetPhp\\Database\\QueryBuilder\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/JetPhp-Database-QueryBuilder.html#method___construct"
+            "url": "classes/jetPhp-database-QueryBuilder.html#method___construct"
         },                {
-            "fqsen": "\\JetPhp\\Database\\QueryBuilder\u003A\u003AUsing\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003AUsing\u0028\u0029",
             "name": "Using",
             "summary": "Use\u0020this\u0020to\u0020reset\u0020the\u0020connection\u0020to\u0020the\u0020database\u0020to\u0020a\u0020different\u0020one.",
-            "url": "classes/JetPhp-Database-QueryBuilder.html#method_Using"
+            "url": "classes/jetPhp-database-QueryBuilder.html#method_Using"
         },                {
-            "fqsen": "\\JetPhp\\Database\\QueryBuilder\u003A\u003ArefreshConnection\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003ArefreshConnection\u0028\u0029",
             "name": "refreshConnection",
             "summary": "",
-            "url": "classes/JetPhp-Database-QueryBuilder.html#method_refreshConnection"
+            "url": "classes/jetPhp-database-QueryBuilder.html#method_refreshConnection"
         },                {
-            "fqsen": "\\JetPhp\\Database\\QueryBuilder\u003A\u003AQuery\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003AQuery\u0028\u0029",
             "name": "Query",
             "summary": "",
-            "url": "classes/JetPhp-Database-QueryBuilder.html#method_Query"
+            "url": "classes/jetPhp-database-QueryBuilder.html#method_Query"
         },                {
-            "fqsen": "\\JetPhp\\Database\\QueryBuilder\u003A\u003Abound_query\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003Abound_query\u0028\u0029",
             "name": "bound_query",
             "summary": "Assists\u0020us\u0020to\u0020make\u0020bound\u0020queries",
-            "url": "classes/JetPhp-Database-QueryBuilder.html#method_bound_query"
+            "url": "classes/jetPhp-database-QueryBuilder.html#method_bound_query"
         },                {
-            "fqsen": "\\JetPhp\\Database\\QueryBuilder\u003A\u003Aone\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003Aone\u0028\u0029",
             "name": "one",
             "summary": "",
-            "url": "classes/JetPhp-Database-QueryBuilder.html#method_one"
+            "url": "classes/jetPhp-database-QueryBuilder.html#method_one"
         },                {
-            "fqsen": "\\JetPhp\\Database\\QueryBuilder\u003A\u003Aall\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003Aall\u0028\u0029",
             "name": "all",
             "summary": "",
-            "url": "classes/JetPhp-Database-QueryBuilder.html#method_all"
+            "url": "classes/jetPhp-database-QueryBuilder.html#method_all"
         },                {
-            "fqsen": "\\JetPhp\\Database\\QueryBuilder\u003A\u003A_count_internal\u0028\u0029",
+            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003A_count_internal\u0028\u0029",
             "name": "_count_internal",
             "summary": "",
-            "url": "classes/JetPhp-Database-QueryBuilder.html#method__count_internal"
+            "url": "classes/jetPhp-database-QueryBuilder.html#method__count_internal"
         },                {
-            "fqsen": "\\JetPhp\\Database\\QueryBuilder\u003A\u003A\u0024query",
+            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003A\u0024query",
             "name": "query",
             "summary": "",
-            "url": "classes/JetPhp-Database-QueryBuilder.html#property_query"
+            "url": "classes/jetPhp-database-QueryBuilder.html#property_query"
         },                {
-            "fqsen": "\\JetPhp\\Database\\QueryBuilder\u003A\u003A\u0024connection",
+            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003A\u0024connection",
             "name": "connection",
             "summary": "",
-            "url": "classes/JetPhp-Database-QueryBuilder.html#property_connection"
+            "url": "classes/jetPhp-database-QueryBuilder.html#property_connection"
         },                {
-            "fqsen": "\\JetPhp\\Database\\QueryBuilder\u003A\u003A\u0024using",
+            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003A\u0024using",
             "name": "using",
             "summary": "",
-            "url": "classes/JetPhp-Database-QueryBuilder.html#property_using"
+            "url": "classes/jetPhp-database-QueryBuilder.html#property_using"
         },                {
-            "fqsen": "\\JetPhp\\Database\\SupportDatabaseDrivers",
+            "fqsen": "\\jetPhp\\database\\SupportDatabaseDrivers",
             "name": "SupportDatabaseDrivers",
             "summary": "",
-            "url": "classes/JetPhp-Database-SupportDatabaseDrivers.html"
+            "url": "classes/jetPhp-database-SupportDatabaseDrivers.html"
         },                {
-            "fqsen": "\\JetPhp\\Database\\SupportDatabaseDrivers\u003A\u003A\u0024MYSQL",
+            "fqsen": "\\jetPhp\\database\\SupportDatabaseDrivers\u003A\u003A\u0024MYSQL",
             "name": "MYSQL",
             "summary": "",
-            "url": "classes/JetPhp-Database-SupportDatabaseDrivers.html#property_MYSQL"
+            "url": "classes/jetPhp-database-SupportDatabaseDrivers.html#property_MYSQL"
         },                {
-            "fqsen": "\\JetPhp\\Database\\SupportDatabaseDrivers\u003A\u003A\u0024SQLITE",
+            "fqsen": "\\jetPhp\\database\\SupportDatabaseDrivers\u003A\u003A\u0024SQLITE",
             "name": "SQLITE",
             "summary": "",
-            "url": "classes/JetPhp-Database-SupportDatabaseDrivers.html#property_SQLITE"
+            "url": "classes/jetPhp-database-SupportDatabaseDrivers.html#property_SQLITE"
         },                {
-            "fqsen": "\\JetPhp\\Database\\SupportDatabaseDrivers\u003A\u003A\u0024POSTGRES",
+            "fqsen": "\\jetPhp\\database\\SupportDatabaseDrivers\u003A\u003A\u0024POSTGRES",
             "name": "POSTGRES",
             "summary": "",
-            "url": "classes/JetPhp-Database-SupportDatabaseDrivers.html#property_POSTGRES"
+            "url": "classes/jetPhp-database-SupportDatabaseDrivers.html#property_POSTGRES"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\BaseException",
+            "fqsen": "\\jetPhp\\exceptions\\BaseException",
             "name": "BaseException",
-            "summary": "",
-            "url": "classes/JetPhp-Exeptions-BaseException.html"
+            "summary": "This\u0020is\u0020the\u0020base\u0020exception\u0020class\u0020that\u0020all\u0020other\u0020exceptions\u0020must\u0020extend.",
+            "url": "classes/jetPhp-exceptions-BaseException.html"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\BaseException\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\jetPhp\\exceptions\\BaseException\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/JetPhp-Exeptions-BaseException.html#method___construct"
+            "url": "classes/jetPhp-exceptions-BaseException.html#method___construct"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\BaseException\u003A\u003A__toString\u0028\u0029",
+            "fqsen": "\\jetPhp\\exceptions\\BaseException\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
             "summary": "",
-            "url": "classes/JetPhp-Exeptions-BaseException.html#method___toString"
+            "url": "classes/jetPhp-exceptions-BaseException.html#method___toString"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\CommandException",
+            "fqsen": "\\jetPhp\\exceptions\\CommandException",
             "name": "CommandException",
-            "summary": "",
-            "url": "classes/JetPhp-Exeptions-CommandException.html"
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020cli\u0020command\u0020fails.",
+            "url": "classes/jetPhp-exceptions-CommandException.html"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\ControllerException",
+            "fqsen": "\\jetPhp\\exceptions\\ControllerException",
             "name": "ControllerException",
-            "summary": "",
-            "url": "classes/JetPhp-Exeptions-ControllerException.html"
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020controller\u0020parsing\u0020fails\u0020in\u0020anyway",
+            "url": "classes/jetPhp-exceptions-ControllerException.html"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\DatabaseException",
+            "fqsen": "\\jetPhp\\exceptions\\DatabaseException",
             "name": "DatabaseException",
-            "summary": "",
-            "url": "classes/JetPhp-Exeptions-DatabaseException.html"
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020an\u0020error\u0020occurs\u0020during\u0020database\u0020connection\u0020establishment.",
+            "url": "classes/jetPhp-exceptions-DatabaseException.html"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\FailedRequiredException",
+            "fqsen": "\\jetPhp\\exceptions\\FailedRequiredException",
             "name": "FailedRequiredException",
-            "summary": "",
-            "url": "classes/JetPhp-Exeptions-FailedRequiredException.html"
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020required\u0020field\u0020is\u0020not\u0020provided\u0020in\u0020the\u0020request",
+            "url": "classes/jetPhp-exceptions-FailedRequiredException.html"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\LimitPaginationException",
+            "fqsen": "\\jetPhp\\exceptions\\LimitPaginationException",
             "name": "LimitPaginationException",
-            "summary": "",
-            "url": "classes/JetPhp-Exeptions-LimitPaginationException.html"
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020limit\u0020is\u0020provided\u0020in\u0020a\u0020paginated\u0020query\u0020using\u0020the\u0020Pagination\u0020class",
+            "url": "classes/jetPhp-exceptions-LimitPaginationException.html"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\OffsetPaginationException",
+            "fqsen": "\\jetPhp\\exceptions\\OffsetPaginationException",
             "name": "OffsetPaginationException",
-            "summary": "",
-            "url": "classes/JetPhp-Exeptions-OffsetPaginationException.html"
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020an\u0020offset\u0020is\u0020passed\u0020in\u0020a\u0020paginated\u0020query\u0020using\u0020the\u0020Pagination\u0020class",
+            "url": "classes/jetPhp-exceptions-OffsetPaginationException.html"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\RestParseException",
+            "fqsen": "\\jetPhp\\exceptions\\RestParseException",
             "name": "RestParseException",
-            "summary": "",
-            "url": "classes/JetPhp-Exeptions-RestParseException.html"
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020an\u0020error\u0020occurs\u0020during\u0020REST\u0020parsing.",
+            "url": "classes/jetPhp-exceptions-RestParseException.html"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\RestPHPException",
+            "fqsen": "\\jetPhp\\exceptions\\RestPHPException",
             "name": "RestPHPException",
-            "summary": "",
-            "url": "classes/JetPhp-Exeptions-RestPHPException.html"
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020an\u0020error\u0020occurs\u0020during\u0020REST\u0020parsing.",
+            "url": "classes/jetPhp-exceptions-RestPHPException.html"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\UserUnauthenticatedException",
+            "fqsen": "\\jetPhp\\exceptions\\UserUnauthenticatedException",
             "name": "UserUnauthenticatedException",
-            "summary": "",
-            "url": "classes/JetPhp-Exeptions-UserUnauthenticatedException.html"
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020one\u0020tries\u0020to\u0020access\u0020a\u0020protected\u0020resource\u0020without\u0020being\u0020authenticated",
+            "url": "classes/jetPhp-exceptions-UserUnauthenticatedException.html"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions\\UserUnauthorizedException",
+            "fqsen": "\\jetPhp\\exceptions\\UserUnauthorizedException",
             "name": "UserUnauthorizedException",
-            "summary": "",
-            "url": "classes/JetPhp-Exeptions-UserUnauthorizedException.html"
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020user\u0020is\u0020not\u0020authorized\u0020to\u0020access\u0020a\u0020resource",
+            "url": "classes/jetPhp-exceptions-UserUnauthorizedException.html"
         },                {
-            "fqsen": "\\JetPhp\\Request\\AuthTrait",
+            "fqsen": "\\jetPhp\\request\\AuthTrait",
             "name": "AuthTrait",
             "summary": "",
-            "url": "classes/JetPhp-Request-AuthTrait.html"
+            "url": "classes/jetPhp-request-AuthTrait.html"
         },                {
-            "fqsen": "\\JetPhp\\Request\\AuthTrait\u003A\u003AcanAny\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003AcanAny\u0028\u0029",
             "name": "canAny",
             "summary": "This\u0020method\u0020is\u0020used\u0020to\u0020check\u0020if\u0020the\u0020currently\u0020logged\u0020in\u0020user\u0020has\u0020the\u0020required\u0020permission\u0020to\u0020access\u0020a\u0020resource.",
-            "url": "classes/JetPhp-Request-AuthTrait.html#method_canAny"
+            "url": "classes/jetPhp-request-AuthTrait.html#method_canAny"
         },                {
-            "fqsen": "\\JetPhp\\Request\\AuthTrait\u003A\u003Acan\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003Acan\u0028\u0029",
             "name": "can",
             "summary": "Like\u0020CanAny\u0020but\u0020only\u0020check\u0020for\u0020one\u0020permission\u0020at\u0020a\u0020time",
-            "url": "classes/JetPhp-Request-AuthTrait.html#method_can"
+            "url": "classes/jetPhp-request-AuthTrait.html#method_can"
         },                {
-            "fqsen": "\\JetPhp\\Request\\AuthTrait\u003A\u003AcanAll\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003AcanAll\u0028\u0029",
             "name": "canAll",
             "summary": "Similar\u0020to\u0020canAny\u0020only\u0020that\u0020this\u0020checks\u0020if\u0020the\u0020user\u0020has\u0020all\u0020the\u0020passed\u0020permissions",
-            "url": "classes/JetPhp-Request-AuthTrait.html#method_canAll"
+            "url": "classes/jetPhp-request-AuthTrait.html#method_canAll"
         },                {
-            "fqsen": "\\JetPhp\\Request\\AuthTrait\u003A\u003Aauth\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003Aauth\u0028\u0029",
             "name": "auth",
             "summary": "This\u0020method\u0020holds\u0020the\u0020currently\u0020logged\u0020in\u0020user\u0020object",
-            "url": "classes/JetPhp-Request-AuthTrait.html#method_auth"
+            "url": "classes/jetPhp-request-AuthTrait.html#method_auth"
         },                {
-            "fqsen": "\\JetPhp\\Request\\AuthTrait\u003A\u003AmustAuthenticate\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003AmustAuthenticate\u0028\u0029",
             "name": "mustAuthenticate",
             "summary": "This\u0020method\u0020ensures\u0020that\u0020only\u0020authenticated\u0020users\u0020can\u0020access\u0020a\u0020resource",
-            "url": "classes/JetPhp-Request-AuthTrait.html#method_mustAuthenticate"
+            "url": "classes/jetPhp-request-AuthTrait.html#method_mustAuthenticate"
         },                {
-            "fqsen": "\\JetPhp\\Request\\AuthTrait\u003A\u003AauthExtraHas\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003AauthExtraHas\u0028\u0029",
             "name": "authExtraHas",
             "summary": "Checks\u0020if\u0020the\u0020auth\u0020extra\u0020data\u0020contains\u0020a\u0020key\u0020or\u0020not",
-            "url": "classes/JetPhp-Request-AuthTrait.html#method_authExtraHas"
+            "url": "classes/jetPhp-request-AuthTrait.html#method_authExtraHas"
         },                {
-            "fqsen": "\\JetPhp\\Request\\AuthTrait\u003A\u003AgetAuthExtraByKey\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003AgetAuthExtraByKey\u0028\u0029",
             "name": "getAuthExtraByKey",
             "summary": "Returns\u0020the\u0020auth\u0020extra\u0020data\u0020by\u0020key",
-            "url": "classes/JetPhp-Request-AuthTrait.html#method_getAuthExtraByKey"
+            "url": "classes/jetPhp-request-AuthTrait.html#method_getAuthExtraByKey"
         },                {
-            "fqsen": "\\JetPhp\\Request\\BaseRestService",
+            "fqsen": "\\jetPhp\\request\\BaseRestService",
             "name": "BaseRestService",
             "summary": "This\u0020is\u0020the\u0020main\u0020class\u0020all\u0020other\u0020services\u0020must\u0020extend.",
-            "url": "classes/JetPhp-Request-BaseRestService.html"
+            "url": "classes/jetPhp-request-BaseRestService.html"
         },                {
-            "fqsen": "\\JetPhp\\Request\\BaseRestService\u003A\u003Aprocess\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003Aprocess\u0028\u0029",
             "name": "process",
             "summary": "This\u0020is\u0020the\u0020main\u0020method\u0020that\u0020processes\u0020the\u0020request.",
-            "url": "classes/JetPhp-Request-BaseRestService.html#method_process"
+            "url": "classes/jetPhp-request-BaseRestService.html#method_process"
         },                {
-            "fqsen": "\\JetPhp\\Request\\BaseWebServiceInterface",
+            "fqsen": "\\jetPhp\\request\\BaseWebServiceInterface",
             "name": "BaseWebServiceInterface",
             "summary": "",
-            "url": "classes/JetPhp-Request-BaseWebServiceInterface.html"
+            "url": "classes/jetPhp-request-BaseWebServiceInterface.html"
         },                {
-            "fqsen": "\\JetPhp\\Request\\BaseWebServiceInterface\u003A\u003ArunAction\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\BaseWebServiceInterface\u003A\u003ArunAction\u0028\u0029",
             "name": "runAction",
             "summary": "This\u0020is\u0020the\u0020actual\u0020switcher.\u0020It\u0020maps\u0020the\u0020action\u0020from\u0020the\u0020request\u0020to\u0020a\u0020method\u0020in\u0020your\u0020service\u0028class\u0029",
-            "url": "classes/JetPhp-Request-BaseWebServiceInterface.html#method_runAction"
+            "url": "classes/jetPhp-request-BaseWebServiceInterface.html#method_runAction"
         },                {
-            "fqsen": "\\JetPhp\\Request\\BaseWebServiceInterface\u003A\u003Aprocess\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\BaseWebServiceInterface\u003A\u003Aprocess\u0028\u0029",
             "name": "process",
             "summary": "This\u0020is\u0020the\u0020main\u0020method\u0020that\u0020processes\u0020the\u0020request.",
-            "url": "classes/JetPhp-Request-BaseWebServiceInterface.html#method_process"
+            "url": "classes/jetPhp-request-BaseWebServiceInterface.html#method_process"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request",
+            "fqsen": "\\jetPhp\\request\\Request",
             "name": "Request",
             "summary": "",
-            "url": "classes/JetPhp-Request-Request.html"
+            "url": "classes/jetPhp-request-Request.html"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request\u003A\u003AgetAuth\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetAuth\u0028\u0029",
             "name": "getAuth",
             "summary": "",
-            "url": "classes/JetPhp-Request-Request.html#method_getAuth"
+            "url": "classes/jetPhp-request-Request.html#method_getAuth"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request\u003A\u003AgetContext\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetContext\u0028\u0029",
             "name": "getContext",
             "summary": "",
-            "url": "classes/JetPhp-Request-Request.html#method_getContext"
+            "url": "classes/jetPhp-request-Request.html#method_getContext"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request\u003A\u003AisAuthenticated\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AisAuthenticated\u0028\u0029",
             "name": "isAuthenticated",
             "summary": "",
-            "url": "classes/JetPhp-Request-Request.html#method_isAuthenticated"
+            "url": "classes/jetPhp-request-Request.html#method_isAuthenticated"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request\u003A\u003AsetAuthenticationContext\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AsetAuthenticationContext\u0028\u0029",
             "name": "setAuthenticationContext",
             "summary": "",
-            "url": "classes/JetPhp-Request-Request.html#method_setAuthenticationContext"
+            "url": "classes/jetPhp-request-Request.html#method_setAuthenticationContext"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request\u003A\u003AsetAppContext\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AsetAppContext\u0028\u0029",
             "name": "setAppContext",
             "summary": "",
-            "url": "classes/JetPhp-Request-Request.html#method_setAppContext"
+            "url": "classes/jetPhp-request-Request.html#method_setAppContext"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request\u003A\u003AgetJsonData\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetJsonData\u0028\u0029",
             "name": "getJsonData",
             "summary": "Returns\u0020the\u0020json\u0020data\u0020from\u0020the\u0020request\u0020if\u0020the\u0020request\u0020was\u0020submitted\u0020as\u0020json",
-            "url": "classes/JetPhp-Request-Request.html#method_getJsonData"
+            "url": "classes/jetPhp-request-Request.html#method_getJsonData"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request\u003A\u003AgetData\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetData\u0028\u0029",
             "name": "getData",
             "summary": "Merges\u0020data\u0020sent\u0020from\u0020the\u0020client\u0020as\u0020json\u0020and\u0020form\u0020data\u0020as\u0020one\u0020array\u0020where\u0020one\u0020can\u0020access\u0020all\u0020the\u0020request\u0020data.",
-            "url": "classes/JetPhp-Request-Request.html#method_getData"
+            "url": "classes/jetPhp-request-Request.html#method_getData"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request\u003A\u003AgetFileByName\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetFileByName\u0028\u0029",
             "name": "getFileByName",
             "summary": "Returns\u0020the\u0020file\u0020from\u0020the\u0020request\u0020if\u0020the\u0020request\u0020was\u0020submitted\u0020as\u0020form\u0020data",
-            "url": "classes/JetPhp-Request-Request.html#method_getFileByName"
+            "url": "classes/jetPhp-request-Request.html#method_getFileByName"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request\u003A\u003AgetFormData\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetFormData\u0028\u0029",
             "name": "getFormData",
             "summary": "Returns\u0020the\u0020data\u0020if\u0020the\u0020request\u0020was\u0020submitted\u0020as\u0020form\u0020data",
-            "url": "classes/JetPhp-Request-Request.html#method_getFormData"
+            "url": "classes/jetPhp-request-Request.html#method_getFormData"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request\u003A\u003A\u0024authenticated",
+            "fqsen": "\\jetPhp\\request\\Request\u003A\u003A\u0024authenticated",
             "name": "authenticated",
             "summary": "",
-            "url": "classes/JetPhp-Request-Request.html#property_authenticated"
+            "url": "classes/jetPhp-request-Request.html#property_authenticated"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request\u003A\u003A\u0024context",
+            "fqsen": "\\jetPhp\\request\\Request\u003A\u003A\u0024context",
             "name": "context",
             "summary": "",
-            "url": "classes/JetPhp-Request-Request.html#property_context"
+            "url": "classes/jetPhp-request-Request.html#property_context"
         },                {
-            "fqsen": "\\JetPhp\\Request\\Request\u003A\u003A\u0024auth",
+            "fqsen": "\\jetPhp\\request\\Request\u003A\u003A\u0024auth",
             "name": "auth",
             "summary": "",
-            "url": "classes/JetPhp-Request-Request.html#property_auth"
+            "url": "classes/jetPhp-request-Request.html#property_auth"
         },                {
-            "fqsen": "\\JetPhp\\Request\\RequestActionTrait",
+            "fqsen": "\\jetPhp\\request\\RequestActionTrait",
             "name": "RequestActionTrait",
             "summary": "",
-            "url": "classes/JetPhp-Request-RequestActionTrait.html"
+            "url": "classes/jetPhp-request-RequestActionTrait.html"
         },                {
-            "fqsen": "\\JetPhp\\Request\\RequestActionTrait\u003A\u003Acheck_one\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\RequestActionTrait\u003A\u003Acheck_one\u0028\u0029",
             "name": "check_one",
             "summary": "",
-            "url": "classes/JetPhp-Request-RequestActionTrait.html#method_check_one"
+            "url": "classes/jetPhp-request-RequestActionTrait.html#method_check_one"
         },                {
-            "fqsen": "\\JetPhp\\Request\\RequestActionTrait\u003A\u003Arequires\u0028\u0029",
+            "fqsen": "\\jetPhp\\request\\RequestActionTrait\u003A\u003Arequires\u0028\u0029",
             "name": "requires",
             "summary": "This\u0020checks\u0020if\u0020the\u0020required\u0020fields\u0020are\u0020present\u0020in\u0020the\u0020request\u0020otherwise\u0020it\u0020throws\u0020an\u0020exception",
-            "url": "classes/JetPhp-Request-RequestActionTrait.html#method_requires"
+            "url": "classes/jetPhp-request-RequestActionTrait.html#method_requires"
         },                {
-            "fqsen": "\\JetPhp\\Response\\BaseResponse",
+            "fqsen": "\\jetPhp\\response\\BaseResponse",
             "name": "BaseResponse",
             "summary": "This\u0020provides\u0020a\u0020uniform\u0020response\u0020format\u0020for\u0020our\u0020entire\u0020application.",
-            "url": "classes/JetPhp-Response-BaseResponse.html"
+            "url": "classes/jetPhp-response-BaseResponse.html"
         },                {
-            "fqsen": "\\JetPhp\\Response\\BaseResponse\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/JetPhp-Response-BaseResponse.html#method___construct"
+            "url": "classes/jetPhp-response-BaseResponse.html#method___construct"
         },                {
-            "fqsen": "\\JetPhp\\Response\\BaseResponse\u003A\u003AgetPrettyResponse\u0028\u0029",
+            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003AgetPrettyResponse\u0028\u0029",
             "name": "getPrettyResponse",
             "summary": "",
-            "url": "classes/JetPhp-Response-BaseResponse.html#method_getPrettyResponse"
+            "url": "classes/jetPhp-response-BaseResponse.html#method_getPrettyResponse"
         },                {
-            "fqsen": "\\JetPhp\\Response\\BaseResponse\u003A\u003AJsonResponse\u0028\u0029",
+            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003AJsonResponse\u0028\u0029",
             "name": "JsonResponse",
             "summary": "",
-            "url": "classes/JetPhp-Response-BaseResponse.html#method_JsonResponse"
+            "url": "classes/jetPhp-response-BaseResponse.html#method_JsonResponse"
         },                {
-            "fqsen": "\\JetPhp\\Response\\BaseResponse\u003A\u003Abuild\u0028\u0029",
+            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003Abuild\u0028\u0029",
             "name": "build",
             "summary": "",
-            "url": "classes/JetPhp-Response-BaseResponse.html#method_build"
+            "url": "classes/jetPhp-response-BaseResponse.html#method_build"
         },                {
-            "fqsen": "\\JetPhp\\Response\\BaseResponse\u003A\u003A\u0024returnCode",
+            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A\u0024returnCode",
             "name": "returnCode",
             "summary": "",
-            "url": "classes/JetPhp-Response-BaseResponse.html#property_returnCode"
+            "url": "classes/jetPhp-response-BaseResponse.html#property_returnCode"
         },                {
-            "fqsen": "\\JetPhp\\Response\\BaseResponse\u003A\u003A\u0024returnMessage",
+            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A\u0024returnMessage",
             "name": "returnMessage",
             "summary": "",
-            "url": "classes/JetPhp-Response-BaseResponse.html#property_returnMessage"
+            "url": "classes/jetPhp-response-BaseResponse.html#property_returnMessage"
         },                {
-            "fqsen": "\\JetPhp\\Response\\BaseResponse\u003A\u003A\u0024returnData",
+            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A\u0024returnData",
             "name": "returnData",
             "summary": "",
-            "url": "classes/JetPhp-Response-BaseResponse.html#property_returnData"
+            "url": "classes/jetPhp-response-BaseResponse.html#property_returnData"
         },                {
-            "fqsen": "\\JetPhp\\Response\\BaseResponse\u003A\u003A\u0024extraData",
+            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A\u0024extraData",
             "name": "extraData",
             "summary": "",
-            "url": "classes/JetPhp-Response-BaseResponse.html#property_extraData"
+            "url": "classes/jetPhp-response-BaseResponse.html#property_extraData"
         },                {
-            "fqsen": "\\JetPhp\\Response\\BaseResponse\u003A\u003A\u0024prettyResponse",
+            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A\u0024prettyResponse",
             "name": "prettyResponse",
             "summary": "",
-            "url": "classes/JetPhp-Response-BaseResponse.html#property_prettyResponse"
+            "url": "classes/jetPhp-response-BaseResponse.html#property_prettyResponse"
         },                {
-            "fqsen": "\\JetPhp\\Response\\BaseResponse\u003A\u003A\u0024response",
+            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A\u0024response",
             "name": "response",
             "summary": "",
-            "url": "classes/JetPhp-Response-BaseResponse.html#property_response"
+            "url": "classes/jetPhp-response-BaseResponse.html#property_response"
         },                {
-            "fqsen": "\\JetPhp\\Response\\Response",
+            "fqsen": "\\jetPhp\\response\\Response",
             "name": "Response",
             "summary": "Document\u0020me\u0021",
-            "url": "classes/JetPhp-Response-Response.html"
+            "url": "classes/jetPhp-response-Response.html"
         },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
             "url": "namespaces/default.html"
         },                {
-            "fqsen": "\\JetPhp\\Command",
-            "name": "Command",
+            "fqsen": "\\jetPhp\\command",
+            "name": "command",
             "summary": "",
             "url": "namespaces/jetphp-command.html"
         },                {
-            "fqsen": "\\JetPhp",
-            "name": "JetPhp",
+            "fqsen": "\\jetPhp",
+            "name": "jetPhp",
             "summary": "",
             "url": "namespaces/jetphp.html"
         },                {
-            "fqsen": "\\JetPhp\\Command\\Core",
-            "name": "Core",
+            "fqsen": "\\jetPhp\\command\\commands",
+            "name": "commands",
             "summary": "",
-            "url": "namespaces/jetphp-command-core.html"
+            "url": "namespaces/jetphp-command-commands.html"
         },                {
-            "fqsen": "\\JetPhp\\Core",
-            "name": "Core",
+            "fqsen": "\\jetPhp\\core",
+            "name": "core",
             "summary": "",
             "url": "namespaces/jetphp-core.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Config",
-            "name": "Config",
+            "fqsen": "\\jetPhp\\core\\config",
+            "name": "config",
             "summary": "",
             "url": "namespaces/jetphp-core-config.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Helpers",
-            "name": "Helpers",
+            "fqsen": "\\jetPhp\\core\\helpers",
+            "name": "helpers",
             "summary": "",
             "url": "namespaces/jetphp-core-helpers.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Interceptions",
-            "name": "Interceptions",
+            "fqsen": "\\jetPhp\\core\\interceptions",
+            "name": "interceptions",
             "summary": "",
             "url": "namespaces/jetphp-core-interceptions.html"
         },                {
-            "fqsen": "\\JetPhp\\Core\\Routing",
-            "name": "Routing",
+            "fqsen": "\\jetPhp\\core\\routing",
+            "name": "routing",
             "summary": "",
             "url": "namespaces/jetphp-core-routing.html"
         },                {
-            "fqsen": "\\JetPhp\\Database",
-            "name": "Database",
+            "fqsen": "\\jetPhp\\database",
+            "name": "database",
             "summary": "",
             "url": "namespaces/jetphp-database.html"
         },                {
-            "fqsen": "\\JetPhp\\Exeptions",
-            "name": "Exeptions",
+            "fqsen": "\\jetPhp\\exceptions",
+            "name": "exceptions",
             "summary": "",
-            "url": "namespaces/jetphp-exeptions.html"
+            "url": "namespaces/jetphp-exceptions.html"
         },                {
-            "fqsen": "\\JetPhp\\Request",
-            "name": "Request",
+            "fqsen": "\\jetPhp\\request",
+            "name": "request",
             "summary": "",
             "url": "namespaces/jetphp-request.html"
         },                {
-            "fqsen": "\\JetPhp\\Response",
-            "name": "Response",
+            "fqsen": "\\jetPhp\\response",
+            "name": "response",
             "summary": "",
             "url": "namespaces/jetphp-response.html"
         }            ]

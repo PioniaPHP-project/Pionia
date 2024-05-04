@@ -1,2 +1,4 @@
 
-<?php $autoloader = require __DIR__ . '/../vendor/autoload.php';
+<?php
+
+$autoloader = require __DIR__ . '/../vendor/autoload.php';

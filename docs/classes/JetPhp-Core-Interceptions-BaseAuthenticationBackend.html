@@ -76,31 +76,31 @@
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="namespaces/jetphp.html" class="">JetPhp</a>
+    <a href="namespaces/jetphp.html" class="">jetPhp</a>
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
-                <a href="namespaces/jetphp-command.html" class="">Command</a>
+                <a href="namespaces/jetphp-command.html" class="">command</a>
                 
             </li>
                     <li>
-                <a href="namespaces/jetphp-core.html" class="">Core</a>
+                <a href="namespaces/jetphp-core.html" class="">core</a>
                 
             </li>
                     <li>
-                <a href="namespaces/jetphp-database.html" class="">Database</a>
+                <a href="namespaces/jetphp-database.html" class="">database</a>
                 
             </li>
                     <li>
-                <a href="namespaces/jetphp-exeptions.html" class="">Exeptions</a>
+                <a href="namespaces/jetphp-exceptions.html" class="">exceptions</a>
                 
             </li>
                     <li>
-                <a href="namespaces/jetphp-request.html" class="">Request</a>
+                <a href="namespaces/jetphp-request.html" class="">request</a>
                 
             </li>
                     <li>
-                <a href="namespaces/jetphp-response.html" class="">Response</a>
+                <a href="namespaces/jetphp-response.html" class="">response</a>
                 
             </li>
             </ul>
@@ -130,9 +130,9 @@
             <div class="phpdocumentor-column -nine phpdocumentor-content">
                                 <section>
                                         <ul class="phpdocumentor-breadcrumbs">
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp.html">JetPhp</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp-core.html">Core</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp-core-interceptions.html">Interceptions</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp.html">jetPhp</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp-core.html">core</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp-core-interceptions.html">interceptions</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
@@ -158,23 +158,71 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Interceptions/BaseAuthenticationBackend.php"><a href="files/src-core-interceptions-baseauthenticationbackend.html"><abbr title="src/Core/Interceptions/BaseAuthenticationBackend.php">BaseAuthenticationBackend.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/interceptions/BaseAuthenticationBackend.php"><a href="files/src-core-interceptions-baseauthenticationbackend.html"><abbr title="src/core/interceptions/BaseAuthenticationBackend.php">BaseAuthenticationBackend.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
-            <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#source-view.12" class="phpdocumentor-element-found-in__source" data-line="12" data-modal="source-view" data-src="files/src/Core/Interceptions/BaseAuthenticationBackend.php.txt"></a>
+            <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#source-view.58" class="phpdocumentor-element-found-in__source" data-line="58" data-modal="source-view" data-src="files/src/core/interceptions/BaseAuthenticationBackend.php.txt"></a>
     </aside>
 
-            <p class="phpdocumentor-summary">Document me!</p>
+            <p class="phpdocumentor-summary">This is the base class for all authentication backends.</p>
+
+    <section class="phpdocumentor-description"><p>All authentication backends must extend this class and implement the authenticate method.</p>
+<p>The authenticate method should return a ContextUserObject object.</p>
+<p>The ContextUserObject object should have the following properties:</p>
+<ul>
+<li>user: object - The user object</li>
+<li>authenticated: bool - True if the user is authenticated, false otherwise</li>
+<li>permissions: array|null - The user's permissions</li>
+<li>authExtra: array|null - Any other data about the logged-in session holder, can be used to hold user domain, user role etc</li>
+</ul>
+</section>
 
 
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">use jetPhp\core\interceptions\BaseAuthenticationBackend;
+class MyAuthenticationBackend extends BaseAuthenticationBackend
+{
+  // This is not something you should do in your project, but just gives you the best idea of how to implement the authenticate method
+   public function authenticate(Request $request): ContextUserObject
+  {
+     // your authentication logic here
+     $data = $request-&gt;getData();
+     $username = $data['username'];
+     // get the user object from the database
+     $builder = new QueryBuilder();
+     $user = $builder-&gt;one('select * from users where username = :username LIMIT 1', ['username' =&gt; $username]);
+     if ($user) {
+         $contextUserObject = new ContextUserObject();
+         $contextUserObject-&gt;user = $user;
+         $contextUserObject-&gt;authenticated = true;
+         $contextUserObject-&gt;permissions = ['read', 'write'];
+         $contextUserObject-&gt;authExtra = ['role' =&gt; user['role']];
+         return $contextUserObject;
+     }
+ }
+}
+</code></pre>
+</section>
+
+                                    </dd>
+                                            </dl>
 
 
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -188,28 +236,28 @@
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#property_request">$request</a>
+    <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#property_request">$request</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: <a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>            </span>
 </dt>
 
     </dl>
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#method_authenticate">authenticate()</a>
+    <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#method_authenticate">authenticate()</a>
     <span>
-                                &nbsp;: <a href="classes/JetPhp-Core-Helpers-ContextUserObject.html"><abbr title="\JetPhp\Core\Helpers\ContextUserObject">ContextUserObject</abbr></a>    </span>
+                                &nbsp;: <a href="classes/jetPhp-core-helpers-ContextUserObject.html"><abbr title="\jetPhp\core\helpers\ContextUserObject">ContextUserObject</abbr></a>    </span>
 </dt>
 
     </dl>
@@ -223,7 +271,7 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -235,27 +283,31 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_request">
         $request
-        <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#property_request" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#property_request" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Interceptions/BaseAuthenticationBackend.php"><a href="files/src-core-interceptions-baseauthenticationbackend.html"><abbr title="src/Core/Interceptions/BaseAuthenticationBackend.php">BaseAuthenticationBackend.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/interceptions/BaseAuthenticationBackend.php"><a href="files/src-core-interceptions-baseauthenticationbackend.html"><abbr title="src/core/interceptions/BaseAuthenticationBackend.php">BaseAuthenticationBackend.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">0</span>
 
-            <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/Core/Interceptions/BaseAuthenticationBackend.php.txt"></a>
+            <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/core/interceptions/BaseAuthenticationBackend.php.txt"></a>
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
     <span class="phpdocumentor-signature__name">$request</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"><ul>
+<li>The request object</li>
+</ul>
+</section>
+
     
     
 
@@ -265,7 +317,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -276,21 +328,21 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_authenticate">
         authenticate()
-        <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#method_authenticate" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#method_authenticate" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Interceptions/BaseAuthenticationBackend.php"><a href="files/src-core-interceptions-baseauthenticationbackend.html"><abbr title="src/Core/Interceptions/BaseAuthenticationBackend.php">BaseAuthenticationBackend.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/interceptions/BaseAuthenticationBackend.php"><a href="files/src-core-interceptions-baseauthenticationbackend.html"><abbr title="src/core/interceptions/BaseAuthenticationBackend.php">BaseAuthenticationBackend.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
-            <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#source-view.18" class="phpdocumentor-element-found-in__source" data-line="18" data-modal="source-view" data-src="files/src/Core/Interceptions/BaseAuthenticationBackend.php.txt"></a>
+            <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#source-view.64" class="phpdocumentor-element-found-in__source" data-line="64" data-modal="source-view" data-src="files/src/core/interceptions/BaseAuthenticationBackend.php.txt"></a>
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">authenticate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/JetPhp-Request-Request.html"><abbr title="\JetPhp\Request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/JetPhp-Core-Helpers-ContextUserObject.html"><abbr title="\JetPhp\Core\Helpers\ContextUserObject">ContextUserObject</abbr></a></span></code>
+    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">authenticate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/jetPhp-core-helpers-ContextUserObject.html"><abbr title="\jetPhp\core\helpers\ContextUserObject">ContextUserObject</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -299,7 +351,7 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/JetPhp-Request-Request.html"><abbr title="\JetPhp\Request\Request">Request</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -310,7 +362,7 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/JetPhp-Core-Helpers-ContextUserObject.html"><abbr title="\JetPhp\Core\Helpers\ContextUserObject">ContextUserObject</abbr></a></span>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/jetPhp-core-helpers-ContextUserObject.html"><abbr title="\jetPhp\core\helpers\ContextUserObject">ContextUserObject</abbr></a></span>
             </section>
 
 </article>
@@ -320,7 +372,7 @@
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/Core/Interceptions/BaseAuthenticationBackend.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/core/interceptions/BaseAuthenticationBackend.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -419,22 +471,22 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                            <li><a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#toc-methods">Methods</a></li>
+                                                            <li><a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#property_request">$request<a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html"></li>
+                                                    <li><a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#property_request">$request<a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html"></li>
                                             </ul>
                 </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li><a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#method_authenticate">authenticate()</a></li>
+                                            <li><a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#method_authenticate">authenticate()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -454,7 +506,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/JetPhp-Core-Interceptions-BaseAuthenticationBackend.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
