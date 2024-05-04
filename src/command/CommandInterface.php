@@ -14,7 +14,7 @@ class CommandInterface
      * @var array|string[] $commands
      */
     private static array $commands = [
-        'jetPhp\command\core\StartServer',
+        'jetPhp\command\commands\StartServer',
     ];
 
 
