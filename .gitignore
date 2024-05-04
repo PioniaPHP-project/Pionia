@@ -3,6 +3,7 @@ settings.ini
 .idea
 .DM_Store
 composer.lock
+src/core/.DS_Store
 build
 .phpdoc
 
