@@ -6,7 +6,7 @@
 ## Installation
 
 ```bash
-composer require jetezra/rest-php
+composer require jetezra/jetphp-core
 ```
 This is meant for the core developers of the JetPhp-Core not the framework itself.
 If you are looking to use or get started with the framework, please find the [JetPhp Framework here](https://github.com/JetPhp-project/JetPhp-Framework.git)
