@@ -10,6 +10,4 @@ use Symfony\Component\Routing\RouteCollection;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  * */
-class BaseRoutes extends RouteCollection
-{
-}
+class BaseRoutes extends RouteCollection {}
