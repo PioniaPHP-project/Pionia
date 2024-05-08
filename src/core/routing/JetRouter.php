@@ -74,6 +74,7 @@ class JetRouter
     {
         $this->resolveController($controller);
         $this->basePath = $basePath;
+        $this->addRoute('ping', 'ping', SupportedHttpMethods::GET, $controller);
         return $this;
     }
 

@@ -19,10 +19,17 @@ abstract class BaseApiController extends Base
 
     /**
      * This just is for checking the server status
-     * @param Request $request
      */
     public function ping(Request $request): BaseResponse
     {
-        return BaseResponse::JsonResponse(0, 'pong', ['framework' => $this::$name, 'version'=> $this::$version]);
+        return BaseResponse::JsonResponse(0, 'pong', [
+            'framework' => $this::$name,
+            'version'=> $this::$version,
+            'baseUrl' => $request->getBaseUrl(),
+            'port' => $request->getPort(),
+            'uri' => $request->getRequestUri(),
+            'schema' => $request->getScheme(),
+            'script' => $request->getScriptName(),
+        ]);
     }
 }
