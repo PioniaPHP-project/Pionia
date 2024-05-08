@@ -16,13 +16,14 @@
             "role": "Developer"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "require": {
         "ext-json": "*",
         "ext-pdo": "*",
         "php": ">=8.0",
-        "symfony/http-kernel": "6.4.x-dev",
-        "symfony/routing": "6.4.x-dev",
-        "symfony/console": "6.4.x-dev"
+        "symfony/http-kernel": "^6.4",
+        "symfony/routing": "^6.4",
+        "symfony/console": "^6.4"
     }
 }

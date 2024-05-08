@@ -105,14 +105,15 @@ class JetRouter
     /**
      * @throws ControllerException
      */
-    private function addRoute(string $action, string $name, string | array $method = SupportedHttpMethods::POST, $controller = null, $condition = ''){
-        if ($controller){
+    private function addRoute(string $action, string $name, string | array $method = SupportedHttpMethods::POST, $controller = null, $condition = '')
+    {
+        if ($controller) {
             $this->resolveController($controller);
         }
         $methods = [];
-        if (is_string($method)){
+        if (is_string($method)) {
             $methods = [$method];
-        } else if (is_array($method)){
+        } else if (is_array($method)) {
             $methods = $method;
         }
 
@@ -121,11 +122,13 @@ class JetRouter
         }
 
         $route = new Route($this->basePath, [
-            '_controller' => $this->controller.'::'.$action,
-        ], [], [],null, [], $methods, $condition);
+            '_controller' => $this->controller . '::' . $action,
+        ], [], [], null, [], $methods, $condition);
 
         $this->routes->add($name, $route);
         return $this;
     }
 
 }
+
+
