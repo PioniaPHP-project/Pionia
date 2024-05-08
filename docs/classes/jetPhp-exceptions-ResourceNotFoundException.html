@@ -131,16 +131,15 @@
                                 <section>
                                         <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp.html">jetPhp</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp-core.html">core</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp-core-routing.html">routing</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp-exceptions.html">exceptions</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    BaseRoute
+    ResourceNotFoundException
 
         <span class="phpdocumentor-element__extends">
-        extends <abbr title="\Symfony\Component\Routing\Route">Route</abbr>
+        extends <a href="classes/jetPhp-exceptions-BaseException.html"><abbr title="\jetPhp\exceptions\BaseException">BaseException</abbr></a>
     </span>
     
             <div class="phpdocumentor-element__package">
@@ -159,39 +158,23 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/BaseRoute.php"><a href="files/src-core-routing-baseroute.html"><abbr title="src/core/routing/BaseRoute.php">BaseRoute.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/exceptions/ResourceNotFoundException.php"><a href="files/src-exceptions-resourcenotfoundexception.html"><abbr title="src/exceptions/ResourceNotFoundException.php">ResourceNotFoundException.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">8</span>
 
-            <a href="classes/jetPhp-core-routing-BaseRoute.html#source-view.12" class="phpdocumentor-element-found-in__source" data-line="12" data-modal="source-view" data-src="files/src/core/routing/BaseRoute.php.txt"></a>
+            <a href="classes/jetPhp-exceptions-ResourceNotFoundException.html#source-view.8" class="phpdocumentor-element-found-in__source" data-line="8" data-modal="source-view" data-src="files/src/exceptions/ResourceNotFoundException.php.txt"></a>
     </aside>
 
-            <p class="phpdocumentor-summary">This is the base route class, it extends the Symfony route class and is used to define routes in the framework</p>
+            <p class="phpdocumentor-summary">This exception is thrown when a service requested is not found.</p>
 
 
 
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/jetPhp-core-routing-BaseRoute.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">author</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p><a href="https://www.linkedin.com/in/jetezra/">Jet - ezrajet9@gmail.com</a></p>
-</section>
-
-                                    </dd>
-                                            </dl>
 
 
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/jetPhp-core-routing-BaseRoute.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/jetPhp-exceptions-ResourceNotFoundException.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -204,6 +187,25 @@
 
 
 
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/jetPhp-exceptions-ResourceNotFoundException.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/jetPhp-exceptions-BaseException.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/jetPhp-exceptions-BaseException.html#method___toString">__toString()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+    </dl>
 
 
 
@@ -212,12 +214,107 @@
 
         
 
-        
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/jetPhp-exceptions-ResourceNotFoundException.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/jetPhp-exceptions-BaseException.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/exceptions/BaseException.php"><a href="files/src-exceptions-baseexception.html"><abbr title="src/exceptions/BaseException.php">BaseException.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
+
+            <a href="classes/jetPhp-exceptions-ResourceNotFoundException.html#source-view.14" class="phpdocumentor-element-found-in__source" data-line="14" data-modal="source-view" data-src="files/src/exceptions/BaseException.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$code</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">0</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Throwable">Throwable</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$previous</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$code</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">0</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$previous</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Throwable">Throwable</abbr></span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___toString">
+        __toString()
+        <a href="classes/jetPhp-exceptions-BaseException.html#method___toString" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/exceptions/BaseException.php"><a href="files/src-exceptions-baseexception.html"><abbr title="src/exceptions/BaseException.php">BaseException.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+
+            <a href="classes/jetPhp-exceptions-ResourceNotFoundException.html#source-view.18" class="phpdocumentor-element-found-in__source" data-line="18" data-modal="source-view" data-src="files/src/exceptions/BaseException.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__toString</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+            </section>
+
         <div class="phpdocumentor-modal" id="source-view">
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/core/routing/BaseRoute.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/exceptions/ResourceNotFoundException.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -316,10 +413,18 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                            </ul>
+                                                                                <li><a href="classes/jetPhp-exceptions-ResourceNotFoundException.html#toc-methods">Methods</a></li>
+                                    </ul>
             </li>
             
             
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/jetPhp-exceptions-BaseException.html#method___construct">__construct()</a></li>
+                                            <li><a href="classes/jetPhp-exceptions-BaseException.html#method___toString">__toString()</a></li>
+                                    </ul>
+            </li>
                     </ul>
     </section>
 
@@ -337,7 +442,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/jetPhp-core-routing-BaseRoute.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/jetPhp-exceptions-ResourceNotFoundException.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

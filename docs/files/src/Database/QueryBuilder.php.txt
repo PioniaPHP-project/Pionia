@@ -6,6 +6,10 @@ namespace jetPhp\database;
 use jetPhp\exceptions\DatabaseException;
 use PDO;
 
+/**
+ * Class QueryBuilder
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
+ */
 class QueryBuilder extends Connector
 {
     protected string $query = "";

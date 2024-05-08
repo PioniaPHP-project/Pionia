@@ -5,6 +5,17 @@ namespace jetPhp\core;
 use jetPhp\request\Request;
 use jetPhp\response\BaseResponse;
 
+/**
+ * This is the base controller class for the framework and most probably the only controller class that should be extended.
+ *
+ * It is used to define the base controller for the project.
+ * According to this framework, only controller classes should be used in the entire app. That's why it is called a controller anyway!
+ * Therefore, one class in the entire should extend this class. and provide the implementation as per the project requirements.
+ *
+ * It should call the main switch's processService method to process the request and return the response.
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
+ * */
 abstract class BaseApiController extends Base
 {
     public static array | null $settings = null;
@@ -18,7 +29,7 @@ abstract class BaseApiController extends Base
     }
 
     /**
-     * This just is for checking the server status
+     * This is just for checking the server status
      */
     public function ping(Request $request): BaseResponse
     {

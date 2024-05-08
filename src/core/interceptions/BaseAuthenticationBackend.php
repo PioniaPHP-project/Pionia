@@ -54,6 +54,8 @@ use jetPhp\request\Request;
  * ```
  *
  * @property Request $request - The request object
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 abstract class BaseAuthenticationBackend
 {

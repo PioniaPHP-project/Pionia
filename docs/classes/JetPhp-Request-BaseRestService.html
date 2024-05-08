@@ -146,9 +146,6 @@
                             </ul>
         </div>
     
-            <span class="phpdocumentor-element__implements">
-            implements
-                            <a href="classes/jetPhp-request-BaseWebServiceInterface.html"><abbr title="\jetPhp\request\BaseWebServiceInterface">BaseWebServiceInterface</abbr></a>                    </span>
     
             <span class="phpdocumentor-element__extends">
             Uses
@@ -165,18 +162,33 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
-            <a href="classes/jetPhp-request-BaseRestService.html#source-view.14" class="phpdocumentor-element-found-in__source" data-line="14" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.23" class="phpdocumentor-element-found-in__source" data-line="23" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
     </aside>
 
             <p class="phpdocumentor-summary">This is the main class all other services must extend.</p>
 
-    <section class="phpdocumentor-description"><p>All repetitive code is abstracted here.</p>
-<p>Once extended, it requires one to implement the runAction method.</p>
+    <section class="phpdocumentor-description"><p>It contains the basic methods that all services will need for authentication and request processing</p>
 </section>
 
 
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/jetPhp-request-BaseRestService.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p><a href="https://www.linkedin.com/in/jetezra/">Jet - ezrajet9@gmail.com</a></p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
 
 
@@ -188,19 +200,73 @@
 
 
 
-    <h4 id="toc-interfaces">
-        Interfaces
-        <a href="classes/jetPhp-request-BaseRestService.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/jetPhp-request-BaseWebServiceInterface.html"><abbr title="\jetPhp\request\BaseWebServiceInterface">BaseWebServiceInterface</abbr></a></dt>    </dl>
 
 
 
 
 
 
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/jetPhp-request-BaseRestService.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-request-BaseRestService.html#property_actionsRequiringAuth">$actionsRequiringAuth</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-request-BaseRestService.html#property_actionsRequiringAuth">$actionsRequiringAuth</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-request-BaseRestService.html#property_authMessage">$authMessage</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-request-BaseRestService.html#property_deactivatedActions">$deactivatedActions</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-request-BaseRestService.html#property_deactivatedActions">$deactivatedActions</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-request-BaseRestService.html#property_request">$request</a>
+    <span>
+                        &nbsp;: <a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-request-BaseRestService.html#property_request">$request</a>
+    <span>
+                        &nbsp;: <a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-request-BaseRestService.html#property_serviceRequiresAuth">$serviceRequiresAuth</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-request-BaseRestService.html#property_serviceRequiresAuth">$serviceRequiresAuth</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+
+    </dl>
 
 <h4 id="toc-methods">
     Methods
@@ -258,11 +324,11 @@
 <dd>This method ensures that only authenticated users can access a resource</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/jetPhp-request-BaseRestService.html#method_process">process()</a>
+    <a href="classes/jetPhp-request-BaseRestService.html#method_processAction">processAction()</a>
     <span>
                                 &nbsp;: <a href="classes/jetPhp-response-BaseResponse.html"><abbr title="\jetPhp\response\BaseResponse">BaseResponse</abbr></a>    </span>
 </dt>
-<dd>This is the main method that processes the request.</dd>
+<dd>This method is called when the service is called with an action</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/jetPhp-request-RequestActionTrait.html#method_requires">requires()</a>
@@ -276,6 +342,7 @@
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>Checks if a single field is present in the request data and is not null or empty</dd>
 
     </dl>
 
@@ -285,6 +352,337 @@
         
 
         
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/jetPhp-request-BaseRestService.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_actionsRequiringAuth">
+        $actionsRequiringAuth
+        <a href="classes/jetPhp-request-BaseRestService.html#property_actionsRequiringAuth" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$actionsRequiringAuth</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>An array of actions that require authentication</p>
+</section>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_actionsRequiringAuth">
+        $actionsRequiringAuth
+        <a href="classes/jetPhp-request-BaseRestService.html#property_actionsRequiringAuth" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">40</span>
+
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.40" class="phpdocumentor-element-found-in__source" data-line="40" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$actionsRequiringAuth</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+        <section class="phpdocumentor-description"><p>This array contains the actions that require authentication</p>
+</section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_authMessage">
+        $authMessage
+        <a href="classes/jetPhp-request-BaseRestService.html#property_authMessage" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">50</span>
+
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.50" class="phpdocumentor-element-found-in__source" data-line="50" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$authMessage</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+        <section class="phpdocumentor-description"><p>This message will be displayed when the entire service requires authentication</p>
+</section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_deactivatedActions">
+        $deactivatedActions
+        <a href="classes/jetPhp-request-BaseRestService.html#property_deactivatedActions" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$deactivatedActions</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>An array of actions that are deactivated for the current service</p>
+</section>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_deactivatedActions">
+        $deactivatedActions
+        <a href="classes/jetPhp-request-BaseRestService.html#property_deactivatedActions" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">35</span>
+
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.35" class="phpdocumentor-element-found-in__source" data-line="35" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$deactivatedActions</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+        <section class="phpdocumentor-description"><p>An array of actions that are deactivated for the current service</p>
+</section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_request">
+        $request
+        <a href="classes/jetPhp-request-BaseRestService.html#property_request" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$request</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The request object</p>
+</section>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_request">
+        $request
+        <a href="classes/jetPhp-request-BaseRestService.html#property_request" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">27</span>
+
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.27" class="phpdocumentor-element-found-in__source" data-line="27" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$request</span>
+    </code>
+
+    
+        <section class="phpdocumentor-description"><p>The request object</p>
+</section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_serviceRequiresAuth">
+        $serviceRequiresAuth
+        <a href="classes/jetPhp-request-BaseRestService.html#property_serviceRequiresAuth" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$serviceRequiresAuth</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>If true, the entire service requires authentication</p>
+</section>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_serviceRequiresAuth">
+        $serviceRequiresAuth
+        <a href="classes/jetPhp-request-BaseRestService.html#property_serviceRequiresAuth" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">45</span>
+
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.45" class="phpdocumentor-element-found-in__source" data-line="45" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$serviceRequiresAuth</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+    
+        <section class="phpdocumentor-description"><p>If true, the entire service requires authentication</p>
+</section>
+
+    
+
+</article>
+            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
@@ -296,7 +694,7 @@
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_auth">
         auth()
@@ -306,33 +704,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/AuthTrait.php"><a href="files/src-request-authtrait.html"><abbr title="src/request/AuthTrait.php">AuthTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">123</span>
+    <span class="phpdocumentor-element-found-in__line">126</span>
 
-            <a href="classes/jetPhp-request-BaseRestService.html#source-view.123" class="phpdocumentor-element-found-in__source" data-line="123" data-modal="source-view" data-src="files/src/request/AuthTrait.php.txt"></a>
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.126" class="phpdocumentor-element-found-in__source" data-line="126" data-modal="source-view" data-src="files/src/request/AuthTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This method holds the currently logged in user object</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">auth</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/jetPhp-core-helpers-ContextUserObject.html"><abbr title="\jetPhp\core\helpers\ContextUserObject">ContextUserObject</abbr></a>|null</span></code>
+                    <span class="phpdocumentor-signature__name">auth</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/jetPhp-core-helpers-ContextUserObject.html"><abbr title="\jetPhp\core\helpers\ContextUserObject">ContextUserObject</abbr></a>|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The request object</p>
-</section>
-
-            </dd>
-            </dl>
-
+    
     
 
             <section>
@@ -349,7 +735,7 @@
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_authExtraHas">
         authExtraHas()
@@ -359,29 +745,22 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/AuthTrait.php"><a href="files/src-request-authtrait.html"><abbr title="src/request/AuthTrait.php">AuthTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">151</span>
+    <span class="phpdocumentor-element-found-in__line">152</span>
 
-            <a href="classes/jetPhp-request-BaseRestService.html#source-view.151" class="phpdocumentor-element-found-in__source" data-line="151" data-modal="source-view" data-src="files/src/request/AuthTrait.php.txt"></a>
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.152" class="phpdocumentor-element-found-in__source" data-line="152" data-modal="source-view" data-src="files/src/request/AuthTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Checks if the auth extra data contains a key or not</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">authExtraHas</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">authExtraHas</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$key</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
@@ -407,7 +786,7 @@
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_can">
         can()
@@ -417,31 +796,22 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/AuthTrait.php"><a href="files/src-request-authtrait.html"><abbr title="src/request/AuthTrait.php">AuthTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">73</span>
 
-            <a href="classes/jetPhp-request-BaseRestService.html#source-view.68" class="phpdocumentor-element-found-in__source" data-line="68" data-modal="source-view" data-src="files/src/request/AuthTrait.php.txt"></a>
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.73" class="phpdocumentor-element-found-in__source" data-line="73" data-modal="source-view" data-src="files/src/request/AuthTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Like CanAny but only check for one permission at a time</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">can</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$permission</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;You do not have access to this resource&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">can</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$permission</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;You do not have access to this resource&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The request object</p>
-</section>
-
-            </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$permission</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
@@ -501,7 +871,7 @@
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_canAll">
         canAll()
@@ -511,31 +881,22 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/AuthTrait.php"><a href="files/src-request-authtrait.html"><abbr title="src/request/AuthTrait.php">AuthTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">96</span>
+    <span class="phpdocumentor-element-found-in__line">100</span>
 
-            <a href="classes/jetPhp-request-BaseRestService.html#source-view.96" class="phpdocumentor-element-found-in__source" data-line="96" data-modal="source-view" data-src="files/src/request/AuthTrait.php.txt"></a>
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.100" class="phpdocumentor-element-found-in__source" data-line="100" data-modal="source-view" data-src="files/src/request/AuthTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Similar to canAny only that this checks if the user has all the passed permissions</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">canAll</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$permissions</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;You do not have access to this resource&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">canAll</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$permissions</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;You do not have access to this resource&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The request object</p>
-</section>
-
-            </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$permissions</span>
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
@@ -599,7 +960,7 @@
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_canAny">
         canAny()
@@ -609,16 +970,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/AuthTrait.php"><a href="files/src-request-authtrait.html"><abbr title="src/request/AuthTrait.php">AuthTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
-            <a href="classes/jetPhp-request-BaseRestService.html#source-view.27" class="phpdocumentor-element-found-in__source" data-line="27" data-modal="source-view" data-src="files/src/request/AuthTrait.php.txt"></a>
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.33" class="phpdocumentor-element-found-in__source" data-line="33" data-modal="source-view" data-src="files/src/request/AuthTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This method is used to check if the currently logged in user has the required permission to access a resource.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">canAny</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$permission</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;You do not have access to this resource&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">canAny</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$permission</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;You do not have access to this resource&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -628,15 +989,6 @@
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The request object</p>
-</section>
-
-            </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$permission</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string|array&lt;string|int, mixed&gt;</span>
@@ -696,7 +1048,7 @@
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_getAuthExtraByKey">
         getAuthExtraByKey()
@@ -715,20 +1067,13 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getAuthExtraByKey</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed|null</span></code>
+                    <span class="phpdocumentor-signature__name">getAuthExtraByKey</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$key</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
@@ -754,7 +1099,7 @@
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_mustAuthenticate">
         mustAuthenticate()
@@ -764,29 +1109,22 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/AuthTrait.php"><a href="files/src-request-authtrait.html"><abbr title="src/request/AuthTrait.php">AuthTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">136</span>
+    <span class="phpdocumentor-element-found-in__line">138</span>
 
-            <a href="classes/jetPhp-request-BaseRestService.html#source-view.136" class="phpdocumentor-element-found-in__source" data-line="136" data-modal="source-view" data-src="files/src/request/AuthTrait.php.txt"></a>
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.138" class="phpdocumentor-element-found-in__source" data-line="138" data-modal="source-view" data-src="files/src/request/AuthTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This method ensures that only authenticated users can access a resource</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">mustAuthenticate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;You must be authenticated to access this resource&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">mustAuthenticate</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;You must be authenticated to access this resource&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$message</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
@@ -827,24 +1165,24 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_process">
-        process()
-        <a href="classes/jetPhp-request-BaseRestService.html#method_process" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_processAction">
+        processAction()
+        <a href="classes/jetPhp-request-BaseRestService.html#method_processAction" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">61</span>
 
-            <a href="classes/jetPhp-request-BaseRestService.html#source-view.23" class="phpdocumentor-element-found-in__source" data-line="23" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.61" class="phpdocumentor-element-found-in__source" data-line="61" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
     </aside>
 
-        <p class="phpdocumentor-summary">This is the main method that processes the request.</p>
+        <p class="phpdocumentor-summary">This method is called when the service is called with an action</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">process</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action_or_service</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/jetPhp-response-BaseResponse.html"><abbr title="\jetPhp\response\BaseResponse">BaseResponse</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">processAction</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/jetPhp-response-BaseResponse.html"><abbr title="\jetPhp\response\BaseResponse">BaseResponse</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -852,18 +1190,20 @@
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$action_or_service</span>
+                <span class="phpdocumentor-signature__argument__name">$action</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The action to be called</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$request</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>This is the request object</p>
+                    <section class="phpdocumentor-description"><p>The request object</p>
 </section>
 
             </dd>
@@ -872,15 +1212,24 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/jetPhp-request-BaseRestService.html#method_process#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/jetPhp-request-BaseRestService.html#method_processAction#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">inheritDoc</span>
+                    <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                                
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/jetPhp-exceptions-ResourceNotFoundException.html"><abbr title="\jetPhp\exceptions\ResourceNotFoundException">ResourceNotFoundException</abbr></a>|<abbr title="\ReflectionException">ReflectionException</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/jetPhp-exceptions-UserUnauthenticatedException.html"><abbr title="\jetPhp\exceptions\UserUnauthenticatedException">UserUnauthenticatedException</abbr></a></span>
+                                                            
                                              
                                     </dd>
                                             </dl>
@@ -889,7 +1238,7 @@
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/jetPhp-response-BaseResponse.html"><abbr title="\jetPhp\response\BaseResponse">BaseResponse</abbr></a></span>
                     &mdash;
-                <section class="phpdocumentor-description"><p>The uniform response object that is returned by the framework</p>
+                <section class="phpdocumentor-description"><p>The response object</p>
 </section>
 
             </section>
@@ -899,7 +1248,7 @@
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_requires">
         requires()
@@ -909,16 +1258,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/RequestActionTrait.php"><a href="files/src-request-requestactiontrait.html"><abbr title="src/request/RequestActionTrait.php">RequestActionTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
-            <a href="classes/jetPhp-request-BaseRestService.html#source-view.24" class="phpdocumentor-element-found-in__source" data-line="24" data-modal="source-view" data-src="files/src/request/RequestActionTrait.php.txt"></a>
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.34" class="phpdocumentor-element-found-in__source" data-line="34" data-modal="source-view" data-src="files/src/request/RequestActionTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This checks if the required fields are present in the request otherwise it throws an exception</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">requires</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$required</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">requires</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$required</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -926,18 +1275,13 @@
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$required</span>
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string</span>
                  = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The fields that are required</p>
+</section>
+
             </dd>
             </dl>
 
@@ -954,7 +1298,9 @@
                 <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><a href="classes/jetPhp-exceptions-FailedRequiredException.html"><abbr title="\jetPhp\exceptions\FailedRequiredException">FailedRequiredException</abbr></a></span>
                                                             
-                                             
+                                                 <section class="phpdocumentor-description"><p>if a required field is not present in the request</p>
+</section>
+
                                     </dd>
                                             </dl>
 
@@ -974,15 +1320,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/RequestActionTrait.php"><a href="files/src-request-requestactiontrait.html"><abbr title="src/request/RequestActionTrait.php">RequestActionTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
-            <a href="classes/jetPhp-request-BaseRestService.html#source-view.10" class="phpdocumentor-element-found-in__source" data-line="10" data-modal="source-view" data-src="files/src/request/RequestActionTrait.php.txt"></a>
+            <a href="classes/jetPhp-request-BaseRestService.html#source-view.22" class="phpdocumentor-element-found-in__source" data-line="22" data-modal="source-view" data-src="files/src/request/RequestActionTrait.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Checks if a single field is present in the request data and is not null or empty</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">check_one</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$field</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">check_one</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href=""></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$field</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href=""></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -991,14 +1338,14 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$field</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href=""></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$data</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href=""></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -1006,6 +1353,21 @@
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/jetPhp-request-RequestActionTrait.html#method_check_one#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/jetPhp-exceptions-FailedRequiredException.html"><abbr title="\jetPhp\exceptions\FailedRequiredException">FailedRequiredException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
 
     
 </article>
@@ -1114,10 +1476,25 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                                <li><a href="classes/jetPhp-request-BaseRestService.html#toc-methods">Methods</a></li>
+                                                            <li><a href="classes/jetPhp-request-BaseRestService.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/jetPhp-request-BaseRestService.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/jetPhp-request-BaseRestService.html#property_actionsRequiringAuth">$actionsRequiringAuth<a href="classes/jetPhp-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/jetPhp-request-BaseRestService.html#property_actionsRequiringAuth">$actionsRequiringAuth<a href="classes/jetPhp-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/jetPhp-request-BaseRestService.html#property_authMessage">$authMessage<a href="classes/jetPhp-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/jetPhp-request-BaseRestService.html#property_deactivatedActions">$deactivatedActions<a href="classes/jetPhp-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/jetPhp-request-BaseRestService.html#property_deactivatedActions">$deactivatedActions<a href="classes/jetPhp-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/jetPhp-request-BaseRestService.html#property_request">$request<a href="classes/jetPhp-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/jetPhp-request-BaseRestService.html#property_request">$request<a href="classes/jetPhp-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/jetPhp-request-BaseRestService.html#property_serviceRequiresAuth">$serviceRequiresAuth<a href="classes/jetPhp-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/jetPhp-request-BaseRestService.html#property_serviceRequiresAuth">$serviceRequiresAuth<a href="classes/jetPhp-request-BaseRestService.html"></li>
+                                            </ul>
+                </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
@@ -1129,7 +1506,7 @@
                                             <li><a href="classes/jetPhp-request-AuthTrait.html#method_canAny">canAny()</a></li>
                                             <li><a href="classes/jetPhp-request-AuthTrait.html#method_getAuthExtraByKey">getAuthExtraByKey()</a></li>
                                             <li><a href="classes/jetPhp-request-AuthTrait.html#method_mustAuthenticate">mustAuthenticate()</a></li>
-                                            <li><a href="classes/jetPhp-request-BaseRestService.html#method_process">process()</a></li>
+                                            <li><a href="classes/jetPhp-request-BaseRestService.html#method_processAction">processAction()</a></li>
                                             <li><a href="classes/jetPhp-request-RequestActionTrait.html#method_requires">requires()</a></li>
                                             <li><a href="classes/jetPhp-request-RequestActionTrait.html#method_check_one">check_one()</a></li>
                                     </ul>

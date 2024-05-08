@@ -132,16 +132,12 @@
                                         <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp.html">jetPhp</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp-core.html">core</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/jetphp-core-routing.html">routing</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    BaseRoute
+    BaseApiServiceSwitch
 
-        <span class="phpdocumentor-element__extends">
-        extends <abbr title="\Symfony\Component\Routing\Route">Route</abbr>
-    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -156,23 +152,30 @@
 <div class="phpdocumentor-label-line">
 
 
+    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Abstract</span><span>Yes</span></div>
+
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/BaseRoute.php"><a href="files/src-core-routing-baseroute.html"><abbr title="src/core/routing/BaseRoute.php">BaseRoute.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/BaseApiServiceSwitch.php"><a href="files/src-core-baseapiserviceswitch.html"><abbr title="src/core/BaseApiServiceSwitch.php">BaseApiServiceSwitch.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
-            <a href="classes/jetPhp-core-routing-BaseRoute.html#source-view.12" class="phpdocumentor-element-found-in__source" data-line="12" data-modal="source-view" data-src="files/src/core/routing/BaseRoute.php.txt"></a>
+            <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#source-view.23" class="phpdocumentor-element-found-in__source" data-line="23" data-modal="source-view" data-src="files/src/core/BaseApiServiceSwitch.php.txt"></a>
     </aside>
 
-            <p class="phpdocumentor-summary">This is the base route class, it extends the Symfony route class and is used to define routes in the framework</p>
+            <p class="phpdocumentor-summary">This is the base class for the API service switch. It is used to switch between different services based on the request data.</p>
 
+    <section class="phpdocumentor-description"><p>The child class must implement the registerServices method to return an array of services.
+It requires the request to define the <code class="prettyprint">SERVICE</code> key in the request data and the <code class="prettyprint">ACTION</code> key to define the action to be performed.</p>
+<p>The SERVICE is the class that will be called when the SERVICE_NAME is called.
+The ACTION is the method that will be called on the SERVICE.</p>
+</section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/jetPhp-core-routing-BaseRoute.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -185,13 +188,23 @@
 </section>
 
                                     </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="classes/jetPhp-response-BaseResponse.html"><abbr title="\jetPhp\response\BaseResponse">BaseResponse</abbr></a></span>
+                                        
+                                                 <section class="phpdocumentor-description"><p>for the response returned by this swicher's processServices method</p>
+</section>
+
+                                    </dd>
                                             </dl>
 
 
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/jetPhp-core-routing-BaseRoute.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -204,6 +217,27 @@
 
 
 
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#method_processServices">processServices()</a>
+    <span>
+                                &nbsp;: <a href="classes/jetPhp-response-BaseResponse.html"><abbr title="\jetPhp\response\BaseResponse">BaseResponse</abbr></a>    </span>
+</dt>
+<dd>This method checks the request data for the `SERVICE` key and processes the service based on it</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#method_registerServices">registerServices()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>This method must be implemented by the child class to return an array of services.</dd>
+
+    </dl>
 
 
 
@@ -212,12 +246,153 @@
 
         
 
-        
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_processServices">
+        processServices()
+        <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#method_processServices" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/BaseApiServiceSwitch.php"><a href="files/src-core-baseapiserviceswitch.html"><abbr title="src/core/BaseApiServiceSwitch.php">BaseApiServiceSwitch.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">53</span>
+
+            <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#source-view.53" class="phpdocumentor-element-found-in__source" data-line="53" data-modal="source-view" data-src="files/src/core/BaseApiServiceSwitch.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">This method checks the request data for the `SERVICE` key and processes the service based on it</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">processServices</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/jetPhp-response-BaseResponse.html"><abbr title="\jetPhp\response\BaseResponse">BaseResponse</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$request</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/jetPhp-request-Request.html"><abbr title="\jetPhp\request\Request">Request</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The request object</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#method_processServices#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/jetPhp-exceptions-ResourceNotFoundException.html"><abbr title="\jetPhp\exceptions\ResourceNotFoundException">ResourceNotFoundException</abbr></a>|<abbr title="\ReflectionException">ReflectionException</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>if the SERVICE key is not found, or the service is invalid, or the service is not found</p>
+</section>
+
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/jetPhp-response-BaseResponse.html"><abbr title="\jetPhp\response\BaseResponse">BaseResponse</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                        -abstract                                "
+>
+    <h4 class="phpdocumentor-element__name" id="method_registerServices">
+        registerServices()
+        <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#method_registerServices" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/BaseApiServiceSwitch.php"><a href="files/src-core-baseapiserviceswitch.html"><abbr title="src/core/BaseApiServiceSwitch.php">BaseApiServiceSwitch.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">45</span>
+
+            <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#source-view.45" class="phpdocumentor-element-found-in__source" data-line="45" data-modal="source-view" data-src="files/src/core/BaseApiServiceSwitch.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">This method must be implemented by the child class to return an array of services.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">registerServices</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>The array should be in the format of <code class="prettyprint">['SERVICE_NAME' =&gt; new SERVICE_CLASS()]</code>.
+The <code class="prettyprint">SERVICE_NAME</code> is the key that will be used to call the service.
+The <code class="prettyprint">SERVICE_CLASS</code> is the class that will be called when the SERVICE_NAME is called.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#method_registerServices#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">public function registerServices() :array
+{
+   return [
+      'service1' =&gt; new Service1(),
+      'service2' =&gt; new Service2(),
+    ];
+}
+</code></pre>
+</section>
+
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The array of services</p>
+</section>
+
+            </section>
+
+</article>
+            </section>
+
         <div class="phpdocumentor-modal" id="source-view">
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/core/routing/BaseRoute.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/core/BaseApiServiceSwitch.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -316,10 +491,18 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                            </ul>
+                                                                                <li><a href="classes/jetPhp-core-BaseApiServiceSwitch.html#toc-methods">Methods</a></li>
+                                    </ul>
             </li>
             
             
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/jetPhp-core-BaseApiServiceSwitch.html#method_processServices">processServices()</a></li>
+                                            <li><a href="classes/jetPhp-core-BaseApiServiceSwitch.html#method_registerServices">registerServices()</a></li>
+                                    </ul>
+            </li>
                     </ul>
     </section>
 
@@ -337,7 +520,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/jetPhp-core-routing-BaseRoute.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/jetPhp-core-BaseApiServiceSwitch.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

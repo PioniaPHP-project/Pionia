@@ -4,6 +4,8 @@ namespace jetPhp\core\config;
 
 /**
  * This class is responsible for handling all session related operations
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 class Sessions
 {

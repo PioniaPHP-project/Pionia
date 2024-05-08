@@ -18,7 +18,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\command\\CommandInterface",
             "name": "CommandInterface",
-            "summary": "",
+            "summary": "This\u0020is\u0020the\u0020command\u0020interface,\u0020it\u0020is\u0020the\u0020entry\u0020point\u0020for\u0020all\u0020commands\u0020in\u0020the\u0020framework",
             "url": "classes/jetPhp-command-CommandInterface.html"
         },                {
             "fqsen": "\\jetPhp\\command\\CommandInterface\u003A\u003AaddCommand\u0028\u0029",
@@ -43,7 +43,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\command\\commands\\StartServer",
             "name": "StartServer",
-            "summary": "For\u0020starting\u0020the\u0020php\u0020server",
+            "summary": "For\u0020starting\u0020the\u0020command\u0020line\u0020server.\u0020This\u0020should\u0020be\u0020good\u0020choice\u0020only\u0020in\u0020development",
             "url": "classes/jetPhp-command-commands-StartServer.html"
         },                {
             "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003Aconfigure\u0028\u0029",
@@ -78,7 +78,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\command\\ConsoleApplication",
             "name": "ConsoleApplication",
-            "summary": "",
+            "summary": "This\u0020is\u0020the\u0020main\u0020console\u0020application\u0020class,\u0020it\u0020extends\u0020the\u0020Symfony\u0020console\u0020application\u0020class",
             "url": "classes/jetPhp-command-ConsoleApplication.html"
         },                {
             "fqsen": "\\jetPhp\\command\\ConsoleApplication\u003A\u003A__construct\u0028\u0029",
@@ -88,7 +88,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\core\\Base",
             "name": "Base",
-            "summary": "",
+            "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020the\u0020framework",
             "url": "classes/jetPhp-core-Base.html"
         },                {
             "fqsen": "\\jetPhp\\core\\Base\u003A\u003A__construct\u0028\u0029",
@@ -133,7 +133,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\core\\BaseApiController",
             "name": "BaseApiController",
-            "summary": "",
+            "summary": "This\u0020is\u0020the\u0020base\u0020controller\u0020class\u0020for\u0020the\u0020framework\u0020and\u0020most\u0020probably\u0020the\u0020only\u0020controller\u0020class\u0020that\u0020should\u0020be\u0020extended.",
             "url": "classes/jetPhp-core-BaseApiController.html"
         },                {
             "fqsen": "\\jetPhp\\core\\BaseApiController\u003A\u003A__construct\u0028\u0029",
@@ -143,7 +143,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\core\\BaseApiController\u003A\u003Aping\u0028\u0029",
             "name": "ping",
-            "summary": "This\u0020just\u0020is\u0020for\u0020checking\u0020the\u0020server\u0020status",
+            "summary": "This\u0020is\u0020just\u0020for\u0020checking\u0020the\u0020server\u0020status",
             "url": "classes/jetPhp-core-BaseApiController.html#method_ping"
         },                {
             "fqsen": "\\jetPhp\\core\\BaseApiController\u003A\u003A\u0024settings",
@@ -151,9 +151,24 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/jetPhp-core-BaseApiController.html#property_settings"
         },                {
+            "fqsen": "\\jetPhp\\core\\BaseApiServiceSwitch",
+            "name": "BaseApiServiceSwitch",
+            "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020the\u0020API\u0020service\u0020switch.\u0020It\u0020is\u0020used\u0020to\u0020switch\u0020between\u0020different\u0020services\u0020based\u0020on\u0020the\u0020request\u0020data.",
+            "url": "classes/jetPhp-core-BaseApiServiceSwitch.html"
+        },                {
+            "fqsen": "\\jetPhp\\core\\BaseApiServiceSwitch\u003A\u003AregisterServices\u0028\u0029",
+            "name": "registerServices",
+            "summary": "This\u0020method\u0020must\u0020be\u0020implemented\u0020by\u0020the\u0020child\u0020class\u0020to\u0020return\u0020an\u0020array\u0020of\u0020services.",
+            "url": "classes/jetPhp-core-BaseApiServiceSwitch.html#method_registerServices"
+        },                {
+            "fqsen": "\\jetPhp\\core\\BaseApiServiceSwitch\u003A\u003AprocessServices\u0028\u0029",
+            "name": "processServices",
+            "summary": "This\u0020method\u0020checks\u0020the\u0020request\u0020data\u0020for\u0020the\u0020\u0060SERVICE\u0060\u0020key\u0020and\u0020processes\u0020the\u0020service\u0020based\u0020on\u0020it",
+            "url": "classes/jetPhp-core-BaseApiServiceSwitch.html#method_processServices"
+        },                {
             "fqsen": "\\jetPhp\\core\\config\\CoreKernel",
             "name": "CoreKernel",
-            "summary": "",
+            "summary": "This\u0020is\u0020the\u0020core\u0020kernel\u0020that\u0020handles\u0020all\u0020the\u0020request\u0020processing\u0020and\u0020middleware\u0020execution",
             "url": "classes/jetPhp-core-config-CoreKernel.html"
         },                {
             "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A__construct\u0028\u0029",
@@ -268,7 +283,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\core\\helpers\\ContextUserObject",
             "name": "ContextUserObject",
-            "summary": "",
+            "summary": "This\u0020is\u0020the\u0020context\u0020object\u0020holding\u0020the\u0020current\u0020session",
             "url": "classes/jetPhp-core-helpers-ContextUserObject.html"
         },                {
             "fqsen": "\\jetPhp\\core\\helpers\\ContextUserObject\u003A\u003A\u0024user",
@@ -293,7 +308,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\core\\helpers\\SupportedHttpMethods",
             "name": "SupportedHttpMethods",
-            "summary": "",
+            "summary": "This\u0020class\u0020holds\u0020the\u0020supported\u0020http\u0020methods\u0020in\u0020the\u0020framework.",
             "url": "classes/jetPhp-core-helpers-SupportedHttpMethods.html"
         },                {
             "fqsen": "\\jetPhp\\core\\helpers\\SupportedHttpMethods\u003A\u003APOST",
@@ -308,27 +323,27 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\core\\helpers\\Utilities",
             "name": "Utilities",
-            "summary": "These\u0020are\u0020just\u0020helpers\u0020to\u0020quickly\u0020staff\u0020done",
+            "summary": "These\u0020are\u0020just\u0020helpers\u0020to\u0020quickly\u0020get\u0020staff\u0020done",
             "url": "classes/jetPhp-core-helpers-Utilities.html"
         },                {
             "fqsen": "\\jetPhp\\core\\helpers\\Utilities\u003A\u003AarrayToCommaSepString\u0028\u0029",
             "name": "arrayToCommaSepString",
-            "summary": "",
+            "summary": "This\u0020function\u0020converts\u0020an\u0020array\u0020to\u0020a\u0020comma\u002Dseparated\u0020string",
             "url": "classes/jetPhp-core-helpers-Utilities.html#method_arrayToCommaSepString"
         },                {
             "fqsen": "\\jetPhp\\core\\helpers\\Utilities\u003A\u003Ajsonify\u0028\u0029",
             "name": "jsonify",
-            "summary": "",
+            "summary": "This\u0020function\u0020json\u0020encodes\u0020a\u0020value",
             "url": "classes/jetPhp-core-helpers-Utilities.html#method_jsonify"
         },                {
             "fqsen": "\\jetPhp\\core\\helpers\\Utilities\u003A\u003Aextends\u0028\u0029",
             "name": "extends",
-            "summary": "",
+            "summary": "This\u0020function\u0020checks\u0020if\u0020a\u0020class\u0020extends\u0020another\u0020class",
             "url": "classes/jetPhp-core-helpers-Utilities.html#method_extends"
         },                {
             "fqsen": "\\jetPhp\\core\\helpers\\Utilities\u003A\u003Aimplements\u0028\u0029",
             "name": "implements",
-            "summary": "",
+            "summary": "This\u0020function\u0020checks\u0020if\u0020a\u0020class\u0020implements\u0020an\u0020interface",
             "url": "classes/jetPhp-core-helpers-Utilities.html#method_implements"
         },                {
             "fqsen": "\\jetPhp\\core\\interceptions\\BaseAuthenticationBackend",
@@ -353,12 +368,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\core\\routing\\BaseRoute",
             "name": "BaseRoute",
-            "summary": "",
+            "summary": "This\u0020is\u0020the\u0020base\u0020route\u0020class,\u0020it\u0020extends\u0020the\u0020Symfony\u0020route\u0020class\u0020and\u0020is\u0020used\u0020to\u0020define\u0020routes\u0020in\u0020the\u0020framework",
             "url": "classes/jetPhp-core-routing-BaseRoute.html"
         },                {
             "fqsen": "\\jetPhp\\core\\routing\\BaseRoutes",
             "name": "BaseRoutes",
-            "summary": "",
+            "summary": "This\u0020is\u0020the\u0020base\u0020routes\u0020class,\u0020it\u0020extends\nthe\u0020Symfony\u0020route\u0020collection\u0020class\u0020and\u0020is\u0020used\u0020to\u0020define\u0020routes\u0020in\u0020the\u0020framework",
             "url": "classes/jetPhp-core-routing-BaseRoutes.html"
         },                {
             "fqsen": "\\jetPhp\\core\\routing\\JetRouter",
@@ -428,7 +443,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\database\\Connector",
             "name": "Connector",
-            "summary": "",
+            "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020the\u0020framework",
             "url": "classes/jetPhp-database-Connector.html"
         },                {
             "fqsen": "\\jetPhp\\database\\Connector\u003A\u003A__connect_internal\u0028\u0029",
@@ -533,7 +548,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\database\\QueryBuilder",
             "name": "QueryBuilder",
-            "summary": "",
+            "summary": "Class\u0020QueryBuilder",
             "url": "classes/jetPhp-database-QueryBuilder.html"
         },                {
             "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003A__construct\u0028\u0029",
@@ -593,7 +608,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\database\\SupportDatabaseDrivers",
             "name": "SupportDatabaseDrivers",
-            "summary": "",
+            "summary": "Currently\u0020supported\u0020database\u0020drivers",
             "url": "classes/jetPhp-database-SupportDatabaseDrivers.html"
         },                {
             "fqsen": "\\jetPhp\\database\\SupportDatabaseDrivers\u003A\u003A\u0024MYSQL",
@@ -656,6 +671,11 @@ Search.appendIndex(
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020an\u0020offset\u0020is\u0020passed\u0020in\u0020a\u0020paginated\u0020query\u0020using\u0020the\u0020Pagination\u0020class",
             "url": "classes/jetPhp-exceptions-OffsetPaginationException.html"
         },                {
+            "fqsen": "\\jetPhp\\exceptions\\ResourceNotFoundException",
+            "name": "ResourceNotFoundException",
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020service\u0020requested\u0020is\u0020not\u0020found.",
+            "url": "classes/jetPhp-exceptions-ResourceNotFoundException.html"
+        },                {
             "fqsen": "\\jetPhp\\exceptions\\RestParseException",
             "name": "RestParseException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020an\u0020error\u0020occurs\u0020during\u0020REST\u0020parsing.",
@@ -678,7 +698,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\request\\AuthTrait",
             "name": "AuthTrait",
-            "summary": "",
+            "summary": "This\u0020trait\u0020provides\u0020common\u0020authentication\u0020methods\u0020for\u0020the\u0020services",
             "url": "classes/jetPhp-request-AuthTrait.html"
         },                {
             "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003AcanAny\u0028\u0029",
@@ -721,54 +741,64 @@ Search.appendIndex(
             "summary": "This\u0020is\u0020the\u0020main\u0020class\u0020all\u0020other\u0020services\u0020must\u0020extend.",
             "url": "classes/jetPhp-request-BaseRestService.html"
         },                {
-            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003Aprocess\u0028\u0029",
-            "name": "process",
-            "summary": "This\u0020is\u0020the\u0020main\u0020method\u0020that\u0020processes\u0020the\u0020request.",
-            "url": "classes/jetPhp-request-BaseRestService.html#method_process"
+            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003AprocessAction\u0028\u0029",
+            "name": "processAction",
+            "summary": "This\u0020method\u0020is\u0020called\u0020when\u0020the\u0020service\u0020is\u0020called\u0020with\u0020an\u0020action",
+            "url": "classes/jetPhp-request-BaseRestService.html#method_processAction"
         },                {
-            "fqsen": "\\jetPhp\\request\\BaseWebServiceInterface",
-            "name": "BaseWebServiceInterface",
+            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003A\u0024request",
+            "name": "request",
             "summary": "",
-            "url": "classes/jetPhp-request-BaseWebServiceInterface.html"
+            "url": "classes/jetPhp-request-BaseRestService.html#property_request"
         },                {
-            "fqsen": "\\jetPhp\\request\\BaseWebServiceInterface\u003A\u003ArunAction\u0028\u0029",
-            "name": "runAction",
-            "summary": "This\u0020is\u0020the\u0020actual\u0020switcher.\u0020It\u0020maps\u0020the\u0020action\u0020from\u0020the\u0020request\u0020to\u0020a\u0020method\u0020in\u0020your\u0020service\u0028class\u0029",
-            "url": "classes/jetPhp-request-BaseWebServiceInterface.html#method_runAction"
+            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003A\u0024deactivatedActions",
+            "name": "deactivatedActions",
+            "summary": "",
+            "url": "classes/jetPhp-request-BaseRestService.html#property_deactivatedActions"
         },                {
-            "fqsen": "\\jetPhp\\request\\BaseWebServiceInterface\u003A\u003Aprocess\u0028\u0029",
-            "name": "process",
-            "summary": "This\u0020is\u0020the\u0020main\u0020method\u0020that\u0020processes\u0020the\u0020request.",
-            "url": "classes/jetPhp-request-BaseWebServiceInterface.html#method_process"
+            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003A\u0024actionsRequiringAuth",
+            "name": "actionsRequiringAuth",
+            "summary": "",
+            "url": "classes/jetPhp-request-BaseRestService.html#property_actionsRequiringAuth"
+        },                {
+            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003A\u0024serviceRequiresAuth",
+            "name": "serviceRequiresAuth",
+            "summary": "",
+            "url": "classes/jetPhp-request-BaseRestService.html#property_serviceRequiresAuth"
+        },                {
+            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003A\u0024authMessage",
+            "name": "authMessage",
+            "summary": "",
+            "url": "classes/jetPhp-request-BaseRestService.html#property_authMessage"
         },                {
             "fqsen": "\\jetPhp\\request\\Request",
             "name": "Request",
-            "summary": "",
+            "summary": "This\u0020method\u0020extends\u0020the\u0020Symfony\u0020request\u0020class\u0020to\u0020add\u0020more\u0020functionality\u0020to\u0020the\u0020request\u0020object.",
             "url": "classes/jetPhp-request-Request.html"
         },                {
             "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetAuth\u0028\u0029",
             "name": "getAuth",
-            "summary": "",
+            "summary": "The\u0020currently\u0020logged\u0020user\u0020in\u0020context\u0020object",
             "url": "classes/jetPhp-request-Request.html#method_getAuth"
         },                {
             "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetContext\u0028\u0029",
             "name": "getContext",
-            "summary": "",
+            "summary": "This\u0020is\u0020the\u0020entire\u0020app\u0020context\u0020object,\u0020it\u0020even\u0020contains\u0020the\u0020authentication\u0020object\u0020itself.",
             "url": "classes/jetPhp-request-Request.html#method_getContext"
         },                {
             "fqsen": "\\jetPhp\\request\\Request\u003A\u003AisAuthenticated\u0028\u0029",
             "name": "isAuthenticated",
-            "summary": "",
+            "summary": "This\u0020method\u0020checks\u0020if\u0020the\u0020request\u0020is\u0020authenticated",
             "url": "classes/jetPhp-request-Request.html#method_isAuthenticated"
         },                {
             "fqsen": "\\jetPhp\\request\\Request\u003A\u003AsetAuthenticationContext\u0028\u0029",
             "name": "setAuthenticationContext",
-            "summary": "",
+            "summary": "This\u0020method\u0020sets\u0020the\u0020authentication\u0020context\u0020for\u0020the\u0020request",
             "url": "classes/jetPhp-request-Request.html#method_setAuthenticationContext"
         },                {
             "fqsen": "\\jetPhp\\request\\Request\u003A\u003AsetAppContext\u0028\u0029",
             "name": "setAppContext",
-            "summary": "",
+            "summary": "This\u0020method\u0020add\u0020data\u0020to\u0020the\u0020context\u0020object",
             "url": "classes/jetPhp-request-Request.html#method_setAppContext"
         },                {
             "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetJsonData\u0028\u0029",
@@ -808,12 +838,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\request\\RequestActionTrait",
             "name": "RequestActionTrait",
-            "summary": "",
+            "summary": "Provides\u0020helper\u0020methods\u0020for\u0020request\u0020actions",
             "url": "classes/jetPhp-request-RequestActionTrait.html"
         },                {
             "fqsen": "\\jetPhp\\request\\RequestActionTrait\u003A\u003Acheck_one\u0028\u0029",
             "name": "check_one",
-            "summary": "",
+            "summary": "Checks\u0020if\u0020a\u0020single\u0020field\u0020is\u0020present\u0020in\u0020the\u0020request\u0020data\u0020and\u0020is\u0020not\u0020null\u0020or\u0020empty",
             "url": "classes/jetPhp-request-RequestActionTrait.html#method_check_one"
         },                {
             "fqsen": "\\jetPhp\\request\\RequestActionTrait\u003A\u003Arequires\u0028\u0029",
@@ -878,7 +908,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\response\\Response",
             "name": "Response",
-            "summary": "Document\u0020me\u0021",
+            "summary": "This\u0020is\u0020the\u0020internal\u0020response.\u0020It\u0020should\u0020not\u0020be\u0020used\u0020anywhere\u0020in\u0020the\u0020project\u0020but\u0020in\u0020the\u0020core\u0020framework",
             "url": "classes/jetPhp-response-Response.html"
         },                {
             "fqsen": "\\",

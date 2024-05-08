@@ -2,6 +2,15 @@
 
 namespace jetPhp\core;
 
+/**
+ * This is the base class for the framework
+ *
+ * It holds the settings and the version of the framework
+ *
+ * All classes in the framework should extend this class to have access to the core configurations
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
+ */
 class Base
 {
 

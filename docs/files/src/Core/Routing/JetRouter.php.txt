@@ -12,11 +12,19 @@ use Symfony\Component\Routing\Route;
 /**
  * Changing how we define our routes in the app
  *
- * Now we need to do like this
- *
- * @example ```php
- * $routes = new JetRouter(someController, theItsApiHere);
+ * Now we need to do it like this
+ * ```php
+ * $router = new JetRouter();
+ * $router->addGroup('App\Controllers\MyController')
+ *    ->post('myAction', 'myAction')
+ *   ->get('myAction', 'myAction');
  * ```
+ *
+ * You can only add post and get routes as that what the framework tends to support.
+ * If you need more methods, you can add them to the SupportedHttpMethods class and use them here.
+ * However, this is meant for core framework developers only.
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 class JetRouter
 {
@@ -74,6 +82,7 @@ class JetRouter
     {
         $this->resolveController($controller);
         $this->basePath = $basePath;
+        $this->addRoute('ping', 'ping', SupportedHttpMethods::GET, $controller);
         return $this;
     }
 

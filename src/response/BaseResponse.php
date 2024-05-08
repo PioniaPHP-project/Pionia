@@ -20,6 +20,8 @@ namespace jetPhp\response;
  * @property $returnData - the data the server wants to send to the frontend, can be of any data format
  *
  * @property $extraData - any other data you want to send to the front-end, any!!
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 class BaseResponse
 {

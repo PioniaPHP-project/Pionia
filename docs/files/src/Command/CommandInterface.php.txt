@@ -6,7 +6,11 @@ use Exception;
 use jetPhp\core\helpers\Utilities;
 use jetPhp\exceptions\CommandException;
 
-
+/**
+ * This is the command interface, it is the entry point for all commands in the framework
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
+ */
 class CommandInterface
 {
     /**
@@ -14,7 +18,7 @@ class CommandInterface
      * @var array|string[] $commands
      */
     private static array $commands = [
-        'jetPhp\command\core\StartServer',
+        'jetPhp\command\commands\StartServer',
     ];
 
 

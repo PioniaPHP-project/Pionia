@@ -158,15 +158,31 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/helpers/Utilities.php"><a href="files/src-core-helpers-utilities.html"><abbr title="src/core/helpers/Utilities.php">Utilities.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
-            <a href="classes/jetPhp-core-helpers-Utilities.html#source-view.10" class="phpdocumentor-element-found-in__source" data-line="10" data-modal="source-view" data-src="files/src/core/helpers/Utilities.php.txt"></a>
+            <a href="classes/jetPhp-core-helpers-Utilities.html#source-view.12" class="phpdocumentor-element-found-in__source" data-line="12" data-modal="source-view" data-src="files/src/core/helpers/Utilities.php.txt"></a>
     </aside>
 
-            <p class="phpdocumentor-summary">These are just helpers to quickly staff done</p>
+            <p class="phpdocumentor-summary">These are just helpers to quickly get staff done</p>
 
 
 
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/jetPhp-core-helpers-Utilities.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p><a href="https://www.linkedin.com/in/jetezra/">Jet - ezrajet9@gmail.com</a></p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
 
 
@@ -196,24 +212,28 @@
     <span>
                                 &nbsp;: string    </span>
 </dt>
+<dd>This function converts an array to a comma-separated string</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/jetPhp-core-helpers-Utilities.html#method_extends">extends()</a>
     <span>
                                 &nbsp;: bool|string    </span>
 </dt>
+<dd>This function checks if a class extends another class</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/jetPhp-core-helpers-Utilities.html#method_implements">implements()</a>
     <span>
                                 &nbsp;: bool|string    </span>
 </dt>
+<dd>This function checks if a class implements an interface</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/jetPhp-core-helpers-Utilities.html#method_jsonify">jsonify()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
+<dd>This function json encodes a value</dd>
 
     </dl>
 
@@ -244,15 +264,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/helpers/Utilities.php"><a href="files/src-core-helpers-utilities.html"><abbr title="src/core/helpers/Utilities.php">Utilities.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
-            <a href="classes/jetPhp-core-helpers-Utilities.html#source-view.12" class="phpdocumentor-element-found-in__source" data-line="12" data-modal="source-view" data-src="files/src/core/helpers/Utilities.php.txt"></a>
+            <a href="classes/jetPhp-core-helpers-Utilities.html#source-view.21" class="phpdocumentor-element-found-in__source" data-line="21" data-modal="source-view" data-src="files/src/core/helpers/Utilities.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">This function converts an array to a comma-separated string</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">arrayToCommaSepString</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$array</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$separator</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;,&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">arrayToCommaSepString</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$array</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$separator</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;,&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -264,14 +285,18 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The array to convert</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$separator</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                  = <span class="phpdocumentor-signature__argument__default-value">&#039;,&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The separator to use</p>
+</section>
+
             </dd>
             </dl>
 
@@ -280,6 +305,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The comma-separated string</p>
+</section>
+
             </section>
 
 </article>
@@ -297,15 +326,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/helpers/Utilities.php"><a href="files/src-core-helpers-utilities.html"><abbr title="src/core/helpers/Utilities.php">Utilities.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
-            <a href="classes/jetPhp-core-helpers-Utilities.html#source-view.22" class="phpdocumentor-element-found-in__source" data-line="22" data-modal="source-view" data-src="files/src/core/helpers/Utilities.php.txt"></a>
+            <a href="classes/jetPhp-core-helpers-Utilities.html#source-view.42" class="phpdocumentor-element-found-in__source" data-line="42" data-modal="source-view" data-src="files/src/core/helpers/Utilities.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">This function checks if a class extends another class</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">extends</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$klass</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$baseObj</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|string</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">extends</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$klass</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$baseObj</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -314,17 +344,21 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$klass</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The class to check</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$baseObj</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The base class to check against</p>
+</section>
+
             </dd>
             </dl>
 
@@ -333,6 +367,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool|string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the class extends the base class, or 'NO_CLASS' if the class does not exist, or 'DOES_NOT' if the class does not extend the base class</p>
+</section>
+
             </section>
 
 </article>
@@ -350,15 +388,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/helpers/Utilities.php"><a href="files/src-core-helpers-utilities.html"><abbr title="src/core/helpers/Utilities.php">Utilities.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">61</span>
 
-            <a href="classes/jetPhp-core-helpers-Utilities.html#source-view.35" class="phpdocumentor-element-found-in__source" data-line="35" data-modal="source-view" data-src="files/src/core/helpers/Utilities.php.txt"></a>
+            <a href="classes/jetPhp-core-helpers-Utilities.html#source-view.61" class="phpdocumentor-element-found-in__source" data-line="61" data-modal="source-view" data-src="files/src/core/helpers/Utilities.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">This function checks if a class implements an interface</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">implements</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$class</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$interface</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|string</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">implements</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$class</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$interface</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -367,17 +406,21 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$class</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The class to check</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$interface</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The interface to check against</p>
+</section>
+
             </dd>
             </dl>
 
@@ -386,6 +429,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool|string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the class implements the interface, or 'NO_CLASS' if the class does not exist, or 'DOES_NOT' if the class does not implement the interface</p>
+</section>
+
             </section>
 
 </article>
@@ -403,12 +450,13 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/helpers/Utilities.php"><a href="files/src-core-helpers-utilities.html"><abbr title="src/core/helpers/Utilities.php">Utilities.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
-            <a href="classes/jetPhp-core-helpers-Utilities.html#source-view.17" class="phpdocumentor-element-found-in__source" data-line="17" data-modal="source-view" data-src="files/src/core/helpers/Utilities.php.txt"></a>
+            <a href="classes/jetPhp-core-helpers-Utilities.html#source-view.31" class="phpdocumentor-element-found-in__source" data-line="31" data-modal="source-view" data-src="files/src/core/helpers/Utilities.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">This function json encodes a value</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">jsonify</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
@@ -423,7 +471,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The value to encode</p>
+</section>
+
             </dd>
             </dl>
 
@@ -432,6 +482,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The json encoded value</p>
+</section>
+
             </section>
 
 </article>

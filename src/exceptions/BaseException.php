@@ -6,6 +6,8 @@ use Throwable;
 
 /**
  * This is the base exception class that all other exceptions must extend.
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 class BaseException  extends \Exception
 {

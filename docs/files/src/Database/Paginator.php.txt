@@ -28,6 +28,7 @@ use jetPhp\exceptions\OffsetPaginationException;
  *          ->LimitBy(10)
  *          ->paginate(['type' => 'USER']);
  * ```
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 class Paginator extends QueryBuilder
 {

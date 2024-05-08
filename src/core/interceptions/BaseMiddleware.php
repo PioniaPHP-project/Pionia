@@ -17,6 +17,8 @@ use jetPhp\response\Response;
  *
  * Also, middlewares run before authentication backends therefore on the request part, they have no access to the authenticated
  * user
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 abstract class BaseMiddleware
 {

@@ -161,14 +161,41 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.20" class="phpdocumentor-element-found-in__source" data-line="20" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.42" class="phpdocumentor-element-found-in__source" data-line="42" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
-        
+            <p class="phpdocumentor-summary">This is the core kernel that handles all the request processing and middleware execution</p>
+
+    <section class="phpdocumentor-description"><p>It is executes the entire request cycle.</p>
+<p>The request cycle is as follows:</p>
+<pre class="prettyprint"><code class="prettyprint">1. Resolve all middlewares against the request only
+2. Resolve all authentication backends till we have a user or we run out of backends
+3. Resolve the request and enter the controller
+4. Resolve all middlewares again but this time against the request and response since we have both
+5. Return the response to the client
+</code></pre>
+<p>It also catches all exceptions and returns a 200 ok response with error code 500</p>
+</section>
 
 
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/jetPhp-core-config-CoreKernel.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p><a href="https://www.linkedin.com/in/jetezra/">Jet - ezrajet9@gmail.com</a></p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
 
 
@@ -193,9 +220,39 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-core-config-CoreKernel.html#property_authBackends">$authBackends</a>
+    <span>
+                        &nbsp;: mixed            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-core-config-CoreKernel.html#property_context">$context</a>
+    <span>
+                        &nbsp;: mixed            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-core-config-CoreKernel.html#property_matcher">$matcher</a>
+    <span>
+                        &nbsp;: mixed            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-core-config-CoreKernel.html#property_middleware">$middleware</a>
+    <span>
+                        &nbsp;: mixed            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/jetPhp-core-Base.html#property_name">$name</a>
     <span>
                         &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-core-config-CoreKernel.html#property_name">$name</a>
+    <span>
+                        &nbsp;: mixed            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
@@ -214,6 +271,12 @@
     <a href="classes/jetPhp-core-Base.html#property_version">$version</a>
     <span>
                         &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/jetPhp-core-config-CoreKernel.html#property_version">$version</a>
+    <span>
+                        &nbsp;: mixed            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
@@ -347,6 +410,150 @@
             phpdocumentor-element
             -property
             -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_authBackends">
+        $authBackends
+        <a href="classes/jetPhp-core-config-CoreKernel.html#property_authBackends" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$authBackends</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>array - Array of authentication backends</p>
+</section>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_context">
+        $context
+        <a href="classes/jetPhp-core-config-CoreKernel.html#property_context" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$context</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>RequestContext - Instance of the request context</p>
+</section>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_matcher">
+        $matcher
+        <a href="classes/jetPhp-core-config-CoreKernel.html#property_matcher" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$matcher</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>UrlMatcher - Instance of the url matcher</p>
+</section>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_middleware">
+        $middleware
+        <a href="classes/jetPhp-core-config-CoreKernel.html#property_middleware" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$middleware</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>array - Array of middleware classes</p>
+</section>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
             -static                                            "
 >
     <h4 class="phpdocumentor-element__name" id="property_name">
@@ -359,9 +566,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Base.php"><a href="files/src-core-base.html"><abbr title="src/core/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.12" class="phpdocumentor-element-found-in__source" data-line="12" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.21" class="phpdocumentor-element-found-in__source" data-line="21" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
     </aside>
 
     
@@ -372,6 +579,42 @@
      = <span class="phpdocumentor-signature__default-value">&#039;JetPhp&#039;</span></code>
 
     
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_name">
+        $name
+        <a href="classes/jetPhp-core-config-CoreKernel.html#property_name" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$name</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>string - The name of the application</p>
+</section>
+
     
     
 
@@ -429,9 +672,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Base.php"><a href="files/src-core-base.html"><abbr title="src/core/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">8</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.8" class="phpdocumentor-element-found-in__source" data-line="8" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.17" class="phpdocumentor-element-found-in__source" data-line="17" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
     </aside>
 
     
@@ -463,9 +706,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Base.php"><a href="files/src-core-base.html"><abbr title="src/core/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.10" class="phpdocumentor-element-found-in__source" data-line="10" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.19" class="phpdocumentor-element-found-in__source" data-line="19" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
     </aside>
 
     
@@ -476,6 +719,42 @@
      = <span class="phpdocumentor-signature__default-value">&#039;1.0.0&#039;</span></code>
 
     
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_version">
+        $version
+        <a href="classes/jetPhp-core-config-CoreKernel.html#property_version" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$version</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>string - The version of the application</p>
+</section>
+
     
     
 
@@ -497,9 +776,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">49</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.27" class="phpdocumentor-element-found-in__source" data-line="27" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.49" class="phpdocumentor-element-found-in__source" data-line="49" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -531,9 +810,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.22" class="phpdocumentor-element-found-in__source" data-line="22" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.44" class="phpdocumentor-element-found-in__source" data-line="44" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -565,9 +844,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.23" class="phpdocumentor-element-found-in__source" data-line="23" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.45" class="phpdocumentor-element-found-in__source" data-line="45" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -599,9 +878,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.25" class="phpdocumentor-element-found-in__source" data-line="25" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.47" class="phpdocumentor-element-found-in__source" data-line="47" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -633,9 +912,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.30" class="phpdocumentor-element-found-in__source" data-line="30" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.52" class="phpdocumentor-element-found-in__source" data-line="52" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -672,9 +951,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.29" class="phpdocumentor-element-found-in__source" data-line="29" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.51" class="phpdocumentor-element-found-in__source" data-line="51" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -714,9 +993,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Base.php"><a href="files/src-core-base.html"><abbr title="src/core/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.25" class="phpdocumentor-element-found-in__source" data-line="25" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.34" class="phpdocumentor-element-found-in__source" data-line="34" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
     </aside>
 
     
@@ -756,9 +1035,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Base.php"><a href="files/src-core-base.html"><abbr title="src/core/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.30" class="phpdocumentor-element-found-in__source" data-line="30" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.39" class="phpdocumentor-element-found-in__source" data-line="39" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
     </aside>
 
     
@@ -805,9 +1084,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Base.php"><a href="files/src-core-base.html"><abbr title="src/core/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.20" class="phpdocumentor-element-found-in__source" data-line="20" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.29" class="phpdocumentor-element-found-in__source" data-line="29" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
     </aside>
 
     
@@ -841,9 +1120,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.97" class="phpdocumentor-element-found-in__source" data-line="97" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.119" class="phpdocumentor-element-found-in__source" data-line="119" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -887,9 +1166,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.46" class="phpdocumentor-element-found-in__source" data-line="46" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.68" class="phpdocumentor-element-found-in__source" data-line="68" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -933,9 +1212,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.36" class="phpdocumentor-element-found-in__source" data-line="36" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.58" class="phpdocumentor-element-found-in__source" data-line="58" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -979,9 +1258,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">133</span>
+    <span class="phpdocumentor-element-found-in__line">155</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.133" class="phpdocumentor-element-found-in__source" data-line="133" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.155" class="phpdocumentor-element-found-in__source" data-line="155" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -1025,9 +1304,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">141</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.119" class="phpdocumentor-element-found-in__source" data-line="119" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.141" class="phpdocumentor-element-found-in__source" data-line="141" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Runs every registered middleware pre and post controller execution. Exposing both the request and response the middleware</p>
@@ -1079,9 +1358,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Base.php"><a href="files/src-core-base.html"><abbr title="src/core/Base.php">Base.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.35" class="phpdocumentor-element-found-in__source" data-line="35" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.44" class="phpdocumentor-element-found-in__source" data-line="44" data-modal="source-view" data-src="files/src/core/Base.php.txt"></a>
     </aside>
 
     
@@ -1111,9 +1390,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">151</span>
+    <span class="phpdocumentor-element-found-in__line">173</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.151" class="phpdocumentor-element-found-in__source" data-line="151" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.173" class="phpdocumentor-element-found-in__source" data-line="173" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This will run until any of the backends successfully authenticates the user</p>
@@ -1167,9 +1446,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/core/config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
-            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.60" class="phpdocumentor-element-found-in__source" data-line="60" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
+            <a href="classes/jetPhp-core-config-CoreKernel.html#source-view.82" class="phpdocumentor-element-found-in__source" data-line="82" data-modal="source-view" data-src="files/src/core/config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -1327,10 +1606,16 @@
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/jetPhp-core-config-CoreKernel.html#property_authBackends">$authBackends<a href="classes/jetPhp-core-config-CoreKernel.html"></li>
+                                                    <li><a href="classes/jetPhp-core-config-CoreKernel.html#property_context">$context<a href="classes/jetPhp-core-config-CoreKernel.html"></li>
+                                                    <li><a href="classes/jetPhp-core-config-CoreKernel.html#property_matcher">$matcher<a href="classes/jetPhp-core-config-CoreKernel.html"></li>
+                                                    <li><a href="classes/jetPhp-core-config-CoreKernel.html#property_middleware">$middleware<a href="classes/jetPhp-core-config-CoreKernel.html"></li>
                                                     <li><a href="classes/jetPhp-core-Base.html#property_name">$name<a href="classes/jetPhp-core-config-CoreKernel.html"></li>
+                                                    <li><a href="classes/jetPhp-core-config-CoreKernel.html#property_name">$name<a href="classes/jetPhp-core-config-CoreKernel.html"></li>
                                                     <li><a href="classes/jetPhp-core-config-CoreKernel.html#property_routes">$routes<a href="classes/jetPhp-core-config-CoreKernel.html"></li>
                                                     <li><a href="classes/jetPhp-core-Base.html#property_settings">$settings<a href="classes/jetPhp-core-config-CoreKernel.html"></li>
                                                     <li><a href="classes/jetPhp-core-Base.html#property_version">$version<a href="classes/jetPhp-core-config-CoreKernel.html"></li>
+                                                    <li><a href="classes/jetPhp-core-config-CoreKernel.html#property_version">$version<a href="classes/jetPhp-core-config-CoreKernel.html"></li>
                                                     <li><a href="classes/jetPhp-core-config-CoreKernel.html#property_authBackends">$authBackends<a href="classes/jetPhp-core-config-CoreKernel.html"></li>
                                                     <li><a href="classes/jetPhp-core-config-CoreKernel.html#property_context">$context<a href="classes/jetPhp-core-config-CoreKernel.html"></li>
                                                     <li><a href="classes/jetPhp-core-config-CoreKernel.html#property_matcher">$matcher<a href="classes/jetPhp-core-config-CoreKernel.html"></li>

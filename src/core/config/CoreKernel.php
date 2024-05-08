@@ -15,7 +15,29 @@ use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 
 /**
+ * This is the core kernel that handles all the request processing and middleware execution
+ *
+ * It is executes the entire request cycle.
+ *
+ * The request cycle is as follows:
+ *
+ *     1. Resolve all middlewares against the request only
+ *     2. Resolve all authentication backends till we have a user or we run out of backends
+ *     3. Resolve the request and enter the controller
+ *     4. Resolve all middlewares again but this time against the request and response since we have both
+ *     5. Return the response to the client
+ *
+ * It also catches all exceptions and returns a 200 ok response with error code 500
+ *
+ * @property $name string - The name of the application
+ * @property $version string - The version of the application
  * @property $routes BaseRoutes - Instance of the base routes
+ * @property $context RequestContext - Instance of the request context
+ * @property $matcher UrlMatcher - Instance of the url matcher
+ * @property $middleware array - Array of middleware classes
+ * @property $authBackends array - Array of authentication backends
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 class CoreKernel extends Base
 {

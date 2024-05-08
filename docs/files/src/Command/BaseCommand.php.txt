@@ -31,7 +31,9 @@ class BaseCommand extends Command
      * @param string|null $db
      * @return PDO
      * @throws DatabaseException
-     */
+     *
+     * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
+     * */
     protected static function connection(string | null $db = null): PDO
     {
         return Connector::connect($db);

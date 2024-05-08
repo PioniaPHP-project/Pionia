@@ -6,28 +6,58 @@ use jetPhp\core\helpers\ContextUserObject;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 
+/**
+ *
+ * This method extends the Symfony request class to add more functionality to the request object.
+ *
+ * All methods on the request object are still available in this class. But more methods have been added to the request object.
+ *
+ * @property bool $authenticated Whether the request is authenticated or not
+ * @property mixed $context The entire app context object
+ * @property ContextUserObject|null $auth The currently logged user in context object
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
+ */
 class Request extends \Symfony\Component\HttpFoundation\Request
 {
      private bool $authenticated = false;
      private mixed  $context = null;
      private ContextUserObject | null $auth = null;
 
+    /**
+     * The currently logged user in context object
+     * @return ContextUserObject|null The currently logged in user object or null if no user is logged in
+     */
     public function getAuth(): ?ContextUserObject
     {
         return $this->auth;
     }
 
+    /**
+     * This is the entire app context object, it even contains the authentication object itself.
+     * @return mixed
+     */
     public function getContext(): mixed
     {
         return $this->context;
     }
 
+
+    /**
+     * This method checks if the request is authenticated
+     * @return bool Whether the request is authenticated or not
+     */
     public function isAuthenticated(): bool
     {
-        return $this->authenticated;
+        return $this->authenticated || ( $this->auth && $this->auth->authenticated);
     }
 
 
+    /**
+     * This method sets the authentication context for the request
+     * @param ContextUserObject $userObject
+     * @return $this
+     */
     public function setAuthenticationContext(ContextUserObject $userObject)
     {
         if ($userObject->user){
@@ -39,6 +69,11 @@ class Request extends \Symfony\Component\HttpFoundation\Request
     }
 
 
+    /**
+     * This method add data to the context object
+     * @param array $contextData The context data to be added to the request
+     * @return $this
+     */
     private function setAppContext($contextData = []): static
     {
         $contextUser = new ContextUserObject();

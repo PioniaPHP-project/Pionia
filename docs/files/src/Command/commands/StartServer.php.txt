@@ -9,7 +9,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * For starting the php server
+ * For starting the command line server. This should be good choice only in development
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 class StartServer extends BaseCommand
 {

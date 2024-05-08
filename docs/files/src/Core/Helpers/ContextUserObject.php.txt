@@ -2,8 +2,10 @@
 
 namespace jetPhp\core\helpers;
 
-/***
+/**
  * This is the context object holding the current session
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 class ContextUserObject
 {

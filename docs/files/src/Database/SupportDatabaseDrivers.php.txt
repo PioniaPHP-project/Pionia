@@ -2,6 +2,10 @@
 
 namespace jetPhp\database;
 
+/**
+ * Currently supported database drivers
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
+ */
 class SupportDatabaseDrivers
 {
     public static string $MYSQL = 'MYSQL';

@@ -6,7 +6,11 @@ use Exception;
 use jetPhp\core\helpers\Utilities;
 use jetPhp\exceptions\CommandException;
 
-
+/**
+ * This is the command interface, it is the entry point for all commands in the framework
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
+ */
 class CommandInterface
 {
     /**
