@@ -20,7 +20,7 @@ abstract class BaseRestService
 
     public Request $request;
 
-    abstract public function registerActions(): array;
+    abstract public static function registerActions(): array;
 
     /**
      * @throws ResourceNotFoundException
@@ -33,7 +33,7 @@ abstract class BaseRestService
         $data = $this->request->getData();
         $files = $this->request->files;
 
-        $actions = $this->registerActions();
+        $actions = $this::registerActions();
         if (array_key_exists($action, $actions)) {
             $action = $actions[$action];
             if (!method_exists($this, $action)) {
