@@ -4,6 +4,7 @@ namespace jetPhp\request;
 
 use jetPhp\exceptions\ResourceNotFoundException;
 use jetPhp\response\BaseResponse;
+use ReflectionMethod;
 
 /**
  * This is the main class all other services must extend.
@@ -53,13 +54,13 @@ abstract class BaseRestService
      */
     public function processAction(string $action, Request $request): BaseResponse
     {
+        $this->request = $request;
+
         $service = $request->getData()['SERVICE'];
 
         if ($this->serviceRequiresAuth && !$request->isAuthenticated()) {
             throw new ResourceNotFoundException($this->authMessage??"Service $service requires authentication");
         }
-
-        $this->request = $request;
 
 
         if (in_array($action, $this->deactivatedActions)) {
@@ -74,7 +75,9 @@ abstract class BaseRestService
         $files = $this->request->files;
         // here we attempt to call the action method on the current class
         if (method_exists($this, $action)) {
-            return $this->$action($data, $files);
+            $reflection = new ReflectionMethod($this, $action);
+            $reflection->setAccessible(true);
+            return $reflection->invoke($this, $data, $files, $request);
         }
         throw new ResourceNotFoundException("Action $action not found in the $service context");
     }
