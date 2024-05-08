@@ -378,7 +378,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\jetPhp\\core\\routing\\JetRouter",
             "name": "JetRouter",
-            "summary": "Changing\u0020how\u0020we\u0020define\u0020our\u0020routes\u0020in\u0020the\u0020app",
+            "summary": "This\u0020is\u0020the\u0020basis\u0020for\u0020defining\u0020routes\u0020in\u0020the\u0020application.",
             "url": "classes/jetPhp-core-routing-JetRouter.html"
         },                {
             "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003AgetRoutes\u0028\u0029",

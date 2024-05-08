@@ -7,7 +7,7 @@ namespace jetPhp\database;
  *
  * By default, postgres, mysql and sqlite are supported.
  *
- * @author Tumusiime Ezra -- jet2018
+ * @author @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  *
  * @property $datasource Can be provided but must be as per PDO datasource format.
  */

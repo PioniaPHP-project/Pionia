@@ -158,21 +158,15 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/JetRouter.php"><a href="files/src-core-routing-jetrouter.html"><abbr title="src/core/routing/JetRouter.php">JetRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
-            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.29" class="phpdocumentor-element-found-in__source" data-line="29" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
+            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.31" class="phpdocumentor-element-found-in__source" data-line="31" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
     </aside>
 
-            <p class="phpdocumentor-summary">Changing how we define our routes in the app</p>
+            <p class="phpdocumentor-summary">This is the basis for defining routes in the application.</p>
 
-    <section class="phpdocumentor-description"><p>Now we need to do it like this</p>
-<pre class="prettyprint"><code class="language-php">$router = new JetRouter();
-$router-&gt;addGroup('App\Controllers\MyController')
-   -&gt;post('myAction', 'myAction')
-  -&gt;get('myAction', 'myAction');
-</code></pre>
-<p>You can only add post and get routes as that what the framework tends to support.
-If you need more methods, you can add them to the SupportedHttpMethods class and use them here.
+    <section class="phpdocumentor-description"><p>You can only add <code class="prettyprint">post</code> and <code class="prettyprint">get</code> routes as that what the framework tends to support.</p>
+<p>If you need more methods, you can add them to the SupportedHttpMethods class and implement them here.
 However, this is meant for core framework developers only.</p>
 </section>
 
@@ -184,6 +178,19 @@ However, this is meant for core framework developers only.</p>
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">$router = new JetRouter();
+$router-&gt;addGroup('app\controller\MyController')
+   -&gt;post('myAction', 'myAction')
+  -&gt;get('myAction', 'myAction');
+</code></pre>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
                     <span class="phpdocumentor-tag__name">author</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
@@ -315,9 +322,9 @@ However, this is meant for core framework developers only.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/JetRouter.php"><a href="files/src-core-routing-jetrouter.html"><abbr title="src/core/routing/JetRouter.php">JetRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
-            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.31" class="phpdocumentor-element-found-in__source" data-line="31" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
+            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.33" class="phpdocumentor-element-found-in__source" data-line="33" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
     </aside>
 
     
@@ -349,9 +356,9 @@ However, this is meant for core framework developers only.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/JetRouter.php"><a href="files/src-core-routing-jetrouter.html"><abbr title="src/core/routing/JetRouter.php">JetRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
-            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.34" class="phpdocumentor-element-found-in__source" data-line="34" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
+            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.36" class="phpdocumentor-element-found-in__source" data-line="36" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
     </aside>
 
     
@@ -383,9 +390,9 @@ However, this is meant for core framework developers only.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/JetRouter.php"><a href="files/src-core-routing-jetrouter.html"><abbr title="src/core/routing/JetRouter.php">JetRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
-            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.33" class="phpdocumentor-element-found-in__source" data-line="33" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
+            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.35" class="phpdocumentor-element-found-in__source" data-line="35" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
     </aside>
 
     
@@ -422,9 +429,9 @@ However, this is meant for core framework developers only.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/JetRouter.php"><a href="files/src-core-routing-jetrouter.html"><abbr title="src/core/routing/JetRouter.php">JetRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 
-            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.41" class="phpdocumentor-element-found-in__source" data-line="41" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
+            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.43" class="phpdocumentor-element-found-in__source" data-line="43" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
     </aside>
 
     
@@ -464,9 +471,9 @@ However, this is meant for core framework developers only.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/JetRouter.php"><a href="files/src-core-routing-jetrouter.html"><abbr title="src/core/routing/JetRouter.php">JetRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
-            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.81" class="phpdocumentor-element-found-in__source" data-line="81" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
+            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.83" class="phpdocumentor-element-found-in__source" data-line="83" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
     </aside>
 
     
@@ -517,9 +524,9 @@ However, this is meant for core framework developers only.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/JetRouter.php"><a href="files/src-core-routing-jetrouter.html"><abbr title="src/core/routing/JetRouter.php">JetRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">90</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
-            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.90" class="phpdocumentor-element-found-in__source" data-line="90" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
+            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.92" class="phpdocumentor-element-found-in__source" data-line="92" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
     </aside>
 
     
@@ -566,9 +573,9 @@ However, this is meant for core framework developers only.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/JetRouter.php"><a href="files/src-core-routing-jetrouter.html"><abbr title="src/core/routing/JetRouter.php">JetRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
-            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.36" class="phpdocumentor-element-found-in__source" data-line="36" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
+            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.38" class="phpdocumentor-element-found-in__source" data-line="38" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
     </aside>
 
     
@@ -602,9 +609,9 @@ However, this is meant for core framework developers only.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/JetRouter.php"><a href="files/src-core-routing-jetrouter.html"><abbr title="src/core/routing/JetRouter.php">JetRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
-            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.68" class="phpdocumentor-element-found-in__source" data-line="68" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
+            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.70" class="phpdocumentor-element-found-in__source" data-line="70" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
     </aside>
 
     
@@ -651,9 +658,9 @@ However, this is meant for core framework developers only.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/JetRouter.php"><a href="files/src-core-routing-jetrouter.html"><abbr title="src/core/routing/JetRouter.php">JetRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">106</span>
+    <span class="phpdocumentor-element-found-in__line">108</span>
 
-            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.106" class="phpdocumentor-element-found-in__source" data-line="106" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
+            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.108" class="phpdocumentor-element-found-in__source" data-line="108" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
     </aside>
 
     
@@ -736,9 +743,9 @@ However, this is meant for core framework developers only.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/JetRouter.php"><a href="files/src-core-routing-jetrouter.html"><abbr title="src/core/routing/JetRouter.php">JetRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
-            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.46" class="phpdocumentor-element-found-in__source" data-line="46" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
+            <a href="classes/jetPhp-core-routing-JetRouter.html#source-view.48" class="phpdocumentor-element-found-in__source" data-line="48" data-modal="source-view" data-src="files/src/core/routing/JetRouter.php.txt"></a>
     </aside>
 
     

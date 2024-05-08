@@ -1,1 +1,1 @@
-phpDocumentor run -d . -t docs/ --config=phpdoc.dist.xml
+phpDocumentor run -d . -t docs/ --config=phpdoc.dist.xml --force

@@ -10,19 +10,21 @@ use Symfony\Component\Routing\Route;
 
 
 /**
- * Changing how we define our routes in the app
+ * This is the basis for defining routes in the application.
  *
- * Now we need to do it like this
+ *
+ * You can only add `post` and `get` routes as that what the framework tends to support.
+ *
+ * If you need more methods, you can add them to the SupportedHttpMethods class and implement them here.
+ * However, this is meant for core framework developers only.
+ *
+ * @example
  * ```php
  * $router = new JetRouter();
- * $router->addGroup('App\Controllers\MyController')
+ * $router->addGroup('app\controller\MyController')
  *    ->post('myAction', 'myAction')
  *   ->get('myAction', 'myAction');
  * ```
- *
- * You can only add post and get routes as that what the framework tends to support.
- * If you need more methods, you can add them to the SupportedHttpMethods class and use them here.
- * However, this is meant for core framework developers only.
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
