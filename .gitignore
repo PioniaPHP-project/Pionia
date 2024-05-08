@@ -5,5 +5,3 @@ settings.ini
 composer.lock
 src/core/.DS_Store
 build
-.phpdoc
-
