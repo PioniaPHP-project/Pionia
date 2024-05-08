@@ -25,11 +25,9 @@ abstract class BaseApiController extends Base
         return BaseResponse::JsonResponse(0, 'pong', [
             'framework' => $this::$name,
             'version'=> $this::$version,
-            'baseUrl' => $request->getBaseUrl(),
             'port' => $request->getPort(),
             'uri' => $request->getRequestUri(),
             'schema' => $request->getScheme(),
-            'script' => $request->getScriptName(),
         ]);
     }
 }
