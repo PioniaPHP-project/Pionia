@@ -18,7 +18,7 @@ abstract class BaseApiServiceSwitch
      * The SERVICE_CLASS is the class that will be called when the SERVICE_NAME is called
      * @return array
      */
-    abstract public static function registerServices() :array;
+    abstract public function registerServices() :array;
 
     /**
      * This method checks the request data for the `SERVICE` key and processes the service based on it
@@ -34,8 +34,8 @@ abstract class BaseApiServiceSwitch
         if (empty($service)) {
             throw new ResourceNotFoundException("Service not defined in request data");
         }
-
-        $services = self::registerServices();
+        $klass = new static();
+        $services = $klass->registerServices();
         if (array_key_exists($service, $services)) {
             $service = $services[$service];
             if (!is_a($service, 'jetPhp\request\BaseRestService', true)){
