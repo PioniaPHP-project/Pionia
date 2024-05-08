@@ -24,7 +24,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
 
     public function isAuthenticated(): bool
     {
-        return $this->authenticated || $this->auth->authenticated;
+        return $this->authenticated || ( $this->auth && $this->auth->authenticated);
     }
 
 
