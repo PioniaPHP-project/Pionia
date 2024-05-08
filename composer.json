@@ -23,7 +23,6 @@
         "php": ">=8.0",
         "symfony/http-kernel": "6.4.x-dev",
         "symfony/routing": "6.4.x-dev",
-        "symfony/console": "6.4.x-dev",
-        "symfony/process": "6.4.x-dev"
+        "symfony/console": "6.4.x-dev"
     }
 }
