@@ -1,6 +1,6 @@
 {
     "name": "jetezra/jetphp-core",
-    "description": "First Restful PhP framework that does is truly restful",
+    "description": "First PhP Restful framework that is truly restful",
     "type": "library",
     "license": "MIT",
     "keywords": ["php", "framework", "jet2018", "service", "j2j", "architecture", "performance"],
