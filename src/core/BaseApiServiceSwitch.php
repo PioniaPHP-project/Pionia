@@ -26,7 +26,7 @@ abstract class BaseApiServiceSwitch
      * @param Request $request The request object
      * @throws ResourceNotFoundException if the SERVICE key is not found, or the service is invalid, or the service is not found
      */
-    public function processServices(Request $request): BaseResponse
+    public static function processServices(Request $request): BaseResponse
     {
         $service = $request->getData()['SERVICE'];
         $action = $request->getData()['ACTION'];
@@ -35,7 +35,7 @@ abstract class BaseApiServiceSwitch
             throw new ResourceNotFoundException("Service not defined in request data");
         }
 
-        $services = $this::registerServices();
+        $services = self::registerServices();
         if (array_key_exists($service, $services)) {
             $service = $services[$service];
             if (!is_a($service, 'jetPhp\request\BaseRestService', true)){
@@ -44,7 +44,7 @@ abstract class BaseApiServiceSwitch
             if (empty($action)) {
                 throw new ResourceNotFoundException("Action not defined in request data");
             }
-            return $service->process($action, $request);
+            return $service->processAction($action, $request);
         }
         throw new ResourceNotFoundException("Service $service not found");
     }
