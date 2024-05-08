@@ -20,7 +20,8 @@ use ReflectionMethod;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  **/
-abstract class BaseRestService {
+abstract class BaseRestService
+{
     /**
      * @var Request $request The request object
      */
