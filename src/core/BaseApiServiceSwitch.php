@@ -5,6 +5,7 @@ namespace jetPhp\core;
 use jetPhp\core\helpers\Utilities;
 use jetPhp\exceptions\ResourceNotFoundException;
 use jetPhp\request\Request;
+use jetPhp\response\BaseResponse;
 
 abstract class BaseApiServiceSwitch
 {
@@ -25,7 +26,7 @@ abstract class BaseApiServiceSwitch
      * @param Request $request The request object
      * @throws ResourceNotFoundException if the SERVICE key is not found, or the service is invalid, or the service is not found
      */
-    public function processServices(Request $request)
+    public function processServices(Request $request): BaseResponse
     {
         $service = $request->getData()['SERVICE'];
         $action = $request->getData()['ACTION'];
