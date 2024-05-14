@@ -1,9 +1,9 @@
 <?php
 
-namespace jetPhp\core;
+namespace Pioneer\core;
 
-use jetPhp\request\Request;
-use jetPhp\response\BaseResponse;
+use Pioneer\request\Request;
+use Pioneer\response\BaseResponse;
 
 /**
  * This is the base controller class for the framework and most probably the only controller class that should be extended.
@@ -16,7 +16,7 @@ use jetPhp\response\BaseResponse;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  * */
-abstract class BaseApiController extends Base
+abstract class BaseApiController extends Pioneer
 {
     public static array | null $settings = null;
 

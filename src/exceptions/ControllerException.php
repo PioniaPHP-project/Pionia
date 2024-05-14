@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\exceptions;
+namespace Pioneer\exceptions;
 /**
  * This exception is thrown controller parsing fails in anyway
  */

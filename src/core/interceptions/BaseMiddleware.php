@@ -1,9 +1,10 @@
 <?php
 
-namespace jetPhp\core\interceptions;
+namespace Pioneer\core\interceptions;
 
-use jetPhp\request\Request;
-use jetPhp\response\Response;
+
+use Pioneer\request\Request;
+use Pioneer\response\Response;
 
 /**
  * Middleware can run on every request and every response.

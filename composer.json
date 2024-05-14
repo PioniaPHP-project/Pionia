@@ -6,7 +6,7 @@
     "keywords": ["php", "framework", "jet2018", "service", "j2j", "architecture", "performance"],
     "autoload": {
         "psr-4": {
-            "jetPhp\\": "src/"
+            "Pioneer\\": "src/"
         }
     },
     "authors": [

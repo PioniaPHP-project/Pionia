@@ -376,57 +376,57 @@ Search.appendIndex(
             "summary": "This\u0020is\u0020the\u0020base\u0020routes\u0020class,\u0020it\u0020extends\nthe\u0020Symfony\u0020route\u0020collection\u0020class\u0020and\u0020is\u0020used\u0020to\u0020define\u0020routes\u0020in\u0020the\u0020framework",
             "url": "classes/jetPhp-core-routing-BaseRoutes.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\JetRouter",
+            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter",
             "name": "JetRouter",
             "summary": "This\u0020is\u0020the\u0020basis\u0020for\u0020defining\u0020routes\u0020in\u0020the\u0020application.",
             "url": "classes/jetPhp-core-routing-JetRouter.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003AgetRoutes\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003AgetRoutes\u0028\u0029",
             "name": "getRoutes",
             "summary": "",
             "url": "classes/jetPhp-core-routing-JetRouter.html#method_getRoutes"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
             "url": "classes/jetPhp-core-routing-JetRouter.html#method___construct"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003AresolveController\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003AresolveController\u0028\u0029",
             "name": "resolveController",
             "summary": "",
             "url": "classes/jetPhp-core-routing-JetRouter.html#method_resolveController"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003Apost\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003Apost\u0028\u0029",
             "name": "post",
             "summary": "",
             "url": "classes/jetPhp-core-routing-JetRouter.html#method_post"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003AaddGroup\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003AaddGroup\u0028\u0029",
             "name": "addGroup",
             "summary": "",
             "url": "classes/jetPhp-core-routing-JetRouter.html#method_addGroup"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003Aget\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003Aget\u0028\u0029",
             "name": "get",
             "summary": "",
             "url": "classes/jetPhp-core-routing-JetRouter.html#method_get"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003AaddRoute\u0028\u0029",
+            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003AaddRoute\u0028\u0029",
             "name": "addRoute",
             "summary": "",
             "url": "classes/jetPhp-core-routing-JetRouter.html#method_addRoute"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003A\u0024routes",
+            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003A\u0024routes",
             "name": "routes",
             "summary": "",
             "url": "classes/jetPhp-core-routing-JetRouter.html#property_routes"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003A\u0024controller",
+            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003A\u0024controller",
             "name": "controller",
             "summary": "",
             "url": "classes/jetPhp-core-routing-JetRouter.html#property_controller"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\JetRouter\u003A\u003A\u0024basePath",
+            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003A\u0024basePath",
             "name": "basePath",
             "summary": "",
             "url": "classes/jetPhp-core-routing-JetRouter.html#property_basePath"

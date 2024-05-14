@@ -1,8 +1,8 @@
 <?php
 
-namespace jetPhp\request;
+namespace Pioneer\request;
 
-use jetPhp\exceptions\FailedRequiredException;
+use Pioneer\exceptions\FailedRequiredException;
 
 /**
  * Provides helper methods for request actions

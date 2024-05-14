@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\core;
+namespace Pioneer\core;
 
 /**
  * This is the base class for the framework
@@ -11,14 +11,14 @@ namespace jetPhp\core;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class Base
+class Pioneer
 {
 
     public static array | null $settings = null;
 
-    public static string $version = '1.0.0';
+    public static string $version = '1.0.1';
 
-    public static string $name = 'JetPhp';
+    public static string $name = 'Pioneer';
 
     public function __construct()
     {

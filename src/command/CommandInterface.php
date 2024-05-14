@@ -1,10 +1,10 @@
 <?php
 
-namespace jetPhp\command;
+namespace Pioneer\command;
 
 use Exception;
-use jetPhp\core\helpers\Utilities;
-use jetPhp\exceptions\CommandException;
+use Pioneer\core\helpers\Utilities;
+use Pioneer\exceptions\CommandException;
 
 /**
  * This is the command interface, it is the entry point for all commands in the framework
@@ -18,7 +18,7 @@ class CommandInterface
      * @var array|string[] $commands
      */
     private static array $commands = [
-        'jetPhp\command\commands\StartServer',
+        'Pioneer\command\commands\StartServer',
     ];
 
 
@@ -27,7 +27,7 @@ class CommandInterface
      */
     public static function addCommand(string $command): array
     {
-        if (Utilities::extends($command, 'jetPhp\command\BaseCommand') === 'NO_CLASS'){
+        if (Utilities::extends($command, 'Pioneer\command\BaseCommand') === 'NO_CLASS'){
             throw new CommandException("Command {$command} class not found");
         }
         self::$commands[]= $command;

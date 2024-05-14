@@ -1,6 +1,6 @@
-# JetPhp-Core
+# Pioneer Core
 
-##### The first true restful and performant PHP framework.
+##### This is the core of the PhP Pioneer Framework
 
 
 ## Installation
@@ -8,8 +8,8 @@
 ```bash
 composer require jetezra/jetphp-core
 ```
-This is meant for the core developers of the JetPhp-Core not the framework itself.
-If you are looking to use or get started with the framework, please find the [JetPhp Framework here](https://github.com/JetPhp-project/JetPhp-Framework.git)
+This is meant for the core developers of the Pioneer Core not the framework itself.
+If you are looking to use or get started with the framework, please find the [Pioneer Framework here](https://github.com/JetPhp-project/JetPhp-Framework.git)
 
 ## Usage
 
