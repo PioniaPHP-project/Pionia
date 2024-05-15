@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\exceptions;
+namespace Pionia\exceptions;
 /**
  * This exception is thrown controller parsing fails in anyway
  */

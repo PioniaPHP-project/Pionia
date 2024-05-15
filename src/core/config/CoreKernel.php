@@ -1,13 +1,13 @@
 <?php
 
-namespace Pioneer\core\config;
+namespace Pionia\core\config;
 
 use Exception;
-use Pioneer\core\Pioneer;
-use Pioneer\core\routing\BaseRoutes;
-use Pioneer\request\Request;
-use Pioneer\response\BaseResponse;
-use Pioneer\response\Response;
+use Pionia\core\Pionia;
+use Pionia\core\routing\BaseRoutes;
+use Pionia\request\Request;
+use Pionia\response\BaseResponse;
+use Pionia\response\Response;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
@@ -39,7 +39,7 @@ use Symfony\Component\Routing\RequestContext;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class CoreKernel extends Pioneer
+class CoreKernel extends Pionia
 {
     private ?RequestContext $context = null;
     private ?UrlMatcher $matcher = null;

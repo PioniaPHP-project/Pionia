@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\core\config;
+namespace Pionia\core\config;
 
 /**
  * This class is responsible for handling all session related operations

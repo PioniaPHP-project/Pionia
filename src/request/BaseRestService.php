@@ -1,10 +1,10 @@
 <?php
 
-namespace Pioneer\request;
+namespace Pionia\request;
 
-use Pioneer\exceptions\ResourceNotFoundException;
-use Pioneer\exceptions\UserUnauthenticatedException;
-use Pioneer\response\BaseResponse;
+use Pionia\exceptions\ResourceNotFoundException;
+use Pionia\exceptions\UserUnauthenticatedException;
+use Pionia\response\BaseResponse;
 use ReflectionException;
 use ReflectionMethod;
 

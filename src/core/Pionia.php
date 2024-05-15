@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\core;
+namespace Pionia\core;
 
 /**
  * This is the base class for the framework
@@ -11,14 +11,14 @@ namespace Pioneer\core;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class Pioneer
+class Pionia
 {
 
     public static array | null $settings = null;
 
-    public static string $version = '1.0.1';
+    public static string $version = '1.0.2';
 
-    public static string $name = 'Pioneer';
+    public static string $name = 'Pionia';
 
     public function __construct()
     {

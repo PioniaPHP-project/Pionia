@@ -1,8 +1,8 @@
 <?php
 
-namespace Pioneer\command;
+namespace Pionia\command;
 
-use Pioneer\core\Pioneer;
+use Pionia\core\Pionia;
 use Symfony\Component\Console\Application;
 
 /**
@@ -16,6 +16,6 @@ class ConsoleApplication extends Application
 {
     public function __construct()
     {
-        parent::__construct(Pioneer::$name.' Console', Pioneer::$version);
+        parent::__construct(Pionia::$name.' Console', Pionia::$version);
     }
 }

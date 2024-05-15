@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\exceptions;
+namespace Pionia\exceptions;
 
 /**
  * This exception is thrown when an offset is passed in a paginated query using the Pagination class

@@ -1,9 +1,9 @@
 <?php
 
-namespace Pioneer\core;
+namespace Pionia\core;
 
-use Pioneer\request\Request;
-use Pioneer\response\BaseResponse;
+use Pionia\request\Request;
+use Pionia\response\BaseResponse;
 
 /**
  * This is the base controller class for the framework and most probably the only controller class that should be extended.
@@ -16,7 +16,7 @@ use Pioneer\response\BaseResponse;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  * */
-abstract class BaseApiController extends Pioneer
+abstract class BaseApiController extends Pionia
 {
     public static array | null $settings = null;
 

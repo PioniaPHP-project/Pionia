@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\database;
+namespace Pionia\database;
 
 /**
  * Currently supported database drivers

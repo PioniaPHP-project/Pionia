@@ -1,12 +1,12 @@
 <?php
 
-namespace Pioneer\database;
+namespace Pionia\database;
 
 use PDO;
-use Pioneer\core\Pioneer;
-use Pioneer\exceptions\DatabaseException;
+use Pionia\core\Pionia;
+use Pionia\exceptions\DatabaseException;
 
-class Connector extends Pioneer implements ConnectionInterface
+class Connector extends Pionia implements ConnectionInterface
 {
 
     private static string | null $dbType = null;

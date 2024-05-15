@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\core\routing;
+namespace Pionia\core\routing;
 
 use Symfony\Component\Routing\Route;
 

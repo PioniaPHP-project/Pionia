@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\core\helpers;
+namespace Pionia\core\helpers;
 
 /**
  * This class holds the supported http methods in the framework.
