@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\response;
+namespace Pioneer\response;
 
 /**
  * This is the internal response. It should not be used anywhere in the project but in the core framework

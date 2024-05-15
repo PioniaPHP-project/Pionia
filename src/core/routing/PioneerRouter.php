@@ -1,11 +1,11 @@
 <?php
 
-namespace jetPhp\core\routing;
+namespace Pioneer\core\routing;
 
-use jetPhp\core\helpers\SupportedHttpMethods;
-use jetPhp\core\helpers\Utilities;
-use jetPhp\exceptions\ControllerException;
-use jetPhp\response\BaseResponse;
+use Pioneer\core\helpers\SupportedHttpMethods;
+use Pioneer\core\helpers\Utilities;
+use Pioneer\exceptions\ControllerException;
+use Pioneer\response\BaseResponse;
 use Symfony\Component\Routing\Route;
 
 
@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Route;
  *
  * @example
  * ```php
- * $router = new JetRouter();
+ * $router = new PioneerRouter();
  * $router->addGroup('app\controller\MyController')
  *    ->post('myAction', 'myAction')
  *   ->get('myAction', 'myAction');
@@ -28,7 +28,7 @@ use Symfony\Component\Routing\Route;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class JetRouter
+class PioneerRouter
 {
     protected $routes;
 
@@ -53,7 +53,7 @@ class JetRouter
             throw new ControllerException('No controller defined');
         }
 
-        $res = Utilities::extends($controller, 'jetPhp\core\BaseApiController');
+        $res = Utilities::extends($controller, 'Pioneer\core\BaseApiController');
         if ($res ==='NO_CLASS'){
             throw new ControllerException("Controller {$controller} class not found");
         } elseif ($res === 'DOES_NOT') {

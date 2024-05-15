@@ -1,12 +1,12 @@
 {
-    "name": "jetezra/jetphp-core",
-    "description": "First PhP Restful framework that is truly restful",
+    "name": "pioneer/pioneerphp-core",
+    "description": "This is the core of the Pioneer PHP framework. It is a simple and lightweight PHP framework that is designed to be fast and easy to use.",
     "type": "library",
     "license": "MIT",
-    "keywords": ["php", "framework", "jet2018", "service", "j2j", "architecture", "performance"],
+    "keywords": ["php", "framework", "jet2018", "service", "j2j", "Pioneer", "architecture", "performance"],
     "autoload": {
         "psr-4": {
-            "jetPhp\\": "src/"
+            "Pioneer\\": "src/"
         }
     },
     "authors": [
@@ -24,6 +24,7 @@
         "php": ">=8.0",
         "symfony/http-kernel": "^6.4",
         "symfony/routing": "^6.4",
-        "symfony/console": "^6.4"
+        "symfony/console": "^6.4",
+        "jetezra/jetphp-core": "^1.0"
     }
 }

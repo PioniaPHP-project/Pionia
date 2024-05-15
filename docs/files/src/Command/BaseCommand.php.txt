@@ -1,11 +1,11 @@
 <?php
 
-namespace jetPhp\command;
+namespace Pioneer\command;
 
-use jetPhp\core\Base;
-use jetPhp\database\Connector;
-use jetPhp\exceptions\DatabaseException;
 use PDO;
+use Pioneer\core\Pioneer;
+use Pioneer\database\Connector;
+use Pioneer\exceptions\DatabaseException;
 use Symfony\Component\Console\Command\Command;
 
 /**
@@ -18,11 +18,11 @@ class BaseCommand extends Command
     /**
      * Return the base app, via this, you can access all the app settings, and current app environment
      *
-     * @return Base
+     * @return Pioneer
      */
-    protected static function base(): Base
+    protected static function base(): Pioneer
     {
-        return new Base();
+        return new Pioneer();
     }
 
     /**
@@ -30,7 +30,6 @@ class BaseCommand extends Command
      *
      * @param string|null $db
      * @return PDO
-     * @throws DatabaseException
      *
      * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
      * */

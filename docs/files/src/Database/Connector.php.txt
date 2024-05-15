@@ -1,12 +1,12 @@
 <?php
 
-namespace jetPhp\database;
+namespace Pioneer\database;
 
-use jetPhp\core\Base;
-use jetPhp\exceptions\DatabaseException;
 use PDO;
+use Pioneer\core\Pioneer;
+use Pioneer\exceptions\DatabaseException;
 
-class Connector extends Base implements ConnectionInterface
+class Connector extends Pioneer implements ConnectionInterface
 {
 
     private static string | null $dbType = null;

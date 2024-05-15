@@ -1,8 +1,8 @@
 <?php
 
-namespace jetPhp\command\commands;
+namespace Pioneer\command\commands;
 
-use jetPhp\command\BaseCommand;
+use Pioneer\command\BaseCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,9 +15,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class StartServer extends BaseCommand
 {
-    protected static $title = 'Start Server';
-    protected static $description = 'serve';
-    protected static $name = 'serve';
+    protected static string $title = 'Start Server';
+    protected static string $description = 'serve';
+    protected static string $name = 'serve';
 
     private array $command = ['php', '-S'];
 

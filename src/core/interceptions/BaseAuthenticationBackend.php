@@ -1,6 +1,9 @@
 <?php
 
-namespace jetPhp\core\interceptions;
+namespace Pioneer\core\interceptions;
+
+use Pioneer\core\helpers\ContextUserObject;
+use Pioneer\request\Request;
 
 /**
  * This is an interception class that will run against all requests. It is what the developer should
@@ -11,8 +14,6 @@ namespace jetPhp\core\interceptions;
  * for example, you can have some requests that are authenticated via JWT and others via session.
  */
 
-use jetPhp\core\helpers\ContextUserObject;
-use jetPhp\request\Request;
 
 /**
  * This is the base class for all authentication backends.
@@ -29,7 +30,7 @@ use jetPhp\request\Request;
  *
  * @example
  * ```php
- * use jetPhp\core\interceptions\BaseAuthenticationBackend;
+ * use Pioneer\core\interceptions\BaseAuthenticationBackend;
  * class MyAuthenticationBackend extends BaseAuthenticationBackend
  * {
  *   // This is not something you should do in your project, but just gives you the best idea of how to implement the authenticate method

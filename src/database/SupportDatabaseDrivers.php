@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\database;
+namespace Pioneer\database;
 
 /**
  * Currently supported database drivers

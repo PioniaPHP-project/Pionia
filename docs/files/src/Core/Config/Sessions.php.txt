@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\core\config;
+namespace Pioneer\core\config;
 
 /**
  * This class is responsible for handling all session related operations

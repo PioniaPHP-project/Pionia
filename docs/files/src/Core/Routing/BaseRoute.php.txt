@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\core\routing;
+namespace Pioneer\core\routing;
 
 use Symfony\Component\Routing\Route;
 

@@ -1,10 +1,11 @@
 <?php
 
-namespace jetPhp\database;
+namespace Pioneer\database;
 
 
-use jetPhp\exceptions\LimitPaginationException;
-use jetPhp\exceptions\OffsetPaginationException;
+
+use Pioneer\exceptions\LimitPaginationException;
+use Pioneer\exceptions\OffsetPaginationException;
 
 /**
  *  This class helps us to perform paginated queries from the database. The fast that counting and querying happens
@@ -60,6 +61,10 @@ class Paginator extends QueryBuilder
         return $this;
     }
 
+    /**
+     * @throws LimitPaginationException
+     * @throws OffsetPaginationException
+     */
     public function paginate($bindings = [])
     {
         if (str_contains($this->query, 'LIMIT') || str_contains($this->query, 'limit')) {

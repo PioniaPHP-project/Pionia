@@ -1,13 +1,13 @@
 <?php
 
-namespace jetPhp\core\config;
+namespace Pioneer\core\config;
 
 use Exception;
-use jetPhp\core\Base;
-use jetPhp\core\routing\BaseRoutes;
-use jetPhp\request\Request;
-use jetPhp\response\BaseResponse;
-use jetPhp\response\Response;
+use Pioneer\core\Pioneer;
+use Pioneer\core\routing\BaseRoutes;
+use Pioneer\request\Request;
+use Pioneer\response\BaseResponse;
+use Pioneer\response\Response;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
@@ -39,7 +39,7 @@ use Symfony\Component\Routing\RequestContext;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class CoreKernel extends Base
+class CoreKernel extends Pioneer
 {
     private ?RequestContext $context = null;
     private ?UrlMatcher $matcher = null;

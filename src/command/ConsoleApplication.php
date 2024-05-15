@@ -1,8 +1,8 @@
 <?php
 
-namespace jetPhp\command;
+namespace Pioneer\command;
 
-use jetPhp\core\Base;
+use Pioneer\core\Pioneer;
 use Symfony\Component\Console\Application;
 
 /**
@@ -16,6 +16,6 @@ class ConsoleApplication extends Application
 {
     public function __construct()
     {
-        parent::__construct(Base::$name.' Console', Base::$version);
+        parent::__construct(Pioneer::$name.' Console', Pioneer::$version);
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace jetPhp\database;
+namespace Pioneer\database;
 
 
-use jetPhp\exceptions\DatabaseException;
 use PDO;
+use Pioneer\exceptions\DatabaseException;
 
 /**
  * Class QueryBuilder
@@ -32,14 +32,15 @@ class QueryBuilder extends Connector
      * Use this to reset the connection to the database to a different one.
      * @param string $using
      */
-    public function Using(string $using)
+    public function Using(string $using): static
     {
         $this->using = $using;
         $this->refreshConnection();
         return $this;
     }
 
-    public function refreshConnection(){
+    public function refreshConnection(): void
+    {
         $this->connection = Connector::connect($this->using);
     }
 

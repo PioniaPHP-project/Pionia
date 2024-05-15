@@ -1,10 +1,10 @@
 <?php
 
-namespace jetPhp\core;
+namespace Pioneer\core;
 
-use jetPhp\exceptions\ResourceNotFoundException;
-use jetPhp\request\Request;
-use jetPhp\response\BaseResponse;
+use Pioneer\exceptions\ResourceNotFoundException;
+use Pioneer\request\Request;
+use Pioneer\response\BaseResponse;
 use ReflectionException;
 
 /**
@@ -62,7 +62,7 @@ abstract class BaseApiServiceSwitch
         $services = $klass->registerServices();
         if (array_key_exists($service, $services)) {
             $service = $services[$service];
-            if (!is_a($service, 'jetPhp\request\BaseRestService', true)){
+            if (!is_a($service, 'Pioneer\request\BaseRestService', true)){
                 throw new ResourceNotFoundException("Service $service is not a valid service");
             }
             if (empty($action)) {

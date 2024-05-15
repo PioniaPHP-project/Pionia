@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\database;
+namespace Pioneer\database;
 
 /**
  * Extend this to define your own database driver implementation.

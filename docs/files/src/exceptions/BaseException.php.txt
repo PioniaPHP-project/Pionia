@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\exceptions;
+namespace Pioneer\exceptions;
 
 use Throwable;
 

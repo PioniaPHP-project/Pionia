@@ -1,8 +1,8 @@
 <?php
 
-namespace jetPhp\request;
+namespace Pioneer\request;
 
-use jetPhp\core\helpers\ContextUserObject;
+use Pioneer\core\helpers\ContextUserObject;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 
@@ -58,7 +58,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      * @param ContextUserObject $userObject
      * @return $this
      */
-    public function setAuthenticationContext(ContextUserObject $userObject)
+    public function setAuthenticationContext(ContextUserObject $userObject): static
     {
         if ($userObject->user){
             $userObject->authenticated = true;

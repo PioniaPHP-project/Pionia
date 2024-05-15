@@ -1,10 +1,10 @@
 <?php
 
-namespace jetPhp\request;
+namespace Pioneer\request;
 
-use jetPhp\core\helpers\ContextUserObject;
-use jetPhp\exceptions\UserUnauthenticatedException;
-use jetPhp\exceptions\UserUnauthorizedException;
+use Pioneer\core\helpers\ContextUserObject;
+use Pioneer\exceptions\UserUnauthenticatedException;
+use Pioneer\exceptions\UserUnauthorizedException;
 
 /**
  * This trait provides common authentication methods for the services

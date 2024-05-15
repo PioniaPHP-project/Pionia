@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\exceptions;
+namespace Pioneer\exceptions;
 
 /**
  * This exception is thrown when an offset is passed in a paginated query using the Pagination class
