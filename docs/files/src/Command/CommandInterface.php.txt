@@ -1,10 +1,10 @@
 <?php
 
-namespace Pioneer\command;
+namespace Pionia\command;
 
 use Exception;
-use Pioneer\core\helpers\Utilities;
-use Pioneer\exceptions\CommandException;
+use Pionia\core\helpers\Utilities;
+use Pionia\exceptions\CommandException;
 
 /**
  * This is the command interface, it is the entry point for all commands in the framework
@@ -18,7 +18,7 @@ class CommandInterface
      * @var array|string[] $commands
      */
     private static array $commands = [
-        'Pioneer\command\commands\StartServer',
+        'Pionia\command\commands\StartServer',
     ];
 
 
@@ -27,7 +27,7 @@ class CommandInterface
      */
     public static function addCommand(string $command): array
     {
-        if (Utilities::extends($command, 'Pioneer\command\BaseCommand') === 'NO_CLASS'){
+        if (Utilities::extends($command, 'Pionia\command\BaseCommand') === 'NO_CLASS'){
             throw new CommandException("Command {$command} class not found");
         }
         self::$commands[]= $command;

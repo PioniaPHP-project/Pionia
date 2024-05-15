@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\core\helpers;
+namespace Pionia\core\helpers;
 
 /**
  * This is the context object holding the current session

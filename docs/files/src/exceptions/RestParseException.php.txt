@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\exceptions;
+namespace Pionia\exceptions;
 
 
 /**

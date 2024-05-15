@@ -1,10 +1,10 @@
 <?php
 
-namespace Pioneer\database;
+namespace Pionia\database;
 
 
 use PDO;
-use Pioneer\exceptions\DatabaseException;
+use Pionia\exceptions\DatabaseException;
 
 /**
  * Class QueryBuilder

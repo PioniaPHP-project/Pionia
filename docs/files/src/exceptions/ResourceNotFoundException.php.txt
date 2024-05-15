@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\exceptions;
+namespace Pionia\exceptions;
 
 /**
  * This exception is thrown when a service requested is not found.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\database;
+namespace Pionia\database;
 
 /**
  * Extend this to define your own database driver implementation.

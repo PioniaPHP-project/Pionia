@@ -1,11 +1,11 @@
 <?php
 
-namespace Pioneer\core\routing;
+namespace Pionia\core\routing;
 
-use Pioneer\core\helpers\SupportedHttpMethods;
-use Pioneer\core\helpers\Utilities;
-use Pioneer\exceptions\ControllerException;
-use Pioneer\response\BaseResponse;
+use Pionia\core\helpers\SupportedHttpMethods;
+use Pionia\core\helpers\Utilities;
+use Pionia\exceptions\ControllerException;
+use Pionia\response\BaseResponse;
 use Symfony\Component\Routing\Route;
 
 
@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Route;
  *
  * @example
  * ```php
- * $router = new PioneerRouter();
+ * $router = new PioniaRouter();
  * $router->addGroup('app\controller\MyController')
  *    ->post('myAction', 'myAction')
  *   ->get('myAction', 'myAction');
@@ -28,7 +28,7 @@ use Symfony\Component\Routing\Route;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class PioneerRouter
+class PioniaRouter
 {
     protected $routes;
 
@@ -53,7 +53,7 @@ class PioneerRouter
             throw new ControllerException('No controller defined');
         }
 
-        $res = Utilities::extends($controller, 'Pioneer\core\BaseApiController');
+        $res = Utilities::extends($controller, 'Pionia\core\BaseApiController');
         if ($res ==='NO_CLASS'){
             throw new ControllerException("Controller {$controller} class not found");
         } elseif ($res === 'DOES_NOT') {

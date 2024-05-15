@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\response;
+namespace Pionia\response;
 
 /**
  * This provides a uniform response format for our entire application.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\core\helpers;
+namespace Pionia\core\helpers;
 
 use ReflectionClass;
 

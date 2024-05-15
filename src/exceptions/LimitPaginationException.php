@@ -1,6 +1,6 @@
 <?php
 
-namespace Pioneer\exceptions;
+namespace Pionia\exceptions;
 
 /**
  * This exception is thrown when a limit is provided in a paginated query using the Pagination class

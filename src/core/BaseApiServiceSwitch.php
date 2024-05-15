@@ -1,10 +1,11 @@
 <?php
 
-namespace Pioneer\core;
+namespace Pionia\core;
 
-use Pioneer\exceptions\ResourceNotFoundException;
-use Pioneer\request\Request;
-use Pioneer\response\BaseResponse;
+use Pionia\exceptions\ResourceNotFoundException;
+use Pionia\exceptions\UserUnauthenticatedException;
+use Pionia\request\Request;
+use Pionia\response\BaseResponse;
 use ReflectionException;
 
 /**
@@ -48,7 +49,9 @@ abstract class BaseApiServiceSwitch
      * This method checks the request data for the `SERVICE` key and processes the service based on it
      *
      * @param Request $request The request object
-     * @throws ResourceNotFoundException|ReflectionException if the SERVICE key is not found, or the service is invalid, or the service is not found
+     * @return BaseResponse The response object
+     * @throws UserUnauthenticatedException if the user is not authenticated and the service requires authentication
+     * @throws ResourceNotFoundException|ReflectionException if the SERVICE key is not found, or the service is invalid, or the service is not found*@see BaseResponse for the response returned by this swicher's processServices method
      */
     public static function processServices(Request $request): BaseResponse
     {
@@ -62,7 +65,7 @@ abstract class BaseApiServiceSwitch
         $services = $klass->registerServices();
         if (array_key_exists($service, $services)) {
             $service = $services[$service];
-            if (!is_a($service, 'Pioneer\request\BaseRestService', true)){
+            if (!is_a($service, 'Pionia\request\BaseRestService', true)){
                 throw new ResourceNotFoundException("Service $service is not a valid service");
             }
             if (empty($action)) {

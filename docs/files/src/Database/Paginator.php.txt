@@ -1,11 +1,11 @@
 <?php
 
-namespace Pioneer\database;
+namespace Pionia\database;
 
 
 
-use Pioneer\exceptions\LimitPaginationException;
-use Pioneer\exceptions\OffsetPaginationException;
+use Pionia\exceptions\LimitPaginationException;
+use Pionia\exceptions\OffsetPaginationException;
 
 /**
  *  This class helps us to perform paginated queries from the database. The fast that counting and querying happens

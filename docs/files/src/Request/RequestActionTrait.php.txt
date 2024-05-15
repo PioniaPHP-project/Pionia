@@ -1,8 +1,8 @@
 <?php
 
-namespace Pioneer\request;
+namespace Pionia\request;
 
-use Pioneer\exceptions\FailedRequiredException;
+use Pionia\exceptions\FailedRequiredException;
 
 /**
  * Provides helper methods for request actions

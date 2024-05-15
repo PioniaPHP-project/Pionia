@@ -1,11 +1,11 @@
 <?php
 
-namespace Pioneer\command;
+namespace Pionia\command;
 
 use PDO;
-use Pioneer\core\Pioneer;
-use Pioneer\database\Connector;
-use Pioneer\exceptions\DatabaseException;
+use Pionia\core\Pionia;
+use Pionia\database\Connector;
+use Pionia\exceptions\DatabaseException;
 use Symfony\Component\Console\Command\Command;
 
 /**
@@ -18,11 +18,11 @@ class BaseCommand extends Command
     /**
      * Return the base app, via this, you can access all the app settings, and current app environment
      *
-     * @return Pioneer
+     * @return Pionia
      */
-    protected static function base(): Pioneer
+    protected static function base(): Pionia
     {
-        return new Pioneer();
+        return new Pionia();
     }
 
     /**
