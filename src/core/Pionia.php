@@ -16,7 +16,7 @@ class Pionia
 
     public static array | null $settings = null;
 
-    public static string $version = '1.0.3';
+    public static string $version = '1.0.4';
 
     public static string $name = 'Pionia';
 
