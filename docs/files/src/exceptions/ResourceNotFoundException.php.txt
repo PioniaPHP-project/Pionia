@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\exceptions;
+namespace Pioneer\exceptions;
 
 /**
  * This exception is thrown when a service requested is not found.

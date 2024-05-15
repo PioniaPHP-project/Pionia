@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\exceptions;
+namespace Pioneer\exceptions;
 
 /**
  * This exception is thrown when one tries to access a protected resource without being authenticated

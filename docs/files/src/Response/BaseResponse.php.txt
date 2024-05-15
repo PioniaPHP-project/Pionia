@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\response;
+namespace Pioneer\response;
 
 /**
  * This provides a uniform response format for our entire application.

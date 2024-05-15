@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\core\helpers;
+namespace Pioneer\core\helpers;
 
 /**
  * This is the context object holding the current session

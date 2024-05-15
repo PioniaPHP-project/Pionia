@@ -1,10 +1,10 @@
 <?php
 
-namespace jetPhp\request;
+namespace Pioneer\request;
 
-use jetPhp\exceptions\ResourceNotFoundException;
-use jetPhp\exceptions\UserUnauthenticatedException;
-use jetPhp\response\BaseResponse;
+use Pioneer\exceptions\ResourceNotFoundException;
+use Pioneer\exceptions\UserUnauthenticatedException;
+use Pioneer\response\BaseResponse;
 use ReflectionException;
 use ReflectionMethod;
 

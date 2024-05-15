@@ -1,979 +1,979 @@
 Search.appendIndex(
     [
                 {
-            "fqsen": "\\jetPhp\\command\\BaseCommand",
+            "fqsen": "\\Pioneer\\command\\BaseCommand",
             "name": "BaseCommand",
             "summary": "This\u0020is\u0020the\u0020base\u0020command\u0020class,\u0020it\u0020extends\u0020the\u0020Symfony\u0020console\u0020command\u0020class\u0020and\u0020provides\u0020some\u0020helper\u0020methods\nthat\u0020can\u0020be\u0020used\u0020in\u0020all\u0020commands.\u0020All\u0020commands\u0020should\u0020extend\u0020this\u0020class.",
-            "url": "classes/jetPhp-command-BaseCommand.html"
+            "url": "classes/Pioneer-command-BaseCommand.html"
         },                {
-            "fqsen": "\\jetPhp\\command\\BaseCommand\u003A\u003Abase\u0028\u0029",
+            "fqsen": "\\Pioneer\\command\\BaseCommand\u003A\u003Abase\u0028\u0029",
             "name": "base",
             "summary": "Return\u0020the\u0020base\u0020app,\u0020via\u0020this,\u0020you\u0020can\u0020access\u0020all\u0020the\u0020app\u0020settings,\u0020and\u0020current\u0020app\u0020environment",
-            "url": "classes/jetPhp-command-BaseCommand.html#method_base"
+            "url": "classes/Pioneer-command-BaseCommand.html#method_base"
         },                {
-            "fqsen": "\\jetPhp\\command\\BaseCommand\u003A\u003Aconnection\u0028\u0029",
+            "fqsen": "\\Pioneer\\command\\BaseCommand\u003A\u003Aconnection\u0028\u0029",
             "name": "connection",
             "summary": "Returns\u0020the\u0020current\u0020database\u0020connection",
-            "url": "classes/jetPhp-command-BaseCommand.html#method_connection"
+            "url": "classes/Pioneer-command-BaseCommand.html#method_connection"
         },                {
-            "fqsen": "\\jetPhp\\command\\CommandInterface",
+            "fqsen": "\\Pioneer\\command\\CommandInterface",
             "name": "CommandInterface",
             "summary": "This\u0020is\u0020the\u0020command\u0020interface,\u0020it\u0020is\u0020the\u0020entry\u0020point\u0020for\u0020all\u0020commands\u0020in\u0020the\u0020framework",
-            "url": "classes/jetPhp-command-CommandInterface.html"
+            "url": "classes/Pioneer-command-CommandInterface.html"
         },                {
-            "fqsen": "\\jetPhp\\command\\CommandInterface\u003A\u003AaddCommand\u0028\u0029",
+            "fqsen": "\\Pioneer\\command\\CommandInterface\u003A\u003AaddCommand\u0028\u0029",
             "name": "addCommand",
             "summary": "",
-            "url": "classes/jetPhp-command-CommandInterface.html#method_addCommand"
+            "url": "classes/Pioneer-command-CommandInterface.html#method_addCommand"
         },                {
-            "fqsen": "\\jetPhp\\command\\CommandInterface\u003A\u003Arun\u0028\u0029",
+            "fqsen": "\\Pioneer\\command\\CommandInterface\u003A\u003Arun\u0028\u0029",
             "name": "run",
             "summary": "",
-            "url": "classes/jetPhp-command-CommandInterface.html#method_run"
+            "url": "classes/Pioneer-command-CommandInterface.html#method_run"
         },                {
-            "fqsen": "\\jetPhp\\command\\CommandInterface\u003A\u003AsetUp\u0028\u0029",
+            "fqsen": "\\Pioneer\\command\\CommandInterface\u003A\u003AsetUp\u0028\u0029",
             "name": "setUp",
             "summary": "",
-            "url": "classes/jetPhp-command-CommandInterface.html#method_setUp"
+            "url": "classes/Pioneer-command-CommandInterface.html#method_setUp"
         },                {
-            "fqsen": "\\jetPhp\\command\\CommandInterface\u003A\u003A\u0024commands",
+            "fqsen": "\\Pioneer\\command\\CommandInterface\u003A\u003A\u0024commands",
             "name": "commands",
             "summary": "These\u0020are\u0020the\u0020core\u0020commands\u0020that\u0020are\u0020available\u0020in\u0020the\u0020framework",
-            "url": "classes/jetPhp-command-CommandInterface.html#property_commands"
+            "url": "classes/Pioneer-command-CommandInterface.html#property_commands"
         },                {
-            "fqsen": "\\jetPhp\\command\\commands\\StartServer",
+            "fqsen": "\\Pioneer\\command\\commands\\StartServer",
             "name": "StartServer",
             "summary": "For\u0020starting\u0020the\u0020command\u0020line\u0020server.\u0020This\u0020should\u0020be\u0020good\u0020choice\u0020only\u0020in\u0020development",
-            "url": "classes/jetPhp-command-commands-StartServer.html"
+            "url": "classes/Pioneer-command-commands-StartServer.html"
         },                {
-            "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003Aconfigure\u0028\u0029",
+            "fqsen": "\\Pioneer\\command\\commands\\StartServer\u003A\u003Aconfigure\u0028\u0029",
             "name": "configure",
             "summary": "",
-            "url": "classes/jetPhp-command-commands-StartServer.html#method_configure"
+            "url": "classes/Pioneer-command-commands-StartServer.html#method_configure"
         },                {
-            "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003Aexecute\u0028\u0029",
+            "fqsen": "\\Pioneer\\command\\commands\\StartServer\u003A\u003Aexecute\u0028\u0029",
             "name": "execute",
             "summary": "",
-            "url": "classes/jetPhp-command-commands-StartServer.html#method_execute"
+            "url": "classes/Pioneer-command-commands-StartServer.html#method_execute"
         },                {
-            "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003A\u0024title",
+            "fqsen": "\\Pioneer\\command\\commands\\StartServer\u003A\u003A\u0024title",
             "name": "title",
             "summary": "",
-            "url": "classes/jetPhp-command-commands-StartServer.html#property_title"
+            "url": "classes/Pioneer-command-commands-StartServer.html#property_title"
         },                {
-            "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003A\u0024description",
+            "fqsen": "\\Pioneer\\command\\commands\\StartServer\u003A\u003A\u0024description",
             "name": "description",
             "summary": "",
-            "url": "classes/jetPhp-command-commands-StartServer.html#property_description"
+            "url": "classes/Pioneer-command-commands-StartServer.html#property_description"
         },                {
-            "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003A\u0024name",
+            "fqsen": "\\Pioneer\\command\\commands\\StartServer\u003A\u003A\u0024name",
             "name": "name",
             "summary": "",
-            "url": "classes/jetPhp-command-commands-StartServer.html#property_name"
+            "url": "classes/Pioneer-command-commands-StartServer.html#property_name"
         },                {
-            "fqsen": "\\jetPhp\\command\\commands\\StartServer\u003A\u003A\u0024command",
+            "fqsen": "\\Pioneer\\command\\commands\\StartServer\u003A\u003A\u0024command",
             "name": "command",
             "summary": "",
-            "url": "classes/jetPhp-command-commands-StartServer.html#property_command"
+            "url": "classes/Pioneer-command-commands-StartServer.html#property_command"
         },                {
-            "fqsen": "\\jetPhp\\command\\ConsoleApplication",
+            "fqsen": "\\Pioneer\\command\\ConsoleApplication",
             "name": "ConsoleApplication",
             "summary": "This\u0020is\u0020the\u0020main\u0020console\u0020application\u0020class,\u0020it\u0020extends\u0020the\u0020Symfony\u0020console\u0020application\u0020class",
-            "url": "classes/jetPhp-command-ConsoleApplication.html"
+            "url": "classes/Pioneer-command-ConsoleApplication.html"
         },                {
-            "fqsen": "\\jetPhp\\command\\ConsoleApplication\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pioneer\\command\\ConsoleApplication\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/jetPhp-command-ConsoleApplication.html#method___construct"
+            "url": "classes/Pioneer-command-ConsoleApplication.html#method___construct"
         },                {
-            "fqsen": "\\jetPhp\\core\\Base",
-            "name": "Base",
-            "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020the\u0020framework",
-            "url": "classes/jetPhp-core-Base.html"
-        },                {
-            "fqsen": "\\jetPhp\\core\\Base\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/jetPhp-core-Base.html#method___construct"
-        },                {
-            "fqsen": "\\jetPhp\\core\\Base\u003A\u003AgetSettings\u0028\u0029",
-            "name": "getSettings",
-            "summary": "",
-            "url": "classes/jetPhp-core-Base.html#method_getSettings"
-        },                {
-            "fqsen": "\\jetPhp\\core\\Base\u003A\u003AgetSetting\u0028\u0029",
-            "name": "getSetting",
-            "summary": "",
-            "url": "classes/jetPhp-core-Base.html#method_getSetting"
-        },                {
-            "fqsen": "\\jetPhp\\core\\Base\u003A\u003AgetSettingOrDefault\u0028\u0029",
-            "name": "getSettingOrDefault",
-            "summary": "",
-            "url": "classes/jetPhp-core-Base.html#method_getSettingOrDefault"
-        },                {
-            "fqsen": "\\jetPhp\\core\\Base\u003A\u003AresolveSettingsFromIni\u0028\u0029",
-            "name": "resolveSettingsFromIni",
-            "summary": "",
-            "url": "classes/jetPhp-core-Base.html#method_resolveSettingsFromIni"
-        },                {
-            "fqsen": "\\jetPhp\\core\\Base\u003A\u003A\u0024settings",
-            "name": "settings",
-            "summary": "",
-            "url": "classes/jetPhp-core-Base.html#property_settings"
-        },                {
-            "fqsen": "\\jetPhp\\core\\Base\u003A\u003A\u0024version",
-            "name": "version",
-            "summary": "",
-            "url": "classes/jetPhp-core-Base.html#property_version"
-        },                {
-            "fqsen": "\\jetPhp\\core\\Base\u003A\u003A\u0024name",
-            "name": "name",
-            "summary": "",
-            "url": "classes/jetPhp-core-Base.html#property_name"
-        },                {
-            "fqsen": "\\jetPhp\\core\\BaseApiController",
+            "fqsen": "\\Pioneer\\core\\BaseApiController",
             "name": "BaseApiController",
             "summary": "This\u0020is\u0020the\u0020base\u0020controller\u0020class\u0020for\u0020the\u0020framework\u0020and\u0020most\u0020probably\u0020the\u0020only\u0020controller\u0020class\u0020that\u0020should\u0020be\u0020extended.",
-            "url": "classes/jetPhp-core-BaseApiController.html"
+            "url": "classes/Pioneer-core-BaseApiController.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\BaseApiController\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\BaseApiController\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/jetPhp-core-BaseApiController.html#method___construct"
+            "url": "classes/Pioneer-core-BaseApiController.html#method___construct"
         },                {
-            "fqsen": "\\jetPhp\\core\\BaseApiController\u003A\u003Aping\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\BaseApiController\u003A\u003Aping\u0028\u0029",
             "name": "ping",
             "summary": "This\u0020is\u0020just\u0020for\u0020checking\u0020the\u0020server\u0020status",
-            "url": "classes/jetPhp-core-BaseApiController.html#method_ping"
+            "url": "classes/Pioneer-core-BaseApiController.html#method_ping"
         },                {
-            "fqsen": "\\jetPhp\\core\\BaseApiController\u003A\u003A\u0024settings",
+            "fqsen": "\\Pioneer\\core\\BaseApiController\u003A\u003A\u0024settings",
             "name": "settings",
             "summary": "",
-            "url": "classes/jetPhp-core-BaseApiController.html#property_settings"
+            "url": "classes/Pioneer-core-BaseApiController.html#property_settings"
         },                {
-            "fqsen": "\\jetPhp\\core\\BaseApiServiceSwitch",
+            "fqsen": "\\Pioneer\\core\\BaseApiServiceSwitch",
             "name": "BaseApiServiceSwitch",
             "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020the\u0020API\u0020service\u0020switch.\u0020It\u0020is\u0020used\u0020to\u0020switch\u0020between\u0020different\u0020services\u0020based\u0020on\u0020the\u0020request\u0020data.",
-            "url": "classes/jetPhp-core-BaseApiServiceSwitch.html"
+            "url": "classes/Pioneer-core-BaseApiServiceSwitch.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\BaseApiServiceSwitch\u003A\u003AregisterServices\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\BaseApiServiceSwitch\u003A\u003AregisterServices\u0028\u0029",
             "name": "registerServices",
             "summary": "This\u0020method\u0020must\u0020be\u0020implemented\u0020by\u0020the\u0020child\u0020class\u0020to\u0020return\u0020an\u0020array\u0020of\u0020services.",
-            "url": "classes/jetPhp-core-BaseApiServiceSwitch.html#method_registerServices"
+            "url": "classes/Pioneer-core-BaseApiServiceSwitch.html#method_registerServices"
         },                {
-            "fqsen": "\\jetPhp\\core\\BaseApiServiceSwitch\u003A\u003AprocessServices\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\BaseApiServiceSwitch\u003A\u003AprocessServices\u0028\u0029",
             "name": "processServices",
             "summary": "This\u0020method\u0020checks\u0020the\u0020request\u0020data\u0020for\u0020the\u0020\u0060SERVICE\u0060\u0020key\u0020and\u0020processes\u0020the\u0020service\u0020based\u0020on\u0020it",
-            "url": "classes/jetPhp-core-BaseApiServiceSwitch.html#method_processServices"
+            "url": "classes/Pioneer-core-BaseApiServiceSwitch.html#method_processServices"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel",
             "name": "CoreKernel",
             "summary": "This\u0020is\u0020the\u0020core\u0020kernel\u0020that\u0020handles\u0020all\u0020the\u0020request\u0020processing\u0020and\u0020middleware\u0020execution",
-            "url": "classes/jetPhp-core-config-CoreKernel.html"
+            "url": "classes/Pioneer-core-config-CoreKernel.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#method___construct"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#method___construct"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003AregisterMiddleware\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003AregisterMiddleware\u0028\u0029",
             "name": "registerMiddleware",
             "summary": "",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#method_registerMiddleware"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#method_registerMiddleware"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003AregisterAuthBackends\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003AregisterAuthBackends\u0028\u0029",
             "name": "registerAuthBackends",
             "summary": "",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#method_registerAuthBackends"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#method_registerAuthBackends"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003Aresolve\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003Aresolve\u0028\u0029",
             "name": "resolve",
             "summary": "",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#method_resolve"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#method_resolve"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003Ahandle\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003Ahandle\u0028\u0029",
             "name": "handle",
             "summary": "",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#method_handle"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#method_handle"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003AresolveMiddlewares\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003AresolveMiddlewares\u0028\u0029",
             "name": "resolveMiddlewares",
             "summary": "Runs\u0020every\u0020registered\u0020middleware\u0020pre\u0020and\u0020post\u0020controller\u0020execution.\u0020Exposing\u0020both\u0020the\u0020request\u0020and\u0020response\u0020the\u0020middleware",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#method_resolveMiddlewares"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#method_resolveMiddlewares"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003AresolveAuthenticationBackend\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003AresolveAuthenticationBackend\u0028\u0029",
             "name": "resolveAuthenticationBackend",
             "summary": "",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#method_resolveAuthenticationBackend"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#method_resolveAuthenticationBackend"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003AauthenticationBackendWorker\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003AauthenticationBackendWorker\u0028\u0029",
             "name": "authenticationBackendWorker",
             "summary": "This\u0020will\u0020run\u0020until\u0020any\u0020of\u0020the\u0020backends\u0020successfully\u0020authenticates\u0020the\u0020user",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#method_authenticationBackendWorker"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#method_authenticationBackendWorker"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A\u0024context",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003A\u0024context",
             "name": "context",
             "summary": "",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#property_context"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#property_context"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A\u0024matcher",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003A\u0024matcher",
             "name": "matcher",
             "summary": "",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#property_matcher"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#property_matcher"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A\u0024middleware",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003A\u0024middleware",
             "name": "middleware",
             "summary": "",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#property_middleware"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#property_middleware"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A\u0024authBackends",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003A\u0024authBackends",
             "name": "authBackends",
             "summary": "",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#property_authBackends"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#property_authBackends"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\CoreKernel\u003A\u003A\u0024routes",
+            "fqsen": "\\Pioneer\\core\\config\\CoreKernel\u003A\u003A\u0024routes",
             "name": "routes",
             "summary": "",
-            "url": "classes/jetPhp-core-config-CoreKernel.html#property_routes"
+            "url": "classes/Pioneer-core-config-CoreKernel.html#property_routes"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\Sessions",
+            "fqsen": "\\Pioneer\\core\\config\\Sessions",
             "name": "Sessions",
             "summary": "This\u0020class\u0020is\u0020responsible\u0020for\u0020handling\u0020all\u0020session\u0020related\u0020operations",
-            "url": "classes/jetPhp-core-config-Sessions.html"
+            "url": "classes/Pioneer-core-config-Sessions.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Adestroy\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\Sessions\u003A\u003Adestroy\u0028\u0029",
             "name": "destroy",
             "summary": "Destroys\u0020all\u0020data\u0020registered\u0020to\u0020a\u0020session",
-            "url": "classes/jetPhp-core-config-Sessions.html#method_destroy"
+            "url": "classes/Pioneer-core-config-Sessions.html#method_destroy"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Astart\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\Sessions\u003A\u003Astart\u0028\u0029",
             "name": "start",
             "summary": "Initialize\u0020session\u0020data",
-            "url": "classes/jetPhp-core-config-Sessions.html#method_start"
+            "url": "classes/Pioneer-core-config-Sessions.html#method_start"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Aset\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\Sessions\u003A\u003Aset\u0028\u0029",
             "name": "set",
             "summary": "Sets\u0020the\u0020given\u0020key\u0020to\u0020the\u0020given\u0020value\u0020into\u0020the\u0020session\u0020and\u0020returns\u0020the\u0020current\u0020entire\u0020session\u0020values",
-            "url": "classes/jetPhp-core-config-Sessions.html#method_set"
+            "url": "classes/Pioneer-core-config-Sessions.html#method_set"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Aget\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\Sessions\u003A\u003Aget\u0028\u0029",
             "name": "get",
             "summary": "Gets\u0020and\u0020returns\u0020a\u0020certain\u0020value\u0020from\u0020the\u0020session",
-            "url": "classes/jetPhp-core-config-Sessions.html#method_get"
+            "url": "classes/Pioneer-core-config-Sessions.html#method_get"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Ahas\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\Sessions\u003A\u003Ahas\u0028\u0029",
             "name": "has",
             "summary": "Checks\u0020if\u0020a\u0020certain\u0020key\u0020is\u0020already\u0020in\u0020the\u0020session",
-            "url": "classes/jetPhp-core-config-Sessions.html#method_has"
+            "url": "classes/Pioneer-core-config-Sessions.html#method_has"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Aremove\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\Sessions\u003A\u003Aremove\u0028\u0029",
             "name": "remove",
             "summary": "Destroys\u0020a\u0020specific\u0020key\u0020in\u0020the\u0020session",
-            "url": "classes/jetPhp-core-config-Sessions.html#method_remove"
+            "url": "classes/Pioneer-core-config-Sessions.html#method_remove"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003AregerateKey\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\Sessions\u003A\u003AregerateKey\u0028\u0029",
             "name": "regerateKey",
             "summary": "Update\u0020the\u0020current\u0020session\u0020id\u0020with\u0020a\u0020newly\u0020generated\u0020one",
-            "url": "classes/jetPhp-core-config-Sessions.html#method_regerateKey"
+            "url": "classes/Pioneer-core-config-Sessions.html#method_regerateKey"
         },                {
-            "fqsen": "\\jetPhp\\core\\config\\Sessions\u003A\u003Aconfigure\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\config\\Sessions\u003A\u003Aconfigure\u0028\u0029",
             "name": "configure",
             "summary": "Set\u0020the\u0020session\u0020cookie\u0020parameters",
-            "url": "classes/jetPhp-core-config-Sessions.html#method_configure"
+            "url": "classes/Pioneer-core-config-Sessions.html#method_configure"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\ContextUserObject",
+            "fqsen": "\\Pioneer\\core\\helpers\\ContextUserObject",
             "name": "ContextUserObject",
             "summary": "This\u0020is\u0020the\u0020context\u0020object\u0020holding\u0020the\u0020current\u0020session",
-            "url": "classes/jetPhp-core-helpers-ContextUserObject.html"
+            "url": "classes/Pioneer-core-helpers-ContextUserObject.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\ContextUserObject\u003A\u003A\u0024user",
+            "fqsen": "\\Pioneer\\core\\helpers\\ContextUserObject\u003A\u003A\u0024user",
             "name": "user",
             "summary": "You\u0020can\u0020store\u0020here\u0020your\u0020user\u0020object",
-            "url": "classes/jetPhp-core-helpers-ContextUserObject.html#property_user"
+            "url": "classes/Pioneer-core-helpers-ContextUserObject.html#property_user"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\ContextUserObject\u003A\u003A\u0024authenticated",
+            "fqsen": "\\Pioneer\\core\\helpers\\ContextUserObject\u003A\u003A\u0024authenticated",
             "name": "authenticated",
             "summary": "Turn\u0020this\u0020to\u0020true\u0020if\u0020the\u0020user\u0020is\u0020authenticated",
-            "url": "classes/jetPhp-core-helpers-ContextUserObject.html#property_authenticated"
+            "url": "classes/Pioneer-core-helpers-ContextUserObject.html#property_authenticated"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\ContextUserObject\u003A\u003A\u0024permissions",
+            "fqsen": "\\Pioneer\\core\\helpers\\ContextUserObject\u003A\u003A\u0024permissions",
             "name": "permissions",
             "summary": "Set\u0020this\u0020to\u0020the\u0020user\u0027s\u0020object",
-            "url": "classes/jetPhp-core-helpers-ContextUserObject.html#property_permissions"
+            "url": "classes/Pioneer-core-helpers-ContextUserObject.html#property_permissions"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\ContextUserObject\u003A\u003A\u0024authExtra",
+            "fqsen": "\\Pioneer\\core\\helpers\\ContextUserObject\u003A\u003A\u0024authExtra",
             "name": "authExtra",
             "summary": "this\u0020holds\u0020any\u0020other\u0020data\u0020about\u0020the\u0020logged\u002Din\u0020session\u0020holder,\u0020can\u0020be\u0020user\u0020to\u0020hold\u0020user\u0020domain,\u0020user\u0020role\u0020etc",
-            "url": "classes/jetPhp-core-helpers-ContextUserObject.html#property_authExtra"
+            "url": "classes/Pioneer-core-helpers-ContextUserObject.html#property_authExtra"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\SupportedHttpMethods",
+            "fqsen": "\\Pioneer\\core\\helpers\\SupportedHttpMethods",
             "name": "SupportedHttpMethods",
             "summary": "This\u0020class\u0020holds\u0020the\u0020supported\u0020http\u0020methods\u0020in\u0020the\u0020framework.",
-            "url": "classes/jetPhp-core-helpers-SupportedHttpMethods.html"
+            "url": "classes/Pioneer-core-helpers-SupportedHttpMethods.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\SupportedHttpMethods\u003A\u003APOST",
+            "fqsen": "\\Pioneer\\core\\helpers\\SupportedHttpMethods\u003A\u003APOST",
             "name": "POST",
             "summary": "",
-            "url": "classes/jetPhp-core-helpers-SupportedHttpMethods.html#constant_POST"
+            "url": "classes/Pioneer-core-helpers-SupportedHttpMethods.html#constant_POST"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\SupportedHttpMethods\u003A\u003AGET",
+            "fqsen": "\\Pioneer\\core\\helpers\\SupportedHttpMethods\u003A\u003AGET",
             "name": "GET",
             "summary": "",
-            "url": "classes/jetPhp-core-helpers-SupportedHttpMethods.html#constant_GET"
+            "url": "classes/Pioneer-core-helpers-SupportedHttpMethods.html#constant_GET"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\Utilities",
+            "fqsen": "\\Pioneer\\core\\helpers\\Utilities",
             "name": "Utilities",
             "summary": "These\u0020are\u0020just\u0020helpers\u0020to\u0020quickly\u0020get\u0020staff\u0020done",
-            "url": "classes/jetPhp-core-helpers-Utilities.html"
+            "url": "classes/Pioneer-core-helpers-Utilities.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\Utilities\u003A\u003AarrayToCommaSepString\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\helpers\\Utilities\u003A\u003AarrayToCommaSepString\u0028\u0029",
             "name": "arrayToCommaSepString",
             "summary": "This\u0020function\u0020converts\u0020an\u0020array\u0020to\u0020a\u0020comma\u002Dseparated\u0020string",
-            "url": "classes/jetPhp-core-helpers-Utilities.html#method_arrayToCommaSepString"
+            "url": "classes/Pioneer-core-helpers-Utilities.html#method_arrayToCommaSepString"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\Utilities\u003A\u003Ajsonify\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\helpers\\Utilities\u003A\u003Ajsonify\u0028\u0029",
             "name": "jsonify",
             "summary": "This\u0020function\u0020json\u0020encodes\u0020a\u0020value",
-            "url": "classes/jetPhp-core-helpers-Utilities.html#method_jsonify"
+            "url": "classes/Pioneer-core-helpers-Utilities.html#method_jsonify"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\Utilities\u003A\u003Aextends\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\helpers\\Utilities\u003A\u003Aextends\u0028\u0029",
             "name": "extends",
             "summary": "This\u0020function\u0020checks\u0020if\u0020a\u0020class\u0020extends\u0020another\u0020class",
-            "url": "classes/jetPhp-core-helpers-Utilities.html#method_extends"
+            "url": "classes/Pioneer-core-helpers-Utilities.html#method_extends"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers\\Utilities\u003A\u003Aimplements\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\helpers\\Utilities\u003A\u003Aimplements\u0028\u0029",
             "name": "implements",
             "summary": "This\u0020function\u0020checks\u0020if\u0020a\u0020class\u0020implements\u0020an\u0020interface",
-            "url": "classes/jetPhp-core-helpers-Utilities.html#method_implements"
+            "url": "classes/Pioneer-core-helpers-Utilities.html#method_implements"
         },                {
-            "fqsen": "\\jetPhp\\core\\interceptions\\BaseAuthenticationBackend",
+            "fqsen": "\\Pioneer\\core\\interceptions\\BaseAuthenticationBackend",
             "name": "BaseAuthenticationBackend",
             "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020all\u0020authentication\u0020backends.",
-            "url": "classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html"
+            "url": "classes/Pioneer-core-interceptions-BaseAuthenticationBackend.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\interceptions\\BaseAuthenticationBackend\u003A\u003Aauthenticate\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\interceptions\\BaseAuthenticationBackend\u003A\u003Aauthenticate\u0028\u0029",
             "name": "authenticate",
             "summary": "",
-            "url": "classes/jetPhp-core-interceptions-BaseAuthenticationBackend.html#method_authenticate"
+            "url": "classes/Pioneer-core-interceptions-BaseAuthenticationBackend.html#method_authenticate"
         },                {
-            "fqsen": "\\jetPhp\\core\\interceptions\\BaseMiddleware",
+            "fqsen": "\\Pioneer\\core\\interceptions\\BaseMiddleware",
             "name": "BaseMiddleware",
             "summary": "Middleware\u0020can\u0020run\u0020on\u0020every\u0020request\u0020and\u0020every\u0020response.",
-            "url": "classes/jetPhp-core-interceptions-BaseMiddleware.html"
+            "url": "classes/Pioneer-core-interceptions-BaseMiddleware.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\interceptions\\BaseMiddleware\u003A\u003Arun\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\interceptions\\BaseMiddleware\u003A\u003Arun\u0028\u0029",
             "name": "run",
             "summary": "",
-            "url": "classes/jetPhp-core-interceptions-BaseMiddleware.html#method_run"
+            "url": "classes/Pioneer-core-interceptions-BaseMiddleware.html#method_run"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\BaseRoute",
+            "fqsen": "\\Pioneer\\core\\Pioneer",
+            "name": "Pioneer",
+            "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020the\u0020framework",
+            "url": "classes/Pioneer-core-Pioneer.html"
+        },                {
+            "fqsen": "\\Pioneer\\core\\Pioneer\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Pioneer-core-Pioneer.html#method___construct"
+        },                {
+            "fqsen": "\\Pioneer\\core\\Pioneer\u003A\u003AgetSettings\u0028\u0029",
+            "name": "getSettings",
+            "summary": "",
+            "url": "classes/Pioneer-core-Pioneer.html#method_getSettings"
+        },                {
+            "fqsen": "\\Pioneer\\core\\Pioneer\u003A\u003AgetSetting\u0028\u0029",
+            "name": "getSetting",
+            "summary": "",
+            "url": "classes/Pioneer-core-Pioneer.html#method_getSetting"
+        },                {
+            "fqsen": "\\Pioneer\\core\\Pioneer\u003A\u003AgetSettingOrDefault\u0028\u0029",
+            "name": "getSettingOrDefault",
+            "summary": "",
+            "url": "classes/Pioneer-core-Pioneer.html#method_getSettingOrDefault"
+        },                {
+            "fqsen": "\\Pioneer\\core\\Pioneer\u003A\u003AresolveSettingsFromIni\u0028\u0029",
+            "name": "resolveSettingsFromIni",
+            "summary": "",
+            "url": "classes/Pioneer-core-Pioneer.html#method_resolveSettingsFromIni"
+        },                {
+            "fqsen": "\\Pioneer\\core\\Pioneer\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Pioneer-core-Pioneer.html#property_settings"
+        },                {
+            "fqsen": "\\Pioneer\\core\\Pioneer\u003A\u003A\u0024version",
+            "name": "version",
+            "summary": "",
+            "url": "classes/Pioneer-core-Pioneer.html#property_version"
+        },                {
+            "fqsen": "\\Pioneer\\core\\Pioneer\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Pioneer-core-Pioneer.html#property_name"
+        },                {
+            "fqsen": "\\Pioneer\\core\\routing\\BaseRoute",
             "name": "BaseRoute",
             "summary": "This\u0020is\u0020the\u0020base\u0020route\u0020class,\u0020it\u0020extends\u0020the\u0020Symfony\u0020route\u0020class\u0020and\u0020is\u0020used\u0020to\u0020define\u0020routes\u0020in\u0020the\u0020framework",
-            "url": "classes/jetPhp-core-routing-BaseRoute.html"
+            "url": "classes/Pioneer-core-routing-BaseRoute.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\BaseRoutes",
+            "fqsen": "\\Pioneer\\core\\routing\\BaseRoutes",
             "name": "BaseRoutes",
             "summary": "This\u0020is\u0020the\u0020base\u0020routes\u0020class,\u0020it\u0020extends\nthe\u0020Symfony\u0020route\u0020collection\u0020class\u0020and\u0020is\u0020used\u0020to\u0020define\u0020routes\u0020in\u0020the\u0020framework",
-            "url": "classes/jetPhp-core-routing-BaseRoutes.html"
+            "url": "classes/Pioneer-core-routing-BaseRoutes.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter",
-            "name": "JetRouter",
+            "fqsen": "\\Pioneer\\core\\routing\\PioneerRouter",
+            "name": "PioneerRouter",
             "summary": "This\u0020is\u0020the\u0020basis\u0020for\u0020defining\u0020routes\u0020in\u0020the\u0020application.",
-            "url": "classes/jetPhp-core-routing-JetRouter.html"
+            "url": "classes/Pioneer-core-routing-PioneerRouter.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003AgetRoutes\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\routing\\PioneerRouter\u003A\u003AgetRoutes\u0028\u0029",
             "name": "getRoutes",
             "summary": "",
-            "url": "classes/jetPhp-core-routing-JetRouter.html#method_getRoutes"
+            "url": "classes/Pioneer-core-routing-PioneerRouter.html#method_getRoutes"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\routing\\PioneerRouter\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/jetPhp-core-routing-JetRouter.html#method___construct"
+            "url": "classes/Pioneer-core-routing-PioneerRouter.html#method___construct"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003AresolveController\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\routing\\PioneerRouter\u003A\u003AresolveController\u0028\u0029",
             "name": "resolveController",
             "summary": "",
-            "url": "classes/jetPhp-core-routing-JetRouter.html#method_resolveController"
+            "url": "classes/Pioneer-core-routing-PioneerRouter.html#method_resolveController"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003Apost\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\routing\\PioneerRouter\u003A\u003Apost\u0028\u0029",
             "name": "post",
             "summary": "",
-            "url": "classes/jetPhp-core-routing-JetRouter.html#method_post"
+            "url": "classes/Pioneer-core-routing-PioneerRouter.html#method_post"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003AaddGroup\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\routing\\PioneerRouter\u003A\u003AaddGroup\u0028\u0029",
             "name": "addGroup",
             "summary": "",
-            "url": "classes/jetPhp-core-routing-JetRouter.html#method_addGroup"
+            "url": "classes/Pioneer-core-routing-PioneerRouter.html#method_addGroup"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003Aget\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\routing\\PioneerRouter\u003A\u003Aget\u0028\u0029",
             "name": "get",
             "summary": "",
-            "url": "classes/jetPhp-core-routing-JetRouter.html#method_get"
+            "url": "classes/Pioneer-core-routing-PioneerRouter.html#method_get"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003AaddRoute\u0028\u0029",
+            "fqsen": "\\Pioneer\\core\\routing\\PioneerRouter\u003A\u003AaddRoute\u0028\u0029",
             "name": "addRoute",
             "summary": "",
-            "url": "classes/jetPhp-core-routing-JetRouter.html#method_addRoute"
+            "url": "classes/Pioneer-core-routing-PioneerRouter.html#method_addRoute"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003A\u0024routes",
+            "fqsen": "\\Pioneer\\core\\routing\\PioneerRouter\u003A\u003A\u0024routes",
             "name": "routes",
             "summary": "",
-            "url": "classes/jetPhp-core-routing-JetRouter.html#property_routes"
+            "url": "classes/Pioneer-core-routing-PioneerRouter.html#property_routes"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003A\u0024controller",
+            "fqsen": "\\Pioneer\\core\\routing\\PioneerRouter\u003A\u003A\u0024controller",
             "name": "controller",
             "summary": "",
-            "url": "classes/jetPhp-core-routing-JetRouter.html#property_controller"
+            "url": "classes/Pioneer-core-routing-PioneerRouter.html#property_controller"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing\\PioneerRouter\u003A\u003A\u0024basePath",
+            "fqsen": "\\Pioneer\\core\\routing\\PioneerRouter\u003A\u003A\u0024basePath",
             "name": "basePath",
             "summary": "",
-            "url": "classes/jetPhp-core-routing-JetRouter.html#property_basePath"
+            "url": "classes/Pioneer-core-routing-PioneerRouter.html#property_basePath"
         },                {
-            "fqsen": "\\jetPhp\\database\\ConnectionInterface",
+            "fqsen": "\\Pioneer\\database\\ConnectionInterface",
             "name": "ConnectionInterface",
             "summary": "Extend\u0020this\u0020to\u0020define\u0020your\u0020own\u0020database\u0020driver\u0020implementation.",
-            "url": "classes/jetPhp-database-ConnectionInterface.html"
+            "url": "classes/Pioneer-database-ConnectionInterface.html"
         },                {
-            "fqsen": "\\jetPhp\\database\\ConnectionInterface\u003A\u003A__connect_internal\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\ConnectionInterface\u003A\u003A__connect_internal\u0028\u0029",
             "name": "__connect_internal",
             "summary": "",
-            "url": "classes/jetPhp-database-ConnectionInterface.html#method___connect_internal"
+            "url": "classes/Pioneer-database-ConnectionInterface.html#method___connect_internal"
         },                {
-            "fqsen": "\\jetPhp\\database\\Connector",
+            "fqsen": "\\Pioneer\\database\\Connector",
             "name": "Connector",
             "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020the\u0020framework",
-            "url": "classes/jetPhp-database-Connector.html"
+            "url": "classes/Pioneer-database-Connector.html"
         },                {
-            "fqsen": "\\jetPhp\\database\\Connector\u003A\u003A__connect_internal\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\Connector\u003A\u003A__connect_internal\u0028\u0029",
             "name": "__connect_internal",
             "summary": "",
-            "url": "classes/jetPhp-database-Connector.html#method___connect_internal"
+            "url": "classes/Pioneer-database-Connector.html#method___connect_internal"
         },                {
-            "fqsen": "\\jetPhp\\database\\Connector\u003A\u003AwithSqlite\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\Connector\u003A\u003AwithSqlite\u0028\u0029",
             "name": "withSqlite",
             "summary": "",
-            "url": "classes/jetPhp-database-Connector.html#method_withSqlite"
+            "url": "classes/Pioneer-database-Connector.html#method_withSqlite"
         },                {
-            "fqsen": "\\jetPhp\\database\\Connector\u003A\u003Aconnect\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\Connector\u003A\u003Aconnect\u0028\u0029",
             "name": "connect",
             "summary": "",
-            "url": "classes/jetPhp-database-Connector.html#method_connect"
+            "url": "classes/Pioneer-database-Connector.html#method_connect"
         },                {
-            "fqsen": "\\jetPhp\\database\\Connector\u003A\u003A\u0024dbType",
+            "fqsen": "\\Pioneer\\database\\Connector\u003A\u003A\u0024dbType",
             "name": "dbType",
             "summary": "",
-            "url": "classes/jetPhp-database-Connector.html#property_dbType"
+            "url": "classes/Pioneer-database-Connector.html#property_dbType"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator",
+            "fqsen": "\\Pioneer\\database\\Paginator",
             "name": "Paginator",
             "summary": "This\u0020class\u0020helps\u0020us\u0020to\u0020perform\u0020paginated\u0020queries\u0020from\u0020the\u0020database.\u0020The\u0020fast\u0020that\u0020counting\u0020and\u0020querying\u0020happens\n\u0020in\u0020the\u0020db,\u0020it\u0020makes\u0020this\u0020somewhat\u0020optimal.",
-            "url": "classes/jetPhp-database-Paginator.html"
+            "url": "classes/Pioneer-database-Paginator.html"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#method___construct"
+            "url": "classes/Pioneer-database-Paginator.html#method___construct"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003ALimitBy\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003ALimitBy\u0028\u0029",
             "name": "LimitBy",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#method_LimitBy"
+            "url": "classes/Pioneer-database-Paginator.html#method_LimitBy"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003AstartFrom\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003AstartFrom\u0028\u0029",
             "name": "startFrom",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#method_startFrom"
+            "url": "classes/Pioneer-database-Paginator.html#method_startFrom"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003Apaginate\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003Apaginate\u0028\u0029",
             "name": "paginate",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#method_paginate"
+            "url": "classes/Pioneer-database-Paginator.html#method_paginate"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003Apager\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003Apager\u0028\u0029",
             "name": "pager",
             "summary": "We\u0020use\u0020this\u0020method\u0020if\u0020we\u0020still\u0020want\u0020to\u0020play\u0020with\u0020the\u0020class\u0020object",
-            "url": "classes/jetPhp-database-Paginator.html#method_pager"
+            "url": "classes/Pioneer-database-Paginator.html#method_pager"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024query",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003A\u0024query",
             "name": "query",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#property_query"
+            "url": "classes/Pioneer-database-Paginator.html#property_query"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024limit",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003A\u0024limit",
             "name": "limit",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#property_limit"
+            "url": "classes/Pioneer-database-Paginator.html#property_limit"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024offset",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003A\u0024offset",
             "name": "offset",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#property_offset"
+            "url": "classes/Pioneer-database-Paginator.html#property_offset"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024next_offset",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003A\u0024next_offset",
             "name": "next_offset",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#property_next_offset"
+            "url": "classes/Pioneer-database-Paginator.html#property_next_offset"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024results",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003A\u0024results",
             "name": "results",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#property_results"
+            "url": "classes/Pioneer-database-Paginator.html#property_results"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024previous_offset",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003A\u0024previous_offset",
             "name": "previous_offset",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#property_previous_offset"
+            "url": "classes/Pioneer-database-Paginator.html#property_previous_offset"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024has_next_page",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003A\u0024has_next_page",
             "name": "has_next_page",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#property_has_next_page"
+            "url": "classes/Pioneer-database-Paginator.html#property_has_next_page"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024has_prev_page",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003A\u0024has_prev_page",
             "name": "has_prev_page",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#property_has_prev_page"
+            "url": "classes/Pioneer-database-Paginator.html#property_has_prev_page"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024number_of_records",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003A\u0024number_of_records",
             "name": "number_of_records",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#property_number_of_records"
+            "url": "classes/Pioneer-database-Paginator.html#property_number_of_records"
         },                {
-            "fqsen": "\\jetPhp\\database\\Paginator\u003A\u003A\u0024total_records",
+            "fqsen": "\\Pioneer\\database\\Paginator\u003A\u003A\u0024total_records",
             "name": "total_records",
             "summary": "",
-            "url": "classes/jetPhp-database-Paginator.html#property_total_records"
+            "url": "classes/Pioneer-database-Paginator.html#property_total_records"
         },                {
-            "fqsen": "\\jetPhp\\database\\QueryBuilder",
+            "fqsen": "\\Pioneer\\database\\QueryBuilder",
             "name": "QueryBuilder",
             "summary": "Class\u0020QueryBuilder",
-            "url": "classes/jetPhp-database-QueryBuilder.html"
+            "url": "classes/Pioneer-database-QueryBuilder.html"
         },                {
-            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\QueryBuilder\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/jetPhp-database-QueryBuilder.html#method___construct"
+            "url": "classes/Pioneer-database-QueryBuilder.html#method___construct"
         },                {
-            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003AUsing\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\QueryBuilder\u003A\u003AUsing\u0028\u0029",
             "name": "Using",
             "summary": "Use\u0020this\u0020to\u0020reset\u0020the\u0020connection\u0020to\u0020the\u0020database\u0020to\u0020a\u0020different\u0020one.",
-            "url": "classes/jetPhp-database-QueryBuilder.html#method_Using"
+            "url": "classes/Pioneer-database-QueryBuilder.html#method_Using"
         },                {
-            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003ArefreshConnection\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\QueryBuilder\u003A\u003ArefreshConnection\u0028\u0029",
             "name": "refreshConnection",
             "summary": "",
-            "url": "classes/jetPhp-database-QueryBuilder.html#method_refreshConnection"
+            "url": "classes/Pioneer-database-QueryBuilder.html#method_refreshConnection"
         },                {
-            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003AQuery\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\QueryBuilder\u003A\u003AQuery\u0028\u0029",
             "name": "Query",
             "summary": "",
-            "url": "classes/jetPhp-database-QueryBuilder.html#method_Query"
+            "url": "classes/Pioneer-database-QueryBuilder.html#method_Query"
         },                {
-            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003Abound_query\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\QueryBuilder\u003A\u003Abound_query\u0028\u0029",
             "name": "bound_query",
             "summary": "Assists\u0020us\u0020to\u0020make\u0020bound\u0020queries",
-            "url": "classes/jetPhp-database-QueryBuilder.html#method_bound_query"
+            "url": "classes/Pioneer-database-QueryBuilder.html#method_bound_query"
         },                {
-            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003Aone\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\QueryBuilder\u003A\u003Aone\u0028\u0029",
             "name": "one",
             "summary": "",
-            "url": "classes/jetPhp-database-QueryBuilder.html#method_one"
+            "url": "classes/Pioneer-database-QueryBuilder.html#method_one"
         },                {
-            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003Aall\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\QueryBuilder\u003A\u003Aall\u0028\u0029",
             "name": "all",
             "summary": "",
-            "url": "classes/jetPhp-database-QueryBuilder.html#method_all"
+            "url": "classes/Pioneer-database-QueryBuilder.html#method_all"
         },                {
-            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003A_count_internal\u0028\u0029",
+            "fqsen": "\\Pioneer\\database\\QueryBuilder\u003A\u003A_count_internal\u0028\u0029",
             "name": "_count_internal",
             "summary": "",
-            "url": "classes/jetPhp-database-QueryBuilder.html#method__count_internal"
+            "url": "classes/Pioneer-database-QueryBuilder.html#method__count_internal"
         },                {
-            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003A\u0024query",
+            "fqsen": "\\Pioneer\\database\\QueryBuilder\u003A\u003A\u0024query",
             "name": "query",
             "summary": "",
-            "url": "classes/jetPhp-database-QueryBuilder.html#property_query"
+            "url": "classes/Pioneer-database-QueryBuilder.html#property_query"
         },                {
-            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003A\u0024connection",
+            "fqsen": "\\Pioneer\\database\\QueryBuilder\u003A\u003A\u0024connection",
             "name": "connection",
             "summary": "",
-            "url": "classes/jetPhp-database-QueryBuilder.html#property_connection"
+            "url": "classes/Pioneer-database-QueryBuilder.html#property_connection"
         },                {
-            "fqsen": "\\jetPhp\\database\\QueryBuilder\u003A\u003A\u0024using",
+            "fqsen": "\\Pioneer\\database\\QueryBuilder\u003A\u003A\u0024using",
             "name": "using",
             "summary": "",
-            "url": "classes/jetPhp-database-QueryBuilder.html#property_using"
+            "url": "classes/Pioneer-database-QueryBuilder.html#property_using"
         },                {
-            "fqsen": "\\jetPhp\\database\\SupportDatabaseDrivers",
+            "fqsen": "\\Pioneer\\database\\SupportDatabaseDrivers",
             "name": "SupportDatabaseDrivers",
             "summary": "Currently\u0020supported\u0020database\u0020drivers",
-            "url": "classes/jetPhp-database-SupportDatabaseDrivers.html"
+            "url": "classes/Pioneer-database-SupportDatabaseDrivers.html"
         },                {
-            "fqsen": "\\jetPhp\\database\\SupportDatabaseDrivers\u003A\u003A\u0024MYSQL",
+            "fqsen": "\\Pioneer\\database\\SupportDatabaseDrivers\u003A\u003A\u0024MYSQL",
             "name": "MYSQL",
             "summary": "",
-            "url": "classes/jetPhp-database-SupportDatabaseDrivers.html#property_MYSQL"
+            "url": "classes/Pioneer-database-SupportDatabaseDrivers.html#property_MYSQL"
         },                {
-            "fqsen": "\\jetPhp\\database\\SupportDatabaseDrivers\u003A\u003A\u0024SQLITE",
+            "fqsen": "\\Pioneer\\database\\SupportDatabaseDrivers\u003A\u003A\u0024SQLITE",
             "name": "SQLITE",
             "summary": "",
-            "url": "classes/jetPhp-database-SupportDatabaseDrivers.html#property_SQLITE"
+            "url": "classes/Pioneer-database-SupportDatabaseDrivers.html#property_SQLITE"
         },                {
-            "fqsen": "\\jetPhp\\database\\SupportDatabaseDrivers\u003A\u003A\u0024POSTGRES",
+            "fqsen": "\\Pioneer\\database\\SupportDatabaseDrivers\u003A\u003A\u0024POSTGRES",
             "name": "POSTGRES",
             "summary": "",
-            "url": "classes/jetPhp-database-SupportDatabaseDrivers.html#property_POSTGRES"
+            "url": "classes/Pioneer-database-SupportDatabaseDrivers.html#property_POSTGRES"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\BaseException",
+            "fqsen": "\\Pioneer\\exceptions\\BaseException",
             "name": "BaseException",
             "summary": "This\u0020is\u0020the\u0020base\u0020exception\u0020class\u0020that\u0020all\u0020other\u0020exceptions\u0020must\u0020extend.",
-            "url": "classes/jetPhp-exceptions-BaseException.html"
+            "url": "classes/Pioneer-exceptions-BaseException.html"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\BaseException\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pioneer\\exceptions\\BaseException\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/jetPhp-exceptions-BaseException.html#method___construct"
+            "url": "classes/Pioneer-exceptions-BaseException.html#method___construct"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\BaseException\u003A\u003A__toString\u0028\u0029",
+            "fqsen": "\\Pioneer\\exceptions\\BaseException\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
             "summary": "",
-            "url": "classes/jetPhp-exceptions-BaseException.html#method___toString"
+            "url": "classes/Pioneer-exceptions-BaseException.html#method___toString"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\CommandException",
+            "fqsen": "\\Pioneer\\exceptions\\CommandException",
             "name": "CommandException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020cli\u0020command\u0020fails.",
-            "url": "classes/jetPhp-exceptions-CommandException.html"
+            "url": "classes/Pioneer-exceptions-CommandException.html"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\ControllerException",
+            "fqsen": "\\Pioneer\\exceptions\\ControllerException",
             "name": "ControllerException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020controller\u0020parsing\u0020fails\u0020in\u0020anyway",
-            "url": "classes/jetPhp-exceptions-ControllerException.html"
+            "url": "classes/Pioneer-exceptions-ControllerException.html"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\DatabaseException",
+            "fqsen": "\\Pioneer\\exceptions\\DatabaseException",
             "name": "DatabaseException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020an\u0020error\u0020occurs\u0020during\u0020database\u0020connection\u0020establishment.",
-            "url": "classes/jetPhp-exceptions-DatabaseException.html"
+            "url": "classes/Pioneer-exceptions-DatabaseException.html"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\FailedRequiredException",
+            "fqsen": "\\Pioneer\\exceptions\\FailedRequiredException",
             "name": "FailedRequiredException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020required\u0020field\u0020is\u0020not\u0020provided\u0020in\u0020the\u0020request",
-            "url": "classes/jetPhp-exceptions-FailedRequiredException.html"
+            "url": "classes/Pioneer-exceptions-FailedRequiredException.html"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\LimitPaginationException",
+            "fqsen": "\\Pioneer\\exceptions\\LimitPaginationException",
             "name": "LimitPaginationException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020limit\u0020is\u0020provided\u0020in\u0020a\u0020paginated\u0020query\u0020using\u0020the\u0020Pagination\u0020class",
-            "url": "classes/jetPhp-exceptions-LimitPaginationException.html"
+            "url": "classes/Pioneer-exceptions-LimitPaginationException.html"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\OffsetPaginationException",
+            "fqsen": "\\Pioneer\\exceptions\\OffsetPaginationException",
             "name": "OffsetPaginationException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020an\u0020offset\u0020is\u0020passed\u0020in\u0020a\u0020paginated\u0020query\u0020using\u0020the\u0020Pagination\u0020class",
-            "url": "classes/jetPhp-exceptions-OffsetPaginationException.html"
+            "url": "classes/Pioneer-exceptions-OffsetPaginationException.html"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\ResourceNotFoundException",
+            "fqsen": "\\Pioneer\\exceptions\\ResourceNotFoundException",
             "name": "ResourceNotFoundException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020service\u0020requested\u0020is\u0020not\u0020found.",
-            "url": "classes/jetPhp-exceptions-ResourceNotFoundException.html"
+            "url": "classes/Pioneer-exceptions-ResourceNotFoundException.html"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\RestParseException",
+            "fqsen": "\\Pioneer\\exceptions\\RestParseException",
             "name": "RestParseException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020an\u0020error\u0020occurs\u0020during\u0020REST\u0020parsing.",
-            "url": "classes/jetPhp-exceptions-RestParseException.html"
+            "url": "classes/Pioneer-exceptions-RestParseException.html"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\RestPHPException",
+            "fqsen": "\\Pioneer\\exceptions\\RestPHPException",
             "name": "RestPHPException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020an\u0020error\u0020occurs\u0020during\u0020REST\u0020parsing.",
-            "url": "classes/jetPhp-exceptions-RestPHPException.html"
+            "url": "classes/Pioneer-exceptions-RestPHPException.html"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\UserUnauthenticatedException",
+            "fqsen": "\\Pioneer\\exceptions\\UserUnauthenticatedException",
             "name": "UserUnauthenticatedException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020one\u0020tries\u0020to\u0020access\u0020a\u0020protected\u0020resource\u0020without\u0020being\u0020authenticated",
-            "url": "classes/jetPhp-exceptions-UserUnauthenticatedException.html"
+            "url": "classes/Pioneer-exceptions-UserUnauthenticatedException.html"
         },                {
-            "fqsen": "\\jetPhp\\exceptions\\UserUnauthorizedException",
+            "fqsen": "\\Pioneer\\exceptions\\UserUnauthorizedException",
             "name": "UserUnauthorizedException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020user\u0020is\u0020not\u0020authorized\u0020to\u0020access\u0020a\u0020resource",
-            "url": "classes/jetPhp-exceptions-UserUnauthorizedException.html"
+            "url": "classes/Pioneer-exceptions-UserUnauthorizedException.html"
         },                {
-            "fqsen": "\\jetPhp\\request\\AuthTrait",
+            "fqsen": "\\Pioneer\\request\\AuthTrait",
             "name": "AuthTrait",
             "summary": "This\u0020trait\u0020provides\u0020common\u0020authentication\u0020methods\u0020for\u0020the\u0020services",
-            "url": "classes/jetPhp-request-AuthTrait.html"
+            "url": "classes/Pioneer-request-AuthTrait.html"
         },                {
-            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003AcanAny\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\AuthTrait\u003A\u003AcanAny\u0028\u0029",
             "name": "canAny",
             "summary": "This\u0020method\u0020is\u0020used\u0020to\u0020check\u0020if\u0020the\u0020currently\u0020logged\u0020in\u0020user\u0020has\u0020the\u0020required\u0020permission\u0020to\u0020access\u0020a\u0020resource.",
-            "url": "classes/jetPhp-request-AuthTrait.html#method_canAny"
+            "url": "classes/Pioneer-request-AuthTrait.html#method_canAny"
         },                {
-            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003Acan\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\AuthTrait\u003A\u003Acan\u0028\u0029",
             "name": "can",
             "summary": "Like\u0020CanAny\u0020but\u0020only\u0020check\u0020for\u0020one\u0020permission\u0020at\u0020a\u0020time",
-            "url": "classes/jetPhp-request-AuthTrait.html#method_can"
+            "url": "classes/Pioneer-request-AuthTrait.html#method_can"
         },                {
-            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003AcanAll\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\AuthTrait\u003A\u003AcanAll\u0028\u0029",
             "name": "canAll",
             "summary": "Similar\u0020to\u0020canAny\u0020only\u0020that\u0020this\u0020checks\u0020if\u0020the\u0020user\u0020has\u0020all\u0020the\u0020passed\u0020permissions",
-            "url": "classes/jetPhp-request-AuthTrait.html#method_canAll"
+            "url": "classes/Pioneer-request-AuthTrait.html#method_canAll"
         },                {
-            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003Aauth\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\AuthTrait\u003A\u003Aauth\u0028\u0029",
             "name": "auth",
             "summary": "This\u0020method\u0020holds\u0020the\u0020currently\u0020logged\u0020in\u0020user\u0020object",
-            "url": "classes/jetPhp-request-AuthTrait.html#method_auth"
+            "url": "classes/Pioneer-request-AuthTrait.html#method_auth"
         },                {
-            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003AmustAuthenticate\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\AuthTrait\u003A\u003AmustAuthenticate\u0028\u0029",
             "name": "mustAuthenticate",
             "summary": "This\u0020method\u0020ensures\u0020that\u0020only\u0020authenticated\u0020users\u0020can\u0020access\u0020a\u0020resource",
-            "url": "classes/jetPhp-request-AuthTrait.html#method_mustAuthenticate"
+            "url": "classes/Pioneer-request-AuthTrait.html#method_mustAuthenticate"
         },                {
-            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003AauthExtraHas\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\AuthTrait\u003A\u003AauthExtraHas\u0028\u0029",
             "name": "authExtraHas",
             "summary": "Checks\u0020if\u0020the\u0020auth\u0020extra\u0020data\u0020contains\u0020a\u0020key\u0020or\u0020not",
-            "url": "classes/jetPhp-request-AuthTrait.html#method_authExtraHas"
+            "url": "classes/Pioneer-request-AuthTrait.html#method_authExtraHas"
         },                {
-            "fqsen": "\\jetPhp\\request\\AuthTrait\u003A\u003AgetAuthExtraByKey\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\AuthTrait\u003A\u003AgetAuthExtraByKey\u0028\u0029",
             "name": "getAuthExtraByKey",
             "summary": "Returns\u0020the\u0020auth\u0020extra\u0020data\u0020by\u0020key",
-            "url": "classes/jetPhp-request-AuthTrait.html#method_getAuthExtraByKey"
+            "url": "classes/Pioneer-request-AuthTrait.html#method_getAuthExtraByKey"
         },                {
-            "fqsen": "\\jetPhp\\request\\BaseRestService",
+            "fqsen": "\\Pioneer\\request\\BaseRestService",
             "name": "BaseRestService",
             "summary": "This\u0020is\u0020the\u0020main\u0020class\u0020all\u0020other\u0020services\u0020must\u0020extend.",
-            "url": "classes/jetPhp-request-BaseRestService.html"
+            "url": "classes/Pioneer-request-BaseRestService.html"
         },                {
-            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003AprocessAction\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\BaseRestService\u003A\u003AprocessAction\u0028\u0029",
             "name": "processAction",
             "summary": "This\u0020method\u0020is\u0020called\u0020when\u0020the\u0020service\u0020is\u0020called\u0020with\u0020an\u0020action",
-            "url": "classes/jetPhp-request-BaseRestService.html#method_processAction"
+            "url": "classes/Pioneer-request-BaseRestService.html#method_processAction"
         },                {
-            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003A\u0024request",
+            "fqsen": "\\Pioneer\\request\\BaseRestService\u003A\u003A\u0024request",
             "name": "request",
             "summary": "",
-            "url": "classes/jetPhp-request-BaseRestService.html#property_request"
+            "url": "classes/Pioneer-request-BaseRestService.html#property_request"
         },                {
-            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003A\u0024deactivatedActions",
+            "fqsen": "\\Pioneer\\request\\BaseRestService\u003A\u003A\u0024deactivatedActions",
             "name": "deactivatedActions",
             "summary": "",
-            "url": "classes/jetPhp-request-BaseRestService.html#property_deactivatedActions"
+            "url": "classes/Pioneer-request-BaseRestService.html#property_deactivatedActions"
         },                {
-            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003A\u0024actionsRequiringAuth",
+            "fqsen": "\\Pioneer\\request\\BaseRestService\u003A\u003A\u0024actionsRequiringAuth",
             "name": "actionsRequiringAuth",
             "summary": "",
-            "url": "classes/jetPhp-request-BaseRestService.html#property_actionsRequiringAuth"
+            "url": "classes/Pioneer-request-BaseRestService.html#property_actionsRequiringAuth"
         },                {
-            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003A\u0024serviceRequiresAuth",
+            "fqsen": "\\Pioneer\\request\\BaseRestService\u003A\u003A\u0024serviceRequiresAuth",
             "name": "serviceRequiresAuth",
             "summary": "",
-            "url": "classes/jetPhp-request-BaseRestService.html#property_serviceRequiresAuth"
+            "url": "classes/Pioneer-request-BaseRestService.html#property_serviceRequiresAuth"
         },                {
-            "fqsen": "\\jetPhp\\request\\BaseRestService\u003A\u003A\u0024authMessage",
+            "fqsen": "\\Pioneer\\request\\BaseRestService\u003A\u003A\u0024authMessage",
             "name": "authMessage",
             "summary": "",
-            "url": "classes/jetPhp-request-BaseRestService.html#property_authMessage"
+            "url": "classes/Pioneer-request-BaseRestService.html#property_authMessage"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request",
+            "fqsen": "\\Pioneer\\request\\Request",
             "name": "Request",
             "summary": "This\u0020method\u0020extends\u0020the\u0020Symfony\u0020request\u0020class\u0020to\u0020add\u0020more\u0020functionality\u0020to\u0020the\u0020request\u0020object.",
-            "url": "classes/jetPhp-request-Request.html"
+            "url": "classes/Pioneer-request-Request.html"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetAuth\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\Request\u003A\u003AgetAuth\u0028\u0029",
             "name": "getAuth",
             "summary": "The\u0020currently\u0020logged\u0020user\u0020in\u0020context\u0020object",
-            "url": "classes/jetPhp-request-Request.html#method_getAuth"
+            "url": "classes/Pioneer-request-Request.html#method_getAuth"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetContext\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\Request\u003A\u003AgetContext\u0028\u0029",
             "name": "getContext",
             "summary": "This\u0020is\u0020the\u0020entire\u0020app\u0020context\u0020object,\u0020it\u0020even\u0020contains\u0020the\u0020authentication\u0020object\u0020itself.",
-            "url": "classes/jetPhp-request-Request.html#method_getContext"
+            "url": "classes/Pioneer-request-Request.html#method_getContext"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AisAuthenticated\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\Request\u003A\u003AisAuthenticated\u0028\u0029",
             "name": "isAuthenticated",
             "summary": "This\u0020method\u0020checks\u0020if\u0020the\u0020request\u0020is\u0020authenticated",
-            "url": "classes/jetPhp-request-Request.html#method_isAuthenticated"
+            "url": "classes/Pioneer-request-Request.html#method_isAuthenticated"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AsetAuthenticationContext\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\Request\u003A\u003AsetAuthenticationContext\u0028\u0029",
             "name": "setAuthenticationContext",
             "summary": "This\u0020method\u0020sets\u0020the\u0020authentication\u0020context\u0020for\u0020the\u0020request",
-            "url": "classes/jetPhp-request-Request.html#method_setAuthenticationContext"
+            "url": "classes/Pioneer-request-Request.html#method_setAuthenticationContext"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AsetAppContext\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\Request\u003A\u003AsetAppContext\u0028\u0029",
             "name": "setAppContext",
             "summary": "This\u0020method\u0020add\u0020data\u0020to\u0020the\u0020context\u0020object",
-            "url": "classes/jetPhp-request-Request.html#method_setAppContext"
+            "url": "classes/Pioneer-request-Request.html#method_setAppContext"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetJsonData\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\Request\u003A\u003AgetJsonData\u0028\u0029",
             "name": "getJsonData",
             "summary": "Returns\u0020the\u0020json\u0020data\u0020from\u0020the\u0020request\u0020if\u0020the\u0020request\u0020was\u0020submitted\u0020as\u0020json",
-            "url": "classes/jetPhp-request-Request.html#method_getJsonData"
+            "url": "classes/Pioneer-request-Request.html#method_getJsonData"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetData\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\Request\u003A\u003AgetData\u0028\u0029",
             "name": "getData",
             "summary": "Merges\u0020data\u0020sent\u0020from\u0020the\u0020client\u0020as\u0020json\u0020and\u0020form\u0020data\u0020as\u0020one\u0020array\u0020where\u0020one\u0020can\u0020access\u0020all\u0020the\u0020request\u0020data.",
-            "url": "classes/jetPhp-request-Request.html#method_getData"
+            "url": "classes/Pioneer-request-Request.html#method_getData"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetFileByName\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\Request\u003A\u003AgetFileByName\u0028\u0029",
             "name": "getFileByName",
             "summary": "Returns\u0020the\u0020file\u0020from\u0020the\u0020request\u0020if\u0020the\u0020request\u0020was\u0020submitted\u0020as\u0020form\u0020data",
-            "url": "classes/jetPhp-request-Request.html#method_getFileByName"
+            "url": "classes/Pioneer-request-Request.html#method_getFileByName"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request\u003A\u003AgetFormData\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\Request\u003A\u003AgetFormData\u0028\u0029",
             "name": "getFormData",
             "summary": "Returns\u0020the\u0020data\u0020if\u0020the\u0020request\u0020was\u0020submitted\u0020as\u0020form\u0020data",
-            "url": "classes/jetPhp-request-Request.html#method_getFormData"
+            "url": "classes/Pioneer-request-Request.html#method_getFormData"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request\u003A\u003A\u0024authenticated",
+            "fqsen": "\\Pioneer\\request\\Request\u003A\u003A\u0024authenticated",
             "name": "authenticated",
             "summary": "",
-            "url": "classes/jetPhp-request-Request.html#property_authenticated"
+            "url": "classes/Pioneer-request-Request.html#property_authenticated"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request\u003A\u003A\u0024context",
+            "fqsen": "\\Pioneer\\request\\Request\u003A\u003A\u0024context",
             "name": "context",
             "summary": "",
-            "url": "classes/jetPhp-request-Request.html#property_context"
+            "url": "classes/Pioneer-request-Request.html#property_context"
         },                {
-            "fqsen": "\\jetPhp\\request\\Request\u003A\u003A\u0024auth",
+            "fqsen": "\\Pioneer\\request\\Request\u003A\u003A\u0024auth",
             "name": "auth",
             "summary": "",
-            "url": "classes/jetPhp-request-Request.html#property_auth"
+            "url": "classes/Pioneer-request-Request.html#property_auth"
         },                {
-            "fqsen": "\\jetPhp\\request\\RequestActionTrait",
+            "fqsen": "\\Pioneer\\request\\RequestActionTrait",
             "name": "RequestActionTrait",
             "summary": "Provides\u0020helper\u0020methods\u0020for\u0020request\u0020actions",
-            "url": "classes/jetPhp-request-RequestActionTrait.html"
+            "url": "classes/Pioneer-request-RequestActionTrait.html"
         },                {
-            "fqsen": "\\jetPhp\\request\\RequestActionTrait\u003A\u003Acheck_one\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\RequestActionTrait\u003A\u003Acheck_one\u0028\u0029",
             "name": "check_one",
             "summary": "Checks\u0020if\u0020a\u0020single\u0020field\u0020is\u0020present\u0020in\u0020the\u0020request\u0020data\u0020and\u0020is\u0020not\u0020null\u0020or\u0020empty",
-            "url": "classes/jetPhp-request-RequestActionTrait.html#method_check_one"
+            "url": "classes/Pioneer-request-RequestActionTrait.html#method_check_one"
         },                {
-            "fqsen": "\\jetPhp\\request\\RequestActionTrait\u003A\u003Arequires\u0028\u0029",
+            "fqsen": "\\Pioneer\\request\\RequestActionTrait\u003A\u003Arequires\u0028\u0029",
             "name": "requires",
             "summary": "This\u0020checks\u0020if\u0020the\u0020required\u0020fields\u0020are\u0020present\u0020in\u0020the\u0020request\u0020otherwise\u0020it\u0020throws\u0020an\u0020exception",
-            "url": "classes/jetPhp-request-RequestActionTrait.html#method_requires"
+            "url": "classes/Pioneer-request-RequestActionTrait.html#method_requires"
         },                {
-            "fqsen": "\\jetPhp\\response\\BaseResponse",
+            "fqsen": "\\Pioneer\\response\\BaseResponse",
             "name": "BaseResponse",
             "summary": "This\u0020provides\u0020a\u0020uniform\u0020response\u0020format\u0020for\u0020our\u0020entire\u0020application.",
-            "url": "classes/jetPhp-response-BaseResponse.html"
+            "url": "classes/Pioneer-response-BaseResponse.html"
         },                {
-            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pioneer\\response\\BaseResponse\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/jetPhp-response-BaseResponse.html#method___construct"
+            "url": "classes/Pioneer-response-BaseResponse.html#method___construct"
         },                {
-            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003AgetPrettyResponse\u0028\u0029",
+            "fqsen": "\\Pioneer\\response\\BaseResponse\u003A\u003AgetPrettyResponse\u0028\u0029",
             "name": "getPrettyResponse",
             "summary": "",
-            "url": "classes/jetPhp-response-BaseResponse.html#method_getPrettyResponse"
+            "url": "classes/Pioneer-response-BaseResponse.html#method_getPrettyResponse"
         },                {
-            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003AJsonResponse\u0028\u0029",
+            "fqsen": "\\Pioneer\\response\\BaseResponse\u003A\u003AJsonResponse\u0028\u0029",
             "name": "JsonResponse",
             "summary": "",
-            "url": "classes/jetPhp-response-BaseResponse.html#method_JsonResponse"
+            "url": "classes/Pioneer-response-BaseResponse.html#method_JsonResponse"
         },                {
-            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003Abuild\u0028\u0029",
+            "fqsen": "\\Pioneer\\response\\BaseResponse\u003A\u003Abuild\u0028\u0029",
             "name": "build",
             "summary": "",
-            "url": "classes/jetPhp-response-BaseResponse.html#method_build"
+            "url": "classes/Pioneer-response-BaseResponse.html#method_build"
         },                {
-            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A\u0024returnCode",
+            "fqsen": "\\Pioneer\\response\\BaseResponse\u003A\u003A\u0024returnCode",
             "name": "returnCode",
             "summary": "",
-            "url": "classes/jetPhp-response-BaseResponse.html#property_returnCode"
+            "url": "classes/Pioneer-response-BaseResponse.html#property_returnCode"
         },                {
-            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A\u0024returnMessage",
+            "fqsen": "\\Pioneer\\response\\BaseResponse\u003A\u003A\u0024returnMessage",
             "name": "returnMessage",
             "summary": "",
-            "url": "classes/jetPhp-response-BaseResponse.html#property_returnMessage"
+            "url": "classes/Pioneer-response-BaseResponse.html#property_returnMessage"
         },                {
-            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A\u0024returnData",
+            "fqsen": "\\Pioneer\\response\\BaseResponse\u003A\u003A\u0024returnData",
             "name": "returnData",
             "summary": "",
-            "url": "classes/jetPhp-response-BaseResponse.html#property_returnData"
+            "url": "classes/Pioneer-response-BaseResponse.html#property_returnData"
         },                {
-            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A\u0024extraData",
+            "fqsen": "\\Pioneer\\response\\BaseResponse\u003A\u003A\u0024extraData",
             "name": "extraData",
             "summary": "",
-            "url": "classes/jetPhp-response-BaseResponse.html#property_extraData"
+            "url": "classes/Pioneer-response-BaseResponse.html#property_extraData"
         },                {
-            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A\u0024prettyResponse",
+            "fqsen": "\\Pioneer\\response\\BaseResponse\u003A\u003A\u0024prettyResponse",
             "name": "prettyResponse",
             "summary": "",
-            "url": "classes/jetPhp-response-BaseResponse.html#property_prettyResponse"
+            "url": "classes/Pioneer-response-BaseResponse.html#property_prettyResponse"
         },                {
-            "fqsen": "\\jetPhp\\response\\BaseResponse\u003A\u003A\u0024response",
+            "fqsen": "\\Pioneer\\response\\BaseResponse\u003A\u003A\u0024response",
             "name": "response",
             "summary": "",
-            "url": "classes/jetPhp-response-BaseResponse.html#property_response"
+            "url": "classes/Pioneer-response-BaseResponse.html#property_response"
         },                {
-            "fqsen": "\\jetPhp\\response\\Response",
+            "fqsen": "\\Pioneer\\response\\Response",
             "name": "Response",
             "summary": "This\u0020is\u0020the\u0020internal\u0020response.\u0020It\u0020should\u0020not\u0020be\u0020used\u0020anywhere\u0020in\u0020the\u0020project\u0020but\u0020in\u0020the\u0020core\u0020framework",
-            "url": "classes/jetPhp-response-Response.html"
+            "url": "classes/Pioneer-response-Response.html"
         },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
             "url": "namespaces/default.html"
         },                {
-            "fqsen": "\\jetPhp\\command",
+            "fqsen": "\\Pioneer\\command",
             "name": "command",
             "summary": "",
-            "url": "namespaces/jetphp-command.html"
+            "url": "namespaces/pioneer-command.html"
         },                {
-            "fqsen": "\\jetPhp",
-            "name": "jetPhp",
+            "fqsen": "\\Pioneer",
+            "name": "Pioneer",
             "summary": "",
-            "url": "namespaces/jetphp.html"
+            "url": "namespaces/pioneer.html"
         },                {
-            "fqsen": "\\jetPhp\\command\\commands",
+            "fqsen": "\\Pioneer\\command\\commands",
             "name": "commands",
             "summary": "",
-            "url": "namespaces/jetphp-command-commands.html"
+            "url": "namespaces/pioneer-command-commands.html"
         },                {
-            "fqsen": "\\jetPhp\\core",
+            "fqsen": "\\Pioneer\\core",
             "name": "core",
             "summary": "",
-            "url": "namespaces/jetphp-core.html"
+            "url": "namespaces/pioneer-core.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\config",
+            "fqsen": "\\Pioneer\\core\\config",
             "name": "config",
             "summary": "",
-            "url": "namespaces/jetphp-core-config.html"
+            "url": "namespaces/pioneer-core-config.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\helpers",
+            "fqsen": "\\Pioneer\\core\\helpers",
             "name": "helpers",
             "summary": "",
-            "url": "namespaces/jetphp-core-helpers.html"
+            "url": "namespaces/pioneer-core-helpers.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\interceptions",
+            "fqsen": "\\Pioneer\\core\\interceptions",
             "name": "interceptions",
             "summary": "",
-            "url": "namespaces/jetphp-core-interceptions.html"
+            "url": "namespaces/pioneer-core-interceptions.html"
         },                {
-            "fqsen": "\\jetPhp\\core\\routing",
+            "fqsen": "\\Pioneer\\core\\routing",
             "name": "routing",
             "summary": "",
-            "url": "namespaces/jetphp-core-routing.html"
+            "url": "namespaces/pioneer-core-routing.html"
         },                {
-            "fqsen": "\\jetPhp\\database",
+            "fqsen": "\\Pioneer\\database",
             "name": "database",
             "summary": "",
-            "url": "namespaces/jetphp-database.html"
+            "url": "namespaces/pioneer-database.html"
         },                {
-            "fqsen": "\\jetPhp\\exceptions",
+            "fqsen": "\\Pioneer\\exceptions",
             "name": "exceptions",
             "summary": "",
-            "url": "namespaces/jetphp-exceptions.html"
+            "url": "namespaces/pioneer-exceptions.html"
         },                {
-            "fqsen": "\\jetPhp\\request",
+            "fqsen": "\\Pioneer\\request",
             "name": "request",
             "summary": "",
-            "url": "namespaces/jetphp-request.html"
+            "url": "namespaces/pioneer-request.html"
         },                {
-            "fqsen": "\\jetPhp\\response",
+            "fqsen": "\\Pioneer\\response",
             "name": "response",
             "summary": "",
-            "url": "namespaces/jetphp-response.html"
+            "url": "namespaces/pioneer-response.html"
         }            ]
 );

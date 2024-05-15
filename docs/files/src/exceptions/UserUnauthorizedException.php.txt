@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\exceptions;
+namespace Pioneer\exceptions;
 
 /**
  * This exception is thrown when a user is not authorized to access a resource

@@ -1,6 +1,6 @@
 <?php
 
-namespace jetPhp\core\helpers;
+namespace Pioneer\core\helpers;
 
 /**
  * This class holds the supported http methods in the framework.
