@@ -25,6 +25,15 @@ class BaseCommand extends Command
         return new Pionia();
     }
 
+    protected function getServerSettings(): array
+    {
+        $settings =  Pionia::getSetting("server");
+        if ($settings && is_array($settings)) {
+            return $settings;
+        }
+        return [];
+    }
+
     /**
      * Returns the current database connection
      *

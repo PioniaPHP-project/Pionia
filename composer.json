@@ -24,6 +24,7 @@
         "php": ">=8.0",
         "symfony/http-kernel": "^6.4",
         "symfony/routing": "^6.4",
-        "symfony/console": "^6.4"
+        "symfony/console": "^6.4",
+        "monolog/monolog": "^3.6"
     }
 }

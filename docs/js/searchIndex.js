@@ -911,6 +911,11 @@ Search.appendIndex(
             "summary": "This\u0020is\u0020the\u0020internal\u0020response.\u0020It\u0020should\u0020not\u0020be\u0020used\u0020anywhere\u0020in\u0020the\u0020project\u0020but\u0020in\u0020the\u0020core\u0020framework",
             "url": "classes/Pionia-response-Response.html"
         },                {
+            "fqsen": "\\ValidationTrait",
+            "name": "Validator",
+            "summary": "",
+            "url": "classes/Validator.html"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
