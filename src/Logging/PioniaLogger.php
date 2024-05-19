@@ -9,7 +9,6 @@ use Monolog\Level;
 use Monolog\Processor\GitProcessor;
 use Monolog\Processor\MemoryUsageProcessor;
 use Monolog\Processor\ProcessIdProcessor;
-use Monolog\Processor\UidProcessor;
 use Pionia\core\Pionia;
 
 use Monolog\Handler\StreamHandler; // The StreamHandler sends log messages to a file on your disk
@@ -26,23 +25,19 @@ class PioniaLogger extends Pionia
         parent::__construct();
     }
 
-//
-//
-//require __DIR__ . "/vendor/autoload.php";
-//
-//. . .
-//use Monolog\Formatter\LineFormatter;
-//
-//$logger = new Logger("my_logger");
-//
-//$stream_handler = new StreamHandler("php://stdout", Level::Debug);
-//$output = "%level_name% | %datetime% > %message% | %context% %extra%\n";
-//$stream_handler->setFormatter(new LineFormatter($output));
-//
-//$logger->pushHandler($stream_handler);
-//
-//$logger->debug("This file has been executed")
 
+    /**
+     * Call this method to initialise the logger.
+     *
+     * To turn off debug logging, turn off DEBUG in settings.ini.
+     * You can turn off DEBUG but still want to maintain logging alone, there you leave LOG_REQUESTS on in the settings.ini.
+     *
+     * Also you can define your own LOG_DESTINATION destination. This is where you want to log to. default is terminal, but it can a file. If
+     * it is a file, a clear file path should be provided.
+     *
+     * @return Logger|null
+     * @throws BaseException
+     */
     public static function init(): Logger | null
     {
         self::resolveSettingsFromIni();
@@ -61,7 +56,7 @@ class PioniaLogger extends Pionia
         } else if (is_file($destination)) {
             $stream = $destination;
         } else {
-            throw new BaseException('Destination file for logs in the settings is not valid');
+            $stream = "php://stdout";
         }
 
         if ($logRequests || $debug) {
@@ -80,7 +75,7 @@ class PioniaLogger extends Pionia
             $logger->pushProcessor(new MemoryUsageProcessor());
         }
 
-        if (!$debug) {
+        if ($debug) {
             $output = self::$name . " :: %level_name% | %datetime% > %message% | %context% %extra%\n";
             $formatter = new LineFormatter($output);
         } else {
@@ -88,7 +83,7 @@ class PioniaLogger extends Pionia
         }
 
         // stream handler for dev
-        if ($logRequests) {
+        if ($logRequests || $debug) {
             $stream_handler = new StreamHandler('php://stdout', $maximumLogLevel);
             $stream_handler->setFormatter($formatter);
             $logger->pushHandler($stream_handler);

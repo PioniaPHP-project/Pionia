@@ -5,15 +5,15 @@ use Pionia\exceptions\InvalidDataException;
 
 trait ValidationTrait
 {
-    private  string $email_pattern = "/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/";
-    private  string $phone_pattern = "/^(0)[1-9]\d{9}$/";
-    private  string $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/";
-    private  string $username_pattern = "/^[a-zA-Z0-9_]{5,}$/";
-    private  string $date_pattern = "/^\d{4}-\d{2}-\d{2}$/";
-    private  string $time_pattern = "/^\d{2}:\d{2}$/";
-    private  string $datetime_pattern = "/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/";
-    private  string $ip_pattern = "/^(\d{1,3}\.){3}\d{1,3}$/";
-    private  string $slug_pattern = "/^[a-z0-9-]+$/";
+    public  string $email_pattern = "/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/";
+    public  string $phone_pattern = "/^[+]{1}(?:[0-9\-\\(\\)\\/.]\s?){6,15}[0-9]{1}$/";
+    public  string $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/";
+    public  string $username_pattern = "/^[a-zA-Z0-9_]{5,}$/";
+    public  string $date_pattern = "/^\d{4}-\d{2}-\d{2}$/";
+    public  string $time_pattern = "/^\d{2}:\d{2}$/";
+    public  string $datetime_pattern = "/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/";
+    public  string $ip_pattern = "/^(\d{1,3}\.){3}\d{1,3}$/";
+    public  string $slug_pattern = "/^[a-z0-9-]+$/";
     private  bool $throwsExceptions = true;
     public function __construct($throws = true)
     {
@@ -31,6 +31,7 @@ trait ValidationTrait
     public function validate(string $regex, mixed $value, ?string $message = 'Invalid data'): bool|int
     {
         $checker = filter_var($value, FILTER_VALIDATE_REGEXP,  ['options' => ['regexp' => $regex]]);
+//        $checker = preg_match($regex, $value);
         if (!$checker && $this->throwsExceptions) {
             throw new InvalidDataException($message);
         }
@@ -49,31 +50,8 @@ trait ValidationTrait
             return $this->validate($regex ?? $this->email_pattern, $email, 'Invalid email address');
         }
 
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidDataException('Invalid email address');
-        }
         return $this->_validateFilter($email, FILTER_VALIDATE_EMAIL, 'Invalid Email Address');
     }
-
-    /**
-     * @throws InvalidDataException
-     */
-    private function _validate_phone(string $number, ?string $code, ?string $regex = null): bool
-    {
-//        // if the user provided the regex, don't bother doing anything
-        if ($regex  || !$code){
-            return $this->validate($regex ?? $this->phone_pattern, $number);
-        }
-
-        // make the copy of the phone number
-        $copy = $number;
-        if (!str_starts_with($copy, $code)){
-            throw new InvalidDataException('Invalid phone number, must start with '.$code);
-        }
-        $str = str_replace($code, '0',  $number);
-        return $this->validate($this->phone_pattern, $str, 'Invalid phone number');
-    }
-
 
     /**
      * Will only validate international numbers if the code is provided, otherwise, will validate local only
@@ -84,9 +62,18 @@ trait ValidationTrait
      * @return bool|int
      * @throws InvalidDataException
      */
-    public  function asPhone(string $phone, ?string $code = null, ?string $regex = null): bool|int
+    public  function asInternationalPhone(string $phone, ?string $code = null, ?string $regex = null): bool|int
     {
-        return $this->_validate_phone($phone, $code, $regex);
+        // we have the regex but no code
+        if (!$code){
+            return $this->validate($regex ?? $this->phone_pattern, $phone);
+        }
+
+        $copy = $phone;
+        if (!str_starts_with($copy, $code)){
+            throw new InvalidDataException('Invalid phone number, must start with '.$code);
+        }
+        return $this->validate($regex ?? $this->phone_pattern, $copy, 'Invalid phone number');
     }
 
     /**
@@ -186,7 +173,7 @@ trait ValidationTrait
     }
 
     /**
-     * @param mixed $ip The Ip address we checking.
+     * @param mixed $ip The Ip address we're checking.
      * @param string|null $regex Your custom regular expression we can depend on instead.
      * @return bool|int
      * @throws InvalidDataException
@@ -233,6 +220,11 @@ trait ValidationTrait
     /**
      * @param mixed $slug The slug string we are testing
      * @param string|null $regex Your custom regular expression we can depend on instead.
+     *
+     * @example ```
+     *      $slug = 'fsjkfjshfsjk-skdhfkjdfsj-skdjfhjskdf'; // valid slug
+     *      $slug2 = 'sfksdfsdskljfhsdhjkfhsdsfsdfsfsd'; // valid slug
+     *      $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
      * @return bool|int
      * @throws InvalidDataException
      */
@@ -246,16 +238,16 @@ trait ValidationTrait
      * Internal validator based on PHP filter_var validations
      * @param $value
      * @param $filterType
-     * @param $meesage
-     * @return mixed
+     * @param string $message
+     * @return int|bool
      * @throws InvalidDataException
      */
-    private function _validateFilter($value, $filterType, $meesage = 'Invalid Data'): int | bool
+    private function _validateFilter($value, $filterType, string $message = 'Invalid Data'): int | bool
     {
         $checker = filter_var($value, $filterType);
         if (!$checker && $this->throwsExceptions){
-            throw new InvalidDataException($meesage);
+            throw new InvalidDataException($message);
         }
-        return $checker;
+        return $checker == $value;
     }
 }
