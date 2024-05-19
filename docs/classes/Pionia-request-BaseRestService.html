@@ -96,6 +96,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/pionia-logging.html" class="">Logging</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/pionia-request.html" class="">request</a>
                 
             </li>
@@ -103,7 +107,19 @@
                 <a href="namespaces/pionia-response.html" class="">response</a>
                 
             </li>
+                    <li>
+                <a href="namespaces/pionia-testsuite.html" class="">TestSuite</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/pionia-validators.html" class="">validators</a>
+                
+            </li>
             </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/validators.html" class="">validators</a>
+</h4>
 
                         </section>
                 <section class="phpdocumentor-sidebar__category">
@@ -149,7 +165,7 @@
     
             <span class="phpdocumentor-element__extends">
             Uses
-                            <a href="classes/Pionia-request-AuthTrait.html"><abbr title="\Pionia\request\AuthTrait">AuthTrait</abbr></a>,                             <a href="classes/Pionia-request-RequestActionTrait.html"><abbr title="\Pionia\request\RequestActionTrait">RequestActionTrait</abbr></a>                    </span>
+                            <a href="classes/Pionia-request-AuthTrait.html"><abbr title="\Pionia\request\AuthTrait">AuthTrait</abbr></a>,                             <a href="classes/Pionia-request-RequestActionTrait.html"><abbr title="\Pionia\request\RequestActionTrait">RequestActionTrait</abbr></a>,                             <a href="classes/Pionia-request-ValidationTrait.html"><abbr title="\Pionia\request\ValidationTrait">ValidationTrait</abbr></a>                    </span>
     </h2>
 
 <div class="phpdocumentor-label-line">
@@ -231,6 +247,18 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#property_date_pattern">$date_pattern</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#property_datetime_pattern">$datetime_pattern</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-request-BaseRestService.html#property_deactivatedActions">$deactivatedActions</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
@@ -240,6 +268,30 @@
     <a href="classes/Pionia-request-BaseRestService.html#property_deactivatedActions">$deactivatedActions</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#property_email_pattern">$email_pattern</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#property_ip_pattern">$ip_pattern</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#property_password_pattern">$password_pattern</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#property_phone_pattern">$phone_pattern</a>
+    <span>
+                        &nbsp;: string            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
@@ -262,6 +314,30 @@
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-request-BaseRestService.html#property_serviceRequiresAuth">$serviceRequiresAuth</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#property_slug_pattern">$slug_pattern</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#property_time_pattern">$time_pattern</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#property_username_pattern">$username_pattern</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Pionia-request-ValidationTrait.html#property_throwsExceptions">$throwsExceptions</a>
     <span>
                         &nbsp;: bool            </span>
 </dt>
@@ -274,6 +350,104 @@
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asDate">asDate()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asDateTime">asDateTime()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asDomain">asDomain()</a>
+    <span>
+                                &nbsp;: bool|int|mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asEmail">asEmail()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+<dd>Validates emails of all formats</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asFloat">asFloat()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asInternationalPhone">asInternationalPhone()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+<dd>Will only validate international numbers if the code is provided, otherwise, will validate local only</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asIp">asIp()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asMac">asMac()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asNumber">asNumber()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asPassword">asPassword()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+<dd>Validates the rules as follows
+ - Atleast one integer
+ - Atleast one lowercase alpha letter
+ - Atleast one Uppercase alpha letter
+ - Atleast one special character</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asSlug">asSlug()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asTime">asTime()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asUrl">asUrl()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_asUsername">asUsername()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+<dd>Checks for at least 5 alphanumeric letters</dd>
+
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-request-AuthTrait.html#method_auth">auth()</a>
     <span>
@@ -336,6 +510,20 @@
                                 &nbsp;: void    </span>
 </dt>
 <dd>This checks if the required fields are present in the request otherwise it throws an exception</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-request-ValidationTrait.html#method_validate">validate()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+<dd>Use this to cover scenarios this contract does not cover</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Pionia-request-ValidationTrait.html#method__validateFilter">_validateFilter()</a>
+    <span>
+                                &nbsp;: int|bool    </span>
+</dt>
+<dd>Internal validator based on PHP filter_var validations</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-request-RequestActionTrait.html#method_check_one">check_one()</a>
@@ -411,9 +599,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
-            <a href="classes/Pionia-request-BaseRestService.html#source-view.41" class="phpdocumentor-element-found-in__source" data-line="41" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.42" class="phpdocumentor-element-found-in__source" data-line="42" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
     </aside>
 
     
@@ -447,9 +635,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
-            <a href="classes/Pionia-request-BaseRestService.html#source-view.51" class="phpdocumentor-element-found-in__source" data-line="51" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.52" class="phpdocumentor-element-found-in__source" data-line="52" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
     </aside>
 
     
@@ -463,6 +651,74 @@
         <section class="phpdocumentor-description"><p>This message will be displayed when the entire service requires authentication</p>
 </section>
 
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_date_pattern">
+        $date_pattern
+        <a href="classes/Pionia-request-ValidationTrait.html#property_date_pattern" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">12</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.12" class="phpdocumentor-element-found-in__source" data-line="12" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$date_pattern</span>
+     = <span class="phpdocumentor-signature__default-value">&quot;/^\\d{4}-\\d{2}-\\d{2}\$/&quot;</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_datetime_pattern">
+        $datetime_pattern
+        <a href="classes/Pionia-request-ValidationTrait.html#property_datetime_pattern" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.14" class="phpdocumentor-element-found-in__source" data-line="14" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$datetime_pattern</span>
+     = <span class="phpdocumentor-signature__default-value">&quot;/^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}\$/&quot;</span></code>
+
+    
+    
     
 
 </article>
@@ -519,9 +775,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
-            <a href="classes/Pionia-request-BaseRestService.html#source-view.36" class="phpdocumentor-element-found-in__source" data-line="36" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.37" class="phpdocumentor-element-found-in__source" data-line="37" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
     </aside>
 
     
@@ -535,6 +791,142 @@
         <section class="phpdocumentor-description"><p>An array of actions that are deactivated for the current service</p>
 </section>
 
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_email_pattern">
+        $email_pattern
+        <a href="classes/Pionia-request-ValidationTrait.html#property_email_pattern" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">8</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.8" class="phpdocumentor-element-found-in__source" data-line="8" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$email_pattern</span>
+     = <span class="phpdocumentor-signature__default-value">&quot;/^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$/&quot;</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_ip_pattern">
+        $ip_pattern
+        <a href="classes/Pionia-request-ValidationTrait.html#property_ip_pattern" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">15</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.15" class="phpdocumentor-element-found-in__source" data-line="15" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$ip_pattern</span>
+     = <span class="phpdocumentor-signature__default-value">&quot;/^(\\d{1,3}\\.){3}\\d{1,3}\$/&quot;</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_password_pattern">
+        $password_pattern
+        <a href="classes/Pionia-request-ValidationTrait.html#property_password_pattern" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">10</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.10" class="phpdocumentor-element-found-in__source" data-line="10" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$password_pattern</span>
+     = <span class="phpdocumentor-signature__default-value">&quot;/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*(_|[^\\w])).+\$/&quot;</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_phone_pattern">
+        $phone_pattern
+        <a href="classes/Pionia-request-ValidationTrait.html#property_phone_pattern" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">9</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.9" class="phpdocumentor-element-found-in__source" data-line="9" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$phone_pattern</span>
+     = <span class="phpdocumentor-signature__default-value">&quot;/^[+]{1}(?:[0-9\\-\\(\\)\\/.]\\s?){6,15}[0-9]{1}\$/&quot;</span></code>
+
+    
+    
     
 
 </article>
@@ -663,9 +1055,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
-            <a href="classes/Pionia-request-BaseRestService.html#source-view.46" class="phpdocumentor-element-found-in__source" data-line="46" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.47" class="phpdocumentor-element-found-in__source" data-line="47" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
     </aside>
 
     
@@ -682,6 +1074,142 @@
     
 
 </article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_slug_pattern">
+        $slug_pattern
+        <a href="classes/Pionia-request-ValidationTrait.html#property_slug_pattern" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">16</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.16" class="phpdocumentor-element-found-in__source" data-line="16" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$slug_pattern</span>
+     = <span class="phpdocumentor-signature__default-value">&quot;/^[a-z0-9-]+\$/&quot;</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_time_pattern">
+        $time_pattern
+        <a href="classes/Pionia-request-ValidationTrait.html#property_time_pattern" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">13</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.13" class="phpdocumentor-element-found-in__source" data-line="13" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$time_pattern</span>
+     = <span class="phpdocumentor-signature__default-value">&quot;/^\\d{2}:\\d{2}\$/&quot;</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_username_pattern">
+        $username_pattern
+        <a href="classes/Pionia-request-ValidationTrait.html#property_username_pattern" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">11</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.11" class="phpdocumentor-element-found-in__source" data-line="11" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$username_pattern</span>
+     = <span class="phpdocumentor-signature__default-value">&quot;/^[a-zA-Z0-9_]{5,}\$/&quot;</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_throwsExceptions">
+        $throwsExceptions
+        <a href="classes/Pionia-request-ValidationTrait.html#property_throwsExceptions" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">17</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.17" class="phpdocumentor-element-found-in__source" data-line="17" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$throwsExceptions</span>
+     = <span class="phpdocumentor-signature__default-value">true</span></code>
+
+    
+    
+    
+
+</article>
             </section>
 
             <section class="phpdocumentor-methods">
@@ -690,6 +1218,1073 @@
             <a href="classes/Pionia-request-BaseRestService.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Pionia-request-ValidationTrait.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.18" class="phpdocumentor-element-found-in__source" data-line="18" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$throws</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$throws</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asDate">
+        asDate()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asDate" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">113</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.113" class="phpdocumentor-element-found-in__source" data-line="113" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asDate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$date</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$date</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>date in the format <code class="prettyprint">yyyy-mm-dd</code> eg. '2024-17-05</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asDate#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asDateTime">
+        asDateTime()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asDateTime" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">155</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.155" class="phpdocumentor-element-found-in__source" data-line="155" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asDateTime</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$date</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$date</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asDateTime#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asDomain">
+        asDomain()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asDomain" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">210</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.210" class="phpdocumentor-element-found-in__source" data-line="210" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asDomain</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$domain</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int|mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$domain</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The domain we are testing its validity</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asDomain#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int|mixed</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asEmail">
+        asEmail()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asEmail" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">47</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.47" class="phpdocumentor-element-found-in__source" data-line="47" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Validates emails of all formats</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asEmail</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$email</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The email address we're currently testing in the core.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asEmail#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asFloat">
+        asFloat()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asFloat" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">135</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.135" class="phpdocumentor-element-found-in__source" data-line="135" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asFloat</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$number</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$number</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asFloat#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asInternationalPhone">
+        asInternationalPhone()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asInternationalPhone" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">65</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.65" class="phpdocumentor-element-found-in__source" data-line="65" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Will only validate international numbers if the code is provided, otherwise, will validate local only</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asInternationalPhone</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$phone</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$code</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$phone</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The phone number we are testing</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$code</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>International country that you want to check against</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asInternationalPhone#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asIp">
+        asIp()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asIp" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">181</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.181" class="phpdocumentor-element-found-in__source" data-line="181" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asIp</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$ip</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$ip</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The Ip address we're checking.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asIp#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asMac">
+        asMac()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asMac" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">195</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.195" class="phpdocumentor-element-found-in__source" data-line="195" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asMac</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mac</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$mac</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mac address we are checking</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asMac#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asNumber">
+        asNumber()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">124</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.124" class="phpdocumentor-element-found-in__source" data-line="124" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asNumber</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$number</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$number</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The number we are checking</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asNumber#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asPassword">
+        asPassword()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asPassword" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">90</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.90" class="phpdocumentor-element-found-in__source" data-line="90" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Validates the rules as follows
+ - Atleast one integer
+ - Atleast one lowercase alpha letter
+ - Atleast one Uppercase alpha letter
+ - Atleast one special character</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asPassword</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$password</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$password</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The password string we are testing, must be raw, not hashed</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asPassword#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asSlug">
+        asSlug()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asSlug" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">231</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.231" class="phpdocumentor-element-found-in__source" data-line="231" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asSlug</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$slug</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$slug</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The slug string we are testing</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asSlug#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="prettyprint">$slug = 'fsjkfjshfsjk-skdhfkjdfsj-skdjfhjskdf'; // valid slug
+$slug2 = 'sfksdfsdskljfhsdhjkfhsdsfsdfsfsd'; // valid slug
+$slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
+</code></pre>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asTime">
+        asTime()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asTime" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">147</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.147" class="phpdocumentor-element-found-in__source" data-line="147" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asTime</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$time</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$time</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asTime#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asUrl">
+        asUrl()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asUrl" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">166</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.166" class="phpdocumentor-element-found-in__source" data-line="166" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asUrl</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$url</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$url</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The url string we are testing</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asUrl#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asUsername">
+        asUsername()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asUsername" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">102</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.102" class="phpdocumentor-element-found-in__source" data-line="102" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Checks for at least 5 alphanumeric letters</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asUsername</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$username</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$username</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The string we are testing</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_asUsername#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
                     <article
         class="phpdocumentor-element
             -method
@@ -1173,9 +2768,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/request/BaseRestService.php"><a href="files/src-request-baserestservice.html"><abbr title="src/request/BaseRestService.php">BaseRestService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">62</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
-            <a href="classes/Pionia-request-BaseRestService.html#source-view.62" class="phpdocumentor-element-found-in__source" data-line="62" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.63" class="phpdocumentor-element-found-in__source" data-line="63" data-modal="source-view" data-src="files/src/request/BaseRestService.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This method is called when the service is called with an action</p>
@@ -1305,6 +2900,170 @@
                                             </dl>
 
     
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_validate">
+        validate()
+        <a href="classes/Pionia-request-ValidationTrait.html#method_validate" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">31</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.31" class="phpdocumentor-element-found-in__source" data-line="31" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Use this to cover scenarios this contract does not cover</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">validate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;Invalid data&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$regex</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><ul>
+<li>The regular expression to check against</li>
+</ul>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$value</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><ul>
+<li>The value to check</li>
+</ul>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;Invalid data&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><ul>
+<li>The message to throw if the value is invalid and we are in the exceptions mode</li>
+</ul>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method_validate#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method__validateFilter">
+        _validateFilter()
+        <a href="classes/Pionia-request-ValidationTrait.html#method__validateFilter" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/request/ValidationTrait.php"><a href="files/src-request-validationtrait.html"><abbr title="src/request/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">245</span>
+
+            <a href="classes/Pionia-request-BaseRestService.html#source-view.245" class="phpdocumentor-element-found-in__source" data-line="245" data-modal="source-view" data-src="files/src/request/ValidationTrait.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Internal validator based on PHP filter_var validations</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">_validateFilter</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href=""></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href=""></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filterType</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;Invalid Data&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$value</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href=""></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$filterType</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href=""></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;Invalid Data&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-request-ValidationTrait.html#method__validateFilter#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-InvalidDataException.html"><abbr title="\Pionia\exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int|bool</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1487,18 +3246,43 @@
                                                     <li><a href="classes/Pionia-request-BaseRestService.html#property_actionsRequiringAuth">$actionsRequiringAuth<a href="classes/Pionia-request-BaseRestService.html"></li>
                                                     <li><a href="classes/Pionia-request-BaseRestService.html#property_actionsRequiringAuth">$actionsRequiringAuth<a href="classes/Pionia-request-BaseRestService.html"></li>
                                                     <li><a href="classes/Pionia-request-BaseRestService.html#property_authMessage">$authMessage<a href="classes/Pionia-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/Pionia-request-ValidationTrait.html#property_date_pattern">$date_pattern<a href="classes/Pionia-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/Pionia-request-ValidationTrait.html#property_datetime_pattern">$datetime_pattern<a href="classes/Pionia-request-BaseRestService.html"></li>
                                                     <li><a href="classes/Pionia-request-BaseRestService.html#property_deactivatedActions">$deactivatedActions<a href="classes/Pionia-request-BaseRestService.html"></li>
                                                     <li><a href="classes/Pionia-request-BaseRestService.html#property_deactivatedActions">$deactivatedActions<a href="classes/Pionia-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/Pionia-request-ValidationTrait.html#property_email_pattern">$email_pattern<a href="classes/Pionia-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/Pionia-request-ValidationTrait.html#property_ip_pattern">$ip_pattern<a href="classes/Pionia-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/Pionia-request-ValidationTrait.html#property_password_pattern">$password_pattern<a href="classes/Pionia-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/Pionia-request-ValidationTrait.html#property_phone_pattern">$phone_pattern<a href="classes/Pionia-request-BaseRestService.html"></li>
                                                     <li><a href="classes/Pionia-request-BaseRestService.html#property_request">$request<a href="classes/Pionia-request-BaseRestService.html"></li>
                                                     <li><a href="classes/Pionia-request-BaseRestService.html#property_request">$request<a href="classes/Pionia-request-BaseRestService.html"></li>
                                                     <li><a href="classes/Pionia-request-BaseRestService.html#property_serviceRequiresAuth">$serviceRequiresAuth<a href="classes/Pionia-request-BaseRestService.html"></li>
                                                     <li><a href="classes/Pionia-request-BaseRestService.html#property_serviceRequiresAuth">$serviceRequiresAuth<a href="classes/Pionia-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/Pionia-request-ValidationTrait.html#property_slug_pattern">$slug_pattern<a href="classes/Pionia-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/Pionia-request-ValidationTrait.html#property_time_pattern">$time_pattern<a href="classes/Pionia-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/Pionia-request-ValidationTrait.html#property_username_pattern">$username_pattern<a href="classes/Pionia-request-BaseRestService.html"></li>
+                                                    <li><a href="classes/Pionia-request-ValidationTrait.html#property_throwsExceptions">$throwsExceptions<a href="classes/Pionia-request-BaseRestService.html"></li>
                                             </ul>
                 </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method___construct">__construct()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asDate">asDate()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asDateTime">asDateTime()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asDomain">asDomain()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asEmail">asEmail()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asFloat">asFloat()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asInternationalPhone">asInternationalPhone()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asIp">asIp()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asMac">asMac()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asNumber">asNumber()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asPassword">asPassword()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asSlug">asSlug()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asTime">asTime()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asUrl">asUrl()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_asUsername">asUsername()</a></li>
                                             <li><a href="classes/Pionia-request-AuthTrait.html#method_auth">auth()</a></li>
                                             <li><a href="classes/Pionia-request-AuthTrait.html#method_authExtraHas">authExtraHas()</a></li>
                                             <li><a href="classes/Pionia-request-AuthTrait.html#method_can">can()</a></li>
@@ -1508,6 +3292,8 @@
                                             <li><a href="classes/Pionia-request-AuthTrait.html#method_mustAuthenticate">mustAuthenticate()</a></li>
                                             <li><a href="classes/Pionia-request-BaseRestService.html#method_processAction">processAction()</a></li>
                                             <li><a href="classes/Pionia-request-RequestActionTrait.html#method_requires">requires()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method_validate">validate()</a></li>
+                                            <li><a href="classes/Pionia-request-ValidationTrait.html#method__validateFilter">_validateFilter()</a></li>
                                             <li><a href="classes/Pionia-request-RequestActionTrait.html#method_check_one">check_one()</a></li>
                                     </ul>
             </li>

@@ -1,6 +1,21 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\BASEPATH",
+            "name": "BASEPATH",
+            "summary": "",
+            "url": "namespaces/default.html#constant_BASEPATH"
+        },                {
+            "fqsen": "\\SETTINGS",
+            "name": "SETTINGS",
+            "summary": "",
+            "url": "namespaces/default.html#constant_SETTINGS"
+        },                {
+            "fqsen": "\\exception_handler\u0028\u0029",
+            "name": "exception_handler",
+            "summary": "",
+            "url": "namespaces/default.html#function_exception_handler"
+        },                {
             "fqsen": "\\Pionia\\command\\BaseCommand",
             "name": "BaseCommand",
             "summary": "This\u0020is\u0020the\u0020base\u0020command\u0020class,\u0020it\u0020extends\u0020the\u0020Symfony\u0020console\u0020command\u0020class\u0020and\u0020provides\u0020some\u0020helper\u0020methods\nthat\u0020can\u0020be\u0020used\u0020in\u0020all\u0020commands.\u0020All\u0020commands\u0020should\u0020extend\u0020this\u0020class.",
@@ -10,6 +25,11 @@ Search.appendIndex(
             "name": "base",
             "summary": "Return\u0020the\u0020base\u0020app,\u0020via\u0020this,\u0020you\u0020can\u0020access\u0020all\u0020the\u0020app\u0020settings,\u0020and\u0020current\u0020app\u0020environment",
             "url": "classes/Pionia-command-BaseCommand.html#method_base"
+        },                {
+            "fqsen": "\\Pionia\\command\\BaseCommand\u003A\u003AgetServerSettings\u0028\u0029",
+            "name": "getServerSettings",
+            "summary": "",
+            "url": "classes/Pionia-command-BaseCommand.html#method_getServerSettings"
         },                {
             "fqsen": "\\Pionia\\command\\BaseCommand\u003A\u003Aconnection\u0028\u0029",
             "name": "connection",
@@ -45,6 +65,11 @@ Search.appendIndex(
             "name": "StartServer",
             "summary": "For\u0020starting\u0020the\u0020command\u0020line\u0020server.\u0020This\u0020should\u0020be\u0020good\u0020choice\u0020only\u0020in\u0020development",
             "url": "classes/Pionia-command-commands-StartServer.html"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\StartServer\u003A\u003Aport\u0028\u0029",
+            "name": "port",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-StartServer.html#method_port"
         },                {
             "fqsen": "\\Pionia\\command\\commands\\StartServer\u003A\u003Aconfigure\u0028\u0029",
             "name": "configure",
@@ -340,6 +365,11 @@ Search.appendIndex(
             "name": "getSetting",
             "summary": "",
             "url": "classes/Pionia-core-Pionia.html#method_getSetting"
+        },                {
+            "fqsen": "\\Pionia\\core\\Pionia\u003A\u003AgetServerSettings\u0028\u0029",
+            "name": "getServerSettings",
+            "summary": "",
+            "url": "classes/Pionia-core-Pionia.html#method_getServerSettings"
         },                {
             "fqsen": "\\Pionia\\core\\Pionia\u003A\u003AgetSettingOrDefault\u0028\u0029",
             "name": "getSettingOrDefault",
@@ -661,6 +691,11 @@ Search.appendIndex(
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020required\u0020field\u0020is\u0020not\u0020provided\u0020in\u0020the\u0020request",
             "url": "classes/Pionia-exceptions-FailedRequiredException.html"
         },                {
+            "fqsen": "\\Pionia\\exceptions\\InvalidDataException",
+            "name": "InvalidDataException",
+            "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020regular\u0020expression\u0020fails\u0020and\u0020we\u0020are\u0020in\u0020the\u0020exceptions\u0020mode.",
+            "url": "classes/Pionia-exceptions-InvalidDataException.html"
+        },                {
             "fqsen": "\\Pionia\\exceptions\\LimitPaginationException",
             "name": "LimitPaginationException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020limit\u0020is\u0020provided\u0020in\u0020a\u0020paginated\u0020query\u0020using\u0020the\u0020Pagination\u0020class",
@@ -695,6 +730,21 @@ Search.appendIndex(
             "name": "UserUnauthorizedException",
             "summary": "This\u0020exception\u0020is\u0020thrown\u0020when\u0020a\u0020user\u0020is\u0020not\u0020authorized\u0020to\u0020access\u0020a\u0020resource",
             "url": "classes/Pionia-exceptions-UserUnauthorizedException.html"
+        },                {
+            "fqsen": "\\Pionia\\Logging\\PioniaLogger",
+            "name": "PioniaLogger",
+            "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020the\u0020framework",
+            "url": "classes/Pionia-Logging-PioniaLogger.html"
+        },                {
+            "fqsen": "\\Pionia\\Logging\\PioniaLogger\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Pionia-Logging-PioniaLogger.html#method___construct"
+        },                {
+            "fqsen": "\\Pionia\\Logging\\PioniaLogger\u003A\u003Ainit\u0028\u0029",
+            "name": "init",
+            "summary": "Call\u0020this\u0020method\u0020to\u0020initialise\u0020the\u0020logger.",
+            "url": "classes/Pionia-Logging-PioniaLogger.html#method_init"
         },                {
             "fqsen": "\\Pionia\\request\\AuthTrait",
             "name": "AuthTrait",
@@ -851,6 +901,146 @@ Search.appendIndex(
             "summary": "This\u0020checks\u0020if\u0020the\u0020required\u0020fields\u0020are\u0020present\u0020in\u0020the\u0020request\u0020otherwise\u0020it\u0020throws\u0020an\u0020exception",
             "url": "classes/Pionia-request-RequestActionTrait.html#method_requires"
         },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait",
+            "name": "ValidationTrait",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#method___construct"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003Avalidate\u0028\u0029",
+            "name": "validate",
+            "summary": "Use\u0020this\u0020to\u0020cover\u0020scenarios\u0020this\u0020contract\u0020does\u0020not\u0020cover",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_validate"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasEmail\u0028\u0029",
+            "name": "asEmail",
+            "summary": "Validates\u0020emails\u0020of\u0020all\u0020formats",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asEmail"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasInternationalPhone\u0028\u0029",
+            "name": "asInternationalPhone",
+            "summary": "Will\u0020only\u0020validate\u0020international\u0020numbers\u0020if\u0020the\u0020code\u0020is\u0020provided,\u0020otherwise,\u0020will\u0020validate\u0020local\u0020only",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asInternationalPhone"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasPassword\u0028\u0029",
+            "name": "asPassword",
+            "summary": "Validates\u0020the\u0020rules\u0020as\u0020follows\n\u0020\u002D\u0020Atleast\u0020one\u0020integer\n\u0020\u002D\u0020Atleast\u0020one\u0020lowercase\u0020alpha\u0020letter\n\u0020\u002D\u0020Atleast\u0020one\u0020Uppercase\u0020alpha\u0020letter\n\u0020\u002D\u0020Atleast\u0020one\u0020special\u0020character",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asPassword"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasUsername\u0028\u0029",
+            "name": "asUsername",
+            "summary": "Checks\u0020for\u0020at\u0020least\u00205\u0020alphanumeric\u0020letters",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asUsername"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasDate\u0028\u0029",
+            "name": "asDate",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asDate"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasNumber\u0028\u0029",
+            "name": "asNumber",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asNumber"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasFloat\u0028\u0029",
+            "name": "asFloat",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asFloat"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasTime\u0028\u0029",
+            "name": "asTime",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asTime"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasDateTime\u0028\u0029",
+            "name": "asDateTime",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asDateTime"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasUrl\u0028\u0029",
+            "name": "asUrl",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asUrl"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasIp\u0028\u0029",
+            "name": "asIp",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asIp"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasMac\u0028\u0029",
+            "name": "asMac",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asMac"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasDomain\u0028\u0029",
+            "name": "asDomain",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asDomain"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003AasSlug\u0028\u0029",
+            "name": "asSlug",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#method_asSlug"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003A_validateFilter\u0028\u0029",
+            "name": "_validateFilter",
+            "summary": "Internal\u0020validator\u0020based\u0020on\u0020PHP\u0020filter_var\u0020validations",
+            "url": "classes/Pionia-request-ValidationTrait.html#method__validateFilter"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003A\u0024email_pattern",
+            "name": "email_pattern",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#property_email_pattern"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003A\u0024phone_pattern",
+            "name": "phone_pattern",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#property_phone_pattern"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003A\u0024password_pattern",
+            "name": "password_pattern",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#property_password_pattern"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003A\u0024username_pattern",
+            "name": "username_pattern",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#property_username_pattern"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003A\u0024date_pattern",
+            "name": "date_pattern",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#property_date_pattern"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003A\u0024time_pattern",
+            "name": "time_pattern",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#property_time_pattern"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003A\u0024datetime_pattern",
+            "name": "datetime_pattern",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#property_datetime_pattern"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003A\u0024ip_pattern",
+            "name": "ip_pattern",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#property_ip_pattern"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003A\u0024slug_pattern",
+            "name": "slug_pattern",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#property_slug_pattern"
+        },                {
+            "fqsen": "\\Pionia\\request\\ValidationTrait\u003A\u003A\u0024throwsExceptions",
+            "name": "throwsExceptions",
+            "summary": "",
+            "url": "classes/Pionia-request-ValidationTrait.html#property_throwsExceptions"
+        },                {
             "fqsen": "\\Pionia\\response\\BaseResponse",
             "name": "BaseResponse",
             "summary": "This\u0020provides\u0020a\u0020uniform\u0020response\u0020format\u0020for\u0020our\u0020entire\u0020application.",
@@ -911,10 +1101,105 @@ Search.appendIndex(
             "summary": "This\u0020is\u0020the\u0020internal\u0020response.\u0020It\u0020should\u0020not\u0020be\u0020used\u0020anywhere\u0020in\u0020the\u0020project\u0020but\u0020in\u0020the\u0020core\u0020framework",
             "url": "classes/Pionia-response-Response.html"
         },                {
-            "fqsen": "\\ValidationTrait",
-            "name": "Validator",
+            "fqsen": "\\Pionia\\TestSuite\\ContextAwareTestCase",
+            "name": "ContextAwareTestCase",
+            "summary": "Provides\u0020a\u0020context\u0020aware\u0020test\u0020suite.",
+            "url": "classes/Pionia-TestSuite-ContextAwareTestCase.html"
+        },                {
+            "fqsen": "\\Pionia\\TestSuite\\ContextAwareTestCase\u003A\u003AsetUp\u0028\u0029",
+            "name": "setUp",
             "summary": "",
-            "url": "classes/Validator.html"
+            "url": "classes/Pionia-TestSuite-ContextAwareTestCase.html#method_setUp"
+        },                {
+            "fqsen": "\\Pionia\\TestSuite\\ContextAwareTestCase\u003A\u003AgetPionia\u0028\u0029",
+            "name": "getPionia",
+            "summary": "",
+            "url": "classes/Pionia-TestSuite-ContextAwareTestCase.html#method_getPionia"
+        },                {
+            "fqsen": "\\Pionia\\TestSuite\\ContextAwareTestCase\u003A\u003AgetConnection\u0028\u0029",
+            "name": "getConnection",
+            "summary": "",
+            "url": "classes/Pionia-TestSuite-ContextAwareTestCase.html#method_getConnection"
+        },                {
+            "fqsen": "\\Pionia\\TestSuite\\ContextAwareTestCase\u003A\u003AtearDown\u0028\u0029",
+            "name": "tearDown",
+            "summary": "",
+            "url": "classes/Pionia-TestSuite-ContextAwareTestCase.html#method_tearDown"
+        },                {
+            "fqsen": "\\Pionia\\TestSuite\\ContextAwareTestCase\u003A\u003A\u0024pionia",
+            "name": "pionia",
+            "summary": "",
+            "url": "classes/Pionia-TestSuite-ContextAwareTestCase.html#property_pionia"
+        },                {
+            "fqsen": "\\Pionia\\TestSuite\\ContextAwareTestCase\u003A\u003A\u0024connection",
+            "name": "connection",
+            "summary": "",
+            "url": "classes/Pionia-TestSuite-ContextAwareTestCase.html#property_connection"
+        },                {
+            "fqsen": "\\Pionia\\TestSuite\\ContextFreeTestCase",
+            "name": "ContextFreeTestCase",
+            "summary": "This\u0020is\u0020for\u0020testing\u0020small\u0020chunk\u0020of\u0020your\u0020codebase.",
+            "url": "classes/Pionia-TestSuite-ContextFreeTestCase.html"
+        },                {
+            "fqsen": "\\Pionia\\TestSuite\\ContextFreeTestCase\u003A\u003AsetUp\u0028\u0029",
+            "name": "setUp",
+            "summary": "",
+            "url": "classes/Pionia-TestSuite-ContextFreeTestCase.html#method_setUp"
+        },                {
+            "fqsen": "\\Pionia\\TestSuite\\ContextFreeTestCase\u003A\u003AgetPionia\u0028\u0029",
+            "name": "getPionia",
+            "summary": "",
+            "url": "classes/Pionia-TestSuite-ContextFreeTestCase.html#method_getPionia"
+        },                {
+            "fqsen": "\\Pionia\\TestSuite\\ContextFreeTestCase\u003A\u003AtearDown\u0028\u0029",
+            "name": "tearDown",
+            "summary": "",
+            "url": "classes/Pionia-TestSuite-ContextFreeTestCase.html#method_tearDown"
+        },                {
+            "fqsen": "\\Pionia\\TestSuite\\ContextFreeTestCase\u003A\u003A\u0024pionia",
+            "name": "pionia",
+            "summary": "",
+            "url": "classes/Pionia-TestSuite-ContextFreeTestCase.html#property_pionia"
+        },                {
+            "fqsen": "\\Pionia\\validators\\Validator",
+            "name": "Validator",
+            "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020the\u0020framework",
+            "url": "classes/Pionia-validators-Validator.html"
+        },                {
+            "fqsen": "\\validators\\ValidatorTest",
+            "name": "ValidatorTest",
+            "summary": "This\u0020is\u0020for\u0020testing\u0020small\u0020chunk\u0020of\u0020your\u0020codebase.",
+            "url": "classes/validators-ValidatorTest.html"
+        },                {
+            "fqsen": "\\validators\\ValidatorTest\u003A\u003AtestIsPhone\u0028\u0029",
+            "name": "testIsPhone",
+            "summary": "",
+            "url": "classes/validators-ValidatorTest.html#method_testIsPhone"
+        },                {
+            "fqsen": "\\validators\\ValidatorTest\u003A\u003AtestIsEmail\u0028\u0029",
+            "name": "testIsEmail",
+            "summary": "",
+            "url": "classes/validators-ValidatorTest.html#method_testIsEmail"
+        },                {
+            "fqsen": "\\validators\\ValidatorTest\u003A\u003AtestIsHttpUrl\u0028\u0029",
+            "name": "testIsHttpUrl",
+            "summary": "",
+            "url": "classes/validators-ValidatorTest.html#method_testIsHttpUrl"
+        },                {
+            "fqsen": "\\validators\\ValidatorTest\u003A\u003AtestIsHttpsUrl\u0028\u0029",
+            "name": "testIsHttpsUrl",
+            "summary": "",
+            "url": "classes/validators-ValidatorTest.html#method_testIsHttpsUrl"
+        },                {
+            "fqsen": "\\validators\\ValidatorTest\u003A\u003AtestDomain\u0028\u0029",
+            "name": "testDomain",
+            "summary": "",
+            "url": "classes/validators-ValidatorTest.html#method_testDomain"
+        },                {
+            "fqsen": "\\validators\\ValidatorTest\u003A\u003AtestSlug\u0028\u0029",
+            "name": "testSlug",
+            "summary": "",
+            "url": "classes/validators-ValidatorTest.html#method_testSlug"
         },                {
             "fqsen": "\\",
             "name": "\\",
@@ -971,6 +1256,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/pionia-exceptions.html"
         },                {
+            "fqsen": "\\Pionia\\Logging",
+            "name": "Logging",
+            "summary": "",
+            "url": "namespaces/pionia-logging.html"
+        },                {
             "fqsen": "\\Pionia\\request",
             "name": "request",
             "summary": "",
@@ -980,5 +1270,20 @@ Search.appendIndex(
             "name": "response",
             "summary": "",
             "url": "namespaces/pionia-response.html"
+        },                {
+            "fqsen": "\\Pionia\\TestSuite",
+            "name": "TestSuite",
+            "summary": "",
+            "url": "namespaces/pionia-testsuite.html"
+        },                {
+            "fqsen": "\\Pionia\\validators",
+            "name": "validators",
+            "summary": "",
+            "url": "namespaces/pionia-validators.html"
+        },                {
+            "fqsen": "\\validators",
+            "name": "validators",
+            "summary": "",
+            "url": "namespaces/validators.html"
         }            ]
 );
