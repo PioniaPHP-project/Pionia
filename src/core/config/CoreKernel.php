@@ -3,6 +3,7 @@
 namespace Pionia\core\config;
 
 use Exception;
+use Monolog\Logger;
 use Pionia\core\Pionia;
 use Pionia\core\routing\BaseRoutes;
 use Pionia\Logging\PioniaLogger;
@@ -45,7 +46,7 @@ class CoreKernel extends Pionia
     private ?RequestContext $context = null;
     private ?UrlMatcher $matcher = null;
 
-    private ?PioniaLogger $logger = null;
+    private ?Logger $logger = null;
 
     private $middleware = [];
 
