@@ -36,7 +36,6 @@ class PioniaLogger extends Pionia
      * it is a file, a clear file path should be provided.
      *
      * @return Logger|null
-     * @throws BaseException
      */
     public static function init(): Logger | null
     {
