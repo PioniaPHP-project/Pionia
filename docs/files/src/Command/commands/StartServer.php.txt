@@ -21,19 +21,31 @@ class StartServer extends BaseCommand
 
     private array $command = ['php', '-S'];
 
+    private function port()
+    {
+        $port = 8000;
+        $server = $this->getServerSettings();
+        if (count($server) > 0) {
+            if (array_key_exists('port', $server)) {
+                $port = $server['port'];
+            }
+        }
+        return $port;
+    }
+
     protected function configure(): void
     {
         $this
             ->setName($this::$name)
             ->setDescription('Starts the '.$this::base()::$name.' server')
-            ->addOption('port', 'p', InputArgument::OPTIONAL, 8000)
+            ->addOption('port', 'p', InputArgument::OPTIONAL, $this->port())
             ->setHelp('This command starts the '.$this::base()::$name.' server. It should be preferred for localhost development only')
             ->addOption('host', null, InputArgument::OPTIONAL, 'localhost');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $port = $input->getOption('port') ?? 8000;
+        $port = $input->getOption('port') ?? $this->port();
         $host = $input->getOption('host') ?? 'localhost';
         $output->writeln('Starting server on http://' .$host.':'.$port);
         $output->writeln('Press Ctrl+C to stop the server');
