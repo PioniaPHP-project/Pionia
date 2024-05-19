@@ -19,7 +19,6 @@ class CommandInterface
      */
     private static array $commands = [
         'Pionia\command\commands\StartServer',
-        'Pionia\command\commands\RunTests',
     ];
 
 
