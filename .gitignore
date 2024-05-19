@@ -6,3 +6,4 @@ composer.lock
 src/core/.DS_Store
 build
 .phpunit.result.cache
+pionia

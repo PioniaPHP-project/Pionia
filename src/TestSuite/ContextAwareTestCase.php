@@ -8,9 +8,13 @@ use Pionia\core\Pionia;
 use Pionia\database\Connector;
 use Pionia\exceptions\DatabaseException;
 
-define('BASEPATH', __DIR__.'/../../');
+if (!defined('BASEPATH')) {
+    define('BASEPATH', __DIR__ . '/../../');
+}
 
-define('SETTINGS', BASEPATH.'settings.ini');
+if (!defined('SETTINGS')) {
+    define('SETTINGS', BASEPATH . 'settings.ini');
+}
 /**
  * Provides a context aware test suite.
  *

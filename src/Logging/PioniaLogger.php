@@ -39,16 +39,31 @@ class PioniaLogger extends Pionia
      */
     public static function init(): Logger | null
     {
-        self::resolveSettingsFromIni();
+        $pionia = new Pionia();
 
-        $debug = self::getServerSettings()["DEBUG"];
-        $logRequests = self::getServerSettings()["LOG_REQUESTS"];
+        $serverSettings = $pionia::getServerSettings();
+
+        if (array_key_exists("DEBUG", $serverSettings)) {
+            $debug = $serverSettings["DEBUG"];
+        } else {
+            $debug = true;
+        }
+
+        if (array_key_exists("LOG_REQUESTS", $serverSettings)) {
+            $logRequests = $serverSettings["LOG_REQUESTS"];
+        } else {
+            $logRequests = true;
+        }
 
         if (!$debug && !$logRequests) {
             return null;
         }
 
-        $destination = self::getServerSettings()["LOG_DESTINATION"];
+        if (array_key_exists("LOG_DESTINATION", $serverSettings)) {
+            $destination = $serverSettings["LOG_DESTINATION"];
+        } else {
+            $destination = 'terminal';
+        }
 
         if ($destination === 'terminal') {
             $stream = "php://stdout";
