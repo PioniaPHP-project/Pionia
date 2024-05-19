@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class RunTests extends BaseCommand
 {
-    protected static string $title = 'Start Server';
+    protected static string $title = 'Runs Unit tests of the application';
     protected static string $description = 'test';
     protected static string $name = 'test';
 
@@ -33,7 +33,7 @@ class RunTests extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $logger = PioniaLogger::init();
-        $logger->info('Running tests');
+        $logger->info('Discovering tests');
         // start the php server here
         shell_exec(implode(' ', $this->command));
         $logger->info("All tests run successfully");
