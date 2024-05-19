@@ -29,6 +29,7 @@ abstract class BaseRestService
 
     use AuthTrait;
     use RequestActionTrait;
+    use ValidationTrait;
 
     /**
      * @var array $deactivatedActions An array of actions that are deactivated for the current service

@@ -83,10 +83,9 @@ class Connector extends Pionia implements ConnectionInterface
             $using = 'db';
         }
 
-        if (!array_key_exists($using, $settings_file)){
+        if (is_array($settings_file) && !array_key_exists($using, $settings_file)){
             throw new DatabaseException("SETTINGS ERROR: Could not find the defined data source, are you sure you defines a db connection names ".$using);
         }
-
         $params = $settings_file[$using];
         if (!array_key_exists('driver', $params)){
             throw new DatabaseException("You must define the driver in your ".$using." connection in ".SETTINGS);

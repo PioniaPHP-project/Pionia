@@ -36,6 +36,15 @@ class Pionia
         return self::$settings[$key] ?? null;
     }
 
+    protected static function getServerSettings(): array
+    {
+        $settings =  self::getSetting("server");
+        if (is_array($settings)) {
+            return $settings;
+        }
+        return [];
+    }
+
     public static function getSettingOrDefault(string $key, mixed $default): mixed
     {
         return self::$settings[$key] ?? $default;
