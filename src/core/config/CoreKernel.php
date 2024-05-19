@@ -5,6 +5,7 @@ namespace Pionia\core\config;
 use Exception;
 use Pionia\core\Pionia;
 use Pionia\core\routing\BaseRoutes;
+use Pionia\Logging\PioniaLogger;
 use Pionia\request\Request;
 use Pionia\response\BaseResponse;
 use Pionia\response\Response;
@@ -44,6 +45,8 @@ class CoreKernel extends Pionia
     private ?RequestContext $context = null;
     private ?UrlMatcher $matcher = null;
 
+    private ?PioniaLogger $logger = null;
+
     private $middleware = [];
 
     private $authBackends = [];
@@ -53,6 +56,8 @@ class CoreKernel extends Pionia
     ){
         parent::__construct();
         $this::resolveSettingsFromIni();
+
+        $this->logger = PioniaLogger::init();
     }
 
     public function registerMiddleware(array | string $middleware): static
