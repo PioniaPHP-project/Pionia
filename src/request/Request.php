@@ -25,15 +25,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      private bool $authenticated = false;
      private mixed  $context = null;
 
-     private ?Logger $logger;
      private ContextUserObject | null $auth = null;
-
-     public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
-     {
-         parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
-
-         $this->logger = PioniaLogger::init();
-     }
 
     /**
      * The currently logged user in context object
