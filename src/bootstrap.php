@@ -11,8 +11,6 @@
  */
 
 use Pionia\Logging\PioniaLogger;
-use Pionia\validators\Validator;
-
 set_exception_handler('exception_handler');
 
 function exception_handler(Throwable $e): void
@@ -24,6 +22,4 @@ function exception_handler(Throwable $e): void
 $autoloader = require __DIR__ . '/../vendor/autoload.php';
 
 
-$validator = new Validator();
 
-echo $validator->asPhone('0781109107');
