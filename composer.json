@@ -16,8 +16,8 @@
             "role": "Developer"
         }
     ],
-    "minimum-stability": "beta",
-    "prefer-stable": false,
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "require": {
         "ext-json": "*",
         "ext-pdo": "*",
