@@ -32,11 +32,10 @@ class RunTests extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $logger = PioniaLogger::init();
-        $logger->info('Discovering tests');
+        $output->writeln('Discovering tests');
         // start the php server here
         shell_exec(implode(' ', $this->command));
-        $logger->info("All tests run successfully");
+        $output->writeln("All tests run successfully");
         return Command::SUCCESS;
     }
 }
