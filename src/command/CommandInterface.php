@@ -21,6 +21,7 @@ class CommandInterface
         'Pionia\command\commands\StartServer',
         'Pionia\command\commands\CreateService',
         'Pionia\command\commands\CreateAuthenticationBackend',
+        'Pionia\command\commands\CreateMiddleware',
     ];
 
 
