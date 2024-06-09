@@ -2,10 +2,9 @@
 
 namespace Pionia\command;
 
-use PDO;
 use Pionia\core\Pionia;
-use Pionia\database\Connector;
-use Pionia\exceptions\DatabaseException;
+use Pionia\database\Connection;
+use Porm\core\Database;
 use Symfony\Component\Console\Command\Command;
 
 /**
@@ -38,12 +37,14 @@ class BaseCommand extends Command
      * Returns the current database connection
      *
      * @param string|null $db
-     * @return PDO
+     * @return Database
      *
+     * @throws \Exception
      * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
-     * */
-    protected static function connection(string | null $db = null): PDO
+     *
+     */
+    protected static function connection(string | null $db = null): Database
     {
-        return Connector::connect($db);
+        return Connection::use($db);
     }
 }

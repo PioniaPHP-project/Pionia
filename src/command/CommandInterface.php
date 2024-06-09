@@ -19,6 +19,8 @@ class CommandInterface
      */
     private static array $commands = [
         'Pionia\command\commands\StartServer',
+        'Pionia\command\commands\CreateService',
+        'Pionia\command\commands\CreateAuthenticationBackend',
     ];
 
 

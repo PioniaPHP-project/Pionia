@@ -2,11 +2,11 @@
 
 namespace Pionia\TestSuite;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
-use Pionia\core\config\CoreKernel;
 use Pionia\core\Pionia;
-use Pionia\database\Connector;
 use Pionia\exceptions\DatabaseException;
+use Porm\core\Database;
 
 if (!defined('BASEPATH')) {
     define('BASEPATH', __DIR__ . '/../../');
@@ -29,15 +29,15 @@ if (!defined('SETTINGS')) {
 class ContextAwareTestCase extends TestCase
 {
     private  Pionia | null $pionia;
-    private \PDO | null $connection;
+    private ?Database $connection;
 
     /**
-     * @throws DatabaseException
+     * @throws DatabaseException|Exception
      */
     protected function setUp(): void
     {
         $this->pionia = new Pionia();
-        $this->connection = Connector::connect();
+        $this->connection = Database::use();
     }
 
     public function getPionia(): Pionia
@@ -45,7 +45,7 @@ class ContextAwareTestCase extends TestCase
         return $this->pionia;
     }
 
-    public function getConnection(): \PDO
+    public function getConnection(): Database
     {
         return $this->connection;
     }

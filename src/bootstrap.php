@@ -10,7 +10,9 @@
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 
+use Pionia\core\Pionia;
 use Pionia\Logging\PioniaLogger;
+
 set_exception_handler('exception_handler');
 
 
@@ -25,4 +27,8 @@ $autoloader = require __DIR__ . '/../vendor/autoload.php';
 
 
 $logger = PioniaLogger::init();
-$logger->debug('PioniaLogger::boot()');
+$logger->debug(\Pionia\core\Pionia::$name. "::".Pionia::$version);
+
+$service = new \Pionia\codegens\Service('user', ['login']);
+$service->generate();
+
