@@ -16,6 +16,9 @@ use Monolog\Logger;
 use Pionia\exceptions\BaseException;
 
 // The Logger instance
+
+/**
+ */
 class PioniaLogger extends Pionia
 {
     public function __construct()
