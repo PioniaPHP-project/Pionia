@@ -4,6 +4,7 @@ namespace Pionia\core\routing;
 
 use Pionia\core\helpers\SupportedHttpMethods;
 use Pionia\core\helpers\Utilities;
+use Pionia\core\Pionia;
 use Pionia\exceptions\ControllerException;
 use Pionia\response\BaseResponse;
 use Symfony\Component\Routing\Route;
@@ -28,24 +29,34 @@ use Symfony\Component\Routing\Route;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class PioniaRouter
+class PioniaRouter extends Pionia
 {
     protected $routes;
 
     private string | null $controller = null;
-    private string $basePath = '/api/v1/';
+    private string $basePath = '/api';
 
     public function getRoutes(): BaseRoutes
     {
         return $this->routes;
     }
 
+
     public function __construct(BaseRoutes | null $routes = null)
     {
         $this->routes = $routes ?? new BaseRoutes();
+
+        $set = self::getServerSettings();
+
+        if ($set && isset($set['baseurl'])){
+            $this->basePath = $set['baseurl'];
+        }
     }
 
-    private function resolveController(string |null $_controller = null, $setAsCurrent = true): static
+    /**
+     * @throws ControllerException
+     */
+    private function resolveController(string |null $_controller = null, $setAsCurrent = true): void
     {
         $controller = $_controller ?? $this->controller;
 
@@ -63,11 +74,10 @@ class PioniaRouter
         if ($setAsCurrent){
             $this->controller = $controller;
         }
-        return $this;
     }
 
 
-    public function post(string $action, string $name)
+    public function post(string $action, string $name): BaseResponse|static
     {
         try {
             if (!$this->controller) {
@@ -80,16 +90,19 @@ class PioniaRouter
         }
     }
 
-    public function addGroup(string $controller, string $basePath = '/api/v1/'): static
+    /**
+     * @throws ControllerException
+     */
+    public function addGroup(string $controller, string $basePath = 'v1/'): static
     {
         $this->resolveController($controller);
-        $this->basePath = $basePath;
+        $this->basePath = $this->basePath.$this->cleanBase($basePath);
         $this->addRoute('ping', 'ping', SupportedHttpMethods::GET, $controller);
         return $this;
     }
 
 
-    public function get(string $action, string $name)
+    public function get(string $action, string $name): BaseResponse|static
     {
         try {
             if (!$this->controller) {
@@ -103,9 +116,27 @@ class PioniaRouter
     }
 
     /**
+     * Cleans up the base url to set
+     * @param string $base
+     * @return string
+     */
+    private function cleanBase(string $base)
+    {
+        if (!str_starts_with($base, "/") && str_ends_with($this->basePath, "/")){
+            $base = '/'.$base;
+        }
+
+        if (!str_ends_with($base, "/")){
+            $base .= "/";
+        }
+
+        return $base;
+    }
+
+    /**
      * @throws ControllerException
      */
-    private function addRoute(string $action, string $name, string | array $method = SupportedHttpMethods::POST, $controller = null, $condition = '')
+    private function addRoute(string $action, string $name, string | array $method = SupportedHttpMethods::POST, $controller = null, $condition = ''): void
     {
         if ($controller) {
             $this->resolveController($controller);
@@ -126,7 +157,6 @@ class PioniaRouter
         ], [], [], null, [], $methods, $condition);
 
         $this->routes->add($name, $route);
-        return $this;
     }
 
 }

@@ -11,6 +11,7 @@
  */
 
 use Pionia\Logging\PioniaLogger;
+
 set_exception_handler('exception_handler');
 
 
@@ -24,5 +25,5 @@ function exception_handler(Throwable $e): void
 $autoloader = require __DIR__ . '/../vendor/autoload.php';
 
 
-$logger = PioniaLogger::init();
-$logger->debug('PioniaLogger::boot()');
+
+

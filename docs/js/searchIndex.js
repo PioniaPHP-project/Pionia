@@ -11,15 +11,195 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#constant_SETTINGS"
         },                {
+            "fqsen": "\\logger",
+            "name": "logger",
+            "summary": "",
+            "url": "namespaces/default.html#constant_logger"
+        },                {
             "fqsen": "\\exception_handler\u0028\u0029",
             "name": "exception_handler",
             "summary": "",
             "url": "namespaces/default.html#function_exception_handler"
         },                {
+            "fqsen": "\\Pionia\\codegens\\AuthBackend",
+            "name": "AuthBackend",
+            "summary": "Code\u0020generator\u0020for\u0020creating\u0020Authentication\u0020Backends",
+            "url": "classes/Pionia-codegens-AuthBackend.html"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Pionia-codegens-AuthBackend.html#method___construct"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003Agenerate\u0028\u0029",
+            "name": "generate",
+            "summary": "",
+            "url": "classes/Pionia-codegens-AuthBackend.html#method_generate"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003AaddActions\u0028\u0029",
+            "name": "addActions",
+            "summary": "",
+            "url": "classes/Pionia-codegens-AuthBackend.html#method_addActions"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003AcreateActionMethod\u0028\u0029",
+            "name": "createActionMethod",
+            "summary": "",
+            "url": "classes/Pionia-codegens-AuthBackend.html#method_createActionMethod"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003A\u0024dir",
+            "name": "dir",
+            "summary": "",
+            "url": "classes/Pionia-codegens-AuthBackend.html#property_dir"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003A\u0024namespace",
+            "name": "namespace",
+            "summary": "",
+            "url": "classes/Pionia-codegens-AuthBackend.html#property_namespace"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003A\u0024actions",
+            "name": "actions",
+            "summary": "",
+            "url": "classes/Pionia-codegens-AuthBackend.html#property_actions"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\CodeGenerator",
+            "name": "CodeGenerator",
+            "summary": "Base\u0020for\u0020all\u0020code\u0020generators\u0020in\u0020Pionia",
+            "url": "classes/Pionia-codegens-CodeGenerator.html"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003AsweetName\u0028\u0029",
+            "name": "sweetName",
+            "summary": "Spices\u0020up\u0020the\u0020name\u0020a\u0020little\u0020\u0027user\u0027\u0020becomes\u0020\u0027UserService\u0027",
+            "url": "classes/Pionia-codegens-CodeGenerator.html#method_sweetName"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003Agenerate\u0028\u0029",
+            "name": "generate",
+            "summary": "",
+            "url": "classes/Pionia-codegens-CodeGenerator.html#method_generate"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003Alog\u0028\u0029",
+            "name": "log",
+            "summary": "",
+            "url": "classes/Pionia-codegens-CodeGenerator.html#method_log"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003AgetOrCreateDirectory\u0028\u0029",
+            "name": "getOrCreateDirectory",
+            "summary": "",
+            "url": "classes/Pionia-codegens-CodeGenerator.html#method_getOrCreateDirectory"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003AcreateFile\u0028\u0029",
+            "name": "createFile",
+            "summary": "",
+            "url": "classes/Pionia-codegens-CodeGenerator.html#method_createFile"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Pionia-codegens-CodeGenerator.html#property_name"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003A\u0024output",
+            "name": "output",
+            "summary": "",
+            "url": "classes/Pionia-codegens-CodeGenerator.html#property_output"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Middleware",
+            "name": "Middleware",
+            "summary": "Code\u0020generator\u0020for\u0020creating\u0020middleware\u0020files\u0020in\u0020pionia",
+            "url": "classes/Pionia-codegens-Middleware.html"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Middleware.html#method___construct"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003Agenerate\u0028\u0029",
+            "name": "generate",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Middleware.html#method_generate"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003AaddActions\u0028\u0029",
+            "name": "addActions",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Middleware.html#method_addActions"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003AcreateActionMethod\u0028\u0029",
+            "name": "createActionMethod",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Middleware.html#method_createActionMethod"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003A\u0024dir",
+            "name": "dir",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Middleware.html#property_dir"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003A\u0024namespace",
+            "name": "namespace",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Middleware.html#property_namespace"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003A\u0024actions",
+            "name": "actions",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Middleware.html#property_actions"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Service",
+            "name": "Service",
+            "summary": "Code\u0020generator\u0020for\u0020creating\u0020new\u0020services\u0020in\u0020Pionia",
+            "url": "classes/Pionia-codegens-Service.html"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Service.html#method___construct"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003Agenerate\u0028\u0029",
+            "name": "generate",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Service.html#method_generate"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003AaddActions\u0028\u0029",
+            "name": "addActions",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Service.html#method_addActions"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003AcreateActionMethod\u0028\u0029",
+            "name": "createActionMethod",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Service.html#method_createActionMethod"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003A\u0024dir",
+            "name": "dir",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Service.html#property_dir"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003A\u0024namespace",
+            "name": "namespace",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Service.html#property_namespace"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003A\u0024actions",
+            "name": "actions",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Service.html#property_actions"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003A\u0024backupName",
+            "name": "backupName",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Service.html#property_backupName"
+        },                {
+            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003A\u0024defaults",
+            "name": "defaults",
+            "summary": "",
+            "url": "classes/Pionia-codegens-Service.html#property_defaults"
+        },                {
             "fqsen": "\\Pionia\\command\\BaseCommand",
             "name": "BaseCommand",
             "summary": "This\u0020is\u0020the\u0020base\u0020command\u0020class,\u0020it\u0020extends\u0020the\u0020Symfony\u0020console\u0020command\u0020class\u0020and\u0020provides\u0020some\u0020helper\u0020methods\nthat\u0020can\u0020be\u0020used\u0020in\u0020all\u0020commands.\u0020All\u0020commands\u0020should\u0020extend\u0020this\u0020class.",
             "url": "classes/Pionia-command-BaseCommand.html"
+        },                {
+            "fqsen": "\\Pionia\\command\\BaseCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Pionia-command-BaseCommand.html#method___construct"
         },                {
             "fqsen": "\\Pionia\\command\\BaseCommand\u003A\u003Abase\u0028\u0029",
             "name": "base",
@@ -41,9 +221,14 @@ Search.appendIndex(
             "summary": "This\u0020is\u0020the\u0020command\u0020interface,\u0020it\u0020is\u0020the\u0020entry\u0020point\u0020for\u0020all\u0020commands\u0020in\u0020the\u0020framework",
             "url": "classes/Pionia-command-CommandInterface.html"
         },                {
+            "fqsen": "\\Pionia\\command\\CommandInterface\u003A\u003AgetCommands\u0028\u0029",
+            "name": "getCommands",
+            "summary": "",
+            "url": "classes/Pionia-command-CommandInterface.html#method_getCommands"
+        },                {
             "fqsen": "\\Pionia\\command\\CommandInterface\u003A\u003AaddCommand\u0028\u0029",
             "name": "addCommand",
-            "summary": "",
+            "summary": "Checks\u0020if\u0020a\u0020command\u0020is\u0020valid\u0020and\u0020then\u0020adds\u0020it\u0020to\u0020the\u0020in\u002Dbuilt\u0020commands\u0020stack",
             "url": "classes/Pionia-command-CommandInterface.html#method_addCommand"
         },                {
             "fqsen": "\\Pionia\\command\\CommandInterface\u003A\u003Arun\u0028\u0029",
@@ -53,13 +238,103 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\command\\CommandInterface\u003A\u003AsetUp\u0028\u0029",
             "name": "setUp",
-            "summary": "",
+            "summary": "Sets\u0020a\u0020new\u0020Pionia\u0020instance,\u0020merges\u0020all\u0020commands\u0020declared\u0020in\u0020settings.ini\u0020with\u0020the\u0020inbuilt\u0020commands.",
             "url": "classes/Pionia-command-CommandInterface.html#method_setUp"
         },                {
             "fqsen": "\\Pionia\\command\\CommandInterface\u003A\u003A\u0024commands",
             "name": "commands",
             "summary": "These\u0020are\u0020the\u0020core\u0020commands\u0020that\u0020are\u0020available\u0020in\u0020the\u0020framework",
             "url": "classes/Pionia-command-CommandInterface.html#property_commands"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateAuthenticationBackend",
+            "name": "CreateAuthenticationBackend",
+            "summary": "For\u0020Creating\u0020a\u0020new\u0020service",
+            "url": "classes/Pionia-command-commands-CreateAuthenticationBackend.html"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateAuthenticationBackend\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateAuthenticationBackend.html#method_configure"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateAuthenticationBackend\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateAuthenticationBackend.html#method_execute"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateAuthenticationBackend\u003A\u003A\u0024title",
+            "name": "title",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateAuthenticationBackend.html#property_title"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateAuthenticationBackend\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateAuthenticationBackend.html#property_description"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateAuthenticationBackend\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateAuthenticationBackend.html#property_name"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateMiddleware",
+            "name": "CreateMiddleware",
+            "summary": "For\u0020Creating\u0020a\u0020new\u0020service",
+            "url": "classes/Pionia-command-commands-CreateMiddleware.html"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateMiddleware\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateMiddleware.html#method_configure"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateMiddleware\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateMiddleware.html#method_execute"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateMiddleware\u003A\u003A\u0024title",
+            "name": "title",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateMiddleware.html#property_title"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateMiddleware\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateMiddleware.html#property_description"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateMiddleware\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateMiddleware.html#property_name"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateService",
+            "name": "CreateService",
+            "summary": "For\u0020Creating\u0020a\u0020new\u0020service",
+            "url": "classes/Pionia-command-commands-CreateService.html"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateService\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateService.html#method_configure"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateService\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateService.html#method_execute"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateService\u003A\u003A\u0024title",
+            "name": "title",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateService.html#property_title"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateService\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateService.html#property_description"
+        },                {
+            "fqsen": "\\Pionia\\command\\commands\\CreateService\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Pionia-command-commands-CreateService.html#property_name"
         },                {
             "fqsen": "\\Pionia\\command\\commands\\StartServer",
             "name": "StartServer",
@@ -160,6 +435,16 @@ Search.appendIndex(
             "name": "registerMiddleware",
             "summary": "",
             "url": "classes/Pionia-core-config-CoreKernel.html#method_registerMiddleware"
+        },                {
+            "fqsen": "\\Pionia\\core\\config\\CoreKernel\u003A\u003AmergeMiddlewaresFromSettings\u0028\u0029",
+            "name": "mergeMiddlewaresFromSettings",
+            "summary": "",
+            "url": "classes/Pionia-core-config-CoreKernel.html#method_mergeMiddlewaresFromSettings"
+        },                {
+            "fqsen": "\\Pionia\\core\\config\\CoreKernel\u003A\u003AmergeAuthenticationsFromSettings\u0028\u0029",
+            "name": "mergeAuthenticationsFromSettings",
+            "summary": "",
+            "url": "classes/Pionia-core-config-CoreKernel.html#method_mergeAuthenticationsFromSettings"
         },                {
             "fqsen": "\\Pionia\\core\\config\\CoreKernel\u003A\u003AregisterAuthBackends\u0028\u0029",
             "name": "registerAuthBackends",
@@ -441,6 +726,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-core-routing-PioniaRouter.html#method_get"
         },                {
+            "fqsen": "\\Pionia\\core\\routing\\PioniaRouter\u003A\u003AcleanBase\u0028\u0029",
+            "name": "cleanBase",
+            "summary": "Cleans\u0020up\u0020the\u0020base\u0020url\u0020to\u0020set",
+            "url": "classes/Pionia-core-routing-PioniaRouter.html#method_cleanBase"
+        },                {
             "fqsen": "\\Pionia\\core\\routing\\PioniaRouter\u003A\u003AaddRoute\u0028\u0029",
             "name": "addRoute",
             "summary": "",
@@ -461,200 +751,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-core-routing-PioniaRouter.html#property_basePath"
         },                {
-            "fqsen": "\\Pionia\\database\\ConnectionInterface",
-            "name": "ConnectionInterface",
-            "summary": "Extend\u0020this\u0020to\u0020define\u0020your\u0020own\u0020database\u0020driver\u0020implementation.",
-            "url": "classes/Pionia-database-ConnectionInterface.html"
-        },                {
-            "fqsen": "\\Pionia\\database\\ConnectionInterface\u003A\u003A__connect_internal\u0028\u0029",
-            "name": "__connect_internal",
+            "fqsen": "\\Pionia\\database\\Connection",
+            "name": "Connection",
             "summary": "",
-            "url": "classes/Pionia-database-ConnectionInterface.html#method___connect_internal"
-        },                {
-            "fqsen": "\\Pionia\\database\\Connector",
-            "name": "Connector",
-            "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020the\u0020framework",
-            "url": "classes/Pionia-database-Connector.html"
-        },                {
-            "fqsen": "\\Pionia\\database\\Connector\u003A\u003A__connect_internal\u0028\u0029",
-            "name": "__connect_internal",
-            "summary": "",
-            "url": "classes/Pionia-database-Connector.html#method___connect_internal"
-        },                {
-            "fqsen": "\\Pionia\\database\\Connector\u003A\u003AwithSqlite\u0028\u0029",
-            "name": "withSqlite",
-            "summary": "",
-            "url": "classes/Pionia-database-Connector.html#method_withSqlite"
-        },                {
-            "fqsen": "\\Pionia\\database\\Connector\u003A\u003Aconnect\u0028\u0029",
-            "name": "connect",
-            "summary": "",
-            "url": "classes/Pionia-database-Connector.html#method_connect"
-        },                {
-            "fqsen": "\\Pionia\\database\\Connector\u003A\u003A\u0024dbType",
-            "name": "dbType",
-            "summary": "",
-            "url": "classes/Pionia-database-Connector.html#property_dbType"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator",
-            "name": "Paginator",
-            "summary": "This\u0020class\u0020helps\u0020us\u0020to\u0020perform\u0020paginated\u0020queries\u0020from\u0020the\u0020database.\u0020The\u0020fast\u0020that\u0020counting\u0020and\u0020querying\u0020happens\n\u0020in\u0020the\u0020db,\u0020it\u0020makes\u0020this\u0020somewhat\u0020optimal.",
-            "url": "classes/Pionia-database-Paginator.html"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#method___construct"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003ALimitBy\u0028\u0029",
-            "name": "LimitBy",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#method_LimitBy"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003AstartFrom\u0028\u0029",
-            "name": "startFrom",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#method_startFrom"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003Apaginate\u0028\u0029",
-            "name": "paginate",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#method_paginate"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003Apager\u0028\u0029",
-            "name": "pager",
-            "summary": "We\u0020use\u0020this\u0020method\u0020if\u0020we\u0020still\u0020want\u0020to\u0020play\u0020with\u0020the\u0020class\u0020object",
-            "url": "classes/Pionia-database-Paginator.html#method_pager"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003A\u0024query",
-            "name": "query",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#property_query"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003A\u0024limit",
-            "name": "limit",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#property_limit"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003A\u0024offset",
-            "name": "offset",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#property_offset"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003A\u0024next_offset",
-            "name": "next_offset",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#property_next_offset"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003A\u0024results",
-            "name": "results",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#property_results"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003A\u0024previous_offset",
-            "name": "previous_offset",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#property_previous_offset"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003A\u0024has_next_page",
-            "name": "has_next_page",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#property_has_next_page"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003A\u0024has_prev_page",
-            "name": "has_prev_page",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#property_has_prev_page"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003A\u0024number_of_records",
-            "name": "number_of_records",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#property_number_of_records"
-        },                {
-            "fqsen": "\\Pionia\\database\\Paginator\u003A\u003A\u0024total_records",
-            "name": "total_records",
-            "summary": "",
-            "url": "classes/Pionia-database-Paginator.html#property_total_records"
-        },                {
-            "fqsen": "\\Pionia\\database\\QueryBuilder",
-            "name": "QueryBuilder",
-            "summary": "Class\u0020QueryBuilder",
-            "url": "classes/Pionia-database-QueryBuilder.html"
-        },                {
-            "fqsen": "\\Pionia\\database\\QueryBuilder\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Pionia-database-QueryBuilder.html#method___construct"
-        },                {
-            "fqsen": "\\Pionia\\database\\QueryBuilder\u003A\u003AUsing\u0028\u0029",
-            "name": "Using",
-            "summary": "Use\u0020this\u0020to\u0020reset\u0020the\u0020connection\u0020to\u0020the\u0020database\u0020to\u0020a\u0020different\u0020one.",
-            "url": "classes/Pionia-database-QueryBuilder.html#method_Using"
-        },                {
-            "fqsen": "\\Pionia\\database\\QueryBuilder\u003A\u003ArefreshConnection\u0028\u0029",
-            "name": "refreshConnection",
-            "summary": "",
-            "url": "classes/Pionia-database-QueryBuilder.html#method_refreshConnection"
-        },                {
-            "fqsen": "\\Pionia\\database\\QueryBuilder\u003A\u003AQuery\u0028\u0029",
-            "name": "Query",
-            "summary": "",
-            "url": "classes/Pionia-database-QueryBuilder.html#method_Query"
-        },                {
-            "fqsen": "\\Pionia\\database\\QueryBuilder\u003A\u003Abound_query\u0028\u0029",
-            "name": "bound_query",
-            "summary": "Assists\u0020us\u0020to\u0020make\u0020bound\u0020queries",
-            "url": "classes/Pionia-database-QueryBuilder.html#method_bound_query"
-        },                {
-            "fqsen": "\\Pionia\\database\\QueryBuilder\u003A\u003Aone\u0028\u0029",
-            "name": "one",
-            "summary": "",
-            "url": "classes/Pionia-database-QueryBuilder.html#method_one"
-        },                {
-            "fqsen": "\\Pionia\\database\\QueryBuilder\u003A\u003Aall\u0028\u0029",
-            "name": "all",
-            "summary": "",
-            "url": "classes/Pionia-database-QueryBuilder.html#method_all"
-        },                {
-            "fqsen": "\\Pionia\\database\\QueryBuilder\u003A\u003A_count_internal\u0028\u0029",
-            "name": "_count_internal",
-            "summary": "",
-            "url": "classes/Pionia-database-QueryBuilder.html#method__count_internal"
-        },                {
-            "fqsen": "\\Pionia\\database\\QueryBuilder\u003A\u003A\u0024query",
-            "name": "query",
-            "summary": "",
-            "url": "classes/Pionia-database-QueryBuilder.html#property_query"
-        },                {
-            "fqsen": "\\Pionia\\database\\QueryBuilder\u003A\u003A\u0024connection",
-            "name": "connection",
-            "summary": "",
-            "url": "classes/Pionia-database-QueryBuilder.html#property_connection"
-        },                {
-            "fqsen": "\\Pionia\\database\\QueryBuilder\u003A\u003A\u0024using",
-            "name": "using",
-            "summary": "",
-            "url": "classes/Pionia-database-QueryBuilder.html#property_using"
-        },                {
-            "fqsen": "\\Pionia\\database\\SupportDatabaseDrivers",
-            "name": "SupportDatabaseDrivers",
-            "summary": "Currently\u0020supported\u0020database\u0020drivers",
-            "url": "classes/Pionia-database-SupportDatabaseDrivers.html"
-        },                {
-            "fqsen": "\\Pionia\\database\\SupportDatabaseDrivers\u003A\u003A\u0024MYSQL",
-            "name": "MYSQL",
-            "summary": "",
-            "url": "classes/Pionia-database-SupportDatabaseDrivers.html#property_MYSQL"
-        },                {
-            "fqsen": "\\Pionia\\database\\SupportDatabaseDrivers\u003A\u003A\u0024SQLITE",
-            "name": "SQLITE",
-            "summary": "",
-            "url": "classes/Pionia-database-SupportDatabaseDrivers.html#property_SQLITE"
-        },                {
-            "fqsen": "\\Pionia\\database\\SupportDatabaseDrivers\u003A\u003A\u0024POSTGRES",
-            "name": "POSTGRES",
-            "summary": "",
-            "url": "classes/Pionia-database-SupportDatabaseDrivers.html#property_POSTGRES"
+            "url": "classes/Pionia-database-Connection.html"
         },                {
             "fqsen": "\\Pionia\\exceptions\\BaseException",
             "name": "BaseException",
@@ -801,6 +901,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-request-BaseRestService.html#property_request"
         },                {
+            "fqsen": "\\Pionia\\request\\BaseRestService\u003A\u003A\u0024logger",
+            "name": "logger",
+            "summary": "",
+            "url": "classes/Pionia-request-BaseRestService.html#property_logger"
+        },                {
             "fqsen": "\\Pionia\\request\\BaseRestService\u003A\u003A\u0024deactivatedActions",
             "name": "deactivatedActions",
             "summary": "",
@@ -870,6 +975,16 @@ Search.appendIndex(
             "name": "getFormData",
             "summary": "Returns\u0020the\u0020data\u0020if\u0020the\u0020request\u0020was\u0020submitted\u0020as\u0020form\u0020data",
             "url": "classes/Pionia-request-Request.html#method_getFormData"
+        },                {
+            "fqsen": "\\Pionia\\request\\Request\u003A\u003AgetLogger\u0028\u0029",
+            "name": "getLogger",
+            "summary": "",
+            "url": "classes/Pionia-request-Request.html#method_getLogger"
+        },                {
+            "fqsen": "\\Pionia\\request\\Request\u003A\u003AsetLogger\u0028\u0029",
+            "name": "setLogger",
+            "summary": "",
+            "url": "classes/Pionia-request-Request.html#method_setLogger"
         },                {
             "fqsen": "\\Pionia\\request\\Request\u003A\u003A\u0024authenticated",
             "name": "authenticated",
@@ -1206,15 +1321,20 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html"
         },                {
-            "fqsen": "\\Pionia\\command",
-            "name": "command",
+            "fqsen": "\\Pionia\\codegens",
+            "name": "codegens",
             "summary": "",
-            "url": "namespaces/pionia-command.html"
+            "url": "namespaces/pionia-codegens.html"
         },                {
             "fqsen": "\\Pionia",
             "name": "Pionia",
             "summary": "",
             "url": "namespaces/pionia.html"
+        },                {
+            "fqsen": "\\Pionia\\command",
+            "name": "command",
+            "summary": "",
+            "url": "namespaces/pionia-command.html"
         },                {
             "fqsen": "\\Pionia\\command\\commands",
             "name": "commands",

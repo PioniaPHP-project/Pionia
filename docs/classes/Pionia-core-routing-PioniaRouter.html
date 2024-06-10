@@ -80,6 +80,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/pionia-codegens.html" class="">codegens</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/pionia-command.html" class="">command</a>
                 
             </li>
@@ -155,6 +159,9 @@
         <h2 class="phpdocumentor-content__title">
     PioniaRouter
 
+        <span class="phpdocumentor-element__extends">
+        extends <a href="classes/Pionia-core-Pionia.html"><abbr title="\Pionia\core\Pionia">Pionia</abbr></a>
+    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -174,9 +181,9 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/PioniaRouter.php"><a href="files/src-core-routing-pioniarouter.html"><abbr title="src/core/routing/PioniaRouter.php">PioniaRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
-            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.31" class="phpdocumentor-element-found-in__source" data-line="31" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.32" class="phpdocumentor-element-found-in__source" data-line="32" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
     </aside>
 
             <p class="phpdocumentor-summary">This is the basis for defining routes in the application.</p>
@@ -239,6 +246,24 @@ $router-&gt;addGroup('app\controller\MyController')
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-core-Pionia.html#property_name">$name</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-core-Pionia.html#property_settings">$settings</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-core-Pionia.html#property_version">$version</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Pionia-core-routing-PioniaRouter.html#property_routes">$routes</a>
     <span>
@@ -280,7 +305,7 @@ $router-&gt;addGroup('app\controller\MyController')
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-core-routing-PioniaRouter.html#method_get">get()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <a href="classes/Pionia-response-BaseResponse.html"><abbr title="\Pionia\response\BaseResponse">BaseResponse</abbr></a>|static    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
@@ -290,21 +315,58 @@ $router-&gt;addGroup('app\controller\MyController')
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-core-routing-PioniaRouter.html#method_post">post()</a>
+    <a href="classes/Pionia-core-Pionia.html#method_getSetting">getSetting()</a>
     <span>
                                 &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-core-Pionia.html#method_getSettingOrDefault">getSettingOrDefault()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-core-Pionia.html#method_getSettings">getSettings()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;|null    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-core-routing-PioniaRouter.html#method_post">post()</a>
+    <span>
+                                &nbsp;: <a href="classes/Pionia-response-BaseResponse.html"><abbr title="\Pionia\response\BaseResponse">BaseResponse</abbr></a>|static    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-core-Pionia.html#method_resolveSettingsFromIni">resolveSettingsFromIni()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Pionia-core-Pionia.html#method_getServerSettings">getServerSettings()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-core-routing-PioniaRouter.html#method_addRoute">addRoute()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: void    </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Pionia-core-routing-PioniaRouter.html#method_cleanBase">cleanBase()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Cleans up the base url to set</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-core-routing-PioniaRouter.html#method_resolveController">resolveController()</a>
     <span>
-                                &nbsp;: static    </span>
+                                &nbsp;: void    </span>
 </dt>
 
     </dl>
@@ -325,6 +387,108 @@ $router-&gt;addGroup('app\controller\MyController')
         class="
             phpdocumentor-element
             -property
+            -public
+            -static                                            "
+>
+    <h4 class="phpdocumentor-element__name" id="property_name">
+        $name
+        <a href="classes/Pionia-core-Pionia.html#property_name" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.21" class="phpdocumentor-element-found-in__source" data-line="21" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$name</span>
+     = <span class="phpdocumentor-signature__default-value">&#039;Pionia&#039;</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+            -static                                            "
+>
+    <h4 class="phpdocumentor-element__name" id="property_settings">
+        $settings
+        <a href="classes/Pionia-core-Pionia.html#property_settings" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">17</span>
+
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.17" class="phpdocumentor-element-found-in__source" data-line="17" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$settings</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+            -static                                            "
+>
+    <h4 class="phpdocumentor-element__name" id="property_version">
+        $version
+        <a href="classes/Pionia-core-Pionia.html#property_version" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">19</span>
+
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.19" class="phpdocumentor-element-found-in__source" data-line="19" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$version</span>
+     = <span class="phpdocumentor-signature__default-value">&#039;1.0.7&#039;</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
             -protected
                                                         "
 >
@@ -338,9 +502,9 @@ $router-&gt;addGroup('app\controller\MyController')
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/PioniaRouter.php"><a href="files/src-core-routing-pioniarouter.html"><abbr title="src/core/routing/PioniaRouter.php">PioniaRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
-            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.33" class="phpdocumentor-element-found-in__source" data-line="33" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.34" class="phpdocumentor-element-found-in__source" data-line="34" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
     </aside>
 
     
@@ -372,9 +536,9 @@ $router-&gt;addGroup('app\controller\MyController')
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/PioniaRouter.php"><a href="files/src-core-routing-pioniarouter.html"><abbr title="src/core/routing/PioniaRouter.php">PioniaRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
-            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.36" class="phpdocumentor-element-found-in__source" data-line="36" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.37" class="phpdocumentor-element-found-in__source" data-line="37" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
     </aside>
 
     
@@ -382,7 +546,7 @@ $router-&gt;addGroup('app\controller\MyController')
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$basePath</span>
-     = <span class="phpdocumentor-signature__default-value">&#039;/api/v1/&#039;</span></code>
+     = <span class="phpdocumentor-signature__default-value">&#039;/api&#039;</span></code>
 
     
     
@@ -406,9 +570,9 @@ $router-&gt;addGroup('app\controller\MyController')
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/PioniaRouter.php"><a href="files/src-core-routing-pioniarouter.html"><abbr title="src/core/routing/PioniaRouter.php">PioniaRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
-            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.35" class="phpdocumentor-element-found-in__source" data-line="35" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.36" class="phpdocumentor-element-found-in__source" data-line="36" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
     </aside>
 
     
@@ -445,9 +609,9 @@ $router-&gt;addGroup('app\controller\MyController')
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/PioniaRouter.php"><a href="files/src-core-routing-pioniarouter.html"><abbr title="src/core/routing/PioniaRouter.php">PioniaRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
-            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.43" class="phpdocumentor-element-found-in__source" data-line="43" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.45" class="phpdocumentor-element-found-in__source" data-line="45" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
     </aside>
 
     
@@ -487,15 +651,15 @@ $router-&gt;addGroup('app\controller\MyController')
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/PioniaRouter.php"><a href="files/src-core-routing-pioniarouter.html"><abbr title="src/core/routing/PioniaRouter.php">PioniaRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
-            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.83" class="phpdocumentor-element-found-in__source" data-line="83" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.96" class="phpdocumentor-element-found-in__source" data-line="96" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">addGroup</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$controller</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$basePath</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;/api/v1/&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+                    <span class="phpdocumentor-signature__name">addGroup</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$controller</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$basePath</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;v1/&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -512,13 +676,28 @@ $router-&gt;addGroup('app\controller\MyController')
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$basePath</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;/api/v1/&#039;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;v1/&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-core-routing-PioniaRouter.html#method_addGroup#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-ControllerException.html"><abbr title="\Pionia\exceptions\ControllerException">ControllerException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -540,15 +719,15 @@ $router-&gt;addGroup('app\controller\MyController')
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/PioniaRouter.php"><a href="files/src-core-routing-pioniarouter.html"><abbr title="src/core/routing/PioniaRouter.php">PioniaRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">92</span>
+    <span class="phpdocumentor-element-found-in__line">105</span>
 
-            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.92" class="phpdocumentor-element-found-in__source" data-line="92" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.105" class="phpdocumentor-element-found-in__source" data-line="105" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">get</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">get</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-response-BaseResponse.html"><abbr title="\Pionia\response\BaseResponse">BaseResponse</abbr></a>|static</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -573,7 +752,11 @@ $router-&gt;addGroup('app\controller\MyController')
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-response-BaseResponse.html"><abbr title="\Pionia\response\BaseResponse">BaseResponse</abbr></a>|static</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -589,9 +772,9 @@ $router-&gt;addGroup('app\controller\MyController')
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/PioniaRouter.php"><a href="files/src-core-routing-pioniarouter.html"><abbr title="src/core/routing/PioniaRouter.php">PioniaRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
-            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.38" class="phpdocumentor-element-found-in__source" data-line="38" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.39" class="phpdocumentor-element-found-in__source" data-line="39" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
     </aside>
 
     
@@ -615,6 +798,133 @@ $router-&gt;addGroup('app\controller\MyController')
         class="phpdocumentor-element
             -method
             -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSetting">
+        getSetting()
+        <a href="classes/Pionia-core-Pionia.html#method_getSetting" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.34" class="phpdocumentor-element-found-in__source" data-line="34" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSetting</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSettingOrDefault">
+        getSettingOrDefault()
+        <a href="classes/Pionia-core-Pionia.html#method_getSettingOrDefault" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">48</span>
+
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.48" class="phpdocumentor-element-found-in__source" data-line="48" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSettingOrDefault</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$default</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$default</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSettings">
+        getSettings()
+        <a href="classes/Pionia-core-Pionia.html#method_getSettings" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">29</span>
+
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.29" class="phpdocumentor-element-found-in__source" data-line="29" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSettings</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
                                                         "
 >
     <h4 class="phpdocumentor-element__name" id="method_post">
@@ -625,15 +935,15 @@ $router-&gt;addGroup('app\controller\MyController')
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/PioniaRouter.php"><a href="files/src-core-routing-pioniarouter.html"><abbr title="src/core/routing/PioniaRouter.php">PioniaRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
-            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.70" class="phpdocumentor-element-found-in__source" data-line="70" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.80" class="phpdocumentor-element-found-in__source" data-line="80" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">post</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">post</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-response-BaseResponse.html"><abbr title="\Pionia\response\BaseResponse">BaseResponse</abbr></a>|static</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -658,7 +968,79 @@ $router-&gt;addGroup('app\controller\MyController')
 
     
 
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-response-BaseResponse.html"><abbr title="\Pionia\response\BaseResponse">BaseResponse</abbr></a>|static</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_resolveSettingsFromIni">
+        resolveSettingsFromIni()
+        <a href="classes/Pionia-core-Pionia.html#method_resolveSettingsFromIni" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">53</span>
+
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.53" class="phpdocumentor-element-found-in__source" data-line="53" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
+    </aside>
+
     
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">resolveSettingsFromIni</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getServerSettings">
+        getServerSettings()
+        <a href="classes/Pionia-core-Pionia.html#method_getServerSettings" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">39</span>
+
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.39" class="phpdocumentor-element-found-in__source" data-line="39" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getServerSettings</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -674,15 +1056,15 @@ $router-&gt;addGroup('app\controller\MyController')
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/PioniaRouter.php"><a href="files/src-core-routing-pioniarouter.html"><abbr title="src/core/routing/PioniaRouter.php">PioniaRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">108</span>
+    <span class="phpdocumentor-element-found-in__line">139</span>
 
-            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.108" class="phpdocumentor-element-found-in__source" data-line="108" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.139" class="phpdocumentor-element-found-in__source" data-line="139" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">addRoute</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">SupportedHttpMethods::POST</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$controller</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$condition</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">addRoute</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">SupportedHttpMethods::POST</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$controller</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$condition</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -751,6 +1133,53 @@ $router-&gt;addGroup('app\controller\MyController')
             -private
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_cleanBase">
+        cleanBase()
+        <a href="classes/Pionia-core-routing-PioniaRouter.html#method_cleanBase" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/PioniaRouter.php"><a href="files/src-core-routing-pioniarouter.html"><abbr title="src/core/routing/PioniaRouter.php">PioniaRouter.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">123</span>
+
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.123" class="phpdocumentor-element-found-in__source" data-line="123" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Cleans up the base url to set</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">cleanBase</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$base</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$base</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_resolveController">
         resolveController()
         <a href="classes/Pionia-core-routing-PioniaRouter.html#method_resolveController" class="headerlink"><i class="fas fa-link"></i></a>
@@ -759,15 +1188,15 @@ $router-&gt;addGroup('app\controller\MyController')
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/routing/PioniaRouter.php"><a href="files/src-core-routing-pioniarouter.html"><abbr title="src/core/routing/PioniaRouter.php">PioniaRouter.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">59</span>
 
-            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.48" class="phpdocumentor-element-found-in__source" data-line="48" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
+            <a href="classes/Pionia-core-routing-PioniaRouter.html#source-view.59" class="phpdocumentor-element-found-in__source" data-line="59" data-modal="source-view" data-src="files/src/core/routing/PioniaRouter.php.txt"></a>
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">resolveController</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$_controller</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$setAsCurrent</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+                    <span class="phpdocumentor-signature__name">resolveController</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$_controller</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$setAsCurrent</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -791,12 +1220,23 @@ $router-&gt;addGroup('app\controller\MyController')
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-core-routing-PioniaRouter.html#method_resolveController#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">static</span>
-            </section>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-exceptions-ControllerException.html"><abbr title="\Pionia\exceptions\ControllerException">ControllerException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
 
+    
 </article>
             </section>
 
@@ -911,6 +1351,9 @@ $router-&gt;addGroup('app\controller\MyController')
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/Pionia-core-Pionia.html#property_name">$name<a href="classes/Pionia-core-routing-PioniaRouter.html"></li>
+                                                    <li><a href="classes/Pionia-core-Pionia.html#property_settings">$settings<a href="classes/Pionia-core-routing-PioniaRouter.html"></li>
+                                                    <li><a href="classes/Pionia-core-Pionia.html#property_version">$version<a href="classes/Pionia-core-routing-PioniaRouter.html"></li>
                                                     <li><a href="classes/Pionia-core-routing-PioniaRouter.html#property_routes">$routes<a href="classes/Pionia-core-routing-PioniaRouter.html"></li>
                                                     <li><a href="classes/Pionia-core-routing-PioniaRouter.html#property_basePath">$basePath<a href="classes/Pionia-core-routing-PioniaRouter.html"></li>
                                                     <li><a href="classes/Pionia-core-routing-PioniaRouter.html#property_controller">$controller<a href="classes/Pionia-core-routing-PioniaRouter.html"></li>
@@ -924,8 +1367,14 @@ $router-&gt;addGroup('app\controller\MyController')
                                             <li><a href="classes/Pionia-core-routing-PioniaRouter.html#method_addGroup">addGroup()</a></li>
                                             <li><a href="classes/Pionia-core-routing-PioniaRouter.html#method_get">get()</a></li>
                                             <li><a href="classes/Pionia-core-routing-PioniaRouter.html#method_getRoutes">getRoutes()</a></li>
+                                            <li><a href="classes/Pionia-core-Pionia.html#method_getSetting">getSetting()</a></li>
+                                            <li><a href="classes/Pionia-core-Pionia.html#method_getSettingOrDefault">getSettingOrDefault()</a></li>
+                                            <li><a href="classes/Pionia-core-Pionia.html#method_getSettings">getSettings()</a></li>
                                             <li><a href="classes/Pionia-core-routing-PioniaRouter.html#method_post">post()</a></li>
+                                            <li><a href="classes/Pionia-core-Pionia.html#method_resolveSettingsFromIni">resolveSettingsFromIni()</a></li>
+                                            <li><a href="classes/Pionia-core-Pionia.html#method_getServerSettings">getServerSettings()</a></li>
                                             <li><a href="classes/Pionia-core-routing-PioniaRouter.html#method_addRoute">addRoute()</a></li>
+                                            <li><a href="classes/Pionia-core-routing-PioniaRouter.html#method_cleanBase">cleanBase()</a></li>
                                             <li><a href="classes/Pionia-core-routing-PioniaRouter.html#method_resolveController">resolveController()</a></li>
                                     </ul>
             </li>
