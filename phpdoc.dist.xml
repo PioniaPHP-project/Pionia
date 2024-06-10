@@ -15,6 +15,7 @@
         <api format="php">
             <source dsn=".">
                 <path>src</path>
+                <path>pionia/Porm/*</path>
             </source>
             <output>.</output>
             <ignore hidden="true" symlinks="true">
