@@ -726,6 +726,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-core-routing-PioniaRouter.html#method_get"
         },                {
+            "fqsen": "\\Pionia\\core\\routing\\PioniaRouter\u003A\u003AcleanBase\u0028\u0029",
+            "name": "cleanBase",
+            "summary": "Cleans\u0020up\u0020the\u0020base\u0020url\u0020to\u0020set",
+            "url": "classes/Pionia-core-routing-PioniaRouter.html#method_cleanBase"
+        },                {
             "fqsen": "\\Pionia\\core\\routing\\PioniaRouter\u003A\u003AaddRoute\u0028\u0029",
             "name": "addRoute",
             "summary": "",

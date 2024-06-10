@@ -4,6 +4,7 @@ namespace Pionia\core\routing;
 
 use Pionia\core\helpers\SupportedHttpMethods;
 use Pionia\core\helpers\Utilities;
+use Pionia\core\Pionia;
 use Pionia\exceptions\ControllerException;
 use Pionia\response\BaseResponse;
 use Symfony\Component\Routing\Route;
@@ -28,21 +29,28 @@ use Symfony\Component\Routing\Route;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class PioniaRouter
+class PioniaRouter extends Pionia
 {
     protected $routes;
 
     private string | null $controller = null;
-    private string $basePath = '/api/v1/';
+    private string $basePath = '/api';
 
     public function getRoutes(): BaseRoutes
     {
         return $this->routes;
     }
 
+
     public function __construct(BaseRoutes | null $routes = null)
     {
         $this->routes = $routes ?? new BaseRoutes();
+
+        $set = self::getServerSettings();
+
+        if ($set && isset($set['baseurl'])){
+            $this->basePath = $set['baseurl'];
+        }
     }
 
     /**
@@ -85,10 +93,10 @@ class PioniaRouter
     /**
      * @throws ControllerException
      */
-    public function addGroup(string $controller, string $basePath = '/api/v1/'): static
+    public function addGroup(string $controller, string $basePath = 'v1/'): static
     {
         $this->resolveController($controller);
-        $this->basePath = $basePath;
+        $this->basePath = $this->basePath.$this->cleanBase($basePath);
         $this->addRoute('ping', 'ping', SupportedHttpMethods::GET, $controller);
         return $this;
     }
@@ -105,6 +113,24 @@ class PioniaRouter
         } catch (ControllerException $e) {
             return BaseResponse::JsonResponse(500, $e->getMessage());
         }
+    }
+
+    /**
+     * Cleans up the base url to set
+     * @param string $base
+     * @return string
+     */
+    private function cleanBase(string $base)
+    {
+        if (!str_starts_with($base, "/") && str_ends_with($this->basePath, "/")){
+            $base = '/'.$base;
+        }
+
+        if (!str_ends_with($base, "/")){
+            $base .= "/";
+        }
+
+        return $base;
     }
 
     /**
