@@ -3,11 +3,9 @@
 namespace Pionia\core\config;
 
 use Exception;
-use Monolog\Logger;
 use Pionia\core\helpers\Utilities;
 use Pionia\core\Pionia;
 use Pionia\core\routing\BaseRoutes;
-use Pionia\Logging\PioniaLogger;
 use Pionia\request\Request;
 use Pionia\response\BaseResponse;
 use Pionia\response\Response;
