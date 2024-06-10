@@ -2,11 +2,12 @@
 
 namespace Pionia\command;
 
-use PDO;
 use Pionia\core\Pionia;
-use Pionia\database\Connector;
-use Pionia\exceptions\DatabaseException;
+use Pionia\database\Connection;
+use Pionia\Logging\PioniaLogger;
+use Porm\core\Database;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\HttpKernel\Log\Logger;
 
 /**
  * This is the base command class, it extends the Symfony console command class and provides some helper methods
@@ -14,6 +15,11 @@ use Symfony\Component\Console\Command\Command;
  * */
 class BaseCommand extends Command
 {
+
+    public function __construct(?string $name = null)
+    {
+        parent::__construct($name);
+    }
 
     /**
      * Return the base app, via this, you can access all the app settings, and current app environment
@@ -38,12 +44,14 @@ class BaseCommand extends Command
      * Returns the current database connection
      *
      * @param string|null $db
-     * @return PDO
+     * @return Database
      *
+     * @throws \Exception
      * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
-     * */
-    protected static function connection(string | null $db = null): PDO
+     *
+     */
+    protected static function connection(string | null $db = null): Database
     {
-        return Connector::connect($db);
+        return Connection::use($db);
     }
 }

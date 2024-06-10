@@ -4,8 +4,10 @@ namespace Pionia\command;
 
 use Pionia\core\Pionia;
 use Pionia\database\Connection;
+use Pionia\Logging\PioniaLogger;
 use Porm\core\Database;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\HttpKernel\Log\Logger;
 
 /**
  * This is the base command class, it extends the Symfony console command class and provides some helper methods
@@ -13,6 +15,11 @@ use Symfony\Component\Console\Command\Command;
  * */
 class BaseCommand extends Command
 {
+
+    public function __construct(?string $name = null)
+    {
+        parent::__construct($name);
+    }
 
     /**
      * Return the base app, via this, you can access all the app settings, and current app environment

@@ -4,6 +4,7 @@ namespace Pionia\core\config;
 
 use Exception;
 use Monolog\Logger;
+use Pionia\core\helpers\Utilities;
 use Pionia\core\Pionia;
 use Pionia\core\routing\BaseRoutes;
 use Pionia\Logging\PioniaLogger;
@@ -46,7 +47,6 @@ class CoreKernel extends Pionia
     private ?RequestContext $context = null;
     private ?UrlMatcher $matcher = null;
 
-    private ?Logger $logger = null;
 
     private $middleware = [];
 
@@ -58,7 +58,6 @@ class CoreKernel extends Pionia
         parent::__construct();
         $this::resolveSettingsFromIni();
 
-        $this->logger = PioniaLogger::init();
     }
 
     public function registerMiddleware(array | string $middleware): static
@@ -69,6 +68,45 @@ class CoreKernel extends Pionia
             $this->middleware[] = $middleware;
         }
         return $this;
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function mergeMiddlewaresFromSettings(): void
+    {
+        $otherMiddlewares = $this::getSetting('middlewares');
+        if ($otherMiddlewares){
+            $middlewares = array_values($otherMiddlewares);
+            foreach ($middlewares as $middleware){
+                $check = Utilities::extends($middleware, 'Pionia\core\interceptions\BaseMiddleware');
+                if ($check === 'NO_CLASS'){
+                    throw new Exception("Middleware $middleware was not found, are you sure you created it?");
+                } elseif ($check === 'DOES_NOT'){
+                    throw new Exception("Middleware $middleware must extend Pionia\core\interceptions\BaseMiddleware");
+                }
+
+                $this->middleware[] = $middleware;
+            }
+        }
+    }
+
+    private function mergeAuthenticationsFromSettings()
+    {
+        $otherAuths = $this::getSetting('authentications');
+        if ($otherAuths){
+            $auths = array_values($otherAuths);
+            foreach ($auths as $auth){
+                $check = Utilities::extends($auth, 'Pionia\core\interceptions\BaseAuthenticationBackend');
+                if ($check === 'NO_CLASS'){
+                    throw new Exception("Authentication backend $auth was not found, are you sure you created it?");
+                } elseif ($check === 'DOES_NOT'){
+                    throw new Exception("Authentication backend $auth must extend Pionia\core\interceptions\BaseAuthenticationBackend");
+                }
+
+                $this->authBackends[] = $auth;
+            }
+        }
     }
 
     public function registerAuthBackends(array | string $auth_backends): static
@@ -108,7 +146,18 @@ class CoreKernel extends Pionia
 
             $arguments = $argumentResolver->getArguments($request, $controller);
 
+            $serverSettings = self::getSetting('server');
+
+            $shouldLog = isset($serverSettings['LOG_REQUESTS']) && $serverSettings['LOG_REQUESTS'];
+
+            if ($shouldLog) {
+                logger->info("Request Data Received ", $arguments);
+            }
+
             $response =  call_user_func_array($controller, $arguments);
+
+            if ($shouldLog)
+            logger->info('Response Data Received', $response);
 
             $requestResponse = new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
         } catch (ResourceNotFoundException $exception) {
@@ -127,7 +176,6 @@ class CoreKernel extends Pionia
         try {
             $request = $this->resolveMiddlewares($request); // first run for all middlewares
             $request =$this->resolveAuthenticationBackend($request); // run all the authentication middles
-
             $response = $this->resolve($request);
             $request = $this->resolveMiddlewares($request, $response);
             return $response->prepare($request)->send();
@@ -146,6 +194,7 @@ class CoreKernel extends Pionia
      */
     public function resolveMiddlewares(Request $request, Response | null $response = null): Request
     {
+        $this->mergeMiddlewaresFromSettings();
         // we want to run them if we have them
         if (count($this->middleware) > 0) {
             foreach ($this->middleware as $middleware) {
@@ -160,6 +209,7 @@ class CoreKernel extends Pionia
 
     public function resolveAuthenticationBackend(Request $request): Request
     {
+        $this->mergeAuthenticationsFromSettings();
         if (count($this->authBackends) > 0) {
             // we take a snapshot
             $backends = $this->authBackends;

@@ -2,8 +2,10 @@
 
 namespace Pionia\request;
 
+use Monolog\Logger;
 use Pionia\exceptions\ResourceNotFoundException;
 use Pionia\exceptions\UserUnauthenticatedException;
+use Pionia\Logging\PioniaLogger;
 use Pionia\response\BaseResponse;
 use ReflectionException;
 use ReflectionMethod;
@@ -26,6 +28,8 @@ abstract class BaseRestService
      * @var Request $request The request object
      */
     public Request $request;
+
+    public Logger $logger;
 
     use AuthTrait;
     use RequestActionTrait;
@@ -62,6 +66,8 @@ abstract class BaseRestService
      */
     public function processAction(string $action, Request $request): BaseResponse
     {
+        $this->logger = PioniaLogger::init();
+
         $this->request = $request;
 
         $service = $request->getData()['SERVICE'];

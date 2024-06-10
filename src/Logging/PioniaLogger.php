@@ -18,8 +18,6 @@ use Pionia\exceptions\BaseException;
 // The Logger instance
 class PioniaLogger extends Pionia
 {
-
-
     public function __construct()
     {
         parent::__construct();
@@ -84,13 +82,14 @@ class PioniaLogger extends Pionia
         if ($debug) {
             $logger
                 ->pushProcessor(new ProcessIdProcessor())
-                ->pushProcessor(new GitProcessor());
+                ->pushProcessor(new GitProcessor())
+                ->pushProcessor(new MemoryUsageProcessor());
         } else {
             $logger->pushProcessor(new MemoryUsageProcessor());
         }
 
         if ($debug) {
-            $output = self::$name . " :: %level_name% | %datetime% > %message% | %context% %extra%\n";
+            $output = self::$name . " :: %level_name% | %datetime% > %message% \n| %context% %extra%\n";
             $formatter = new LineFormatter($output);
         } else {
             $formatter = new JsonFormatter();

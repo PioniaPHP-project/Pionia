@@ -45,7 +45,7 @@ class ValidatorTest extends ContextFreeTestCase
     public static function testSlug()
     {
         $validator = new Validator(false);
-        $slug = 'me sjfsks dfsjdlf';
+        $slug = 'mesjfsksdfsjdlf';
         assertEquals($validator->asSlug($slug), 1);
     }
 }

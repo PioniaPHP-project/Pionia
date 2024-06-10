@@ -80,6 +80,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/pionia-codegens.html" class="">codegens</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/pionia-command.html" class="">command</a>
                 
             </li>
@@ -257,6 +261,12 @@
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-command-BaseCommand.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Pionia-command-BaseCommand.html#method_base">base()</a>
     <span>
@@ -273,7 +283,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Pionia-command-BaseCommand.html#method_connection">connection()</a>
     <span>
-                                &nbsp;: <abbr title="\PDO">PDO</abbr>    </span>
+                                &nbsp;: <abbr title="\Porm\core\Database">Database</abbr>    </span>
 </dt>
 <dd>Returns the current database connection</dd>
 
@@ -456,6 +466,48 @@
                     <article
         class="phpdocumentor-element
             -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Pionia-command-BaseCommand.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/command/BaseCommand.php"><a href="files/src-command-basecommand.html"><abbr title="src/command/BaseCommand.php">BaseCommand.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">19</span>
+
+            <a href="classes/Pionia-command-commands-StartServer.html#source-view.19" class="phpdocumentor-element-found-in__source" data-line="19" data-modal="source-view" data-src="files/src/command/BaseCommand.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$name</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
             -protected
                                     -static                    "
 >
@@ -467,9 +519,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/command/BaseCommand.php"><a href="files/src-command-basecommand.html"><abbr title="src/command/BaseCommand.php">BaseCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
-            <a href="classes/Pionia-command-commands-StartServer.html#source-view.23" class="phpdocumentor-element-found-in__source" data-line="23" data-modal="source-view" data-src="files/src/command/BaseCommand.php.txt"></a>
+            <a href="classes/Pionia-command-commands-StartServer.html#source-view.29" class="phpdocumentor-element-found-in__source" data-line="29" data-modal="source-view" data-src="files/src/command/BaseCommand.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Return the base app, via this, you can access all the app settings, and current app environment</p>
@@ -536,16 +588,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/command/BaseCommand.php"><a href="files/src-command-basecommand.html"><abbr title="src/command/BaseCommand.php">BaseCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
-            <a href="classes/Pionia-command-commands-StartServer.html#source-view.45" class="phpdocumentor-element-found-in__source" data-line="45" data-modal="source-view" data-src="files/src/command/BaseCommand.php.txt"></a>
+            <a href="classes/Pionia-command-commands-StartServer.html#source-view.53" class="phpdocumentor-element-found-in__source" data-line="53" data-modal="source-view" data-src="files/src/command/BaseCommand.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Returns the current database connection</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">connection</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$db</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\PDO">PDO</abbr></span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">connection</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$db</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Porm\core\Database">Database</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -569,6 +621,14 @@
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
                     <span class="phpdocumentor-tag__name">author</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
@@ -581,7 +641,7 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\PDO">PDO</abbr></span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Porm\core\Database">Database</abbr></span>
             </section>
 
 </article>
@@ -652,9 +712,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/command/BaseCommand.php"><a href="files/src-command-basecommand.html"><abbr title="src/command/BaseCommand.php">BaseCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
-            <a href="classes/Pionia-command-commands-StartServer.html#source-view.28" class="phpdocumentor-element-found-in__source" data-line="28" data-modal="source-view" data-src="files/src/command/BaseCommand.php.txt"></a>
+            <a href="classes/Pionia-command-commands-StartServer.html#source-view.34" class="phpdocumentor-element-found-in__source" data-line="34" data-modal="source-view" data-src="files/src/command/BaseCommand.php.txt"></a>
     </aside>
 
     
@@ -829,6 +889,7 @@
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/Pionia-command-BaseCommand.html#method___construct">__construct()</a></li>
                                             <li><a href="classes/Pionia-command-BaseCommand.html#method_base">base()</a></li>
                                             <li><a href="classes/Pionia-command-commands-StartServer.html#method_configure">configure()</a></li>
                                             <li><a href="classes/Pionia-command-BaseCommand.html#method_connection">connection()</a></li>

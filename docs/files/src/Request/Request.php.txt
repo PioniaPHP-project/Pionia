@@ -2,7 +2,9 @@
 
 namespace Pionia\request;
 
+use Monolog\Logger;
 use Pionia\core\helpers\ContextUserObject;
+use Pionia\Logging\PioniaLogger;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 
@@ -22,6 +24,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
 {
      private bool $authenticated = false;
      private mixed  $context = null;
+
      private ContextUserObject | null $auth = null;
 
     /**
@@ -145,4 +148,13 @@ class Request extends \Symfony\Component\HttpFoundation\Request
         return [];
     }
 
+    public function getLogger(): ?Logger
+    {
+        return $this->logger;
+    }
+
+    public function setLogger(?Logger $logger): void
+    {
+        $this->logger = $logger;
+    }
 }

@@ -45,7 +45,10 @@ class PioniaRouter
         $this->routes = $routes ?? new BaseRoutes();
     }
 
-    private function resolveController(string |null $_controller = null, $setAsCurrent = true): static
+    /**
+     * @throws ControllerException
+     */
+    private function resolveController(string |null $_controller = null, $setAsCurrent = true): void
     {
         $controller = $_controller ?? $this->controller;
 
@@ -63,11 +66,10 @@ class PioniaRouter
         if ($setAsCurrent){
             $this->controller = $controller;
         }
-        return $this;
     }
 
 
-    public function post(string $action, string $name)
+    public function post(string $action, string $name): BaseResponse|static
     {
         try {
             if (!$this->controller) {
@@ -80,6 +82,9 @@ class PioniaRouter
         }
     }
 
+    /**
+     * @throws ControllerException
+     */
     public function addGroup(string $controller, string $basePath = '/api/v1/'): static
     {
         $this->resolveController($controller);
@@ -89,7 +94,7 @@ class PioniaRouter
     }
 
 
-    public function get(string $action, string $name)
+    public function get(string $action, string $name): BaseResponse|static
     {
         try {
             if (!$this->controller) {
@@ -105,7 +110,7 @@ class PioniaRouter
     /**
      * @throws ControllerException
      */
-    private function addRoute(string $action, string $name, string | array $method = SupportedHttpMethods::POST, $controller = null, $condition = '')
+    private function addRoute(string $action, string $name, string | array $method = SupportedHttpMethods::POST, $controller = null, $condition = ''): void
     {
         if ($controller) {
             $this->resolveController($controller);
@@ -126,7 +131,6 @@ class PioniaRouter
         ], [], [], null, [], $methods, $condition);
 
         $this->routes->add($name, $route);
-        return $this;
     }
 
 }
