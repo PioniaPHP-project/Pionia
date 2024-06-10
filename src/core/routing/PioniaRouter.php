@@ -34,7 +34,7 @@ class PioniaRouter extends Pionia
     protected $routes;
 
     private string | null $controller = null;
-    private string $basePath = '/api';
+    private string $basePath = '/api/v1/';
 
     public function getRoutes(): BaseRoutes
     {
@@ -46,11 +46,6 @@ class PioniaRouter extends Pionia
     {
         $this->routes = $routes ?? new BaseRoutes();
 
-        $set = self::getServerSettings();
-
-        if ($set && isset($set['baseurl'])){
-            $this->basePath = $set['baseurl'];
-        }
     }
 
     /**
@@ -93,10 +88,10 @@ class PioniaRouter extends Pionia
     /**
      * @throws ControllerException
      */
-    public function addGroup(string $controller, string $basePath = 'v1/'): static
+    public function addGroup(string $controller, string $basePath = '/api/v1/'): static
     {
         $this->resolveController($controller);
-        $this->basePath = $this->basePath.$this->cleanBase($basePath);
+        $this->basePath = $basePath;
         $this->addRoute('ping', 'ping', SupportedHttpMethods::GET, $controller);
         return $this;
     }
