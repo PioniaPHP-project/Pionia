@@ -119,6 +119,29 @@ class CoreKernel extends Pionia
         return $this;
     }
 
+    public function addStaticRouter(Request $request)
+    {
+        $setting = self::getSetting("pages");
+        if ($setting) {
+
+            if (isset($setting['render']) && $setting['render']) {
+                $dir = 'static';
+                if (isset($setting['dir']) || isset($setting['folder'])) {
+                    $dir = $setting['dir'] ? BASEPATH . '/' . $setting['dir'] : ($setting['folder'] ? BASEPATH . '/' . $setting['folder'] : $dir);
+                }
+
+                $path = '/';
+                if (isset($setting['base']) || isset($setting['path'])) {
+                    $path = $setting['path'] ?: $setting['base'] ?: '/';
+                }
+
+                if ($request->getBasePath()){
+
+                }
+            }
+        }
+    }
+
 
     /**
      * @throws Exception
