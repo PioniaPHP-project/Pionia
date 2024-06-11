@@ -34,6 +34,4 @@ $request = \Pionia\request\Request::createFromGlobals();
 
 $kernel->handle($request);
 
-// hkmcode testing to push
-
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\command\commands;
+namespace Pionia\CLI\commands;
 
 use Pionia\codegens\Service;
-use Pionia\command\BaseCommand;
+use Pionia\CLI\BaseCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
