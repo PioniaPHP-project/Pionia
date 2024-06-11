@@ -15,3 +15,5 @@ require_once "src/bootstrap.php";
 if (!defined("logger")){
     define('logger', PioniaLogger::init());
 }
+
+// testing
