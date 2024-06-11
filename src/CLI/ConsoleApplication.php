@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\command;
+namespace Pionia\CLI;
 
 use Pionia\core\Pionia;
 use Symfony\Component\Console\Application;
