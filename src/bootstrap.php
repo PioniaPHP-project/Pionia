@@ -22,16 +22,16 @@ function exception_handler(Throwable $e): void
 }
 
 $autoloader = require __DIR__ . '/../vendor/autoload.php';
-
-
-$routes = new \Pionia\core\routing\PioniaRouter();
-
-$routes->addGroup('Pionia\core\BaseApiController');
-
-$kernel = new \Pionia\core\config\CoreKernel($routes->getRoutes());
-
-$request = \Pionia\request\Request::createFromGlobals();
-
-$kernel->handle($request);
+//
+//
+//$routes = new \Pionia\core\routing\PioniaRouter();
+//
+//$routes->addGroup('Pionia\core\BaseApiController');
+//
+//$kernel = new \Pionia\core\config\CoreKernel($routes->getRoutes());
+//
+//$request = \Pionia\request\Request::createFromGlobals();
+//
+//$kernel->handle($request);
 
 
