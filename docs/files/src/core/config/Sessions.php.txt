@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\core\config;
+namespace Pionia\Core\Config;
 
 /**
  * This class is responsible for handling all session related operations
@@ -14,14 +14,14 @@ class Sessions
      *
      * @return bool true on success or false on failure.
      */
-    public static function destroy()
+    public static function destroy(): bool
     {
         return session_destroy();
     }
 
     /**
      * Initialize session data
-     * @param $options – [optional]
+     * @param array|null $options – [optional]
      * If provided, this is an associative array of options that will override the currently set
      * session configuration directives. The keys should not include the session. prefix.
      * In addition to the normal set of configuration directives,va read_and_close option may also be provided.
@@ -29,7 +29,8 @@ class Sessions
      * thereby avoiding unnecessary locking if the session data won't be changed.
      * @return bool
      */
-    public static function start($options = null){
+    public static function start(?array $options = []): bool
+    {
         return session_start($options);
     }
 
@@ -39,7 +40,8 @@ class Sessions
      * @param $value
      * @return array
      */
-    public static function set($key, $value){
+    public static function set($key, $value): array
+    {
         $_SESSION[$key] = $value;
         return $_SESSION;
     }
@@ -49,7 +51,8 @@ class Sessions
      * @param $key
      * @return mixed
      */
-    public static function get($key){
+    public static function get($key): mixed
+    {
         return $_SESSION[$key];
     }
 
@@ -58,7 +61,8 @@ class Sessions
      * @param $key
      * @return bool
      */
-    public static function has($key){
+    public static function has($key): bool
+    {
         return isset($_SESSION[$key]);
     }
 
@@ -67,7 +71,7 @@ class Sessions
      * @param $key
      * @return bool
      */
-    public static function remove($key)
+    public static function remove($key): bool
     {
         unset($_SESSION[$key]);
         return true;
@@ -75,23 +79,24 @@ class Sessions
 
     /**
      * Update the current session id with a newly generated one
-     * @param $should_delete_old_session
+     * @param bool|null $should_delete_old_session
      * @return bool
      */
-    public static function regerateKey($should_delete_old_session = true){
+    public static function regerateKey(?bool $should_delete_old_session = true): bool
+    {
         return session_regenerate_id($should_delete_old_session);
     }
 
     /**
      * Set the session cookie parameters
-     * @param $lifetime_or_option –  An associative array which may have any of the keys lifetime, path, domain, secure, httponly and samesite.
+     * @param array|null $lifetime_or_option –  An associative array which may have any of the keys lifetime, path, domain, secure, httponly and samesite.
      * The values have the same meaning as described for the parameters with the same name.
      * The value of the samesite element should be either Lax or Strict.
      * If any of the allowed options are not given, their default values are the same as the default values of the explicit parameters.
      * If the samesite element is omitted, no SameSite cookie attribute is set
      * @return bool
      */
-    public static function configure($lifetime_or_option = [])
+    public static function configure(?array $lifetime_or_option = []): bool
     {
         return session_set_cookie_params($lifetime_or_option);
     }

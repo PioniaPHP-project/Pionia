@@ -5,11 +5,11 @@ namespace Pionia\Codegens;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
-use Pionia\core\helpers\ContextUserObject;
-use Pionia\core\interceptions\BaseAuthenticationBackend;
-use Pionia\core\interceptions\BaseMiddleware;
-use Pionia\request\Request;
-use Pionia\response\Response;
+use Pionia\Core\Helpers\ContextUserObject;
+use Pionia\Core\Interceptions\BaseAuthenticationBackend;
+use Pionia\Core\Interceptions\BaseMiddleware;
+use Pionia\Request\Request;
+use Pionia\Response\Response;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -45,9 +45,9 @@ class Middleware extends CodeGenerator
         $file->addComment('This middleware is auto-generated from pionia cli.');
         $file->addComment("Remember to register your middleware in index.php.");
 
-        $namespace->addUse('Pionia\core\interceptions\BaseMiddleware');
-        $namespace->addUse('Pionia\request\Request');
-        $namespace->addUse('Pionia\response\Response');
+        $namespace->addUse('Pionia\Core\Interceptions\BaseMiddleware');
+        $namespace->addUse('Pionia\Request\Request');
+        $namespace->addUse('Pionia\Response\Response');
 
         $klass = $namespace->addClass($name);
 
@@ -62,12 +62,11 @@ class Middleware extends CodeGenerator
         $this->log("Middleware $name created at $directory.");
     }
 
-    private function addActions(ClassType $class): ClassType
+    private function addActions(ClassType $class): void
     {
         foreach ($this->actions as $action) {
             $class = $this->createActionMethod($class, $action);
         }
-        return $class;
     }
 
     private function createActionMethod(ClassType $class, string $action): ClassType

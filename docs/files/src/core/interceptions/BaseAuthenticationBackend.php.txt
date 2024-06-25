@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\core\interceptions;
+namespace Pionia\Core\Interceptions;
 
-use Pionia\core\helpers\ContextUserObject;
-use Pionia\request\Request;
+use Pionia\Core\Helpers\ContextUserObject;
+use Pionia\Request\Request;
 
 /**
  * This is an interception class that will run against all requests. It is what the developer should
@@ -30,7 +30,7 @@ use Pionia\request\Request;
  *
  * @example
  * ```php
- * use Pionia\core\interceptions\BaseAuthenticationBackend;
+ * use Pionia\Core\Interceptions\BaseAuthenticationBackend;
  * class MyAuthenticationBackend extends BaseAuthenticationBackend
  * {
  *   // This is not something you should do in your project, but just gives you the best idea of how to implement the authenticate method

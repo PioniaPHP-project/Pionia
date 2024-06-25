@@ -1,8 +1,8 @@
 <?php
 
-namespace Pionia\command;
+namespace Pionia\Command;
 
-use Pionia\core\Pionia;
+use Pionia\Core\Pionia;
 use Symfony\Component\Console\Application;
 
 /**

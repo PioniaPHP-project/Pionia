@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\core\routing;
+namespace Pionia\Core\Routing;
 
 use Symfony\Component\Routing\Route;
 

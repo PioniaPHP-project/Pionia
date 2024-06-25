@@ -1,11 +1,11 @@
 <?php
 
-namespace Pionia\command;
+namespace Pionia\Command;
 
 use Exception;
-use Pionia\core\helpers\Utilities;
-use Pionia\core\Pionia;
-use Pionia\exceptions\CommandException;
+use Pionia\Core\Helpers\Utilities;
+use Pionia\Core\Pionia;
+use Pionia\Exceptions\CommandException;
 use Pionia\Logging\PioniaLogger;
 
 /**
@@ -20,10 +20,10 @@ class CommandInterface extends Pionia
      * @var array|string[] $commands
      */
     private array $commands = [
-        'Pionia\command\commands\StartServer',
-        'Pionia\command\commands\CreateService',
-        'Pionia\command\commands\CreateAuthenticationBackend',
-        'Pionia\command\commands\CreateMiddleware',
+        'Pionia\Command\Commands\StartServer',
+        'Pionia\Command\Commands\CreateService',
+        'Pionia\Command\Commands\CreateAuthenticationBackend',
+        'Pionia\Command\Commands\CreateMiddleware',
     ];
 
     /**
@@ -41,12 +41,12 @@ class CommandInterface extends Pionia
      */
     private function addCommand(string $command): array
     {
-        $check = Utilities::extends($command, 'Pionia\command\BaseCommand');
+        $check = Utilities::extends($command, 'Pionia\Command\BaseCommand');
         if ($check === 'NO_CLASS'){
             logger->info("Class not found");
             throw new CommandException("Command {$command} class not found");
         } elseif ($check === 'DOES_NOT'){
-            throw new CommandException("Command {$command} must extend Pionia\command\BaseCommand");
+            throw new CommandException("Command {$command} must extend Pionia\Command\BaseCommand");
         }
         $this->commands[]= $command;
         return $this->commands;

@@ -1,7 +1,7 @@
 <?php
-namespace  Pionia\request;
+namespace  Pionia\Request;
 
-use Pionia\exceptions\InvalidDataException;
+use Pionia\Exceptions\InvalidDataException;
 
 /**
  */
@@ -80,16 +80,16 @@ trait ValidationTrait
 
     /**
      * Validates the rules as follows
-     *  - Atleast one integer
-     *  - Atleast one lowercase alpha letter
-     *  - Atleast one Uppercase alpha letter
-     *  - Atleast one special character
+     *  - At least one integer
+     *  - At least one lowercase alpha letter
+     *  - At least one Uppercase alpha letter
+     *  - At least one special character
      *
      * @param mixed $password The password string we are testing, must be raw, not hashed
      * @param string|null $regex Your custom regular expression we can depend on instead.
      * @throws InvalidDataException
      */
-    public  function asPassword($password, ?string $regex = null): bool|int
+    public  function asPassword(mixed $password, ?string $regex = null): bool|int
     {
         return $this->validate($regex ?? $this->password_pattern, $password, 'Week Password');
     }
@@ -101,7 +101,7 @@ trait ValidationTrait
      * @return bool|int
      * @throws InvalidDataException
      */
-    public  function asUsername($username, ?string $regex = null): bool|int
+    public  function asUsername(mixed $username, ?string $regex = null): bool|int
     {
         return $this->validate($regex ?? $this->username_pattern, $username, 'Invalid username');
     }
@@ -165,7 +165,7 @@ trait ValidationTrait
      * @return bool|int
      * @throws InvalidDataException
      */
-    public  function asUrl($url, ?string $regex = null): bool|int
+    public  function asUrl(mixed $url, ?string $regex = null): bool|int
     {
         if ($regex){
             return $this->validate($url, $regex, 'Invalid URL');
@@ -206,10 +206,10 @@ trait ValidationTrait
     /**
      * @param mixed $domain The domain we are testing its validity
      * @param string|null $regex Your custom regular expression we can depend on instead.
-     * @return bool|int|mixed
+     * @return bool|int
      * @throws InvalidDataException
      */
-    public function asDomain(mixed $domain, ?string $regex = null)
+    public function asDomain(mixed $domain, ?string $regex = null): bool|int
     {
         if ($regex){
             return $this->validate($regex, $domain, 'Invalid domain');
@@ -230,7 +230,7 @@ trait ValidationTrait
      * @return bool|int
      * @throws InvalidDataException
      */
-    public  function asSlug($slug, ?string $regex = null): bool|int
+    public  function asSlug(mixed $slug, ?string $regex = null): bool|int
     {
         return $this->validate($regex ?? $this->slug_pattern, $slug, 'Invalid slug');
     }
@@ -244,7 +244,7 @@ trait ValidationTrait
      * @return int|bool
      * @throws InvalidDataException
      */
-    private function _validateFilter($value, $filterType, string $message = 'Invalid Data'): int | bool
+    private function _validateFilter(mixed $value, $filterType, string $message = 'Invalid Data'): int | bool
     {
         $checker = filter_var($value, $filterType);
         if (!$checker && $this->throwsExceptions){

@@ -3,7 +3,7 @@
 namespace Pionia\TestSuite;
 
 use PHPUnit\Framework\TestCase;
-use Pionia\core\Pionia;
+use Pionia\Core\Pionia;
 
 define('BASEPATH', __DIR__.'/../../');
 

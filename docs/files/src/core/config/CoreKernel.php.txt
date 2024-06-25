@@ -1,14 +1,15 @@
 <?php
 
-namespace Pionia\core\config;
+namespace Pionia\Core\Config;
 
 use Exception;
-use Pionia\core\helpers\Utilities;
-use Pionia\core\Pionia;
-use Pionia\core\routing\BaseRoutes;
-use Pionia\request\Request;
-use Pionia\response\BaseResponse;
-use Pionia\response\Response;
+use Pionia\Core\Helpers\Utilities;
+use Pionia\Core\Pionia;
+use Pionia\Core\Routing\BaseRoutes;
+use Pionia\Logging\PioniaLogger;
+use Pionia\Request\Request;
+use Pionia\Response\BaseResponse;
+use Pionia\Response\Response;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
@@ -46,9 +47,9 @@ class CoreKernel extends Pionia
     private ?UrlMatcher $matcher = null;
 
 
-    private $middleware = [];
+    private array $middleware = [];
 
-    private $authBackends = [];
+    private array $authBackends = [];
 
     public function __construct(
         private BaseRoutes $routes,
@@ -58,6 +59,12 @@ class CoreKernel extends Pionia
 
     }
 
+    /**
+     * @param array|string $middleware
+     * @return CoreKernel
+     *
+     * @deprecated - register middlewares directly in the settings.ini file. Will be removed from future versions
+     */
     public function registerMiddleware(array | string $middleware): static
     {
         if (is_array($middleware)) {
@@ -77,11 +84,11 @@ class CoreKernel extends Pionia
         if ($otherMiddlewares){
             $middlewares = array_values($otherMiddlewares);
             foreach ($middlewares as $middleware){
-                $check = Utilities::extends($middleware, 'Pionia\core\interceptions\BaseMiddleware');
+                $check = Utilities::extends($middleware, 'Pionia\Core\Interceptions\BaseMiddleware');
                 if ($check === 'NO_CLASS'){
                     throw new Exception("Middleware $middleware was not found, are you sure you created it?");
                 } elseif ($check === 'DOES_NOT'){
-                    throw new Exception("Middleware $middleware must extend Pionia\core\interceptions\BaseMiddleware");
+                    throw new Exception("Middleware $middleware must extend Pionia\Core\Interceptions\BaseMiddleware");
                 }
 
                 $this->middleware[] = $middleware;
@@ -89,17 +96,20 @@ class CoreKernel extends Pionia
         }
     }
 
-    private function mergeAuthenticationsFromSettings()
+    /**
+     * @throws Exception
+     */
+    private function mergeAuthenticationsFromSettings(): void
     {
         $otherAuths = $this::getSetting('authentications');
         if ($otherAuths){
             $auths = array_values($otherAuths);
             foreach ($auths as $auth){
-                $check = Utilities::extends($auth, 'Pionia\core\interceptions\BaseAuthenticationBackend');
+                $check = Utilities::extends($auth, 'Pionia\Core\Interceptions\BaseAuthenticationBackend');
                 if ($check === 'NO_CLASS'){
                     throw new Exception("Authentication backend $auth was not found, are you sure you created it?");
                 } elseif ($check === 'DOES_NOT'){
-                    throw new Exception("Authentication backend $auth must extend Pionia\core\interceptions\BaseAuthenticationBackend");
+                    throw new Exception("Authentication backend $auth must extend Pionia\Core\Interceptions\BaseAuthenticationBackend");
                 }
 
                 $this->authBackends[] = $auth;
@@ -107,6 +117,12 @@ class CoreKernel extends Pionia
         }
     }
 
+    /**
+     * @param array|string $auth_backends
+     * @return CoreKernel
+     *
+     * @deprecated - register authentications directly in the settings.ini file. Will be removed from future versions
+     */
     public function registerAuthBackends(array | string $auth_backends): static
     {
         if (is_string($auth_backends)){
@@ -149,13 +165,14 @@ class CoreKernel extends Pionia
             $shouldLog = isset($serverSettings['LOG_REQUESTS']) && $serverSettings['LOG_REQUESTS'];
 
             if ($shouldLog) {
-                logger->info("Request Data Received ", $arguments);
+                logger->info("New Request ", PioniaLogger::hideInLogs($arguments));
             }
 
             $response =  call_user_func_array($controller, $arguments);
 
-            if ($shouldLog)
-            logger->info('Response Data Received', $response);
+            if ($shouldLog) {
+                logger->info('Response Data Received', PioniaLogger::hideInLogs($response));
+            }
 
             $requestResponse = new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
         } catch (ResourceNotFoundException $exception) {
@@ -169,8 +186,39 @@ class CoreKernel extends Pionia
         return $requestResponse;
     }
 
+    /**
+     * This is the main method that runs the entire request cycle.
+     * @param Request $request
+     * @return Response
+     *
+     * @deprecated - This method will be removed in future versions. Use the run method instead
+     */
     public function handle(Request $request): Response
     {
+        $this->resolveFrontEnd($request);
+        try {
+            $request = $this->resolveMiddlewares($request); // first run for all middlewares
+            $request =$this->resolveAuthenticationBackend($request); // run all the authentication middles
+            $response = $this->resolve($request);
+            $request = $this->resolveMiddlewares($request, $response);
+            return $response->prepare($request)->send();
+        } catch (Exception $exception) {
+            $response = BaseResponse::JsonResponse(500, $exception->getMessage());
+            $reqRes =  new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
+            return $reqRes->prepare($request)->send();
+        }
+    }
+
+    /**
+     * This is the main method that runs the entire request cycle.
+     * It automatically resolves the request internally.
+     * @return Response
+     * @since 1.1.1 - This method was added to replace the handle method. The handle method will be removed in future versions
+     */
+    public function run(): Response
+    {
+        $request = Request::createFromGlobals();
+        $this->resolveFrontEnd($request);
         try {
             $request = $this->resolveMiddlewares($request); // first run for all middlewares
             $request =$this->resolveAuthenticationBackend($request); // run all the authentication middles
@@ -189,8 +237,9 @@ class CoreKernel extends Pionia
      * @param Request $request
      * @param Response|null $response
      * @return Request
+     * @throws Exception
      */
-    public function resolveMiddlewares(Request $request, Response | null $response = null): Request
+    private function resolveMiddlewares(Request $request, Response | null $response = null): Request
     {
         $this->mergeMiddlewaresFromSettings();
         // we want to run them if we have them
@@ -205,7 +254,10 @@ class CoreKernel extends Pionia
         return $request;
     }
 
-    public function resolveAuthenticationBackend(Request $request): Request
+    /**
+     * @throws Exception
+     */
+    private function resolveAuthenticationBackend(Request $request): Request
     {
         $this->mergeAuthenticationsFromSettings();
         if (count($this->authBackends) > 0) {
@@ -222,7 +274,7 @@ class CoreKernel extends Pionia
      * or until all the backends are complete
      * @param Request $request
      * @param array $backends
-     * @return $this
+     * @return Request
      */
     private function authenticationBackendWorker(Request $request, array $backends ): Request
     {
@@ -245,6 +297,18 @@ class CoreKernel extends Pionia
             return $this->authenticationBackendWorker($request, $backends);
         }
         return $request;
+    }
+
+    private function resolveFrontEnd(Request $request): void
+    {
+        if (!str_starts_with($request->getPathInfo(), '/api') && strtolower($request->getMethod()) === 'get'){
+            // here we are probably coming from some frontend
+
+//            $frontEndDir = self::getServerSettings()['FRONTEND_DIR'] ?? 'static';
+            $response = new Response(file_get_contents(__DIR__.'/index.php'), Response::HTTP_OK, ['Content-Type' => 'text/html']);
+            $response->send();
+            exit();
+        }
     }
 
 }

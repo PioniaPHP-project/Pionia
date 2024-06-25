@@ -1,12 +1,12 @@
 <?php
 
-namespace Pionia\core\routing;
+namespace Pionia\Core\Routing;
 
-use Pionia\core\helpers\SupportedHttpMethods;
-use Pionia\core\helpers\Utilities;
-use Pionia\core\Pionia;
-use Pionia\exceptions\ControllerException;
-use Pionia\response\BaseResponse;
+use Pionia\Core\Helpers\SupportedHttpMethods;
+use Pionia\Core\Helpers\Utilities;
+use Pionia\Core\Pionia;
+use Pionia\Exceptions\ControllerException;
+use Pionia\Response\BaseResponse;
 use Symfony\Component\Routing\Route;
 
 
@@ -21,20 +21,29 @@ use Symfony\Component\Routing\Route;
  *
  * @example
  * ```php
+ * // deprecated version
  * $router = new PioniaRouter();
  * $router->addGroup('app\controller\MyController')
  *    ->post('myAction', 'myAction')
  *   ->get('myAction', 'myAction');
+ *
+ * // new version
+ * $router = new PioniaRouter();
+ * $router->addSwitchFor('app\switches\MySwitch', 'v1');
  * ```
+ *
+ *
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class PioniaRouter extends Pionia
+class PioniaRouter
 {
     protected $routes;
 
     private string | null $controller = null;
-    private string $basePath = '/api';
+    private string $basePath = '/api/v1/';
+
+    private string $apiBase = '/api/';
 
     public function getRoutes(): BaseRoutes
     {
@@ -46,25 +55,20 @@ class PioniaRouter extends Pionia
     {
         $this->routes = $routes ?? new BaseRoutes();
 
-        $set = self::getServerSettings();
-
-        if ($set && isset($set['baseurl'])){
-            $this->basePath = $set['baseurl'];
-        }
     }
 
     /**
      * @throws ControllerException
      */
-    private function resolveController(string |null $_controller = null, $setAsCurrent = true): void
+    private function resolveController(string |null $controller_ = null, bool $setAsCurrent = true): void
     {
-        $controller = $_controller ?? $this->controller;
+        $controller = $controller_ ?? $this->controller;
 
         if (!$controller){
             throw new ControllerException('No controller defined');
         }
 
-        $res = Utilities::extends($controller, 'Pionia\core\BaseApiController');
+        $res = Utilities::extends($controller, 'Pionia\Core\BaseApiController');
         if ($res ==='NO_CLASS'){
             throw new ControllerException("Controller {$controller} class not found");
         } elseif ($res === 'DOES_NOT') {
@@ -77,6 +81,13 @@ class PioniaRouter extends Pionia
     }
 
 
+    /**
+     * @param string $action
+     * @param string $name
+     * @return BaseResponse|$this
+     *
+     * @deprecated - Use addSwitchFor instead
+     */
     public function post(string $action, string $name): BaseResponse|static
     {
         try {
@@ -92,17 +103,74 @@ class PioniaRouter extends Pionia
 
     /**
      * @throws ControllerException
+     * @deprecated Use addSwitchFor instead
      */
-    public function addGroup(string $controller, string $basePath = 'v1/'): static
+    public function addGroup(string $controller, string $basePath = '/api/v1/'): static
     {
         $this->resolveController($controller);
-        $this->basePath = $this->basePath.$this->cleanBase($basePath);
+        $this->basePath = $basePath;
         $this->addRoute('ping', 'ping', SupportedHttpMethods::GET, $controller);
         return $this;
     }
 
+    /**
+     * Adds a switch for a certain api version
+     *
+     * @param string $switch The switch to add
+     * @param string|null $versionName The version name to add the switch to
+     *
+     * @return PioniaRouter
+     * @throws ControllerException
+     * @example
+     * ```php
+     * $router = new PioniaRouter();
+     * $router->addSwitchFor('app\switches\MySwitch', 'v1');
+     * ```
+     */
+    public function addSwitchFor(string $switch, ?string $versionName = 'v1'): PioniaRouter
+    {
+        $cleanVersion = $this->cleanVersion($versionName);
+        $path = $this->apiBase.$cleanVersion.'/';
+        $name = $cleanVersion.'_processor';
+        $pingName = $cleanVersion.'_ping';
 
-    public function get(string $action, string $name): BaseResponse|static
+        if ($this->routes->get($name)){
+            throw new ControllerException("Switch for version {$versionName} already exists");
+        }
+
+        $res = Utilities::extends($switch, 'Pionia\Core\BaseApiServiceSwitch');
+
+        if ($res === 'NO_CLASS'){
+            throw new ControllerException("Switch {$switch} class not found");
+        } elseif ($res === 'DOES_NOT') {
+            throw new ControllerException("Switch {$switch} does not implement BaseApiServiceSwitch");
+        }
+
+        // add the only post route
+        $postRoute = new Route($path, [
+            '_controller' => $switch . '::processor',
+        ], [], [], null, [], SupportedHttpMethods::POST);
+
+        $this->routes->add($name, $postRoute);
+
+
+        $pingRoute = new Route($path, [
+            '_controller' => $switch . '::ping',
+        ], [], [], null, [], SupportedHttpMethods::GET);
+
+        $this->routes->add($pingName, $pingRoute);
+        return $this;
+    }
+
+
+/**
+     * @param string $action
+     * @param string $name
+     * @return BaseResponse|$this
+     *
+     * @deprecated - Use addSwitchFor instead
+     */
+    private function get(string $action, string $name): BaseResponse|static
     {
         try {
             if (!$this->controller) {
@@ -119,8 +187,10 @@ class PioniaRouter extends Pionia
      * Cleans up the base url to set
      * @param string $base
      * @return string
+     *
+     * @deprecated - Was useful for v1.1.0 and below
      */
-    private function cleanBase(string $base)
+    private function cleanBase(string $base): string
     {
         if (!str_starts_with($base, "/") && str_ends_with($this->basePath, "/")){
             $base = '/'.$base;
@@ -133,10 +203,24 @@ class PioniaRouter extends Pionia
         return $base;
     }
 
+    private function cleanVersion(string $str): string
+    {
+        if (str_starts_with($str, "/")){
+            $str = substr($str, 1);
+        }
+
+        if (str_ends_with($str, "/")){
+            $str = substr($str, 0, -1);
+        }
+
+        return $str;
+    }
+
     /**
      * @throws ControllerException
+     * @deprecated - Use addSwitchFor instead with the version name. This is just a helper method
      */
-    private function addRoute(string $action, string $name, string | array $method = SupportedHttpMethods::POST, $controller = null, $condition = ''): void
+    private function addRoute(string $action, string $name, string | array $method = SupportedHttpMethods::POST, $controller = null, string | array $condition = ''): void
     {
         if ($controller) {
             $this->resolveController($controller);

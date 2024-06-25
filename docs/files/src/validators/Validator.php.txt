@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\validators;
+namespace Pionia\Validators;
 
-use Pionia\core\Pionia;
-use Pionia\request\ValidationTrait;
+use Pionia\Core\Pionia;
+use Pionia\Request\ValidationTrait;
 
 class Validator extends Pionia
 {

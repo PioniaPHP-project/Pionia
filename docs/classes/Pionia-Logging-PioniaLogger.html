@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
             <title>Pionia Core</title>
-
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
@@ -58,7 +58,7 @@
                 <a href="https://github.com/JetPhp-project/JetPhp-Core.git">
                     <span>
                                                                         <i class="fab fa-github"></i>
-
+                                                
                     </span>
                 </a>
             </li>
@@ -81,43 +81,43 @@
     <ul class="phpdocumentor-list">
                     <li>
                 <a href="namespaces/pionia-codegens.html" class="">Codegens</a>
-
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-command.html" class="">command</a>
-
+                <a href="namespaces/pionia-command.html" class="">Command</a>
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-core.html" class="">core</a>
-
+                <a href="namespaces/pionia-core.html" class="">Core</a>
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-database.html" class="">database</a>
-
+                <a href="namespaces/pionia-database.html" class="">Database</a>
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-exceptions.html" class="">exceptions</a>
-
+                <a href="namespaces/pionia-exceptions.html" class="">Exceptions</a>
+                
             </li>
                     <li>
                 <a href="namespaces/pionia-logging.html" class="">Logging</a>
-
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-request.html" class="">request</a>
-
+                <a href="namespaces/pionia-request.html" class="">Request</a>
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-response.html" class="">response</a>
-
+                <a href="namespaces/pionia-response.html" class="">Response</a>
+                
             </li>
                     <li>
                 <a href="namespaces/pionia-testsuite.html" class="">TestSuite</a>
-
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-validators.html" class="">validators</a>
-
+                <a href="namespaces/pionia-validators.html" class="">Validators</a>
+                
             </li>
             </ul>
 
@@ -133,7 +133,7 @@
 </h4>
 
                         </section>
-
+            
     <section class="phpdocumentor-sidebar__category">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
@@ -158,18 +158,15 @@
         <h2 class="phpdocumentor-content__title">
     PioniaLogger
 
-        <span class="phpdocumentor-element__extends">
-        extends <a href="classes/Pionia-core-Pionia.html"><abbr title="\Pionia\core\Pionia">Pionia</abbr></a>
-    </span>
-
+    
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
                                     <li class="phpdocumentor-breadcrumb"><a href="packages/Pionia.html">Pionia</a></li>
                             </ul>
         </div>
-
-
+    
+    
     </h2>
 
 <div class="phpdocumentor-label-line">
@@ -180,13 +177,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Logging/PioniaLogger.php"><a href="files/src-logging-pionialogger.html"><abbr title="src/Logging/PioniaLogger.php">PioniaLogger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
-            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.22" class="phpdocumentor-element-found-in__source" data-line="22" data-modal="source-view" data-src="files/src/Logging/PioniaLogger.php.txt"></a>
+            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.18" class="phpdocumentor-element-found-in__source" data-line="18" data-modal="source-view" data-src="files/src/Logging/PioniaLogger.php.txt"></a>
     </aside>
 
-            <p class="phpdocumentor-summary">This is the base class for the framework</p>
-
+        
 
 
 
@@ -212,22 +208,10 @@
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-core-Pionia.html#property_name">$name</a>
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Pionia-Logging-PioniaLogger.html#property_hiddenKeys">$hiddenKeys</a>
     <span>
-                        &nbsp;: string            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-core-Pionia.html#property_settings">$settings</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-core-Pionia.html#property_version">$version</a>
-    <span>
-                        &nbsp;: string            </span>
+                        &nbsp;: mixed            </span>
 </dt>
 
     </dl>
@@ -239,28 +223,11 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Logging-PioniaLogger.html#method___construct">__construct()</a>
+    <a href="classes/Pionia-Logging-PioniaLogger.html#method_hideInLogs">hideInLogs()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-core-Pionia.html#method_getSetting">getSetting()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-core-Pionia.html#method_getSettingOrDefault">getSettingOrDefault()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-core-Pionia.html#method_getSettings">getSettings()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;|null    </span>
-</dt>
+<dd>This method will hide the secure keys in the logs</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Logging-PioniaLogger.html#method_init">init()</a>
@@ -269,26 +236,14 @@
 </dt>
 <dd>Call this method to initialise the logger.</dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-core-Pionia.html#method_resolveSettingsFromIni">resolveSettingsFromIni()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/Pionia-core-Pionia.html#method_getServerSettings">getServerSettings()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-
     </dl>
 
 
 
 
+        
 
-
-
+        
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
@@ -299,102 +254,34 @@
         class="
             phpdocumentor-element
             -property
-            -public
+            -private
             -static                                            "
 >
-    <h4 class="phpdocumentor-element__name" id="property_name">
-        $name
-        <a href="classes/Pionia-core-Pionia.html#property_name" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_hiddenKeys">
+        $hiddenKeys
+        <a href="classes/Pionia-Logging-PioniaLogger.html#property_hiddenKeys" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Logging/PioniaLogger.php"><a href="files/src-logging-pionialogger.html"><abbr title="src/Logging/PioniaLogger.php">PioniaLogger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
-            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.21" class="phpdocumentor-element-found-in__source" data-line="21" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
+            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.20" class="phpdocumentor-element-found-in__source" data-line="20" data-modal="source-view" data-src="files/src/Logging/PioniaLogger.php.txt"></a>
     </aside>
 
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$name</span>
-     = <span class="phpdocumentor-signature__default-value">&#039;Pionia&#039;</span></code>
+    <span class="phpdocumentor-signature__visibility">private</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$hiddenKeys</span>
+     = <span class="phpdocumentor-signature__default-value">[&#039;password&#039;, &#039;pass&#039;, &#039;pin&#039;, &#039;passwd&#039;, &#039;secret_key&#039;, &#039;pwd&#039;, &#039;token&#039;, &#039;credit_card&#039;, &#039;creditcard&#039;, &#039;cc&#039;, &#039;secret&#039;, &#039;cvv&#039;, &#039;cvn&#039;]</span></code>
 
-
-
-
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-            -static                                            "
->
-    <h4 class="phpdocumentor-element__name" id="property_settings">
-        $settings
-        <a href="classes/Pionia-core-Pionia.html#property_settings" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">17</span>
-
-            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.17" class="phpdocumentor-element-found-in__source" data-line="17" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
-    </aside>
-
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
-    <span class="phpdocumentor-signature__name">$settings</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
-
-
-
-
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-            -static                                            "
->
-    <h4 class="phpdocumentor-element__name" id="property_version">
-        $version
-        <a href="classes/Pionia-core-Pionia.html#property_version" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">19</span>
-
-            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.19" class="phpdocumentor-element-found-in__source" data-line="19" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
-    </aside>
-
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$version</span>
-     = <span class="phpdocumentor-signature__default-value">&#039;1.0.7&#039;</span></code>
-
-
-
-
+    
+    
+    
 
 </article>
             </section>
@@ -409,158 +296,52 @@
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+                                    -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/Pionia-Logging-PioniaLogger.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_hideInLogs">
+        hideInLogs()
+        <a href="classes/Pionia-Logging-PioniaLogger.html#method_hideInLogs" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Logging/PioniaLogger.php"><a href="files/src-logging-pionialogger.html"><abbr title="src/Logging/PioniaLogger.php">PioniaLogger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">130</span>
 
-            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.24" class="phpdocumentor-element-found-in__source" data-line="24" data-modal="source-view" data-src="files/src/Logging/PioniaLogger.php.txt"></a>
+            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.130" class="phpdocumentor-element-found-in__source" data-line="130" data-modal="source-view" data-src="files/src/Logging/PioniaLogger.php.txt"></a>
     </aside>
 
+        <p class="phpdocumentor-summary">This method will hide the secure keys in the logs</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">hideInLogs</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-
-
-
-
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_getSetting">
-        getSetting()
-        <a href="classes/Pionia-core-Pionia.html#method_getSetting" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">34</span>
-
-            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.34" class="phpdocumentor-element-found-in__source" data-line="34" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
-    </aside>
-
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSetting</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$key</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
+                <span class="phpdocumentor-signature__argument__name">$data</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The data whose secure keys are to be hidden</p>
+</section>
 
             </dd>
             </dl>
 
-
-
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_getSettingOrDefault">
-        getSettingOrDefault()
-        <a href="classes/Pionia-core-Pionia.html#method_getSettingOrDefault" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">48</span>
-
-            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.48" class="phpdocumentor-element-found-in__source" data-line="48" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
-    </aside>
-
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSettingOrDefault</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$default</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$key</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$default</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-
-            </dd>
-            </dl>
-
-
-
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_getSettings">
-        getSettings()
-        <a href="classes/Pionia-core-Pionia.html#method_getSettings" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">29</span>
-
-            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.29" class="phpdocumentor-element-found-in__source" data-line="29" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
-    </aside>
-
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSettings</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-
-
-
+    
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The data with the hidden keys hidden</p>
+</section>
+
             </section>
 
 </article>
@@ -578,9 +359,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Logging/PioniaLogger.php"><a href="files/src-logging-pionialogger.html"><abbr title="src/Logging/PioniaLogger.php">PioniaLogger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
-            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.41" class="phpdocumentor-element-found-in__source" data-line="41" data-modal="source-view" data-src="files/src/Logging/PioniaLogger.php.txt"></a>
+            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.45" class="phpdocumentor-element-found-in__source" data-line="45" data-modal="source-view" data-src="files/src/Logging/PioniaLogger.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Call this method to initialise the logger.</p>
@@ -593,84 +374,23 @@
         </div>
         <section class="phpdocumentor-description"><p>To turn off debug logging, turn off DEBUG in settings.ini.
 You can turn off DEBUG but still want to maintain logging alone, there you leave LOG_REQUESTS on in the settings.ini.</p>
-<p>Also you can define your own LOG_DESTINATION destination. This is where you want to log to. default is terminal, but it can a file. If
-it is a file, a clear file path should be provided.</p>
+<p>Also you can define your own LOG_DESTINATION destination. This is where you want to log to. default is stdout, but it can be file. If
+it is a file, a clear file path should be provided. It will be created if not already available.</p>
+<p>You can also define the LOG_FORMAT. This can be either TEXT or JSON. Default is TEXT.</p>
+<p>You can also define the LOGGED_SETTINGS. This is a comma separated list of settings that you want to log along to the log file.</p>
+<p>You can also define the HIDE_IN_LOGS. This is a comma separated list of settings keys that you want to hide in the logs.
+Default list comprises of <code class="prettyprint">password</code>, <code class="prettyprint">pass</code>, <code class="prettyprint">passwd</code>, <code class="prettyprint">pwd</code>, <code class="prettyprint">token</code>, <code class="prettyprint">credit_card</code>, <code class="prettyprint">creditcard</code>, <code class="prettyprint">cc</code>, <code class="prettyprint">secret</code>, <code class="prettyprint">cvv</code>, <code class="prettyprint">cvn</code>.
+Nothing gets removed from list, but whatever you add to the HIDE_IN_LOGS will be added and hidden in the logs.</p>
+<p>You can also define the HIDE_SUB. This is the string that will replace the hidden values in the logs. Default is <code class="prettyprint">*********</code>.</p>
+<p>If you log to a file, then you watch the file using <code class="prettyprint">tail -f /path/to/file.log</code> to see the logs in real time.</p>
 </section>
 
-
-
+    
+    
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Monolog\Logger">Logger</abbr>|null</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_resolveSettingsFromIni">
-        resolveSettingsFromIni()
-        <a href="classes/Pionia-core-Pionia.html#method_resolveSettingsFromIni" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">53</span>
-
-            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.53" class="phpdocumentor-element-found-in__source" data-line="53" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
-    </aside>
-
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">resolveSettingsFromIni</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-
-
-
-
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -protected
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_getServerSettings">
-        getServerSettings()
-        <a href="classes/Pionia-core-Pionia.html#method_getServerSettings" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">39</span>
-
-            <a href="classes/Pionia-Logging-PioniaLogger.html#source-view.39" class="phpdocumentor-element-found-in__source" data-line="39" data-modal="source-view" data-src="files/src/core/Pionia.php.txt"></a>
-    </aside>
-
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getServerSettings</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-
-
-
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
             </section>
 
 </article>
@@ -771,7 +491,7 @@ it is a file, a clear file path should be provided.</p>
     </article>
                                 </section>
                 <section class="phpdocumentor-on-this-page__sidebar">
-
+                                
     <section class="phpdocumentor-on-this-page__content">
         <strong class="phpdocumentor-on-this-page__title">On this page</strong>
 
@@ -783,26 +503,19 @@ it is a file, a clear file path should be provided.</p>
                                                             <li><a href="classes/Pionia-Logging-PioniaLogger.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
-
+            
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/Pionia-core-Pionia.html#property_name">$name<a href="classes/Pionia-Logging-PioniaLogger.html"></li>
-                                                    <li><a href="classes/Pionia-core-Pionia.html#property_settings">$settings<a href="classes/Pionia-Logging-PioniaLogger.html"></li>
-                                                    <li><a href="classes/Pionia-core-Pionia.html#property_version">$version<a href="classes/Pionia-Logging-PioniaLogger.html"></li>
+                                                    <li><a href="classes/Pionia-Logging-PioniaLogger.html#property_hiddenKeys">$hiddenKeys<a href="classes/Pionia-Logging-PioniaLogger.html"></li>
                                             </ul>
                 </li>
-
+            
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li><a href="classes/Pionia-Logging-PioniaLogger.html#method___construct">__construct()</a></li>
-                                            <li><a href="classes/Pionia-core-Pionia.html#method_getSetting">getSetting()</a></li>
-                                            <li><a href="classes/Pionia-core-Pionia.html#method_getSettingOrDefault">getSettingOrDefault()</a></li>
-                                            <li><a href="classes/Pionia-core-Pionia.html#method_getSettings">getSettings()</a></li>
+                                            <li><a href="classes/Pionia-Logging-PioniaLogger.html#method_hideInLogs">hideInLogs()</a></li>
                                             <li><a href="classes/Pionia-Logging-PioniaLogger.html#method_init">init()</a></li>
-                                            <li><a href="classes/Pionia-core-Pionia.html#method_resolveSettingsFromIni">resolveSettingsFromIni()</a></li>
-                                            <li><a href="classes/Pionia-core-Pionia.html#method_getServerSettings">getServerSettings()</a></li>
                                     </ul>
             </li>
                     </ul>

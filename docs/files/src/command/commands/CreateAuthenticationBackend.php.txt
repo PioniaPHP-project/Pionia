@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\command\commands;
+namespace Pionia\Command\Commands;
 
 use Pionia\Codegens\AuthBackend;
-use Pionia\command\BaseCommand;
+use Pionia\Command\BaseCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

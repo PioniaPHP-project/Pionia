@@ -1,8 +1,8 @@
 <?php
 
-namespace Pionia\database;
+namespace Pionia\Database;
 
-use Porm\core\Database;
+use Porm\Core\Database;
 
 /**
  * @inheritDoc

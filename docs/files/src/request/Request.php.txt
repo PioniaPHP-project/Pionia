@@ -1,9 +1,8 @@
 <?php
 
-namespace Pionia\request;
+namespace Pionia\Request;
 
-use Monolog\Logger;
-use Pionia\core\helpers\ContextUserObject;
+use Pionia\Core\Helpers\ContextUserObject;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 
@@ -76,7 +75,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      * @param array $contextData The context data to be added to the request
      * @return $this
      */
-    private function setAppContext($contextData = []): static
+    private function setAppContext(array $contextData = []): static
     {
         $contextUser = new ContextUserObject();
 
@@ -115,7 +114,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      * This implies that this request is safe for both json and form data scenarios
      * @return array
      */
-    public function getData()
+    public function getData(): array
     {
         $json = $this->getJsonData()??[];
         $form = $this->getFormData()??[];
@@ -145,15 +144,5 @@ class Request extends \Symfony\Component\HttpFoundation\Request
             return $this->request->all() ?? [];
         }
         return [];
-    }
-
-    public function getLogger(): ?Logger
-    {
-        return $this->logger;
-    }
-
-    public function setLogger(?Logger $logger): void
-    {
-        $this->logger = $logger;
     }
 }

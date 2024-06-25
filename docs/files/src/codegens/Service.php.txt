@@ -5,8 +5,8 @@ namespace Pionia\Codegens;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
-use Pionia\request\BaseRestService;
-use Pionia\response\BaseResponse;
+use Pionia\Request\BaseRestService;
+use Pionia\Response\BaseResponse;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -52,8 +52,8 @@ class Service extends CodeGenerator
         $file->addComment('This service is auto-generated from pionia cli.');
         $file->addComment("Remember to register your this service as $name in your service switch.");
 
-        $namespace->addUse('Pionia\response\BaseResponse');
-        $namespace->addUse('Pionia\request\BaseRestService');
+        $namespace->addUse('Pionia\Response\BaseResponse');
+        $namespace->addUse('Pionia\Request\BaseRestService');
 
         $klass = $namespace->addClass($name);
 
@@ -68,7 +68,7 @@ class Service extends CodeGenerator
         $this->log("Service $name created at $directory.");
     }
 
-    private function addActions(ClassType $class): ClassType
+    private function addActions(ClassType $class): void
     {
         $this->log("Detecting actions");
         if (count($this->actions) < 1){
@@ -78,7 +78,6 @@ class Service extends CodeGenerator
         foreach ($this->actions as $action) {
             $class = $this->createActionMethod($class, $action);
         }
-        return $class;
     }
 
     private function createActionMethod(ClassType $class, string $action): ClassType

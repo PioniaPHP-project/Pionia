@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\core;
+namespace Pionia\Core;
 
-use Pionia\request\Request;
-use Pionia\response\BaseResponse;
+use Pionia\Request\Request;
+use Pionia\Response\BaseResponse;
 
 /**
  * This is the base controller class for the framework and most probably the only controller class that should be extended.

@@ -127,8 +127,11 @@ class PioniaLogger
      * @param array $data The data whose secure keys are to be hidden
      * @return array The data with the hidden keys hidden
      */
-    public static function hideInLogs(array $data = []): array
+    public static function hideInLogs(mixed $data = []): array
     {
+        if (!is_array($data)) {
+            return $data;
+        }
         // this method will hide the secured keys in the logs
         $keys = self::$hiddenKeys;
         if (!empty($serverSettings['HIDE_IN_LOGS'])) {

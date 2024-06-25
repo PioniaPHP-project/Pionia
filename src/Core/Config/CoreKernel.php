@@ -16,6 +16,11 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 
+
+if (!defined('logger')){
+    define('logger', PioniaLogger::init());
+}
+
 /**
  * This is the core kernel that handles all the request processing and middleware execution
  *

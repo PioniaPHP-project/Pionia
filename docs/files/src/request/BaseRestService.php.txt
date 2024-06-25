@@ -1,12 +1,11 @@
 <?php
 
-namespace Pionia\request;
+namespace Pionia\Request;
 
-use Monolog\Logger;
-use Pionia\exceptions\ResourceNotFoundException;
-use Pionia\exceptions\UserUnauthenticatedException;
+use Pionia\Exceptions\ResourceNotFoundException;
+use Pionia\Exceptions\UserUnauthenticatedException;
 use Pionia\Logging\PioniaLogger;
-use Pionia\response\BaseResponse;
+use Pionia\Response\BaseResponse;
 use ReflectionException;
 use ReflectionMethod;
 
@@ -22,14 +21,13 @@ use ReflectionMethod;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  **/
+
 abstract class BaseRestService
 {
     /**
      * @var Request $request The request object
      */
     public Request $request;
-
-    public Logger $logger;
 
     use AuthTrait;
     use RequestActionTrait;
@@ -66,8 +64,6 @@ abstract class BaseRestService
      */
     public function processAction(string $action, Request $request): BaseResponse
     {
-        $this->logger = PioniaLogger::init();
-
         $this->request = $request;
 
         $service = $request->getData()['SERVICE'];

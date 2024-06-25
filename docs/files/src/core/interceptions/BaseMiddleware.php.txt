@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\core\interceptions;
+namespace Pionia\Core\Interceptions;
 
 
-use Pionia\request\Request;
-use Pionia\response\Response;
+use Pionia\Request\Request;
+use Pionia\Response\Response;
 
 /**
  * Middleware can run on every request and every response.

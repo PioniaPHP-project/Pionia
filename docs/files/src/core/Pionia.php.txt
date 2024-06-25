@@ -1,6 +1,7 @@
 <?php
 
-namespace Pionia\core;
+namespace Pionia\Core;
+
 
 /**
  * This is the base class for the framework
@@ -9,20 +10,36 @@ namespace Pionia\core;
  *
  * All classes in the framework should extend this class to have access to the core configurations
  *
+ * @since 1.1.1 - Added the ability to change the name of the framework from the core :)
+ *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 class Pionia
 {
-
     public static array | null $settings = null;
 
-    public static string $version = '1.0.7';
+    public static string $version = '1.1.0';
 
     public static string $name = 'Pionia';
 
     public function __construct()
     {
         $this::resolveSettingsFromIni();
+
+        $server = self::getServerSettings();
+
+//        if ($server && array_key_exists('DEBUG', $server) && $server['DEBUG']){
+//            error_reporting(E_ALL);
+//            ini_set('display_errors', '1');
+//        } else {
+//            error_reporting(0);
+//            ini_set('display_errors', '0');
+//        }
+
+        if ($server && array_key_exists('APP_NAME', $server)){
+            self::$name = $server['APP_NAME'];
+        }
+
     }
 
 
@@ -31,12 +48,27 @@ class Pionia
         return self::$settings;
     }
 
+    /**
+     * Checks for the setting and returns it
+     * If the setting is not found, it returns null
+     *
+     * Here `SERVER` and `server` are the same
+     * @param string $key
+     * @return mixed
+     */
     public static function getSetting(string $key): mixed
     {
+        // check for small case first
+        $key = strtolower($key);
+        if (isset(self::$settings[$key])){
+            return self::$settings[$key];
+        }
+        // check for uppercase last
+        $key = strtoupper($key);
         return self::$settings[$key] ?? null;
     }
 
-    protected static function getServerSettings(): array
+    public static function getServerSettings(): array
     {
         $settings =  self::getSetting("server");
         if (is_array($settings)) {

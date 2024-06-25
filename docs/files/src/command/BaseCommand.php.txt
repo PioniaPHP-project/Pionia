@@ -1,13 +1,12 @@
 <?php
 
-namespace Pionia\command;
+namespace Pionia\Command;
 
-use Pionia\core\Pionia;
-use Pionia\database\Connection;
-use Pionia\Logging\PioniaLogger;
+use Exception;
+use Pionia\Core\Pionia;
+use Pionia\Database\Connection;
 use Porm\core\Database;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\HttpKernel\Log\Logger;
 
 /**
  * This is the base command class, it extends the Symfony console command class and provides some helper methods
@@ -46,7 +45,7 @@ class BaseCommand extends Command
      * @param string|null $db
      * @return Database
      *
-     * @throws \Exception
+     * @throws Exception
      * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
      *
      */

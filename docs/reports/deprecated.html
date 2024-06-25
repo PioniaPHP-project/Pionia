@@ -4,7 +4,7 @@
     <meta charset="utf-8">
             <title>    Pionia Core &raquo; Deprecated elements
 </title>
-
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
@@ -59,7 +59,7 @@
                 <a href="https://github.com/JetPhp-project/JetPhp-Core.git">
                     <span>
                                                                         <i class="fab fa-github"></i>
-
+                                                
                     </span>
                 </a>
             </li>
@@ -82,43 +82,43 @@
     <ul class="phpdocumentor-list">
                     <li>
                 <a href="namespaces/pionia-codegens.html" class="">Codegens</a>
-
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-command.html" class="">command</a>
-
+                <a href="namespaces/pionia-command.html" class="">Command</a>
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-core.html" class="">core</a>
-
+                <a href="namespaces/pionia-core.html" class="">Core</a>
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-database.html" class="">database</a>
-
+                <a href="namespaces/pionia-database.html" class="">Database</a>
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-exceptions.html" class="">exceptions</a>
-
+                <a href="namespaces/pionia-exceptions.html" class="">Exceptions</a>
+                
             </li>
                     <li>
                 <a href="namespaces/pionia-logging.html" class="">Logging</a>
-
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-request.html" class="">request</a>
-
+                <a href="namespaces/pionia-request.html" class="">Request</a>
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-response.html" class="">response</a>
-
+                <a href="namespaces/pionia-response.html" class="">Response</a>
+                
             </li>
                     <li>
                 <a href="namespaces/pionia-testsuite.html" class="">TestSuite</a>
-
+                
             </li>
                     <li>
-                <a href="namespaces/pionia-validators.html" class="">validators</a>
-
+                <a href="namespaces/pionia-validators.html" class="">Validators</a>
+                
             </li>
             </ul>
 
@@ -134,7 +134,7 @@
 </h4>
 
                         </section>
-
+            
     <section class="phpdocumentor-sidebar__category">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
@@ -157,10 +157,96 @@
         <div class="phpdocumentor-row">
             <h2 class="phpdocumentor-content__title">Deprecated</h2>
 
-
-                            <div class="phpdocumentor-admonition phpdocumentor-admonition--success">
-                    No deprecated elements have been found in this project.
-                </div>
+                        <h3>Table of Contents</h3>
+            <table class="phpdocumentor-table_of_contents">
+                                    <tr>
+                        <td class="phpdocumentor-cell"><a href="reports/deprecated.html#src/Core/Config/CoreKernel.php">src/Core/Config/CoreKernel.php</a></td>
+                    </tr>
+                                    <tr>
+                        <td class="phpdocumentor-cell"><a href="reports/deprecated.html#src/Core/Routing/PioniaRouter.php">src/Core/Routing/PioniaRouter.php</a></td>
+                    </tr>
+                            </table>
+            
+                            <a id="src/Core/Config/CoreKernel.php"></a>
+                <h3><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></h3>
+                <table>
+                    <tr>
+                        <th class="phpdocumentor-heading">Line</th>
+                        <th class="phpdocumentor-heading">Element</th>
+                        <th class="phpdocumentor-heading">Reason</th>
+                    </tr>
+                                                                        <tr>
+                                <td class="phpdocumentor-cell">68</td>
+                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerMiddleware"><abbr title="\Pionia\Core\Config\CoreKernel::registerMiddleware()">CoreKernel::registerMiddleware()</abbr></a></td>
+                                <td class="phpdocumentor-cell"><ul>
+<li>register middlewares directly in the settings.ini file. Will be removed from future versions</li>
+</ul>
+</td>
+                            </tr>
+                                                                                                <tr>
+                                <td class="phpdocumentor-cell">126</td>
+                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerAuthBackends"><abbr title="\Pionia\Core\Config\CoreKernel::registerAuthBackends()">CoreKernel::registerAuthBackends()</abbr></a></td>
+                                <td class="phpdocumentor-cell"><ul>
+<li>register authentications directly in the settings.ini file. Will be removed from future versions</li>
+</ul>
+</td>
+                            </tr>
+                                                                                                <tr>
+                                <td class="phpdocumentor-cell">196</td>
+                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Config-CoreKernel.html#method_handle"><abbr title="\Pionia\Core\Config\CoreKernel::handle()">CoreKernel::handle()</abbr></a></td>
+                                <td class="phpdocumentor-cell"><ul>
+<li>This method will be removed in future versions. Use the run method instead</li>
+</ul>
+</td>
+                            </tr>
+                                                            </table>
+                            <a id="src/Core/Routing/PioniaRouter.php"></a>
+                <h3><abbr title="src/Core/Routing/PioniaRouter.php">PioniaRouter.php</abbr></h3>
+                <table>
+                    <tr>
+                        <th class="phpdocumentor-heading">Line</th>
+                        <th class="phpdocumentor-heading">Element</th>
+                        <th class="phpdocumentor-heading">Reason</th>
+                    </tr>
+                                                                        <tr>
+                                <td class="phpdocumentor-cell">91</td>
+                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Routing-PioniaRouter.html#method_post"><abbr title="\Pionia\Core\Routing\PioniaRouter::post()">PioniaRouter::post()</abbr></a></td>
+                                <td class="phpdocumentor-cell"><ul>
+<li>Use addSwitchFor instead</li>
+</ul>
+</td>
+                            </tr>
+                                                                                                <tr>
+                                <td class="phpdocumentor-cell">108</td>
+                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Routing-PioniaRouter.html#method_addGroup"><abbr title="\Pionia\Core\Routing\PioniaRouter::addGroup()">PioniaRouter::addGroup()</abbr></a></td>
+                                <td class="phpdocumentor-cell"><p>Use addSwitchFor instead</p>
+</td>
+                            </tr>
+                                                                                                <tr>
+                                <td class="phpdocumentor-cell">173</td>
+                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Routing-PioniaRouter.html#method_get"><abbr title="\Pionia\Core\Routing\PioniaRouter::get()">PioniaRouter::get()</abbr></a></td>
+                                <td class="phpdocumentor-cell"><ul>
+<li>Use addSwitchFor instead</li>
+</ul>
+</td>
+                            </tr>
+                                                                                                <tr>
+                                <td class="phpdocumentor-cell">193</td>
+                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Routing-PioniaRouter.html#method_cleanBase"><abbr title="\Pionia\Core\Routing\PioniaRouter::cleanBase()">PioniaRouter::cleanBase()</abbr></a></td>
+                                <td class="phpdocumentor-cell"><ul>
+<li>Was useful for v1.1.0 and below</li>
+</ul>
+</td>
+                            </tr>
+                                                                                                <tr>
+                                <td class="phpdocumentor-cell">223</td>
+                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Routing-PioniaRouter.html#method_addRoute"><abbr title="\Pionia\Core\Routing\PioniaRouter::addRoute()">PioniaRouter::addRoute()</abbr></a></td>
+                                <td class="phpdocumentor-cell"><ul>
+<li>Use addSwitchFor instead with the version name. This is just a helper method</li>
+</ul>
+</td>
+                            </tr>
+                                                            </table>
                     </div>
     </section>
                             </div>

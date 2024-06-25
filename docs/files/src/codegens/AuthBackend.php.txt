@@ -5,9 +5,9 @@ namespace Pionia\Codegens;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
-use Pionia\core\helpers\ContextUserObject;
-use Pionia\core\interceptions\BaseAuthenticationBackend;
-use Pionia\request\Request;
+use Pionia\Core\Helpers\ContextUserObject;
+use Pionia\Core\Interceptions\BaseAuthenticationBackend;
+use Pionia\Request\Request;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -43,9 +43,9 @@ class AuthBackend extends CodeGenerator
         $file->addComment('This authentication backend is auto-generated from pionia cli.');
         $file->addComment("Remember to register your backend in index.php.");
 
-        $namespace->addUse('Pionia\core\helpers\ContextUserObject');
-        $namespace->addUse('Pionia\core\interceptions\BaseAuthenticationBackend');
-        $namespace->addUse('Pionia\request\Request');
+        $namespace->addUse('Pionia\Core\Helpers\ContextUserObject');
+        $namespace->addUse('Pionia\Core\Interceptions\BaseAuthenticationBackend');
+        $namespace->addUse('Pionia\Request\Request');
 
         $klass = $namespace->addClass($name);
 
@@ -60,12 +60,11 @@ class AuthBackend extends CodeGenerator
         $this->log("Authentication Backend $name created at $directory.");
     }
 
-    private function addActions(ClassType $class): ClassType
+    private function addActions(ClassType $class): void
     {
         foreach ($this->actions as $action) {
             $class = $this->createActionMethod($class, $action);
         }
-        return $class;
     }
 
     private function createActionMethod(ClassType $class, string $action): ClassType

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\response;
+namespace Pionia\Response;
 
 /**
  * This provides a uniform response format for our entire application.
@@ -48,16 +48,34 @@ class BaseResponse
         return $this->prettyResponse;
     }
 
-    public static function JsonResponse($code=0,  string|null $message = null, mixed $data = null, array | string | null $extraData = null): static
+    /**
+     * All actions in Pionia must return this as the response. This is how Pionia ensures a uniform response format
+     *
+     * @param int|null $code - the return code to the client side. Defaults to 0 for success
+     * @param string|null $message
+     * @param mixed|null $data
+     * @param array|string|null $extraData
+     * @return BaseResponse
+     */
+    public static function JsonResponse(?int $code = 0, string|null $message = null, mixed $data = null, array | string | null $extraData = null): static
     {
         $response = new BaseResponse($data);
+        if ($code === null) {
+            $code = 0;
+        }
         $response->returnCode=$code;
         $response->returnMessage = $message;
         $response->extraData = $extraData;
         return $response->build();
     }
 
-    public function build($additionalData = []): static
+    /**
+     * This is used to build the response.
+     *
+     * @param array|null $additionalData
+     * @return BaseResponse
+     */
+    public function build(?array $additionalData = []): static
     {
         if ($this->response){
             $data = array_merge($this->response, $additionalData);

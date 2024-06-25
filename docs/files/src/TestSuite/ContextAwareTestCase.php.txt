@@ -4,8 +4,8 @@ namespace Pionia\TestSuite;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Pionia\core\Pionia;
-use Pionia\exceptions\DatabaseException;
+use Pionia\Core\Pionia;
+use Pionia\Exceptions\DatabaseException;
 use Porm\core\Database;
 
 if (!defined('BASEPATH')) {
