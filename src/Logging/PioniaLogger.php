@@ -130,7 +130,7 @@ class PioniaLogger
     public static function hideInLogs(mixed $data = []): array
     {
         if (!is_array($data)) {
-            return $data;
+            return [];
         }
         // this method will hide the secured keys in the logs
         $keys = self::$hiddenKeys;
