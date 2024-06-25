@@ -4,7 +4,6 @@ namespace Pionia\Request;
 
 use Pionia\Exceptions\ResourceNotFoundException;
 use Pionia\Exceptions\UserUnauthenticatedException;
-use Pionia\Logging\PioniaLogger;
 use Pionia\Response\BaseResponse;
 use ReflectionException;
 use ReflectionMethod;
@@ -52,7 +51,6 @@ abstract class BaseRestService
      * @var ?string $authMessage This message will be displayed when the entire service requires authentication
      */
     public ?string $authMessage = null;
-
     /**
      * This method is called when the service is called with an action
      *
