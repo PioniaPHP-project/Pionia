@@ -4,28 +4,20 @@ namespace Pionia\Logging;
 
 use Monolog\Formatter\JsonFormatter;
 use Monolog\Formatter\LineFormatter;
-use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
-use Monolog\Processor\GitProcessor;
+use Monolog\Processor\HostnameProcessor;
 use Monolog\Processor\MemoryUsageProcessor;
 use Monolog\Processor\ProcessIdProcessor;
-use Pionia\core\Pionia;
-
+use Monolog\Processor\PsrLogMessageProcessor;
+use Monolog\Processor\WebProcessor;
+use Pionia\Core\Pionia;
 use Monolog\Handler\StreamHandler; // The StreamHandler sends log messages to a file on your disk
-use Monolog\Logger;
-use Pionia\exceptions\BaseException;
-
-// The Logger instance
-
+use Monolog\Logger; // The Logger class is the main class of the Monolog library
 /**
  */
-class PioniaLogger extends Pionia
+class PioniaLogger
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
+    private static $hiddenKeys = ['password', 'pass', 'pin', 'passwd', 'secret_key', 'pwd', 'token', 'credit_card', 'creditcard', 'cc', 'secret', 'cvv', 'cvn'];
 
     /**
      * Call this method to initialise the logger.
@@ -33,15 +25,27 @@ class PioniaLogger extends Pionia
      * To turn off debug logging, turn off DEBUG in settings.ini.
      * You can turn off DEBUG but still want to maintain logging alone, there you leave LOG_REQUESTS on in the settings.ini.
      *
-     * Also you can define your own LOG_DESTINATION destination. This is where you want to log to. default is terminal, but it can a file. If
-     * it is a file, a clear file path should be provided.
+     * Also you can define your own LOG_DESTINATION destination. This is where you want to log to. default is stdout, but it can be file. If
+     * it is a file, a clear file path should be provided. It will be created if not already available.
+     *
+     * You can also define the LOG_FORMAT. This can be either TEXT or JSON. Default is TEXT.
+     *
+     * You can also define the LOGGED_SETTINGS. This is a comma separated list of settings that you want to log along to the log file.
+     *
+     * You can also define the HIDE_IN_LOGS. This is a comma separated list of settings keys that you want to hide in the logs.
+     * Default list comprises of `password`, `pass`, `passwd`, `pwd`, `token`, `credit_card`, `creditcard`, `cc`, `secret`, `cvv`, `cvn`.
+     * Nothing gets removed from list, but whatever you add to the HIDE_IN_LOGS will be added and hidden in the logs.
+     *
+     * You can also define the HIDE_SUB. This is the string that will replace the hidden values in the logs. Default is `*********`.
+     *
+     * If you log to a file, then you watch the file using `tail -f /path/to/file.log` to see the logs in real time.
      *
      * @return Logger|null
      */
     public static function init(): Logger | null
     {
         $pionia = new Pionia();
-
+        $settings = $pionia::getSettings();
         $serverSettings = $pionia::getServerSettings();
 
         if (array_key_exists("DEBUG", $serverSettings)) {
@@ -63,57 +67,82 @@ class PioniaLogger extends Pionia
         if (array_key_exists("LOG_DESTINATION", $serverSettings)) {
             $destination = $serverSettings["LOG_DESTINATION"];
         } else {
-            $destination = 'terminal';
+            $destination = 'stdout';
         }
 
-        if ($destination === 'terminal') {
+        if ($destination === 'stdout') {
             $stream = "php://stdout";
-        } else if (is_file($destination)) {
+        } else {
             $stream = $destination;
-        } else {
-            $stream = "php://stdout";
         }
 
-        if ($logRequests || $debug) {
-            $maximumLogLevel = Level::Debug;
-        } else {
-            $maximumLogLevel = Level::Info;
-        }
+        $logger = new Logger($pionia::$name);
 
-        $logger = new Logger(self::$name);
+        $logger->pushProcessor(new PsrLogMessageProcessor())
+            ->pushProcessor(new MemoryUsageProcessor())
+            ->pushProcessor(new ProcessIdProcessor())
+            ->pushProcessor(new WebProcessor());
 
         if ($debug) {
             $logger
-                ->pushProcessor(new ProcessIdProcessor())
-                ->pushProcessor(new GitProcessor())
-                ->pushProcessor(new MemoryUsageProcessor());
-        } else {
-            $logger->pushProcessor(new MemoryUsageProcessor());
+                ->pushProcessor(new HostnameProcessor());
         }
 
-        if ($debug) {
-            $output = self::$name . " :: %level_name% | %datetime% > %message% \n| %context% %extra%\n";
-            $formatter = new LineFormatter($output);
-        } else {
-            $formatter = new JsonFormatter();
+        $logger->pushProcessor(function ($record) use ($debug, $serverSettings, $settings){
+            // here the developer can also log some parts of the settings.ini file
+            if (isset($serverSettings['LOGGED_SETTINGS'])){
+                $settings_ = explode(',', $serverSettings['LOGGED_SETTINGS']);
+                foreach ($settings_ as $key){
+                    $cleaned = self::hideInLogs($settings[$key]);
+                    $record->extra = array_merge($record->extra, $cleaned);
+                }
+            }
+            return $record;
+        });
+
+        $outFormat = 'TEXT';
+
+        if (array_key_exists('LOG_FORMAT', $serverSettings)) {
+            $outFormat = strtoupper($serverSettings['LOG_FORMAT']);
         }
 
-        // stream handler for dev
+        if ($outFormat === 'JSON') {
+            $formatter = new JsonFormatter(1, true, true, true);
+        } else {
+            $dateFormat = "Y-n-j, g:i:s a";
+            $output = '[%datetime%] '.strtolower($pionia::$name).".%level_name% >> %message% - %context% %extra%\n";
+            $formatter = new LineFormatter($output, null, true, true);
+        }
+
         if ($logRequests || $debug) {
-            $stream_handler = new StreamHandler('php://stdout', $maximumLogLevel);
+            $stream_handler = new StreamHandler($stream, Level::Debug);
             $stream_handler->setFormatter($formatter);
             $logger->pushHandler($stream_handler);
         }
-
-        // this shall kick in in production
-        if ($destination !== 'terminal' && $logRequests) {
-            $rotater = new RotatingFileHandler($stream);
-            $rotater->setFormatter($formatter);
-            $logger->pushHandler($rotater);
-        }
-
-        // if we are in production and have the logging settings, then we handle that too
         return $logger;
+    }
+
+    /**
+     * This method will hide the secure keys in the logs
+     * @param array $data The data whose secure keys are to be hidden
+     * @return array The data with the hidden keys hidden
+     */
+    public static function hideInLogs(array $data = []): array
+    {
+        // this method will hide the secured keys in the logs
+        $keys = self::$hiddenKeys;
+        if (!empty($serverSettings['HIDE_IN_LOGS'])) {
+            $keys = array_merge($keys, explode(',', $serverSettings['HIDE_IN_LOGS']));
+        }
+        $sub = $serverSettings['HIDE_SUB'] ?? '*********';
+
+        array_walk_recursive($data, function (&$value, $key) use ($keys, $sub) {
+            if (in_array($key, $keys)) {
+                $value = $sub;
+            }
+        });
+
+        return $data;
     }
 
 }

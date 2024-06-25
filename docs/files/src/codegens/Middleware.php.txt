@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\codegens;
+namespace Pionia\Codegens;
 
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
@@ -33,7 +33,7 @@ class Middleware extends CodeGenerator
         if ($className){
             $this->name = $className;
         }
-        
+
         $name = $this->sweetName('Middleware');
 
         $file = new PhpFile;

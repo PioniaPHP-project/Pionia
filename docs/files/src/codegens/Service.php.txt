@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\codegens;
+namespace Pionia\Codegens;
 
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;

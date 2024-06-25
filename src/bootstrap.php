@@ -14,7 +14,6 @@ use Pionia\Logging\PioniaLogger;
 
 set_exception_handler('exception_handler');
 
-
 function exception_handler(Throwable $e): void
 {
     $logger = PioniaLogger::init();
@@ -22,16 +21,7 @@ function exception_handler(Throwable $e): void
 }
 
 $autoloader = require __DIR__ . '/../vendor/autoload.php';
-//
-//
-//$routes = new \Pionia\core\routing\PioniaRouter();
-//
-//$routes->addGroup('Pionia\core\BaseApiController');
-//
-//$kernel = new \Pionia\core\config\CoreKernel($routes->getRoutes());
-//
-//$request = \Pionia\request\Request::createFromGlobals();
-//
-//$kernel->handle($request);
 
-
+if (!defined("logger")){
+    define('logger', PioniaLogger::init());
+}

@@ -3,7 +3,9 @@ settings.ini
 .idea
 .DM_Store
 composer.lock
-src/core/.DS_Store
+src/Core/.DS_Store
 build
 .phpunit.result.cache
 pionia
+
+**.log

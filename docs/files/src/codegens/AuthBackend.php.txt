@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\codegens;
+namespace Pionia\Codegens;
 
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
@@ -31,7 +31,7 @@ class AuthBackend extends CodeGenerator
         if ($className){
             $this->name = $className;
         }
-        
+
         $name = $this->sweetName('AuthBackend');
 
         $file = new PhpFile;

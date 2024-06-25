@@ -3,7 +3,7 @@
 namespace validators;
 
 use Pionia\TestSuite\ContextFreeTestCase;
-use Pionia\validators\Validator;
+use Pionia\Validators\Validator;
 use function PHPUnit\Framework\assertEquals;
 
 class ValidatorTest extends ContextFreeTestCase

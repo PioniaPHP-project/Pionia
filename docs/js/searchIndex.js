@@ -21,172 +21,172 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_exception_handler"
         },                {
-            "fqsen": "\\Pionia\\codegens\\AuthBackend",
+            "fqsen": "\\Pionia\\Codegens\\AuthBackend",
             "name": "AuthBackend",
             "summary": "Code\u0020generator\u0020for\u0020creating\u0020Authentication\u0020Backends",
             "url": "classes/Pionia-codegens-AuthBackend.html"
         },                {
-            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\AuthBackend\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
             "url": "classes/Pionia-codegens-AuthBackend.html#method___construct"
         },                {
-            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003Agenerate\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\AuthBackend\u003A\u003Agenerate\u0028\u0029",
             "name": "generate",
             "summary": "",
             "url": "classes/Pionia-codegens-AuthBackend.html#method_generate"
         },                {
-            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003AaddActions\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\AuthBackend\u003A\u003AaddActions\u0028\u0029",
             "name": "addActions",
             "summary": "",
             "url": "classes/Pionia-codegens-AuthBackend.html#method_addActions"
         },                {
-            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003AcreateActionMethod\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\AuthBackend\u003A\u003AcreateActionMethod\u0028\u0029",
             "name": "createActionMethod",
             "summary": "",
             "url": "classes/Pionia-codegens-AuthBackend.html#method_createActionMethod"
         },                {
-            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003A\u0024dir",
+            "fqsen": "\\Pionia\\Codegens\\AuthBackend\u003A\u003A\u0024dir",
             "name": "dir",
             "summary": "",
             "url": "classes/Pionia-codegens-AuthBackend.html#property_dir"
         },                {
-            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003A\u0024namespace",
+            "fqsen": "\\Pionia\\Codegens\\AuthBackend\u003A\u003A\u0024namespace",
             "name": "namespace",
             "summary": "",
             "url": "classes/Pionia-codegens-AuthBackend.html#property_namespace"
         },                {
-            "fqsen": "\\Pionia\\codegens\\AuthBackend\u003A\u003A\u0024actions",
+            "fqsen": "\\Pionia\\Codegens\\AuthBackend\u003A\u003A\u0024actions",
             "name": "actions",
             "summary": "",
             "url": "classes/Pionia-codegens-AuthBackend.html#property_actions"
         },                {
-            "fqsen": "\\Pionia\\codegens\\CodeGenerator",
+            "fqsen": "\\Pionia\\Codegens\\CodeGenerator",
             "name": "CodeGenerator",
             "summary": "Base\u0020for\u0020all\u0020code\u0020generators\u0020in\u0020Pionia",
             "url": "classes/Pionia-codegens-CodeGenerator.html"
         },                {
-            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003AsweetName\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\CodeGenerator\u003A\u003AsweetName\u0028\u0029",
             "name": "sweetName",
             "summary": "Spices\u0020up\u0020the\u0020name\u0020a\u0020little\u0020\u0027user\u0027\u0020becomes\u0020\u0027UserService\u0027",
             "url": "classes/Pionia-codegens-CodeGenerator.html#method_sweetName"
         },                {
-            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003Agenerate\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\CodeGenerator\u003A\u003Agenerate\u0028\u0029",
             "name": "generate",
             "summary": "",
             "url": "classes/Pionia-codegens-CodeGenerator.html#method_generate"
         },                {
-            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003Alog\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\CodeGenerator\u003A\u003Alog\u0028\u0029",
             "name": "log",
             "summary": "",
             "url": "classes/Pionia-codegens-CodeGenerator.html#method_log"
         },                {
-            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003AgetOrCreateDirectory\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\CodeGenerator\u003A\u003AgetOrCreateDirectory\u0028\u0029",
             "name": "getOrCreateDirectory",
             "summary": "",
             "url": "classes/Pionia-codegens-CodeGenerator.html#method_getOrCreateDirectory"
         },                {
-            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003AcreateFile\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\CodeGenerator\u003A\u003AcreateFile\u0028\u0029",
             "name": "createFile",
             "summary": "",
             "url": "classes/Pionia-codegens-CodeGenerator.html#method_createFile"
         },                {
-            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003A\u0024name",
+            "fqsen": "\\Pionia\\Codegens\\CodeGenerator\u003A\u003A\u0024name",
             "name": "name",
             "summary": "",
             "url": "classes/Pionia-codegens-CodeGenerator.html#property_name"
         },                {
-            "fqsen": "\\Pionia\\codegens\\CodeGenerator\u003A\u003A\u0024output",
+            "fqsen": "\\Pionia\\Codegens\\CodeGenerator\u003A\u003A\u0024output",
             "name": "output",
             "summary": "",
             "url": "classes/Pionia-codegens-CodeGenerator.html#property_output"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Middleware",
+            "fqsen": "\\Pionia\\Codegens\\Middleware",
             "name": "Middleware",
             "summary": "Code\u0020generator\u0020for\u0020creating\u0020middleware\u0020files\u0020in\u0020pionia",
             "url": "classes/Pionia-codegens-Middleware.html"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\Middleware\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
             "url": "classes/Pionia-codegens-Middleware.html#method___construct"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003Agenerate\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\Middleware\u003A\u003Agenerate\u0028\u0029",
             "name": "generate",
             "summary": "",
             "url": "classes/Pionia-codegens-Middleware.html#method_generate"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003AaddActions\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\Middleware\u003A\u003AaddActions\u0028\u0029",
             "name": "addActions",
             "summary": "",
             "url": "classes/Pionia-codegens-Middleware.html#method_addActions"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003AcreateActionMethod\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\Middleware\u003A\u003AcreateActionMethod\u0028\u0029",
             "name": "createActionMethod",
             "summary": "",
             "url": "classes/Pionia-codegens-Middleware.html#method_createActionMethod"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003A\u0024dir",
+            "fqsen": "\\Pionia\\Codegens\\Middleware\u003A\u003A\u0024dir",
             "name": "dir",
             "summary": "",
             "url": "classes/Pionia-codegens-Middleware.html#property_dir"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003A\u0024namespace",
+            "fqsen": "\\Pionia\\Codegens\\Middleware\u003A\u003A\u0024namespace",
             "name": "namespace",
             "summary": "",
             "url": "classes/Pionia-codegens-Middleware.html#property_namespace"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Middleware\u003A\u003A\u0024actions",
+            "fqsen": "\\Pionia\\Codegens\\Middleware\u003A\u003A\u0024actions",
             "name": "actions",
             "summary": "",
             "url": "classes/Pionia-codegens-Middleware.html#property_actions"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Service",
+            "fqsen": "\\Pionia\\Codegens\\Service",
             "name": "Service",
             "summary": "Code\u0020generator\u0020for\u0020creating\u0020new\u0020services\u0020in\u0020Pionia",
             "url": "classes/Pionia-codegens-Service.html"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\Service\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
             "url": "classes/Pionia-codegens-Service.html#method___construct"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003Agenerate\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\Service\u003A\u003Agenerate\u0028\u0029",
             "name": "generate",
             "summary": "",
             "url": "classes/Pionia-codegens-Service.html#method_generate"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003AaddActions\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\Service\u003A\u003AaddActions\u0028\u0029",
             "name": "addActions",
             "summary": "",
             "url": "classes/Pionia-codegens-Service.html#method_addActions"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003AcreateActionMethod\u0028\u0029",
+            "fqsen": "\\Pionia\\Codegens\\Service\u003A\u003AcreateActionMethod\u0028\u0029",
             "name": "createActionMethod",
             "summary": "",
             "url": "classes/Pionia-codegens-Service.html#method_createActionMethod"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003A\u0024dir",
+            "fqsen": "\\Pionia\\Codegens\\Service\u003A\u003A\u0024dir",
             "name": "dir",
             "summary": "",
             "url": "classes/Pionia-codegens-Service.html#property_dir"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003A\u0024namespace",
+            "fqsen": "\\Pionia\\Codegens\\Service\u003A\u003A\u0024namespace",
             "name": "namespace",
             "summary": "",
             "url": "classes/Pionia-codegens-Service.html#property_namespace"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003A\u0024actions",
+            "fqsen": "\\Pionia\\Codegens\\Service\u003A\u003A\u0024actions",
             "name": "actions",
             "summary": "",
             "url": "classes/Pionia-codegens-Service.html#property_actions"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003A\u0024backupName",
+            "fqsen": "\\Pionia\\Codegens\\Service\u003A\u003A\u0024backupName",
             "name": "backupName",
             "summary": "",
             "url": "classes/Pionia-codegens-Service.html#property_backupName"
         },                {
-            "fqsen": "\\Pionia\\codegens\\Service\u003A\u003A\u0024defaults",
+            "fqsen": "\\Pionia\\Codegens\\Service\u003A\u003A\u0024defaults",
             "name": "defaults",
             "summary": "",
             "url": "classes/Pionia-codegens-Service.html#property_defaults"
@@ -1321,7 +1321,7 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html"
         },                {
-            "fqsen": "\\Pionia\\codegens",
+            "fqsen": "\\Pionia\\Codegens",
             "name": "codegens",
             "summary": "",
             "url": "namespaces/pionia-codegens.html"

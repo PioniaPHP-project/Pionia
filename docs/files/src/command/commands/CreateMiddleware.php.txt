@@ -2,8 +2,8 @@
 
 namespace Pionia\command\commands;
 
-use Pionia\codegens\AuthBackend;
-use Pionia\codegens\Middleware;
+use Pionia\Codegens\AuthBackend;
+use Pionia\Codegens\Middleware;
 use Pionia\command\BaseCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
