@@ -80,7 +80,7 @@ abstract class BaseApiServiceSwitch extends BaseApiController
      * @param Request $request
      * @return BaseResponse
      */
-    protected static function processor(Request $request): BaseResponse
+    public static function processor(Request $request): BaseResponse
     {
         $codes = self::getServerSettings();
         try {
