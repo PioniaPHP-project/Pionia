@@ -158,16 +158,16 @@ class CoreKernel extends Pionia
 
         $this->matcher->getContext()->fromRequest($request);
 
+        $serverSettings = self::getSetting('server');
+
+        $shouldLog = isset($serverSettings['LOG_REQUESTS']) && $serverSettings['LOG_REQUESTS'];
+
         try {
             $request->attributes->add($this->matcher->match($request->getPathInfo()));
 
             $controller = $controllerResolver->getController($request);
 
             $arguments = $argumentResolver->getArguments($request, $controller);
-
-            $serverSettings = self::getSetting('server');
-
-            $shouldLog = isset($serverSettings['LOG_REQUESTS']) && $serverSettings['LOG_REQUESTS'];
 
             if ($shouldLog) {
                 logger->info("New Request: ", PioniaLogger::hideInLogs($arguments));
@@ -176,14 +176,20 @@ class CoreKernel extends Pionia
             $response =  call_user_func_array($controller, $arguments);
 
             if ($shouldLog) {
-                logger->info('Response: ', $response);
+                logger->info('Response: ', ['response' => $response]);
             }
 
             $requestResponse = new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
         } catch (ResourceNotFoundException $exception) {
+            if ($shouldLog){
+                logger->error($exception->getMessage(), ['stack' => $exception]);
+            }
             $response = BaseResponse::JsonResponse(404, 'Resource not found, are you sure this endpoint exists?');
             $requestResponse = new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
         } catch (Exception $exception) {
+            if ($shouldLog){
+                logger->error($exception->getMessage(), ['stack' => $exception]);
+            }
             $response = BaseResponse::JsonResponse(500, $exception->getMessage());
             $requestResponse =  new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
         }
