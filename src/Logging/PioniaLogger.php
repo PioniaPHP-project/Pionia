@@ -92,9 +92,16 @@ class PioniaLogger
             // here the developer can also log some parts of the settings.ini file
             if (isset($serverSettings['LOGGED_SETTINGS'])){
                 $settings_ = explode(',', $serverSettings['LOGGED_SETTINGS']);
-                foreach ($settings_ as $key){
-                    $cleaned = self::hideInLogs($settings[$key]);
-                    $record->extra = array_merge($record->extra, $cleaned);
+                if (is_array($settings_) && !empty($settings_)) {
+                    $all = [];
+                    foreach ($settings_ as $key) {
+                        $current = $settings[$key];
+                        if (is_array($current)) {
+                            $cleaned = self::hideInLogs($current);
+                            $all = array_merge($all, $cleaned);
+                        }
+                    }
+                    $record->extra = array_merge($record->extra, $all);
                 }
             }
             return $record;
