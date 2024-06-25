@@ -9,6 +9,18 @@ use Pionia\Request\PaginationCore;
 use Porm\exceptions\BaseDatabaseException;
 use Porm\Porm;
 
+/**
+ * This is not publicly ready for use. But this is the base class other generic services will build from.
+ *
+ * Right now it does nothing so shouldn't be used.
+ *
+ * @property string $table The table to be used
+ * @property int $limit The limit of the data to be returned
+ * @property int $offset The offset of the data to be returned
+ * @property string $pk_field The primary key field
+ * @property string $connection The database connection to be used
+ * @property array|string $columns The columns to be returned
+ */
 class BaseGenericService extends BaseRestService
 {
     public string $table;
