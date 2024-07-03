@@ -16,7 +16,7 @@ class PaginationCore
 
     private Request $request;
 
-    private array $parged = ['columns' => '*'];
+    private array $parged = ['columns' => '*', 'where' => []];
 
     private string $table;
 
@@ -39,6 +39,12 @@ class PaginationCore
         return $this;
     }
 
+    public function where(array $where = []): PaginationCore
+    {
+        $this->parged['where'] = array_merge($this->parged['where'], $where);
+        return $this;
+    }
+
     /**
      * Sets the columns to return in the queryset
      * @param string|array $columns
@@ -51,22 +57,54 @@ class PaginationCore
     }
 
     /**
-     * Should be called finally to get the paginated data
+     * Should be called finally to get the paginated data.
+     *
+     * Supports where clause just like the `where` method in the Porm query builder
      * @throws BaseDatabaseException
      * @throws Exception
      */
-    public function paginate(): ?array
+    public function paginate(?array $where = null): ?array
     {
+        if ($where) {
+            $this->parged['where'] = array_merge($this->parged['where'], $where);
+        }
+
         $limit = $this->parged['LIMIT'];
         $offset = $this->parged['OFFSET'];
 
-        return Porm::from($this->table)
+        $baseQuery =  Porm::from($this->table)
             ->columns($this->parged['columns'])
             ->using($this->db)
-            ->filter()
+            ->filter($this->parged['where']);
+        // before applying the offsets, get the total count
+        $all = $baseQuery->count();
+        // apply the limit and offset
+        $resultSet = $baseQuery
             ->limit($limit)
             ->startAt($offset)
             ->all();
+        $prev = $offset - $limit;
+        $next = $offset + $limit;
+        // check if there are more results
+        $nextOffset = $next < $all ? $next : null;
+
+        $prevOffset = max($prev, 0);
+
+        // has next page
+        $hasNext = $nextOffset < $all;
+        $hasPrevious = $prevOffset > 0;
+
+        return [
+            'results' => $resultSet,
+            'current_limit' => $limit,
+            'current_offset' => $offset,
+            'next_offset' => $nextOffset,
+            'prev_offset' => $prevOffset,
+            'results_count' => count($resultSet),
+            'has_next' => $hasNext,
+            'has_previous' => $hasPrevious,
+            'total_count' => $all
+        ];
     }
 
     /**

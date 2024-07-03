@@ -28,6 +28,7 @@
         "monolog/monolog": "^3.6",
         "phpunit/phpunit": "^10.0",
         "pionia/porm": "^1.0",
-        "nette/php-generator": "^4.1"
+        "nette/php-generator": "^4.1",
+        "doctrine/inflector": "^2.0"
     }
 }

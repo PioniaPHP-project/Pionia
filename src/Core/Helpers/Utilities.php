@@ -2,6 +2,8 @@
 
 namespace Pionia\Core\Helpers;
 
+use Doctrine\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 use ReflectionClass;
 
 /**
@@ -71,4 +73,82 @@ class Utilities
         return true;
     }
 
+
+    /**
+     * Camel cases any string you drop at it
+     * @param string $string
+     * @return string
+     */
+    public static function toCamelCase(string $string): string
+    {
+        return self::formatter()->camelize($string);
+    }
+
+    /**
+     * Converts any word to its singular form
+     * @param string $word
+     * @return string
+     */
+    public static function singularize(string $word): string
+    {
+        return self::formatter()->singularize($word);
+    }
+
+    /**
+     * Converts any word to its plural form
+     * @param string $word
+     * @return string
+     */
+    public static function pluralize(string $word): string
+    {
+        return self::formatter()->pluralize($word);
+    }
+
+    /**
+     * Capitalizes any word eg hello world => Hello World
+     * @param string $word
+     * @return string
+     */
+    public static function capitalize(string $word): string
+    {
+        return self::formatter()->capitalize($word);
+    }
+
+    /**
+     * Gives you a chance to teleport to the core symfony inflector
+     */
+    public static function formatter(): Inflector
+    {
+        return InflectorFactory::create()->build();
+    }
+
+    /**
+     * Converts a string to a class name eg hello_world => HelloWorld
+     * @param string $class
+     * @return string
+     */
+    public static function classify(string $class): string
+    {
+        return self::formatter()->classify($class);
+    }
+
+    /**
+     * Converts a string to a table name eg HelloWorld => hello_world
+     * @param string $class
+     * @return string
+     */
+    public static function modelize(string $class): string
+    {
+        return self::formatter()->tableize($class);
+    }
+
+    /**
+     * Converts a string to a slug eg HelloWorld => hello-world
+     * @param string $class
+     * @return string
+     */
+    public static function slugify(string $class): string
+    {
+        return self::formatter()->urlize($class);
+    }
 }

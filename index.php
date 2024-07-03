@@ -16,8 +16,3 @@ require_once "src/bootstrap.php";
 if (!defined("logger")){
     define('logger', PioniaLogger::init());
 }
-
-$server = new \Pionia\Core\Config\CoreKernel(new \Pionia\Core\Routing\BaseRoutes());
-
-$request = Request::createFromGlobals();
-$server->handle($request);
