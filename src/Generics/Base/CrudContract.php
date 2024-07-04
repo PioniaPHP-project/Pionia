@@ -111,19 +111,16 @@ trait CrudContract
         $item = $this->getOneInternal($id);
 
         if (!$item) {
-            throw new Exception("Item with $this->pk_field $id not found");
+            throw new Exception("Record with $this->pk_field $id not found");
         }
-        $transaction = Porm::from($this->table)->pdo()->beginTransaction();
         // run the before delete event and confirm if its not false or null before proceeding
         if ($this->preDelete($item)) {
              $deleted = Porm::from($this->table)
                 ->using($this->connection)
                 ->delete([$this->pk_field => $id]);
-             $transaction && Porm::from($this->table)->pdo()->commit();
              // run the post delete event
              return $this->postDelete($deleted, $item);
         }
-        $transaction && Porm::from($this->table)->pdo()->rollBack();
         return null;
     }
 
@@ -147,27 +144,19 @@ trait CrudContract
         foreach ($this->createColumns as $column) {
             $sanitizedData[$column] = trim($data[$column]);
         }
-        $transaction = Porm::from($this->table)->pdo()->beginTransaction();
 
-        try {
-            // run the pre create event and confirm if its not false or null before proceeding
-            if ($toSave = $this->preCreate($sanitizedData)) {
-
+        $saved = null;
+        if ($toSave = $this->preCreate($sanitizedData)) {
+            Porm::from($this->table)->inTransaction(function () use ($data, &$saved, $toSave) {
                 $saved = Porm::from($this->table)
                     ->using($this->connection)
                     ->save($toSave);
-                if ($transaction) {
-                    Porm::from($this->table)->pdo()->commit();
-                }
-                return $this->postCreate($saved);
-            }
-
-            $transaction && Porm::from($this->table)->pdo()->rollBack();
-            return null;
-        } catch (Exception $e) {
-           $transaction && Porm::from($this->table)->pdo()->rollBack();
-            throw new Exception($e->getMessage());
+            });
         }
+        if (!$saved) {
+            throw new Exception("Record not saved! Try again later.");
+        }
+        return $this->postCreate($saved);
     }
 
 
@@ -223,47 +212,42 @@ trait CrudContract
             ->get($id, $this->pk_field);
 
         if (!$item) {
-            throw new Exception("Item with id {$id} not found");
+            throw new Exception("Record with id {$id} not found");
         }
 
-        $transaction = Porm::from($this->table)->pdo()->beginTransaction();
-
-        try {
-            if (is_array($item)) {
-                $toArray = $item;
-            } else {
-                $toArray = (array)$item;
-            }
-            // if the developer defines the columns to update, we stick to those
-            if ($this->updateColumns) {
-                foreach ($this->updateColumns as $column) {
-                    if (isset($data[$column])) {
-                        $toArray[$column] = $data[$column];
-                    }
-                }
-            } else {
-                foreach ($toArray as $key => $value) {
-                    if (isset($data[$key])) {
-                        $toArray[$key] = $data[$key];
-                    }
+        if (is_array($item)) {
+            $toArray = $item;
+        } else {
+            $toArray = (array)$item;
+        }
+        // if the developer defines the columns to update, we stick to those
+        if ($this->updateColumns) {
+            foreach ($this->updateColumns as $column) {
+                if (isset($data[$column])) {
+                    $toArray[$column] = $data[$column];
                 }
             }
-            // run the pre update event and confirm if its not false or null before proceeding
-            if ($toSave = $this->preUpdate($toArray)) {
-
+        } else {
+            foreach ($toArray as $key => $value) {
+                if (isset($data[$key])) {
+                    $toArray[$key] = $data[$key];
+                }
+            }
+        }
+        $updated = null;
+        // run the pre update event and confirm if its not false or null before proceeding
+        if ($toSave = $this->preUpdate($toArray)) {
+            Porm::from($this->table)->inTransaction(function () use ($toSave, $id, &$updated) {
                 Porm::from($this->table)
                     ->using($this->connection)
                     ->update($toSave, [$this->pk_field => $id]);
-            }
-
-            $transaction && Porm::from($this->table)->pdo()->commit();
-
+            });
             $updated = $this->getOneInternal($id);
-            // run the post update event
-            return $this->postUpdate($updated);
-        } catch (Exception $e) {
-            $transaction && Porm::from($this->table)->pdo()->rollBack();
-            throw new Exception($e->getMessage());
         }
+        if (!$updated) {
+            throw new Exception("Update failed for record with id $id");
+        }
+        // run the post update event
+        return $this->postUpdate($updated);
     }
 }
