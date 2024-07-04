@@ -61,7 +61,11 @@ trait CrudContract
      */
     protected function getOne(): ?array
     {
-        $data = $this->request->get($this->pk_field);
+        $once = $this->getOne();
+        if ($once) {
+            return $once;
+        }
+        $data = $this->request->getData();
         $id = $data[$this->pk_field] ?? throw new Exception("Field {$this->pk_field} is required");
         return $this->getOneInternal($id);
     }
@@ -72,8 +76,8 @@ trait CrudContract
      */
     private function getOneInternal($id): ?array
     {
-        $getDefined = $this->getOne();
-        return $getDefined ?? Porm::from($this->table)
+        $customQueried = $this->getOne();
+        return $customQueried ?? Porm::from($this->table)
             ->using($this->connection)
             ->columns($this->getListColumns())
             ->get([$this->pk_field => $id]);
