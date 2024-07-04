@@ -2,13 +2,12 @@
 
 namespace Pionia\Generics;
 
-use Pionia\Generics\Facades\GenericService;
-use Pionia\Generics\Facades\Helpers\CreateMixin;
-use Pionia\Generics\Facades\Helpers\RetrieveMixin;
-use Pionia\Generics\Facades\Helpers\UpdateMixin;
+use Pionia\Generics\Mixins\DeleteMixin;
+use Pionia\Generics\Mixins\ListMixin;
+use Pionia\Generics\Mixins\RetrieveMixin;
 
 /**
- * Adds retrieve, create and update actions to the service.
+ * Adds the delete and retrieve actions to the service.
  *
  * @property string $table The table to be used
  * @property int $limit The limit of the data to be returned
@@ -18,9 +17,9 @@ use Pionia\Generics\Facades\Helpers\UpdateMixin;
  * @property array|string $listColumns The columns to be returned in listing data
  * @property array|null $createColumns The columns to be created
  */
-class RetrieveCreateUpdateGenericService extends GenericService
+class RetrieveListDeleteService extends GenericService
 {
+    use DeleteMixin;
     use RetrieveMixin;
-    use CreateMixin;
-    use UpdateMixin;
+    use ListMixin;
 }

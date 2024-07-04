@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Generics\Facades\Helpers;
+namespace Pionia\Generics\Mixins;
 
 use Pionia\Response\BaseResponse;
 use Porm\exceptions\BaseDatabaseException;

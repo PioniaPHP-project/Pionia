@@ -1,11 +1,14 @@
 <?php
 
-namespace Pionia\Generics\Facades\Helpers;
+namespace Pionia\Generics\Mixins;
 
 use Exception;
 use Pionia\Core\Helpers\Utilities;
 use Pionia\Response\BaseResponse;
 
+/**
+ * This mixin adds the delete functionality to the service.
+ */
 trait DeleteMixin
 {
     /**

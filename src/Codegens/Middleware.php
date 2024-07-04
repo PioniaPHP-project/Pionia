@@ -5,8 +5,6 @@ namespace Pionia\Codegens;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
-use Pionia\Core\Helpers\ContextUserObject;
-use Pionia\Core\Interceptions\BaseAuthenticationBackend;
 use Pionia\Core\Interceptions\BaseMiddleware;
 use Pionia\Request\Request;
 use Pionia\Response\Response;

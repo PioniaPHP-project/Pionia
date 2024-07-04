@@ -2,12 +2,12 @@
 
 namespace Pionia\Generics;
 
-use Pionia\Generics\Facades\GenericService;
-use Pionia\Generics\Facades\Helpers\CreateMixin;
-use Pionia\Generics\Facades\Helpers\DeleteMixin;
-use Pionia\Generics\Facades\Helpers\RandomMixin;
-use Pionia\Generics\Facades\Helpers\RetrieveMixin;
-use Pionia\Generics\Facades\Helpers\UpdateMixin;
+use Pionia\Generics\Mixins\CreateMixin;
+use Pionia\Generics\Mixins\DeleteMixin;
+use Pionia\Generics\Mixins\ListMixin;
+use Pionia\Generics\Mixins\RandomMixin;
+use Pionia\Generics\Mixins\RetrieveMixin;
+use Pionia\Generics\Mixins\UpdateMixin;
 
 /**
  * Adds the retrieve, create, update and delete actions to the service.
@@ -29,4 +29,5 @@ class UniversalGenericService extends GenericService
     use DeleteMixin;
     use UpdateMixin;
     use RandomMixin;
+    use ListMixin;
 }

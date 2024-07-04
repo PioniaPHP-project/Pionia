@@ -1,10 +1,9 @@
 <?php
 
-namespace Pionia\Generics\Facades;
+namespace Pionia\Generics;
 
 use Exception;
 use PDOStatement;
-use Pionia\Core\Helpers\Utilities;
 use Pionia\Request\BaseRestService;
 use Pionia\Request\PaginationCore;
 use Porm\exceptions\BaseDatabaseException;
@@ -26,35 +25,7 @@ class GenericService extends BaseRestService
 
     public ?array $createColumns = null;
 
-//    protected function listVerb(): ?string
-//    {
-//        return $this->table ? Utilities::toCamelCase('list '.Utilities::pluralize($this->table)): 'list';
-//    }
-//
-//    protected function createVerb(): ?string
-//    {
-//        return $this->table ? Utilities::toCamelCase('create '.Utilities::singularize($this->table)): 'create';
-//    }
-//
-//    protected function deleteVerb(): ?string
-//    {
-//        return $this->table ? Utilities::toCamelCase('delete '.Utilities::singularize($this->table)): 'delete';
-//    }
-//
-//    protected function detailsVerb(): ?string
-//    {
-//        return $this->table ? Utilities::toCamelCase(Utilities::singularize($this->table).' details'): 'details';
-//    }
-//
-//    protected function updateVerb(): ?string
-//    {
-//        return $this->table ? Utilities::toCamelCase('update '.Utilities::singularize($this->table)): 'update';
-//    }
-//
-//    protected function searchVerb(): ?string
-//    {
-//        return $this->table ? Utilities::toCamelCase('search '.Utilities::singularize($this->table)): 'search';
-//    }
+    public ?array $updateColumns = null;
 
     protected function _checkPaginationInternal(array $data): bool
     {

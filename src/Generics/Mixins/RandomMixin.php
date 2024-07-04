@@ -1,12 +1,14 @@
 <?php
 
-namespace Pionia\Generics\Facades\Helpers;
+namespace Pionia\Generics\Mixins;
 
 use Exception;
-use Pionia\Core\Helpers\Utilities;
 use Pionia\Response\BaseResponse;
 use Porm\exceptions\BaseDatabaseException;
 
+/**
+ * This mixin adds the random functionality to the service.
+ */
 trait RandomMixin
 {
     /**
