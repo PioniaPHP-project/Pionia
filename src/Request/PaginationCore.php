@@ -14,30 +14,22 @@ class PaginationCore
 
     private string $db = 'db';
 
-    private Request $request;
+    private array $reqData = [];
 
     private array $parged = ['columns' => '*', 'where' => []];
 
     private string $table;
 
-    public function __construct(Request $request)
+    public function __construct(?array $reqData, string $table,  ?int $limit = 10, ?int $offset = 0, ?string $db = 'db')
     {
-        $this->request = $request;
+        $this->limit = $limit;
+        $this->offset = $offset;
+        $this->table = $table;
+        $this->reqData = $reqData;
+        $this->db = $db;
+        $this->parged = array_merge($this->parged, $this->extractPagination());
     }
 
-    /**
-     * Paginates the data
-     */
-    public function builder(string $table, Request $request, ?int $limit = 10, ?int $offset = 0, ?string $db = 'db'): PaginationCore
-    {
-        $paginator = new PaginationCore($request);
-        $paginator->limit = $limit;
-        $paginator->offset = $offset;
-        $paginator->table = $table;
-        $paginator->db = $db;
-        $this->parged = array_merge($this->parged, $paginator->extractPagination());
-        return $this;
-    }
 
     public function where(array $where = []): PaginationCore
     {
@@ -72,7 +64,7 @@ class PaginationCore
         $limit = $this->parged['LIMIT'];
         $offset = $this->parged['OFFSET'];
 
-        $baseQuery =  Porm::from($this->table)
+        $baseQuery = Porm::from($this->table)
             ->columns($this->parged['columns'])
             ->using($this->db)
             ->filter($this->parged['where']);
@@ -118,7 +110,7 @@ class PaginationCore
      */
     private function extractPagination(): array
     {
-        $data = $this->request->getData();
+        $data = $this->reqData;
         $search = null;
 
         if (isset($data['PAGINATION']) || isset($data['pagination']) || isset($data['SEARCH']) || isset($data['search'])) {

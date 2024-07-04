@@ -9,6 +9,8 @@ use Pionia\Response\BaseResponse;
  * This mixin adds the list functionality to the service.
  *
  * If pagination is defined in the request, it will be detected and applied
+ *
+ * Passed tests
  */
 trait ListMixin
 {

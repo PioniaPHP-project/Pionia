@@ -165,9 +165,8 @@ trait CrudContract
      */
     protected function paginate(): ?array
     {
-        $paginator = new PaginationCore($this->request);
-        return $paginator->builder($this->table, $this->request, $this->limit, $this->offset, $this->connection)
-            ->columns($this->getListColumns())
+        $paginator = new PaginationCore($this->request->getData(), $this->table, $this->limit, $this->offset, $this->connection);
+        return $paginator->columns($this->getListColumns())
             ->paginate();
     }
 
