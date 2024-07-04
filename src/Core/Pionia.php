@@ -18,7 +18,7 @@ class Pionia
 {
     public static array | null $settings = null;
 
-    public static string $version = '1.1.1';
+    public static string $version = '1.1.2';
 
     public static string $name = 'Pionia';
 
