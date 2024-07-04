@@ -2,6 +2,7 @@
 
 namespace Pionia\Generics;
 
+use Pionia\Generics\Base\GenericService;
 use Pionia\Generics\Mixins\ListMixin;
 use Pionia\Generics\Mixins\RetrieveMixin;
 use Pionia\Generics\Mixins\UpdateMixin;

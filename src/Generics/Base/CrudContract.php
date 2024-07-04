@@ -1,31 +1,19 @@
 <?php
 
-namespace Pionia\Generics;
+namespace Pionia\Generics\Base;
 
 use Exception;
 use PDOStatement;
-use Pionia\Request\BaseRestService;
 use Pionia\Request\PaginationCore;
 use Porm\exceptions\BaseDatabaseException;
 use Porm\Porm;
 
-class GenericService extends BaseRestService
+trait CrudContract
 {
-    public string $table;
-
-    public int $limit = 10;
-
-    public int $offset = 0;
-
-    public string $pk_field = 'id';
-
-    public string $connection = 'db';
-
-    public array | string $listColumns = '*';
-
-    public ?array $createColumns = null;
-
-    public ?array $updateColumns = null;
+    private function getListColumns(): array|string
+    {
+        return $this->listColumns ?? '*';
+    }
 
     protected function _checkPaginationInternal(array $data): bool
     {
@@ -69,50 +57,74 @@ class GenericService extends BaseRestService
 
     /**
      * Retrieve in CRUD
-     * @throws BaseDatabaseException
      * @throws Exception
      */
     protected function getOne(): ?array
     {
         $data = $this->request->getData();
         $id = $data[$this->pk_field] ?? throw new Exception("Field {$this->pk_field} is required");
-        return Porm::from($this->table)
+        return $this->getOneInternal($id);
+    }
+
+    /**
+     * Gets one item from the database. Can be overridden by defining a getOne method in the service
+     * @throws Exception
+     */
+    private function getOneInternal($id): ?array
+    {
+        $getDefined = $this->getOne();
+        return $getDefined ?? Porm::from($this->table)
             ->using($this->connection)
-            ->columns($this->listColumns)
-            ->get($id, $this->pk_field);
+            ->columns($this->getListColumns())
+            ->get([$this->pk_field => $id]);
     }
 
     /**
      * Retrieve all in CRUD
+     *
+     * Can be overridden by defining a getItems method in the service
+     * @return array|null
      * @throws BaseDatabaseException
      * @throws Exception
      */
     protected function allItems(): ?array
     {
-        return Porm::from($this->table)
+        $customMultipleQueried = $this->getItems();
+        return $customMultipleQueried ?? Porm::from($this->table)
             ->using($this->connection)
-            ->columns($this->listColumns)
+            ->columns($this->getListColumns())
             ->all();
     }
 
     /**
      * Delete in CRUD
-     * @throws BaseDatabaseException
+     * Handles both post and pre delete events
      * @throws Exception
      */
-    protected function deleteItem(): PDOStatement
+    protected function deleteItem(): mixed
     {
         $data = $this->request->getData();
         $id = $data[$this->pk_field] ?? throw new Exception("Field {$this->pk_field} is required");
-        return Porm::from($this->table)
-            ->using($this->connection)
-            ->delete($id, $this->pk_field);
+        $item = $this->getOneInternal($id);
+
+        if (!$item) {
+            throw new Exception("Item with $this->pk_field $id not found");
+        }
+        // run the before delete event and confirm if its not false or null before proceeding
+        if ($this->preDelete($item)) {
+             $deleted = Porm::from($this->table)
+                ->using($this->connection)
+                ->delete([$this->pk_field => $id]);
+
+             // run the post delete event
+             return $this->postDelete($deleted, $item);
+        }
+        return null;
     }
 
     /**
      * Create in CRUD
-     * Saves in transactions
-     * @throws BaseDatabaseException
+     * Saves in transactions, runs pre and post create events
      * @throws Exception
      */
     protected function createItem(): ?object
@@ -120,7 +132,7 @@ class GenericService extends BaseRestService
         $data = $this->request->getData();
         foreach ($this->createColumns as $column) {
             if (!isset($data[$column])) {
-                throw new Exception("Column {$column} is required");
+                throw new Exception("Column $column is required");
             }
         }
         $sanitizedData = [];
@@ -129,11 +141,17 @@ class GenericService extends BaseRestService
         }
         try {
             Porm::from($this->table)->pdo()->beginTransaction();
-            $saved =  Porm::from($this->table)
-                ->using($this->connection)
-                ->save($sanitizedData);
-            Porm::from($this->table)->pdo()->commit();
-            return $saved;
+            // run the pre create event and confirm if its not false or null before proceeding
+            if ($toSave = $this->preCreate($sanitizedData)) {
+
+                $saved = Porm::from($this->table)
+                    ->using($this->connection)
+                    ->save($toSave);
+                Porm::from($this->table)->pdo()->commit();
+                return $this->postCreate($saved);
+            }
+            Porm::from($this->table)->pdo()->rollBack();
+            return null;
         } catch (Exception $e) {
             Porm::from($this->table)->pdo()->rollBack();
             throw new Exception($e->getMessage());
@@ -148,7 +166,7 @@ class GenericService extends BaseRestService
     {
         $paginator = new PaginationCore($this->request);
         return $paginator->builder($this->table, $this->request, $this->limit, $this->offset, $this->connection)
-            ->columns($this->listColumns)
+            ->columns($this->getListColumns())
             ->paginate();
     }
 
@@ -198,25 +216,42 @@ class GenericService extends BaseRestService
 
         try {
             Porm::from($this->table)->pdo()->beginTransaction();
-            // update the item
-            foreach ($data as $key => $value) {
-                $item->$key = $value;
-            }
 
-            Porm::from($this->table)
-                ->using($this->connection)
-                ->update($item, $id, $this->pk_field);
+            if (is_array($item)) {
+                $toArray = $item;
+            } else {
+                $toArray = (array)$item;
+            }
+            // if the developer defines the columns to update, we stick to those
+            if ($this->updateColumns) {
+                foreach ($this->updateColumns as $column) {
+                    if (isset($data[$column])) {
+                        $toArray[$column] = $data[$column];
+                    }
+                }
+            } else {
+                foreach ($toArray as $key => $value) {
+                    if (isset($data[$key])) {
+                        $toArray[$key] = $data[$key];
+                    }
+                }
+            }
+            // run the pre update event and confirm if its not false or null before proceeding
+            if ($toSave = $this->preUpdate($toArray)) {
+
+                Porm::from($this->table)
+                    ->using($this->connection)
+                    ->update($toSave, [$this->pk_field => $id]);
+            }
 
             Porm::from($this->table)->pdo()->commit();
 
-            return Porm::from($this->table)
-                ->using($this->connection)
-                ->columns($this->listColumns)
-                ->get($id, $this->pk_field);
+            $updated = $this->getOneInternal($id);
+            // run the post update event
+            return $this->postUpdate($updated);
         } catch (Exception $e) {
             Porm::from($this->table)->pdo()->rollBack();
             throw new Exception($e->getMessage());
         }
     }
-
 }
