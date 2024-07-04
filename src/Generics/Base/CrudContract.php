@@ -3,7 +3,6 @@
 namespace Pionia\Generics\Base;
 
 use Exception;
-use PDOStatement;
 use Pionia\Request\PaginationCore;
 use Porm\exceptions\BaseDatabaseException;
 use Porm\Porm;
@@ -114,15 +113,17 @@ trait CrudContract
         if (!$item) {
             throw new Exception("Item with $this->pk_field $id not found");
         }
+        $transaction = Porm::from($this->table)->pdo()->beginTransaction();
         // run the before delete event and confirm if its not false or null before proceeding
         if ($this->preDelete($item)) {
              $deleted = Porm::from($this->table)
                 ->using($this->connection)
                 ->delete([$this->pk_field => $id]);
-
+             $transaction && Porm::from($this->table)->pdo()->commit();
              // run the post delete event
              return $this->postDelete($deleted, $item);
         }
+        $transaction && Porm::from($this->table)->pdo()->rollBack();
         return null;
     }
 
@@ -134,30 +135,37 @@ trait CrudContract
     protected function createItem(): ?object
     {
         $data = $this->request->getData();
+        if (!$this->createColumns) {
+            throw new Exception("Fields to use for creating were not defined in the service");
+        }
         foreach ($this->createColumns as $column) {
             if (!isset($data[$column])) {
-                throw new Exception("Column $column is required");
+                throw new Exception("Field $column is required");
             }
         }
         $sanitizedData = [];
         foreach ($this->createColumns as $column) {
             $sanitizedData[$column] = trim($data[$column]);
         }
+        $transaction = Porm::from($this->table)->pdo()->beginTransaction();
+
         try {
-            Porm::from($this->table)->pdo()->beginTransaction();
             // run the pre create event and confirm if its not false or null before proceeding
             if ($toSave = $this->preCreate($sanitizedData)) {
 
                 $saved = Porm::from($this->table)
                     ->using($this->connection)
                     ->save($toSave);
-                Porm::from($this->table)->pdo()->commit();
+                if ($transaction) {
+                    Porm::from($this->table)->pdo()->commit();
+                }
                 return $this->postCreate($saved);
             }
-            Porm::from($this->table)->pdo()->rollBack();
+
+            $transaction && Porm::from($this->table)->pdo()->rollBack();
             return null;
         } catch (Exception $e) {
-            Porm::from($this->table)->pdo()->rollBack();
+           $transaction && Porm::from($this->table)->pdo()->rollBack();
             throw new Exception($e->getMessage());
         }
     }
@@ -218,9 +226,9 @@ trait CrudContract
             throw new Exception("Item with id {$id} not found");
         }
 
-        try {
-            Porm::from($this->table)->pdo()->beginTransaction();
+        $transaction = Porm::from($this->table)->pdo()->beginTransaction();
 
+        try {
             if (is_array($item)) {
                 $toArray = $item;
             } else {
@@ -248,13 +256,13 @@ trait CrudContract
                     ->update($toSave, [$this->pk_field => $id]);
             }
 
-            Porm::from($this->table)->pdo()->commit();
+            $transaction && Porm::from($this->table)->pdo()->commit();
 
             $updated = $this->getOneInternal($id);
             // run the post update event
             return $this->postUpdate($updated);
         } catch (Exception $e) {
-            Porm::from($this->table)->pdo()->rollBack();
+            $transaction && Porm::from($this->table)->pdo()->rollBack();
             throw new Exception($e->getMessage());
         }
     }
