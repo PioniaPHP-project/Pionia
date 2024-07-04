@@ -61,7 +61,7 @@ trait CrudContract
      */
     protected function getOne(): ?array
     {
-        $once = $this->getOne();
+        $once = $this->getItem();
         if ($once) {
             return $once;
         }
@@ -76,7 +76,7 @@ trait CrudContract
      */
     private function getOneInternal($id): ?array
     {
-        $customQueried = $this->getOne();
+        $customQueried = $this->getItem();
         return $customQueried ?? Porm::from($this->table)
             ->using($this->connection)
             ->columns($this->getListColumns())
