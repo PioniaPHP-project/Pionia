@@ -170,13 +170,13 @@ class CoreKernel extends Pionia
             $arguments = $argumentResolver->getArguments($request, $controller);
 
             if ($shouldLog) {
-                logger->info("New Request: ", PioniaLogger::hideInLogs($arguments));
+                logger->info("New Request: ", PioniaLogger::hideInLogs($request->getData()));
             }
 
             $response =  call_user_func_array($controller, $arguments);
 
             if ($shouldLog) {
-                logger->info('Response: ', ['response' => $response]);
+                logger->info('Response: ', ['response' => $response->getPrettyResponse()]);
             }
 
             $requestResponse = new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
