@@ -87,12 +87,20 @@ trait EventsContract
     }
 
 
-    public function getItem(): mixed
+    /**
+     * Override this in your service to define the basis to return single item details
+     * @return null|object
+     */
+    public function getItem(): ?object
     {
         return null;
     }
 
-    public function getItems(): mixed
+    /**
+     * Override this in your service to define the basis to return multiple items from the database
+     * @return null|object
+     */
+    public function getItems(): ?array
     {
         return null;
     }

@@ -77,14 +77,15 @@ class PaginationCore
             ->all();
         $prev = $offset - $limit;
         $next = $offset + $limit;
+
         // check if there are more results
         $nextOffset = $next < $all ? $next : null;
 
         $prevOffset = max($prev, 0);
 
         // has next page
-        $hasNext = $nextOffset < $all;
-        $hasPrevious = $prevOffset > 0;
+        $hasNext = $nextOffset !== null;
+        $hasPrevious = $prevOffset && $prevOffset > 0;
 
         return [
             'results' => $resultSet,

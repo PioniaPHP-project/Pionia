@@ -58,7 +58,7 @@ trait CrudContract
      * Retrieve in CRUD
      * @throws Exception
      */
-    protected function getOne(): ?array
+    protected function getOne(): ?object
     {
         $once = $this->getItem();
         if ($once) {
@@ -73,7 +73,7 @@ trait CrudContract
      * Gets one item from the database. Can be overridden by defining a getOne method in the service
      * @throws Exception
      */
-    private function getOneInternal($id): ?array
+    private function getOneInternal($id): null | array | object
     {
         $customQueried = $this->getItem();
         return $customQueried ?? Porm::from($this->table)

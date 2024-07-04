@@ -80,9 +80,7 @@ class PioniaLogger
 
         $logger->pushProcessor(new PsrLogMessageProcessor())
             ->pushProcessor(new MemoryUsageProcessor())
-            ->pushProcessor(new ProcessIdProcessor())
-            ->pushProcessor(new WebProcessor());
-
+            ->pushProcessor(new ProcessIdProcessor());
         if ($debug) {
             $logger
                 ->pushProcessor(new HostnameProcessor());
