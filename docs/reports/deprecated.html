@@ -101,6 +101,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/pionia-generics.html" class="">Generics</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/pionia-logging.html" class="">Logging</a>
                 
             </li>
@@ -165,6 +169,9 @@
                                     <tr>
                         <td class="phpdocumentor-cell"><a href="reports/deprecated.html#src/Core/Routing/PioniaRouter.php">src/Core/Routing/PioniaRouter.php</a></td>
                     </tr>
+                                    <tr>
+                        <td class="phpdocumentor-cell"><a href="reports/deprecated.html#src/Request/Request.php">src/Request/Request.php</a></td>
+                    </tr>
                             </table>
             
                             <a id="src/Core/Config/CoreKernel.php"></a>
@@ -176,7 +183,7 @@
                         <th class="phpdocumentor-heading">Reason</th>
                     </tr>
                                                                         <tr>
-                                <td class="phpdocumentor-cell">68</td>
+                                <td class="phpdocumentor-cell">73</td>
                                 <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerMiddleware"><abbr title="\Pionia\Core\Config\CoreKernel::registerMiddleware()">CoreKernel::registerMiddleware()</abbr></a></td>
                                 <td class="phpdocumentor-cell"><ul>
 <li>register middlewares directly in the settings.ini file. Will be removed from future versions</li>
@@ -184,7 +191,7 @@
 </td>
                             </tr>
                                                                                                 <tr>
-                                <td class="phpdocumentor-cell">126</td>
+                                <td class="phpdocumentor-cell">131</td>
                                 <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerAuthBackends"><abbr title="\Pionia\Core\Config\CoreKernel::registerAuthBackends()">CoreKernel::registerAuthBackends()</abbr></a></td>
                                 <td class="phpdocumentor-cell"><ul>
 <li>register authentications directly in the settings.ini file. Will be removed from future versions</li>
@@ -192,7 +199,7 @@
 </td>
                             </tr>
                                                                                                 <tr>
-                                <td class="phpdocumentor-cell">196</td>
+                                <td class="phpdocumentor-cell">207</td>
                                 <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Config-CoreKernel.html#method_handle"><abbr title="\Pionia\Core\Config\CoreKernel::handle()">CoreKernel::handle()</abbr></a></td>
                                 <td class="phpdocumentor-cell"><ul>
 <li>This method will be removed in future versions. Use the run method instead</li>
@@ -244,6 +251,27 @@
                                 <td class="phpdocumentor-cell"><ul>
 <li>Use addSwitchFor instead with the version name. This is just a helper method</li>
 </ul>
+</td>
+                            </tr>
+                                                            </table>
+                            <a id="src/Request/Request.php"></a>
+                <h3><abbr title="src/Request/Request.php">Request.php</abbr></h3>
+                <table>
+                    <tr>
+                        <th class="phpdocumentor-heading">Line</th>
+                        <th class="phpdocumentor-heading">Element</th>
+                        <th class="phpdocumentor-heading">Reason</th>
+                    </tr>
+                                                                        <tr>
+                                <td class="phpdocumentor-cell">104</td>
+                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Request-Request.html#method_getJsonData"><abbr title="\Pionia\Request\Request::getJsonData()">Request::getJsonData()</abbr></a></td>
+                                <td class="phpdocumentor-cell"><p>Use $this-&gt;getData() instead</p>
+</td>
+                            </tr>
+                                                                                                <tr>
+                                <td class="phpdocumentor-cell">145</td>
+                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Request-Request.html#method_getFormData"><abbr title="\Pionia\Request\Request::getFormData()">Request::getFormData()</abbr></a></td>
+                                <td class="phpdocumentor-cell"><p>Use $this-&gt;getData() instead</p>
 </td>
                             </tr>
                                                             </table>

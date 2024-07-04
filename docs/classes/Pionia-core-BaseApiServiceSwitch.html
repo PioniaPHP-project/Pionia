@@ -100,6 +100,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/pionia-generics.html" class="">Generics</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/pionia-logging.html" class="">Logging</a>
                 
             </li>
@@ -311,17 +315,17 @@ If the setting is not found, it returns null</dd>
 <dd>This is just for checking the api status</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Pionia.html#method_resolveSettingsFromIni">resolveSettingsFromIni()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Pionia-Core-BaseApiServiceSwitch.html#method_processor">processor()</a>
     <span>
                                 &nbsp;: <a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a>    </span>
 </dt>
 <dd>This is the sole action to be called in the routes file. It processes the request and returns the response</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-Core-Pionia.html#method_resolveSettingsFromIni">resolveSettingsFromIni()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Pionia-Core-BaseApiServiceSwitch.html#method_registerServices">registerServices()</a>
@@ -446,7 +450,7 @@ If the setting is not found, it returns null</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
     <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$version</span>
-     = <span class="phpdocumentor-signature__default-value">&#039;1.1.0&#039;</span></code>
+     = <span class="phpdocumentor-signature__default-value">&#039;1.1.1&#039;</span></code>
 
     
     
@@ -715,6 +719,53 @@ If the setting is not found, it returns null</p>
             -public
                                     -static                    "
 >
+    <h4 class="phpdocumentor-element__name" id="method_processor">
+        processor()
+        <a href="classes/Pionia-Core-BaseApiServiceSwitch.html#method_processor" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/BaseApiServiceSwitch.php"><a href="files/src-core-baseapiserviceswitch.html"><abbr title="src/Core/BaseApiServiceSwitch.php">BaseApiServiceSwitch.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">83</span>
+
+            <a href="classes/Pionia-Core-BaseApiServiceSwitch.html#source-view.83" class="phpdocumentor-element-found-in__source" data-line="83" data-modal="source-view" data-src="files/src/Core/BaseApiServiceSwitch.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">This is the sole action to be called in the routes file. It processes the request and returns the response</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">processor</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$request</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
     <h4 class="phpdocumentor-element__name" id="method_resolveSettingsFromIni">
         resolveSettingsFromIni()
         <a href="classes/Pionia-Core-Pionia.html#method_resolveSettingsFromIni" class="headerlink"><i class="fas fa-link"></i></a>
@@ -740,53 +791,6 @@ If the setting is not found, it returns null</p>
     
 
     
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -protected
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_processor">
-        processor()
-        <a href="classes/Pionia-Core-BaseApiServiceSwitch.html#method_processor" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/BaseApiServiceSwitch.php"><a href="files/src-core-baseapiserviceswitch.html"><abbr title="src/Core/BaseApiServiceSwitch.php">BaseApiServiceSwitch.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">83</span>
-
-            <a href="classes/Pionia-Core-BaseApiServiceSwitch.html#source-view.83" class="phpdocumentor-element-found-in__source" data-line="83" data-modal="source-view" data-src="files/src/Core/BaseApiServiceSwitch.php.txt"></a>
-    </aside>
-
-        <p class="phpdocumentor-summary">This is the sole action to be called in the routes file. It processes the request and returns the response</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">processor</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a></span>
-            </section>
-
 </article>
                     <article
         class="phpdocumentor-element
@@ -1064,8 +1068,8 @@ The <code class="prettyprint">SERVICE_CLASS</code> is the class that will be cal
                                             <li><a href="classes/Pionia-Core-Pionia.html#method_getSettingOrDefault">getSettingOrDefault()</a></li>
                                             <li><a href="classes/Pionia-Core-Pionia.html#method_getSettings">getSettings()</a></li>
                                             <li><a href="classes/Pionia-Core-BaseApiServiceSwitch.html#method_ping">ping()</a></li>
-                                            <li><a href="classes/Pionia-Core-Pionia.html#method_resolveSettingsFromIni">resolveSettingsFromIni()</a></li>
                                             <li><a href="classes/Pionia-Core-BaseApiServiceSwitch.html#method_processor">processor()</a></li>
+                                            <li><a href="classes/Pionia-Core-Pionia.html#method_resolveSettingsFromIni">resolveSettingsFromIni()</a></li>
                                             <li><a href="classes/Pionia-Core-BaseApiServiceSwitch.html#method_registerServices">registerServices()</a></li>
                                             <li><a href="classes/Pionia-Core-BaseApiServiceSwitch.html#method_processServices">processServices()</a></li>
                                     </ul>

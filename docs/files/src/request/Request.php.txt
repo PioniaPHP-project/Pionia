@@ -99,6 +99,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
     /**
      * Returns the json data from the request if the request was submitted as json
      * @return array
+     * @deprecated Use $this->getData() instead
      */
     public function getJsonData(): array
     {
@@ -116,9 +117,11 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      */
     public function getData(): array
     {
-        $json = $this->getJsonData()??[];
-        $form = $this->getFormData()??[];
-        return array_merge($json, $form);
+//        $json = $this->getJsonData()??[];
+//        $form = $this->getFormData()??[];
+//        return array_merge($json, $form);
+
+        return $this->getPayload()->all();
     }
 
     /**
@@ -137,6 +140,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
     /**
      * Returns the data if the request was submitted as form data
      * @return array
+     * @deprecated Use $this->getData() instead
      */
     public function getFormData(): array
     {

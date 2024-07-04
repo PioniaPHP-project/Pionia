@@ -80,9 +80,7 @@ class PioniaLogger
 
         $logger->pushProcessor(new PsrLogMessageProcessor())
             ->pushProcessor(new MemoryUsageProcessor())
-            ->pushProcessor(new ProcessIdProcessor())
-            ->pushProcessor(new WebProcessor());
-
+            ->pushProcessor(new ProcessIdProcessor());
         if ($debug) {
             $logger
                 ->pushProcessor(new HostnameProcessor());
@@ -92,9 +90,16 @@ class PioniaLogger
             // here the developer can also log some parts of the settings.ini file
             if (isset($serverSettings['LOGGED_SETTINGS'])){
                 $settings_ = explode(',', $serverSettings['LOGGED_SETTINGS']);
-                foreach ($settings_ as $key){
-                    $cleaned = self::hideInLogs($settings[$key]);
-                    $record->extra = array_merge($record->extra, $cleaned);
+                if (is_array($settings_) && !empty($settings_)) {
+                    $all = [];
+                    foreach ($settings_ as $key) {
+                        $current = $settings[$key];
+                        if (is_array($current)) {
+                            $cleaned = self::hideInLogs($current);
+                            $all = array_merge($all, $cleaned);
+                        }
+                    }
+                    $record->extra = array_merge($record->extra, $all);
                 }
             }
             return $record;
@@ -127,8 +132,11 @@ class PioniaLogger
      * @param array $data The data whose secure keys are to be hidden
      * @return array The data with the hidden keys hidden
      */
-    public static function hideInLogs(array $data = []): array
+    public static function hideInLogs(mixed $data = []): array
     {
+        if (!is_array($data)) {
+            return [];
+        }
         // this method will hide the secured keys in the logs
         $keys = self::$hiddenKeys;
         if (!empty($serverSettings['HIDE_IN_LOGS'])) {

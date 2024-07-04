@@ -2,6 +2,7 @@
 
 namespace Pionia\Codegens;
 
+use Pionia\Core\Helpers\Utilities;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -20,9 +21,9 @@ abstract class CodeGenerator
     protected function sweetName(string $type): string
     {
         if (str_contains(strtolower($this->name), strtolower($type))) {
-            return ucfirst($this->name);
+            return Utilities::singularize(Utilities::classify($this->name));
         }
-        return ucfirst($this->name) .$type;
+        return  Utilities::singularize(Utilities::classify($this->name. " ".$type));
     }
 
     abstract public function generate();

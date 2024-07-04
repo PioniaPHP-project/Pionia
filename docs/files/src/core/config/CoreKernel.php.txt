@@ -16,6 +16,11 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 
+
+if (!defined('logger')){
+    define('logger', PioniaLogger::init());
+}
+
 /**
  * This is the core kernel that handles all the request processing and middleware execution
  *
@@ -153,6 +158,10 @@ class CoreKernel extends Pionia
 
         $this->matcher->getContext()->fromRequest($request);
 
+        $serverSettings = self::getSetting('server');
+
+        $shouldLog = isset($serverSettings['LOG_REQUESTS']) && $serverSettings['LOG_REQUESTS'];
+
         try {
             $request->attributes->add($this->matcher->match($request->getPathInfo()));
 
@@ -160,25 +169,27 @@ class CoreKernel extends Pionia
 
             $arguments = $argumentResolver->getArguments($request, $controller);
 
-            $serverSettings = self::getSetting('server');
-
-            $shouldLog = isset($serverSettings['LOG_REQUESTS']) && $serverSettings['LOG_REQUESTS'];
-
             if ($shouldLog) {
-                logger->info("New Request ", PioniaLogger::hideInLogs($arguments));
+                logger->info("New Request: ", PioniaLogger::hideInLogs($request->getData()));
             }
 
             $response =  call_user_func_array($controller, $arguments);
 
             if ($shouldLog) {
-                logger->info('Response Data Received', PioniaLogger::hideInLogs($response));
+                logger->info('Response: ', ['response' => $response->getPrettyResponse()]);
             }
 
             $requestResponse = new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
         } catch (ResourceNotFoundException $exception) {
+            if ($shouldLog){
+                logger->error($exception->getMessage(), ['stack' => $exception]);
+            }
             $response = BaseResponse::JsonResponse(404, 'Resource not found, are you sure this endpoint exists?');
             $requestResponse = new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
         } catch (Exception $exception) {
+            if ($shouldLog){
+                logger->error($exception->getMessage(), ['stack' => $exception]);
+            }
             $response = BaseResponse::JsonResponse(500, $exception->getMessage());
             $requestResponse =  new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
         }
