@@ -170,25 +170,25 @@ class CoreKernel extends Pionia
             $arguments = $argumentResolver->getArguments($request, $controller);
 
             if ($shouldLog) {
-                logger->info("New Request: ", PioniaLogger::hideInLogs($request->getData()));
+                logger->info("Pionia Request: ", PioniaLogger::hideInLogs($request->getData()));
             }
 
             $response =  call_user_func_array($controller, $arguments);
 
             if ($shouldLog) {
-                logger->info('Response: ', ['response' => $response->getPrettyResponse()]);
+                logger->info('Pionia Response: ', ['response' => $response->getPrettyResponse()]);
             }
 
             $requestResponse = new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
         } catch (ResourceNotFoundException $exception) {
             if ($shouldLog){
-                logger->error($exception->getMessage(), ['stack' => $exception]);
+                logger->debug($exception->getMessage(), ['stack' => $exception]);
             }
             $response = BaseResponse::JsonResponse(404, 'Resource not found, are you sure this endpoint exists?');
             $requestResponse = new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
         } catch (Exception $exception) {
             if ($shouldLog){
-                logger->error($exception->getMessage(), ['stack' => $exception]);
+                logger->debug($exception->getMessage(), ['stack' => $exception->getTraceAsString()]);
             }
             $response = BaseResponse::JsonResponse(500, $exception->getMessage());
             $requestResponse =  new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
