@@ -47,6 +47,7 @@ class PioniaLogger
         $pionia = new Pionia();
         $settings = $pionia::getSettings();
         $serverSettings = $pionia::getServerSettings();
+        $processors = $settings['PROCESSORS'] ?? [];
 
         if (array_key_exists("DEBUG", $serverSettings)) {
             $debug = $serverSettings["DEBUG"];
@@ -78,12 +79,19 @@ class PioniaLogger
 
         $logger = new Logger($pionia::$name);
 
-        $logger->pushProcessor(new PsrLogMessageProcessor())
-            ->pushProcessor(new MemoryUsageProcessor())
-            ->pushProcessor(new ProcessIdProcessor());
-        if ($debug) {
-            $logger
-                ->pushProcessor(new HostnameProcessor());
+//        $logger->pushProcessor(new PsrLogMessageProcessor())
+//            ->pushProcessor(new MemoryUsageProcessor())
+//            ->pushProcessor(new ProcessIdProcessor());
+//        if ($debug) {
+//            $logger
+//                ->pushProcessor(new HostnameProcessor());
+//        }
+
+        // add the processors the developer has registered in the settings.ini file
+        if (is_array($processors) && !empty($processors)) {
+            foreach ($processors as $processor) {
+                $logger->pushProcessor(new $processor());
+            }
         }
 
         $logger->pushProcessor(function ($record) use ($debug, $serverSettings, $settings){
