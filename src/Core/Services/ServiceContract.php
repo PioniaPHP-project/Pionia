@@ -92,7 +92,13 @@ abstract class ServiceContract
         // here we attempt to call the action method on the current class
         if (method_exists($this, $action)) {
             if (isset($this->actionPermissions[$action])) {
-                $this->canAll($this->actionPermissions[$action]);
+                if (is_array($this->actionPermissions[$action])){
+                    $this->canAll($this->actionPermissions[$action]);
+                }
+                // from version 1.1.4, we started checking permissions that are also strings
+                if (is_string($this->actionPermissions[$action])){
+                    $this->can($this->actionPermissions[$action]);
+                }
             }
             $reflection = new ReflectionMethod($this, $action);
             $reflection->setAccessible(true);

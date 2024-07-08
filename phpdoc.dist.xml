@@ -15,14 +15,29 @@
         <api format="php">
             <source dsn=".">
                 <path>src</path>
-                <path>pionia/Porm/*</path>
             </source>
             <output>.</output>
-            <ignore hidden="true" symlinks="true">
-                <path>vendor/**/**</path>
+            <ignore hidden="true" symlinks="false">
+                <path>vendor/bin/**/**</path>
+                <path>vendor/brick/**/**</path>
+                <path>vendor/catfan/**/**</path>
+                <path>vendor/composer/**/**</path>
+                <path>vendor/doctrine/**/**</path>
+                <path>vendor/monolog/**/**</path>
+                <path>vendor/myclabs/**/**</path>
+                <path>vendor/nette/**/**</path>
+                <path>vendor/nikic/**/**</path>
+                <path>vendor/phar-io/**/**</path>
+                <path>vendor/phpunit/**/**</path>
+                <path>vendor/psr/**/**</path>
+                <path>vendor/ramsey/**/**</path>
+                <path>vendor/sebastian/**/**</path>
+                <path>vendor/symfony/**/**</path>
+                <path>vendor/theseer/**/**</path>
+                <path>vendor/autoload.php</path>
+                <path>example/**/**</path>
             </ignore>
             <extensions>
-                <!--1 or more repetitions:-->
                 <extension>php</extension>
             </extensions>
             <default-package-name>Pionia</default-package-name>

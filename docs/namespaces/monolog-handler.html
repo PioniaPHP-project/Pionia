@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>Pionia Core</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title">
+    <a href="" class="phpdocumentor-title__link">
+        Pionia Core
+    </a>
+</h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+                        <li class="phpdocumentor-topnav__menu-item -menu">
+                <a href="./">
+                    <span>
+                                                                        Documentation
+                    </span>
+                </a>
+            </li>
+                                <li class="phpdocumentor-topnav__menu-item -social">
+                <a href="https://github.com/JetPhp-project/JetPhp-Core.git">
+                    <span>
+                                                                        <i class="fab fa-github"></i>
+                                                
+                    </span>
+                </a>
+            </li>
+                </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/pionia.html" class="">Pionia</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/pionia-codegens.html" class="">Codegens</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/pionia-command.html" class="">Command</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/pionia-core.html" class="">Core</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/pionia-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/pionia-exceptions.html" class="">Exceptions</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/pionia-generics.html" class="">Generics</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/pionia-logging.html" class="">Logging</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/pionia-request.html" class="">Request</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/pionia-response.html" class="">Response</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/pionia-testsuite.html" class="">TestSuite</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/pionia-validators.html" class="">Validators</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/validators.html" class="">validators</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/brick.html" class="">Brick</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/brick-math.html" class="">Math</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/medoo.html" class="">Medoo</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/medoo-tests.html" class="">Tests</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/doctrine.html" class="">Doctrine</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/doctrine-inflector.html" class="">Inflector</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/monolog.html" class="">Monolog</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/monolog-attribute.html" class="">Attribute</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/monolog-formatter.html" class="">Formatter</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/monolog-handler.html" class="-active">Handler</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/monolog-processor.html" class="">Processor</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/monolog-test.html" class="">Test</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/deepcopy.html" class="">DeepCopy</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/deepcopy-exception.html" class="">Exception</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/deepcopy-filter.html" class="">Filter</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/deepcopy-matcher.html" class="">Matcher</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/deepcopy-reflection.html" class="">Reflection</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/deepcopy-typefilter.html" class="">TypeFilter</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/deepcopy-typematcher.html" class="">TypeMatcher</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/nette.html" class="">Nette</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/nette-phpgenerator.html" class="">PhpGenerator</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/nette-utils.html" class="">Utils</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/nette-localization.html" class="">Localization</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/nette-iterators.html" class="">Iterators</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/phpparser.html" class="">PhpParser</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/phpparser-builder.html" class="">Builder</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpparser-comment.html" class="">Comment</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpparser-errorhandler.html" class="">ErrorHandler</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpparser-internal.html" class="">Internal</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpparser-lexer.html" class="">Lexer</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpparser-node.html" class="">Node</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpparser-nodevisitor.html" class="">NodeVisitor</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpparser-parser.html" class="">Parser</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpparser-prettyprinter.html" class="">PrettyPrinter</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/phario.html" class="">PharIo</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/phario-manifest.html" class="">Manifest</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phario-csfixer.html" class="">CSFixer</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phario-version.html" class="">Version</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/phpunit.html" class="">PHPUnit</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/phpunit-event.html" class="">Event</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpunit-framework.html" class="">Framework</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpunit-logging.html" class="">Logging</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpunit-metadata.html" class="">Metadata</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpunit-runner.html" class="">Runner</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpunit-testrunner.html" class="">TestRunner</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpunit-textui.html" class="">TextUI</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/phpunit-util.html" class="">Util</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/porm.html" class="">Porm</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/porm-core.html" class="">core</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/porm-database.html" class="">database</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/porm-exceptions.html" class="">exceptions</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/psr.html" class="">Psr</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/psr-container.html" class="">Container</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/psr-eventdispatcher.html" class="">EventDispatcher</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/psr-log.html" class="">Log</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/ramsey.html" class="">Ramsey</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/ramsey-collection.html" class="">Collection</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/ramsey-uuid.html" class="">Uuid</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/sebastianbergmann.html" class="">SebastianBergmann</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/sebastianbergmann-codecoverage.html" class="">CodeCoverage</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-fileiterator.html" class="">FileIterator</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-invoker.html" class="">Invoker</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-template.html" class="">Template</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-timer.html" class="">Timer</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-cliparser.html" class="">CliParser</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-codeunit.html" class="">CodeUnit</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-codeunitreverselookup.html" class="">CodeUnitReverseLookup</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-comparator.html" class="">Comparator</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-complexity.html" class="">Complexity</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-diff.html" class="">Diff</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-environment.html" class="">Environment</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-exporter.html" class="">Exporter</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-globalstate.html" class="">GlobalState</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-linesofcode.html" class="">LinesOfCode</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-objectenumerator.html" class="">ObjectEnumerator</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-objectreflector.html" class="">ObjectReflector</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-recursioncontext.html" class="">RecursionContext</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/sebastianbergmann-type.html" class="">Type</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/symfony.html" class="">Symfony</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/symfony-component.html" class="">Component</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/symfony-contracts.html" class="">Contracts</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/symfony-polyfill.html" class="">Polyfill</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/theseer.html" class="">TheSeer</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/theseer-tokenizer.html" class="">Tokenizer</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Pionia.html" class="">Pionia</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Medoo.html" class="">Medoo</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Porm.html" class="">Porm</a>
+</h4>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/monolog.html">Monolog</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -namespace">
+        <h2 class="phpdocumentor-content__title">Handler</h2>
+
+        
+<h3 id="toc">
+    Table of Contents
+    <a href="namespaces/monolog-handler.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+<h4 id="namespaces">
+    Namespaces
+    <a href="namespaces/monolog-handler.html#namespaces" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -namespace"><a href="namespaces/monolog-handler-curl.html"><abbr title="\Monolog\Handler\Curl">Curl</abbr></a></dt>
+            <dt class="phpdocumentor-table-of-contents__entry -namespace"><a href="namespaces/monolog-handler-fingerscrossed.html"><abbr title="\Monolog\Handler\FingersCrossed">FingersCrossed</abbr></a></dt>
+            <dt class="phpdocumentor-table-of-contents__entry -namespace"><a href="namespaces/monolog-handler-slack.html"><abbr title="\Monolog\Handler\Slack">Slack</abbr></a></dt>
+            <dt class="phpdocumentor-table-of-contents__entry -namespace"><a href="namespaces/monolog-handler-syslogudp.html"><abbr title="\Monolog\Handler\SyslogUdp">SyslogUdp</abbr></a></dt>
+    </dl>
+
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="namespaces/monolog-handler.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Monolog-Handler-FormattableHandlerInterface.html"><abbr title="\Monolog\Handler\FormattableHandlerInterface">FormattableHandlerInterface</abbr></a></dt><dd>Interface to describe loggers that have a formatter</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Monolog-Handler-HandlerInterface.html"><abbr title="\Monolog\Handler\HandlerInterface">HandlerInterface</abbr></a></dt><dd>Interface that all Monolog Handlers must implement</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Monolog-Handler-ProcessableHandlerInterface.html"><abbr title="\Monolog\Handler\ProcessableHandlerInterface">ProcessableHandlerInterface</abbr></a></dt><dd>Interface to describe loggers that have processors</dd>    </dl>
+
+    <h4 id="toc-classes">
+        Classes
+        <a href="namespaces/monolog-handler.html#toc-classes" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-AbstractHandler.html"><abbr title="\Monolog\Handler\AbstractHandler">AbstractHandler</abbr></a></dt><dd>Base Handler class providing basic level/bubble support</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-AbstractProcessingHandler.html"><abbr title="\Monolog\Handler\AbstractProcessingHandler">AbstractProcessingHandler</abbr></a></dt><dd>Base Handler class providing the Handler structure, including processors and formatters</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-AbstractSyslogHandler.html"><abbr title="\Monolog\Handler\AbstractSyslogHandler">AbstractSyslogHandler</abbr></a></dt><dd>Common syslog functionality</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-AmqpHandler.html"><abbr title="\Monolog\Handler\AmqpHandler">AmqpHandler</abbr></a></dt><dd>Base Handler class providing the Handler structure, including processors and formatters</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-BrowserConsoleHandler.html"><abbr title="\Monolog\Handler\BrowserConsoleHandler">BrowserConsoleHandler</abbr></a></dt><dd>Handler sending logs to browser&#039;s javascript console with no browser extension required</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-BufferHandler.html"><abbr title="\Monolog\Handler\BufferHandler">BufferHandler</abbr></a></dt><dd>Buffers all records until closing the handler and then pass them as batch.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-ChromePHPHandler.html"><abbr title="\Monolog\Handler\ChromePHPHandler">ChromePHPHandler</abbr></a></dt><dd>Handler sending logs to the ChromePHP extension (http://www.chromephp.com/)</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-CouchDBHandler.html"><abbr title="\Monolog\Handler\CouchDBHandler">CouchDBHandler</abbr></a></dt><dd>CouchDB handler</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-CubeHandler.html"><abbr title="\Monolog\Handler\CubeHandler">CubeHandler</abbr></a></dt><dd>Logs to Cube.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-DeduplicationHandler.html"><abbr title="\Monolog\Handler\DeduplicationHandler">DeduplicationHandler</abbr></a></dt><dd>Simple handler wrapper that deduplicates log records across multiple requests</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-DoctrineCouchDBHandler.html"><abbr title="\Monolog\Handler\DoctrineCouchDBHandler">DoctrineCouchDBHandler</abbr></a></dt><dd>CouchDB handler for Doctrine CouchDB ODM</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-DynamoDbHandler.html"><abbr title="\Monolog\Handler\DynamoDbHandler">DynamoDbHandler</abbr></a></dt><dd>Amazon DynamoDB handler (http://aws.amazon.com/dynamodb/)</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-ElasticaHandler.html"><abbr title="\Monolog\Handler\ElasticaHandler">ElasticaHandler</abbr></a></dt><dd>Elastic Search handler</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-ElasticsearchHandler.html"><abbr title="\Monolog\Handler\ElasticsearchHandler">ElasticsearchHandler</abbr></a></dt><dd>Elasticsearch handler</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-ErrorLogHandler.html"><abbr title="\Monolog\Handler\ErrorLogHandler">ErrorLogHandler</abbr></a></dt><dd>Stores to PHP error_log() handler.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-FallbackGroupHandler.html"><abbr title="\Monolog\Handler\FallbackGroupHandler">FallbackGroupHandler</abbr></a></dt><dd>Forwards records to at most one handler</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-FilterHandler.html"><abbr title="\Monolog\Handler\FilterHandler">FilterHandler</abbr></a></dt><dd>Simple handler wrapper that filters records based on a list of levels</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-FingersCrossedHandler.html"><abbr title="\Monolog\Handler\FingersCrossedHandler">FingersCrossedHandler</abbr></a></dt><dd>Buffers all records until a certain level is reached</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-FirePHPHandler.html"><abbr title="\Monolog\Handler\FirePHPHandler">FirePHPHandler</abbr></a></dt><dd>Simple FirePHP Handler (http://www.firephp.org/), which uses the Wildfire protocol.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-FleepHookHandler.html"><abbr title="\Monolog\Handler\FleepHookHandler">FleepHookHandler</abbr></a></dt><dd>Sends logs to Fleep.io using Webhook integrations</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-FlowdockHandler.html"><abbr title="\Monolog\Handler\FlowdockHandler">FlowdockHandler</abbr></a></dt><dd>Sends notifications through the Flowdock push API</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-GelfHandler.html"><abbr title="\Monolog\Handler\GelfHandler">GelfHandler</abbr></a></dt><dd>Handler to send messages to a Graylog2 (http://www.graylog2.org) server</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-GroupHandler.html"><abbr title="\Monolog\Handler\GroupHandler">GroupHandler</abbr></a></dt><dd>Forwards records to multiple handlers</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-Handler.html"><abbr title="\Monolog\Handler\Handler">Handler</abbr></a></dt><dd>Base Handler class providing basic close() support as well as handleBatch</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-HandlerWrapper.html"><abbr title="\Monolog\Handler\HandlerWrapper">HandlerWrapper</abbr></a></dt><dd>This simple wrapper class can be used to extend handlers functionality.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-IFTTTHandler.html"><abbr title="\Monolog\Handler\IFTTTHandler">IFTTTHandler</abbr></a></dt><dd>IFTTTHandler uses cURL to trigger IFTTT Maker actions</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-InsightOpsHandler.html"><abbr title="\Monolog\Handler\InsightOpsHandler">InsightOpsHandler</abbr></a></dt><dd>Inspired on LogEntriesHandler.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-LogEntriesHandler.html"><abbr title="\Monolog\Handler\LogEntriesHandler">LogEntriesHandler</abbr></a></dt><dd>Stores to any socket - uses fsockopen() or pfsockopen().</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-LogglyHandler.html"><abbr title="\Monolog\Handler\LogglyHandler">LogglyHandler</abbr></a></dt><dd>Sends errors to Loggly.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-LogmaticHandler.html"><abbr title="\Monolog\Handler\LogmaticHandler">LogmaticHandler</abbr></a></dt><dd>Stores to any socket - uses fsockopen() or pfsockopen().</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-MailHandler.html"><abbr title="\Monolog\Handler\MailHandler">MailHandler</abbr></a></dt><dd>Base class for all mail handlers</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-MandrillHandler.html"><abbr title="\Monolog\Handler\MandrillHandler">MandrillHandler</abbr></a></dt><dd>MandrillHandler uses cURL to send the emails to the Mandrill API</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-MissingExtensionException.html"><abbr title="\Monolog\Handler\MissingExtensionException">MissingExtensionException</abbr></a></dt><dd>Exception can be thrown if an extension for a handler is missing</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-MongoDBHandler.html"><abbr title="\Monolog\Handler\MongoDBHandler">MongoDBHandler</abbr></a></dt><dd>Logs to a MongoDB database.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-NativeMailerHandler.html"><abbr title="\Monolog\Handler\NativeMailerHandler">NativeMailerHandler</abbr></a></dt><dd>NativeMailerHandler uses the mail() function to send the emails</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-NewRelicHandler.html"><abbr title="\Monolog\Handler\NewRelicHandler">NewRelicHandler</abbr></a></dt><dd>Class to record a log on a NewRelic application.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-NoopHandler.html"><abbr title="\Monolog\Handler\NoopHandler">NoopHandler</abbr></a></dt><dd>No-op</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-NullHandler.html"><abbr title="\Monolog\Handler\NullHandler">NullHandler</abbr></a></dt><dd>Blackhole</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-OverflowHandler.html"><abbr title="\Monolog\Handler\OverflowHandler">OverflowHandler</abbr></a></dt><dd>Handler to only pass log messages when a certain threshold of number of messages is reached.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-PHPConsoleHandler.html"><abbr title="\Monolog\Handler\PHPConsoleHandler">PHPConsoleHandler</abbr></a></dt><dd>Monolog handler for Google Chrome extension &quot;PHP Console&quot;</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-ProcessHandler.html"><abbr title="\Monolog\Handler\ProcessHandler">ProcessHandler</abbr></a></dt><dd>Stores to STDIN of any process, specified by a command.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-PsrHandler.html"><abbr title="\Monolog\Handler\PsrHandler">PsrHandler</abbr></a></dt><dd>Proxies log messages to an existing PSR-3 compliant logger.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-PushoverHandler.html"><abbr title="\Monolog\Handler\PushoverHandler">PushoverHandler</abbr></a></dt><dd>Sends notifications through the pushover api to mobile phones</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-RedisHandler.html"><abbr title="\Monolog\Handler\RedisHandler">RedisHandler</abbr></a></dt><dd>Logs to a Redis key using rpush</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-RedisPubSubHandler.html"><abbr title="\Monolog\Handler\RedisPubSubHandler">RedisPubSubHandler</abbr></a></dt><dd>Sends the message to a Redis Pub/Sub channel using PUBLISH</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-RollbarHandler.html"><abbr title="\Monolog\Handler\RollbarHandler">RollbarHandler</abbr></a></dt><dd>Sends errors to Rollbar</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-RotatingFileHandler.html"><abbr title="\Monolog\Handler\RotatingFileHandler">RotatingFileHandler</abbr></a></dt><dd>Stores logs to files that are rotated every day and a limited number of files are kept.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-SamplingHandler.html"><abbr title="\Monolog\Handler\SamplingHandler">SamplingHandler</abbr></a></dt><dd>Sampling handler</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-SendGridHandler.html"><abbr title="\Monolog\Handler\SendGridHandler">SendGridHandler</abbr></a></dt><dd>SendGridrHandler uses the SendGrid API v2 function to send Log emails, more information in https://sendgrid.com/docs/API_Reference/Web_API/mail.html</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-SlackHandler.html"><abbr title="\Monolog\Handler\SlackHandler">SlackHandler</abbr></a></dt><dd>Sends notifications through Slack API</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-SlackWebhookHandler.html"><abbr title="\Monolog\Handler\SlackWebhookHandler">SlackWebhookHandler</abbr></a></dt><dd>Sends notifications through Slack Webhooks</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-SocketHandler.html"><abbr title="\Monolog\Handler\SocketHandler">SocketHandler</abbr></a></dt><dd>Stores to any socket - uses fsockopen() or pfsockopen().</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-SqsHandler.html"><abbr title="\Monolog\Handler\SqsHandler">SqsHandler</abbr></a></dt><dd>Writes to any sqs queue.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-StreamHandler.html"><abbr title="\Monolog\Handler\StreamHandler">StreamHandler</abbr></a></dt><dd>Stores to any stream resource</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-SymfonyMailerHandler.html"><abbr title="\Monolog\Handler\SymfonyMailerHandler">SymfonyMailerHandler</abbr></a></dt><dd>SymfonyMailerHandler uses Symfony&#039;s Mailer component to send the emails</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-SyslogHandler.html"><abbr title="\Monolog\Handler\SyslogHandler">SyslogHandler</abbr></a></dt><dd>Logs to syslog service.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-TelegramBotHandler.html"><abbr title="\Monolog\Handler\TelegramBotHandler">TelegramBotHandler</abbr></a></dt><dd>Handler sends logs to Telegram using Telegram Bot API.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-TestHandler.html"><abbr title="\Monolog\Handler\TestHandler">TestHandler</abbr></a></dt><dd>Used for testing purposes.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-WhatFailureGroupHandler.html"><abbr title="\Monolog\Handler\WhatFailureGroupHandler">WhatFailureGroupHandler</abbr></a></dt><dd>Forwards records to multiple handlers suppressing failures of each handler
+and continuing through to give every handler a chance to succeed.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Monolog-Handler-ZendMonitorHandler.html"><abbr title="\Monolog\Handler\ZendMonitorHandler">ZendMonitorHandler</abbr></a></dt><dd>Handler sending logs to Zend Monitor</dd>    </dl>
+
+    <h4 id="toc-traits">
+        Traits
+        <a href="namespaces/monolog-handler.html#toc-traits" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Monolog-Handler-FormattableHandlerTrait.html"><abbr title="\Monolog\Handler\FormattableHandlerTrait">FormattableHandlerTrait</abbr></a></dt><dd>Helper trait for implementing FormattableInterface</dd>        <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Monolog-Handler-ProcessableHandlerTrait.html"><abbr title="\Monolog\Handler\ProcessableHandlerTrait">ProcessableHandlerTrait</abbr></a></dt><dd>Helper trait for implementing ProcessableInterface</dd>        <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Monolog-Handler-WebRequestRecognizerTrait.html"><abbr title="\Monolog\Handler\WebRequestRecognizerTrait">WebRequestRecognizerTrait</abbr></a></dt>    </dl>
+
+
+
+
+
+
+
+        
+
+        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                            
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                                                <li><a href="namespaces/monolog-handler.html#toc-interfaces">Interfaces</a></li>
+                                                            <li><a href="namespaces/monolog-handler.html#toc-classes">Classes</a></li>
+                                                            <li><a href="namespaces/monolog-handler.html#toc-traits">Traits</a></li>
+                                                                                                </ul>
+            </li>
+
+            
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="namespaces/monolog-handler.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

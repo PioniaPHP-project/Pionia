@@ -90,6 +90,9 @@ abstract class BaseApiServiceSwitch extends BaseApiController
         } catch (ReflectionException $e) {
             $serverError = $codes['SERVER_ERROR_CODE']??500;
             return BaseResponse::JsonResponse($serverError, $e->getMessage());
+        } catch (UserUnauthorizedException $e) {
+            $unauth = $codes['UNAUTHORIZED_CODE']??403;
+            return BaseResponse::JsonResponse($unauth, $e->getMessage());
         }
     }
 
