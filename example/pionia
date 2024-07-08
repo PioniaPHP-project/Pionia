@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+
+
+use Pionia\command\CommandInterface;
+
+if (!defined('BASEPATH')) {
+    define('BASEPATH', __DIR__);
+}
+
+// set our settings globally
+if (!defined('SETTINGS')) {
+    define('SETTINGS', BASEPATH . '/settings.ini');
+}
+
+require_once BASEPATH . '/../vendor/autoload.php';
+
+try {
+    CommandInterface::setUp();
+} catch (Exception $e) {
+    dd($e->getMessage());
+}

@@ -2,9 +2,9 @@
 
 namespace app\switches;
 
-require __DIR__ . '/../services/DevJobCategoryService.php';
+require __DIR__ . '/../services/CategoryService.php';
 
-use application\services\DevJobCategoryService;
+use application\services\CategoryService;
 use Pionia\Core\BaseApiServiceSwitch;
 
 class V1Switch extends BaseApiServiceSwitch
@@ -15,7 +15,7 @@ class V1Switch extends BaseApiServiceSwitch
     protected function registerServices(): array
     {
         return [
-            'dev_job_category' => new DevJobCategoryService(),
+            'category' => new CategoryService(),
         ];
     }
 }
