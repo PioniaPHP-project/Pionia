@@ -28,18 +28,9 @@ class Pionia
 
         $server = self::getServerSettings();
 
-        if ($server && array_key_exists('DEBUG', $server) && $server['DEBUG']){
-            error_reporting(E_ALL);
-            ini_set('display_errors', '1');
-        } else {
-            error_reporting(0);
-            ini_set('display_errors', '0');
-        }
-
         if ($server && array_key_exists('APP_NAME', $server)){
             self::$name = $server['APP_NAME'];
         }
-
     }
 
 

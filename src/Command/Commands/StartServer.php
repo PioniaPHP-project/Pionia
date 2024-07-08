@@ -21,16 +21,12 @@ class StartServer extends BaseCommand
 
     private array $command = ['php', '-S'];
 
-    private function port()
+    private function port(): int
     {
         $port = 8000;
         $server = $this->getServerSettings();
-        if (count($server) > 0) {
-            if (array_key_exists('port', $server)) {
-                $port = $server['port'];
-            }
-        }
-        return $port;
+        $port = $server['port']??$server['PORT']??$port;
+        return (int) $port;
     }
 
     protected function configure(): void

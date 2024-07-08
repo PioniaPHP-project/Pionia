@@ -162,6 +162,8 @@ class CoreKernel extends Pionia
 
         $shouldLog = isset($serverSettings['LOG_REQUESTS']) && $serverSettings['LOG_REQUESTS'];
 
+        $shouldLogResponse = $serverSettings['LOG_RESPONSES'] ?? $shouldLog;
+
         try {
             $request->attributes->add($this->matcher->match($request->getPathInfo()));
 
@@ -169,13 +171,15 @@ class CoreKernel extends Pionia
 
             $arguments = $argumentResolver->getArguments($request, $controller);
 
-            if ($shouldLog) {
+            if ($shouldLog && $request->isMethod('POST')) {
                 logger->info("Pionia Request: ", PioniaLogger::hideInLogs($request->getData()));
+            } else {
+                logger->info("Pionia Request: ", ['method' => $request->getMethod(), 'path' => $request->getPathInfo()]);
             }
 
             $response =  call_user_func_array($controller, $arguments);
 
-            if ($shouldLog) {
+            if ($shouldLogResponse) {
                 logger->info('Pionia Response: ', ['response' => $response->getPrettyResponse()]);
             }
 

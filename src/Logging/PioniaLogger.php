@@ -79,18 +79,17 @@ class PioniaLogger
 
         $logger = new Logger($pionia::$name);
 
-//        $logger->pushProcessor(new PsrLogMessageProcessor())
-//            ->pushProcessor(new MemoryUsageProcessor())
-//            ->pushProcessor(new ProcessIdProcessor());
-//        if ($debug) {
-//            $logger
-//                ->pushProcessor(new HostnameProcessor());
-//        }
+        if (is_string($processors)) {
+            $processors = explode(',', $processors);
+        }
 
         // add the processors the developer has registered in the settings.ini file
         if (is_array($processors) && !empty($processors)) {
             foreach ($processors as $processor) {
-                $logger->pushProcessor(new $processor());
+                if (!empty($processor)) {
+                    $processor= trim($processor);
+                    $logger->pushProcessor(new $processor());
+                }
             }
         }
 
@@ -124,8 +123,7 @@ class PioniaLogger
         if ($outFormat === 'JSON') {
             $formatter = new JsonFormatter(1, true, true, true);
         } else {
-            $dateFormat = "Y-n-j, g:i:s a";
-            $output = '[%datetime%] '.strtolower($pionia::$name).".%level_name% >> %message% - %context% %extra%\n";
+            $output = '[%datetime%] '.strtolower($pionia::$name).".%level_name% >> %message% :: %context% %extra%\n";
             $formatter = new LineFormatter($output, null, true, true);
         }
 
