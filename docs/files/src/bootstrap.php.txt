@@ -25,3 +25,4 @@ $autoloader = require __DIR__ . '/../vendor/autoload.php';
 if (!defined("logger")){
     define('logger', PioniaLogger::init());
 }
+

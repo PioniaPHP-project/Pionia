@@ -95,8 +95,8 @@ class Service extends CodeGenerator
         $method->addParameter('data')
             ->setType('?array');
 
-        $method->addParameter('files')
-            ->setType('?array');
+//        $method->addParameter('files')
+//            ->setType('?array');
 
         $this->log("Added $action action as $actionName to our $className service.");
         return $class;

@@ -3,7 +3,7 @@
 namespace Pionia\Generics\Base;
 
 use Exception;
-use Pionia\Request\PaginationCore;
+use Pionia\Database\PaginationCore;
 use Porm\exceptions\BaseDatabaseException;
 use Porm\Porm;
 

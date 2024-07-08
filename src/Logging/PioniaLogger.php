@@ -47,7 +47,7 @@ class PioniaLogger
         $pionia = new Pionia();
         $settings = $pionia::getSettings();
         $serverSettings = $pionia::getServerSettings();
-        $processors = $settings['PROCESSORS'] ?? [];
+        $processors = $serverSettings['LOG_PROCESSORS'] ?? [];
 
         if (array_key_exists("DEBUG", $serverSettings)) {
             $debug = $serverSettings["DEBUG"];
@@ -101,10 +101,12 @@ class PioniaLogger
                 if (is_array($settings_) && !empty($settings_)) {
                     $all = [];
                     foreach ($settings_ as $key) {
-                        $current = $settings[$key];
-                        if (is_array($current)) {
-                            $cleaned = self::hideInLogs($current);
-                            $all = array_merge($all, $cleaned);
+                        if (!empty($settings[$key])) {
+                            $current = $settings[$key];
+                            if (is_array($current)) {
+                                $cleaned = self::hideInLogs($current);
+                                $all = array_merge($all, $cleaned);
+                            }
                         }
                     }
                     $record->extra = array_merge($record->extra, $all);

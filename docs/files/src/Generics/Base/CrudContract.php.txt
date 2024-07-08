@@ -3,12 +3,19 @@
 namespace Pionia\Generics\Base;
 
 use Exception;
-use Pionia\Request\PaginationCore;
+use Pionia\Database\PaginationCore;
 use Porm\exceptions\BaseDatabaseException;
 use Porm\Porm;
 
 trait CrudContract
 {
+    private function detectAndAddColumns(): void
+    {
+        $data = $this->request->getData();
+        if (isset($data['columns']) || isset($data['COLUMNS'])) {
+            $this->listColumns = $data['columns'] ?? $data['COLUMNS'];
+        }
+    }
     private function getListColumns(): array|string
     {
         return $this->listColumns ?? '*';
@@ -60,6 +67,7 @@ trait CrudContract
      */
     protected function getOne(): ?object
     {
+        $this->detectAndAddColumns();
         $once = $this->getItem();
         if ($once) {
             return $once;
@@ -134,6 +142,7 @@ trait CrudContract
      */
     protected function createItem(): ?object
     {
+        $this->detectAndAddColumns();
         $data = $this->request->getData();
         if (!$this->createColumns) {
             throw new Exception("Fields to use for creating were not defined in the service");
@@ -179,6 +188,7 @@ trait CrudContract
      */
     protected function getAllWithPagination(): ?array
     {
+        $this->detectAndAddColumns();
         $data = $this->request->getData();
         if ($this->detectPagination($data)) {
             return $this->paginate();
@@ -191,6 +201,7 @@ trait CrudContract
      */
     protected function randomItem()
     {
+        $this->detectAndAddColumns();
         $data = $this->request->getData();
         $limit = $data['limit'] ?? $data['size']?? 1;
 
@@ -204,6 +215,7 @@ trait CrudContract
      */
     protected function updateItem(): object|array|null
     {
+        $this->detectAndAddColumns();
         $data = $this->request->getData();
         $id = $data[$this->pk_field] ?? throw new Exception("Field {$this->pk_field} is required");
 

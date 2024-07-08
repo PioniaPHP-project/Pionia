@@ -182,7 +182,7 @@ class CoreKernel extends Pionia
             $requestResponse = new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
         } catch (ResourceNotFoundException $exception) {
             if ($shouldLog){
-                logger->debug($exception->getMessage(), ['stack' => $exception]);
+                logger->debug($exception->getMessage(), ['stack' => $exception->getTraceAsString()]);
             }
             $response = BaseResponse::JsonResponse(404, 'Resource not found, are you sure this endpoint exists?');
             $requestResponse = new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);

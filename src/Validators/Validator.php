@@ -3,7 +3,7 @@
 namespace Pionia\Validators;
 
 use Pionia\Core\Pionia;
-use Pionia\Request\ValidationTrait;
+use Pionia\Core\Services\ValidationTrait;
 
 class Validator extends Pionia
 {

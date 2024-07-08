@@ -7,6 +7,4 @@ use Porm\Core\Database;
 /**
  * @inheritDoc
  */
-class Connection extends Database
-{
-}
+class Connection extends Database {}

@@ -4,6 +4,7 @@ namespace Pionia\Core;
 
 use Pionia\Exceptions\ResourceNotFoundException;
 use Pionia\Exceptions\UserUnauthenticatedException;
+use Pionia\Exceptions\UserUnauthorizedException;
 use Pionia\Request\Request;
 use Pionia\Response\BaseResponse;
 use ReflectionException;
@@ -50,27 +51,22 @@ abstract class BaseApiServiceSwitch extends BaseApiController
      * @param Request $request The request object
      * @return BaseResponse The response object
      * @throws UserUnauthenticatedException if the user is not authenticated and the service requires authentication
-     * @throws ResourceNotFoundException|ReflectionException if the SERVICE key is not found, or the service is invalid, or the service is not found*@see BaseResponse for the response returned by this swicher's processServices method
+     * @throws ResourceNotFoundException|ReflectionException|UserUnauthorizedException if the SERVICE key is not found, or the service is invalid, or the service is not found*@see BaseResponse for the response returned by this swicher's processServices method
      */
     private static function processServices(Request $request): BaseResponse
     {
-        $service = $request->getData()['SERVICE'];
-        $action = $request->getData()['ACTION'];
+        $data = $request->getData();
+        $service = $data['SERVICE']?? $data['service'] ?? throw new ResourceNotFoundException("Service not defined in request data");
+        $action = $data['ACTION']?? $data['action'] ?? throw new ResourceNotFoundException("Action not defined in request data");
 
-        if (empty($service)) {
-            throw new ResourceNotFoundException("Service not defined in request data");
-        }
         $klass = new static();
-        $services = $klass->registerServices();
-        if (array_key_exists($service, $services)) {
-            $service = $services[$service];
-            if (!is_a($service, 'Pionia\request\BaseRestService', true)){
+        $serviceNames = array_keys($klass->registerServices());
+        if (in_array($service, $serviceNames)) {
+            $serviceKlass = $klass->registerServices()[$service];
+            if (!is_a($serviceKlass, 'Pionia\request\BaseRestService', true)){
                 throw new ResourceNotFoundException("Service $service is not a valid service");
             }
-            if (empty($action)) {
-                throw new ResourceNotFoundException("Action not defined in request data");
-            }
-            return $service->processAction($action, $request);
+            return $serviceKlass->processAction($action, $request);
         }
         throw new ResourceNotFoundException("Service $service not found");
     }

@@ -1,11 +1,9 @@
 vendor
-settings.ini
 .idea
 .DM_Store
 composer.lock
 src/Core/.DS_Store
 build
 .phpunit.result.cache
-pionia
 
 **.log
