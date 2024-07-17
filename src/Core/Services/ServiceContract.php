@@ -7,6 +7,7 @@ use Pionia\Exceptions\UserUnauthenticatedException;
 use Pionia\Exceptions\UserUnauthorizedException;
 use Pionia\Request\Request;
 use Pionia\Response\BaseResponse;
+use Pionia\Validators\Validator;
 use ReflectionException;
 use ReflectionMethod;
 
@@ -24,14 +25,12 @@ use ReflectionMethod;
  **/
 abstract class ServiceContract
 {
+    use AuthTrait, RequestActionTrait, ValidationTrait;
+
     /**
      * @var Request $request The request object
      */
     public Request $request;
-
-    use AuthTrait;
-    use RequestActionTrait;
-    use ValidationTrait;
 
     /**
      * @var array $deactivatedActions An array of actions that are deactivated for the current service
@@ -73,6 +72,7 @@ abstract class ServiceContract
         $this->request = $request;
 
         $data = $request->getData();
+
         $service = $data['SERVICE']?? $data['service'] ?? throw new ResourceNotFoundException("Service not defined in request data");
 
         if ($this->serviceRequiresAuth) {

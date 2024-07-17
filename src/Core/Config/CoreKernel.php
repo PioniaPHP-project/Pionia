@@ -3,6 +3,7 @@
 namespace Pionia\Core\Config;
 
 use Exception;
+use Pionia\Core\Helpers\SupportedHttpMethods;
 use Pionia\Core\Helpers\Utilities;
 use Pionia\Core\Pionia;
 use Pionia\Core\Routing\BaseRoutes;
@@ -56,12 +57,26 @@ class CoreKernel extends Pionia
 
     private array $authBackends = [];
 
+    public function resolveCors(): void
+    {
+        $settings = $this::getSettingOrDefault('cors', []);
+        $allowedOrigins = $settings['ALLOW_ORIGIN'] ?? '*';
+        $allowedHeaders = $settings['ALLOW_HEADERS'] ?? '*';
+        $allowedCredentials = $settings['ALLOW_CREDENTIALS'] ?? 'true';
+        $maxAge = $settings['MAX_AGE'] ?? 3600;
+        header('Access-Control-Allow-Origin: '.$allowedOrigins);
+        header('Access-Control-Allow-Headers: '.$allowedHeaders);
+        header('Access-Control-Allow-Methods: '.SupportedHttpMethods::POST.', '.SupportedHttpMethods::GET.', OPTIONS');
+        header('Access-Control-Allow-Credentials: '.$allowedCredentials);
+        header('Access-Control-Max-Age: '.$maxAge);
+    }
+
     public function __construct(
         private BaseRoutes $routes,
     ){
         parent::__construct();
         $this::resolveSettingsFromIni();
-
+//        $this::resolveCors();
     }
 
     /**

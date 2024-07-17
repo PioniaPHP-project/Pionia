@@ -70,7 +70,7 @@ class Pionia
 
     public static function getSettingOrDefault(string $key, mixed $default): mixed
     {
-        return self::$settings[$key] ?? $default;
+        return self::getSetting($key) ?? $default;
     }
 
     public static function resolveSettingsFromIni(): mixed
