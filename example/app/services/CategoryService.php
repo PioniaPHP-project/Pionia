@@ -4,6 +4,7 @@ namespace application\services;
 
 use Exception;
 use Pionia\Generics\UniversalGenericService;
+use Pionia\Response\BaseResponse;
 use Porm\Porm;
 
 class CategoryService extends UniversalGenericService
@@ -13,6 +14,11 @@ class CategoryService extends UniversalGenericService
     public ?array $listColumns = ['id', 'name', 'created_at'];
 
     public bool $serviceRequiresAuth = false;
+
+    public function heyWorld()
+    {
+        return BaseResponse::JsonResponse(0, "Hello World");
+    }
 
     /**
      * @throws Exception

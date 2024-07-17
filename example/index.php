@@ -37,5 +37,7 @@ $routes = require_once BASEPATH . '/app/routes.php';
 
 $kernel = new CoreKernel($routes);
 
+$kernel->resolveCors();
+
 $response = $kernel->run();
 
