@@ -2,13 +2,28 @@
 
 namespace application\services;
 
+use Pionia\Generics\Base\JoinType;
 use Pionia\Generics\UniversalGenericService;
 
 class CategoryService extends UniversalGenericService
 {
     public string $table = 'category';
 
-    public ?array $listColumns = ['id', 'name', 'created_at'];
+    public ?array $joins = [
+        'sub_category' => ['id' => 'category_id'],
+    ];
 
-    public bool $serviceRequiresAuth = false;
+    public ?array $joinTypes = [
+        'sub_category' => JoinType::INNER,
+    ];
+
+    public ?array $joinAliases = [
+        'sub_category' => 'sc',
+    ];
+
+    public ?array $listColumns = [
+        'category.id',
+        'category.name',
+        'sc.name(sub_category_name)',
+    ];
 }
