@@ -82,10 +82,10 @@ class PaginationCore
         $nextOffset = $next < $all ? $next : null;
 
         $prevOffset = max($prev, 0);
-
         // has next page
         $hasNext = $nextOffset !== null;
-        $hasPrevious = $prevOffset && $prevOffset > 0;
+        // has previous page
+        $hasPrevious = $prevOffset !== null && $offset > 0;
 
         return [
             'results' => $resultSet,
