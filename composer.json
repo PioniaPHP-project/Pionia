@@ -31,7 +31,6 @@
         "monolog/monolog": "^3.6",
         "pionia/porm": "^1.0",
         "nette/php-generator": "^4.1",
-        "doctrine/inflector": "^2.0",
-        "respect/validation": "^2.3"
+        "doctrine/inflector": "^2.0"
     }
 }
