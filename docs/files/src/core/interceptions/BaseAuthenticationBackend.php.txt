@@ -62,7 +62,7 @@ abstract class BaseAuthenticationBackend
 {
     /**
      * @param Request $request
-     * @return ContextUserObject
+     * @return ContextUserObject|null
      */
-    public abstract function authenticate(Request $request): ContextUserObject;
+    public abstract function authenticate(Request $request): ?ContextUserObject;
 }

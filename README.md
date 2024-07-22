@@ -40,16 +40,6 @@ If you are looking to use or get started with the framework, please find the [Pi
 - [x] Core Documentation Testing and Review
 - [x] Release the first version of the core
 
-### Core 2nd Phase
-
-- [x] Core Performance Testing and Review
-- [x] Core Security Testing and Review
-- [x] Core Documentation Testing and Review
-- [x] Data Validators
-- [ ] Core Unit Testing
-- [ ] Update the core docs 
-- [ ] Release the second version of the core
-
 ### Core 3rd Phase
 - Serving static file(hosting frontend using Pionia)
 - Handling file uploads
@@ -63,6 +53,18 @@ If you are looking to use or get started with the framework, please find the [Pi
 - Testing and Review
 - Update the core docs
 - Release the third version of the core
+
+### Core 2nd Phase
+
+- [x] Core Performance Testing and Review
+- [x] Core Security Testing and Review
+- [x] Core Documentation Testing and Review
+- [x] Data Validators
+- [ ] Core Unit Testing
+- [ ] Update the core docs 
+- [ ] Release the second version of the core
+
+
 
 ### Core 4th Phase
 - Testing and Review

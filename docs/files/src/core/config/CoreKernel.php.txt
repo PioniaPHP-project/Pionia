@@ -3,6 +3,7 @@
 namespace Pionia\Core\Config;
 
 use Exception;
+use Pionia\Core\Helpers\SupportedHttpMethods;
 use Pionia\Core\Helpers\Utilities;
 use Pionia\Core\Pionia;
 use Pionia\Core\Routing\BaseRoutes;
@@ -56,12 +57,26 @@ class CoreKernel extends Pionia
 
     private array $authBackends = [];
 
+    public function resolveCors(): void
+    {
+        $settings = $this::getSettingOrDefault('cors', []);
+        $allowedOrigins = $settings['ALLOW_ORIGIN'] ?? '*';
+        $allowedHeaders = $settings['ALLOW_HEADERS'] ?? '*';
+        $allowedCredentials = $settings['ALLOW_CREDENTIALS'] ?? 'true';
+        $maxAge = $settings['MAX_AGE'] ?? 3600;
+        header('Access-Control-Allow-Origin: '.$allowedOrigins);
+        header('Access-Control-Allow-Headers: '.$allowedHeaders);
+        header('Access-Control-Allow-Methods: '.SupportedHttpMethods::POST.', '.SupportedHttpMethods::GET.', OPTIONS');
+        header('Access-Control-Allow-Credentials: '.$allowedCredentials);
+        header('Access-Control-Max-Age: '.$maxAge);
+    }
+
     public function __construct(
         private BaseRoutes $routes,
     ){
         parent::__construct();
         $this::resolveSettingsFromIni();
-
+//        $this::resolveCors();
     }
 
     /**
@@ -162,6 +177,8 @@ class CoreKernel extends Pionia
 
         $shouldLog = isset($serverSettings['LOG_REQUESTS']) && $serverSettings['LOG_REQUESTS'];
 
+        $shouldLogResponse = $serverSettings['LOG_RESPONSES'] ?? $shouldLog;
+
         try {
             $request->attributes->add($this->matcher->match($request->getPathInfo()));
 
@@ -169,13 +186,15 @@ class CoreKernel extends Pionia
 
             $arguments = $argumentResolver->getArguments($request, $controller);
 
-            if ($shouldLog) {
+            if ($shouldLog && $request->isMethod('POST')) {
                 logger->info("Pionia Request: ", PioniaLogger::hideInLogs($request->getData()));
+            } else {
+                logger->info("Pionia Request: ", ['method' => $request->getMethod(), 'path' => $request->getPathInfo()]);
             }
 
             $response =  call_user_func_array($controller, $arguments);
 
-            if ($shouldLog) {
+            if ($shouldLogResponse) {
                 logger->info('Pionia Response: ', ['response' => $response->getPrettyResponse()]);
             }
 
@@ -289,7 +308,7 @@ class CoreKernel extends Pionia
      */
     private function authenticationBackendWorker(Request $request, array $backends ): Request
     {
-        if ($request->isAuthenticated() || $request->getAuth()->user) {
+        if ($request->isAuthenticated() || ($request->getAuth() && $request->getAuth()->user)) {
             return $request;
         }
 
@@ -298,9 +317,10 @@ class CoreKernel extends Pionia
         $klass = new $current();
         $userObject =  $klass->authenticate($request);
 
-        // if the instance, we set it to context and the next next iteration will be terminated immediately
+        // if there is an instance, we set it to context and the next  iteration will be terminated immediately
         if ($userObject){
             $request->setAuthenticationContext($userObject);
+            return $request;
         }
 
         // if we still have more, we call the next

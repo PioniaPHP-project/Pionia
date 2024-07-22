@@ -119,10 +119,6 @@
                 <a href="namespaces/pionia-testsuite.html" class="">TestSuite</a>
                 
             </li>
-                    <li>
-                <a href="namespaces/pionia-validators.html" class="">Validators</a>
-                
-            </li>
             </ul>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -143,6 +139,20 @@
             </li>
                     <li>
                 <a href="namespaces/porm-exceptions.html" class="">exceptions</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/respect.html" class="">Respect</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/respect-stringifier.html" class="">Stringifier</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/respect-validation.html" class="">Validation</a>
                 
             </li>
             </ul>
@@ -278,18 +288,6 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_date_pattern">$date_pattern</a>
-    <span>
-                        &nbsp;: string            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_datetime_pattern">$datetime_pattern</a>
-    <span>
-                        &nbsp;: string            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Core-Services-ServiceContract.html#property_deactivatedActions">$deactivatedActions</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
@@ -299,12 +297,6 @@
     <a href="classes/Pionia-Core-Services-ServiceContract.html#property_deactivatedActions">$deactivatedActions</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_email_pattern">$email_pattern</a>
-    <span>
-                        &nbsp;: string            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
@@ -386,21 +378,9 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_time_pattern">$time_pattern</a>
-    <span>
-                        &nbsp;: string            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Generics-Base-GenericService.html#property_updateColumns">$updateColumns</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_username_pattern">$username_pattern</a>
-    <span>
-                        &nbsp;: string            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
@@ -424,15 +404,9 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asDate">asDate()</a>
+    <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_allShouldBe">allShouldBe()</a>
     <span>
-                                &nbsp;: bool|int    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asDateTime">asDateTime()</a>
-    <span>
-                                &nbsp;: bool|int    </span>
+                                &nbsp;: mixed    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
@@ -447,12 +421,6 @@
                                 &nbsp;: bool|int    </span>
 </dt>
 <dd>Validates emails of all formats</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asFloat">asFloat()</a>
-    <span>
-                                &nbsp;: bool|int    </span>
-</dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asInternationalPhone">asInternationalPhone()</a>
@@ -476,6 +444,18 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asNumber">asNumber()</a>
     <span>
+                                &nbsp;: bool    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asNumeric">asNumeric()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asNumericInt">asNumericInt()</a>
+    <span>
                                 &nbsp;: bool|int    </span>
 </dt>
 
@@ -497,23 +477,10 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asTime">asTime()</a>
-    <span>
-                                &nbsp;: bool|int    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asUrl">asUrl()</a>
     <span>
                                 &nbsp;: bool|int    </span>
 </dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asUsername">asUsername()</a>
-    <span>
-                                &nbsp;: bool|int    </span>
-</dt>
-<dd>Checks for at least 5 alphanumeric letters</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Core-Services-AuthTrait.html#method_auth">auth()</a>
@@ -653,6 +620,12 @@
 <dd>This checks if the required fields are present in the request otherwise it throws an exception</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_respect">respect()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Generics-Mixins-RetrieveMixin.html#method_retrieve">retrieve()</a>
     <span>
                                 &nbsp;: <a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a>    </span>
@@ -765,6 +738,12 @@ Handles both post and pre delete events</dd>
 </dt>
 <dd>Gets one item from the database. Can be overridden by defining a getOne method in the service</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_shouldBe">shouldBe()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+
     </dl>
 
 
@@ -796,9 +775,9 @@ Handles both post and pre delete events</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">44</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.44" class="phpdocumentor-element-found-in__source" data-line="44" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.43" class="phpdocumentor-element-found-in__source" data-line="43" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
     
@@ -832,9 +811,9 @@ Handles both post and pre delete events</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.49" class="phpdocumentor-element-found-in__source" data-line="49" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.48" class="phpdocumentor-element-found-in__source" data-line="48" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
     
@@ -904,9 +883,9 @@ Handles both post and pre delete events</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.59" class="phpdocumentor-element-found-in__source" data-line="59" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.58" class="phpdocumentor-element-found-in__source" data-line="58" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
     
@@ -1003,74 +982,6 @@ the request and saved</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_date_pattern">
-        $date_pattern
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_date_pattern" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">14</span>
-
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.14" class="phpdocumentor-element-found-in__source" data-line="14" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$date_pattern</span>
-     = <span class="phpdocumentor-signature__default-value">&quot;/^\\d{4}-\\d{2}-\\d{2}\$/&quot;</span></code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_datetime_pattern">
-        $datetime_pattern
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_datetime_pattern" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">16</span>
-
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.16" class="phpdocumentor-element-found-in__source" data-line="16" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$datetime_pattern</span>
-     = <span class="phpdocumentor-signature__default-value">&quot;/^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}\$/&quot;</span></code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_deactivatedActions">
         $deactivatedActions
         <a href="classes/Pionia-Core-Services-ServiceContract.html#property_deactivatedActions" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1081,9 +992,9 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.39" class="phpdocumentor-element-found-in__source" data-line="39" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.38" class="phpdocumentor-element-found-in__source" data-line="38" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
     
@@ -1143,40 +1054,6 @@ the request and saved</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_email_pattern">
-        $email_pattern
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_email_pattern" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">10</span>
-
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.10" class="phpdocumentor-element-found-in__source" data-line="10" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$email_pattern</span>
-     = <span class="phpdocumentor-signature__default-value">&quot;/^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$/&quot;</span></code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_ip_pattern">
         $ip_pattern
         <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_ip_pattern" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1187,9 +1064,9 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.17" class="phpdocumentor-element-found-in__source" data-line="17" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.13" class="phpdocumentor-element-found-in__source" data-line="13" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
     
@@ -1433,9 +1310,9 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.30" class="phpdocumentor-element-found-in__source" data-line="30" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.33" class="phpdocumentor-element-found-in__source" data-line="33" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
     
@@ -1505,9 +1382,9 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.54" class="phpdocumentor-element-found-in__source" data-line="54" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.53" class="phpdocumentor-element-found-in__source" data-line="53" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
     
@@ -1577,9 +1454,9 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.18" class="phpdocumentor-element-found-in__source" data-line="18" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.14" class="phpdocumentor-element-found-in__source" data-line="14" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
     
@@ -1637,40 +1514,6 @@ the request and saved</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_time_pattern">
-        $time_pattern
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_time_pattern" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">15</span>
-
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.15" class="phpdocumentor-element-found-in__source" data-line="15" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$time_pattern</span>
-     = <span class="phpdocumentor-signature__default-value">&quot;/^\\d{2}:\\d{2}\$/&quot;</span></code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_updateColumns">
         $updateColumns
         <a href="classes/Pionia-Generics-Base-GenericService.html#property_updateColumns" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1705,40 +1548,6 @@ the request and saved. If left null, all columns defined in the request object w
         class="
             phpdocumentor-element
             -property
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_username_pattern">
-        $username_pattern
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_username_pattern" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">13</span>
-
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.13" class="phpdocumentor-element-found-in__source" data-line="13" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$username_pattern</span>
-     = <span class="phpdocumentor-signature__default-value">&quot;/^[a-zA-Z0-9_]{5,}\$/&quot;</span></code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
             -private
                                                         "
 >
@@ -1752,9 +1561,9 @@ the request and saved. If left null, all columns defined in the request object w
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.19" class="phpdocumentor-element-found-in__source" data-line="19" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.15" class="phpdocumentor-element-found-in__source" data-line="15" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
     
@@ -1791,9 +1600,9 @@ the request and saved. If left null, all columns defined in the request object w
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.20" class="phpdocumentor-element-found-in__source" data-line="20" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.17" class="phpdocumentor-element-found-in__source" data-line="17" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
     
@@ -1825,23 +1634,23 @@ the request and saved. If left null, all columns defined in the request object w
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_asDate">
-        asDate()
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asDate" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_allShouldBe">
+        allShouldBe()
+        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_allShouldBe" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">226</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.115" class="phpdocumentor-element-found-in__source" data-line="115" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.226" class="phpdocumentor-element-found-in__source" data-line="226" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">asDate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$date</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+                    <span class="phpdocumentor-signature__name">allShouldBe</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">iterable&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expected</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1849,29 +1658,25 @@ the request and saved. If left null, all columns defined in the request object w
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$date</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                <span class="phpdocumentor-signature__argument__name">$value</span>
+                : <span class="phpdocumentor-signature__argument__return-type">iterable&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>date in the format <code class="prettyprint">yyyy-mm-dd</code> eg. '2024-17-05</p>
-</section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$regex</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+                <span class="phpdocumentor-signature__argument__name">$expected</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
-</section>
-
+                
             </dd>
             </dl>
 
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asDate#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_allShouldBe#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -1885,79 +1690,7 @@ the request and saved. If left null, all columns defined in the request object w
                                     </dd>
                                             </dl>
 
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">bool|int</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_asDateTime">
-        asDateTime()
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asDateTime" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">157</span>
-
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.157" class="phpdocumentor-element-found-in__source" data-line="157" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
-    </aside>
-
     
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">asDateTime</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$date</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$date</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$regex</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asDateTime#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-InvalidDataException.html"><abbr title="\Pionia\Exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
-                                                            
-                                             
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">bool|int</span>
-            </section>
-
 </article>
                     <article
         class="phpdocumentor-element
@@ -1973,9 +1706,9 @@ the request and saved. If left null, all columns defined in the request object w
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">212</span>
+    <span class="phpdocumentor-element-found-in__line">171</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.212" class="phpdocumentor-element-found-in__source" data-line="212" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.171" class="phpdocumentor-element-found-in__source" data-line="171" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
     
@@ -2045,16 +1778,16 @@ the request and saved. If left null, all columns defined in the request object w
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.49" class="phpdocumentor-element-found-in__source" data-line="49" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.44" class="phpdocumentor-element-found-in__source" data-line="44" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Validates emails of all formats</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">asEmail</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+                    <span class="phpdocumentor-signature__name">asEmail</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -2067,15 +1800,6 @@ the request and saved. If left null, all columns defined in the request object w
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The email address we're currently testing in the core.</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$regex</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
 </section>
 
             </dd>
@@ -2110,74 +1834,6 @@ the request and saved. If left null, all columns defined in the request object w
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_asFloat">
-        asFloat()
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asFloat" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">137</span>
-
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.137" class="phpdocumentor-element-found-in__source" data-line="137" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">asFloat</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$number</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$number</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$regex</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asFloat#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-InvalidDataException.html"><abbr title="\Pionia\Exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
-                                                            
-                                             
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">bool|int</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_asInternationalPhone">
         asInternationalPhone()
         <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asInternationalPhone" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2186,9 +1842,9 @@ the request and saved. If left null, all columns defined in the request object w
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.67" class="phpdocumentor-element-found-in__source" data-line="67" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.58" class="phpdocumentor-element-found-in__source" data-line="58" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Will only validate international numbers if the code is provided, otherwise, will validate local only</p>
@@ -2268,9 +1924,9 @@ the request and saved. If left null, all columns defined in the request object w
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">183</span>
+    <span class="phpdocumentor-element-found-in__line">142</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.183" class="phpdocumentor-element-found-in__source" data-line="183" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.142" class="phpdocumentor-element-found-in__source" data-line="142" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
     
@@ -2340,9 +1996,9 @@ the request and saved. If left null, all columns defined in the request object w
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">197</span>
+    <span class="phpdocumentor-element-found-in__line">156</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.197" class="phpdocumentor-element-found-in__source" data-line="197" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.156" class="phpdocumentor-element-found-in__source" data-line="156" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
     
@@ -2412,15 +2068,15 @@ the request and saved. If left null, all columns defined in the request object w
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">126</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.126" class="phpdocumentor-element-found-in__source" data-line="126" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.98" class="phpdocumentor-element-found-in__source" data-line="98" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">asNumber</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$number</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+                    <span class="phpdocumentor-signature__name">asNumber</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$number</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -2436,21 +2092,134 @@ the request and saved. If left null, all columns defined in the request object w
 </section>
 
             </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$regex</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
-</section>
-
-            </dd>
             </dl>
 
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
         <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asNumber#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-InvalidDataException.html"><abbr title="\Pionia\Exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asNumeric">
+        asNumeric()
+        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asNumeric" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">106</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.106" class="phpdocumentor-element-found-in__source" data-line="106" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asNumeric</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$number</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$number</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asNumeric#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-InvalidDataException.html"><abbr title="\Pionia\Exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_asNumericInt">
+        asNumericInt()
+        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asNumericInt" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">114</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.114" class="phpdocumentor-element-found-in__source" data-line="114" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">asNumericInt</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$number</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$number</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asNumericInt#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -2484,9 +2253,9 @@ the request and saved. If left null, all columns defined in the request object w
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">92</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.92" class="phpdocumentor-element-found-in__source" data-line="92" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.83" class="phpdocumentor-element-found-in__source" data-line="83" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Validates the rules as follows
@@ -2561,9 +2330,9 @@ the request and saved. If left null, all columns defined in the request object w
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">233</span>
+    <span class="phpdocumentor-element-found-in__line">192</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.233" class="phpdocumentor-element-found-in__source" data-line="233" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.192" class="phpdocumentor-element-found-in__source" data-line="192" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
     
@@ -2637,74 +2406,6 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_asTime">
-        asTime()
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asTime" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">149</span>
-
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.149" class="phpdocumentor-element-found-in__source" data-line="149" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">asTime</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$time</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$time</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$regex</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asTime#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-InvalidDataException.html"><abbr title="\Pionia\Exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
-                                                            
-                                             
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">bool|int</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_asUrl">
         asUrl()
         <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asUrl" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2713,9 +2414,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">168</span>
+    <span class="phpdocumentor-element-found-in__line">128</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.168" class="phpdocumentor-element-found-in__source" data-line="168" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.128" class="phpdocumentor-element-found-in__source" data-line="128" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
     
@@ -2752,79 +2453,6 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
         <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asUrl#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-InvalidDataException.html"><abbr title="\Pionia\Exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
-                                                            
-                                             
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">bool|int</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_asUsername">
-        asUsername()
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asUsername" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">104</span>
-
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.104" class="phpdocumentor-element-found-in__source" data-line="104" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
-    </aside>
-
-        <p class="phpdocumentor-summary">Checks for at least 5 alphanumeric letters</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">asUsername</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$username</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$username</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The string we are testing</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$regex</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Your custom regular expression we can depend on instead.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asUsername#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -3815,9 +3443,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">71</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.71" class="phpdocumentor-element-found-in__source" data-line="71" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.70" class="phpdocumentor-element-found-in__source" data-line="70" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This method is called when the service is called with an action</p>
@@ -4021,6 +3649,38 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_respect">
+        respect()
+        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_respect" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">88</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.88" class="phpdocumentor-element-found-in__source" data-line="88" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">respect</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_retrieve">
         retrieve()
         <a href="classes/Pionia-Generics-Mixins-RetrieveMixin.html#method_retrieve" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4080,9 +3740,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.33" class="phpdocumentor-element-found-in__source" data-line="33" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.30" class="phpdocumentor-element-found-in__source" data-line="30" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Use this to cover scenarios this contract does not cover</p>
@@ -4677,16 +4337,16 @@ Handles both post and pre delete events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">247</span>
+    <span class="phpdocumentor-element-found-in__line">206</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.247" class="phpdocumentor-element-found-in__source" data-line="247" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.206" class="phpdocumentor-element-found-in__source" data-line="206" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Internal validator based on PHP filter_var validations</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">_validateFilter</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href=""></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href=""></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filterType</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;Invalid Data&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|bool</span></code>
+                    <span class="phpdocumentor-signature__name">_validateFilter</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href=""></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filterType</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;Invalid Data&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -4695,7 +4355,7 @@ Handles both post and pre delete events</p>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$value</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href=""></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -4934,6 +4594,74 @@ Handles both post and pre delete events</p>
             </section>
 
 </article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_shouldBe">
+        shouldBe()
+        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_shouldBe" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ValidationTrait.php"><a href="files/src-core-services-validationtrait.html"><abbr title="src/Core/Services/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">218</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListRandomService.html#source-view.218" class="phpdocumentor-element-found-in__source" data-line="218" data-modal="source-view" data-src="files/src/Core/Services/ValidationTrait.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">shouldBe</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expected</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$value</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$expected</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_shouldBe#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-InvalidDataException.html"><abbr title="\Pionia\Exceptions\InvalidDataException">InvalidDataException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
             </section>
 
         <div class="phpdocumentor-modal" id="source-view">
@@ -5053,11 +4781,8 @@ Handles both post and pre delete events</p>
                                                     <li><a href="classes/Pionia-Core-Services-ServiceContract.html#property_authMessage">$authMessage<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
                                                     <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_connection">$connection<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
                                                     <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_createColumns">$createColumns<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
-                                                    <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#property_date_pattern">$date_pattern<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
-                                                    <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#property_datetime_pattern">$datetime_pattern<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
                                                     <li><a href="classes/Pionia-Core-Services-ServiceContract.html#property_deactivatedActions">$deactivatedActions<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
                                                     <li><a href="classes/Pionia-Core-Services-ServiceContract.html#property_deactivatedActions">$deactivatedActions<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
-                                                    <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#property_email_pattern">$email_pattern<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
                                                     <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#property_ip_pattern">$ip_pattern<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
                                                     <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_limit">$limit<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
                                                     <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_listColumns">$listColumns<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
@@ -5071,9 +4796,7 @@ Handles both post and pre delete events</p>
                                                     <li><a href="classes/Pionia-Core-Services-ServiceContract.html#property_serviceRequiresAuth">$serviceRequiresAuth<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
                                                     <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#property_slug_pattern">$slug_pattern<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
                                                     <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_table">$table<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
-                                                    <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#property_time_pattern">$time_pattern<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
                                                     <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_updateColumns">$updateColumns<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
-                                                    <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#property_username_pattern">$username_pattern<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
                                                     <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#property_throwsExceptions">$throwsExceptions<a href="classes/Pionia-Generics-RetrieveListRandomService.html"></li>
                                             </ul>
                 </li>
@@ -5082,20 +4805,18 @@ Handles both post and pre delete events</p>
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method___construct">__construct()</a></li>
-                                            <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asDate">asDate()</a></li>
-                                            <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asDateTime">asDateTime()</a></li>
+                                            <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_allShouldBe">allShouldBe()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asDomain">asDomain()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asEmail">asEmail()</a></li>
-                                            <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asFloat">asFloat()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asInternationalPhone">asInternationalPhone()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asIp">asIp()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asMac">asMac()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asNumber">asNumber()</a></li>
+                                            <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asNumeric">asNumeric()</a></li>
+                                            <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asNumericInt">asNumericInt()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asPassword">asPassword()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asSlug">asSlug()</a></li>
-                                            <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asTime">asTime()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asUrl">asUrl()</a></li>
-                                            <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_asUsername">asUsername()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-AuthTrait.html#method_auth">auth()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-AuthTrait.html#method_authExtraHas">authExtraHas()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-AuthTrait.html#method_can">can()</a></li>
@@ -5116,6 +4837,7 @@ Handles both post and pre delete events</p>
                                             <li><a href="classes/Pionia-Core-Services-ServiceContract.html#method_processAction">processAction()</a></li>
                                             <li><a href="classes/Pionia-Generics-Mixins-RandomMixin.html#method_random">random()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-RequestActionTrait.html#method_requires">requires()</a></li>
+                                            <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_respect">respect()</a></li>
                                             <li><a href="classes/Pionia-Generics-Mixins-RetrieveMixin.html#method_retrieve">retrieve()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_validate">validate()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method__checkPaginationInternal">_checkPaginationInternal()</a></li>
@@ -5133,6 +4855,7 @@ Handles both post and pre delete events</p>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_detectAndAddColumns">detectAndAddColumns()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_getListColumns">getListColumns()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_getOneInternal">getOneInternal()</a></li>
+                                            <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_shouldBe">shouldBe()</a></li>
                                     </ul>
             </li>
                     </ul>

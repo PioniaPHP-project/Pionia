@@ -308,7 +308,7 @@ class CoreKernel extends Pionia
      */
     private function authenticationBackendWorker(Request $request, array $backends ): Request
     {
-        if ($request->isAuthenticated() || $request->getAuth()->user) {
+        if ($request->isAuthenticated() || ($request->getAuth() && $request->getAuth()->user)) {
             return $request;
         }
 
@@ -317,9 +317,10 @@ class CoreKernel extends Pionia
         $klass = new $current();
         $userObject =  $klass->authenticate($request);
 
-        // if the instance, we set it to context and the next next iteration will be terminated immediately
+        // if there is an instance, we set it to context and the next  iteration will be terminated immediately
         if ($userObject){
             $request->setAuthenticationContext($userObject);
+            return $request;
         }
 
         // if we still have more, we call the next
