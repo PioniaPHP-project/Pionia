@@ -2,10 +2,10 @@
 
 namespace Pionia\Generics\Base;
 
-enum JoinType: string
+enum JoinType
 {
-    case INNER = 'INNER';
-    case LEFT = 'LEFT';
-    case RIGHT = 'RIGHT';
-    case FULL = 'FULL';
+    case INNER;
+    case LEFT;
+    case RIGHT;
+    case FULL;
 }

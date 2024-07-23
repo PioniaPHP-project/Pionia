@@ -48,5 +48,17 @@ class GenericService extends BaseRestService
      */
     public ?array $updateColumns = null;
 
-    use EventsContract, CrudContract;
+    public ?array $fileColumns = null;
+
+    use EventsContract, CrudContract, JoinContract;
+
+
+    private function getFieldValue($name)
+    {
+        if (isset($this->fileColumns[$name])){
+            return $this->request->getFileByName($name) ?? null;
+        }
+        $data = $this->request->getData();
+        return $data[$name]?? null;
+    }
 }

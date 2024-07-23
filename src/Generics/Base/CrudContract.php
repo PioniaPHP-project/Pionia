@@ -11,11 +11,11 @@ trait CrudContract
 {
     private function detectAndAddColumns(): void
     {
-        $data = $this->request->getData();
-        if (isset($data['columns']) || isset($data['COLUMNS'])) {
-            $this->listColumns = $data['columns'] ?? $data['COLUMNS'];
+        if ($this->getFieldValue("columns") || $this->getFieldValue("COLUMNS")) {
+            $this->listColumns = $this->getFieldValue("columns") ?? $this->getFieldValue("COLUMNS");
         }
     }
+
     private function getListColumns(): array|string
     {
         return $this->listColumns ?? '*';
@@ -72,8 +72,10 @@ trait CrudContract
         if ($once) {
             return $once;
         }
-        $data = $this->request->getData();
-        $id = $data[$this->pk_field] ?? throw new Exception("Field {$this->pk_field} is required");
+        if ($this->weShouldJoin()) {
+            return $this->getOneJoined();
+        }
+        $id = $this->getFieldValue($this->pk_field) ?? throw new Exception("Field {$this->pk_field} is required");
         return $this->getOneInternal($id);
     }
 
@@ -101,6 +103,10 @@ trait CrudContract
     protected function allItems(): ?array
     {
         $customMultipleQueried = $this->getItems();
+
+        if ($this->weShouldJoin() && !$customMultipleQueried) {
+            return $this->getAllItemsJoined();
+        }
         return $customMultipleQueried ?? Porm::from($this->table)
             ->using($this->connection)
             ->columns($this->getListColumns())
@@ -114,8 +120,7 @@ trait CrudContract
      */
     protected function deleteItem(): mixed
     {
-        $data = $this->request->getData();
-        $id = $data[$this->pk_field] ?? throw new Exception("Field {$this->pk_field} is required");
+        $id = $this->getFieldValue($this->pk_field) ?? throw new Exception("Field {$this->pk_field} is required");
         $item = $this->getOneInternal($id);
 
         if (!$item) {
@@ -143,23 +148,22 @@ trait CrudContract
     protected function createItem(): ?object
     {
         $this->detectAndAddColumns();
-        $data = $this->request->getData();
         if (!$this->createColumns) {
-            throw new Exception("Fields to use for creating were not defined in the service");
+            throw new Exception("Fields to use for creating undefined in the service");
         }
         foreach ($this->createColumns as $column) {
-            if (!isset($data[$column])) {
+            if (!$this->getFieldValue($column)) {
                 throw new Exception("Field $column is required");
             }
         }
         $sanitizedData = [];
         foreach ($this->createColumns as $column) {
-            $sanitizedData[$column] = trim($data[$column]);
+            $sanitizedData[$column] = trim($this->getFieldValue($column));
         }
 
         $saved = null;
         if ($toSave = $this->preCreate($sanitizedData)) {
-            Porm::from($this->table)->inTransaction(function () use ($data, &$saved, $toSave) {
+            Porm::from($this->table)->inTransaction(function () use (&$saved, $toSave) {
                 $saved = Porm::from($this->table)
                     ->using($this->connection)
                     ->save($toSave);
@@ -202,8 +206,7 @@ trait CrudContract
     protected function randomItem()
     {
         $this->detectAndAddColumns();
-        $data = $this->request->getData();
-        $limit = $data['limit'] ?? $data['size']?? 1;
+        $limit = $this->getFieldValue('limit') ?? $this->getFieldValue('size') ?? 1;
 
         return Porm::from($this->table)
             ->using($this->connection)
@@ -216,8 +219,7 @@ trait CrudContract
     protected function updateItem(): object|array|null
     {
         $this->detectAndAddColumns();
-        $data = $this->request->getData();
-        $id = $data[$this->pk_field] ?? throw new Exception("Field {$this->pk_field} is required");
+        $id = $this->getFieldValue($this->pk_field) ?? throw new Exception("Field {$this->pk_field} is required");
 
         // get the item to be updated
 
@@ -237,14 +239,14 @@ trait CrudContract
         // if the developer defines the columns to update, we stick to those
         if ($this->updateColumns) {
             foreach ($this->updateColumns as $column) {
-                if (isset($data[$column])) {
-                    $toArray[$column] = $data[$column];
+                if ($this->getFieldValue($column)) {
+                    $toArray[$column] = $this->getFieldValue($column);
                 }
             }
         } else {
             foreach ($toArray as $key => $value) {
-                if (isset($data[$key])) {
-                    $toArray[$key] = $data[$key];
+                if ($this->getFieldValue($key)) {
+                    $toArray[$key] = $this->getFieldValue($key);
                 }
             }
         }

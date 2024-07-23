@@ -38,7 +38,7 @@ class PaginationCore
     }
 
     /**
-     * Sets the columns to return in the queryset
+     * Sets the columns to return in the query
      * @param string|array $columns
      * @return $this
      */
