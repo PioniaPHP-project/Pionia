@@ -4,6 +4,7 @@ namespace Pionia\Generics\Base;
 
 use Exception;
 use Pionia\Database\PaginationCore;
+use Porm\Database\builders\PormObject;
 use Porm\exceptions\BaseDatabaseException;
 use Porm\Porm;
 
@@ -178,12 +179,21 @@ trait CrudContract
 
     /**
      * @throws BaseDatabaseException
+     * @throws Exception
      */
     protected function paginate(): ?array
     {
         $paginator = new PaginationCore($this->request->getData(), $this->table, $this->limit, $this->offset, $this->connection);
-        return $paginator->columns($this->getListColumns())
-            ->paginate();
+        $prep1 =  $paginator->columns($this->getListColumns());
+
+        $prep1->init(function (PormObject $query) {
+            if ($this->weShouldJoin()) {
+                 $join = $query->join();
+                return $this->attachJoins($join);
+            }
+            return $query->filter();
+        });
+        return $prep1->paginate();
     }
 
     /**

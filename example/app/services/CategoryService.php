@@ -8,17 +8,14 @@ use Pionia\Generics\UniversalGenericService;
 class CategoryService extends UniversalGenericService
 {
     public string $table = 'category';
-
-    public string $pk_field = 'category.id';
-
     public ?array $joins = [
         'sub_category' => ['id' => 'category_id'],
     ];
 
     public ?array $joinTypes = [
-        'sub_category' => JoinType::LEFT,
+        'sub_category' => JoinType::INNER,
     ];
-
+//
     public ?array $joinAliases = [
         'sub_category' => 'sc',
     ];
@@ -28,9 +25,9 @@ class CategoryService extends UniversalGenericService
         'active',
     ];
 
-    public ?array $listColumns = [
-        'category.id',
-        'category.name',
-        'sc.name(sub_category_name)',
-    ];
+//    public ?array $listColumns = [
+//        'category.id',
+//        'category.name',
+//        'sc.name(sub_category_name)',
+//    ];
 }

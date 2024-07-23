@@ -147,9 +147,9 @@ trait JoinContract
      * Attaches all defined joins to the base query.
      * @throws Exception
      */
-    private function attachJoins(): Join
+    private function attachJoins(?Join $join = null): Join
     {
-        $query = $this->joinQuery();
+        $query = $join ?? $this->joinQuery();
 
         if (!$this->joinTypes){
             foreach ($this->joins as $table => $columns){
