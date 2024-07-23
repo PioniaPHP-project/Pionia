@@ -117,10 +117,6 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      */
     public function getData(): array
     {
-//        $json = $this->getJsonData()??[];
-//        $form = $this->getFormData()??[];
-//        return array_merge($json, $form);
-
         return $this->getPayload()->all();
     }
 

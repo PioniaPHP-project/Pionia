@@ -7,21 +7,90 @@ use Pionia\Database\PaginationCore;
 use Porm\Database\builders\PormObject;
 use Porm\exceptions\BaseDatabaseException;
 use Porm\Porm;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\FileBag;
 
 trait CrudContract
 {
+    /**
+     * Checks if the frontend has defined columns we should query by.
+     * Works for both joined and non-joined querying.
+     * It pays respect to aliases defined, so, don't forget to respect them too!
+     * @return void
+     */
     private function detectAndAddColumns(): void
     {
+        if ($this->getFieldValue("dontRelate")){
+            $this->dontRelate = $this->getFieldValue("dontRelate");
+        }
+
         if ($this->getFieldValue("columns") || $this->getFieldValue("COLUMNS")) {
             $this->listColumns = $this->getFieldValue("columns") ?? $this->getFieldValue("COLUMNS");
         }
+
+        if ($this->dontRelate){
+            $this->cleanRelationColumns();
+        }
     }
 
+    /**
+     * If the fields are already in the format of relationships, this method reverses that
+     * including removing duplicates.
+     *
+     * @example ```
+     * $this->listColumns = ["alias2.name", "alias1.name(category_name), "alias1.id"];
+     * // this will become
+     * $this->listColumns = ["name", "name(category_name), "id"];
+     * ```
+     * ay the time of querying `name(category_name)` will take precedence of `name` thus we shall end up with
+     * `category_name` and `id` in the response
+     * @return void
+     */
+    private function cleanRelationColumns(): void
+    {
+        if ($this->getListColumns() !== "*"){
+            $columns = [];
+            foreach ($this->getListColumns() as $column){
+                if (str_contains($column, ".")){
+                    $results = explode(".", $column);
+                    $column = $results[1];
+
+                    if (str_contains($column, "(")){
+                        $checker = explode("(", $column);
+                        $final = $checker[0];
+                        array_map(function ($item) use($final, &$column) {
+                            if (str_starts_with($item, $final)){
+                                $column= null;
+                            }
+                            return [];
+                        }, $columns);
+                    }
+                }
+                if ($column) {
+                    $columns[] = $column;
+                }
+            }
+            $this->listColumns = $columns;
+        }
+    }
+
+    /**
+     * Returns the columns we shall query from the db while querying
+     * @return array|string
+     */
     private function getListColumns(): array|string
     {
         return $this->listColumns ?? '*';
     }
 
+    /**
+     * Detects if we have pagination params anywhere in the request.
+     * For pagination to kick-in, both offset and limit must be defined at any of the levels
+     * defined by `$this->detectPagination()`
+     * @see $this->detectPagination()
+     * @param array $data
+     * @return bool
+     */
     protected function _checkPaginationInternal(array $data): bool
     {
         $limitSet = false;
@@ -36,7 +105,45 @@ trait CrudContract
 
         return $limitSet && $offsetSet;
     }
-
+    /**
+     * Detect if our pagination params are defined anywhere in the request.
+    *
+     * Remember these can in defined in one of the following:-
+     *
+     * On the request root level
+    * @example ```json
+     * {
+     *     SERVICE: "ourService",
+     *     ACTION: "ourAction",
+     *     LIMIT: 10, // can also be `limit: 10`
+     *     OFFSET: 5 // can also be `offset: 5`
+     * }
+     *
+     * Or they can be defined under the PAGINATION/pagination key
+     *
+     * @example ```json
+     * {
+     *     SERVICE: "ourService",
+     *     ACTION: "ourAction",
+     *     PAGINATION:{ // can also be `pagination`
+     *          LIMIT: 10, // can also be `limit: 10`
+     *          OFFSET: 5 // can also be `offset: 5`
+     *      }
+     * }
+     *
+     * Or in the SEARCH/search param
+     *
+     * @example
+     * {
+     *     SERVICE: "ourService",
+     *     ACTION: "ourAction",
+     *     SEARCH:{ // can also be `search`
+     *        LIMIT: 10, // can also be `limit: 10`
+     *        OFFSET: 5 // can also be `offset: 5`
+     *     }
+     *  }
+     * }
+     * */
     protected function detectPagination(array $reqData): bool
     {
         if ($reqData) {
@@ -63,7 +170,7 @@ trait CrudContract
     }
 
     /**
-     * Retrieve in CRUD
+     * Retrieve in CRUD, returns on Item at a time.
      * @throws Exception
      */
     protected function getOne(): ?object
@@ -93,6 +200,15 @@ trait CrudContract
             ->get([$this->pk_field => $id]);
     }
 
+    protected function hasLimit()
+    {
+        return $this->getFieldValue("LIMIT") ?? $this->getFieldValue("limit") ?? false;
+    }
+
+    protected function hasOffset()
+    {
+        return $this->getFieldValue("OFFSET") ?? $this->getFieldValue("offset") ?? false;
+    }
     /**
      * Retrieve all in CRUD
      *
@@ -103,15 +219,26 @@ trait CrudContract
      */
     protected function allItems(): ?array
     {
-        $customMultipleQueried = $this->getItems();
+        if($this->getItems()){
+            return $this->getItems();
+        }
 
-        if ($this->weShouldJoin() && !$customMultipleQueried) {
+        if ($this->weShouldJoin()) {
             return $this->getAllItemsJoined();
         }
-        return $customMultipleQueried ?? Porm::from($this->table)
+        $query = Porm::from($this->table)
             ->using($this->connection)
             ->columns($this->getListColumns())
-            ->all();
+            ->filter();
+
+            if ($this->hasLimit()){
+                $query->limit($this->hasLimit());
+            }
+
+            if ($this->hasOffset()){
+                $query->startAt($this->hasOffset());
+            }
+        return $query->all();
     }
 
     /**
@@ -153,13 +280,19 @@ trait CrudContract
             throw new Exception("Fields to use for creating undefined in the service");
         }
         foreach ($this->createColumns as $column) {
-            if (!$this->getFieldValue($column)) {
+            if ($this->getFieldValue($column) === null) {
                 throw new Exception("Field $column is required");
             }
         }
         $sanitizedData = [];
         foreach ($this->createColumns as $column) {
-            $sanitizedData[$column] = trim($this->getFieldValue($column));
+             $dt = $this->getFieldValue($column);
+             if (is_a(FileBag::class, $dt) || is_a(UploadedFile::class, $dt)){
+                 $dt = $this->handleUpload($dt, $column);
+             }
+             if ($dt) {
+                 $sanitizedData[$column] = $dt;
+             }
         }
 
         $saved = null;
@@ -224,6 +357,11 @@ trait CrudContract
     }
 
     /**
+     * Updated an item in the db.
+     *
+     * If updateColumns are defined, it only updates those.
+     *
+     * It also calls both preUpdate and postUpdate hooks if defined
      * @throws Exception
      */
     protected function updateItem(): object|array|null
@@ -249,14 +387,28 @@ trait CrudContract
         // if the developer defines the columns to update, we stick to those
         if ($this->updateColumns) {
             foreach ($this->updateColumns as $column) {
-                if ($this->getFieldValue($column)) {
-                    $toArray[$column] = $this->getFieldValue($column);
+                if ($this->getFieldValue($column) !== null) {
+                    $dt = $this->getFieldValue($column);
+
+                    if (is_a(FileBag::class, $dt) || is_a(UploadedFile::class, $dt)){
+                        $dt = $this->handleUpload($dt, $column);
+                    }
+                    if ($dt) {
+                        $toArray[$column] = $dt;
+                    }
                 }
             }
         } else {
             foreach ($toArray as $key => $value) {
-                if ($this->getFieldValue($key)) {
-                    $toArray[$key] = $this->getFieldValue($key);
+                if ($this->getFieldValue($key) !== null) {
+                    $dt = $this->getFieldValue($key);
+
+                    if (is_a(FileBag::class, $dt) || is_a(UploadedFile::class, $dt)){
+                        $dt = $this->handleUpload($dt, $key);
+                    }
+                    if ($dt) {
+                        $toArray[$key] = $dt;
+                    }
                 }
             }
         }

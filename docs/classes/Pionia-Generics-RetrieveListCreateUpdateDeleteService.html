@@ -242,12 +242,14 @@
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
+<dd>An associative array of actions and their required permissions</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Core-Services-ServiceContract.html#property_actionsRequiringAuth">$actionsRequiringAuth</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
+<dd>This array contains the actions that require authentication</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Core-Services-ServiceContract.html#property_actionsRequiringAuth">$actionsRequiringAuth</a>
@@ -260,6 +262,7 @@
     <span>
                         &nbsp;: string|null            </span>
 </dt>
+<dd>This message will be displayed when the entire service requires authentication</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Generics-Base-GenericService.html#property_connection">$connection</a>
@@ -278,6 +281,7 @@
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
+<dd>An array of actions that are deactivated for the current service</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Core-Services-ServiceContract.html#property_deactivatedActions">$deactivatedActions</a>
@@ -286,9 +290,40 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-Generics-Base-JoinContract.html#property_defaultJoinType">$defaultJoinType</a>
+    <span>
+                        &nbsp;: <a href="classes/Pionia-Generics-Base-JoinType.html"><abbr title="\Pionia\Generics\Base\JoinType">JoinType</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-Generics-Base-GenericService.html#property_fileColumns">$fileColumns</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>Define columns that should be received as files in this array.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_ip_pattern">$ip_pattern</a>
     <span>
                         &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-Generics-Base-JoinContract.html#property_joinAliases">$joinAliases</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-Generics-Base-JoinContract.html#property_joins">$joins</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Pionia-Generics-Base-JoinContract.html#property_joinTypes">$joinTypes</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
@@ -344,6 +379,7 @@
     <span>
                         &nbsp;: bool            </span>
 </dt>
+<dd>If true, the entire service requires authentication</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Core-Services-ServiceContract.html#property_serviceRequiresAuth">$serviceRequiresAuth</a>
@@ -368,6 +404,13 @@
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Pionia-Generics-Base-GenericService.html#property_dontRelate">$dontRelate</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd>Can be mutated by the frontend to turn off relationships and go back to querying the base table again.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_throwsExceptions">$throwsExceptions</a>
@@ -543,6 +586,20 @@
 <dd>Override this in your service to define the basis to return multiple items from the database</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-Generics-Base-EventsContract.html#method_getJoinQuery">getJoinQuery()</a>
+    <span>
+                                &nbsp;: null|object    </span>
+</dt>
+<dd>Override this in your service to define the basis to return multiple items from the database</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_handleUpload">handleUpload()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd>This hook will receive every file found in your request.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Generics-Mixins-ListMixin.html#method_list">list()</a>
     <span>
                                 &nbsp;: <a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a>    </span>
@@ -598,13 +655,6 @@
 <dd>This method is called before the create action, use it to transform the data before saving.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Services-ServiceContract.html#method_processAction">processAction()</a>
-    <span>
-                                &nbsp;: <a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a>    </span>
-</dt>
-<dd>This method is called when the service is called with an action</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Core-Services-RequestActionTrait.html#method_requires">requires()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -635,6 +685,7 @@
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Detects if we have pagination params anywhere in the request.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Pionia-Generics-Base-CrudContract.html#method_allItems">allItems()</a>
@@ -664,6 +715,7 @@ Handles both post and pre delete events</dd>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Detect if our pagination params are defined anywhere in the request.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Pionia-Generics-Base-CrudContract.html#method_getAllWithPagination">getAllWithPagination()</a>
@@ -677,7 +729,19 @@ Handles both post and pre delete events</dd>
     <span>
                                 &nbsp;: object|null    </span>
 </dt>
-<dd>Retrieve in CRUD</dd>
+<dd>Retrieve in CRUD, returns on Item at a time.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Pionia-Generics-Base-CrudContract.html#method_hasLimit">hasLimit()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Pionia-Generics-Base-CrudContract.html#method_hasOffset">hasOffset()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Pionia-Generics-Base-CrudContract.html#method_paginate">paginate()</a>
@@ -696,6 +760,7 @@ Handles both post and pre delete events</dd>
     <span>
                                 &nbsp;: object|array&lt;string|int, mixed&gt;|null    </span>
 </dt>
+<dd>Updated an item in the db.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Core-Services-ValidationTrait.html#method__validateFilter">_validateFilter()</a>
@@ -705,6 +770,13 @@ Handles both post and pre delete events</dd>
 <dd>Internal validator based on PHP filter_var validations</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Pionia-Generics-Base-JoinContract.html#method_attachJoins">attachJoins()</a>
+    <span>
+                                &nbsp;: <a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a>    </span>
+</dt>
+<dd>Attaches all defined joins to the base query.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Core-Services-RequestActionTrait.html#method_check_one">check_one()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -712,9 +784,31 @@ Handles both post and pre delete events</dd>
 <dd>Checks if a single field is present in the request data and is not null or empty</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Pionia-Generics-Base-CrudContract.html#method_cleanRelationColumns">cleanRelationColumns()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>If the fields are already in the format of relationships, this method reverses that
+including removing duplicates.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Generics-Base-CrudContract.html#method_detectAndAddColumns">detectAndAddColumns()</a>
     <span>
                                 &nbsp;: void    </span>
+</dt>
+<dd>Checks if the frontend has defined columns we should query by.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Pionia-Generics-Base-JoinContract.html#method_getAllItemsJoined">getAllItemsJoined()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Will be used when we are listing everything.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Pionia-Generics-Base-GenericService.html#method_getFieldValue">getFieldValue()</a>
+    <span>
+                                &nbsp;: mixed|<abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr>|<abbr title="\Symfony\Component\HttpFoundation\FileBag">FileBag</abbr>|null    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
@@ -722,6 +816,7 @@ Handles both post and pre delete events</dd>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;|string    </span>
 </dt>
+<dd>Returns the columns we shall query from the db while querying</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Generics-Base-CrudContract.html#method_getOneInternal">getOneInternal()</a>
@@ -731,10 +826,37 @@ Handles both post and pre delete events</dd>
 <dd>Gets one item from the database. Can be overridden by defining a getOne method in the service</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Pionia-Generics-Base-JoinContract.html#method_getOneJoined">getOneJoined()</a>
+    <span>
+                                &nbsp;: object|null    </span>
+</dt>
+<dd>Will be used when we are getting a single item.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Pionia-Generics-Base-JoinContract.html#method_joinQuery">joinQuery()</a>
+    <span>
+                                &nbsp;: <a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a>    </span>
+</dt>
+<dd>Resolve the base query to base on to start joining.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Core-Services-ValidationTrait.html#method_shouldBe">shouldBe()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Pionia-Generics-Base-JoinContract.html#method_switchJoin">switchJoin()</a>
+    <span>
+                                &nbsp;: <a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a>    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Pionia-Generics-Base-JoinContract.html#method_weShouldJoin">weShouldJoin()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Detects whether to enter to enter the join mode or stay in the normal mode.</dd>
 
     </dl>
 
@@ -767,12 +889,13 @@ Handles both post and pre delete events</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.42" class="phpdocumentor-element-found-in__source" data-line="42" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.44" class="phpdocumentor-element-found-in__source" data-line="44" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">An associative array of actions and their required permissions</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
@@ -780,9 +903,7 @@ Handles both post and pre delete events</dd>
      = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
     
-        <section class="phpdocumentor-description"><p>An associative array of actions and their required permissions</p>
-</section>
-
+    
     
 
 </article>
@@ -803,12 +924,13 @@ Handles both post and pre delete events</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.47" class="phpdocumentor-element-found-in__source" data-line="47" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.50" class="phpdocumentor-element-found-in__source" data-line="50" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">This array contains the actions that require authentication</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
@@ -816,9 +938,7 @@ Handles both post and pre delete events</dd>
      = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
     
-        <section class="phpdocumentor-description"><p>This array contains the actions that require authentication</p>
-</section>
-
+    
     
 
 </article>
@@ -875,12 +995,13 @@ Handles both post and pre delete events</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.57" class="phpdocumentor-element-found-in__source" data-line="57" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.62" class="phpdocumentor-element-found-in__source" data-line="62" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">This message will be displayed when the entire service requires authentication</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">string|null</span>
@@ -888,9 +1009,7 @@ Handles both post and pre delete events</dd>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
-        <section class="phpdocumentor-description"><p>This message will be displayed when the entire service requires authentication</p>
-</section>
-
+    
     
 
 </article>
@@ -911,9 +1030,9 @@ Handles both post and pre delete events</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/GenericService.php"><a href="files/src-generics-base-genericservice.html"><abbr title="src/Generics/Base/GenericService.php">GenericService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.32" class="phpdocumentor-element-found-in__source" data-line="32" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.40" class="phpdocumentor-element-found-in__source" data-line="40" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
     </aside>
 
     
@@ -947,9 +1066,9 @@ Handles both post and pre delete events</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/GenericService.php"><a href="files/src-generics-base-genericservice.html"><abbr title="src/Generics/Base/GenericService.php">GenericService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.43" class="phpdocumentor-element-found-in__source" data-line="43" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.51" class="phpdocumentor-element-found-in__source" data-line="51" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
     </aside>
 
     
@@ -984,12 +1103,13 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.37" class="phpdocumentor-element-found-in__source" data-line="37" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.38" class="phpdocumentor-element-found-in__source" data-line="38" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">An array of actions that are deactivated for the current service</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
@@ -997,9 +1117,7 @@ the request and saved</p>
      = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
     
-        <section class="phpdocumentor-description"><p>An array of actions that are deactivated for the current service</p>
-</section>
-
+    
     
 
 </article>
@@ -1046,6 +1164,77 @@ the request and saved</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_defaultJoinType">
+        $defaultJoinType
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#property_defaultJoinType" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/JoinContract.php"><a href="files/src-generics-base-joincontract.html"><abbr title="src/Generics/Base/JoinContract.php">JoinContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">72</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.72" class="phpdocumentor-element-found-in__source" data-line="72" data-modal="source-view" data-src="files/src/Generics/Base/JoinContract.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Pionia-Generics-Base-JoinType.html"><abbr title="\Pionia\Generics\Base\JoinType">JoinType</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$defaultJoinType</span>
+     = <span class="phpdocumentor-signature__default-value">\Pionia\Generics\Base\JoinType::INNER</span></code>
+
+    
+        <section class="phpdocumentor-description"><p>The default join type to use when joining tables.</p>
+</section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_fileColumns">
+        $fileColumns
+        <a href="classes/Pionia-Generics-Base-GenericService.html#property_fileColumns" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/GenericService.php"><a href="files/src-generics-base-genericservice.html"><abbr title="src/Generics/Base/GenericService.php">GenericService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">63</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.63" class="phpdocumentor-element-found-in__source" data-line="63" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Define columns that should be received as files in this array.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$fileColumns</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_ip_pattern">
         $ip_pattern
         <a href="classes/Pionia-Core-Services-ValidationTrait.html#property_ip_pattern" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1080,6 +1269,177 @@ the request and saved</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_joinAliases">
+        $joinAliases
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#property_joinAliases" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/JoinContract.php"><a href="files/src-generics-base-joincontract.html"><abbr title="src/Generics/Base/JoinContract.php">JoinContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">51</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.51" class="phpdocumentor-element-found-in__source" data-line="51" data-modal="source-view" data-src="files/src/Generics/Base/JoinContract.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$joinAliases</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+        <section class="phpdocumentor-description"><p>An associative array of aliases to be used for joins with the table in the service.
+The key is the table name and the value is the alias.</p>
+</section>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#property_joinAliases#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">[
+   'student' =&gt; 's',
+]
+</code></pre>
+<p>This will join the <code class="prettyprint">student</code> table using the alias <code class="prettyprint">s</code>.</p>
+</section>
+
+                                    </dd>
+                                            </dl>
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_joins">
+        $joins
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#property_joins" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/JoinContract.php"><a href="files/src-generics-base-joincontract.html"><abbr title="src/Generics/Base/JoinContract.php">JoinContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">23</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.23" class="phpdocumentor-element-found-in__source" data-line="23" data-modal="source-view" data-src="files/src/Generics/Base/JoinContract.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$joins</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+        <section class="phpdocumentor-description"><p>An associative array of tables to be used for joins with the table in the service.
+The key is the table name and the value is an array of the columns to join on.</p>
+</section>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#property_joins#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">[
+   'student' =&gt; ['id' =&gt; 'student_id'],
+]
+</code></pre>
+<p>This will join the <code class="prettyprint">student</code> table on the <code class="prettyprint">id</code> column of the current table and the <code class="prettyprint">student_id</code> column of the <code class="prettyprint">student</code> table.</p>
+</section>
+
+                                    </dd>
+                                            </dl>
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_joinTypes">
+        $joinTypes
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#property_joinTypes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/JoinContract.php"><a href="files/src-generics-base-joincontract.html"><abbr title="src/Generics/Base/JoinContract.php">JoinContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.37" class="phpdocumentor-element-found-in__source" data-line="37" data-modal="source-view" data-src="files/src/Generics/Base/JoinContract.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$joinTypes</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+        <section class="phpdocumentor-description"><p>An associative array of join types to be used for joins with the table in the service.
+The key is the table name and the value is the join type.</p>
+</section>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#property_joinTypes#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">[
+   'student' =&gt; JoinType::INNER,
+]
+</code></pre>
+<p>This will join the <code class="prettyprint">student</code> table using an inner join.</p>
+</section>
+
+                                    </dd>
+                                            </dl>
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_limit">
         $limit
         <a href="classes/Pionia-Generics-Base-GenericService.html#property_limit" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1090,9 +1450,9 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/GenericService.php"><a href="files/src-generics-base-genericservice.html"><abbr title="src/Generics/Base/GenericService.php">GenericService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.17" class="phpdocumentor-element-found-in__source" data-line="17" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.25" class="phpdocumentor-element-found-in__source" data-line="25" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
     </aside>
 
     
@@ -1126,9 +1486,9 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/GenericService.php"><a href="files/src-generics-base-genericservice.html"><abbr title="src/Generics/Base/GenericService.php">GenericService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.37" class="phpdocumentor-element-found-in__source" data-line="37" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.45" class="phpdocumentor-element-found-in__source" data-line="45" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
     </aside>
 
     
@@ -1162,9 +1522,9 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/GenericService.php"><a href="files/src-generics-base-genericservice.html"><abbr title="src/Generics/Base/GenericService.php">GenericService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.22" class="phpdocumentor-element-found-in__source" data-line="22" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.30" class="phpdocumentor-element-found-in__source" data-line="30" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
     </aside>
 
     
@@ -1266,9 +1626,9 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/GenericService.php"><a href="files/src-generics-base-genericservice.html"><abbr title="src/Generics/Base/GenericService.php">GenericService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.27" class="phpdocumentor-element-found-in__source" data-line="27" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.35" class="phpdocumentor-element-found-in__source" data-line="35" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
     </aside>
 
     
@@ -1374,12 +1734,13 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.52" class="phpdocumentor-element-found-in__source" data-line="52" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.56" class="phpdocumentor-element-found-in__source" data-line="56" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">If true, the entire service requires authentication</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">bool</span>
@@ -1387,9 +1748,7 @@ the request and saved</p>
      = <span class="phpdocumentor-signature__default-value">false</span></code>
 
     
-        <section class="phpdocumentor-description"><p>If true, the entire service requires authentication</p>
-</section>
-
+    
     
 
 </article>
@@ -1480,9 +1839,9 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/GenericService.php"><a href="files/src-generics-base-genericservice.html"><abbr title="src/Generics/Base/GenericService.php">GenericService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.12" class="phpdocumentor-element-found-in__source" data-line="12" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.14" class="phpdocumentor-element-found-in__source" data-line="14" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
     </aside>
 
     
@@ -1493,7 +1852,7 @@ the request and saved</p>
     </code>
 
     
-        <section class="phpdocumentor-description"><p>The table name to be used in the service. This is required.</p>
+        <section class="phpdocumentor-description"><p>The base table to be used in the service. This is required when in joins or not</p>
 </section>
 
     
@@ -1516,9 +1875,9 @@ the request and saved</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/GenericService.php"><a href="files/src-generics-base-genericservice.html"><abbr title="src/Generics/Base/GenericService.php">GenericService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.49" class="phpdocumentor-element-found-in__source" data-line="49" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.57" class="phpdocumentor-element-found-in__source" data-line="57" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
     </aside>
 
     
@@ -1533,6 +1892,41 @@ the request and saved</p>
 the request and saved. If left null, all columns defined in the request object will be updated.</p>
 </section>
 
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_dontRelate">
+        $dontRelate
+        <a href="classes/Pionia-Generics-Base-GenericService.html#property_dontRelate" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/GenericService.php"><a href="files/src-generics-base-genericservice.html"><abbr title="src/Generics/Base/GenericService.php">GenericService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.20" class="phpdocumentor-element-found-in__source" data-line="20" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Can be mutated by the frontend to turn off relationships and go back to querying the base table again.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$dontRelate</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+    
+    
     
 
 </article>
@@ -3036,9 +3430,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/EventsContract.php"><a href="files/src-generics-base-eventscontract.html"><abbr title="src/Generics/Base/EventsContract.php">EventsContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">99</span>
+    <span class="phpdocumentor-element-found-in__line">100</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.99" class="phpdocumentor-element-found-in__source" data-line="99" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.100" class="phpdocumentor-element-found-in__source" data-line="100" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Override this in your service to define the basis to return single item details</p>
@@ -3073,9 +3467,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/EventsContract.php"><a href="files/src-generics-base-eventscontract.html"><abbr title="src/Generics/Base/EventsContract.php">EventsContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">108</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.108" class="phpdocumentor-element-found-in__source" data-line="108" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.109" class="phpdocumentor-element-found-in__source" data-line="109" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Override this in your service to define the basis to return multiple items from the database</p>
@@ -3095,6 +3489,100 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
         <span class="phpdocumentor-signature__response_type">null|object</span>
             </section>
 
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getJoinQuery">
+        getJoinQuery()
+        <a href="classes/Pionia-Generics-Base-EventsContract.html#method_getJoinQuery" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/EventsContract.php"><a href="files/src-generics-base-eventscontract.html"><abbr title="src/Generics/Base/EventsContract.php">EventsContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">118</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.118" class="phpdocumentor-element-found-in__source" data-line="118" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Override this in your service to define the basis to return multiple items from the database</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getJoinQuery</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">null|object</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">null|object</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleUpload">
+        handleUpload()
+        <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_handleUpload" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/UploadsContract.php"><a href="files/src-generics-base-uploadscontract.html"><abbr title="src/Generics/Base/UploadsContract.php">UploadsContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.20" class="phpdocumentor-element-found-in__source" data-line="20" data-modal="source-view" data-src="files/src/Generics/Base/UploadsContract.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">This hook will receive every file found in your request.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleUpload</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\FileBag">FileBag</abbr>|<abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$file</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fileName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>Whatever you return here is what we shall send to the db.</p>
+<p>If you to want to avoid the rest of the processing, just return false or null or throw and exception</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$file</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\FileBag">FileBag</abbr>|<abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The file object to work with</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$fileName</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The name as defined in the request</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3225,9 +3713,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/EventsContract.php"><a href="files/src-generics-base-eventscontract.html"><abbr title="src/Generics/Base/EventsContract.php">EventsContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">62</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.62" class="phpdocumentor-element-found-in__source" data-line="62" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.63" class="phpdocumentor-element-found-in__source" data-line="63" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This method is post create action, use it to perform any action after saving.</p>
@@ -3275,9 +3763,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/EventsContract.php"><a href="files/src-generics-base-eventscontract.html"><abbr title="src/Generics/Base/EventsContract.php">EventsContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.89" class="phpdocumentor-element-found-in__source" data-line="89" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.90" class="phpdocumentor-element-found-in__source" data-line="90" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This method is called before the delete action. Use it to perform any action before deleting.</p>
@@ -3329,9 +3817,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/EventsContract.php"><a href="files/src-generics-base-eventscontract.html"><abbr title="src/Generics/Base/EventsContract.php">EventsContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.74" class="phpdocumentor-element-found-in__source" data-line="74" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.75" class="phpdocumentor-element-found-in__source" data-line="75" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This method is post create action, use it to perform any action after saving.</p>
@@ -3379,9 +3867,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/EventsContract.php"><a href="files/src-generics-base-eventscontract.html"><abbr title="src/Generics/Base/EventsContract.php">EventsContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.38" class="phpdocumentor-element-found-in__source" data-line="38" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.39" class="phpdocumentor-element-found-in__source" data-line="39" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This method is called before the create action, use it to transform the data before saving.</p>
@@ -3431,9 +3919,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/EventsContract.php"><a href="files/src-generics-base-eventscontract.html"><abbr title="src/Generics/Base/EventsContract.php">EventsContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.50" class="phpdocumentor-element-found-in__source" data-line="50" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.51" class="phpdocumentor-element-found-in__source" data-line="51" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This method is called before the delete action. Use it to perform any action before deleting.</p>
@@ -3481,9 +3969,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/EventsContract.php"><a href="files/src-generics-base-eventscontract.html"><abbr title="src/Generics/Base/EventsContract.php">EventsContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.25" class="phpdocumentor-element-found-in__source" data-line="25" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.26" class="phpdocumentor-element-found-in__source" data-line="26" data-modal="source-view" data-src="files/src/Generics/Base/EventsContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This method is called before the create action, use it to transform the data before saving.</p>
@@ -3518,99 +4006,6 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
         <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|bool|null</span>
                     &mdash;
                 <section class="phpdocumentor-description"><p>The return data is what is saved to the database, if false or null, the update action is aborted</p>
-</section>
-
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_processAction">
-        processAction()
-        <a href="classes/Pionia-Core-Services-ServiceContract.html#method_processAction" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">69</span>
-
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.69" class="phpdocumentor-element-found-in__source" data-line="69" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
-    </aside>
-
-        <p class="phpdocumentor-summary">This method is called when the service is called with an action</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">processAction</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$action</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The action to be called</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The request object</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Pionia-Core-Services-ServiceContract.html#method_processAction#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-ResourceNotFoundException.html"><abbr title="\Pionia\Exceptions\ResourceNotFoundException">ResourceNotFoundException</abbr></a>|<abbr title="\ReflectionException">ReflectionException</abbr></span>
-                                                            
-                                             
-                                    </dd>
-                            <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-UserUnauthenticatedException.html"><abbr title="\Pionia\Exceptions\UserUnauthenticatedException">UserUnauthenticatedException</abbr></a></span>
-                                                            
-                                             
-                                    </dd>
-                            <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-UserUnauthorizedException.html"><abbr title="\Pionia\Exceptions\UserUnauthorizedException">UserUnauthorizedException</abbr></a></span>
-                                                            
-                                             
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a></span>
-                    &mdash;
-                <section class="phpdocumentor-description"><p>The response object</p>
 </section>
 
             </section>
@@ -3882,19 +4277,23 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">94</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.24" class="phpdocumentor-element-found-in__source" data-line="24" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.94" class="phpdocumentor-element-found-in__source" data-line="94" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Detects if we have pagination params anywhere in the request.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
                     <span class="phpdocumentor-signature__name">_checkPaginationInternal</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>For pagination to kick-in, both offset and limit must be defined at any of the levels
+defined by <code class="prettyprint">$this-&gt;detectPagination()</code></p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3907,6 +4306,22 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-CrudContract.html#method__checkPaginationInternal#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>$this-&gt;detectPagination()</p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -3928,9 +4343,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">101</span>
+    <span class="phpdocumentor-element-found-in__line">220</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.101" class="phpdocumentor-element-found-in__source" data-line="101" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.220" class="phpdocumentor-element-found-in__source" data-line="220" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Retrieve all in CRUD</p>
@@ -3990,9 +4405,9 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">143</span>
+    <span class="phpdocumentor-element-found-in__line">276</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.143" class="phpdocumentor-element-found-in__source" data-line="143" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.276" class="phpdocumentor-element-found-in__source" data-line="276" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Create in CRUD
@@ -4043,9 +4458,9 @@ Saves in transactions, runs pre and post create events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">249</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.115" class="phpdocumentor-element-found-in__source" data-line="115" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.249" class="phpdocumentor-element-found-in__source" data-line="249" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Delete in CRUD
@@ -4092,19 +4507,23 @@ Handles both post and pre delete events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">147</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.39" class="phpdocumentor-element-found-in__source" data-line="39" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.147" class="phpdocumentor-element-found-in__source" data-line="147" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Detect if our pagination params are defined anywhere in the request.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
                     <span class="phpdocumentor-signature__name">detectPagination</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reqData</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>Remember these can in defined in one of the following:-</p>
+<p>On the request root level</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -4117,6 +4536,66 @@ Handles both post and pre delete events</p>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-CrudContract.html#method_detectPagination#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-json">{
+    SERVICE: &quot;ourService&quot;,
+    ACTION: &quot;ourAction&quot;,
+    LIMIT: 10, // can also be `limit: 10`
+    OFFSET: 5 // can also be `offset: 5`
+}
+
+Or they can be defined under the PAGINATION/pagination key
+</code></pre>
+</section>
+
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-json">{
+    SERVICE: &quot;ourService&quot;,
+    ACTION: &quot;ourAction&quot;,
+    PAGINATION:{ // can also be `pagination`
+         LIMIT: 10, // can also be `limit: 10`
+         OFFSET: 5 // can also be `offset: 5`
+     }
+}
+
+Or in the SEARCH/search param
+</code></pre>
+</section>
+
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>{
+SERVICE: &quot;ourService&quot;,
+ACTION: &quot;ourAction&quot;,
+SEARCH:{ // can also be <code class="prettyprint">search</code>
+LIMIT: 10, // can also be <code class="prettyprint">limit: 10</code>
+OFFSET: 5 // can also be <code class="prettyprint">offset: 5</code>
+}
+}
+}</p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -4138,9 +4617,9 @@ Handles both post and pre delete events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">189</span>
+    <span class="phpdocumentor-element-found-in__line">336</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.189" class="phpdocumentor-element-found-in__source" data-line="189" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.336" class="phpdocumentor-element-found-in__source" data-line="336" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Retrieve all with pagination</p>
@@ -4190,12 +4669,12 @@ Handles both post and pre delete events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">176</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.68" class="phpdocumentor-element-found-in__source" data-line="68" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.176" class="phpdocumentor-element-found-in__source" data-line="176" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
-        <p class="phpdocumentor-summary">Retrieve in CRUD</p>
+        <p class="phpdocumentor-summary">Retrieve in CRUD, returns on Item at a time.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
@@ -4234,6 +4713,70 @@ Handles both post and pre delete events</p>
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_hasLimit">
+        hasLimit()
+        <a href="classes/Pionia-Generics-Base-CrudContract.html#method_hasLimit" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">203</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.203" class="phpdocumentor-element-found-in__source" data-line="203" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">hasLimit</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasOffset">
+        hasOffset()
+        <a href="classes/Pionia-Generics-Base-CrudContract.html#method_hasOffset" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">208</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.208" class="phpdocumentor-element-found-in__source" data-line="208" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">hasOffset</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_paginate">
         paginate()
         <a href="classes/Pionia-Generics-Base-CrudContract.html#method_paginate" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4242,9 +4785,9 @@ Handles both post and pre delete events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">178</span>
+    <span class="phpdocumentor-element-found-in__line">317</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.178" class="phpdocumentor-element-found-in__source" data-line="178" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.317" class="phpdocumentor-element-found-in__source" data-line="317" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
     
@@ -4271,6 +4814,14 @@ Handles both post and pre delete events</p>
                                                             
                                              
                                     </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
                                             </dl>
 
             <section>
@@ -4293,9 +4844,9 @@ Handles both post and pre delete events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">202</span>
+    <span class="phpdocumentor-element-found-in__line">349</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.202" class="phpdocumentor-element-found-in__source" data-line="202" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.349" class="phpdocumentor-element-found-in__source" data-line="349" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
     
@@ -4340,19 +4891,23 @@ Handles both post and pre delete events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">216</span>
+    <span class="phpdocumentor-element-found-in__line">367</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.216" class="phpdocumentor-element-found-in__source" data-line="216" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.367" class="phpdocumentor-element-found-in__source" data-line="367" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Updated an item in the db.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
                     <span class="phpdocumentor-signature__name">updateItem</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object|array&lt;string|int, mixed&gt;|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>If updateColumns are defined, it only updates those.</p>
+<p>It also calls both preUpdate and postUpdate hooks if defined</p>
+</section>
+
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -4457,6 +5012,68 @@ Handles both post and pre delete events</p>
         class="phpdocumentor-element
             -method
             -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_attachJoins">
+        attachJoins()
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#method_attachJoins" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/JoinContract.php"><a href="files/src-generics-base-joincontract.html"><abbr title="src/Generics/Base/JoinContract.php">JoinContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">157</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.157" class="phpdocumentor-element-found-in__source" data-line="157" data-modal="source-view" data-src="files/src/Generics/Base/JoinContract.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Attaches all defined joins to the base query.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">attachJoins</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$join</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$join</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a>|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#method_attachJoins#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
                                     -static                    "
 >
     <h4 class="phpdocumentor-element__name" id="method_check_one">
@@ -4524,6 +5141,61 @@ Handles both post and pre delete events</p>
             -private
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_cleanRelationColumns">
+        cleanRelationColumns()
+        <a href="classes/Pionia-Generics-Base-CrudContract.html#method_cleanRelationColumns" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">49</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.49" class="phpdocumentor-element-found-in__source" data-line="49" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">If the fields are already in the format of relationships, this method reverses that
+including removing duplicates.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">cleanRelationColumns</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-CrudContract.html#method_cleanRelationColumns#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="prettyprint">$this-&gt;listColumns = [&quot;alias2.name&quot;, &quot;alias1.name(category_name), &quot;alias1.id&quot;];
+// this will become
+$this-&gt;listColumns = [&quot;name&quot;, &quot;name(category_name), &quot;id&quot;];
+</code></pre>
+<p>ay the time of querying <code class="prettyprint">name(category_name)</code> will take precedence of <code class="prettyprint">name</code> thus we shall end up with
+<code class="prettyprint">category_name</code> and <code class="prettyprint">id</code> in the response</p>
+</section>
+
+                                    </dd>
+                                            </dl>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_detectAndAddColumns">
         detectAndAddColumns()
         <a href="classes/Pionia-Generics-Base-CrudContract.html#method_detectAndAddColumns" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4532,23 +5204,125 @@ Handles both post and pre delete events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.12" class="phpdocumentor-element-found-in__source" data-line="12" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.21" class="phpdocumentor-element-found-in__source" data-line="21" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Checks if the frontend has defined columns we should query by.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
                     <span class="phpdocumentor-signature__name">detectAndAddColumns</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>Works for both joined and non-joined querying.
+It pays respect to aliases defined, so, don't forget to respect them too!</p>
+</section>
+
     
     
 
     
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getAllItemsJoined">
+        getAllItemsJoined()
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#method_getAllItemsJoined" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/JoinContract.php"><a href="files/src-generics-base-joincontract.html"><abbr title="src/Generics/Base/JoinContract.php">JoinContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">141</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.141" class="phpdocumentor-element-found-in__source" data-line="141" data-modal="source-view" data-src="files/src/Generics/Base/JoinContract.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Will be used when we are listing everything.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">getAllItemsJoined</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#method_getAllItemsJoined#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getFieldValue">
+        getFieldValue()
+        <a href="classes/Pionia-Generics-Base-GenericService.html#method_getFieldValue" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/GenericService.php"><a href="files/src-generics-base-genericservice.html"><abbr title="src/Generics/Base/GenericService.php">GenericService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">71</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.71" class="phpdocumentor-element-found-in__source" data-line="71" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">getFieldValue</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href=""></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed|<abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr>|<abbr title="\Symfony\Component\HttpFoundation\FileBag">FileBag</abbr>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$name</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href=""></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed|<abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr>|<abbr title="\Symfony\Component\HttpFoundation\FileBag">FileBag</abbr>|null</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -4564,12 +5338,13 @@ Handles both post and pre delete events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.19" class="phpdocumentor-element-found-in__source" data-line="19" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.81" class="phpdocumentor-element-found-in__source" data-line="81" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Returns the columns we shall query from the db while querying</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
                     <span class="phpdocumentor-signature__name">getListColumns</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|string</span></code>
@@ -4600,9 +5375,9 @@ Handles both post and pre delete events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">194</span>
 
-            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.84" class="phpdocumentor-element-found-in__source" data-line="84" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.194" class="phpdocumentor-element-found-in__source" data-line="194" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Gets one item from the database. Can be overridden by defining a getOne method in the service</p>
@@ -4645,6 +5420,112 @@ Handles both post and pre delete events</p>
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">null|array&lt;string|int, mixed&gt;|object</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getOneJoined">
+        getOneJoined()
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#method_getOneJoined" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/JoinContract.php"><a href="files/src-generics-base-joincontract.html"><abbr title="src/Generics/Base/JoinContract.php">JoinContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">125</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.125" class="phpdocumentor-element-found-in__source" data-line="125" data-modal="source-view" data-src="files/src/Generics/Base/JoinContract.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Will be used when we are getting a single item.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">getOneJoined</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#method_getOneJoined#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">object|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_joinQuery">
+        joinQuery()
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#method_joinQuery" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/JoinContract.php"><a href="files/src-generics-base-joincontract.html"><abbr title="src/Generics/Base/JoinContract.php">JoinContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">205</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.205" class="phpdocumentor-element-found-in__source" data-line="205" data-modal="source-view" data-src="files/src/Generics/Base/JoinContract.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Resolve the base query to base on to start joining.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">joinQuery</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>If the developer has not yet defined any joins, we drop it and generate a new one.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#method_joinQuery#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span>
             </section>
 
 </article>
@@ -4709,6 +5590,115 @@ Handles both post and pre delete events</p>
                                              
                                     </dd>
                                             </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_switchJoin">
+        switchJoin()
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#method_switchJoin" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/JoinContract.php"><a href="files/src-generics-base-joincontract.html"><abbr title="src/Generics/Base/JoinContract.php">JoinContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">180</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.180" class="phpdocumentor-element-found-in__source" data-line="180" data-modal="source-view" data-src="files/src/Generics/Base/JoinContract.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">switchJoin</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Generics-Base-JoinType.html"><abbr title="\Pionia\Generics\Base\JoinType">JoinType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$joinType</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$query</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$table</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$joinType</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Generics-Base-JoinType.html"><abbr title="\Pionia\Generics\Base\JoinType">JoinType</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The type of join to use</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$query</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The current query we are joining to</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$table</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The table to join</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The query with the join added</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_weShouldJoin">
+        weShouldJoin()
+        <a href="classes/Pionia-Generics-Base-JoinContract.html#method_weShouldJoin" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/JoinContract.php"><a href="files/src-generics-base-joincontract.html"><abbr title="src/Generics/Base/JoinContract.php">JoinContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">78</span>
+
+            <a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html#source-view.78" class="phpdocumentor-element-found-in__source" data-line="78" data-modal="source-view" data-src="files/src/Generics/Base/JoinContract.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Detects whether to enter to enter the join mode or stay in the normal mode.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">weShouldJoin</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>Normal mode queries one table at a time.</p>
+</section>
+
+    
+    
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -4837,7 +5827,12 @@ Handles both post and pre delete events</p>
                                                     <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_createColumns">$createColumns<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
                                                     <li><a href="classes/Pionia-Core-Services-ServiceContract.html#property_deactivatedActions">$deactivatedActions<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
                                                     <li><a href="classes/Pionia-Core-Services-ServiceContract.html#property_deactivatedActions">$deactivatedActions<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
+                                                    <li><a href="classes/Pionia-Generics-Base-JoinContract.html#property_defaultJoinType">$defaultJoinType<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
+                                                    <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_fileColumns">$fileColumns<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
                                                     <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#property_ip_pattern">$ip_pattern<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
+                                                    <li><a href="classes/Pionia-Generics-Base-JoinContract.html#property_joinAliases">$joinAliases<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
+                                                    <li><a href="classes/Pionia-Generics-Base-JoinContract.html#property_joins">$joins<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
+                                                    <li><a href="classes/Pionia-Generics-Base-JoinContract.html#property_joinTypes">$joinTypes<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
                                                     <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_limit">$limit<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
                                                     <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_listColumns">$listColumns<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
                                                     <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_offset">$offset<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
@@ -4851,6 +5846,7 @@ Handles both post and pre delete events</p>
                                                     <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#property_slug_pattern">$slug_pattern<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
                                                     <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_table">$table<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
                                                     <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_updateColumns">$updateColumns<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
+                                                    <li><a href="classes/Pionia-Generics-Base-GenericService.html#property_dontRelate">$dontRelate<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
                                                     <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#property_throwsExceptions">$throwsExceptions<a href="classes/Pionia-Generics-RetrieveListCreateUpdateDeleteService.html"></li>
                                             </ul>
                 </li>
@@ -4882,6 +5878,8 @@ Handles both post and pre delete events</p>
                                             <li><a href="classes/Pionia-Core-Services-AuthTrait.html#method_getAuthExtraByKey">getAuthExtraByKey()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-EventsContract.html#method_getItem">getItem()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-EventsContract.html#method_getItems">getItems()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-EventsContract.html#method_getJoinQuery">getJoinQuery()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-UploadsContract.html#method_handleUpload">handleUpload()</a></li>
                                             <li><a href="classes/Pionia-Generics-Mixins-ListMixin.html#method_list">list()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-AuthTrait.html#method_mustAuthenticate">mustAuthenticate()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-EventsContract.html#method_postCreate">postCreate()</a></li>
@@ -4890,7 +5888,6 @@ Handles both post and pre delete events</p>
                                             <li><a href="classes/Pionia-Generics-Base-EventsContract.html#method_preCreate">preCreate()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-EventsContract.html#method_preDelete">preDelete()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-EventsContract.html#method_preUpdate">preUpdate()</a></li>
-                                            <li><a href="classes/Pionia-Core-Services-ServiceContract.html#method_processAction">processAction()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-RequestActionTrait.html#method_requires">requires()</a></li>
                                             <li><a href="classes/Pionia-Generics-Mixins-RetrieveMixin.html#method_retrieve">retrieve()</a></li>
                                             <li><a href="classes/Pionia-Generics-Mixins-UpdateMixin.html#method_update">update()</a></li>
@@ -4902,15 +5899,25 @@ Handles both post and pre delete events</p>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_detectPagination">detectPagination()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_getAllWithPagination">getAllWithPagination()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_getOne">getOne()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_hasLimit">hasLimit()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_hasOffset">hasOffset()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_paginate">paginate()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_randomItem">randomItem()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_updateItem">updateItem()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method__validateFilter">_validateFilter()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-JoinContract.html#method_attachJoins">attachJoins()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-RequestActionTrait.html#method_check_one">check_one()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_cleanRelationColumns">cleanRelationColumns()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_detectAndAddColumns">detectAndAddColumns()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-JoinContract.html#method_getAllItemsJoined">getAllItemsJoined()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-GenericService.html#method_getFieldValue">getFieldValue()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_getListColumns">getListColumns()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_getOneInternal">getOneInternal()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-JoinContract.html#method_getOneJoined">getOneJoined()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-JoinContract.html#method_joinQuery">joinQuery()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_shouldBe">shouldBe()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-JoinContract.html#method_switchJoin">switchJoin()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-JoinContract.html#method_weShouldJoin">weShouldJoin()</a></li>
                                     </ul>
             </li>
                     </ul>

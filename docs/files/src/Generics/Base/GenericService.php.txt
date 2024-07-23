@@ -3,13 +3,21 @@
 namespace Pionia\Generics\Base;
 
 use Pionia\Request\BaseRestService;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\FileBag;
 
 class GenericService extends BaseRestService
 {
     /**
-     * @var string The table name to be used in the service. This is required.
+     * @var string The base table to be used in the service. This is required when in joins or not
      */
     public string $table;
+
+    /**
+     * Can be mutated by the frontend to turn off relationships and go back to querying the base table again.
+     * @var bool
+     */
+    private bool $dontRelate = false;
 
     /**
      * @var int The initial number of items to return per `list` request can de overridden in the request.
@@ -48,5 +56,24 @@ class GenericService extends BaseRestService
      */
     public ?array $updateColumns = null;
 
-    use EventsContract, CrudContract;
+    /**
+     * Define columns that should be received as files in this array.
+     * @var array|null
+     */
+    public ?array $fileColumns = null;
+
+    use EventsContract, CrudContract, JoinContract, UploadsContract;
+
+    /**
+     * @param $name
+     * @return mixed|UploadedFile|FileBag|null
+     */
+    private function getFieldValue($name): mixed
+    {
+        if (isset($this->fileColumns[$name])){
+            return $this->request->getFileByName($name) ?? null;
+        }
+        $data = $this->request->getData();
+        return $data[$name] ?? null;
+    }
 }

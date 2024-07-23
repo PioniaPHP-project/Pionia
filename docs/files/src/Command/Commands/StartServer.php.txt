@@ -4,8 +4,8 @@ namespace Pionia\Command\Commands;
 
 use Pionia\Command\BaseCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -34,16 +34,16 @@ class StartServer extends BaseCommand
         $this
             ->setName($this::$name)
             ->setDescription('Starts the '.$this::base()::$name.' server')
-            ->addOption('port', 'p', InputArgument::OPTIONAL, $this->port())
+            ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, $this->port())
             ->setHelp('This command starts the '.$this::base()::$name.' server. It should be preferred for localhost development only')
-            ->addOption('host', null, InputArgument::OPTIONAL, 'localhost');
+            ->addOption('host', null, InputOption::VALUE_OPTIONAL, 'localhost');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $port = $input->getOption('port') ?? $this->port();
         $host = $input->getOption('host') ?? 'localhost';
-        $output->writeln('Starting server on http://' .$host.':'.$port);
+        $output->writeln("Starting ".$this::base()::$name." on http://" .$host.':'.$port);
         $output->writeln('Press Ctrl+C to stop the server');
         // start the server
         if ($port && $host){

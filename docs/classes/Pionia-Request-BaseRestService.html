@@ -253,12 +253,14 @@
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
+<dd>An associative array of actions and their required permissions</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Core-Services-ServiceContract.html#property_actionsRequiringAuth">$actionsRequiringAuth</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
+<dd>This array contains the actions that require authentication</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Core-Services-ServiceContract.html#property_actionsRequiringAuth">$actionsRequiringAuth</a>
@@ -271,12 +273,14 @@
     <span>
                         &nbsp;: string|null            </span>
 </dt>
+<dd>This message will be displayed when the entire service requires authentication</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Core-Services-ServiceContract.html#property_deactivatedActions">$deactivatedActions</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
+<dd>An array of actions that are deactivated for the current service</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Core-Services-ServiceContract.html#property_deactivatedActions">$deactivatedActions</a>
@@ -319,6 +323,7 @@
     <span>
                         &nbsp;: bool            </span>
 </dt>
+<dd>If true, the entire service requires authentication</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Core-Services-ServiceContract.html#property_serviceRequiresAuth">$serviceRequiresAuth</a>
@@ -481,13 +486,6 @@
 <dd>This method ensures that only authenticated users can access a resource</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Services-ServiceContract.html#method_processAction">processAction()</a>
-    <span>
-                                &nbsp;: <a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a>    </span>
-</dt>
-<dd>This method is called when the service is called with an action</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Core-Services-RequestActionTrait.html#method_requires">requires()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -552,12 +550,13 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
-            <a href="classes/Pionia-Request-BaseRestService.html#source-view.42" class="phpdocumentor-element-found-in__source" data-line="42" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Request-BaseRestService.html#source-view.44" class="phpdocumentor-element-found-in__source" data-line="44" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">An associative array of actions and their required permissions</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
@@ -565,9 +564,7 @@
      = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
     
-        <section class="phpdocumentor-description"><p>An associative array of actions and their required permissions</p>
-</section>
-
+    
     
 
 </article>
@@ -588,12 +585,13 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
-            <a href="classes/Pionia-Request-BaseRestService.html#source-view.47" class="phpdocumentor-element-found-in__source" data-line="47" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Request-BaseRestService.html#source-view.50" class="phpdocumentor-element-found-in__source" data-line="50" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">This array contains the actions that require authentication</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
@@ -601,9 +599,7 @@
      = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
     
-        <section class="phpdocumentor-description"><p>This array contains the actions that require authentication</p>
-</section>
-
+    
     
 
 </article>
@@ -660,12 +656,13 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 
-            <a href="classes/Pionia-Request-BaseRestService.html#source-view.57" class="phpdocumentor-element-found-in__source" data-line="57" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Request-BaseRestService.html#source-view.62" class="phpdocumentor-element-found-in__source" data-line="62" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">This message will be displayed when the entire service requires authentication</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">string|null</span>
@@ -673,9 +670,7 @@
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
-        <section class="phpdocumentor-description"><p>This message will be displayed when the entire service requires authentication</p>
-</section>
-
+    
     
 
 </article>
@@ -696,12 +691,13 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
-            <a href="classes/Pionia-Request-BaseRestService.html#source-view.37" class="phpdocumentor-element-found-in__source" data-line="37" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Request-BaseRestService.html#source-view.38" class="phpdocumentor-element-found-in__source" data-line="38" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">An array of actions that are deactivated for the current service</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
@@ -709,9 +705,7 @@
      = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
     
-        <section class="phpdocumentor-description"><p>An array of actions that are deactivated for the current service</p>
-</section>
-
+    
     
 
 </article>
@@ -942,12 +936,13 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
-            <a href="classes/Pionia-Request-BaseRestService.html#source-view.52" class="phpdocumentor-element-found-in__source" data-line="52" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
+            <a href="classes/Pionia-Request-BaseRestService.html#source-view.56" class="phpdocumentor-element-found-in__source" data-line="56" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">If true, the entire service requires authentication</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">bool</span>
@@ -955,9 +950,7 @@
      = <span class="phpdocumentor-signature__default-value">false</span></code>
 
     
-        <section class="phpdocumentor-description"><p>If true, the entire service requires authentication</p>
-</section>
-
+    
     
 
 </article>
@@ -2434,99 +2427,6 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_processAction">
-        processAction()
-        <a href="classes/Pionia-Core-Services-ServiceContract.html#method_processAction" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Services/ServiceContract.php"><a href="files/src-core-services-servicecontract.html"><abbr title="src/Core/Services/ServiceContract.php">ServiceContract.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">69</span>
-
-            <a href="classes/Pionia-Request-BaseRestService.html#source-view.69" class="phpdocumentor-element-found-in__source" data-line="69" data-modal="source-view" data-src="files/src/Core/Services/ServiceContract.php.txt"></a>
-    </aside>
-
-        <p class="phpdocumentor-summary">This method is called when the service is called with an action</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">processAction</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$action</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The action to be called</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The request object</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Pionia-Core-Services-ServiceContract.html#method_processAction#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-ResourceNotFoundException.html"><abbr title="\Pionia\Exceptions\ResourceNotFoundException">ResourceNotFoundException</abbr></a>|<abbr title="\ReflectionException">ReflectionException</abbr></span>
-                                                            
-                                             
-                                    </dd>
-                            <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-UserUnauthenticatedException.html"><abbr title="\Pionia\Exceptions\UserUnauthenticatedException">UserUnauthenticatedException</abbr></a></span>
-                                                            
-                                             
-                                    </dd>
-                            <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/Pionia-Exceptions-UserUnauthorizedException.html"><abbr title="\Pionia\Exceptions\UserUnauthorizedException">UserUnauthorizedException</abbr></a></span>
-                                                            
-                                             
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a></span>
-                    &mdash;
-                <section class="phpdocumentor-description"><p>The response object</p>
-</section>
-
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_requires">
         requires()
         <a href="classes/Pionia-Core-Services-RequestActionTrait.html#method_requires" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3034,7 +2934,6 @@ $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
                                             <li><a href="classes/Pionia-Core-Services-AuthTrait.html#method_canAny">canAny()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-AuthTrait.html#method_getAuthExtraByKey">getAuthExtraByKey()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-AuthTrait.html#method_mustAuthenticate">mustAuthenticate()</a></li>
-                                            <li><a href="classes/Pionia-Core-Services-ServiceContract.html#method_processAction">processAction()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-RequestActionTrait.html#method_requires">requires()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method_validate">validate()</a></li>
                                             <li><a href="classes/Pionia-Core-Services-ValidationTrait.html#method__validateFilter">_validateFilter()</a></li>

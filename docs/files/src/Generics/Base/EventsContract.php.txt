@@ -9,6 +9,7 @@ namespace Pionia\Generics\Base;
  */
 
 use PDOStatement;
+use Porm\Database\builders\Join;
 
 trait EventsContract
 {
@@ -106,6 +107,15 @@ trait EventsContract
      * @return null|object
      */
     public function getItems(): ?array
+    {
+        return null;
+    }
+
+    /**
+     * Override this in your service to define the basis to return multiple items from the database
+     * @return null|object
+     */
+    public function getJoinQuery(): ?Join
     {
         return null;
     }

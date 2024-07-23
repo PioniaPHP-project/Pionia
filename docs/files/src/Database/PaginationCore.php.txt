@@ -3,6 +3,8 @@
 namespace Pionia\Database;
 
 use Exception;
+use Porm\Database\builders\Join;
+use Porm\Database\builders\Builder;
 use Porm\exceptions\BaseDatabaseException;
 use Porm\Porm;
 
@@ -19,6 +21,8 @@ class PaginationCore
     private array $parged = ['columns' => '*', 'where' => []];
 
     private string $table;
+
+    private Join | Builder | null $baseQuery = null;
 
     public function __construct(?array $reqData, string $table,  ?int $limit = 10, ?int $offset = 0, ?string $db = 'db')
     {
@@ -38,7 +42,7 @@ class PaginationCore
     }
 
     /**
-     * Sets the columns to return in the queryset
+     * Sets the columns to return in the query
      * @param string|array $columns
      * @return $this
      */
@@ -49,13 +53,30 @@ class PaginationCore
     }
 
     /**
+     * @throws Exception
+     */
+    public function init(callable $callback): PaginationCore
+    {
+        $query = Porm::from($this->table)
+            ->columns($this->parged['columns'])
+            ->using($this->db)
+            ->where($this->parged['where']);
+
+        $this->baseQuery = $callback($query);
+        if (!is_a($this->baseQuery, Join::class) && !is_a($this->baseQuery, Builder::class)){
+            throw new Exception("Invalid query builder returned from the callback");
+        }
+        return $this;
+    }
+
+    /**
      * Should be called finally to get the paginated data.
      *
      * Supports where clause just like the `where` method in the Porm query builder
      * @throws BaseDatabaseException
      * @throws Exception
      */
-    public function paginate(?array $where = null): ?array
+    public function paginate(?array $where = null, ?array $joins = null): ?array
     {
         if ($where) {
             $this->parged['where'] = array_merge($this->parged['where'], $where);
@@ -64,14 +85,13 @@ class PaginationCore
         $limit = $this->parged['LIMIT'];
         $offset = $this->parged['OFFSET'];
 
-        $baseQuery = Porm::from($this->table)
-            ->columns($this->parged['columns'])
-            ->using($this->db)
-            ->filter($this->parged['where']);
+        if (!$this->baseQuery){
+            throw new Exception("Query not initiated yet, are you sure you called the `init` method first?");
+        }
         // before applying the offsets, get the total count
-        $all = $baseQuery->count();
+        $all = $this->baseQuery->count();
         // apply the limit and offset
-        $resultSet = $baseQuery
+        $resultSet = $this->baseQuery
             ->limit($limit)
             ->startAt($offset)
             ->all();

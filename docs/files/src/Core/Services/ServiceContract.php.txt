@@ -32,27 +32,32 @@ abstract class ServiceContract
     public Request $request;
 
     /**
-     * @var array $deactivatedActions An array of actions that are deactivated for the current service
+     * An array of actions that are deactivated for the current service
+     * @var array $deactivatedActions
      */
     public array $deactivatedActions = [];
 
     /**
-     * @var array $actionPermissions An associative array of actions and their required permissions
+     * An associative array of actions and their required permissions
+     * @var array $actionPermissions
      */
     public array $actionPermissions = [];
 
     /**
-     * @var array $actionsRequiringAuth This array contains the actions that require authentication
+     * This array contains the actions that require authentication
+     * @var array $actionsRequiringAuth
      */
     public array $actionsRequiringAuth = [];
 
     /**
-     * @var bool $serviceRequiresAuth If true, the entire service requires authentication
+     * If true, the entire service requires authentication
+     * @var bool $serviceRequiresAuth
      */
     public bool  $serviceRequiresAuth = false;
 
     /**
-     * @var ?string $authMessage This message will be displayed when the entire service requires authentication
+     * This message will be displayed when the entire service requires authentication
+     * @var ?string $authMessage
      */
     public ?string $authMessage = null;
 
@@ -65,6 +70,7 @@ abstract class ServiceContract
      * @throws ResourceNotFoundException|ReflectionException
      * @throws UserUnauthenticatedException
      * @throws UserUnauthorizedException
+     * @internal
      */
     public function processAction(string $action, Request $request): BaseResponse
     {

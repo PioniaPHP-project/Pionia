@@ -886,11 +886,6 @@ Search.appendIndex(
             "summary": "This\u0020is\u0020the\u0020main\u0020class\u0020all\u0020other\u0020services\u0020must\u0020extend.",
             "url": "classes/Pionia-Core-Services-ServiceContract.html"
         },                {
-            "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003AprocessAction\u0028\u0029",
-            "name": "processAction",
-            "summary": "This\u0020method\u0020is\u0020called\u0020when\u0020the\u0020service\u0020is\u0020called\u0020with\u0020an\u0020action",
-            "url": "classes/Pionia-Core-Services-ServiceContract.html#method_processAction"
-        },                {
             "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003A\u0024request",
             "name": "request",
             "summary": "",
@@ -898,27 +893,27 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003A\u0024deactivatedActions",
             "name": "deactivatedActions",
-            "summary": "",
+            "summary": "An\u0020array\u0020of\u0020actions\u0020that\u0020are\u0020deactivated\u0020for\u0020the\u0020current\u0020service",
             "url": "classes/Pionia-Core-Services-ServiceContract.html#property_deactivatedActions"
         },                {
             "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003A\u0024actionPermissions",
             "name": "actionPermissions",
-            "summary": "",
+            "summary": "An\u0020associative\u0020array\u0020of\u0020actions\u0020and\u0020their\u0020required\u0020permissions",
             "url": "classes/Pionia-Core-Services-ServiceContract.html#property_actionPermissions"
         },                {
             "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003A\u0024actionsRequiringAuth",
             "name": "actionsRequiringAuth",
-            "summary": "",
+            "summary": "This\u0020array\u0020contains\u0020the\u0020actions\u0020that\u0020require\u0020authentication",
             "url": "classes/Pionia-Core-Services-ServiceContract.html#property_actionsRequiringAuth"
         },                {
             "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003A\u0024serviceRequiresAuth",
             "name": "serviceRequiresAuth",
-            "summary": "",
+            "summary": "If\u0020true,\u0020the\u0020entire\u0020service\u0020requires\u0020authentication",
             "url": "classes/Pionia-Core-Services-ServiceContract.html#property_serviceRequiresAuth"
         },                {
             "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003A\u0024authMessage",
             "name": "authMessage",
-            "summary": "",
+            "summary": "This\u0020message\u0020will\u0020be\u0020displayed\u0020when\u0020the\u0020entire\u0020service\u0020requires\u0020authentication",
             "url": "classes/Pionia-Core-Services-ServiceContract.html#property_authMessage"
         },                {
             "fqsen": "\\Pionia\\Core\\Services\\ValidationTrait",
@@ -1053,8 +1048,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003Acolumns\u0028\u0029",
             "name": "columns",
-            "summary": "Sets\u0020the\u0020columns\u0020to\u0020return\u0020in\u0020the\u0020queryset",
+            "summary": "Sets\u0020the\u0020columns\u0020to\u0020return\u0020in\u0020the\u0020query",
             "url": "classes/Pionia-Database-PaginationCore.html#method_columns"
+        },                {
+            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003Ainit\u0028\u0029",
+            "name": "init",
+            "summary": "",
+            "url": "classes/Pionia-Database-PaginationCore.html#method_init"
         },                {
             "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003Apaginate\u0028\u0029",
             "name": "paginate",
@@ -1095,6 +1095,11 @@ Search.appendIndex(
             "name": "table",
             "summary": "",
             "url": "classes/Pionia-Database-PaginationCore.html#property_table"
+        },                {
+            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003A\u0024baseQuery",
+            "name": "baseQuery",
+            "summary": "",
+            "url": "classes/Pionia-Database-PaginationCore.html#property_baseQuery"
         },                {
             "fqsen": "\\Pionia\\Exceptions\\BaseException",
             "name": "BaseException",
@@ -1178,33 +1183,48 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003AdetectAndAddColumns\u0028\u0029",
             "name": "detectAndAddColumns",
-            "summary": "",
+            "summary": "Checks\u0020if\u0020the\u0020frontend\u0020has\u0020defined\u0020columns\u0020we\u0020should\u0020query\u0020by.",
             "url": "classes/Pionia-Generics-Base-CrudContract.html#method_detectAndAddColumns"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003AcleanRelationColumns\u0028\u0029",
+            "name": "cleanRelationColumns",
+            "summary": "If\u0020the\u0020fields\u0020are\u0020already\u0020in\u0020the\u0020format\u0020of\u0020relationships,\u0020this\u0020method\u0020reverses\u0020that\nincluding\u0020removing\u0020duplicates.",
+            "url": "classes/Pionia-Generics-Base-CrudContract.html#method_cleanRelationColumns"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003AgetListColumns\u0028\u0029",
             "name": "getListColumns",
-            "summary": "",
+            "summary": "Returns\u0020the\u0020columns\u0020we\u0020shall\u0020query\u0020from\u0020the\u0020db\u0020while\u0020querying",
             "url": "classes/Pionia-Generics-Base-CrudContract.html#method_getListColumns"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003A_checkPaginationInternal\u0028\u0029",
             "name": "_checkPaginationInternal",
-            "summary": "",
+            "summary": "Detects\u0020if\u0020we\u0020have\u0020pagination\u0020params\u0020anywhere\u0020in\u0020the\u0020request.",
             "url": "classes/Pionia-Generics-Base-CrudContract.html#method__checkPaginationInternal"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003AdetectPagination\u0028\u0029",
             "name": "detectPagination",
-            "summary": "",
+            "summary": "Detect\u0020if\u0020our\u0020pagination\u0020params\u0020are\u0020defined\u0020anywhere\u0020in\u0020the\u0020request.",
             "url": "classes/Pionia-Generics-Base-CrudContract.html#method_detectPagination"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003AgetOne\u0028\u0029",
             "name": "getOne",
-            "summary": "Retrieve\u0020in\u0020CRUD",
+            "summary": "Retrieve\u0020in\u0020CRUD,\u0020returns\u0020on\u0020Item\u0020at\u0020a\u0020time.",
             "url": "classes/Pionia-Generics-Base-CrudContract.html#method_getOne"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003AgetOneInternal\u0028\u0029",
             "name": "getOneInternal",
             "summary": "Gets\u0020one\u0020item\u0020from\u0020the\u0020database.\u0020Can\u0020be\u0020overridden\u0020by\u0020defining\u0020a\u0020getOne\u0020method\u0020in\u0020the\u0020service",
             "url": "classes/Pionia-Generics-Base-CrudContract.html#method_getOneInternal"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003AhasLimit\u0028\u0029",
+            "name": "hasLimit",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-CrudContract.html#method_hasLimit"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003AhasOffset\u0028\u0029",
+            "name": "hasOffset",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-CrudContract.html#method_hasOffset"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003AallItems\u0028\u0029",
             "name": "allItems",
@@ -1238,7 +1258,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003AupdateItem\u0028\u0029",
             "name": "updateItem",
-            "summary": "",
+            "summary": "Updated\u0020an\u0020item\u0020in\u0020the\u0020db.",
             "url": "classes/Pionia-Generics-Base-CrudContract.html#method_updateItem"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\EventsContract",
@@ -1286,15 +1306,30 @@ Search.appendIndex(
             "summary": "Override\u0020this\u0020in\u0020your\u0020service\u0020to\u0020define\u0020the\u0020basis\u0020to\u0020return\u0020multiple\u0020items\u0020from\u0020the\u0020database",
             "url": "classes/Pionia-Generics-Base-EventsContract.html#method_getItems"
         },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\EventsContract\u003A\u003AgetJoinQuery\u0028\u0029",
+            "name": "getJoinQuery",
+            "summary": "Override\u0020this\u0020in\u0020your\u0020service\u0020to\u0020define\u0020the\u0020basis\u0020to\u0020return\u0020multiple\u0020items\u0020from\u0020the\u0020database",
+            "url": "classes/Pionia-Generics-Base-EventsContract.html#method_getJoinQuery"
+        },                {
             "fqsen": "\\Pionia\\Generics\\Base\\GenericService",
             "name": "GenericService",
             "summary": "This\u0020is\u0020the\u0020main\u0020class\u0020all\u0020other\u0020services\u0020must\u0020extend.",
             "url": "classes/Pionia-Generics-Base-GenericService.html"
         },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\GenericService\u003A\u003AgetFieldValue\u0028\u0029",
+            "name": "getFieldValue",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-GenericService.html#method_getFieldValue"
+        },                {
             "fqsen": "\\Pionia\\Generics\\Base\\GenericService\u003A\u003A\u0024table",
             "name": "table",
             "summary": "",
             "url": "classes/Pionia-Generics-Base-GenericService.html#property_table"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\GenericService\u003A\u003A\u0024dontRelate",
+            "name": "dontRelate",
+            "summary": "Can\u0020be\u0020mutated\u0020by\u0020the\u0020frontend\u0020to\u0020turn\u0020off\u0020relationships\u0020and\u0020go\u0020back\u0020to\u0020querying\u0020the\u0020base\u0020table\u0020again.",
+            "url": "classes/Pionia-Generics-Base-GenericService.html#property_dontRelate"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\GenericService\u003A\u003A\u0024limit",
             "name": "limit",
@@ -1330,6 +1365,101 @@ Search.appendIndex(
             "name": "updateColumns",
             "summary": "",
             "url": "classes/Pionia-Generics-Base-GenericService.html#property_updateColumns"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\GenericService\u003A\u003A\u0024fileColumns",
+            "name": "fileColumns",
+            "summary": "Define\u0020columns\u0020that\u0020should\u0020be\u0020received\u0020as\u0020files\u0020in\u0020this\u0020array.",
+            "url": "classes/Pionia-Generics-Base-GenericService.html#property_fileColumns"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinContract",
+            "name": "JoinContract",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-JoinContract.html"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinContract\u003A\u003AweShouldJoin\u0028\u0029",
+            "name": "weShouldJoin",
+            "summary": "Detects\u0020whether\u0020to\u0020enter\u0020to\u0020enter\u0020the\u0020join\u0020mode\u0020or\u0020stay\u0020in\u0020the\u0020normal\u0020mode.",
+            "url": "classes/Pionia-Generics-Base-JoinContract.html#method_weShouldJoin"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinContract\u003A\u003AgetOneJoined\u0028\u0029",
+            "name": "getOneJoined",
+            "summary": "Will\u0020be\u0020used\u0020when\u0020we\u0020are\u0020getting\u0020a\u0020single\u0020item.",
+            "url": "classes/Pionia-Generics-Base-JoinContract.html#method_getOneJoined"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinContract\u003A\u003AgetAllItemsJoined\u0028\u0029",
+            "name": "getAllItemsJoined",
+            "summary": "Will\u0020be\u0020used\u0020when\u0020we\u0020are\u0020listing\u0020everything.",
+            "url": "classes/Pionia-Generics-Base-JoinContract.html#method_getAllItemsJoined"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinContract\u003A\u003AattachJoins\u0028\u0029",
+            "name": "attachJoins",
+            "summary": "Attaches\u0020all\u0020defined\u0020joins\u0020to\u0020the\u0020base\u0020query.",
+            "url": "classes/Pionia-Generics-Base-JoinContract.html#method_attachJoins"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinContract\u003A\u003AswitchJoin\u0028\u0029",
+            "name": "switchJoin",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-JoinContract.html#method_switchJoin"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinContract\u003A\u003AjoinQuery\u0028\u0029",
+            "name": "joinQuery",
+            "summary": "Resolve\u0020the\u0020base\u0020query\u0020to\u0020base\u0020on\u0020to\u0020start\u0020joining.",
+            "url": "classes/Pionia-Generics-Base-JoinContract.html#method_joinQuery"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinContract\u003A\u003A\u0024joins",
+            "name": "joins",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-JoinContract.html#property_joins"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinContract\u003A\u003A\u0024joinTypes",
+            "name": "joinTypes",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-JoinContract.html#property_joinTypes"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinContract\u003A\u003A\u0024joinAliases",
+            "name": "joinAliases",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-JoinContract.html#property_joinAliases"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinContract\u003A\u003A\u0024defaultJoinType",
+            "name": "defaultJoinType",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-JoinContract.html#property_defaultJoinType"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinType",
+            "name": "JoinType",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-JoinType.html"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinType\u003A\u003AINNER",
+            "name": "INNER",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-JoinType.html#enumcase_INNER"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinType\u003A\u003ALEFT",
+            "name": "LEFT",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-JoinType.html#enumcase_LEFT"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinType\u003A\u003ARIGHT",
+            "name": "RIGHT",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-JoinType.html#enumcase_RIGHT"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\JoinType\u003A\u003AFULL",
+            "name": "FULL",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-JoinType.html#enumcase_FULL"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\UploadsContract",
+            "name": "UploadsContract",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-UploadsContract.html"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\UploadsContract\u003A\u003AhandleUpload\u0028\u0029",
+            "name": "handleUpload",
+            "summary": "This\u0020hook\u0020will\u0020receive\u0020every\u0020file\u0020found\u0020in\u0020your\u0020request.",
+            "url": "classes/Pionia-Generics-Base-UploadsContract.html#method_handleUpload"
         },                {
             "fqsen": "\\Pionia\\Generics\\Mixins\\CreateMixin",
             "name": "CreateMixin",
@@ -2361,6 +2491,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Porm-Database-builders-Join.html#method_build"
         },                {
+            "fqsen": "\\Porm\\Database\\builders\\Join\u003A\u003Acount\u0028\u0029",
+            "name": "count",
+            "summary": "",
+            "url": "classes/Porm-Database-builders-Join.html#method_count"
+        },                {
             "fqsen": "\\Porm\\Database\\builders\\Join\u003A\u003A\u0024table",
             "name": "table",
             "summary": "",
@@ -2435,6 +2570,11 @@ Search.appendIndex(
             "name": "info",
             "summary": "Returns\u0020the\u0020details\u0020of\u0020the\u0020current\u0020db\u0020connection",
             "url": "classes/Porm-Database-builders-PormObject.html#method_info"
+        },                {
+            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003A\u0024pormVersion",
+            "name": "pormVersion",
+            "summary": "",
+            "url": "classes/Porm-Database-builders-PormObject.html#property_pormVersion"
         },                {
             "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003A\u0024alias",
             "name": "alias",

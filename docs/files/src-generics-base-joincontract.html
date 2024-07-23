@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-            <title>    Pionia Core &raquo; Deprecated elements
-</title>
+            <title>Pionia Core</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
@@ -171,130 +170,160 @@
 </aside>
 
             <div class="phpdocumentor-column -nine phpdocumentor-content">
-                                        <section>
-        <ul class="phpdocumentor-breadcrumbs">
-            <li><a href="">Home</a></li>
-        </ul>
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+    </ul>
 
-        <div class="phpdocumentor-row">
-            <h2 class="phpdocumentor-content__title">Deprecated</h2>
+    <article class="phpdocumentor-element -file">
+        <h2 class="phpdocumentor-content__title">JoinContract.php</h2>
 
-                        <h3>Table of Contents</h3>
-            <table class="phpdocumentor-table_of_contents">
-                                    <tr>
-                        <td class="phpdocumentor-cell"><a href="reports/deprecated.html#src/Core/Config/CoreKernel.php">src/Core/Config/CoreKernel.php</a></td>
-                    </tr>
-                                    <tr>
-                        <td class="phpdocumentor-cell"><a href="reports/deprecated.html#src/Core/Routing/PioniaRouter.php">src/Core/Routing/PioniaRouter.php</a></td>
-                    </tr>
-                                    <tr>
-                        <td class="phpdocumentor-cell"><a href="reports/deprecated.html#src/Request/Request.php">src/Request/Request.php</a></td>
-                    </tr>
-                            </table>
+        
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="files/src-generics-base-joincontract.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+
+    <h4 id="toc-traits">
+        Traits
+        <a href="files/src-generics-base-joincontract.html#toc-traits" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Pionia-Generics-Base-JoinContract.html"><abbr title="\Pionia\Generics\Base\JoinContract">JoinContract</abbr></a></dt>    </dl>
+
+
+
+
+
+
+
+
+
+        
+
+        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/Generics/Base/JoinContract.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                            
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                                                                                            <li><a href="files/src-generics-base-joincontract.html#toc-traits">Traits</a></li>
+                                                                                                </ul>
+            </li>
+
             
-                            <a id="src/Core/Config/CoreKernel.php"></a>
-                <h3><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></h3>
-                <table>
-                    <tr>
-                        <th class="phpdocumentor-heading">Line</th>
-                        <th class="phpdocumentor-heading">Element</th>
-                        <th class="phpdocumentor-heading">Reason</th>
-                    </tr>
-                                                                        <tr>
-                                <td class="phpdocumentor-cell">88</td>
-                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerMiddleware"><abbr title="\Pionia\Core\Config\CoreKernel::registerMiddleware()">CoreKernel::registerMiddleware()</abbr></a></td>
-                                <td class="phpdocumentor-cell"><ul>
-<li>register middlewares directly in the settings.ini file. Will be removed from future versions</li>
-</ul>
-</td>
-                            </tr>
-                                                                                                <tr>
-                                <td class="phpdocumentor-cell">146</td>
-                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerAuthBackends"><abbr title="\Pionia\Core\Config\CoreKernel::registerAuthBackends()">CoreKernel::registerAuthBackends()</abbr></a></td>
-                                <td class="phpdocumentor-cell"><ul>
-<li>register authentications directly in the settings.ini file. Will be removed from future versions</li>
-</ul>
-</td>
-                            </tr>
-                                                                                                <tr>
-                                <td class="phpdocumentor-cell">226</td>
-                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Config-CoreKernel.html#method_handle"><abbr title="\Pionia\Core\Config\CoreKernel::handle()">CoreKernel::handle()</abbr></a></td>
-                                <td class="phpdocumentor-cell"><ul>
-<li>This method will be removed in future versions. Use the run method instead</li>
-</ul>
-</td>
-                            </tr>
-                                                            </table>
-                            <a id="src/Core/Routing/PioniaRouter.php"></a>
-                <h3><abbr title="src/Core/Routing/PioniaRouter.php">PioniaRouter.php</abbr></h3>
-                <table>
-                    <tr>
-                        <th class="phpdocumentor-heading">Line</th>
-                        <th class="phpdocumentor-heading">Element</th>
-                        <th class="phpdocumentor-heading">Reason</th>
-                    </tr>
-                                                                        <tr>
-                                <td class="phpdocumentor-cell">91</td>
-                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Routing-PioniaRouter.html#method_post"><abbr title="\Pionia\Core\Routing\PioniaRouter::post()">PioniaRouter::post()</abbr></a></td>
-                                <td class="phpdocumentor-cell"><ul>
-<li>Use addSwitchFor instead</li>
-</ul>
-</td>
-                            </tr>
-                                                                                                <tr>
-                                <td class="phpdocumentor-cell">108</td>
-                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Routing-PioniaRouter.html#method_addGroup"><abbr title="\Pionia\Core\Routing\PioniaRouter::addGroup()">PioniaRouter::addGroup()</abbr></a></td>
-                                <td class="phpdocumentor-cell"><p>Use addSwitchFor instead</p>
-</td>
-                            </tr>
-                                                                                                <tr>
-                                <td class="phpdocumentor-cell">173</td>
-                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Routing-PioniaRouter.html#method_get"><abbr title="\Pionia\Core\Routing\PioniaRouter::get()">PioniaRouter::get()</abbr></a></td>
-                                <td class="phpdocumentor-cell"><ul>
-<li>Use addSwitchFor instead</li>
-</ul>
-</td>
-                            </tr>
-                                                                                                <tr>
-                                <td class="phpdocumentor-cell">193</td>
-                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Routing-PioniaRouter.html#method_cleanBase"><abbr title="\Pionia\Core\Routing\PioniaRouter::cleanBase()">PioniaRouter::cleanBase()</abbr></a></td>
-                                <td class="phpdocumentor-cell"><ul>
-<li>Was useful for v1.1.0 and below</li>
-</ul>
-</td>
-                            </tr>
-                                                                                                <tr>
-                                <td class="phpdocumentor-cell">223</td>
-                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Core-Routing-PioniaRouter.html#method_addRoute"><abbr title="\Pionia\Core\Routing\PioniaRouter::addRoute()">PioniaRouter::addRoute()</abbr></a></td>
-                                <td class="phpdocumentor-cell"><ul>
-<li>Use addSwitchFor instead with the version name. This is just a helper method</li>
-</ul>
-</td>
-                            </tr>
-                                                            </table>
-                            <a id="src/Request/Request.php"></a>
-                <h3><abbr title="src/Request/Request.php">Request.php</abbr></h3>
-                <table>
-                    <tr>
-                        <th class="phpdocumentor-heading">Line</th>
-                        <th class="phpdocumentor-heading">Element</th>
-                        <th class="phpdocumentor-heading">Reason</th>
-                    </tr>
-                                                                        <tr>
-                                <td class="phpdocumentor-cell">104</td>
-                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Request-Request.html#method_getJsonData"><abbr title="\Pionia\Request\Request::getJsonData()">Request::getJsonData()</abbr></a></td>
-                                <td class="phpdocumentor-cell"><p>Use $this-&gt;getData() instead</p>
-</td>
-                            </tr>
-                                                                                                <tr>
-                                <td class="phpdocumentor-cell">141</td>
-                                <td class="phpdocumentor-cell"><a href="classes/Pionia-Request-Request.html#method_getFormData"><abbr title="\Pionia\Request\Request::getFormData()">Request::getFormData()</abbr></a></td>
-                                <td class="phpdocumentor-cell"><p>Use $this-&gt;getData() instead</p>
-</td>
-                            </tr>
-                                                            </table>
-                    </div>
+                    </ul>
     </section>
+
+                </section>
                             </div>
             <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
@@ -308,7 +337,7 @@
     </section>
 </section>
         </div>
-        <a href="reports/deprecated.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="files/src-generics-base-joincontract.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
