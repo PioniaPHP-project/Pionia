@@ -24,10 +24,4 @@ class CategoryService extends UniversalGenericService
         'name',
         'active',
     ];
-
-//    public ?array $listColumns = [
-//        'category.id',
-//        'category.name',
-//        'sc.name(sub_category_name)',
-//    ];
 }
