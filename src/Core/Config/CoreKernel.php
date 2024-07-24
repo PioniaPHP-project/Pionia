@@ -11,6 +11,7 @@ use Pionia\Logging\PioniaLogger;
 use Pionia\Request\Request;
 use Pionia\Response\BaseResponse;
 use Pionia\Response\Response;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
@@ -20,6 +21,10 @@ use Symfony\Component\Routing\RequestContext;
 
 if (!defined('logger')){
     define('logger', PioniaLogger::init());
+}
+
+if (!defined("pionia")){
+    define('pionia', Pionia::boot());
 }
 
 /**
@@ -47,7 +52,7 @@ if (!defined('logger')){
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class CoreKernel extends Pionia
+class CoreKernel
 {
     private ?RequestContext $context = null;
     private ?UrlMatcher $matcher = null;
@@ -59,7 +64,7 @@ class CoreKernel extends Pionia
 
     public function resolveCors(): void
     {
-        $settings = $this::getSettingOrDefault('cors', []);
+        $settings = pionia::getSettingOrDefault('cors', []);
         $allowedOrigins = $settings['ALLOW_ORIGIN'] ?? '*';
         $allowedHeaders = $settings['ALLOW_HEADERS'] ?? '*';
         $allowedCredentials = $settings['ALLOW_CREDENTIALS'] ?? 'true';
@@ -74,9 +79,6 @@ class CoreKernel extends Pionia
     public function __construct(
         private BaseRoutes $routes,
     ){
-        parent::__construct();
-        $this::resolveSettingsFromIni();
-//        $this::resolveCors();
     }
 
     /**
@@ -100,7 +102,7 @@ class CoreKernel extends Pionia
      */
     private function mergeMiddlewaresFromSettings(): void
     {
-        $otherMiddlewares = $this::getSetting('middlewares');
+        $otherMiddlewares = pionia::getSetting('middlewares');
         if ($otherMiddlewares){
             $middlewares = array_values($otherMiddlewares);
             foreach ($middlewares as $middleware){
@@ -121,7 +123,7 @@ class CoreKernel extends Pionia
      */
     private function mergeAuthenticationsFromSettings(): void
     {
-        $otherAuths = $this::getSetting('authentications');
+        $otherAuths = pionia::getSetting('authentications');
         if ($otherAuths){
             $auths = array_values($otherAuths);
             foreach ($auths as $auth){
@@ -173,7 +175,7 @@ class CoreKernel extends Pionia
 
         $this->matcher->getContext()->fromRequest($request);
 
-        $serverSettings = self::getSetting('server');
+        $serverSettings = pionia::getSetting('server');
 
         $shouldLog = isset($serverSettings['LOG_REQUESTS']) && $serverSettings['LOG_REQUESTS'];
 
@@ -226,6 +228,7 @@ class CoreKernel extends Pionia
     public function handle(Request $request): Response
     {
         $this->resolveFrontEnd($request);
+
         try {
             $request = $this->resolveMiddlewares($request); // first run for all middlewares
             $request =$this->resolveAuthenticationBackend($request); // run all the authentication middles
@@ -248,7 +251,9 @@ class CoreKernel extends Pionia
     public function run(): Response
     {
         $request = Request::createFromGlobals();
+
         $this->resolveFrontEnd($request);
+
         try {
             $request = $this->resolveMiddlewares($request); // first run for all middlewares
             $request =$this->resolveAuthenticationBackend($request); // run all the authentication middles
@@ -280,7 +285,6 @@ class CoreKernel extends Pionia
                 $klass->run($request, $response);
             }
         }
-
         return $request;
     }
 
@@ -333,13 +337,38 @@ class CoreKernel extends Pionia
     private function resolveFrontEnd(Request $request): void
     {
         if (!str_starts_with($request->getPathInfo(), '/api') && strtolower($request->getMethod()) === 'get'){
-            // here we are probably coming from some frontend
+            $fileSystem = new Filesystem();
+            $base = BASEPATH;
+            if (!str_ends_with($base, '/')){
+                $base = $base . '/';
+            }
+            $path = $base . 'public/index.html';
 
-//            $frontEndDir = self::getServerSettings()['FRONTEND_DIR'] ?? 'static';
-            $response = new Response(file_get_contents(__DIR__.'/index.php'), Response::HTTP_OK, ['Content-Type' => 'text/html']);
+            if ($fileSystem->exists($path)){
+                $response = new Response(file_get_contents($path), Response::HTTP_OK, ['Content-Type' => 'text/html']);
+            } else {
+                $response = new Response(file_get_contents(__DIR__ . '/index.php'), Response::HTTP_OK, ['Content-Type' => 'text/html']);
+            }
             $response->send();
             exit();
         }
+    }
+
+    public function detectContentType(string $extension): string
+    {
+        $mimeTypes = [
+            'html' => 'text/html',
+            'css' => 'text/css',
+            'js' => 'application/javascript',
+            'json' => 'application/json',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            'svg' => 'image/svg+xml',
+            'pdf' => 'application/pdf',
+        ];
+        return $mimeTypes[$extension] ?? 'application/octet-stream';
     }
 
 }

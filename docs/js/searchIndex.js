@@ -6,6 +6,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#constant_logger"
         },                {
+            "fqsen": "\\pionia",
+            "name": "pionia",
+            "summary": "",
+            "url": "namespaces/default.html#constant_pionia"
+        },                {
             "fqsen": "\\exceptions_error_handler\u0028\u0029",
             "name": "exceptions_error_handler",
             "summary": "",
@@ -496,6 +501,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-Core-Config-CoreKernel.html#method_resolveFrontEnd"
         },                {
+            "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003AdetectContentType\u0028\u0029",
+            "name": "detectContentType",
+            "summary": "",
+            "url": "classes/Pionia-Core-Config-CoreKernel.html#method_detectContentType"
+        },                {
             "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003A\u0024context",
             "name": "context",
             "summary": "",
@@ -671,6 +681,11 @@ Search.appendIndex(
             "summary": "Converts\u0020a\u0020string\u0020to\u0020a\u0020slug\u0020eg\u0020HelloWorld\u0020\u003D\u003E\u0020hello\u002Dworld",
             "url": "classes/Pionia-Core-Helpers-Utilities.html#method_slugify"
         },                {
+            "fqsen": "\\Pionia\\Core\\Helpers\\Utilities\u003A\u003AlevelOneKeysOf\u0028\u0029",
+            "name": "levelOneKeysOf",
+            "summary": "Grabs\u0020all\u0020keys\u0020of\u0020an\u0020array.\u0020But\u0020ignores\u0020nested\u0020keys\nConverts\u0020\u005B\u0027name\u0027\u0020\u003D\u003E\u0020\u0027John\u0027,\u0020\u0027age\u0027\u0020\u003D\u003E\u002020,\u0020\u0027address\u0027\u0020\u003D\u003E\u0020\u005B\u0027city\u0027\u0020\u003D\u003E\u0020\u0027Lagos\u0027,\u0020\u0027state\u0027\u0020\u003D\u003E\u0020\u0027Lagos\u0027\u005D\u005D\u0020to\u0020\u005B\u0027name\u0027,\u0020\u0027age\u0027,\u0020\u0027address\u0027\u005D",
+            "url": "classes/Pionia-Core-Helpers-Utilities.html#method_levelOneKeysOf"
+        },                {
             "fqsen": "\\Pionia\\Core\\Interceptions\\BaseAuthenticationBackend",
             "name": "BaseAuthenticationBackend",
             "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020all\u0020authentication\u0020backends.",
@@ -695,6 +710,11 @@ Search.appendIndex(
             "name": "Pionia",
             "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020the\u0020framework",
             "url": "classes/Pionia-Core-Pionia.html"
+        },                {
+            "fqsen": "\\Pionia\\Core\\Pionia\u003A\u003Aboot\u0028\u0029",
+            "name": "boot",
+            "summary": "",
+            "url": "classes/Pionia-Core-Pionia.html#method_boot"
         },                {
             "fqsen": "\\Pionia\\Core\\Pionia\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
@@ -725,6 +745,11 @@ Search.appendIndex(
             "name": "resolveSettingsFromIni",
             "summary": "",
             "url": "classes/Pionia-Core-Pionia.html#method_resolveSettingsFromIni"
+        },                {
+            "fqsen": "\\Pionia\\Core\\Pionia\u003A\u003AgetUploadSettings\u0028\u0029",
+            "name": "getUploadSettings",
+            "summary": "",
+            "url": "classes/Pionia-Core-Pionia.html#method_getUploadSettings"
         },                {
             "fqsen": "\\Pionia\\Core\\Pionia\u003A\u003A\u0024settings",
             "name": "settings",
@@ -880,41 +905,6 @@ Search.appendIndex(
             "name": "requires",
             "summary": "This\u0020checks\u0020if\u0020the\u0020required\u0020fields\u0020are\u0020present\u0020in\u0020the\u0020request\u0020otherwise\u0020it\u0020throws\u0020an\u0020exception",
             "url": "classes/Pionia-Core-Services-RequestActionTrait.html#method_requires"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Services\\ServiceContract",
-            "name": "ServiceContract",
-            "summary": "This\u0020is\u0020the\u0020main\u0020class\u0020all\u0020other\u0020services\u0020must\u0020extend.",
-            "url": "classes/Pionia-Core-Services-ServiceContract.html"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003A\u0024request",
-            "name": "request",
-            "summary": "",
-            "url": "classes/Pionia-Core-Services-ServiceContract.html#property_request"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003A\u0024deactivatedActions",
-            "name": "deactivatedActions",
-            "summary": "An\u0020array\u0020of\u0020actions\u0020that\u0020are\u0020deactivated\u0020for\u0020the\u0020current\u0020service",
-            "url": "classes/Pionia-Core-Services-ServiceContract.html#property_deactivatedActions"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003A\u0024actionPermissions",
-            "name": "actionPermissions",
-            "summary": "An\u0020associative\u0020array\u0020of\u0020actions\u0020and\u0020their\u0020required\u0020permissions",
-            "url": "classes/Pionia-Core-Services-ServiceContract.html#property_actionPermissions"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003A\u0024actionsRequiringAuth",
-            "name": "actionsRequiringAuth",
-            "summary": "This\u0020array\u0020contains\u0020the\u0020actions\u0020that\u0020require\u0020authentication",
-            "url": "classes/Pionia-Core-Services-ServiceContract.html#property_actionsRequiringAuth"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003A\u0024serviceRequiresAuth",
-            "name": "serviceRequiresAuth",
-            "summary": "If\u0020true,\u0020the\u0020entire\u0020service\u0020requires\u0020authentication",
-            "url": "classes/Pionia-Core-Services-ServiceContract.html#property_serviceRequiresAuth"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Services\\ServiceContract\u003A\u003A\u0024authMessage",
-            "name": "authMessage",
-            "summary": "This\u0020message\u0020will\u0020be\u0020displayed\u0020when\u0020the\u0020entire\u0020service\u0020requires\u0020authentication",
-            "url": "classes/Pionia-Core-Services-ServiceContract.html#property_authMessage"
         },                {
             "fqsen": "\\Pionia\\Core\\Services\\ValidationTrait",
             "name": "ValidationTrait",
@@ -1236,6 +1226,11 @@ Search.appendIndex(
             "summary": "Delete\u0020in\u0020CRUD\nHandles\u0020both\u0020post\u0020and\u0020pre\u0020delete\u0020events",
             "url": "classes/Pionia-Generics-Base-CrudContract.html#method_deleteItem"
         },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003AcheckIfFieldPassesAllValidations\u0028\u0029",
+            "name": "checkIfFieldPassesAllValidations",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-CrudContract.html#method_checkIfFieldPassesAllValidations"
+        },                {
             "fqsen": "\\Pionia\\Generics\\Base\\CrudContract\u003A\u003AcreateItem\u0028\u0029",
             "name": "createItem",
             "summary": "Create\u0020in\u0020CRUD\nSaves\u0020in\u0020transactions,\u0020runs\u0020pre\u0020and\u0020post\u0020create\u0020events",
@@ -1313,13 +1308,18 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\GenericService",
             "name": "GenericService",
-            "summary": "This\u0020is\u0020the\u0020main\u0020class\u0020all\u0020other\u0020services\u0020must\u0020extend.",
+            "summary": "",
             "url": "classes/Pionia-Generics-Base-GenericService.html"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\GenericService\u003A\u003AgetFieldValue\u0028\u0029",
             "name": "getFieldValue",
             "summary": "",
             "url": "classes/Pionia-Generics-Base-GenericService.html#method_getFieldValue"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\GenericService\u003A\u003AhandleUpload\u0028\u0029",
+            "name": "handleUpload",
+            "summary": "",
+            "url": "classes/Pionia-Generics-Base-GenericService.html#method_handleUpload"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\GenericService\u003A\u003A\u0024table",
             "name": "table",
@@ -1458,8 +1458,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\UploadsContract\u003A\u003AhandleUpload\u0028\u0029",
             "name": "handleUpload",
-            "summary": "This\u0020hook\u0020will\u0020receive\u0020every\u0020file\u0020found\u0020in\u0020your\u0020request.",
+            "summary": "This\u0020hook\u0020will\u0020receive\u0020every\u0020file\u0020found\u0020in\u0020your\u0020request\u0020and\u0020you\u0020can\u0020handle\u0020it\u0020as\u0020you\u0020wish.",
             "url": "classes/Pionia-Generics-Base-UploadsContract.html#method_handleUpload"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Base\\UploadsContract\u003A\u003AdefaultUpload\u0028\u0029",
+            "name": "defaultUpload",
+            "summary": "This\u0020hook\u0020will\u0020receive\u0020every\u0020file\u0020found\u0020in\u0020your\u0020request\u0020and\u0020you\u0020can\u0020handle\u0020it\u0020as\u0020you\u0020wish.",
+            "url": "classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload"
         },                {
             "fqsen": "\\Pionia\\Generics\\Mixins\\CreateMixin",
             "name": "CreateMixin",
@@ -1588,7 +1593,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Request\\BaseRestService",
             "name": "BaseRestService",
-            "summary": "This\u0020is\u0020the\u0020main\u0020class\u0020all\u0020other\u0020services\u0020must\u0020extend.",
+            "summary": "",
             "url": "classes/Pionia-Request-BaseRestService.html"
         },                {
             "fqsen": "\\Pionia\\Request\\Request",

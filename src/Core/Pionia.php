@@ -22,6 +22,11 @@ class Pionia
 
     public static string $name = 'Pionia';
 
+    public static function boot(): Pionia
+    {
+        return new Pionia();
+    }
+
     public function __construct()
     {
         $this::resolveSettingsFromIni();
@@ -96,5 +101,10 @@ class Pionia
         }
 
         return self::$settings;
+    }
+
+    public static function getUploadSettings(): array
+    {
+        return self::getSetting('uploads') ?? [];
     }
 }

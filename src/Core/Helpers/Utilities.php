@@ -151,4 +151,23 @@ class Utilities
     {
         return self::formatter()->urlize($class);
     }
+
+    /**
+     * Grabs all keys of an array. But ignores nested keys
+     * Converts ['name' => 'John', 'age' => 20, 'address' => ['city' => 'Lagos', 'state' => 'Lagos']] to ['name', 'age', 'address']
+     * @param array $array
+     * @return array
+     */
+    public static function levelOneKeysOf(array $array): array
+    {
+        $keys = [];
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $keys[] = $key;
+            } else {
+                $keys[] = $value;
+            }
+        }
+        return $keys;
+    }
 }

@@ -75,6 +75,9 @@ class CommandInterface extends Pionia
         if (!defined('logger')){
             define('logger', PioniaLogger::init());
         }
+        if (!defined("pionia")){
+            define('pionia', Pionia::boot());
+        }
         $app = new self();
         $otherCommands = $app->getSetting('commands');
         if ($otherCommands){

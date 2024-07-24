@@ -10,7 +10,7 @@ use Pionia\Generics\Mixins\RetrieveMixin;
 /**
  * Adds the retrieve and create actions to the service.
  */
-class RetrieveListRandomService extends GenericService
+abstract class RetrieveListRandomService extends GenericService
 {
     use RandomMixin, ListMixin, RetrieveMixin;
 }

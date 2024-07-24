@@ -35,6 +35,7 @@
                 <path>vendor/symfony/**/**</path>
                 <path>vendor/theseer/**/**</path>
                 <path>vendor/autoload.php</path>
+                <path>vendor/</path>
                 <path>example/**/**</path>
             </ignore>
             <extensions>

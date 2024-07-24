@@ -185,9 +185,9 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.13" class="phpdocumentor-element-found-in__source" data-line="13" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.12" class="phpdocumentor-element-found-in__source" data-line="12" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         
@@ -230,6 +230,12 @@
                                 &nbsp;: array&lt;string|int, mixed&gt;|null    </span>
 </dt>
 <dd>Retrieve all in CRUD</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Pionia-Generics-Base-CrudContract.html#method_checkIfFieldPassesAllValidations">checkIfFieldPassesAllValidations()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Pionia-Generics-Base-CrudContract.html#method_createItem">createItem()</a>
@@ -357,9 +363,9 @@ including removing duplicates.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.94" class="phpdocumentor-element-found-in__source" data-line="94" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.93" class="phpdocumentor-element-found-in__source" data-line="93" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Detects if we have pagination params anywhere in the request.</p>
@@ -423,9 +429,9 @@ defined by <code class="prettyprint">$this-&gt;detectPagination()</code></p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">220</span>
+    <span class="phpdocumentor-element-found-in__line">219</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.220" class="phpdocumentor-element-found-in__source" data-line="220" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.219" class="phpdocumentor-element-found-in__source" data-line="219" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Retrieve all in CRUD</p>
@@ -477,6 +483,63 @@ defined by <code class="prettyprint">$this-&gt;detectPagination()</code></p>
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_checkIfFieldPassesAllValidations">
+        checkIfFieldPassesAllValidations()
+        <a href="classes/Pionia-Generics-Base-CrudContract.html#method_checkIfFieldPassesAllValidations" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">273</span>
+
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.273" class="phpdocumentor-element-found-in__source" data-line="273" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">checkIfFieldPassesAllValidations</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$field</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$field</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-CrudContract.html#method_checkIfFieldPassesAllValidations#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_createItem">
         createItem()
         <a href="classes/Pionia-Generics-Base-CrudContract.html#method_createItem" class="headerlink"><i class="fas fa-link"></i></a>
@@ -485,9 +548,9 @@ defined by <code class="prettyprint">$this-&gt;detectPagination()</code></p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">276</span>
+    <span class="phpdocumentor-element-found-in__line">299</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.276" class="phpdocumentor-element-found-in__source" data-line="276" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.299" class="phpdocumentor-element-found-in__source" data-line="299" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Create in CRUD
@@ -538,9 +601,9 @@ Saves in transactions, runs pre and post create events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">249</span>
+    <span class="phpdocumentor-element-found-in__line">248</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.249" class="phpdocumentor-element-found-in__source" data-line="249" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.248" class="phpdocumentor-element-found-in__source" data-line="248" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Delete in CRUD
@@ -587,9 +650,9 @@ Handles both post and pre delete events</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">147</span>
+    <span class="phpdocumentor-element-found-in__line">146</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.147" class="phpdocumentor-element-found-in__source" data-line="147" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.146" class="phpdocumentor-element-found-in__source" data-line="146" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Detect if our pagination params are defined anywhere in the request.</p>
@@ -697,9 +760,9 @@ OFFSET: 5 // can also be <code class="prettyprint">offset: 5</code>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">336</span>
+    <span class="phpdocumentor-element-found-in__line">363</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.336" class="phpdocumentor-element-found-in__source" data-line="336" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.363" class="phpdocumentor-element-found-in__source" data-line="363" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Retrieve all with pagination</p>
@@ -749,9 +812,9 @@ OFFSET: 5 // can also be <code class="prettyprint">offset: 5</code>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">176</span>
+    <span class="phpdocumentor-element-found-in__line">175</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.176" class="phpdocumentor-element-found-in__source" data-line="176" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.175" class="phpdocumentor-element-found-in__source" data-line="175" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Retrieve in CRUD, returns on Item at a time.</p>
@@ -801,9 +864,9 @@ OFFSET: 5 // can also be <code class="prettyprint">offset: 5</code>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">203</span>
+    <span class="phpdocumentor-element-found-in__line">202</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.203" class="phpdocumentor-element-found-in__source" data-line="203" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.202" class="phpdocumentor-element-found-in__source" data-line="202" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
     
@@ -833,9 +896,9 @@ OFFSET: 5 // can also be <code class="prettyprint">offset: 5</code>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">208</span>
+    <span class="phpdocumentor-element-found-in__line">207</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.208" class="phpdocumentor-element-found-in__source" data-line="208" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.207" class="phpdocumentor-element-found-in__source" data-line="207" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
     
@@ -865,9 +928,9 @@ OFFSET: 5 // can also be <code class="prettyprint">offset: 5</code>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">317</span>
+    <span class="phpdocumentor-element-found-in__line">344</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.317" class="phpdocumentor-element-found-in__source" data-line="317" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.344" class="phpdocumentor-element-found-in__source" data-line="344" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
     
@@ -924,9 +987,9 @@ OFFSET: 5 // can also be <code class="prettyprint">offset: 5</code>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">349</span>
+    <span class="phpdocumentor-element-found-in__line">376</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.349" class="phpdocumentor-element-found-in__source" data-line="349" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.376" class="phpdocumentor-element-found-in__source" data-line="376" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
     
@@ -971,9 +1034,9 @@ OFFSET: 5 // can also be <code class="prettyprint">offset: 5</code>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">367</span>
+    <span class="phpdocumentor-element-found-in__line">394</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.367" class="phpdocumentor-element-found-in__source" data-line="367" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.394" class="phpdocumentor-element-found-in__source" data-line="394" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Updated an item in the db.</p>
@@ -1026,9 +1089,9 @@ OFFSET: 5 // can also be <code class="prettyprint">offset: 5</code>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.49" class="phpdocumentor-element-found-in__source" data-line="49" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.48" class="phpdocumentor-element-found-in__source" data-line="48" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">If the fields are already in the format of relationships, this method reverses that
@@ -1081,9 +1144,9 @@ $this-&gt;listColumns = [&quot;name&quot;, &quot;name(category_name), &quot;id&q
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.21" class="phpdocumentor-element-found-in__source" data-line="21" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.20" class="phpdocumentor-element-found-in__source" data-line="20" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Checks if the frontend has defined columns we should query by.</p>
@@ -1117,9 +1180,9 @@ It pays respect to aliases defined, so, don't forget to respect them too!</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.81" class="phpdocumentor-element-found-in__source" data-line="81" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.80" class="phpdocumentor-element-found-in__source" data-line="80" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Returns the columns we shall query from the db while querying</p>
@@ -1154,9 +1217,9 @@ It pays respect to aliases defined, so, don't forget to respect them too!</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/CrudContract.php"><a href="files/src-generics-base-crudcontract.html"><abbr title="src/Generics/Base/CrudContract.php">CrudContract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">194</span>
+    <span class="phpdocumentor-element-found-in__line">193</span>
 
-            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.194" class="phpdocumentor-element-found-in__source" data-line="194" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
+            <a href="classes/Pionia-Generics-Base-CrudContract.html#source-view.193" class="phpdocumentor-element-found-in__source" data-line="193" data-modal="source-view" data-src="files/src/Generics/Base/CrudContract.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Gets one item from the database. Can be overridden by defining a getOne method in the service</p>
@@ -1315,6 +1378,7 @@ It pays respect to aliases defined, so, don't forget to respect them too!</p>
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method__checkPaginationInternal">_checkPaginationInternal()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_allItems">allItems()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_checkIfFieldPassesAllValidations">checkIfFieldPassesAllValidations()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_createItem">createItem()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_deleteItem">deleteItem()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_detectPagination">detectPagination()</a></li>

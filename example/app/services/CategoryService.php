@@ -2,6 +2,7 @@
 
 namespace application\services;
 
+use Exception;
 use Pionia\Generics\Base\JoinType;
 use Pionia\Generics\UniversalGenericService;
 
@@ -9,7 +10,7 @@ class CategoryService extends UniversalGenericService
 {
     public string $table = 'category';
 
-    public string $pk_field = 'category.id';
+    public string $pk_field = 'id';
 
     public ?array $joins = [
         'sub_category' => ['id' => 'category_id'],
@@ -35,5 +36,10 @@ class CategoryService extends UniversalGenericService
     public ?array $createColumns = [
         'name',
         'active',
+        'icon',
+    ];
+
+    public ?array $fileColumns = [
+        'icon',
     ];
 }

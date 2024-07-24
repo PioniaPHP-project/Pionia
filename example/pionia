@@ -13,6 +13,10 @@ if (!defined('SETTINGS')) {
     define('SETTINGS', BASEPATH . '/settings.ini');
 }
 
+if (!file_exists(SETTINGS)) {
+    dd('Settings file not found');
+}
+
 require_once BASEPATH . '/../vendor/autoload.php';
 
 try {

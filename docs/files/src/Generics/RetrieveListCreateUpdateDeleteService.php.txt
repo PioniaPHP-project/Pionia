@@ -12,7 +12,7 @@ use Pionia\Generics\Mixins\UpdateMixin;
 /**
  * Adds the retrieve, create and update actions to the service.
  */
-class RetrieveListCreateUpdateDeleteService extends GenericService
+abstract class RetrieveListCreateUpdateDeleteService extends GenericService
 {
     use RetrieveMixin, CreateMixin, DeleteMixin, UpdateMixin, ListMixin;
 }

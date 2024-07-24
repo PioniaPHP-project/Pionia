@@ -8,7 +8,6 @@ use Porm\Database\builders\PormObject;
 use Porm\exceptions\BaseDatabaseException;
 use Porm\Porm;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\FileBag;
 
 trait CrudContract
 {
@@ -269,6 +268,30 @@ trait CrudContract
     }
 
     /**
+     * @throws Exception
+     */
+    protected function checkIfFieldPassesAllValidations($field)
+    {
+        $column = $field;
+        $required = true;
+
+        if (is_array($field)){
+            $column = key($field);
+            $required = isset($field['required']) && $field['required'];
+        }
+
+        $dt = $this->getFieldValue($column);
+        if ($required && $dt  === null) {
+            throw new Exception("Field $column is required");
+        }
+
+        if ($dt && is_a(UploadedFile::class, $dt)){
+            $dt = $this->handleUpload($dt, $column);
+        }
+
+        return $dt;
+    }
+    /**
      * Create in CRUD
      * Saves in transactions, runs pre and post create events
      * @throws Exception
@@ -277,22 +300,26 @@ trait CrudContract
     {
         $this->detectAndAddColumns();
         if (!$this->createColumns) {
-            throw new Exception("Fields to use for creating undefined in the service");
+            throw new Exception("Create columns undefined!");
         }
-        foreach ($this->createColumns as $column) {
-            if ($this->getFieldValue($column) === null) {
-                throw new Exception("Field $column is required");
-            }
-        }
+
         $sanitizedData = [];
         foreach ($this->createColumns as $column) {
-             $dt = $this->getFieldValue($column);
-             if (is_a(FileBag::class, $dt) || is_a(UploadedFile::class, $dt)){
-                 $dt = $this->handleUpload($dt, $column);
-             }
-             if ($dt) {
-                 $sanitizedData[$column] = $dt;
-             }
+            $required = true;
+            if(str_ends_with($column, "?")) {
+                $column = trim(str_replace("?", "", $column));
+                $required = false;
+            }
+            $dt = $this->getFieldValue($column);
+            if ($dt instanceof UploadedFile){
+                $dt = $this->handleUpload($dt, $column);
+            }
+            if ($required && $dt === null) {
+                throw new Exception("Field $column is required");
+            }
+            if ($dt !== null) {
+                $sanitizedData[$column] = $dt;
+            }
         }
 
         $saved = null;
@@ -390,7 +417,7 @@ trait CrudContract
                 if ($this->getFieldValue($column) !== null) {
                     $dt = $this->getFieldValue($column);
 
-                    if (is_a(FileBag::class, $dt) || is_a(UploadedFile::class, $dt)){
+                    if (is_a(UploadedFile::class, $dt)){
                         $dt = $this->handleUpload($dt, $column);
                     }
                     if ($dt) {
@@ -403,7 +430,7 @@ trait CrudContract
                 if ($this->getFieldValue($key) !== null) {
                     $dt = $this->getFieldValue($key);
 
-                    if (is_a(FileBag::class, $dt) || is_a(UploadedFile::class, $dt)){
+                    if (is_a(UploadedFile::class, $dt)){
                         $dt = $this->handleUpload($dt, $key);
                     }
                     if ($dt) {

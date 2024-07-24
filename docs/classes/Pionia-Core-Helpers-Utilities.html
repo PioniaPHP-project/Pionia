@@ -299,6 +299,14 @@
 <dd>This function json encodes a value</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-Core-Helpers-Utilities.html#method_levelOneKeysOf">levelOneKeysOf()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Grabs all keys of an array. But ignores nested keys
+Converts [&#039;name&#039; =&gt; &#039;John&#039;, &#039;age&#039; =&gt; 20, &#039;address&#039; =&gt; [&#039;city&#039; =&gt; &#039;Lagos&#039;, &#039;state&#039; =&gt; &#039;Lagos&#039;]] to [&#039;name&#039;, &#039;age&#039;, &#039;address&#039;]</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Core-Helpers-Utilities.html#method_modelize">modelize()</a>
     <span>
                                 &nbsp;: string    </span>
@@ -724,6 +732,54 @@
             -public
                                     -static                    "
 >
+    <h4 class="phpdocumentor-element__name" id="method_levelOneKeysOf">
+        levelOneKeysOf()
+        <a href="classes/Pionia-Core-Helpers-Utilities.html#method_levelOneKeysOf" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Helpers/Utilities.php"><a href="files/src-core-helpers-utilities.html"><abbr title="src/Core/Helpers/Utilities.php">Utilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">161</span>
+
+            <a href="classes/Pionia-Core-Helpers-Utilities.html#source-view.161" class="phpdocumentor-element-found-in__source" data-line="161" data-modal="source-view" data-src="files/src/Core/Helpers/Utilities.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Grabs all keys of an array. But ignores nested keys
+Converts [&#039;name&#039; =&gt; &#039;John&#039;, &#039;age&#039; =&gt; 20, &#039;address&#039; =&gt; [&#039;city&#039; =&gt; &#039;Lagos&#039;, &#039;state&#039; =&gt; &#039;Lagos&#039;]] to [&#039;name&#039;, &#039;age&#039;, &#039;address&#039;]</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">levelOneKeysOf</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$array</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$array</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
     <h4 class="phpdocumentor-element__name" id="method_modelize">
         modelize()
         <a href="classes/Pionia-Core-Helpers-Utilities.html#method_modelize" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1073,6 +1129,7 @@
                                             <li><a href="classes/Pionia-Core-Helpers-Utilities.html#method_formatter">formatter()</a></li>
                                             <li><a href="classes/Pionia-Core-Helpers-Utilities.html#method_implements">implements()</a></li>
                                             <li><a href="classes/Pionia-Core-Helpers-Utilities.html#method_jsonify">jsonify()</a></li>
+                                            <li><a href="classes/Pionia-Core-Helpers-Utilities.html#method_levelOneKeysOf">levelOneKeysOf()</a></li>
                                             <li><a href="classes/Pionia-Core-Helpers-Utilities.html#method_modelize">modelize()</a></li>
                                             <li><a href="classes/Pionia-Core-Helpers-Utilities.html#method_pluralize">pluralize()</a></li>
                                             <li><a href="classes/Pionia-Core-Helpers-Utilities.html#method_singularize">singularize()</a></li>

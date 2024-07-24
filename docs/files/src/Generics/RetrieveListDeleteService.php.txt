@@ -10,7 +10,7 @@ use Pionia\Generics\Mixins\RetrieveMixin;
 /**
  * Adds the delete and retrieve actions to the service.
  */
-class RetrieveListDeleteService extends GenericService
+abstract class RetrieveListDeleteService extends GenericService
 {
     use DeleteMixin, ListMixin, RetrieveMixin;
 }

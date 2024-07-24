@@ -2,11 +2,11 @@
 
 namespace Pionia\Generics\Base;
 
+use Exception;
 use Pionia\Request\BaseRestService;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\FileBag;
 
-class GenericService extends BaseRestService
+abstract class GenericService extends BaseRestService
 {
     /**
      * @var string The base table to be used in the service. This is required when in joins or not
@@ -66,14 +66,22 @@ class GenericService extends BaseRestService
 
     /**
      * @param $name
-     * @return mixed|UploadedFile|FileBag|null
+     * @return mixed|UploadedFile|null
      */
     private function getFieldValue($name): mixed
     {
-        if (isset($this->fileColumns[$name])){
+        if (in_array($name, $this->fileColumns)){
             return $this->request->getFileByName($name) ?? null;
         }
         $data = $this->request->getData();
         return $data[$name] ?? null;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function handleUpload(UploadedFile $file, string $fileName): mixed
+    {
+        return $this->defaultUpload($file, $fileName);
     }
 }

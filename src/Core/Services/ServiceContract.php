@@ -2,6 +2,7 @@
 
 namespace Pionia\Core\Services;
 
+use Pionia\Core\Pionia;
 use Pionia\Exceptions\ResourceNotFoundException;
 use Pionia\Exceptions\UserUnauthenticatedException;
 use Pionia\Exceptions\UserUnauthorizedException;
@@ -19,7 +20,7 @@ use ReflectionMethod;
  * @property array $actionsRequiringAuth An array of actions that require authentication
  * @property bool $serviceRequiresAuth If true, the entire service requires authentication
  * @property string | null $authMessage This message will be displayed when the entire service requires authentication
- *
+ * @internal
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  **/
 abstract class ServiceContract
@@ -100,7 +101,7 @@ abstract class ServiceContract
                 if (is_array($this->actionPermissions[$action])){
                     $this->canAll($this->actionPermissions[$action]);
                 }
-                // from version 1.1.4, we started checking permissions that are also strings
+                // from version 1.1.4, we started checking permissions that are also strings, not arrays
                 if (is_string($this->actionPermissions[$action])){
                     $this->can($this->actionPermissions[$action]);
                 }
