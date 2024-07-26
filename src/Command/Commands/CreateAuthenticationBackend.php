@@ -4,6 +4,7 @@ namespace Pionia\Command\Commands;
 
 use Pionia\Codegens\AuthBackend;
 use Pionia\Command\BaseCommand;
+use Pionia\Core\Pionia;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,9 +24,9 @@ class CreateAuthenticationBackend extends BaseCommand
     {
         $this
             ->setName($this::$name)
-            ->setDescription('Creates a '.$this::base()::$name.' authentication backend')
+            ->setDescription('Creates a '.pionia::$name.' authentication backend')
             ->addArgument('name', InputArgument::REQUIRED, 'The name of the authentication backend')
-            ->setHelp('Create a new authentication backend of a '.$this::base()::$name.' application in app/authenticationBackends');
+            ->setHelp('Create a new authentication backend of a '.pionia::$name.' application in app/authenticationBackends');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

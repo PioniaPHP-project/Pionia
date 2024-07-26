@@ -4,6 +4,7 @@ namespace Pionia\Command\Commands;
 
 use Pionia\Codegens\Middleware;
 use Pionia\Command\BaseCommand;
+use Pionia\Core\Pionia;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,9 +24,9 @@ class CreateMiddleware extends BaseCommand
     {
         $this
             ->setName($this::$name)
-            ->setDescription('Creates a '.$this::base()::$name.' middleware')
+            ->setDescription('Creates a '.pionia::$name.' middleware')
             ->addArgument('name', InputArgument::REQUIRED, 'The name of the middleware to create')
-            ->setHelp('Create a new middleware of a '.$this::base()::$name.' application in app/middlewares');
+            ->setHelp('Create a new middleware of a '.pionia::$name.' application in app/middlewares');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
