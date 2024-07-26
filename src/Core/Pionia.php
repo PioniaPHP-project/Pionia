@@ -38,7 +38,10 @@ class Pionia
         }
     }
 
-
+    /**
+     * Returns all the settings in the settings file
+     * @return array|null
+     */
     public static function getSettings(): array | null
     {
         return self::$settings;
@@ -64,6 +67,10 @@ class Pionia
         return self::$settings[$key] ?? null;
     }
 
+    /**
+     * Returns the server settings under [server] in the settings file
+     * @return array
+     */
     public static function getServerSettings(): array
     {
         $settings =  self::getSetting("server");

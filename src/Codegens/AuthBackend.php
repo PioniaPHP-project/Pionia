@@ -11,7 +11,7 @@ use Pionia\Request\Request;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Code generator for creating Authentication Backends
+ * Generates Authentication Backends
  */
 class AuthBackend extends CodeGenerator
 {
@@ -71,7 +71,7 @@ class AuthBackend extends CodeGenerator
     {
         $method = $class->addMethod($action)
             ->setPublic()
-            ->setReturnType(ContextUserObject::class)
+            ->setReturnType(null | ContextUserObject::class)
             ->addComment("Implement this method and return your 'ContextUserObject'. You can use Porm here too!")
             ->addBody("\$userObj = new ContextUserObject();")
             ->addBody("")

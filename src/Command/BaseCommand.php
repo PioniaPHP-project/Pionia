@@ -32,11 +32,7 @@ class BaseCommand extends Command
 
     protected function getServerSettings(): array
     {
-        $settings =  Pionia::getSetting("server");
-        if ($settings && is_array($settings)) {
-            return $settings;
-        }
-        return [];
+        return pionia::getServerSettings();
     }
 
     /**
