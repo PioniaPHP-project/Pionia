@@ -44,8 +44,6 @@ if (!defined("pionia")){
  *
  * It also catches all exceptions and returns a 200 ok response with error code 500
  *
- * @property $name string - The name of the application
- * @property $version string - The version of the application
  * @property $routes BaseRoutes - Instance of the base routes
  * @property $context RequestContext - Instance of the request context
  * @property $matcher UrlMatcher - Instance of the url matcher
@@ -79,24 +77,8 @@ class CoreKernel
     }
 
     public function __construct(
-        private BaseRoutes $routes,
+        private readonly BaseRoutes $routes,
     ){
-    }
-
-    /**
-     * @param array|string $middleware
-     * @return CoreKernel
-     *
-     * @deprecated - register middlewares directly in the settings.ini file. Will be removed from future versions
-     */
-    public function registerMiddleware(array | string $middleware): static
-    {
-        if (is_array($middleware)) {
-            $this->middleware = array_merge($this->middleware, $middleware);
-        }else{
-            $this->middleware[] = $middleware;
-        }
-        return $this;
     }
 
     /**
@@ -139,22 +121,6 @@ class CoreKernel
                 $this->authBackends[] = $auth;
             }
         }
-    }
-
-    /**
-     * @param array|string $auth_backends
-     * @return CoreKernel
-     *
-     * @deprecated - register authentications directly in the settings.ini file. Will be removed from future versions
-     */
-    public function registerAuthBackends(array | string $auth_backends): static
-    {
-        if (is_string($auth_backends)){
-            $this->authBackends[] = $auth_backends;
-        } else {
-            $this->authBackends = array_merge($this->authBackends, $auth_backends);
-        }
-        return $this;
     }
 
 
