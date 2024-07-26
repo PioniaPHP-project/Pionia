@@ -8,11 +8,10 @@ require_once __DIR__ . '/switches/V1Switch.php';
 $router  = new PioniaRouter();
 
 try {
-    $api = '\app\switches\V1Switch';
-    $router->addSwitchFor($api);
+    $router->addSwitchFor("\app\switches\V1Switch");
 } catch (ControllerException $e) {
-    echo $e->getMessage();
-    die();
+    logger->debug($e->getMessage());
+    exit();
 }
 
 return $router->getRoutes();

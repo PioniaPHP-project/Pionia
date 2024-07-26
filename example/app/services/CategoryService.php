@@ -2,7 +2,6 @@
 
 namespace application\services;
 
-use Exception;
 use Pionia\Generics\Base\JoinType;
 use Pionia\Generics\UniversalGenericService;
 

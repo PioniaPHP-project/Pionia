@@ -70,7 +70,7 @@ abstract class GenericService extends BaseRestService
      */
     private function getFieldValue($name): mixed
     {
-        if (in_array($name, $this->fileColumns)){
+        if ($this->fileColumns && in_array($name, $this->fileColumns)){
             return $this->request->getFileByName($name) ?? null;
         }
         $data = $this->request->getData();

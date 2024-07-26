@@ -40,4 +40,3 @@ $kernel = new CoreKernel($routes);
 $kernel->resolveCors();
 
 $response = $kernel->run();
-

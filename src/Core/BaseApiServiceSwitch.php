@@ -22,7 +22,7 @@ use ReflectionException;
  * @see BaseResponse for the response returned by this swicher's processServices method
  *
  */
-abstract class BaseApiServiceSwitch extends BaseApiController
+abstract class BaseApiServiceSwitch
 {
     /**
      * This method must be implemented by the child class to return an array of services.
@@ -60,9 +60,13 @@ abstract class BaseApiServiceSwitch extends BaseApiController
         $action = $data['ACTION']?? $data['action'] ?? throw new ResourceNotFoundException("Action not defined in request data");
 
         $klass = new static();
-        $serviceNames = array_keys($klass->registerServices());
-        if (in_array($service, $serviceNames)) {
-            $serviceKlass = $klass->registerServices()[$service];
+        $serviceKlass = $klass->registerServices()[$service]?? null;
+        // if the class was defined as a string especially using Service::class, we instantiate it
+        if ($serviceKlass && is_string($serviceKlass)){
+            $serviceKlass = new $serviceKlass();
+        }
+
+        if ($serviceKlass) {
             if (!is_a($serviceKlass, 'Pionia\request\BaseRestService', true)){
                 throw new ResourceNotFoundException("Service $service is not a valid service");
             }
@@ -78,20 +82,20 @@ abstract class BaseApiServiceSwitch extends BaseApiController
      */
     public static function processor(Request $request): BaseResponse
     {
-        $codes = self::getServerSettings();
+        $codes = pionia::getServerSettings();
         try {
             return self::processServices($request);
         } catch (ResourceNotFoundException $e) {
-            $nofFount = $codes['NOT_FOUND_CODE']??404;
+            $nofFount = $codes['NOT_FOUND_CODE'] ?? $codes['not_found_code'] ?? 404;
             return BaseResponse::JsonResponse($nofFount, $e->getMessage());
         } catch (UserUnauthenticatedException $e) {
-            $auth = $codes['UNAUTHENTICATED_CODE']??401;
+            $auth = $codes['UNAUTHENTICATED_CODE'] ?? $codes['unauthenticated_code'] ?? 401;
             return BaseResponse::JsonResponse($auth, $e->getMessage());
         } catch (ReflectionException $e) {
-            $serverError = $codes['SERVER_ERROR_CODE']??500;
+            $serverError = $codes['SERVER_ERROR_CODE'] ?? $codes['server_error_code'] ?? 500;
             return BaseResponse::JsonResponse($serverError, $e->getMessage());
         } catch (UserUnauthorizedException $e) {
-            $unauth = $codes['UNAUTHORIZED_CODE']??403;
+            $unauth = $codes['UNAUTHORIZED_CODE'] ?? $codes['unauthorized_code'] ?? 403;
             return BaseResponse::JsonResponse($unauth, $e->getMessage());
         }
     }
@@ -104,8 +108,8 @@ abstract class BaseApiServiceSwitch extends BaseApiController
     public function ping(Request $request): BaseResponse
     {
         return BaseResponse::JsonResponse(0, 'pong', [
-            'framework' => $this::$name,
-            'version'=> $this::$version,
+            'framework' => pionia::$name,
+            'version'=> pionia::$version,
             'port' => $request->getPort(),
             'uri' => $request->getRequestUri(),
             'schema' => $request->getScheme(),

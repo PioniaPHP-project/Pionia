@@ -3,6 +3,7 @@
 namespace Pionia\Core\Config;
 
 use Exception;
+use JetBrains\PhpStorm\NoReturn;
 use Pionia\Core\Helpers\SupportedHttpMethods;
 use Pionia\Core\Helpers\Utilities;
 use Pionia\Core\Pionia;
@@ -12,6 +13,7 @@ use Pionia\Request\Request;
 use Pionia\Response\BaseResponse;
 use Pionia\Response\Response;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
@@ -67,7 +69,7 @@ class CoreKernel
         $settings = pionia::getSettingOrDefault('cors', []);
         $allowedOrigins = $settings['ALLOW_ORIGIN'] ?? '*';
         $allowedHeaders = $settings['ALLOW_HEADERS'] ?? '*';
-        $allowedCredentials = $settings['ALLOW_CREDENTIALS'] ?? 'true';
+        $allowedCredentials = $settings['ALLOW_CREDENTIALS'] ?? 'false';
         $maxAge = $settings['MAX_AGE'] ?? 3600;
         header('Access-Control-Allow-Origin: '.$allowedOrigins);
         header('Access-Control-Allow-Headers: '.$allowedHeaders);
@@ -336,39 +338,28 @@ class CoreKernel
 
     private function resolveFrontEnd(Request $request): void
     {
+        $path = $request->getPathInfo();
         if (!str_starts_with($request->getPathInfo(), '/api') && strtolower($request->getMethod()) === 'get'){
             $fileSystem = new Filesystem();
-            $base = BASEPATH;
-            if (!str_ends_with($base, '/')){
-                $base = $base . '/';
+            if ($fileSystem->exists(BASEPATH . '/index.html')){
+                $this->serveSpa($fileSystem, $path, $request);
             }
-            $path = $base . 'public/index.html';
-
-            if ($fileSystem->exists($path)){
-                $response = new Response(file_get_contents($path), Response::HTTP_OK, ['Content-Type' => 'text/html']);
-            } else {
-                $response = new Response(file_get_contents(__DIR__ . '/index.php'), Response::HTTP_OK, ['Content-Type' => 'text/html']);
-            }
-            $response->send();
+            $response = new Response(file_get_contents(__DIR__ . '/index.php'), Response::HTTP_OK, ['Content-Type' => 'text/html']);
+            $response->prepare($request)->send();
             exit();
         }
     }
 
-    public function detectContentType(string $extension): string
+    #[NoReturn]
+    private function serveSpa($fileSystem, $path, $request): void
     {
-        $mimeTypes = [
-            'html' => 'text/html',
-            'css' => 'text/css',
-            'js' => 'application/javascript',
-            'json' => 'application/json',
-            'jpg' => 'image/jpeg',
-            'jpeg' => 'image/jpeg',
-            'png' => 'image/png',
-            'gif' => 'image/gif',
-            'svg' => 'image/svg+xml',
-            'pdf' => 'application/pdf',
-        ];
-        return $mimeTypes[$extension] ?? 'application/octet-stream';
+        $base = BASEPATH;
+        if (!str_ends_with($base, '/')) {
+            $base = $base . '/';
+        }
+        $path = $base . 'index.html';
+        $response = new Response(file_get_contents($path), ResponseAlias::HTTP_OK, ['Content-Type' => 'text/html']);
+        $response->prepare(Request::createFromGlobals())->send();
+        exit();
     }
-
 }

@@ -68,7 +68,7 @@ class PioniaRouter
             throw new ControllerException('No controller defined');
         }
 
-        $res = Utilities::extends($controller, 'Pionia\Core\BaseApiController');
+        $res = Utilities::extends($controller, 'Pionia\Core\BaseApiServiceSwitch');
         if ($res ==='NO_CLASS'){
             throw new ControllerException("Controller {$controller} class not found");
         } elseif ($res === 'DOES_NOT') {
