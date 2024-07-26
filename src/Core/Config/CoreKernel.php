@@ -221,32 +221,8 @@ class CoreKernel
     }
 
     /**
-     * This is the main method that runs the entire request cycle.
-     * @param Request $request
-     * @return Response
-     *
-     * @deprecated - This method will be removed in future versions. Use the run method instead
-     */
-    public function handle(Request $request): Response
-    {
-        $this->resolveFrontEnd($request);
-
-        try {
-            $request = $this->resolveMiddlewares($request); // first run for all middlewares
-            $request =$this->resolveAuthenticationBackend($request); // run all the authentication middles
-            $response = $this->resolve($request);
-            $request = $this->resolveMiddlewares($request, $response);
-            return $response->prepare($request)->send();
-        } catch (Exception $exception) {
-            $response = BaseResponse::JsonResponse(500, $exception->getMessage());
-            $reqRes =  new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
-            return $reqRes->prepare($request)->send();
-        }
-    }
-
-    /**
-     * This is the main method that runs the entire request cycle.
-     * It automatically resolves the request internally.
+     * Bootstraps the entire application
+     * It automatically resolves the request internally, middlewares, authentication backends and the controller
      * @return Response
      * @since 1.1.1 - This method was added to replace the handle method. The handle method will be removed in future versions
      */
@@ -264,7 +240,7 @@ class CoreKernel
             return $response->prepare($request)->send();
         } catch (Exception $exception) {
             $response = BaseResponse::JsonResponse(500, $exception->getMessage());
-            $reqRes =  new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
+            $reqRes =  new Response($response->getPrettyResponse(), ResponseAlias::HTTP_OK, ['Content-Type' => 'application/json']);
             return $reqRes->prepare($request)->send();
         }
     }
@@ -291,6 +267,7 @@ class CoreKernel
     }
 
     /**
+     * Resolves all authentication middlewares using the `authenticationBackendWorker` method
      * @throws Exception
      */
     private function resolveAuthenticationBackend(Request $request): Request
@@ -321,6 +298,7 @@ class CoreKernel
         $current = array_shift($backends);
 
         $klass = new $current();
+
         $userObject =  $klass->authenticate($request);
 
         // if there is an instance, we set it to context and the next  iteration will be terminated immediately
@@ -333,16 +311,25 @@ class CoreKernel
         if (count($backends) > 0) {
             return $this->authenticationBackendWorker($request, $backends);
         }
+
+        // otherwise we abort the process and return the request and proceed. It will be handled on the action or service
+        // level
         return $request;
     }
 
+    /**
+     * Resolves the front end if the request is a get request and the path is not an api path
+     *
+     * Using any frontend of your choice, you can serve the front end from the root of the project
+     * @param Request $request
+     * @return void
+     */
     private function resolveFrontEnd(Request $request): void
     {
-        $path = $request->getPathInfo();
         if (!str_starts_with($request->getPathInfo(), '/api') && strtolower($request->getMethod()) === 'get'){
             $fileSystem = new Filesystem();
             if ($fileSystem->exists(BASEPATH . '/index.html')){
-                $this->serveSpa($fileSystem, $path, $request);
+                $this->serveSpa();
             }
             $response = new Response(file_get_contents(__DIR__ . '/index.php'), Response::HTTP_OK, ['Content-Type' => 'text/html']);
             $response->prepare($request)->send();
@@ -350,8 +337,12 @@ class CoreKernel
         }
     }
 
-    #[NoReturn]
-    private function serveSpa($fileSystem, $path, $request): void
+    /**
+     * Serves Single Page Applications. This is useful for serving the front end from the root of the project.
+     * Handles also cases where users refreshes the url from relative paths to the frontend
+     * @return void
+     */
+    #[NoReturn] private function serveSpa(): void
     {
         $base = BASEPATH;
         if (!str_ends_with($base, '/')) {
