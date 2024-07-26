@@ -23,5 +23,11 @@ use Pionia\Response\Response;
  */
 abstract class BaseMiddleware
 {
+    /**
+     * This method is called to run the middleware. Every middleware must implement this method.
+     *
+     * @param Request $request - The request object
+     * @param Response|null $response - The response object
+     */
     public abstract function run(Request $request,  Response | null $response);
 }

@@ -85,7 +85,11 @@ class Pionia
         return self::getSetting($key) ?? $default;
     }
 
-    public static function resolveSettingsFromIni(): mixed
+    /**
+     * This method resolves the settings from the settings file
+     * @return array|bool|null
+     */
+    public static function resolveSettingsFromIni(): array|bool|null
     {
         if (defined('SETTINGS') === false){
             return null;
@@ -114,4 +118,5 @@ class Pionia
     {
         return self::getSetting('uploads') ?? [];
     }
+
 }

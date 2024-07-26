@@ -65,6 +65,7 @@ abstract class GenericService extends BaseRestService
     use EventsContract, CrudContract, JoinContract, UploadsContract;
 
     /**
+     * Picks the value of a field from the request data
      * @param $name
      * @return mixed|UploadedFile|null
      */
@@ -78,6 +79,11 @@ abstract class GenericService extends BaseRestService
     }
 
     /**
+     * Provides the default upload behaviour for the service.
+     *
+     * You can override this method in your service to provide custom upload behaviour.
+     * @param UploadedFile $file The file to upload
+     * @param string $fileName The name to save the file as
      * @throws Exception
      */
     public function handleUpload(UploadedFile $file, string $fileName): mixed

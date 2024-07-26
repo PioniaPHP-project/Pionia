@@ -16,6 +16,6 @@ class ConsoleApplication extends Application
 {
     public function __construct()
     {
-        parent::__construct(Pionia::$name.' Console', Pionia::$version);
+        parent::__construct(pionia::$name.' Console', pionia::$version);
     }
 }

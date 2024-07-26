@@ -13,7 +13,7 @@ use Pionia\Logging\PioniaLogger;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class CommandInterface extends Pionia
+class CommandInterface
 {
     /**
      * These are the core commands that are available in the framework
@@ -39,7 +39,7 @@ class CommandInterface extends Pionia
      * Checks if a command is valid and then adds it to the in-built commands stack
      * @throws CommandException
      */
-    private function addCommand(string $command): array
+    private function addCommand(string $command): void
     {
         $check = Utilities::extends($command, 'Pionia\Command\BaseCommand');
         if ($check === 'NO_CLASS'){
@@ -49,11 +49,11 @@ class CommandInterface extends Pionia
             throw new CommandException("Command {$command} must extend Pionia\Command\BaseCommand");
         }
         $this->commands[]= $command;
-        return $this->commands;
     }
 
     /**
      * @throws Exception
+     * @internal
      */
     private function run(): ConsoleApplication
     {
@@ -66,8 +66,11 @@ class CommandInterface extends Pionia
     }
 
     /**
-     * Sets a new Pionia instance, merges all commands declared in settings.ini with the inbuilt commands.
+     * Bootstraps the Pionia Command Interface.
+     * This method is the entry point for all commands in the framework
      *
+     * It also registers all commands registered in the app settings under settings.ini
+     * @return ConsoleApplication
      * @throws Exception
      */
     public static function setUp(): ConsoleApplication
@@ -79,8 +82,8 @@ class CommandInterface extends Pionia
             define('pionia', Pionia::boot());
         }
         $app = new self();
-        $otherCommands = $app->getSetting('commands');
-        if ($otherCommands){
+        $otherCommands = pionia->getSetting('commands');
+        if ($otherCommands && is_array($otherCommands)){
             $actual = array_values($otherCommands);
             foreach ($actual as $command){
                 $app->addCommand($command);
