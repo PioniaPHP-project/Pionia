@@ -5,11 +5,6 @@ namespace Pionia\Logging;
 use Monolog\Formatter\JsonFormatter;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Level;
-use Monolog\Processor\HostnameProcessor;
-use Monolog\Processor\MemoryUsageProcessor;
-use Monolog\Processor\ProcessIdProcessor;
-use Monolog\Processor\PsrLogMessageProcessor;
-use Monolog\Processor\WebProcessor;
 use Pionia\Core\Pionia;
 use Monolog\Handler\StreamHandler; // The StreamHandler sends log messages to a file on your disk
 use Monolog\Logger; // The Logger class is the main class of the Monolog library
@@ -17,7 +12,7 @@ use Monolog\Logger; // The Logger class is the main class of the Monolog library
  */
 class PioniaLogger
 {
-    private static $hiddenKeys = ['password', 'pass', 'pin', 'passwd', 'secret_key', 'pwd', 'token', 'credit_card', 'creditcard', 'cc', 'secret', 'cvv', 'cvn'];
+    private static array $hiddenKeys = ['password', 'pass', 'pin', 'passwd', 'secret_key', 'pwd', 'token', 'credit_card', 'creditcard', 'cc', 'secret', 'cvv', 'cvn'];
 
     /**
      * Call this method to initialise the logger.
@@ -44,9 +39,8 @@ class PioniaLogger
      */
     public static function init(): Logger | null
     {
-        $pionia = new Pionia();
-        $settings = $pionia::getSettings();
-        $serverSettings = $pionia::getServerSettings();
+        $settings = pionia::getSettings();
+        $serverSettings = pionia::getServerSettings();
         $processors = $serverSettings['LOG_PROCESSORS'] ?? [];
 
         if (array_key_exists("DEBUG", $serverSettings)) {
@@ -77,7 +71,7 @@ class PioniaLogger
             $stream = $destination;
         }
 
-        $logger = new Logger($pionia::$name);
+        $logger = new Logger(pionia::$name);
 
         if (is_string($processors)) {
             $processors = explode(',', $processors);
@@ -123,7 +117,7 @@ class PioniaLogger
         if ($outFormat === 'JSON') {
             $formatter = new JsonFormatter(1, true, true, true);
         } else {
-            $output = '[%datetime%] '.strtolower($pionia::$name).".%level_name% >> %message% :: %context% %extra%\n";
+            $output = '[%datetime%] '.strtolower(pionia::$name).".%level_name% >> %message% :: %context% %extra%\n";
             $formatter = new LineFormatter($output, null, true, true);
         }
 
