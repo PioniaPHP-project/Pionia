@@ -5,6 +5,8 @@ namespace Pionia\Database;
 use Porm\Core\Database;
 
 /**
- * @inheritDoc
+ * Provides a connection to the database
+ *
+ * It extends the Porm Database class
  */
 class Connection extends Database {}

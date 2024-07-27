@@ -9,14 +9,15 @@ use Pionia\Core\Helpers\ContextUserObject;
 use Pionia\Core\Interceptions\BaseAuthenticationBackend;
 use Pionia\Request\Request;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
- * Code generator for creating Authentication Backends
+ * Generates Authentication Backends
  */
 class AuthBackend extends CodeGenerator
 {
-    private string $dir = BASEPATH.'/app/authenticationBackends/';
-    private string $namespace = 'application\authenticationBackends';
+    private string $dir = BASEPATH.'/app/authentications/';
+    private string $namespace = 'application\authentications';
 
     private array $actions = ['authenticate'];
 
@@ -26,7 +27,7 @@ class AuthBackend extends CodeGenerator
         $this->output = $output;
     }
 
-    public function generate(?string $className = null): void
+    public function generate(?string $className = null, ?SymfonyStyle $io= null): void
     {
         if ($className){
             $this->name = $className;
@@ -57,7 +58,7 @@ class AuthBackend extends CodeGenerator
 
         $this->createFile($directory, $file);
 
-        $this->log("Authentication Backend $name created at $directory.");
+        $io->success("Authentication Backend $name created at $directory.");
     }
 
     private function addActions(ClassType $class): void
@@ -72,6 +73,7 @@ class AuthBackend extends CodeGenerator
         $method = $class->addMethod($action)
             ->setPublic()
             ->setReturnType(ContextUserObject::class)
+            ->setReturnNullable()
             ->addComment("Implement this method and return your 'ContextUserObject'. You can use Porm here too!")
             ->addBody("\$userObj = new ContextUserObject();")
             ->addBody("")

@@ -23,7 +23,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Codegens\\AuthBackend",
             "name": "AuthBackend",
-            "summary": "Code\u0020generator\u0020for\u0020creating\u0020Authentication\u0020Backends",
+            "summary": "Generates\u0020Authentication\u0020Backends",
             "url": "classes/Pionia-Codegens-AuthBackend.html"
         },                {
             "fqsen": "\\Pionia\\Codegens\\AuthBackend\u003A\u003A__construct\u0028\u0029",
@@ -101,6 +101,51 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-Codegens-CodeGenerator.html#property_output"
         },                {
+            "fqsen": "\\Pionia\\Codegens\\GenerateSwitch",
+            "name": "GenerateSwitch",
+            "summary": "Code\u0020generator\u0020for\u0020creating\u0020middleware\u0020files\u0020in\u0020pionia",
+            "url": "classes/Pionia-Codegens-GenerateSwitch.html"
+        },                {
+            "fqsen": "\\Pionia\\Codegens\\GenerateSwitch\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Pionia-Codegens-GenerateSwitch.html#method___construct"
+        },                {
+            "fqsen": "\\Pionia\\Codegens\\GenerateSwitch\u003A\u003Agenerate\u0028\u0029",
+            "name": "generate",
+            "summary": "",
+            "url": "classes/Pionia-Codegens-GenerateSwitch.html#method_generate"
+        },                {
+            "fqsen": "\\Pionia\\Codegens\\GenerateSwitch\u003A\u003AaddActions\u0028\u0029",
+            "name": "addActions",
+            "summary": "",
+            "url": "classes/Pionia-Codegens-GenerateSwitch.html#method_addActions"
+        },                {
+            "fqsen": "\\Pionia\\Codegens\\GenerateSwitch\u003A\u003AcreateActionMethod\u0028\u0029",
+            "name": "createActionMethod",
+            "summary": "",
+            "url": "classes/Pionia-Codegens-GenerateSwitch.html#method_createActionMethod"
+        },                {
+            "fqsen": "\\Pionia\\Codegens\\GenerateSwitch\u003A\u003A\u0024dir",
+            "name": "dir",
+            "summary": "",
+            "url": "classes/Pionia-Codegens-GenerateSwitch.html#property_dir"
+        },                {
+            "fqsen": "\\Pionia\\Codegens\\GenerateSwitch\u003A\u003A\u0024namespace",
+            "name": "namespace",
+            "summary": "",
+            "url": "classes/Pionia-Codegens-GenerateSwitch.html#property_namespace"
+        },                {
+            "fqsen": "\\Pionia\\Codegens\\GenerateSwitch\u003A\u003A\u0024sweetName",
+            "name": "sweetName",
+            "summary": "",
+            "url": "classes/Pionia-Codegens-GenerateSwitch.html#property_sweetName"
+        },                {
+            "fqsen": "\\Pionia\\Codegens\\GenerateSwitch\u003A\u003A\u0024actions",
+            "name": "actions",
+            "summary": "",
+            "url": "classes/Pionia-Codegens-GenerateSwitch.html#property_actions"
+        },                {
             "fqsen": "\\Pionia\\Codegens\\Middleware",
             "name": "Middleware",
             "summary": "Code\u0020generator\u0020for\u0020creating\u0020middleware\u0020files\u0020in\u0020pionia",
@@ -135,6 +180,11 @@ Search.appendIndex(
             "name": "namespace",
             "summary": "",
             "url": "classes/Pionia-Codegens-Middleware.html#property_namespace"
+        },                {
+            "fqsen": "\\Pionia\\Codegens\\Middleware\u003A\u003A\u0024sweetName",
+            "name": "sweetName",
+            "summary": "",
+            "url": "classes/Pionia-Codegens-Middleware.html#property_sweetName"
         },                {
             "fqsen": "\\Pionia\\Codegens\\Middleware\u003A\u003A\u0024actions",
             "name": "actions",
@@ -191,6 +241,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-Codegens-Service.html#property_defaults"
         },                {
+            "fqsen": "\\Pionia\\Codegens\\Service\u003A\u003A\u0024serviceType",
+            "name": "serviceType",
+            "summary": "",
+            "url": "classes/Pionia-Codegens-Service.html#property_serviceType"
+        },                {
+            "fqsen": "\\Pionia\\Codegens\\Service\u003A\u003A\u0024targetTable",
+            "name": "targetTable",
+            "summary": "",
+            "url": "classes/Pionia-Codegens-Service.html#property_targetTable"
+        },                {
             "fqsen": "\\Pionia\\Command\\BaseCommand",
             "name": "BaseCommand",
             "summary": "This\u0020is\u0020the\u0020base\u0020command\u0020class,\u0020it\u0020extends\u0020the\u0020Symfony\u0020console\u0020command\u0020class\u0020and\u0020provides\u0020some\u0020helper\u0020methods\nthat\u0020can\u0020be\u0020used\u0020in\u0020all\u0020commands.\u0020All\u0020commands\u0020should\u0020extend\u0020this\u0020class.",
@@ -200,16 +260,6 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Pionia-Command-BaseCommand.html#method___construct"
-        },                {
-            "fqsen": "\\Pionia\\Command\\BaseCommand\u003A\u003Abase\u0028\u0029",
-            "name": "base",
-            "summary": "Return\u0020the\u0020base\u0020app,\u0020via\u0020this,\u0020you\u0020can\u0020access\u0020all\u0020the\u0020app\u0020settings,\u0020and\u0020current\u0020app\u0020environment",
-            "url": "classes/Pionia-Command-BaseCommand.html#method_base"
-        },                {
-            "fqsen": "\\Pionia\\Command\\BaseCommand\u003A\u003AgetServerSettings\u0028\u0029",
-            "name": "getServerSettings",
-            "summary": "",
-            "url": "classes/Pionia-Command-BaseCommand.html#method_getServerSettings"
         },                {
             "fqsen": "\\Pionia\\Command\\BaseCommand\u003A\u003Aconnection\u0028\u0029",
             "name": "connection",
@@ -231,14 +281,9 @@ Search.appendIndex(
             "summary": "Checks\u0020if\u0020a\u0020command\u0020is\u0020valid\u0020and\u0020then\u0020adds\u0020it\u0020to\u0020the\u0020in\u002Dbuilt\u0020commands\u0020stack",
             "url": "classes/Pionia-Command-CommandInterface.html#method_addCommand"
         },                {
-            "fqsen": "\\Pionia\\Command\\CommandInterface\u003A\u003Arun\u0028\u0029",
-            "name": "run",
-            "summary": "",
-            "url": "classes/Pionia-Command-CommandInterface.html#method_run"
-        },                {
             "fqsen": "\\Pionia\\Command\\CommandInterface\u003A\u003AsetUp\u0028\u0029",
             "name": "setUp",
-            "summary": "Sets\u0020a\u0020new\u0020Pionia\u0020instance,\u0020merges\u0020all\u0020commands\u0020declared\u0020in\u0020settings.ini\u0020with\u0020the\u0020inbuilt\u0020commands.",
+            "summary": "Bootstraps\u0020the\u0020Pionia\u0020Command\u0020Interface.",
             "url": "classes/Pionia-Command-CommandInterface.html#method_setUp"
         },                {
             "fqsen": "\\Pionia\\Command\\CommandInterface\u003A\u003A\u0024commands",
@@ -246,95 +291,265 @@ Search.appendIndex(
             "summary": "These\u0020are\u0020the\u0020core\u0020commands\u0020that\u0020are\u0020available\u0020in\u0020the\u0020framework",
             "url": "classes/Pionia-Command-CommandInterface.html#property_commands"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateAuthenticationBackend",
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\BuildFrontendCommand",
+            "name": "BuildFrontendCommand",
+            "summary": "Builds\u0020and\u0020hosts\u0020the\u0020frontend\u0020in\u0020our\u0020app",
+            "url": "classes/Pionia-Command-Commands-Frontend-BuildFrontendCommand.html"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\BuildFrontendCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-BuildFrontendCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\BuildFrontendCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "Scaffolds\u0020a\u0020full\u0020frontend\u0020framework",
+            "url": "classes/Pionia-Command-Commands-Frontend-BuildFrontendCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\BuildFrontendCommand\u003A\u003AreturnAllFilesInDir\u0028\u0029",
+            "name": "returnAllFilesInDir",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-BuildFrontendCommand.html#method_returnAllFilesInDir"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\BuildFrontendCommand\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-BuildFrontendCommand.html#property_name"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\BuildFrontendCommand\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-BuildFrontendCommand.html#property_description"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\CleanBuildCommand",
+            "name": "CleanBuildCommand",
+            "summary": "Cleans\u0020all\u0020build\u0020files\u0020that\u0020were\u0020formerly\u0020added\u0020via\u0020building.",
+            "url": "classes/Pionia-Command-Commands-Frontend-CleanBuildCommand.html"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\CleanBuildCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-CleanBuildCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\CleanBuildCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-CleanBuildCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\CleanBuildCommand\u003A\u003A\u0024directory",
+            "name": "directory",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-CleanBuildCommand.html#property_directory"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\CleanBuildCommand\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-CleanBuildCommand.html#property_name"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\CleanBuildCommand\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-CleanBuildCommand.html#property_description"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\DropFrontendCommand",
+            "name": "DropFrontendCommand",
+            "summary": "Drops\u0020an\u0020entire\u0020frontend",
+            "url": "classes/Pionia-Command-Commands-Frontend-DropFrontendCommand.html"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\DropFrontendCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-DropFrontendCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\DropFrontendCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-DropFrontendCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\DropFrontendCommand\u003A\u003A\u0024directory",
+            "name": "directory",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-DropFrontendCommand.html#property_directory"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\DropFrontendCommand\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-DropFrontendCommand.html#property_name"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\DropFrontendCommand\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-DropFrontendCommand.html#property_description"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\ScaffoldFrontendCommand",
+            "name": "ScaffoldFrontendCommand",
+            "summary": "Scaffolds\u0020any\u0020frontend\u0020project\u0020in\u0020the\u0020right\u0020directory\u0020using\u0020a\u0020package\u0020manage\u0020of\u0020choice\u0020and\u0020a\u0020frontend\u0020framework\u0020of\u0020choice.",
+            "url": "classes/Pionia-Command-Commands-Frontend-ScaffoldFrontendCommand.html"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\ScaffoldFrontendCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-ScaffoldFrontendCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\ScaffoldFrontendCommand\u003A\u003AaskFrameworkOptions\u0028\u0029",
+            "name": "askFrameworkOptions",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-ScaffoldFrontendCommand.html#method_askFrameworkOptions"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\ScaffoldFrontendCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "Scaffolds\u0020a\u0020full\u0020frontend\u0020framework",
+            "url": "classes/Pionia-Command-Commands-Frontend-ScaffoldFrontendCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\ScaffoldFrontendCommand\u003A\u003A\u0024frameworks",
+            "name": "frameworks",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-ScaffoldFrontendCommand.html#property_frameworks"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\ScaffoldFrontendCommand\u003A\u003A\u0024pManagers",
+            "name": "pManagers",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-ScaffoldFrontendCommand.html#property_pManagers"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\ScaffoldFrontendCommand\u003A\u003A\u0024packageManager",
+            "name": "packageManager",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-ScaffoldFrontendCommand.html#property_packageManager"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\ScaffoldFrontendCommand\u003A\u003A\u0024directory",
+            "name": "directory",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-ScaffoldFrontendCommand.html#property_directory"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\ScaffoldFrontendCommand\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-ScaffoldFrontendCommand.html#property_name"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\ScaffoldFrontendCommand\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Frontend-ScaffoldFrontendCommand.html#property_description"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend",
             "name": "CreateAuthenticationBackend",
             "summary": "For\u0020Creating\u0020a\u0020new\u0020service",
-            "url": "classes/Pionia-Command-Commands-CreateAuthenticationBackend.html"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateAuthenticationBackend\u003A\u003Aconfigure\u0028\u0029",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend\u003A\u003Aconfigure\u0028\u0029",
             "name": "configure",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateAuthenticationBackend.html#method_configure"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html#method_configure"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateAuthenticationBackend\u003A\u003Aexecute\u0028\u0029",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend\u003A\u003Aexecute\u0028\u0029",
             "name": "execute",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateAuthenticationBackend.html#method_execute"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html#method_execute"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateAuthenticationBackend\u003A\u003A\u0024title",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend\u003A\u003A\u0024title",
             "name": "title",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateAuthenticationBackend.html#property_title"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html#property_title"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateAuthenticationBackend\u003A\u003A\u0024description",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend\u003A\u003A\u0024description",
             "name": "description",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateAuthenticationBackend.html#property_description"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html#property_description"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateAuthenticationBackend\u003A\u003A\u0024name",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend\u003A\u003A\u0024name",
             "name": "name",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateAuthenticationBackend.html#property_name"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html#property_name"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateMiddleware",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateMiddleware",
             "name": "CreateMiddleware",
             "summary": "For\u0020Creating\u0020a\u0020new\u0020service",
-            "url": "classes/Pionia-Command-Commands-CreateMiddleware.html"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateMiddleware.html"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateMiddleware\u003A\u003Aconfigure\u0028\u0029",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateMiddleware\u003A\u003Aconfigure\u0028\u0029",
             "name": "configure",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateMiddleware.html#method_configure"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateMiddleware.html#method_configure"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateMiddleware\u003A\u003Aexecute\u0028\u0029",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateMiddleware\u003A\u003Aexecute\u0028\u0029",
             "name": "execute",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateMiddleware.html#method_execute"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateMiddleware.html#method_execute"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateMiddleware\u003A\u003A\u0024title",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateMiddleware\u003A\u003A\u0024title",
             "name": "title",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateMiddleware.html#property_title"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateMiddleware.html#property_title"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateMiddleware\u003A\u003A\u0024description",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateMiddleware\u003A\u003A\u0024description",
             "name": "description",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateMiddleware.html#property_description"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateMiddleware.html#property_description"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateMiddleware\u003A\u003A\u0024name",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateMiddleware\u003A\u003A\u0024name",
             "name": "name",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateMiddleware.html#property_name"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateMiddleware.html#property_name"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateService",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateService",
             "name": "CreateService",
             "summary": "For\u0020Creating\u0020a\u0020new\u0020service",
-            "url": "classes/Pionia-Command-Commands-CreateService.html"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateService.html"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateService\u003A\u003Aconfigure\u0028\u0029",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateService\u003A\u003Aconfigure\u0028\u0029",
             "name": "configure",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateService.html#method_configure"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateService.html#method_configure"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateService\u003A\u003Aexecute\u0028\u0029",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateService\u003A\u003Aexecute\u0028\u0029",
             "name": "execute",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateService.html#method_execute"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateService.html#method_execute"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateService\u003A\u003A\u0024title",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateService\u003A\u003A\u0024title",
             "name": "title",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateService.html#property_title"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateService.html#property_title"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateService\u003A\u003A\u0024description",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateService\u003A\u003A\u0024description",
             "name": "description",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateService.html#property_description"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateService.html#property_description"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\CreateService\u003A\u003A\u0024name",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateService\u003A\u003A\u0024name",
             "name": "name",
             "summary": "",
-            "url": "classes/Pionia-Command-Commands-CreateService.html#property_name"
+            "url": "classes/Pionia-Command-Commands-Generators-CreateService.html#property_name"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateSwitch",
+            "name": "CreateSwitch",
+            "summary": "For\u0020Creating\u0020a\u0020new\u0020service",
+            "url": "classes/Pionia-Command-Commands-Generators-CreateSwitch.html"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateSwitch\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Generators-CreateSwitch.html#method_configure"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateSwitch\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Generators-CreateSwitch.html#method_execute"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateSwitch\u003A\u003A\u0024title",
+            "name": "title",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Generators-CreateSwitch.html#property_title"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateSwitch\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Generators-CreateSwitch.html#property_description"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateSwitch\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Pionia-Command-Commands-Generators-CreateSwitch.html#property_name"
         },                {
             "fqsen": "\\Pionia\\Command\\Commands\\StartServer",
             "name": "StartServer",
@@ -386,26 +601,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-Command-ConsoleApplication.html#method___construct"
         },                {
-            "fqsen": "\\Pionia\\Core\\BaseApiController",
-            "name": "BaseApiController",
-            "summary": "This\u0020is\u0020the\u0020base\u0020controller\u0020class\u0020for\u0020the\u0020framework\u0020and\u0020most\u0020probably\u0020the\u0020only\u0020controller\u0020class\u0020that\u0020should\u0020be\u0020extended.",
-            "url": "classes/Pionia-Core-BaseApiController.html"
-        },                {
-            "fqsen": "\\Pionia\\Core\\BaseApiController\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Pionia-Core-BaseApiController.html#method___construct"
-        },                {
-            "fqsen": "\\Pionia\\Core\\BaseApiController\u003A\u003Aping\u0028\u0029",
-            "name": "ping",
-            "summary": "This\u0020is\u0020just\u0020for\u0020checking\u0020the\u0020server\u0020status",
-            "url": "classes/Pionia-Core-BaseApiController.html#method_ping"
-        },                {
-            "fqsen": "\\Pionia\\Core\\BaseApiController\u003A\u003A\u0024settings",
-            "name": "settings",
-            "summary": "",
-            "url": "classes/Pionia-Core-BaseApiController.html#property_settings"
-        },                {
             "fqsen": "\\Pionia\\Core\\BaseApiServiceSwitch",
             "name": "BaseApiServiceSwitch",
             "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020the\u0020API\u0020service\u0020switch.\u0020It\u0020is\u0020used\u0020to\u0020switch\u0020between\u0020different\u0020services\u0020based\u0020on\u0020the\u0020request\u0020data.",
@@ -446,11 +641,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-Core-Config-CoreKernel.html#method___construct"
         },                {
-            "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003AregisterMiddleware\u0028\u0029",
-            "name": "registerMiddleware",
-            "summary": "",
-            "url": "classes/Pionia-Core-Config-CoreKernel.html#method_registerMiddleware"
-        },                {
             "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003AmergeMiddlewaresFromSettings\u0028\u0029",
             "name": "mergeMiddlewaresFromSettings",
             "summary": "",
@@ -461,24 +651,14 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-Core-Config-CoreKernel.html#method_mergeAuthenticationsFromSettings"
         },                {
-            "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003AregisterAuthBackends\u0028\u0029",
-            "name": "registerAuthBackends",
-            "summary": "",
-            "url": "classes/Pionia-Core-Config-CoreKernel.html#method_registerAuthBackends"
-        },                {
             "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003Aresolve\u0028\u0029",
             "name": "resolve",
             "summary": "",
             "url": "classes/Pionia-Core-Config-CoreKernel.html#method_resolve"
         },                {
-            "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003Ahandle\u0028\u0029",
-            "name": "handle",
-            "summary": "This\u0020is\u0020the\u0020main\u0020method\u0020that\u0020runs\u0020the\u0020entire\u0020request\u0020cycle.",
-            "url": "classes/Pionia-Core-Config-CoreKernel.html#method_handle"
-        },                {
             "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003Arun\u0028\u0029",
             "name": "run",
-            "summary": "This\u0020is\u0020the\u0020main\u0020method\u0020that\u0020runs\u0020the\u0020entire\u0020request\u0020cycle.",
+            "summary": "Bootstraps\u0020the\u0020entire\u0020application\nIt\u0020automatically\u0020resolves\u0020the\u0020request\u0020internally,\u0020middlewares,\u0020authentication\u0020backends\u0020and\u0020the\u0020controller",
             "url": "classes/Pionia-Core-Config-CoreKernel.html#method_run"
         },                {
             "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003AresolveMiddlewares\u0028\u0029",
@@ -488,7 +668,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003AresolveAuthenticationBackend\u0028\u0029",
             "name": "resolveAuthenticationBackend",
-            "summary": "",
+            "summary": "Resolves\u0020all\u0020authentication\u0020middlewares\u0020using\u0020the\u0020\u0060authenticationBackendWorker\u0060\u0020method",
             "url": "classes/Pionia-Core-Config-CoreKernel.html#method_resolveAuthenticationBackend"
         },                {
             "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003AauthenticationBackendWorker\u0028\u0029",
@@ -498,13 +678,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003AresolveFrontEnd\u0028\u0029",
             "name": "resolveFrontEnd",
-            "summary": "",
+            "summary": "Resolves\u0020the\u0020front\u0020end\u0020if\u0020the\u0020request\u0020is\u0020a\u0020get\u0020request\u0020and\u0020the\u0020path\u0020is\u0020not\u0020an\u0020api\u0020path",
             "url": "classes/Pionia-Core-Config-CoreKernel.html#method_resolveFrontEnd"
         },                {
-            "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003AdetectContentType\u0028\u0029",
-            "name": "detectContentType",
-            "summary": "",
-            "url": "classes/Pionia-Core-Config-CoreKernel.html#method_detectContentType"
+            "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003AserveSpa\u0028\u0029",
+            "name": "serveSpa",
+            "summary": "Serves\u0020Single\u0020Page\u0020Applications.\u0020This\u0020is\u0020useful\u0020for\u0020serving\u0020the\u0020front\u0020end\u0020from\u0020the\u0020root\u0020of\u0020the\u0020project.",
+            "url": "classes/Pionia-Core-Config-CoreKernel.html#method_serveSpa"
         },                {
             "fqsen": "\\Pionia\\Core\\Config\\CoreKernel\u003A\u003A\u0024context",
             "name": "context",
@@ -686,6 +866,16 @@ Search.appendIndex(
             "summary": "Grabs\u0020all\u0020keys\u0020of\u0020an\u0020array.\u0020But\u0020ignores\u0020nested\u0020keys\nConverts\u0020\u005B\u0027name\u0027\u0020\u003D\u003E\u0020\u0027John\u0027,\u0020\u0027age\u0027\u0020\u003D\u003E\u002020,\u0020\u0027address\u0027\u0020\u003D\u003E\u0020\u005B\u0027city\u0027\u0020\u003D\u003E\u0020\u0027Lagos\u0027,\u0020\u0027state\u0027\u0020\u003D\u003E\u0020\u0027Lagos\u0027\u005D\u005D\u0020to\u0020\u005B\u0027name\u0027,\u0020\u0027age\u0027,\u0020\u0027address\u0027\u005D",
             "url": "classes/Pionia-Core-Helpers-Utilities.html#method_levelOneKeysOf"
         },                {
+            "fqsen": "\\Pionia\\Core\\Helpers\\Utilities\u003A\u003AupdateSettingsFileSection\u0028\u0029",
+            "name": "updateSettingsFileSection",
+            "summary": "Creates\u0020or\u0020updates\u0020any\u0020section\u0020of\u0020our\u0020settings.ini\u0020file\u0020to\u0020the\u0020values\u0020provided",
+            "url": "classes/Pionia-Core-Helpers-Utilities.html#method_updateSettingsFileSection"
+        },                {
+            "fqsen": "\\Pionia\\Core\\Helpers\\Utilities\u003A\u003Ainidelsection\u0028\u0029",
+            "name": "inidelsection",
+            "summary": "Removes\u0020an\u0020entire\u0020section\u0020from\u0020the\u0020settings.ini\u0020file",
+            "url": "classes/Pionia-Core-Helpers-Utilities.html#method_inidelsection"
+        },                {
             "fqsen": "\\Pionia\\Core\\Interceptions\\BaseAuthenticationBackend",
             "name": "BaseAuthenticationBackend",
             "summary": "This\u0020is\u0020the\u0020base\u0020class\u0020for\u0020all\u0020authentication\u0020backends.",
@@ -703,7 +893,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Core\\Interceptions\\BaseMiddleware\u003A\u003Arun\u0028\u0029",
             "name": "run",
-            "summary": "",
+            "summary": "This\u0020method\u0020is\u0020called\u0020to\u0020run\u0020the\u0020middleware.\u0020Every\u0020middleware\u0020must\u0020implement\u0020this\u0020method.",
             "url": "classes/Pionia-Core-Interceptions-BaseMiddleware.html#method_run"
         },                {
             "fqsen": "\\Pionia\\Core\\Pionia",
@@ -723,7 +913,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Core\\Pionia\u003A\u003AgetSettings\u0028\u0029",
             "name": "getSettings",
-            "summary": "",
+            "summary": "Returns\u0020all\u0020the\u0020settings\u0020in\u0020the\u0020settings\u0020file",
             "url": "classes/Pionia-Core-Pionia.html#method_getSettings"
         },                {
             "fqsen": "\\Pionia\\Core\\Pionia\u003A\u003AgetSetting\u0028\u0029",
@@ -733,22 +923,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Core\\Pionia\u003A\u003AgetServerSettings\u0028\u0029",
             "name": "getServerSettings",
-            "summary": "",
+            "summary": "Returns\u0020the\u0020server\u0020settings\u0020under\u0020\u005Bserver\u005D\u0020in\u0020the\u0020settings\u0020file",
             "url": "classes/Pionia-Core-Pionia.html#method_getServerSettings"
         },                {
             "fqsen": "\\Pionia\\Core\\Pionia\u003A\u003AgetSettingOrDefault\u0028\u0029",
             "name": "getSettingOrDefault",
-            "summary": "",
+            "summary": "Returns\u0020the\u0020setting\u0020or\u0020the\u0020default\u0020value\u0020if\u0020the\u0020setting\u0020is\u0020not\u0020found",
             "url": "classes/Pionia-Core-Pionia.html#method_getSettingOrDefault"
         },                {
             "fqsen": "\\Pionia\\Core\\Pionia\u003A\u003AresolveSettingsFromIni\u0028\u0029",
             "name": "resolveSettingsFromIni",
-            "summary": "",
+            "summary": "Resolved\u0020the\u0020settings\u0020from\u0020all\u0020the\u0020possible\u0020sources",
             "url": "classes/Pionia-Core-Pionia.html#method_resolveSettingsFromIni"
         },                {
             "fqsen": "\\Pionia\\Core\\Pionia\u003A\u003AgetUploadSettings\u0028\u0029",
             "name": "getUploadSettings",
-            "summary": "",
+            "summary": "Returns\u0020the\u0020upload\u0020settings\u0020under\u0020\u005Buploads\u005D\u0020in\u0020the\u0020settings\u0020file",
             "url": "classes/Pionia-Core-Pionia.html#method_getUploadSettings"
         },                {
             "fqsen": "\\Pionia\\Core\\Pionia\u003A\u003A\u0024settings",
@@ -765,11 +955,6 @@ Search.appendIndex(
             "name": "name",
             "summary": "",
             "url": "classes/Pionia-Core-Pionia.html#property_name"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Routing\\BaseRoute",
-            "name": "BaseRoute",
-            "summary": "This\u0020is\u0020the\u0020base\u0020route\u0020class,\u0020it\u0020extends\u0020the\u0020Symfony\u0020route\u0020class\u0020and\u0020is\u0020used\u0020to\u0020define\u0020routes\u0020in\u0020the\u0020framework",
-            "url": "classes/Pionia-Core-Routing-BaseRoute.html"
         },                {
             "fqsen": "\\Pionia\\Core\\Routing\\BaseRoutes",
             "name": "BaseRoutes",
@@ -791,45 +976,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-Core-Routing-PioniaRouter.html#method___construct"
         },                {
-            "fqsen": "\\Pionia\\Core\\Routing\\PioniaRouter\u003A\u003AresolveController\u0028\u0029",
-            "name": "resolveController",
-            "summary": "",
-            "url": "classes/Pionia-Core-Routing-PioniaRouter.html#method_resolveController"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Routing\\PioniaRouter\u003A\u003Apost\u0028\u0029",
-            "name": "post",
-            "summary": "",
-            "url": "classes/Pionia-Core-Routing-PioniaRouter.html#method_post"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Routing\\PioniaRouter\u003A\u003AaddGroup\u0028\u0029",
-            "name": "addGroup",
-            "summary": "",
-            "url": "classes/Pionia-Core-Routing-PioniaRouter.html#method_addGroup"
-        },                {
             "fqsen": "\\Pionia\\Core\\Routing\\PioniaRouter\u003A\u003AaddSwitchFor\u0028\u0029",
             "name": "addSwitchFor",
             "summary": "Adds\u0020a\u0020switch\u0020for\u0020a\u0020certain\u0020api\u0020version",
             "url": "classes/Pionia-Core-Routing-PioniaRouter.html#method_addSwitchFor"
         },                {
-            "fqsen": "\\Pionia\\Core\\Routing\\PioniaRouter\u003A\u003Aget\u0028\u0029",
-            "name": "get",
-            "summary": "",
-            "url": "classes/Pionia-Core-Routing-PioniaRouter.html#method_get"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Routing\\PioniaRouter\u003A\u003AcleanBase\u0028\u0029",
-            "name": "cleanBase",
-            "summary": "Cleans\u0020up\u0020the\u0020base\u0020url\u0020to\u0020set",
-            "url": "classes/Pionia-Core-Routing-PioniaRouter.html#method_cleanBase"
-        },                {
             "fqsen": "\\Pionia\\Core\\Routing\\PioniaRouter\u003A\u003AcleanVersion\u0028\u0029",
             "name": "cleanVersion",
             "summary": "",
             "url": "classes/Pionia-Core-Routing-PioniaRouter.html#method_cleanVersion"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Routing\\PioniaRouter\u003A\u003AaddRoute\u0028\u0029",
-            "name": "addRoute",
-            "summary": "",
-            "url": "classes/Pionia-Core-Routing-PioniaRouter.html#method_addRoute"
         },                {
             "fqsen": "\\Pionia\\Core\\Routing\\PioniaRouter\u003A\u003A\u0024routes",
             "name": "routes",
@@ -840,11 +995,6 @@ Search.appendIndex(
             "name": "controller",
             "summary": "",
             "url": "classes/Pionia-Core-Routing-PioniaRouter.html#property_controller"
-        },                {
-            "fqsen": "\\Pionia\\Core\\Routing\\PioniaRouter\u003A\u003A\u0024basePath",
-            "name": "basePath",
-            "summary": "",
-            "url": "classes/Pionia-Core-Routing-PioniaRouter.html#property_basePath"
         },                {
             "fqsen": "\\Pionia\\Core\\Routing\\PioniaRouter\u003A\u003A\u0024apiBase",
             "name": "apiBase",
@@ -1018,7 +1168,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Database\\Connection",
             "name": "Connection",
-            "summary": "",
+            "summary": "Provides\u0020a\u0020connection\u0020to\u0020the\u0020database",
             "url": "classes/Pionia-Database-Connection.html"
         },                {
             "fqsen": "\\Pionia\\Database\\PaginationCore",
@@ -1313,12 +1463,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\GenericService\u003A\u003AgetFieldValue\u0028\u0029",
             "name": "getFieldValue",
-            "summary": "",
+            "summary": "Picks\u0020the\u0020value\u0020of\u0020a\u0020field\u0020from\u0020the\u0020request\u0020data",
             "url": "classes/Pionia-Generics-Base-GenericService.html#method_getFieldValue"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\GenericService\u003A\u003AhandleUpload\u0028\u0029",
             "name": "handleUpload",
-            "summary": "",
+            "summary": "Provides\u0020the\u0020default\u0020upload\u0020behaviour\u0020for\u0020the\u0020service.",
             "url": "classes/Pionia-Generics-Base-GenericService.html#method_handleUpload"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\GenericService\u003A\u003A\u0024table",
@@ -1428,7 +1578,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\JoinType",
             "name": "JoinType",
-            "summary": "",
+            "summary": "Supported\u0020join\u0020types\u0020in\u0020Pionia",
             "url": "classes/Pionia-Generics-Base-JoinType.html"
         },                {
             "fqsen": "\\Pionia\\Generics\\Base\\JoinType\u003A\u003AINNER",
@@ -1473,8 +1623,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Generics\\Mixins\\CreateMixin\u003A\u003Acreate\u0028\u0029",
             "name": "create",
-            "summary": "",
+            "summary": "Create\u0020a\u0020new\u0020item\u0020in\u0020the\u0020table\nYou\u0020can\u0020use\u0020\u0060save\u0060\u0020as\u0020an\u0020alias\u0020for\u0020this\u0020method",
             "url": "classes/Pionia-Generics-Mixins-CreateMixin.html#method_create"
+        },                {
+            "fqsen": "\\Pionia\\Generics\\Mixins\\CreateMixin\u003A\u003Asave\u0028\u0029",
+            "name": "save",
+            "summary": "Acronym\u0020for\u0020the\u0020\u0060create\u0060\u0020method",
+            "url": "classes/Pionia-Generics-Mixins-CreateMixin.html#method_save"
         },                {
             "fqsen": "\\Pionia\\Generics\\Mixins\\DeleteMixin",
             "name": "DeleteMixin",
@@ -1626,11 +1781,6 @@ Search.appendIndex(
             "summary": "This\u0020method\u0020add\u0020data\u0020to\u0020the\u0020context\u0020object",
             "url": "classes/Pionia-Request-Request.html#method_setAppContext"
         },                {
-            "fqsen": "\\Pionia\\Request\\Request\u003A\u003AgetJsonData\u0028\u0029",
-            "name": "getJsonData",
-            "summary": "Returns\u0020the\u0020json\u0020data\u0020from\u0020the\u0020request\u0020if\u0020the\u0020request\u0020was\u0020submitted\u0020as\u0020json",
-            "url": "classes/Pionia-Request-Request.html#method_getJsonData"
-        },                {
             "fqsen": "\\Pionia\\Request\\Request\u003A\u003AgetData\u0028\u0029",
             "name": "getData",
             "summary": "Merges\u0020data\u0020sent\u0020from\u0020the\u0020client\u0020as\u0020json\u0020and\u0020form\u0020data\u0020as\u0020one\u0020array\u0020where\u0020one\u0020can\u0020access\u0020all\u0020the\u0020request\u0020data.",
@@ -1640,11 +1790,6 @@ Search.appendIndex(
             "name": "getFileByName",
             "summary": "Returns\u0020the\u0020file\u0020from\u0020the\u0020request\u0020if\u0020the\u0020request\u0020was\u0020submitted\u0020as\u0020form\u0020data",
             "url": "classes/Pionia-Request-Request.html#method_getFileByName"
-        },                {
-            "fqsen": "\\Pionia\\Request\\Request\u003A\u003AgetFormData\u0028\u0029",
-            "name": "getFormData",
-            "summary": "Returns\u0020the\u0020data\u0020if\u0020the\u0020request\u0020was\u0020submitted\u0020as\u0020form\u0020data",
-            "url": "classes/Pionia-Request-Request.html#method_getFormData"
         },                {
             "fqsen": "\\Pionia\\Request\\Request\u003A\u003A\u0024authenticated",
             "name": "authenticated",
@@ -1801,1066 +1946,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/validators-ValidatorTest.html#method_testValidator"
         },                {
-            "fqsen": "\\Porm\\Core\\ContractBuilder",
-            "name": "ContractBuilder",
-            "summary": "",
-            "url": "classes/Porm-Core-ContractBuilder.html"
-        },                {
-            "fqsen": "\\Porm\\Core\\ContractBuilder\u003A\u003Abuilder\u0028\u0029",
-            "name": "builder",
-            "summary": "",
-            "url": "classes/Porm-Core-ContractBuilder.html#method_builder"
-        },                {
-            "fqsen": "\\Porm\\Core\\ContractBuilder\u003A\u003Abuild\u0028\u0029",
-            "name": "build",
-            "summary": "",
-            "url": "classes/Porm-Core-ContractBuilder.html#method_build"
-        },                {
-            "fqsen": "\\Porm\\Core\\Core",
-            "name": "Core",
-            "summary": "",
-            "url": "classes/Porm-Core-Core.html"
-        },                {
-            "fqsen": "\\Porm\\Core\\Core\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "Connect\u0020the\u0020database.",
-            "url": "classes/Porm-Core-Core.html#method___construct"
-        },                {
-            "fqsen": "\\Porm\\Core\\Core\u003A\u003AcanLog\u0028\u0029",
-            "name": "canLog",
-            "summary": "",
-            "url": "classes/Porm-Core-Core.html#method_canLog"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database",
-            "name": "Database",
-            "summary": "",
-            "url": "classes/Porm-Core-Database.html"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Porm-Core-Database.html#method___construct"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003A_resolve\u0028\u0029",
-            "name": "_resolve",
-            "summary": "Resolves\u0020the\u0020Database\u0020connection\u0020to\u0020use.\u0020If\u0020the\u0020connection\u0020is\u0020passed,\u0020it\u0020will\u0020use\u0020that\u0020connection.\u0020If\u0020the\u0020options\u0020are\u0020passed,\u0020it\u0020will\u0020use\u0020those\u0020options.\u0020If\u0020the\u0020pdo\u0020is\u0020passed,\u0020it\u0020will\u0020use\u0020that\u0020pdo.",
-            "url": "classes/Porm-Core-Database.html#method__resolve"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003Abuilder\u0028\u0029",
-            "name": "builder",
-            "summary": "",
-            "url": "classes/Porm-Core-Database.html#method_builder"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003AcreateTable\u0028\u0029",
-            "name": "createTable",
-            "summary": "",
-            "url": "classes/Porm-Core-Database.html#method_createTable"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003Adrop\u0028\u0029",
-            "name": "drop",
-            "summary": "",
-            "url": "classes/Porm-Core-Database.html#method_drop"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003Aquery\u0028\u0029",
-            "name": "query",
-            "summary": "Gives\u0020you\u0020access\u0020to\u0020the\u0020underlying\u0020medoo\u0020object\u0020and\u0020pdo\u0020object",
-            "url": "classes/Porm-Core-Database.html#method_query"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003Aclean\u0028\u0029",
-            "name": "clean",
-            "summary": "",
-            "url": "classes/Porm-Core-Database.html#method_clean"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003AlastId\u0028\u0029",
-            "name": "lastId",
-            "summary": "Returns\u0020the\u0020id\u0020of\u0020the\u0020last\u0020inserted\u0020row",
-            "url": "classes/Porm-Core-Database.html#method_lastId"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003A\u0024pdo",
-            "name": "pdo",
-            "summary": "This\u0020is\u0020the\u0020PDO\u0020object\u0020you\u0020can\u0020pass\u0020along",
-            "url": "classes/Porm-Core-Database.html#property_pdo"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003Ause\u0028\u0029",
-            "name": "use",
-            "summary": "This\u0020is\u0020a\u0020static\u0020method\u0020to\u0020use\u0020a\u0020Database\u0020connection.\u0020It\u0020will\u0020return\u0020a\u0020new\u0020Database\u0020instance\u0020with\u0020the\u0020connection\u0020passed.",
-            "url": "classes/Porm-Core-Database.html#method_use"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003A__destruct\u0028\u0029",
-            "name": "__destruct",
-            "summary": "",
-            "url": "classes/Porm-Core-Database.html#method___destruct"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003A\u0024options",
-            "name": "options",
-            "summary": "This\u0020is\u0020the\u0020Medoo\u0020Object\u0020to\u0020pass\u0020along",
-            "url": "classes/Porm-Core-Database.html#property_options"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003A\u0024using",
-            "name": "using",
-            "summary": "This\u0020is\u0020the\u0020Database\u0020connection\u0020to\u0020use,\u0020default\u0020is\u0020db",
-            "url": "classes/Porm-Core-Database.html#property_using"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003A\u0024database",
-            "name": "database",
-            "summary": "This\u0020is\u0020the\u0020Core\u0020object\u0020to\u0020use",
-            "url": "classes/Porm-Core-Database.html#property_database"
-        },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003A\u0024logging",
-            "name": "logging",
-            "summary": "This\u0020is\u0020the\u0020logging\u0020option\u0020to\u0020use",
-            "url": "classes/Porm-Core-Database.html#property_logging"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db",
-            "name": "Db",
-            "summary": "",
-            "url": "classes/Porm-Core-Db.html"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "Connect\u0020the\u0020database.",
-            "url": "classes/Porm-Core-Db.html#method___construct"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AmapKey\u0028\u0029",
-            "name": "mapKey",
-            "summary": "Generate\u0020a\u0020new\u0020map\u0020key\u0020for\u0020the\u0020placeholder.",
-            "url": "classes/Porm-Core-Db.html#method_mapKey"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Aquery\u0028\u0029",
-            "name": "query",
-            "summary": "Execute\u0020customized\u0020raw\u0020statement.",
-            "url": "classes/Porm-Core-Db.html#method_query"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Aexec\u0028\u0029",
-            "name": "exec",
-            "summary": "Execute\u0020the\u0020raw\u0020statement.",
-            "url": "classes/Porm-Core-Db.html#method_exec"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Agenerate\u0028\u0029",
-            "name": "generate",
-            "summary": "Generate\u0020readable\u0020statement.",
-            "url": "classes/Porm-Core-Db.html#method_generate"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Araw\u0028\u0029",
-            "name": "raw",
-            "summary": "Build\u0020a\u0020raw\u0020object.",
-            "url": "classes/Porm-Core-Db.html#method_raw"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AisRaw\u0028\u0029",
-            "name": "isRaw",
-            "summary": "Finds\u0020whether\u0020the\u0020object\u0020is\u0020raw.",
-            "url": "classes/Porm-Core-Db.html#method_isRaw"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AbuildRaw\u0028\u0029",
-            "name": "buildRaw",
-            "summary": "Generate\u0020the\u0020actual\u0020query\u0020from\u0020the\u0020raw\u0020object.",
-            "url": "classes/Porm-Core-Db.html#method_buildRaw"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Aquote\u0028\u0029",
-            "name": "quote",
-            "summary": "Quote\u0020a\u0020string\u0020for\u0020use\u0020in\u0020a\u0020query.",
-            "url": "classes/Porm-Core-Db.html#method_quote"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AtableQuote\u0028\u0029",
-            "name": "tableQuote",
-            "summary": "Quote\u0020table\u0020name\u0020for\u0020use\u0020in\u0020a\u0020query.",
-            "url": "classes/Porm-Core-Db.html#method_tableQuote"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AcolumnQuote\u0028\u0029",
-            "name": "columnQuote",
-            "summary": "Quote\u0020column\u0020name\u0020for\u0020use\u0020in\u0020a\u0020query.",
-            "url": "classes/Porm-Core-Db.html#method_columnQuote"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AtypeMap\u0028\u0029",
-            "name": "typeMap",
-            "summary": "Mapping\u0020the\u0020type\u0020name\u0020as\u0020PDO\u0020data\u0020type.",
-            "url": "classes/Porm-Core-Db.html#method_typeMap"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AcolumnPush\u0028\u0029",
-            "name": "columnPush",
-            "summary": "Build\u0020the\u0020statement\u0020part\u0020for\u0020the\u0020column\u0020stack.",
-            "url": "classes/Porm-Core-Db.html#method_columnPush"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AdataImplode\u0028\u0029",
-            "name": "dataImplode",
-            "summary": "Implode\u0020the\u0020Where\u0020conditions.",
-            "url": "classes/Porm-Core-Db.html#method_dataImplode"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AwhereClause\u0028\u0029",
-            "name": "whereClause",
-            "summary": "Build\u0020the\u0020where\u0020clause.",
-            "url": "classes/Porm-Core-Db.html#method_whereClause"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AselectContext\u0028\u0029",
-            "name": "selectContext",
-            "summary": "Build\u0020statement\u0020for\u0020the\u0020select\u0020query.",
-            "url": "classes/Porm-Core-Db.html#method_selectContext"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AisJoin\u0028\u0029",
-            "name": "isJoin",
-            "summary": "Determine\u0020the\u0020array\u0020with\u0020join\u0020syntax.",
-            "url": "classes/Porm-Core-Db.html#method_isJoin"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AbuildJoin\u0028\u0029",
-            "name": "buildJoin",
-            "summary": "Build\u0020the\u0020join\u0020statement.",
-            "url": "classes/Porm-Core-Db.html#method_buildJoin"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AcolumnMap\u0028\u0029",
-            "name": "columnMap",
-            "summary": "Mapping\u0020columns\u0020for\u0020the\u0020stack.",
-            "url": "classes/Porm-Core-Db.html#method_columnMap"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AdataMap\u0028\u0029",
-            "name": "dataMap",
-            "summary": "Mapping\u0020the\u0020data\u0020from\u0020the\u0020table.",
-            "url": "classes/Porm-Core-Db.html#method_dataMap"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AreturningQuery\u0028\u0029",
-            "name": "returningQuery",
-            "summary": "Build\u0020and\u0020execute\u0020returning\u0020query.",
-            "url": "classes/Porm-Core-Db.html#method_returningQuery"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Acreate\u0028\u0029",
-            "name": "create",
-            "summary": "Create\u0020a\u0020table.",
-            "url": "classes/Porm-Core-Db.html#method_create"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Adrop\u0028\u0029",
-            "name": "drop",
-            "summary": "Drop\u0020a\u0020table.",
-            "url": "classes/Porm-Core-Db.html#method_drop"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Aselect\u0028\u0029",
-            "name": "select",
-            "summary": "Select\u0020data\u0020from\u0020the\u0020table.",
-            "url": "classes/Porm-Core-Db.html#method_select"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Ainsert\u0028\u0029",
-            "name": "insert",
-            "summary": "Insert\u0020one\u0020or\u0020more\u0020records\u0020into\u0020the\u0020table.",
-            "url": "classes/Porm-Core-Db.html#method_insert"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Aupdate\u0028\u0029",
-            "name": "update",
-            "summary": "Modify\u0020data\u0020from\u0020the\u0020table.",
-            "url": "classes/Porm-Core-Db.html#method_update"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Adelete\u0028\u0029",
-            "name": "delete",
-            "summary": "Delete\u0020data\u0020from\u0020the\u0020table.",
-            "url": "classes/Porm-Core-Db.html#method_delete"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Areplace\u0028\u0029",
-            "name": "replace",
-            "summary": "Replace\u0020old\u0020data\u0020with\u0020a\u0020new\u0020one.",
-            "url": "classes/Porm-Core-Db.html#method_replace"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Aget\u0028\u0029",
-            "name": "get",
-            "summary": "Get\u0020only\u0020one\u0020record\u0020from\u0020the\u0020table.",
-            "url": "classes/Porm-Core-Db.html#method_get"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Ahas\u0028\u0029",
-            "name": "has",
-            "summary": "Determine\u0020whether\u0020the\u0020target\u0020data\u0020existed\u0020from\u0020the\u0020table.",
-            "url": "classes/Porm-Core-Db.html#method_has"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Arand\u0028\u0029",
-            "name": "rand",
-            "summary": "Randomly\u0020fetch\u0020data\u0020from\u0020the\u0020table.",
-            "url": "classes/Porm-Core-Db.html#method_rand"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Aaggregate\u0028\u0029",
-            "name": "aggregate",
-            "summary": "Build\u0020for\u0020the\u0020aggregate\u0020function.",
-            "url": "classes/Porm-Core-Db.html#method_aggregate"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Acount\u0028\u0029",
-            "name": "count",
-            "summary": "Count\u0020the\u0020number\u0020of\u0020rows\u0020from\u0020the\u0020table.",
-            "url": "classes/Porm-Core-Db.html#method_count"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Aavg\u0028\u0029",
-            "name": "avg",
-            "summary": "Calculate\u0020the\u0020average\u0020value\u0020of\u0020the\u0020column.",
-            "url": "classes/Porm-Core-Db.html#method_avg"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Amax\u0028\u0029",
-            "name": "max",
-            "summary": "Get\u0020the\u0020maximum\u0020value\u0020of\u0020the\u0020column.",
-            "url": "classes/Porm-Core-Db.html#method_max"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Amin\u0028\u0029",
-            "name": "min",
-            "summary": "Get\u0020the\u0020minimum\u0020value\u0020of\u0020the\u0020column.",
-            "url": "classes/Porm-Core-Db.html#method_min"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Asum\u0028\u0029",
-            "name": "sum",
-            "summary": "Calculate\u0020the\u0020total\u0020value\u0020of\u0020the\u0020column.",
-            "url": "classes/Porm-Core-Db.html#method_sum"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Aaction\u0028\u0029",
-            "name": "action",
-            "summary": "Start\u0020a\u0020transaction.",
-            "url": "classes/Porm-Core-Db.html#method_action"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Aid\u0028\u0029",
-            "name": "id",
-            "summary": "Return\u0020the\u0020ID\u0020for\u0020the\u0020last\u0020inserted\u0020row.",
-            "url": "classes/Porm-Core-Db.html#method_id"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Adebug\u0028\u0029",
-            "name": "debug",
-            "summary": "Enable\u0020debug\u0020mode\u0020and\u0020output\u0020readable\u0020statement\u0020string.",
-            "url": "classes/Porm-Core-Db.html#method_debug"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AbeginDebug\u0028\u0029",
-            "name": "beginDebug",
-            "summary": "Enable\u0020debug\u0020logging\u0020mode.",
-            "url": "classes/Porm-Core-Db.html#method_beginDebug"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003AdebugLog\u0028\u0029",
-            "name": "debugLog",
-            "summary": "Disable\u0020debug\u0020logging\u0020and\u0020return\u0020all\u0020readable\u0020statements.",
-            "url": "classes/Porm-Core-Db.html#method_debugLog"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Alast\u0028\u0029",
-            "name": "last",
-            "summary": "Return\u0020the\u0020last\u0020performed\u0020statement.",
-            "url": "classes/Porm-Core-Db.html#method_last"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Alog\u0028\u0029",
-            "name": "log",
-            "summary": "Return\u0020all\u0020executed\u0020statements.",
-            "url": "classes/Porm-Core-Db.html#method_log"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003Ainfo\u0028\u0029",
-            "name": "info",
-            "summary": "Get\u0020information\u0020about\u0020the\u0020database\u0020connection.",
-            "url": "classes/Porm-Core-Db.html#method_info"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024pdo",
-            "name": "pdo",
-            "summary": "The\u0020PDO\u0020object.",
-            "url": "classes/Porm-Core-Db.html#property_pdo"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024type",
-            "name": "type",
-            "summary": "The\u0020type\u0020of\u0020database.",
-            "url": "classes/Porm-Core-Db.html#property_type"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024prefix",
-            "name": "prefix",
-            "summary": "Table\u0020prefix.",
-            "url": "classes/Porm-Core-Db.html#property_prefix"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024statement",
-            "name": "statement",
-            "summary": "The\u0020PDO\u0020statement\u0020object.",
-            "url": "classes/Porm-Core-Db.html#property_statement"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024dsn",
-            "name": "dsn",
-            "summary": "The\u0020DSN\u0020connection\u0020string.",
-            "url": "classes/Porm-Core-Db.html#property_dsn"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024logs",
-            "name": "logs",
-            "summary": "The\u0020array\u0020of\u0020logs.",
-            "url": "classes/Porm-Core-Db.html#property_logs"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024logging",
-            "name": "logging",
-            "summary": "Determine\u0020should\u0020log\u0020the\u0020query\u0020or\u0020not.",
-            "url": "classes/Porm-Core-Db.html#property_logging"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024testMode",
-            "name": "testMode",
-            "summary": "Determine\u0020is\u0020in\u0020test\u0020mode.",
-            "url": "classes/Porm-Core-Db.html#property_testMode"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024queryString",
-            "name": "queryString",
-            "summary": "The\u0020last\u0020query\u0020string\u0020was\u0020generated\u0020in\u0020test\u0020mode.",
-            "url": "classes/Porm-Core-Db.html#property_queryString"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024debugMode",
-            "name": "debugMode",
-            "summary": "Determine\u0020is\u0020in\u0020debug\u0020mode.",
-            "url": "classes/Porm-Core-Db.html#property_debugMode"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024debugLogging",
-            "name": "debugLogging",
-            "summary": "Determine\u0020should\u0020save\u0020debug\u0020logging.",
-            "url": "classes/Porm-Core-Db.html#property_debugLogging"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024debugLogs",
-            "name": "debugLogs",
-            "summary": "The\u0020array\u0020of\u0020logs\u0020for\u0020debugging.",
-            "url": "classes/Porm-Core-Db.html#property_debugLogs"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024guid",
-            "name": "guid",
-            "summary": "The\u0020unique\u0020global\u0020id.",
-            "url": "classes/Porm-Core-Db.html#property_guid"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024returnId",
-            "name": "returnId",
-            "summary": "The\u0020returned\u0020id\u0020for\u0020the\u0020insert.",
-            "url": "classes/Porm-Core-Db.html#property_returnId"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024error",
-            "name": "error",
-            "summary": "Error\u0020Message.",
-            "url": "classes/Porm-Core-Db.html#property_error"
-        },                {
-            "fqsen": "\\Porm\\Core\\Db\u003A\u003A\u0024errorInfo",
-            "name": "errorInfo",
-            "summary": "The\u0020array\u0020of\u0020error\u0020information.",
-            "url": "classes/Porm-Core-Db.html#property_errorInfo"
-        },                {
-            "fqsen": "\\Porm\\Core\\Raw",
-            "name": "Raw",
-            "summary": "The\u0020Medoo\u0020raw\u0020object.",
-            "url": "classes/Porm-Core-Raw.html"
-        },                {
-            "fqsen": "\\Porm\\Core\\Raw\u003A\u003A\u0024map",
-            "name": "map",
-            "summary": "The\u0020array\u0020of\u0020mapping\u0020data\u0020for\u0020the\u0020raw\u0020string.",
-            "url": "classes/Porm-Core-Raw.html#property_map"
-        },                {
-            "fqsen": "\\Porm\\Core\\Raw\u003A\u003A\u0024value",
-            "name": "value",
-            "summary": "The\u0020raw\u0020string.",
-            "url": "classes/Porm-Core-Raw.html#property_value"
-        },                {
-            "fqsen": "\\Porm\\Core\\Utilities",
-            "name": "Utilities",
-            "summary": "",
-            "url": "classes/Porm-Core-Utilities.html"
-        },                {
-            "fqsen": "\\Porm\\Core\\Utilities\u003A\u003AgetSettings\u0028\u0029",
-            "name": "getSettings",
-            "summary": "",
-            "url": "classes/Porm-Core-Utilities.html#method_getSettings"
-        },                {
-            "fqsen": "\\Porm\\Core\\Utilities\u003A\u003AgetAllSettingsUnderSection\u0028\u0029",
-            "name": "getAllSettingsUnderSection",
-            "summary": "",
-            "url": "classes/Porm-Core-Utilities.html#method_getAllSettingsUnderSection"
-        },                {
-            "fqsen": "\\Porm\\Core\\Utilities\u003A\u003AgetSetting\u0028\u0029",
-            "name": "getSetting",
-            "summary": "",
-            "url": "classes/Porm-Core-Utilities.html#method_getSetting"
-        },                {
-            "fqsen": "\\Porm\\Core\\Utilities\u003A\u003AcanLog\u0028\u0029",
-            "name": "canLog",
-            "summary": "",
-            "url": "classes/Porm-Core-Utilities.html#method_canLog"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg",
-            "name": "Agg",
-            "summary": "Aggregate\u0020functions\u0020for\u0020the\u0020PORM\u0020library.",
-            "url": "classes/Porm-Database-aggregation-Agg.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Abuild\u0028\u0029",
-            "name": "build",
-            "summary": "",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_build"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Arandom\u0028\u0029",
-            "name": "random",
-            "summary": "Assign\u0020a\u0020random\u0020value\u0020to\u0020a\u0020column",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_random"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Asum\u0028\u0029",
-            "name": "sum",
-            "summary": "Get\u0020the\u0020sum\u0020of\u0020a\u0020column\u0020and\u0020assign\u0020it\u0020to\u0020columnName",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_sum"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Aavg\u0028\u0029",
-            "name": "avg",
-            "summary": "Get\u0020the\u0020average\u0020value\u0020of\u0020a\u0020column\u0020and\u0020assing\u0020it\u0020to\u0020columnName",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_avg"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Amax\u0028\u0029",
-            "name": "max",
-            "summary": "Get\u0020the\u0020maximum\u0020value\u0020of\u0020a\u0020column",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_max"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Anow\u0028\u0029",
-            "name": "now",
-            "summary": "Assign\u0020current\u0020timestamp\u0020to\u0020a\u0020column",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_now"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Auuid\u0028\u0029",
-            "name": "uuid",
-            "summary": "If\u0020uuid\u0020string\u0020is\u0020passed,\u0020checks\u0020if\u0020a\u0020column\u0020is\u0020matching\u0020the\u0020given\u0020uuid\u0020otherwise\u0020generates\u0020new\u0020one\u0020and\u0020assigns\u0020it\u0020to\u0020the\u0020column\u0020given",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_uuid"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Alt\u0028\u0029",
-            "name": "lt",
-            "summary": "Less\u0020than.",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_lt"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Alte\u0028\u0029",
-            "name": "lte",
-            "summary": "Less\u0020than\u0020or\u0020equal\u0020to.",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_lte"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Agt\u0028\u0029",
-            "name": "gt",
-            "summary": "Greater\u0020than.",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_gt"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Agte\u0028\u0029",
-            "name": "gte",
-            "summary": "Greater\u0020than\u0020or\u0020equal\u0020to.",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_gte"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Aeq\u0028\u0029",
-            "name": "eq",
-            "summary": "Equal\u0020to.",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_eq"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Aneq\u0028\u0029",
-            "name": "neq",
-            "summary": "Not\u0020equal\u0020to.",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_neq"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Aplus\u0028\u0029",
-            "name": "plus",
-            "summary": "add\u0020to\u0020the\u0020column\u0020value",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_plus"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Aminus\u0028\u0029",
-            "name": "minus",
-            "summary": "subtract\u0020from\u0020the\u0020column\u0020value",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_minus"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Aof\u0028\u0029",
-            "name": "of",
-            "summary": "multiply\u0020the\u0020column\u0020value",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_of"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Ajsonified\u0028\u0029",
-            "name": "jsonified",
-            "summary": "json\u0020encode\u0020the\u0020column\u0020value\u0020and\u0020assign\u0020it\u0020to\u0020the\u0020column",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_jsonified"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Adiv\u0028\u0029",
-            "name": "div",
-            "summary": "divide\u0020the\u0020column\u0020value",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_div"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Alike\u0028\u0029",
-            "name": "like",
-            "summary": "Used\u0020to\u0020add\u0020a\u0020like\u0020condition\u0020to\u0020a\u0020query",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_like"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003AnotLike\u0028\u0029",
-            "name": "notLike",
-            "summary": "Used\u0020to\u0020add\u0020a\u0020like\u0020condition\u0020to\u0020a\u0020query",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_notLike"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003AcolumnsCompare\u0028\u0029",
-            "name": "columnsCompare",
-            "summary": "This\u0020compares\u0020two\u0020tables\u0020in\u0020the\u0020db",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_columnsCompare"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Abetween\u0028\u0029",
-            "name": "between",
-            "summary": "Checks\u0020if\u0020the\u0020value\u0020of\u0020the\u0020\u0024columnName\u0020is\u0020between\u0020the\u0020given\u0020values.",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_between"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003AnotBetween\u0028\u0029",
-            "name": "notBetween",
-            "summary": "Checks\u0020if\u0020the\u0020value\u0020of\u0020the\u0020\u0024columnName\u0020is\u0020not\u0020between\u0020the\u0020given\u0020values.",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_notBetween"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003Aregex\u0028\u0029",
-            "name": "regex",
-            "summary": "Check\u0020if\u0020the\u0020value\u0020of\u0020the\u0020given\u0020column\u0020matches\u0020the\u0020given\u0020regular\u0020expression",
-            "url": "classes/Porm-Database-aggregation-Agg.html#method_regex"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\Agg\u003A\u003A\u0024aggregated",
-            "name": "aggregated",
-            "summary": "",
-            "url": "classes/Porm-Database-aggregation-Agg.html#property_aggregated"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\AggregateTrait",
-            "name": "AggregateTrait",
-            "summary": "",
-            "url": "classes/Porm-Database-aggregation-AggregateTrait.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\AggregateTrait\u003A\u003Acount\u0028\u0029",
-            "name": "count",
-            "summary": "",
-            "url": "classes/Porm-Database-aggregation-AggregateTrait.html#method_count"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\AggregateTrait\u003A\u003Asum\u0028\u0029",
-            "name": "sum",
-            "summary": "",
-            "url": "classes/Porm-Database-aggregation-AggregateTrait.html#method_sum"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\AggregateTrait\u003A\u003Aavg\u0028\u0029",
-            "name": "avg",
-            "summary": "",
-            "url": "classes/Porm-Database-aggregation-AggregateTrait.html#method_avg"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\AggregateTrait\u003A\u003Amax\u0028\u0029",
-            "name": "max",
-            "summary": "",
-            "url": "classes/Porm-Database-aggregation-AggregateTrait.html#method_max"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation\\AggregateTrait\u003A\u003Amin\u0028\u0029",
-            "name": "min",
-            "summary": "",
-            "url": "classes/Porm-Database-aggregation-AggregateTrait.html#method_min"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Builder",
-            "name": "Builder",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Builder.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Builder\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Builder.html#method___construct"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Builder\u003A\u003Aget\u0028\u0029",
-            "name": "get",
-            "summary": "Returns\u0020one\u0020item\u0020from\u0020the\u0020Database",
-            "url": "classes/Porm-Database-builders-Builder.html#method_get"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Builder\u003A\u003Afirst\u0028\u0029",
-            "name": "first",
-            "summary": "Same\u0020as\u0020get\u0028\u0029\u0020but\u0020returns\u0020the\u0020first\u0020item\u0020of\u0020the\u0020resultset",
-            "url": "classes/Porm-Database-builders-Builder.html#method_first"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Builder\u003A\u003Amatch\u0028\u0029",
-            "name": "match",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Builder.html#method_match"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Builder\u003A\u003Abuild\u0028\u0029",
-            "name": "build",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Builder.html#method_build"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Builder\u003A\u003A\u0024table",
-            "name": "table",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Builder.html#property_table"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Builder\u003A\u003A\u0024database",
-            "name": "database",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Builder.html#property_database"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Builder\u003A\u003A\u0024preventLimit",
-            "name": "preventLimit",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Builder.html#property_preventLimit"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Builder\u003A\u003A\u0024where",
-            "name": "where",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Builder.html#property_where"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Builder\u003A\u003A\u0024columns",
-            "name": "columns",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Builder.html#property_columns"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Join",
-            "name": "Join",
-            "summary": "Builds\u0020relationships\u0020across\u0020multiple\u0020tables.",
-            "url": "classes/Porm-Database-builders-Join.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Join\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Join.html#method___construct"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Join\u003A\u003AgetJoins\u0028\u0029",
-            "name": "getJoins",
-            "summary": "Returns\u0020the\u0020medoo\u002Dlike\u0020join\u0020array\u0020that\u0020was\u0020generated\u0020after\u0020chaining\u0020multiple\u0020joins",
-            "url": "classes/Porm-Database-builders-Join.html#method_getJoins"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Join\u003A\u003Abuild\u0028\u0029",
-            "name": "build",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Join.html#method_build"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Join\u003A\u003Acount\u0028\u0029",
-            "name": "count",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Join.html#method_count"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Join\u003A\u003A\u0024table",
-            "name": "table",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Join.html#property_table"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Join\u003A\u003A\u0024database",
-            "name": "database",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Join.html#property_database"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Join\u003A\u003A\u0024preventLimit",
-            "name": "preventLimit",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Join.html#property_preventLimit"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Join\u003A\u003A\u0024where",
-            "name": "where",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Join.html#property_where"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Join\u003A\u003A\u0024columns",
-            "name": "columns",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Join.html#property_columns"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Join\u003A\u003A\u0024joins",
-            "name": "joins",
-            "summary": "List\u0020of\u0020all\u0020joins\u0020that\u0020are\u0020about\u0020to\u0020be\u0020applied.These\u0020are\u0020in\u0020a\u0020medoo\u0020format.",
-            "url": "classes/Porm-Database-builders-Join.html#property_joins"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject",
-            "name": "PormObject",
-            "summary": "This\u0020should\u0020not\u0020be\u0020worked\u0020with\u0020directly,\u0020use\u0020the\u0020Porm\u0020class\u0020instead.",
-            "url": "classes/Porm-Database-builders-PormObject.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-PormObject.html#method___construct"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003Alogs\u0028\u0029",
-            "name": "logs",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-PormObject.html#method_logs"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003Afrom\u0028\u0029",
-            "name": "from",
-            "summary": "This\u0020sets\u0020the\u0020table\u0020to\u0020use",
-            "url": "classes/Porm-Database-builders-PormObject.html#method_from"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003A\u0024table",
-            "name": "table",
-            "summary": "The\u0020Database\u0020table\u0020to\u0020use",
-            "url": "classes/Porm-Database-builders-PormObject.html#property_table"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003AgetDatabase\u0028\u0029",
-            "name": "getDatabase",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-PormObject.html#method_getDatabase"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003ArawQuery\u0028\u0029",
-            "name": "rawQuery",
-            "summary": "This\u0020assists\u0020to\u0020perform\u0020raw\u0020sql\u0020queries",
-            "url": "classes/Porm-Database-builders-PormObject.html#method_rawQuery"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003AinTransaction\u0028\u0029",
-            "name": "inTransaction",
-            "summary": "Using\u0020transactions.\u0020This\u0020is\u0020a\u0020wrapper\u0020for\u0020the\u0020action\u0020method\u0020in\u0020the\u0020Core\u0020class.",
-            "url": "classes/Porm-Database-builders-PormObject.html#method_inTransaction"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003Ainfo\u0028\u0029",
-            "name": "info",
-            "summary": "Returns\u0020the\u0020details\u0020of\u0020the\u0020current\u0020db\u0020connection",
-            "url": "classes/Porm-Database-builders-PormObject.html#method_info"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003A\u0024pormVersion",
-            "name": "pormVersion",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-PormObject.html#property_pormVersion"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003A\u0024alias",
-            "name": "alias",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-PormObject.html#property_alias"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003A\u0024preventHas",
-            "name": "preventHas",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-PormObject.html#property_preventHas"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003A\u0024allowFilterOnly",
-            "name": "allowFilterOnly",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-PormObject.html#property_allowFilterOnly"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003A\u0024resultSet",
-            "name": "resultSet",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-PormObject.html#property_resultSet"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003A\u0024columns",
-            "name": "columns",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-PormObject.html#property_columns"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003A\u0024preventRaw",
-            "name": "preventRaw",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-PormObject.html#property_preventRaw"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\PormObject\u003A\u003A\u0024where",
-            "name": "where",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-PormObject.html#property_where"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Where",
-            "name": "Where",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Where.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Where\u003A\u003Abuild\u0028\u0029",
-            "name": "build",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Where.html#method_build"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Where\u003A\u003Aor\u0028\u0029",
-            "name": "or",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Where.html#method_or"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Where\u003A\u003Aand\u0028\u0029",
-            "name": "and",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Where.html#method_and"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Where\u003A\u003Acommented\u0028\u0029",
-            "name": "commented",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Where.html#method_commented"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders\\Where\u003A\u003A\u0024where",
-            "name": "where",
-            "summary": "",
-            "url": "classes/Porm-Database-builders-Where.html#property_where"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\FilterTrait",
-            "name": "FilterTrait",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-FilterTrait.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\FilterTrait\u003A\u003Alimit\u0028\u0029",
-            "name": "limit",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-FilterTrait.html#method_limit"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\FilterTrait\u003A\u003AstartAt\u0028\u0029",
-            "name": "startAt",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-FilterTrait.html#method_startAt"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\FilterTrait\u003A\u003Agroup\u0028\u0029",
-            "name": "group",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-FilterTrait.html#method_group"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\FilterTrait\u003A\u003Ahaving\u0028\u0029",
-            "name": "having",
-            "summary": "Adds\u0020a\u0020\u0027having\u0027\u0020clause\u0020to\u0020the\u0020query",
-            "url": "classes/Porm-Database-utils-FilterTrait.html#method_having"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\FilterTrait\u003A\u003AorderBy\u0028\u0029",
-            "name": "orderBy",
-            "summary": "Orders\u0020the\u0020query\u0020by\u0020certain\u0020value.",
-            "url": "classes/Porm-Database-utils-FilterTrait.html#method_orderBy"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\JoinParseTrait",
-            "name": "JoinParseTrait",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-JoinParseTrait.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\JoinParseTrait\u003A\u003ArunSelect\u0028\u0029",
-            "name": "runSelect",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-JoinParseTrait.html#method_runSelect"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\JoinParseTrait\u003A\u003Aall\u0028\u0029",
-            "name": "all",
-            "summary": "Returns\u0020all\u0020items\u0020from\u0020the\u0020Database.\u0020If\u0020a\u0020callback\u0020is\u0020passed,\u0020it\u0020will\u0020be\u0020called\u0020on\u0020each\u0020item\u0020in\u0020the\u0020resultset",
-            "url": "classes/Porm-Database-utils-JoinParseTrait.html#method_all"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\JoinParseTrait\u003A\u003Awhere\u0028\u0029",
-            "name": "where",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-JoinParseTrait.html#method_where"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\JoinParseTrait\u003A\u003Ajoin\u0028\u0029",
-            "name": "join",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-JoinParseTrait.html#method_join"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\JoinParseTrait\u003A\u003Ainner\u0028\u0029",
-            "name": "inner",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-JoinParseTrait.html#method_inner"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\JoinParseTrait\u003A\u003Aleft\u0028\u0029",
-            "name": "left",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-JoinParseTrait.html#method_left"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\JoinParseTrait\u003A\u003Aright\u0028\u0029",
-            "name": "right",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-JoinParseTrait.html#method_right"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\JoinParseTrait\u003A\u003Afull\u0028\u0029",
-            "name": "full",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-JoinParseTrait.html#method_full"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\ParseTrait",
-            "name": "ParseTrait",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-ParseTrait.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\ParseTrait\u003A\u003ArunSelect\u0028\u0029",
-            "name": "runSelect",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-ParseTrait.html#method_runSelect"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\ParseTrait\u003A\u003ArunGet\u0028\u0029",
-            "name": "runGet",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-ParseTrait.html#method_runGet"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\ParseTrait\u003A\u003Aall\u0028\u0029",
-            "name": "all",
-            "summary": "Returns\u0020all\u0020items\u0020from\u0020the\u0020Database.\u0020If\u0020a\u0020callback\u0020is\u0020passed,\u0020it\u0020will\u0020be\u0020called\u0020on\u0020each\u0020item\u0020in\u0020the\u0020resultset",
-            "url": "classes/Porm-Database-utils-ParseTrait.html#method_all"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\ParseTrait\u003A\u003Awhere\u0028\u0029",
-            "name": "where",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-ParseTrait.html#method_where"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\ParseTrait\u003A\u003Adelete\u0028\u0029",
-            "name": "delete",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-ParseTrait.html#method_delete"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait",
-            "name": "TableLevelQueryTrait",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003Ahas\u0028\u0029",
-            "name": "has",
-            "summary": "This\u0020checks\u0020if\u0020the\u0020table\u0020has\u0020a\u0020record\u0020that\u0020matches\u0020the\u0020where\u0020clause",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_has"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003Arandom\u0028\u0029",
-            "name": "random",
-            "summary": "Fetches\u0020random\u0020n\u0020items\u0020from\u0020the\u0020table,\u0020default\u0020to\u00201",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_random"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003Asave\u0028\u0029",
-            "name": "save",
-            "summary": "Saves\u0020and\u0020returns\u0020the\u0020saved\u0020item\u0020as\u0020an\u0020object",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_save"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003Aupdate\u0028\u0029",
-            "name": "update",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_update"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003AasJson\u0028\u0029",
-            "name": "asJson",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_asJson"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003AasObject\u0028\u0029",
-            "name": "asObject",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_asObject"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003Aget\u0028\u0029",
-            "name": "get",
-            "summary": "Fetches\u0020a\u0020single\u0020item\u0020from\u0020the\u0020Database",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_get"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003Araw\u0028\u0029",
-            "name": "raw",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_raw"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003Afilter\u0028\u0029",
-            "name": "filter",
-            "summary": "This\u0020switches\u0020the\u0020query\u0020to\u0020filter\u0020mode.\u0020It\u0020is\u0020useful\u0020for\u0020conditional\u0020querying.",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_filter"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003Acolumns\u0028\u0029",
-            "name": "columns",
-            "summary": "This\u0020defines\u0020the\u0020table\u0020column\u0020names\u0020to\u0020return\u0020from\u0020the\u0020Database",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_columns"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003Ausing\u0028\u0029",
-            "name": "using",
-            "summary": "This\u0020sets\u0020the\u0020connection\u0020to\u0020the\u0020Database\u0020to\u0020use\u0020for\u0020the\u0020current\u0020query.",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_using"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003Areboot\u0028\u0029",
-            "name": "reboot",
-            "summary": "This\u0020sets\u0020up\u0020the\u0020Database\u0020connection\u0020to\u0020use\u0020internally.\u0020It\u0020is\u0020called\u0020when\u0020the\u0020Porm\u0020class\u0020is\u0020being\u0020set\u0020up.",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_reboot"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003AdeleteAll\u0028\u0029",
-            "name": "deleteAll",
-            "summary": "This\u0020deletes\u0020all\u0020items\u0020that\u0020match\u0020the\u0020where\u0020clause",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_deleteAll"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003AcheckFilterMode\u0028\u0029",
-            "name": "checkFilterMode",
-            "summary": "This\u0020prevents\u0020the\u0020use\u0020of\u0020non\u002Dfiltering\u0020methods\u0020in\u0020filter\u0020mode.",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_checkFilterMode"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003AdeleteById\u0028\u0029",
-            "name": "deleteById",
-            "summary": "This\u0020is\u0020under\u0020the\u0020hood\u0020similar\u0020to\u0020deleteOne\u0020but\u0020it\u0020is\u0020more\u0020explicit",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_deleteById"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils\\TableLevelQueryTrait\u003A\u003Ajoin\u0028\u0029",
-            "name": "join",
-            "summary": "",
-            "url": "classes/Porm-Database-utils-TableLevelQueryTrait.html#method_join"
-        },                {
-            "fqsen": "\\Porm\\Exceptions\\BaseDatabaseException",
-            "name": "BaseDatabaseException",
-            "summary": "This\u0020is\u0020the\u0020base\u0020exception\u0020class\u0020that\u0020all\u0020other\u0020exceptions\u0020must\u0020extend.",
-            "url": "classes/Porm-Exceptions-BaseDatabaseException.html"
-        },                {
-            "fqsen": "\\Porm\\Exceptions\\BaseDatabaseException\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Porm-Exceptions-BaseDatabaseException.html#method___construct"
-        },                {
-            "fqsen": "\\Porm\\Exceptions\\BaseDatabaseException\u003A\u003A__toString\u0028\u0029",
-            "name": "__toString",
-            "summary": "",
-            "url": "classes/Porm-Exceptions-BaseDatabaseException.html#method___toString"
-        },                {
-            "fqsen": "\\Porm\\Exceptions\\InvalidWhereClause",
-            "name": "InvalidWhereClause",
-            "summary": "This\u0020is\u0020the\u0020base\u0020exception\u0020class\u0020that\u0020all\u0020other\u0020exceptions\u0020must\u0020extend.",
-            "url": "classes/Porm-Exceptions-InvalidWhereClause.html"
-        },                {
-            "fqsen": "\\Porm\\Porm",
-            "name": "Porm",
-            "summary": "This\u0020should\u0020the\u0020preferred\u0020way\u0020to\u0020interact\u0020with\u0020the\u0020Database\u0020in\u0020the\u0020Pionia\u0020Framework.\u0020It\u0020is\u0020a\u0020wrapper\u0020around\u0020the\u0020Medoo\u0020library.",
-            "url": "classes/Porm-Porm.html"
-        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -2880,6 +1965,16 @@ Search.appendIndex(
             "name": "Command",
             "summary": "",
             "url": "namespaces/pionia-command.html"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Frontend",
+            "name": "Frontend",
+            "summary": "",
+            "url": "namespaces/pionia-command-commands-frontend.html"
+        },                {
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators",
+            "name": "Generators",
+            "summary": "",
+            "url": "namespaces/pionia-command-commands-generators.html"
         },                {
             "fqsen": "\\Pionia\\Command\\Commands",
             "name": "Commands",
@@ -2965,40 +2060,5 @@ Search.appendIndex(
             "name": "validators",
             "summary": "",
             "url": "namespaces/validators.html"
-        },                {
-            "fqsen": "\\Porm\\Core",
-            "name": "Core",
-            "summary": "",
-            "url": "namespaces/porm-core.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\aggregation",
-            "name": "aggregation",
-            "summary": "",
-            "url": "namespaces/porm-database-aggregation.html"
-        },                {
-            "fqsen": "\\Porm\\Database",
-            "name": "Database",
-            "summary": "",
-            "url": "namespaces/porm-database.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\builders",
-            "name": "builders",
-            "summary": "",
-            "url": "namespaces/porm-database-builders.html"
-        },                {
-            "fqsen": "\\Porm\\Database\\utils",
-            "name": "utils",
-            "summary": "",
-            "url": "namespaces/porm-database-utils.html"
-        },                {
-            "fqsen": "\\Porm\\Exceptions",
-            "name": "Exceptions",
-            "summary": "",
-            "url": "namespaces/porm-exceptions.html"
-        },                {
-            "fqsen": "\\Porm",
-            "name": "Porm",
-            "summary": "",
-            "url": "namespaces/porm.html"
         }            ]
 );

@@ -39,25 +39,44 @@ abstract class ServiceContract
     public array $deactivatedActions = [];
 
     /**
-     * An associative array of actions and their required permissions
+     * An associative array of actions and their required permissions.
+     * The permissions will be checked on the context user object
+     * @example
+     * ```php
+     * public array $actionPermissions = [
+     * 'create' => ['create_article'],
+     * 'delete' => ['delete_article'],
+     * 'update' => ['update_article'],
+     * 'list' => ['list_article'],
+     * 'get' => ['get_article'],
+     * ]
      * @var array $actionPermissions
      */
     public array $actionPermissions = [];
 
     /**
      * This array contains the actions that require authentication
+     * @example ```php
+     * public array $actionsRequiringAuth = ['create', 'delete', 'update'];
+     * ```
+     *
+     * All the actions defined in this will only be access by only authenticated requests based on the user object
      * @var array $actionsRequiringAuth
      */
     public array $actionsRequiringAuth = [];
 
     /**
-     * If true, the entire service requires authentication
+     * If true, the entire service requires authentication.
+     *
+     * No action in the service will be accessible without authentication
      * @var bool $serviceRequiresAuth
      */
     public bool  $serviceRequiresAuth = false;
 
     /**
-     * This message will be displayed when the entire service requires authentication
+     * This message will be displayed when the entire service requires authentication.
+     * It is used to inform the user why they cannot access the service.
+     * By default, this will return `Service $service requires authentication`
      * @var ?string $authMessage
      */
     public ?string $authMessage = null;

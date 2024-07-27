@@ -125,33 +125,11 @@
     <a href="namespaces/validators.html" class="">validators</a>
 </h4>
 
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="namespaces/porm.html" class="">Porm</a>
-</h4>
-    <ul class="phpdocumentor-list">
-                    <li>
-                <a href="namespaces/porm-core.html" class="">Core</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/porm-database.html" class="">Database</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/porm-exceptions.html" class="">Exceptions</a>
-                
-            </li>
-            </ul>
-
                         </section>
                 <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Pionia.html" class="">Pionia</a>
-</h4>
-
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="packages/Porm.html" class="">Porm</a>
 </h4>
 
                         </section>
@@ -283,19 +261,7 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-Core-Config-CoreKernel.html#property_name">$name</a>
-    <span>
-                        &nbsp;: mixed            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Pionia-Core-Config-CoreKernel.html#property_routes">$routes</a>
-    <span>
-                        &nbsp;: mixed            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-Core-Config-CoreKernel.html#property_version">$version</a>
     <span>
                         &nbsp;: mixed            </span>
 </dt>
@@ -345,31 +311,6 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Config-CoreKernel.html#method_detectContentType">detectContentType()</a>
-    <span>
-                                &nbsp;: string    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Config-CoreKernel.html#method_handle">handle()</a>
-    <span>
-                                &nbsp;: <a href="classes/Pionia-Response-Response.html"><abbr title="\Pionia\Response\Response">Response</abbr></a>    </span>
-</dt>
-<dd>This is the main method that runs the entire request cycle.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerAuthBackends">registerAuthBackends()</a>
-    <span>
-                                &nbsp;: <a href="classes/Pionia-Core-Config-CoreKernel.html"><abbr title="\Pionia\Core\Config\CoreKernel">CoreKernel</abbr></a>    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerMiddleware">registerMiddleware()</a>
-    <span>
-                                &nbsp;: <a href="classes/Pionia-Core-Config-CoreKernel.html"><abbr title="\Pionia\Core\Config\CoreKernel">CoreKernel</abbr></a>    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Core-Config-CoreKernel.html#method_resolveCors">resolveCors()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -380,7 +321,8 @@
     <span>
                                 &nbsp;: <a href="classes/Pionia-Response-Response.html"><abbr title="\Pionia\Response\Response">Response</abbr></a>    </span>
 </dt>
-<dd>This is the main method that runs the entire request cycle.</dd>
+<dd>Bootstraps the entire application
+It automatically resolves the request internally, middlewares, authentication backends and the controller</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Core-Config-CoreKernel.html#method_authenticationBackendWorker">authenticationBackendWorker()</a>
@@ -412,12 +354,14 @@
     <span>
                                 &nbsp;: <a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a>    </span>
 </dt>
+<dd>Resolves all authentication middlewares using the `authenticationBackendWorker` method</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Core-Config-CoreKernel.html#method_resolveFrontEnd">resolveFrontEnd()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>Resolves the front end if the request is a get request and the path is not an api path</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Core-Config-CoreKernel.html#method_resolveMiddlewares">resolveMiddlewares()</a>
@@ -425,6 +369,13 @@
                                 &nbsp;: <a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a>    </span>
 </dt>
 <dd>Runs every registered middleware pre and post controller execution. Exposing both the request and response the middleware</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Pionia-Core-Config-CoreKernel.html#method_serveSpa">serveSpa()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Serves Single Page Applications. This is useful for serving the front end from the root of the project.</dd>
 
     </dl>
 
@@ -591,42 +542,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_name">
-        $name
-        <a href="classes/Pionia-Core-Config-CoreKernel.html#property_name" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">0</span>
-
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$name</span>
-    </code>
-
-        <section class="phpdocumentor-description"><p>string - The name of the application</p>
-</section>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_routes">
         $routes
         <a href="classes/Pionia-Core-Config-CoreKernel.html#property_routes" class="headerlink"><i class="fas fa-link"></i></a>
@@ -650,42 +565,6 @@
     </code>
 
         <section class="phpdocumentor-description"><p>BaseRoutes - Instance of the base routes</p>
-</section>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_version">
-        $version
-        <a href="classes/Pionia-Core-Config-CoreKernel.html#property_version" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">0</span>
-
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.0" class="phpdocumentor-element-found-in__source" data-line="0" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$version</span>
-    </code>
-
-        <section class="phpdocumentor-description"><p>string - The version of the application</p>
 </section>
 
     
@@ -833,14 +712,14 @@
             phpdocumentor-element
             -property
             -private
-                                                        "
+                                                -read-only        "
 >
     <h4 class="phpdocumentor-element__name" id="property_routes">
         $routes
         <a href="classes/Pionia-Core-Config-CoreKernel.html#property_routes" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
-                                </span>
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
@@ -918,245 +797,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_detectContentType">
-        detectContentType()
-        <a href="classes/Pionia-Core-Config-CoreKernel.html#method_detectContentType" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">357</span>
-
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.357" class="phpdocumentor-element-found-in__source" data-line="357" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">detectContentType</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$extension</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$extension</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-            -deprecated                                            "
->
-    <h4 class="phpdocumentor-element__name" id="method_handle">
-        handle()
-        <a href="classes/Pionia-Core-Config-CoreKernel.html#method_handle" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">228</span>
-
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.228" class="phpdocumentor-element-found-in__source" data-line="228" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
-    </aside>
-
-        <p class="phpdocumentor-summary">This is the main method that runs the entire request cycle.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">handle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-Response.html"><abbr title="\Pionia\Response\Response">Response</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Pionia-Core-Config-CoreKernel.html#method_handle#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">deprecated</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><ul>
-<li>This method will be removed in future versions. Use the run method instead</li>
-</ul>
-</section>
-
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-Response.html"><abbr title="\Pionia\Response\Response">Response</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-            -deprecated                                            "
->
-    <h4 class="phpdocumentor-element__name" id="method_registerAuthBackends">
-        registerAuthBackends()
-        <a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerAuthBackends" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">148</span>
-
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.148" class="phpdocumentor-element-found-in__source" data-line="148" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">registerAuthBackends</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$auth_backends</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Core-Config-CoreKernel.html"><abbr title="\Pionia\Core\Config\CoreKernel">CoreKernel</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$auth_backends</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerAuthBackends#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">deprecated</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><ul>
-<li>register authentications directly in the settings.ini file. Will be removed from future versions</li>
-</ul>
-</section>
-
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Core-Config-CoreKernel.html"><abbr title="\Pionia\Core\Config\CoreKernel">CoreKernel</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-            -deprecated                                            "
->
-    <h4 class="phpdocumentor-element__name" id="method_registerMiddleware">
-        registerMiddleware()
-        <a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerMiddleware" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">90</span>
-
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.90" class="phpdocumentor-element-found-in__source" data-line="90" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">registerMiddleware</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$middleware</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Core-Config-CoreKernel.html"><abbr title="\Pionia\Core\Config\CoreKernel">CoreKernel</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$middleware</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerMiddleware#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">deprecated</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><ul>
-<li>register middlewares directly in the settings.ini file. Will be removed from future versions</li>
-</ul>
-</section>
-
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Core-Config-CoreKernel.html"><abbr title="\Pionia\Core\Config\CoreKernel">CoreKernel</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_resolveCors">
         resolveCors()
         <a href="classes/Pionia-Core-Config-CoreKernel.html#method_resolveCors" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1197,12 +837,13 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">251</span>
+    <span class="phpdocumentor-element-found-in__line">195</span>
 
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.251" class="phpdocumentor-element-found-in__source" data-line="251" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
+            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.195" class="phpdocumentor-element-found-in__source" data-line="195" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
     </aside>
 
-        <p class="phpdocumentor-summary">This is the main method that runs the entire request cycle.</p>
+        <p class="phpdocumentor-summary">Bootstraps the entire application
+It automatically resolves the request internally, middlewares, authentication backends and the controller</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1210,9 +851,7 @@
 
     <div class="phpdocumentor-label-line">
         </div>
-        <section class="phpdocumentor-description"><p>It automatically resolves the request internally.</p>
-</section>
-
+    
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -1255,9 +894,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">313</span>
+    <span class="phpdocumentor-element-found-in__line">258</span>
 
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.313" class="phpdocumentor-element-found-in__source" data-line="313" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
+            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.258" class="phpdocumentor-element-found-in__source" data-line="258" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This will run until any of the backends successfully authenticates the user</p>
@@ -1311,9 +950,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">124</span>
+    <span class="phpdocumentor-element-found-in__line">108</span>
 
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.124" class="phpdocumentor-element-found-in__source" data-line="124" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
+            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.108" class="phpdocumentor-element-found-in__source" data-line="108" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -1358,9 +997,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">103</span>
+    <span class="phpdocumentor-element-found-in__line">87</span>
 
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.103" class="phpdocumentor-element-found-in__source" data-line="103" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
+            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.87" class="phpdocumentor-element-found-in__source" data-line="87" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -1405,9 +1044,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">162</span>
+    <span class="phpdocumentor-element-found-in__line">130</span>
 
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.162" class="phpdocumentor-element-found-in__source" data-line="162" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
+            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.130" class="phpdocumentor-element-found-in__source" data-line="130" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
     </aside>
 
     
@@ -1466,12 +1105,13 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">294</span>
+    <span class="phpdocumentor-element-found-in__line">239</span>
 
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.294" class="phpdocumentor-element-found-in__source" data-line="294" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
+            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.239" class="phpdocumentor-element-found-in__source" data-line="239" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Resolves all authentication middlewares using the `authenticationBackendWorker` method</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
                     <span class="phpdocumentor-signature__name">resolveAuthenticationBackend</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a></span></code>
@@ -1527,19 +1167,22 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">337</span>
+    <span class="phpdocumentor-element-found-in__line">293</span>
 
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.337" class="phpdocumentor-element-found-in__source" data-line="337" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
+            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.293" class="phpdocumentor-element-found-in__source" data-line="293" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Resolves the front end if the request is a get request and the path is not an api path</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
                     <span class="phpdocumentor-signature__name">resolveFrontEnd</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>Using any frontend of your choice, you can serve the front end from the root of the project</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1569,9 +1212,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">277</span>
+    <span class="phpdocumentor-element-found-in__line">221</span>
 
-            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.277" class="phpdocumentor-element-found-in__source" data-line="277" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
+            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.221" class="phpdocumentor-element-found-in__source" data-line="221" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Runs every registered middleware pre and post controller execution. Exposing both the request and response the middleware</p>
@@ -1623,6 +1266,41 @@
         <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a></span>
             </section>
 
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_serveSpa">
+        serveSpa()
+        <a href="classes/Pionia-Core-Config-CoreKernel.html#method_serveSpa" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Config/CoreKernel.php"><a href="files/src-core-config-corekernel.html"><abbr title="src/Core/Config/CoreKernel.php">CoreKernel.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">311</span>
+
+            <a href="classes/Pionia-Core-Config-CoreKernel.html#source-view.311" class="phpdocumentor-element-found-in__source" data-line="311" data-modal="source-view" data-src="files/src/Core/Config/CoreKernel.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Serves Single Page Applications. This is useful for serving the front end from the root of the project.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">serveSpa</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>Handles also cases where users refreshes the url from relative paths to the frontend</p>
+</section>
+
+    
+    
+
+    
 </article>
             </section>
 
@@ -1741,9 +1419,7 @@
                                                     <li><a href="classes/Pionia-Core-Config-CoreKernel.html#property_context">$context<a href="classes/Pionia-Core-Config-CoreKernel.html"></li>
                                                     <li><a href="classes/Pionia-Core-Config-CoreKernel.html#property_matcher">$matcher<a href="classes/Pionia-Core-Config-CoreKernel.html"></li>
                                                     <li><a href="classes/Pionia-Core-Config-CoreKernel.html#property_middleware">$middleware<a href="classes/Pionia-Core-Config-CoreKernel.html"></li>
-                                                    <li><a href="classes/Pionia-Core-Config-CoreKernel.html#property_name">$name<a href="classes/Pionia-Core-Config-CoreKernel.html"></li>
                                                     <li><a href="classes/Pionia-Core-Config-CoreKernel.html#property_routes">$routes<a href="classes/Pionia-Core-Config-CoreKernel.html"></li>
-                                                    <li><a href="classes/Pionia-Core-Config-CoreKernel.html#property_version">$version<a href="classes/Pionia-Core-Config-CoreKernel.html"></li>
                                                     <li><a href="classes/Pionia-Core-Config-CoreKernel.html#property_authBackends">$authBackends<a href="classes/Pionia-Core-Config-CoreKernel.html"></li>
                                                     <li><a href="classes/Pionia-Core-Config-CoreKernel.html#property_context">$context<a href="classes/Pionia-Core-Config-CoreKernel.html"></li>
                                                     <li><a href="classes/Pionia-Core-Config-CoreKernel.html#property_matcher">$matcher<a href="classes/Pionia-Core-Config-CoreKernel.html"></li>
@@ -1756,10 +1432,6 @@
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/Pionia-Core-Config-CoreKernel.html#method___construct">__construct()</a></li>
-                                            <li><a href="classes/Pionia-Core-Config-CoreKernel.html#method_detectContentType">detectContentType()</a></li>
-                                            <li><a href="classes/Pionia-Core-Config-CoreKernel.html#method_handle">handle()</a></li>
-                                            <li><a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerAuthBackends">registerAuthBackends()</a></li>
-                                            <li><a href="classes/Pionia-Core-Config-CoreKernel.html#method_registerMiddleware">registerMiddleware()</a></li>
                                             <li><a href="classes/Pionia-Core-Config-CoreKernel.html#method_resolveCors">resolveCors()</a></li>
                                             <li><a href="classes/Pionia-Core-Config-CoreKernel.html#method_run">run()</a></li>
                                             <li><a href="classes/Pionia-Core-Config-CoreKernel.html#method_authenticationBackendWorker">authenticationBackendWorker()</a></li>
@@ -1769,6 +1441,7 @@
                                             <li><a href="classes/Pionia-Core-Config-CoreKernel.html#method_resolveAuthenticationBackend">resolveAuthenticationBackend()</a></li>
                                             <li><a href="classes/Pionia-Core-Config-CoreKernel.html#method_resolveFrontEnd">resolveFrontEnd()</a></li>
                                             <li><a href="classes/Pionia-Core-Config-CoreKernel.html#method_resolveMiddlewares">resolveMiddlewares()</a></li>
+                                            <li><a href="classes/Pionia-Core-Config-CoreKernel.html#method_serveSpa">serveSpa()</a></li>
                                     </ul>
             </li>
                     </ul>

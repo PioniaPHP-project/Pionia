@@ -125,33 +125,11 @@
     <a href="namespaces/validators.html" class="">validators</a>
 </h4>
 
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="namespaces/porm.html" class="">Porm</a>
-</h4>
-    <ul class="phpdocumentor-list">
-                    <li>
-                <a href="namespaces/porm-core.html" class="">Core</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/porm-database.html" class="">Database</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/porm-exceptions.html" class="">Exceptions</a>
-                
-            </li>
-            </ul>
-
                         </section>
                 <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Pionia.html" class="">Pionia</a>
-</h4>
-
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="packages/Porm.html" class="">Porm</a>
 </h4>
 
                         </section>
@@ -218,14 +196,14 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload">defaultUpload()</a>
+    <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_handleUpload">handleUpload()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd>This hook will receive every file found in your request and you can handle it as you wish.</dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_handleUpload">handleUpload()</a>
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload">defaultUpload()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
@@ -246,86 +224,6 @@
             <a href="classes/Pionia-Generics-Base-UploadsContract.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_defaultUpload">
-        defaultUpload()
-        <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/UploadsContract.php"><a href="files/src-generics-base-uploadscontract.html"><abbr title="src/Generics/Base/UploadsContract.php">UploadsContract.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">34</span>
-
-            <a href="classes/Pionia-Generics-Base-UploadsContract.html#source-view.34" class="phpdocumentor-element-found-in__source" data-line="34" data-modal="source-view" data-src="files/src/Generics/Base/UploadsContract.php.txt"></a>
-    </aside>
-
-        <p class="phpdocumentor-summary">This hook will receive every file found in your request and you can handle it as you wish.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">defaultUpload</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$file</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fileName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-        <section class="phpdocumentor-description"><p>Whatever you return here is what we shall send to the db.
-Returning null or false will skip the file in the entire request from being saved in the db.</p>
-</section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$file</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The file object that was uploaded.</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$fileName</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The name as defined in the request.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
-                                                            
-                                             
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">mixed</span>
-                    &mdash;
-                <section class="phpdocumentor-description"><p>The value to be saved in the db, null or false to skip the file, or an exception to stop the entire request</p>
-</section>
-
-            </section>
-
-</article>
                     <article
         class="phpdocumentor-element
             -method
@@ -380,6 +278,86 @@ Returning null or false will skip the file in the entire request from being save
             </dl>
 
     
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The value to be saved in the db, null or false to skip the file, or an exception to stop the entire request</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_defaultUpload">
+        defaultUpload()
+        <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/UploadsContract.php"><a href="files/src-generics-base-uploadscontract.html"><abbr title="src/Generics/Base/UploadsContract.php">UploadsContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+            <a href="classes/Pionia-Generics-Base-UploadsContract.html#source-view.34" class="phpdocumentor-element-found-in__source" data-line="34" data-modal="source-view" data-src="files/src/Generics/Base/UploadsContract.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">This hook will receive every file found in your request and you can handle it as you wish.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">defaultUpload</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$file</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fileName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>Whatever you return here is what we shall send to the db.
+Returning null or false will skip the file in the entire request from being saved in the db.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$file</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The file object that was uploaded.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$fileName</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The name as defined in the request.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -502,8 +480,8 @@ Returning null or false will skip the file in the entire request from being save
                                                 <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li><a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload">defaultUpload()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-UploadsContract.html#method_handleUpload">handleUpload()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload">defaultUpload()</a></li>
                                     </ul>
             </li>
                     </ul>

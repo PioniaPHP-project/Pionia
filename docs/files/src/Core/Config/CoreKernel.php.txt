@@ -3,6 +3,7 @@
 namespace Pionia\Core\Config;
 
 use Exception;
+use JetBrains\PhpStorm\NoReturn;
 use Pionia\Core\Helpers\SupportedHttpMethods;
 use Pionia\Core\Helpers\Utilities;
 use Pionia\Core\Pionia;
@@ -12,6 +13,7 @@ use Pionia\Request\Request;
 use Pionia\Response\BaseResponse;
 use Pionia\Response\Response;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
@@ -42,8 +44,6 @@ if (!defined("pionia")){
  *
  * It also catches all exceptions and returns a 200 ok response with error code 500
  *
- * @property $name string - The name of the application
- * @property $version string - The version of the application
  * @property $routes BaseRoutes - Instance of the base routes
  * @property $context RequestContext - Instance of the request context
  * @property $matcher UrlMatcher - Instance of the url matcher
@@ -67,7 +67,7 @@ class CoreKernel
         $settings = pionia::getSettingOrDefault('cors', []);
         $allowedOrigins = $settings['ALLOW_ORIGIN'] ?? '*';
         $allowedHeaders = $settings['ALLOW_HEADERS'] ?? '*';
-        $allowedCredentials = $settings['ALLOW_CREDENTIALS'] ?? 'true';
+        $allowedCredentials = $settings['ALLOW_CREDENTIALS'] ?? 'false';
         $maxAge = $settings['MAX_AGE'] ?? 3600;
         header('Access-Control-Allow-Origin: '.$allowedOrigins);
         header('Access-Control-Allow-Headers: '.$allowedHeaders);
@@ -77,24 +77,8 @@ class CoreKernel
     }
 
     public function __construct(
-        private BaseRoutes $routes,
+        private readonly BaseRoutes $routes,
     ){
-    }
-
-    /**
-     * @param array|string $middleware
-     * @return CoreKernel
-     *
-     * @deprecated - register middlewares directly in the settings.ini file. Will be removed from future versions
-     */
-    public function registerMiddleware(array | string $middleware): static
-    {
-        if (is_array($middleware)) {
-            $this->middleware = array_merge($this->middleware, $middleware);
-        }else{
-            $this->middleware[] = $middleware;
-        }
-        return $this;
     }
 
     /**
@@ -137,22 +121,6 @@ class CoreKernel
                 $this->authBackends[] = $auth;
             }
         }
-    }
-
-    /**
-     * @param array|string $auth_backends
-     * @return CoreKernel
-     *
-     * @deprecated - register authentications directly in the settings.ini file. Will be removed from future versions
-     */
-    public function registerAuthBackends(array | string $auth_backends): static
-    {
-        if (is_string($auth_backends)){
-            $this->authBackends[] = $auth_backends;
-        } else {
-            $this->authBackends = array_merge($this->authBackends, $auth_backends);
-        }
-        return $this;
     }
 
 
@@ -219,32 +187,8 @@ class CoreKernel
     }
 
     /**
-     * This is the main method that runs the entire request cycle.
-     * @param Request $request
-     * @return Response
-     *
-     * @deprecated - This method will be removed in future versions. Use the run method instead
-     */
-    public function handle(Request $request): Response
-    {
-        $this->resolveFrontEnd($request);
-
-        try {
-            $request = $this->resolveMiddlewares($request); // first run for all middlewares
-            $request =$this->resolveAuthenticationBackend($request); // run all the authentication middles
-            $response = $this->resolve($request);
-            $request = $this->resolveMiddlewares($request, $response);
-            return $response->prepare($request)->send();
-        } catch (Exception $exception) {
-            $response = BaseResponse::JsonResponse(500, $exception->getMessage());
-            $reqRes =  new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
-            return $reqRes->prepare($request)->send();
-        }
-    }
-
-    /**
-     * This is the main method that runs the entire request cycle.
-     * It automatically resolves the request internally.
+     * Bootstraps the entire application
+     * It automatically resolves the request internally, middlewares, authentication backends and the controller
      * @return Response
      * @since 1.1.1 - This method was added to replace the handle method. The handle method will be removed in future versions
      */
@@ -262,7 +206,7 @@ class CoreKernel
             return $response->prepare($request)->send();
         } catch (Exception $exception) {
             $response = BaseResponse::JsonResponse(500, $exception->getMessage());
-            $reqRes =  new Response($response->getPrettyResponse(), Response::HTTP_OK, ['Content-Type' => 'application/json']);
+            $reqRes =  new Response($response->getPrettyResponse(), ResponseAlias::HTTP_OK, ['Content-Type' => 'application/json']);
             return $reqRes->prepare($request)->send();
         }
     }
@@ -289,6 +233,7 @@ class CoreKernel
     }
 
     /**
+     * Resolves all authentication middlewares using the `authenticationBackendWorker` method
      * @throws Exception
      */
     private function resolveAuthenticationBackend(Request $request): Request
@@ -319,6 +264,7 @@ class CoreKernel
         $current = array_shift($backends);
 
         $klass = new $current();
+
         $userObject =  $klass->authenticate($request);
 
         // if there is an instance, we set it to context and the next  iteration will be terminated immediately
@@ -331,44 +277,46 @@ class CoreKernel
         if (count($backends) > 0) {
             return $this->authenticationBackendWorker($request, $backends);
         }
+
+        // otherwise we abort the process and return the request and proceed. It will be handled on the action or service
+        // level
         return $request;
     }
 
+    /**
+     * Resolves the front end if the request is a get request and the path is not an api path
+     *
+     * Using any frontend of your choice, you can serve the front end from the root of the project
+     * @param Request $request
+     * @return void
+     */
     private function resolveFrontEnd(Request $request): void
     {
         if (!str_starts_with($request->getPathInfo(), '/api') && strtolower($request->getMethod()) === 'get'){
             $fileSystem = new Filesystem();
-            $base = BASEPATH;
-            if (!str_ends_with($base, '/')){
-                $base = $base . '/';
+            if ($fileSystem->exists(BASEPATH . '/index.html')){
+                $this->serveSpa();
             }
-            $path = $base . 'public/index.html';
-
-            if ($fileSystem->exists($path)){
-                $response = new Response(file_get_contents($path), Response::HTTP_OK, ['Content-Type' => 'text/html']);
-            } else {
-                $response = new Response(file_get_contents(__DIR__ . '/index.php'), Response::HTTP_OK, ['Content-Type' => 'text/html']);
-            }
-            $response->send();
+            $response = new Response(file_get_contents(__DIR__ . '/index.php'), Response::HTTP_OK, ['Content-Type' => 'text/html']);
+            $response->prepare($request)->send();
             exit();
         }
     }
 
-    public function detectContentType(string $extension): string
+    /**
+     * Serves Single Page Applications. This is useful for serving the front end from the root of the project.
+     * Handles also cases where users refreshes the url from relative paths to the frontend
+     * @return void
+     */
+    #[NoReturn] private function serveSpa(): void
     {
-        $mimeTypes = [
-            'html' => 'text/html',
-            'css' => 'text/css',
-            'js' => 'application/javascript',
-            'json' => 'application/json',
-            'jpg' => 'image/jpeg',
-            'jpeg' => 'image/jpeg',
-            'png' => 'image/png',
-            'gif' => 'image/gif',
-            'svg' => 'image/svg+xml',
-            'pdf' => 'application/pdf',
-        ];
-        return $mimeTypes[$extension] ?? 'application/octet-stream';
+        $base = BASEPATH;
+        if (!str_ends_with($base, '/')) {
+            $base = $base . '/';
+        }
+        $path = $base . 'index.html';
+        $response = new Response(file_get_contents($path), ResponseAlias::HTTP_OK, ['Content-Type' => 'text/html']);
+        $response->prepare(Request::createFromGlobals())->send();
+        exit();
     }
-
 }

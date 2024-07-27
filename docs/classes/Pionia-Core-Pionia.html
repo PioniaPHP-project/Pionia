@@ -125,33 +125,11 @@
     <a href="namespaces/validators.html" class="">validators</a>
 </h4>
 
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="namespaces/porm.html" class="">Porm</a>
-</h4>
-    <ul class="phpdocumentor-list">
-                    <li>
-                <a href="namespaces/porm-core.html" class="">Core</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/porm-database.html" class="">Database</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/porm-exceptions.html" class="">Exceptions</a>
-                
-            </li>
-            </ul>
-
                         </section>
                 <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Pionia.html" class="">Pionia</a>
-</h4>
-
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="packages/Porm.html" class="">Porm</a>
 </h4>
 
                         </section>
@@ -305,6 +283,7 @@
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
+<dd>Returns the server settings under [server] in the settings file</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Core-Pionia.html#method_getSetting">getSetting()</a>
@@ -319,24 +298,28 @@ If the setting is not found, it returns null</dd>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>Returns the setting or the default value if the setting is not found</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Core-Pionia.html#method_getSettings">getSettings()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;|null    </span>
 </dt>
+<dd>Returns all the settings in the settings file</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Core-Pionia.html#method_getUploadSettings">getUploadSettings()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
+<dd>Returns the upload settings under [uploads] in the settings file</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Core-Pionia.html#method_resolveSettingsFromIni">resolveSettingsFromIni()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: array&lt;string|int, mixed&gt;|bool|null    </span>
 </dt>
+<dd>Resolved the settings from all the possible sources</dd>
 
     </dl>
 
@@ -447,7 +430,7 @@ If the setting is not found, it returns null</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
     <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$version</span>
-     = <span class="phpdocumentor-signature__default-value">&#039;1.1.5&#039;</span></code>
+     = <span class="phpdocumentor-signature__default-value">&#039;1.1.6&#039;</span></code>
 
     
     
@@ -549,7 +532,8 @@ If the setting is not found, it returns null</dd>
             <a href="classes/Pionia-Core-Pionia.html#source-view.67" class="phpdocumentor-element-found-in__source" data-line="67" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Returns the server settings under [server] in the settings file</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getServerSettings</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
@@ -580,9 +564,9 @@ If the setting is not found, it returns null</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
-            <a href="classes/Pionia-Core-Pionia.html#source-view.55" class="phpdocumentor-element-found-in__source" data-line="55" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
+            <a href="classes/Pionia-Core-Pionia.html#source-view.58" class="phpdocumentor-element-found-in__source" data-line="58" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Checks for the setting and returns it
@@ -626,12 +610,13 @@ If the setting is not found, it returns null</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
-            <a href="classes/Pionia-Core-Pionia.html#source-view.76" class="phpdocumentor-element-found-in__source" data-line="76" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
+            <a href="classes/Pionia-Core-Pionia.html#source-view.82" class="phpdocumentor-element-found-in__source" data-line="82" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Returns the setting or the default value if the setting is not found</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSettingOrDefault</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$default</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -675,12 +660,13 @@ If the setting is not found, it returns null</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
-            <a href="classes/Pionia-Core-Pionia.html#source-view.42" class="phpdocumentor-element-found-in__source" data-line="42" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
+            <a href="classes/Pionia-Core-Pionia.html#source-view.45" class="phpdocumentor-element-found-in__source" data-line="45" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Returns all the settings in the settings file</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSettings</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span></code>
@@ -711,12 +697,13 @@ If the setting is not found, it returns null</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">106</span>
+    <span class="phpdocumentor-element-found-in__line">126</span>
 
-            <a href="classes/Pionia-Core-Pionia.html#source-view.106" class="phpdocumentor-element-found-in__source" data-line="106" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
+            <a href="classes/Pionia-Core-Pionia.html#source-view.126" class="phpdocumentor-element-found-in__source" data-line="126" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Returns the upload settings under [uploads] in the settings file</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getUploadSettings</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
@@ -747,23 +734,36 @@ If the setting is not found, it returns null</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">97</span>
 
-            <a href="classes/Pionia-Core-Pionia.html#source-view.81" class="phpdocumentor-element-found-in__source" data-line="81" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
+            <a href="classes/Pionia-Core-Pionia.html#source-view.97" class="phpdocumentor-element-found-in__source" data-line="97" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Resolved the settings from all the possible sources</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">resolveSettingsFromIni</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">resolveSettingsFromIni</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|bool|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>Possible sources are:</p>
+<ul>
+<li>The settings file -- settings.ini</li>
+<li>The session -- if the session is active and the session settings are set</li>
+<li>The server settings -- Anything in $_SERVER</li>
+<li>The environment settings -- Anything in $_ENV</li>
+</ul>
+</section>
+
     
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|bool|null</span>
+            </section>
+
 </article>
             </section>
 

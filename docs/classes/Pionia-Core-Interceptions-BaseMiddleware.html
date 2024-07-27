@@ -125,33 +125,11 @@
     <a href="namespaces/validators.html" class="">validators</a>
 </h4>
 
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="namespaces/porm.html" class="">Porm</a>
-</h4>
-    <ul class="phpdocumentor-list">
-                    <li>
-                <a href="namespaces/porm-core.html" class="">Core</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/porm-database.html" class="">Database</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/porm-exceptions.html" class="">Exceptions</a>
-                
-            </li>
-            </ul>
-
                         </section>
                 <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Pionia.html" class="">Pionia</a>
-</h4>
-
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="packages/Porm.html" class="">Porm</a>
 </h4>
 
                         </section>
@@ -263,6 +241,7 @@ user</p>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>This method is called to run the middleware. Every middleware must implement this method.</dd>
 
     </dl>
 
@@ -293,12 +272,13 @@ user</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Interceptions/BaseMiddleware.php"><a href="files/src-core-interceptions-basemiddleware.html"><abbr title="src/Core/Interceptions/BaseMiddleware.php">BaseMiddleware.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
-            <a href="classes/Pionia-Core-Interceptions-BaseMiddleware.html#source-view.26" class="phpdocumentor-element-found-in__source" data-line="26" data-modal="source-view" data-src="files/src/Core/Interceptions/BaseMiddleware.php.txt"></a>
+            <a href="classes/Pionia-Core-Interceptions-BaseMiddleware.html#source-view.32" class="phpdocumentor-element-found-in__source" data-line="32" data-modal="source-view" data-src="files/src/Core/Interceptions/BaseMiddleware.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">This method is called to run the middleware. Every middleware must implement this method.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
     <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">run</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Response-Response.html"><abbr title="\Pionia\Response\Response">Response</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$response</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -313,14 +293,22 @@ user</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Request-Request.html"><abbr title="\Pionia\Request\Request">Request</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><ul>
+<li>The request object</li>
+</ul>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$response</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Response-Response.html"><abbr title="\Pionia\Response\Response">Response</abbr></a>|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><ul>
+<li>The response object</li>
+</ul>
+</section>
+
             </dd>
             </dl>
 

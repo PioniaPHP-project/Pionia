@@ -125,33 +125,11 @@
     <a href="namespaces/validators.html" class="">validators</a>
 </h4>
 
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="namespaces/porm.html" class="">Porm</a>
-</h4>
-    <ul class="phpdocumentor-list">
-                    <li>
-                <a href="namespaces/porm-core.html" class="">Core</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/porm-database.html" class="">Database</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/porm-exceptions.html" class="">Exceptions</a>
-                
-            </li>
-            </ul>
-
                         </section>
                 <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Pionia.html" class="">Pionia</a>
-</h4>
-
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="packages/Porm.html" class="">Porm</a>
 </h4>
 
                         </section>
@@ -338,13 +316,8 @@
     <span>
                                 &nbsp;: <a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a>    </span>
 </dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload">defaultUpload()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-<dd>This hook will receive every file found in your request and you can handle it as you wish.</dd>
+<dd>Create a new item in the table
+You can use `save` as an alias for this method</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Generics-Mixins-RetrieveMixin.html#method_details">details()</a>
@@ -429,6 +402,13 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-Generics-Mixins-CreateMixin.html#method_save">save()</a>
+    <span>
+                                &nbsp;: <a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a>    </span>
+</dt>
+<dd>Acronym for the `create` method</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Generics-Mixins-UpdateMixin.html#method_update">update()</a>
     <span>
                                 &nbsp;: <a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a>    </span>
@@ -461,6 +441,13 @@
 </dt>
 <dd>Create in CRUD
 Saves in transactions, runs pre and post create events</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload">defaultUpload()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd>This hook will receive every file found in your request and you can handle it as you wish.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Pionia-Generics-Base-CrudContract.html#method_deleteItem">deleteItem()</a>
@@ -525,7 +512,7 @@ Handles both post and pre delete events</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Generics-Base-JoinContract.html#method_attachJoins">attachJoins()</a>
     <span>
-                                &nbsp;: <a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a>    </span>
+                                &nbsp;: <abbr title="\Porm\Database\builders\Join">Join</abbr>    </span>
 </dt>
 <dd>Attaches all defined joins to the base query.</dd>
 
@@ -556,6 +543,7 @@ including removing duplicates.</dd>
     <span>
                                 &nbsp;: mixed|<abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr>|null    </span>
 </dt>
+<dd>Picks the value of a field from the request data</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Generics-Base-CrudContract.html#method_getListColumns">getListColumns()</a>
@@ -581,14 +569,14 @@ including removing duplicates.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Generics-Base-JoinContract.html#method_joinQuery">joinQuery()</a>
     <span>
-                                &nbsp;: <a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a>    </span>
+                                &nbsp;: <abbr title="\Porm\Database\builders\Join">Join</abbr>    </span>
 </dt>
 <dd>Resolve the base query to base on to start joining.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Generics-Base-JoinContract.html#method_switchJoin">switchJoin()</a>
     <span>
-                                &nbsp;: <a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a>    </span>
+                                &nbsp;: <abbr title="\Porm\Database\builders\Join">Join</abbr>    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
@@ -1201,12 +1189,14 @@ the request and saved. If left null, all columns defined in the request object w
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Mixins/CreateMixin.php"><a href="files/src-generics-mixins-createmixin.html"><abbr title="src/Generics/Mixins/CreateMixin.php">CreateMixin.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
-            <a href="classes/Pionia-Generics-RetrieveCreateUpdateService.html#source-view.17" class="phpdocumentor-element-found-in__source" data-line="17" data-modal="source-view" data-src="files/src/Generics/Mixins/CreateMixin.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveCreateUpdateService.html#source-view.19" class="phpdocumentor-element-found-in__source" data-line="19" data-modal="source-view" data-src="files/src/Generics/Mixins/CreateMixin.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Create a new item in the table
+You can use `save` as an alias for this method</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">create</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a></span></code>
@@ -1235,86 +1225,6 @@ the request and saved. If left null, all columns defined in the request object w
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_defaultUpload">
-        defaultUpload()
-        <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/UploadsContract.php"><a href="files/src-generics-base-uploadscontract.html"><abbr title="src/Generics/Base/UploadsContract.php">UploadsContract.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">34</span>
-
-            <a href="classes/Pionia-Generics-RetrieveCreateUpdateService.html#source-view.34" class="phpdocumentor-element-found-in__source" data-line="34" data-modal="source-view" data-src="files/src/Generics/Base/UploadsContract.php.txt"></a>
-    </aside>
-
-        <p class="phpdocumentor-summary">This hook will receive every file found in your request and you can handle it as you wish.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">defaultUpload</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$file</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fileName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-        <section class="phpdocumentor-description"><p>Whatever you return here is what we shall send to the db.
-Returning null or false will skip the file in the entire request from being saved in the db.</p>
-</section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$file</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The file object that was uploaded.</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$fileName</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The name as defined in the request.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
-                                                            
-                                             
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">mixed</span>
-                    &mdash;
-                <section class="phpdocumentor-description"><p>The value to be saved in the db, null or false to skip the file, or an exception to stop the entire request</p>
-</section>
-
             </section>
 
 </article>
@@ -1914,6 +1824,58 @@ Returning null or false will skip the file in the entire request from being save
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_save">
+        save()
+        <a href="classes/Pionia-Generics-Mixins-CreateMixin.html#method_save" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Mixins/CreateMixin.php"><a href="files/src-generics-mixins-createmixin.html"><abbr title="src/Generics/Mixins/CreateMixin.php">CreateMixin.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">28</span>
+
+            <a href="classes/Pionia-Generics-RetrieveCreateUpdateService.html#source-view.28" class="phpdocumentor-element-found-in__source" data-line="28" data-modal="source-view" data-src="files/src/Generics/Mixins/CreateMixin.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Acronym for the `create` method</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">save</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Mixins-CreateMixin.html#method_save#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Response-BaseResponse.html"><abbr title="\Pionia\Response\BaseResponse">BaseResponse</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_update">
         update()
         <a href="classes/Pionia-Generics-Mixins-UpdateMixin.html#method_update" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2194,6 +2156,86 @@ Saves in transactions, runs pre and post create events</p>
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">object|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_defaultUpload">
+        defaultUpload()
+        <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/UploadsContract.php"><a href="files/src-generics-base-uploadscontract.html"><abbr title="src/Generics/Base/UploadsContract.php">UploadsContract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+            <a href="classes/Pionia-Generics-RetrieveCreateUpdateService.html#source-view.34" class="phpdocumentor-element-found-in__source" data-line="34" data-modal="source-view" data-src="files/src/Generics/Base/UploadsContract.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">This hook will receive every file found in your request and you can handle it as you wish.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">defaultUpload</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$file</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fileName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>Whatever you return here is what we shall send to the db.
+Returning null or false will skip the file in the entire request from being saved in the db.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$file</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The file object that was uploaded.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$fileName</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The name as defined in the request.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The value to be saved in the db, null or false to skip the file, or an exception to stop the entire request</p>
+</section>
+
             </section>
 
 </article>
@@ -2708,7 +2750,7 @@ OFFSET: 5 // can also be <code class="prettyprint">offset: 5</code>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">attachJoins</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$join</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">attachJoins</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Porm\Database\builders\Join">Join</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$join</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Porm\Database\builders\Join">Join</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -2717,7 +2759,7 @@ OFFSET: 5 // can also be <code class="prettyprint">offset: 5</code>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$join</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a>|null</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Porm\Database\builders\Join">Join</abbr>|null</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -2743,7 +2785,7 @@ OFFSET: 5 // can also be <code class="prettyprint">offset: 5</code>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Porm\Database\builders\Join">Join</abbr></span>
             </section>
 
 </article>
@@ -2904,12 +2946,13 @@ It pays respect to aliases defined, so, don't forget to respect them too!</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Generics/Base/GenericService.php"><a href="files/src-generics-base-genericservice.html"><abbr title="src/Generics/Base/GenericService.php">GenericService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">71</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 
-            <a href="classes/Pionia-Generics-RetrieveCreateUpdateService.html#source-view.71" class="phpdocumentor-element-found-in__source" data-line="71" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
+            <a href="classes/Pionia-Generics-RetrieveCreateUpdateService.html#source-view.72" class="phpdocumentor-element-found-in__source" data-line="72" data-modal="source-view" data-src="files/src/Generics/Base/GenericService.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Picks the value of a field from the request data</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
                     <span class="phpdocumentor-signature__name">getFieldValue</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href=""></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed|<abbr title="\Symfony\Component\HttpFoundation\File\UploadedFile">UploadedFile</abbr>|null</span></code>
@@ -3110,7 +3153,7 @@ It pays respect to aliases defined, so, don't forget to respect them too!</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">joinQuery</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">joinQuery</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Porm\Database\builders\Join">Join</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -3137,7 +3180,7 @@ It pays respect to aliases defined, so, don't forget to respect them too!</p>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Porm\Database\builders\Join">Join</abbr></span>
             </section>
 
 </article>
@@ -3163,7 +3206,7 @@ It pays respect to aliases defined, so, don't forget to respect them too!</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">switchJoin</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Generics-Base-JoinType.html"><abbr title="\Pionia\Generics\Base\JoinType">JoinType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$joinType</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$query</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$table</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">switchJoin</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Pionia-Generics-Base-JoinType.html"><abbr title="\Pionia\Generics\Base\JoinType">JoinType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$joinType</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Porm\Database\builders\Join">Join</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$query</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$table</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Porm\Database\builders\Join">Join</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -3181,7 +3224,7 @@ It pays respect to aliases defined, so, don't forget to respect them too!</p>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$query</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Porm\Database\builders\Join">Join</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The current query we are joining to</p>
@@ -3203,7 +3246,7 @@ It pays respect to aliases defined, so, don't forget to respect them too!</p>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Join.html"><abbr title="\Porm\Database\builders\Join">Join</abbr></a></span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Porm\Database\builders\Join">Join</abbr></span>
                     &mdash;
                 <section class="phpdocumentor-description"><p>The query with the join added</p>
 </section>
@@ -3384,7 +3427,6 @@ It pays respect to aliases defined, so, don't forget to respect them too!</p>
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/Pionia-Generics-Mixins-CreateMixin.html#method_create">create()</a></li>
-                                            <li><a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload">defaultUpload()</a></li>
                                             <li><a href="classes/Pionia-Generics-Mixins-RetrieveMixin.html#method_details">details()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-EventsContract.html#method_getItem">getItem()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-EventsContract.html#method_getItems">getItems()</a></li>
@@ -3397,11 +3439,13 @@ It pays respect to aliases defined, so, don't forget to respect them too!</p>
                                             <li><a href="classes/Pionia-Generics-Base-EventsContract.html#method_preDelete">preDelete()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-EventsContract.html#method_preUpdate">preUpdate()</a></li>
                                             <li><a href="classes/Pionia-Generics-Mixins-RetrieveMixin.html#method_retrieve">retrieve()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Mixins-CreateMixin.html#method_save">save()</a></li>
                                             <li><a href="classes/Pionia-Generics-Mixins-UpdateMixin.html#method_update">update()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method__checkPaginationInternal">_checkPaginationInternal()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_allItems">allItems()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_checkIfFieldPassesAllValidations">checkIfFieldPassesAllValidations()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_createItem">createItem()</a></li>
+                                            <li><a href="classes/Pionia-Generics-Base-UploadsContract.html#method_defaultUpload">defaultUpload()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_deleteItem">deleteItem()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_detectPagination">detectPagination()</a></li>
                                             <li><a href="classes/Pionia-Generics-Base-CrudContract.html#method_getAllWithPagination">getAllWithPagination()</a></li>

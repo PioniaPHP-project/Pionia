@@ -19,26 +19,6 @@ class BaseCommand extends Command
     {
         parent::__construct($name);
     }
-
-    /**
-     * Return the base app, via this, you can access all the app settings, and current app environment
-     *
-     * @return Pionia
-     */
-    protected static function base(): Pionia
-    {
-        return new Pionia();
-    }
-
-    protected function getServerSettings(): array
-    {
-        $settings =  Pionia::getSetting("server");
-        if ($settings && is_array($settings)) {
-            return $settings;
-        }
-        return [];
-    }
-
     /**
      * Returns the current database connection
      *

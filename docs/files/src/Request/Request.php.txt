@@ -97,19 +97,6 @@ class Request extends \Symfony\Component\HttpFoundation\Request
     }
 
     /**
-     * Returns the json data from the request if the request was submitted as json
-     * @return array
-     * @deprecated Use $this->getData() instead
-     */
-    public function getJsonData(): array
-    {
-        if ($this->getContentTypeFormat() === 'json') {
-            return $this->toArray();
-        }
-        return [];
-    }
-
-    /**
      * Merges data sent from the client as json and form data as one array where one can access all the request data.
      *
      * This implies that this request is safe for both json and form data scenarios
@@ -133,16 +120,4 @@ class Request extends \Symfony\Component\HttpFoundation\Request
         return null;
     }
 
-    /**
-     * Returns the data if the request was submitted as form data
-     * @return array
-     * @deprecated Use $this->getData() instead
-     */
-    public function getFormData(): array
-    {
-        if ($this->getContentTypeFormat() === 'form') {
-            return $this->request->all() ?? [];
-        }
-        return [];
-    }
 }

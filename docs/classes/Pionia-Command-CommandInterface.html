@@ -125,33 +125,11 @@
     <a href="namespaces/validators.html" class="">validators</a>
 </h4>
 
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="namespaces/porm.html" class="">Porm</a>
-</h4>
-    <ul class="phpdocumentor-list">
-                    <li>
-                <a href="namespaces/porm-core.html" class="">Core</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/porm-database.html" class="">Database</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/porm-exceptions.html" class="">Exceptions</a>
-                
-            </li>
-            </ul>
-
                         </section>
                 <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Pionia.html" class="">Pionia</a>
-</h4>
-
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="packages/Porm.html" class="">Porm</a>
 </h4>
 
                         </section>
@@ -180,9 +158,6 @@
         <h2 class="phpdocumentor-content__title">
     CommandInterface
 
-        <span class="phpdocumentor-element__extends">
-        extends <a href="classes/Pionia-Core-Pionia.html"><abbr title="\Pionia\Core\Pionia">Pionia</abbr></a>
-    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -250,24 +225,6 @@
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-Core-Pionia.html#property_name">$name</a>
-    <span>
-                        &nbsp;: string            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-Core-Pionia.html#property_settings">$settings</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/Pionia-Core-Pionia.html#property_version">$version</a>
-    <span>
-                        &nbsp;: string            </span>
-</dt>
-
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Pionia-Command-CommandInterface.html#property_commands">$commands</a>
     <span>
@@ -284,59 +241,9 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Pionia.html#method___construct">__construct()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Pionia.html#method_boot">boot()</a>
-    <span>
-                                &nbsp;: <a href="classes/Pionia-Core-Pionia.html"><abbr title="\Pionia\Core\Pionia">Pionia</abbr></a>    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Command-CommandInterface.html#method_getCommands">getCommands()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Pionia.html#method_getServerSettings">getServerSettings()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Pionia.html#method_getSetting">getSetting()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-<dd>Checks for the setting and returns it
-If the setting is not found, it returns null</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Pionia.html#method_getSettingOrDefault">getSettingOrDefault()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Pionia.html#method_getSettings">getSettings()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;|null    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Pionia.html#method_getUploadSettings">getUploadSettings()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Pionia-Core-Pionia.html#method_resolveSettingsFromIni">resolveSettingsFromIni()</a>
-    <span>
-                                &nbsp;: mixed    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
@@ -344,20 +251,14 @@ If the setting is not found, it returns null</dd>
     <span>
                                 &nbsp;: <a href="classes/Pionia-Command-ConsoleApplication.html"><abbr title="\Pionia\Command\ConsoleApplication">ConsoleApplication</abbr></a>    </span>
 </dt>
-<dd>Sets a new Pionia instance, merges all commands declared in settings.ini with the inbuilt commands.</dd>
+<dd>Bootstraps the Pionia Command Interface.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Pionia-Command-CommandInterface.html#method_addCommand">addCommand()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd>Checks if a command is valid and then adds it to the in-built commands stack</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Pionia-Command-CommandInterface.html#method_run">run()</a>
-    <span>
-                                &nbsp;: <a href="classes/Pionia-Command-ConsoleApplication.html"><abbr title="\Pionia\Command\ConsoleApplication">ConsoleApplication</abbr></a>    </span>
-</dt>
 
     </dl>
 
@@ -373,108 +274,6 @@ If the setting is not found, it returns null</dd>
             <a href="classes/Pionia-Command-CommandInterface.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-            -static                                            "
->
-    <h4 class="phpdocumentor-element__name" id="property_name">
-        $name
-        <a href="classes/Pionia-Core-Pionia.html#property_name" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">23</span>
-
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.23" class="phpdocumentor-element-found-in__source" data-line="23" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$name</span>
-     = <span class="phpdocumentor-signature__default-value">&#039;Pionia&#039;</span></code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-            -static                                            "
->
-    <h4 class="phpdocumentor-element__name" id="property_settings">
-        $settings
-        <a href="classes/Pionia-Core-Pionia.html#property_settings" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">19</span>
-
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.19" class="phpdocumentor-element-found-in__source" data-line="19" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
-    <span class="phpdocumentor-signature__name">$settings</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-            -static                                            "
->
-    <h4 class="phpdocumentor-element__name" id="property_version">
-        $version
-        <a href="classes/Pionia-Core-Pionia.html#property_version" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">21</span>
-
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.21" class="phpdocumentor-element-found-in__source" data-line="21" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$version</span>
-     = <span class="phpdocumentor-signature__default-value">&#039;1.1.5&#039;</span></code>
-
-    
-    
-    
-
-</article>
                     <article
         class="
             phpdocumentor-element
@@ -503,7 +302,7 @@ If the setting is not found, it returns null</dd>
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|array&lt;string|int, string&gt;</span>
     <span class="phpdocumentor-signature__name">$commands</span>
-     = <span class="phpdocumentor-signature__default-value">[&#039;Pionia\\Command\\Commands\\StartServer&#039;, &#039;Pionia\\Command\\Commands\\CreateService&#039;, &#039;Pionia\\Command\\Commands\\CreateAuthenticationBackend&#039;, &#039;Pionia\\Command\\Commands\\CreateMiddleware&#039;]</span></code>
+     = <span class="phpdocumentor-signature__default-value">[&#039;Pionia\\Command\\Commands\\StartServer&#039;, &#039;Pionia\\Command\\Commands\\Generators\\CreateService&#039;, &#039;Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend&#039;, &#039;Pionia\\Command\\Commands\\Generators\\CreateMiddleware&#039;, &#039;Pionia\\Command\\Commands\\Generators\\CreateSwitch&#039;, &#039;Pionia\\Command\\Commands\\Frontend\\BuildFrontendCommand&#039;, &#039;Pionia\\Command\\Commands\\Frontend\\DropFrontendCommand&#039;, &#039;Pionia\\Command\\Commands\\Frontend\\ScaffoldFrontendCommand&#039;, &#039;Pionia\\Command\\Commands\\Frontend\\CleanBuildCommand&#039;]</span></code>
 
     
     
@@ -524,74 +323,6 @@ If the setting is not found, it returns null</dd>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/Pionia-Core-Pionia.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">30</span>
-
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.30" class="phpdocumentor-element-found-in__source" data-line="30" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_boot">
-        boot()
-        <a href="classes/Pionia-Core-Pionia.html#method_boot" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">25</span>
-
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.25" class="phpdocumentor-element-found-in__source" data-line="25" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">boot</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Core-Pionia.html"><abbr title="\Pionia\Core\Pionia">Pionia</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Core-Pionia.html"><abbr title="\Pionia\Core\Pionia">Pionia</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getCommands">
         getCommands()
         <a href="classes/Pionia-Command-CommandInterface.html#method_getCommands" class="headerlink"><i class="fas fa-link"></i></a>
@@ -600,9 +331,9 @@ If the setting is not found, it returns null</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Command/CommandInterface.php"><a href="files/src-command-commandinterface.html"><abbr title="src/Command/CommandInterface.php">CommandInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.32" class="phpdocumentor-element-found-in__source" data-line="32" data-modal="source-view" data-src="files/src/Command/CommandInterface.php.txt"></a>
+            <a href="classes/Pionia-Command-CommandInterface.html#source-view.38" class="phpdocumentor-element-found-in__source" data-line="38" data-modal="source-view" data-src="files/src/Command/CommandInterface.php.txt"></a>
     </aside>
 
     
@@ -628,241 +359,6 @@ If the setting is not found, it returns null</dd>
             -public
                                     -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getServerSettings">
-        getServerSettings()
-        <a href="classes/Pionia-Core-Pionia.html#method_getServerSettings" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">67</span>
-
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.67" class="phpdocumentor-element-found-in__source" data-line="67" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getServerSettings</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_getSetting">
-        getSetting()
-        <a href="classes/Pionia-Core-Pionia.html#method_getSetting" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">55</span>
-
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.55" class="phpdocumentor-element-found-in__source" data-line="55" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
-    </aside>
-
-        <p class="phpdocumentor-summary">Checks for the setting and returns it
-If the setting is not found, it returns null</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSetting</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-        <section class="phpdocumentor-description"><p>Here <code class="prettyprint">SERVER</code> and <code class="prettyprint">server</code> are the same</p>
-</section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$key</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_getSettingOrDefault">
-        getSettingOrDefault()
-        <a href="classes/Pionia-Core-Pionia.html#method_getSettingOrDefault" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">76</span>
-
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.76" class="phpdocumentor-element-found-in__source" data-line="76" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSettingOrDefault</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$default</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$key</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$default</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_getSettings">
-        getSettings()
-        <a href="classes/Pionia-Core-Pionia.html#method_getSettings" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">42</span>
-
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.42" class="phpdocumentor-element-found-in__source" data-line="42" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSettings</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_getUploadSettings">
-        getUploadSettings()
-        <a href="classes/Pionia-Core-Pionia.html#method_getUploadSettings" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">106</span>
-
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.106" class="phpdocumentor-element-found-in__source" data-line="106" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getUploadSettings</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_resolveSettingsFromIni">
-        resolveSettingsFromIni()
-        <a href="classes/Pionia-Core-Pionia.html#method_resolveSettingsFromIni" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/Pionia.php"><a href="files/src-core-pionia.html"><abbr title="src/Core/Pionia.php">Pionia.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">81</span>
-
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.81" class="phpdocumentor-element-found-in__source" data-line="81" data-modal="source-view" data-src="files/src/Core/Pionia.php.txt"></a>
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">resolveSettingsFromIni</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
     <h4 class="phpdocumentor-element__name" id="method_setUp">
         setUp()
         <a href="classes/Pionia-Command-CommandInterface.html#method_setUp" class="headerlink"><i class="fas fa-link"></i></a>
@@ -871,12 +367,12 @@ If the setting is not found, it returns null</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Command/CommandInterface.php"><a href="files/src-command-commandinterface.html"><abbr title="src/Command/CommandInterface.php">CommandInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.73" class="phpdocumentor-element-found-in__source" data-line="73" data-modal="source-view" data-src="files/src/Command/CommandInterface.php.txt"></a>
+            <a href="classes/Pionia-Command-CommandInterface.html#source-view.82" class="phpdocumentor-element-found-in__source" data-line="82" data-modal="source-view" data-src="files/src/Command/CommandInterface.php.txt"></a>
     </aside>
 
-        <p class="phpdocumentor-summary">Sets a new Pionia instance, merges all commands declared in settings.ini with the inbuilt commands.</p>
+        <p class="phpdocumentor-summary">Bootstraps the Pionia Command Interface.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -884,7 +380,10 @@ If the setting is not found, it returns null</p>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is the entry point for all commands in the framework</p>
+<p>It also registers all commands registered in the app settings under settings.ini</p>
+</section>
+
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -923,16 +422,16 @@ If the setting is not found, it returns null</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Command/CommandInterface.php"><a href="files/src-command-commandinterface.html"><abbr title="src/Command/CommandInterface.php">CommandInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.42" class="phpdocumentor-element-found-in__source" data-line="42" data-modal="source-view" data-src="files/src/Command/CommandInterface.php.txt"></a>
+            <a href="classes/Pionia-Command-CommandInterface.html#source-view.48" class="phpdocumentor-element-found-in__source" data-line="48" data-modal="source-view" data-src="files/src/Command/CommandInterface.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Checks if a command is valid and then adds it to the in-built commands stack</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">addCommand</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$command</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">addCommand</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$command</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -965,62 +464,7 @@ If the setting is not found, it returns null</p>
                                     </dd>
                                             </dl>
 
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_run">
-        run()
-        <a href="classes/Pionia-Command-CommandInterface.html#method_run" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Command/CommandInterface.php"><a href="files/src-command-commandinterface.html"><abbr title="src/Command/CommandInterface.php">CommandInterface.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">58</span>
-
-            <a href="classes/Pionia-Command-CommandInterface.html#source-view.58" class="phpdocumentor-element-found-in__source" data-line="58" data-modal="source-view" data-src="files/src/Command/CommandInterface.php.txt"></a>
-    </aside>
-
     
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">run</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Command-ConsoleApplication.html"><abbr title="\Pionia\Command\ConsoleApplication">ConsoleApplication</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Pionia-Command-CommandInterface.html#method_run#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
-                                                            
-                                             
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Pionia-Command-ConsoleApplication.html"><abbr title="\Pionia\Command\ConsoleApplication">ConsoleApplication</abbr></a></span>
-            </section>
-
 </article>
             </section>
 
@@ -1135,9 +579,6 @@ If the setting is not found, it returns null</p>
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/Pionia-Core-Pionia.html#property_name">$name<a href="classes/Pionia-Command-CommandInterface.html"></li>
-                                                    <li><a href="classes/Pionia-Core-Pionia.html#property_settings">$settings<a href="classes/Pionia-Command-CommandInterface.html"></li>
-                                                    <li><a href="classes/Pionia-Core-Pionia.html#property_version">$version<a href="classes/Pionia-Command-CommandInterface.html"></li>
                                                     <li><a href="classes/Pionia-Command-CommandInterface.html#property_commands">$commands<a href="classes/Pionia-Command-CommandInterface.html"></li>
                                             </ul>
                 </li>
@@ -1145,18 +586,9 @@ If the setting is not found, it returns null</p>
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li><a href="classes/Pionia-Core-Pionia.html#method___construct">__construct()</a></li>
-                                            <li><a href="classes/Pionia-Core-Pionia.html#method_boot">boot()</a></li>
                                             <li><a href="classes/Pionia-Command-CommandInterface.html#method_getCommands">getCommands()</a></li>
-                                            <li><a href="classes/Pionia-Core-Pionia.html#method_getServerSettings">getServerSettings()</a></li>
-                                            <li><a href="classes/Pionia-Core-Pionia.html#method_getSetting">getSetting()</a></li>
-                                            <li><a href="classes/Pionia-Core-Pionia.html#method_getSettingOrDefault">getSettingOrDefault()</a></li>
-                                            <li><a href="classes/Pionia-Core-Pionia.html#method_getSettings">getSettings()</a></li>
-                                            <li><a href="classes/Pionia-Core-Pionia.html#method_getUploadSettings">getUploadSettings()</a></li>
-                                            <li><a href="classes/Pionia-Core-Pionia.html#method_resolveSettingsFromIni">resolveSettingsFromIni()</a></li>
                                             <li><a href="classes/Pionia-Command-CommandInterface.html#method_setUp">setUp()</a></li>
                                             <li><a href="classes/Pionia-Command-CommandInterface.html#method_addCommand">addCommand()</a></li>
-                                            <li><a href="classes/Pionia-Command-CommandInterface.html#method_run">run()</a></li>
                                     </ul>
             </li>
                     </ul>

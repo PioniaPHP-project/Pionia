@@ -3,6 +3,7 @@
 namespace Pionia\Command\Commands;
 
 use Pionia\Command\BaseCommand;
+use Pionia\Core\Pionia;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -24,7 +25,7 @@ class StartServer extends BaseCommand
     private function port(): int
     {
         $port = 8000;
-        $server = $this->getServerSettings();
+        $server = pionia::getServerSettings();
         $port = $server['port']??$server['PORT']??$port;
         return (int) $port;
     }
@@ -33,9 +34,9 @@ class StartServer extends BaseCommand
     {
         $this
             ->setName($this::$name)
-            ->setDescription('Starts the '.$this::base()::$name.' server')
+            ->setDescription('Starts the '.pionia::$name.' server')
             ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, $this->port())
-            ->setHelp('This command starts the '.$this::base()::$name.' server. It should be preferred for localhost development only')
+            ->setHelp('This command starts the '.pionia::$name.' server. It should be preferred for localhost development only')
             ->addOption('host', null, InputOption::VALUE_OPTIONAL, 'localhost');
     }
 
@@ -43,7 +44,7 @@ class StartServer extends BaseCommand
     {
         $port = $input->getOption('port') ?? $this->port();
         $host = $input->getOption('host') ?? 'localhost';
-        $output->writeln("Starting ".$this::base()::$name." on http://" .$host.':'.$port);
+        $output->writeln("Starting ".pionia::$name." on http://" .$host.':'.$port);
         $output->writeln('Press Ctrl+C to stop the server');
         // start the server
         if ($port && $host){
@@ -52,7 +53,7 @@ class StartServer extends BaseCommand
 
         // start the php server here
         shell_exec(implode(' ', $this->command));
-        $output->writeln($this::base()::$name.' Server started at '.date('Y-m-d H:i:s'));
+        $output->writeln(pionia::$name.' Server started at '.date('Y-m-d H:i:s'));
         return Command::SUCCESS;
     }
 }

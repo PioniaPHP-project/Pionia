@@ -31,7 +31,7 @@ trait UploadsContract
      * @return mixed The value to be saved in the db, null or false to skip the file, or an exception to stop the entire request
      * @throws Exception
      */
-    public function defaultUpload(UploadedFile $file, string $fileName): mixed
+    protected function defaultUpload(UploadedFile $file, string $fileName): mixed
     {
         $fileSystem = new FileSystem();
         $settings = pionia::getUploadSettings();
