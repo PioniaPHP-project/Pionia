@@ -17,7 +17,7 @@ If you are looking to use or get started with the framework, please find the [Pi
 
 # Road Map for the Pioneer Core(Subject to change)
 
-> ##### Coverage 23/44 -- 52%
+> ##### Coverage 28/37 -- 75%
 
 ### Core 1st Phase
 - [x] Core Kernel
@@ -41,17 +41,11 @@ If you are looking to use or get started with the framework, please find the [Pi
 - [x] Release the first version of the core
 
 ### Core 3rd Phase
-- Serving static file(hosting frontend using Pionia)
-- Handling file uploads
+- [X] Serving static file(hosting frontend using Pionia)
+- [x] Handling file uploads
 - Adding Pionia Mailer
-- Adding Pionia Queue
-- Adding Pionia Scheduler
-- Adding Pionia Events
-- Adding Pionia Notifications
-- Adding Pionia Realtime
-- Adding Pionia Websockets
 - Testing and Review
-- Update the core docs
+[-] Update the core docs
 - Release the third version of the core
 
 ### Core 2nd Phase
@@ -60,9 +54,9 @@ If you are looking to use or get started with the framework, please find the [Pi
 - [x] Core Security Testing and Review
 - [x] Core Documentation Testing and Review
 - [x] Data Validators
-- [ ] Core Unit Testing
-- [ ] Update the core docs 
-- [ ] Release the second version of the core
+- [x] Core Unit Testing
+- [X] Update the core docs 
+- [X] Release the second version of the core
 
 
 
