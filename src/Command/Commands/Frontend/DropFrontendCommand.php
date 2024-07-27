@@ -13,6 +13,8 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * Drops an entire frontend
  *
+ * @since 1.1.6
+ *
  * */
 class DropFrontendCommand extends BaseCommand
 {

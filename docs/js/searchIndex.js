@@ -293,7 +293,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\BuildFrontendCommand",
             "name": "BuildFrontendCommand",
-            "summary": "Builds\u0020and\u0020hosts\u0020the\u0020frontend\u0020in\u0020our\u0020app",
+            "summary": "Builds\u0020and\u0020hosts\u0020the\u0020frontend\u0020in\u0020our\u0020app\u0020server\u0020for\u0020production",
             "url": "classes/Pionia-Command-Commands-Frontend-BuildFrontendCommand.html"
         },                {
             "fqsen": "\\Pionia\\Command\\Commands\\Frontend\\BuildFrontendCommand\u003A\u003Aconfigure\u0028\u0029",
@@ -433,7 +433,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend",
             "name": "CreateAuthenticationBackend",
-            "summary": "For\u0020Creating\u0020a\u0020new\u0020service",
+            "summary": "For\u0020Creating\u0020a\u0020new\u0020authentication\u0020backend\u0020in\u0020the\u0020authenticationBackends\u0020directory\u0020by\u0020running\u0020\u0060pionia\u0020gen\u003Aauth\u0020\u007Bname\u007D\u0060",
             "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html"
         },                {
             "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend\u003A\u003Aconfigure\u0028\u0029",
@@ -463,7 +463,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateMiddleware",
             "name": "CreateMiddleware",
-            "summary": "For\u0020Creating\u0020a\u0020new\u0020service",
+            "summary": "For\u0020Creating\u0020a\u0020new\u0020middleware\u0020in\u0020the\u0020middlewares\u0020directory\u0020by\u0020running\u0020\u0060pionia\u0020gen\u003Amiddleware\u0020\u007Bname\u007D\u0060",
             "url": "classes/Pionia-Command-Commands-Generators-CreateMiddleware.html"
         },                {
             "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateMiddleware\u003A\u003Aconfigure\u0028\u0029",
@@ -493,7 +493,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateService",
             "name": "CreateService",
-            "summary": "For\u0020Creating\u0020a\u0020new\u0020service",
+            "summary": "For\u0020Creating\u0020a\u0020new\u0020service\u0020in\u0020the\u0020services\u0020directory\u0020by\u0020running\u0020\u0060pionia\u0020gen\u003Aservice\u0020\u007Bname\u007D\u0060",
             "url": "classes/Pionia-Command-Commands-Generators-CreateService.html"
         },                {
             "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateService\u003A\u003Aconfigure\u0028\u0029",
@@ -523,7 +523,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateSwitch",
             "name": "CreateSwitch",
-            "summary": "For\u0020Creating\u0020a\u0020new\u0020service",
+            "summary": "Creates\u0020a\u0020new\u0020Pionia\u0020Switch\u0020in\u0020\u0020Switches\u0020directory\u0020by\u0020running\u0020\u0060pionia\u0020gen\u003Aswitch\u0020\u007Bversion\u007D\u0060",
             "url": "classes/Pionia-Command-Commands-Generators-CreateSwitch.html"
         },                {
             "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateSwitch\u003A\u003Aconfigure\u0028\u0029",

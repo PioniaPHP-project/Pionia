@@ -12,7 +12,9 @@ use Symfony\Component\Filesystem\Filesystem;
 use Throwable;
 
 /**
- * Builds and hosts the frontend in our app
+ * Builds and hosts the frontend in our app server for production
+ *
+ * @since 1.1.6
  */
 class BuildFrontendCommand extends BaseCommand
 {

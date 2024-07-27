@@ -12,7 +12,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
- * For Creating a new service
+ * For Creating a new service in the services directory by running `pionia gen:service {name}`
+ *
+ * @since 1.1.6 This command now supports creating generic services too!
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */

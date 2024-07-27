@@ -10,6 +10,8 @@ use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Cleans all build files that were formerly added via building.
+ *
+ * @since 1.1.6
  * */
 class CleanBuildCommand extends BaseCommand
 {

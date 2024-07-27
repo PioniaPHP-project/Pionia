@@ -3,7 +3,6 @@
 namespace Pionia\Command\Commands\Generators;
 
 use Pionia\Codegens\GenerateSwitch;
-use Pionia\Codegens\Middleware;
 use Pionia\Command\BaseCommand;
 use Pionia\Core\Pionia;
 use Symfony\Component\Console\Command\Command;
@@ -13,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
- * For Creating a new service
+ * Creates a new Pionia Switch in  Switches directory by running `pionia gen:switch {version}`
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */

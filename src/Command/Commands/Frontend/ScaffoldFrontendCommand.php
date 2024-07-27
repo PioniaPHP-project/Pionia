@@ -15,6 +15,8 @@ use Symfony\Component\Filesystem\Filesystem;
  * Scaffolds any frontend project in the right directory using a package manage of choice and a frontend framework of choice.
  *
  * Command is mostly interactive
+ *
+ * @since 1.1.6
  */
 class ScaffoldFrontendCommand extends BaseCommand
 {
