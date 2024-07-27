@@ -1,6 +1,6 @@
 <?php
 
-namespace application\commands;
+namespace Pionia\Command\Commands\Frontend;
 
 use Pionia\Command\BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * Cleans all build files that were formerly added via building.
  * */
-class cleanBuildCommand extends BaseCommand
+class CleanBuildCommand extends BaseCommand
 {
     protected string $directory = 'frontend';
     protected string $name = 'frontend:build:clean';
@@ -20,6 +20,7 @@ class cleanBuildCommand extends BaseCommand
     protected function configure(): void
     {
         $this->setName($this->name)
+            ->setAliases(['f:bc'])
             ->setDescription($this->description);
     }
 
@@ -60,6 +61,8 @@ class cleanBuildCommand extends BaseCommand
         }
 
         $fs->remove($manifest);
+
+        $io->success("Build files cleaned successfully! 🧹🧼");
 
         return self::SUCCESS;
     }

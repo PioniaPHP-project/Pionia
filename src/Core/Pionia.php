@@ -18,7 +18,7 @@ class Pionia
 {
     public static array | null $settings = null;
 
-    public static string $version = '1.1.5';
+    public static string $version = '1.1.6';
 
     public static string $name = 'Pionia';
 
@@ -57,14 +57,7 @@ class Pionia
      */
     public static function getSetting(string $key): mixed
     {
-        // check for small case first
-        $key = strtolower($key);
-        if (isset(self::$settings[$key])){
-            return self::$settings[$key];
-        }
-        // check for uppercase last
-        $key = strtoupper($key);
-        return self::$settings[$key] ?? null;
+        return self::$settings[strtolower($key)] ?? self::$settings[strtoupper($key)] ?? null;
     }
 
     /**
@@ -80,13 +73,25 @@ class Pionia
         return [];
     }
 
+    /**
+     * Returns the setting or the default value if the setting is not found
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
     public static function getSettingOrDefault(string $key, mixed $default): mixed
     {
         return self::getSetting($key) ?? $default;
     }
 
     /**
-     * This method resolves the settings from the settings file
+     * Resolved the settings from all the possible sources
+     *
+     * Possible sources are:
+     * - The settings file -- settings.ini
+     * - The session -- if the session is active and the session settings are set
+     * - The server settings -- Anything in $_SERVER
+     * - The environment settings -- Anything in $_ENV
      * @return array|bool|null
      */
     public static function resolveSettingsFromIni(): array|bool|null
@@ -114,6 +119,10 @@ class Pionia
         return self::$settings;
     }
 
+    /**
+     * Returns the upload settings under [uploads] in the settings file
+     * @return array
+     */
     public static function getUploadSettings(): array
     {
         return self::getSetting('uploads') ?? [];

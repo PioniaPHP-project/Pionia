@@ -1,8 +1,9 @@
 <?php
 
-namespace application\commands;
+namespace Pionia\Command\Commands\Frontend;
 
 use Pionia\Command\BaseCommand;
+use Pionia\Core\Helpers\Utilities;
 use Pionia\Core\Pionia;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -23,13 +24,13 @@ class ScaffoldFrontendCommand extends BaseCommand
     protected string $directory = 'frontend';
     protected string $name = 'frontend:scaffold';
     protected string $description = 'Scaffolds any frontend project in the right directory 
-    using a package manage of choice and a frontend framework of choice.
-    The command is highly interactive and most of the choices will be found once it is run.';
+    using a package manage of choice and a frontend framework of choice. Command is mostly interactive..';
 
     protected function configure(): void
     {
         $this->setName($this->name)
             ->setDescription($this->description)
+            ->setAliases(['f:s', 'frontend:s'])
             ->addOption("yes", "y", InputOption::VALUE_NONE, "Whether to scaffold with the defaults throughout");
     }
 
@@ -191,41 +192,19 @@ class ScaffoldFrontendCommand extends BaseCommand
 
         $buildCommand .= ' build ';
 
-        $this->addOrUpdateSectionInSettings("frontend", [
-            "frontend_root_folder"=>$this->directory,
+        Utilities::updateSettingsFileSection("frontend", [
+            "frontend_root_folder"=> $this->directory,
             "build_command"=> $buildCommand,
-            "frontend_build_folder"=>"dist",
-            "frontend_framework"=>$framework,
-            "package_manager"=>$this->packageManager
+            "frontend_build_folder"=> "dist",
+            "frontend_framework"=> $framework,
+            "package_manager"=> $this->packageManager
         ]);
 
         $io->info("Added the `frontend` section in the settings.ini");
 
         $progress->finish();
 
-        $io->write(implode("\n", $result));
-
+        $io->success("Frontend scaffolding completed successfully");
         return self::SUCCESS;
-    }
-
-    function addOrUpdateSectionInSettings($section, $values) {
-        if (count($values) > 0) {
-            $config_data = parse_ini_file(SETTINGS, true);
-
-            foreach ($values as $key => $value) {
-                $config_data[$section][$key] = (string) $value;
-            }
-
-            $new_content = '';
-            foreach ($config_data as $section => $section_content) {
-                $section_content = array_map(function ($value, $key) {
-                    return "$key=$value";
-                }, array_values($section_content), array_keys($section_content));
-                $section_content = implode("\n", $section_content);
-                $new_content .= "[$section]\n$section_content\n\n";
-            }
-            file_put_contents(SETTINGS, $new_content);
-            pionia::resolveSettingsFromIni();
-        }
     }
 }

@@ -21,9 +21,15 @@ class CommandInterface
      */
     private array $commands = [
         'Pionia\Command\Commands\StartServer',
-        'Pionia\Command\Commands\CreateService',
-        'Pionia\Command\Commands\CreateAuthenticationBackend',
-        'Pionia\Command\Commands\CreateMiddleware',
+        'Pionia\Command\Commands\Generators\CreateService',
+        'Pionia\Command\Commands\Generators\CreateAuthenticationBackend',
+        'Pionia\Command\Commands\Generators\CreateMiddleware',
+        'Pionia\Command\Commands\Generators\CreateSwitch',
+
+        'Pionia\Command\Commands\Frontend\BuildFrontendCommand',
+        'Pionia\Command\Commands\Frontend\DropFrontendCommand',
+        'Pionia\Command\Commands\Frontend\ScaffoldFrontendCommand',
+        'Pionia\Command\Commands\Frontend\CleanBuildCommand',
     ];
 
     /**

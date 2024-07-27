@@ -8,6 +8,7 @@ use Nette\PhpGenerator\PhpNamespace;
 use Pionia\Request\BaseRestService;
 use Pionia\Response\BaseResponse;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Code generator for creating new services in Pionia
@@ -26,16 +27,26 @@ class Service extends CodeGenerator
         'list',
         'delete',
     ];
+    private ?string $serviceType;
+    private ?string $targetTable;
 
-    public function __construct(string $name, ?array $actions = null, ?OutputInterface $output = null)
+    public function __construct(
+        string $name,
+        ?array $actions = null,
+        ?string $targetTable = null,
+        ?string $serviceType = null,
+        ?OutputInterface $output = null
+    )
     {
         $this->name = $name;
         $this->actions = $actions;
         $this->output = $output;
+        $this->serviceType = $serviceType;
+        $this->targetTable = $targetTable;
         $this->backupName = ucfirst($name);
     }
 
-    public function generate(?string $className = null): void
+    public function generate(?string $className = null, ?SymfonyStyle $io = null): void
     {
         if ($className){
             $this->name = $className;
@@ -52,20 +63,37 @@ class Service extends CodeGenerator
         $file->addComment('This service is auto-generated from pionia cli.');
         $file->addComment("Remember to register your this service as $name in your service switch.");
 
-        $namespace->addUse('Pionia\Response\BaseResponse');
-        $namespace->addUse('Pionia\Request\BaseRestService');
+        if ($this->serviceType === 'Basic'){
+            $namespace->addUse('Pionia\Request\BaseRestService');
+            $namespace->addUse('Pionia\Response\BaseResponse');
+        } else {
+            $gs = $this->actions[0]?? 'UniversalGenericService';
+            $namespace->addUse('Pionia\Generics\\'.$gs);
+        }
 
         $klass = $namespace->addClass($name);
 
-        $klass->setExtends(BaseRestService::class);
+        if ($this->serviceType === 'Basic') {
+            $klass->setExtends(BaseRestService::class);
+        } else {
+            $ks = trim($this->actions[0]) ?? 'UniversalGenericService';
+            $klass->setExtends('Pionia\Generics\\'.$ks);
+        }
 
-        $this->addActions($klass);
+        if ($this->serviceType === 'Generic') {
+            $klass->addProperty('table')
+                ->setPublic()
+                ->setType('string')
+                ->setValue($this->targetTable);
+        } else {
+            $this->addActions($klass);
+        }
 
         $directory = $this->dir.$name.'.php';
 
         $this->createFile($directory, $file);
 
-        $this->log("Service $name created at $directory.");
+        $io->success("Service $name created at $directory.");
     }
 
     private function addActions(ClassType $class): void

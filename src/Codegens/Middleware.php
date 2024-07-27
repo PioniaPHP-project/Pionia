@@ -9,6 +9,7 @@ use Pionia\Core\Interceptions\BaseMiddleware;
 use Pionia\Request\Request;
 use Pionia\Response\Response;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Code generator for creating middleware files in pionia
@@ -17,6 +18,7 @@ class Middleware extends CodeGenerator
 {
     private string $dir = BASEPATH.'/app/middlewares/';
     private string $namespace = 'application\middlewares';
+    public string $sweetName = '';
 
     private array $actions = ['run'];
 
@@ -24,15 +26,17 @@ class Middleware extends CodeGenerator
     {
         $this->name = $name;
         $this->output = $output;
+
+        $this->sweetName = $this->sweetName('Middleware');
     }
 
-    public function generate(?string $className = null): void
+    public function generate(?string $className = null, ?SymfonyStyle $io = null): void
     {
         if ($className){
             $this->name = $className;
         }
 
-        $name = $this->sweetName('Middleware');
+        $this->name = $this->sweetName('Middleware');
 
         $file = new PhpFile;
 
@@ -47,17 +51,15 @@ class Middleware extends CodeGenerator
         $namespace->addUse('Pionia\Request\Request');
         $namespace->addUse('Pionia\Response\Response');
 
-        $klass = $namespace->addClass($name);
+        $klass = $namespace->addClass($this->name);
 
         $klass->setExtends(BaseMiddleware::class);
 
         $this->addActions($klass);
 
-        $directory = $this->dir.$name.'.php';
+        $directory = $this->dir.$this->name.'.php';
 
         $this->createFile($directory, $file);
-
-        $this->log("Middleware $name created at $directory.");
     }
 
     private function addActions(ClassType $class): void

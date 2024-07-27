@@ -4,6 +4,7 @@ namespace Pionia\Core\Helpers;
 
 use Doctrine\Inflector\Inflector;
 use Doctrine\Inflector\InflectorFactory;
+use Pionia\Core\Pionia;
 use ReflectionClass;
 
 /**
@@ -169,5 +170,61 @@ class Utilities
             }
         }
         return $keys;
+    }
+
+    /**
+     * Creates or updates any section of our settings.ini file to the values provided
+     * @param string $section The section to update/create
+     * @param array $values The values to update/create
+     * @return void
+     */
+    public static function updateSettingsFileSection(string $section, array $values): void
+    {
+        if (count($values) > 0) {
+            $config_data = parse_ini_file(SETTINGS, true);
+
+            foreach ($values as $key => $value) {
+                $config_data[$section][$key] = $value;
+            }
+
+            $new_content = '';
+            foreach ($config_data as $section => $section_content) {
+                $section_content = array_map(function ($value, $key) {
+                    return "$key=$value";
+                }, array_values($section_content), array_keys($section_content));
+                $section_content = implode("\n", $section_content);
+                $new_content .= "[$section]\n$section_content\n\n";
+            }
+
+            $file_resource = fopen(SETTINGS, 'w+');
+            fwrite($file_resource, "$new_content");
+            fclose($file_resource);
+            pionia::boot();
+        }
+    }
+
+    /**
+     * Removes an entire section from the settings.ini file
+     * @param string $section
+     * @return void
+     */
+    public static function inidelsection(string $section): void
+    {
+        $parsed_ini = parse_ini_file(SETTINGS, TRUE);
+        $skip = "$section";
+        $output = '';
+        foreach ( $parsed_ini as $section=>$info ) {
+            if ( $section != $skip ) {
+                $output .= "[$section]\n";
+                foreach ( $info as $var=>$val ) {
+                    $output .= "$var=$val\n";
+                }
+                $output .= "\n\n";
+            }
+        }
+        $file_resource = fopen(SETTINGS, 'w+');
+        fwrite($file_resource, "$output");
+        fclose($file_resource);
+        pionia::boot();
     }
 }

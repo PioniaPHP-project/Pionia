@@ -1,11 +1,10 @@
 <?php
 
-namespace application\commands;
+namespace Pionia\Command\Commands\Frontend;
 
 use Nette\Utils\Finder;
 use Pionia\Command\BaseCommand;
 use Pionia\Core\Pionia;
-use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -23,6 +22,7 @@ class BuildFrontendCommand extends BaseCommand
     protected function configure(): void
     {
         $this->setName($this->name)
+            ->setAliases(['f:b', 'f:build', 'frontend:build', 'frontend:b' , 'front:build'])
             ->setDescription($this->description);
     }
 
@@ -78,6 +78,8 @@ class BuildFrontendCommand extends BaseCommand
         $fs->mirror($buildPath, BASEPATH);
 
         file_put_contents(BASEPATH."/manifest.json", self::returnAllFilesInDir($buildPath));
+
+        $io->success("Build files successfully served!");
         return self::SUCCESS;
     }
 
