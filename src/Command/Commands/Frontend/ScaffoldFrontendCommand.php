@@ -163,7 +163,7 @@ class ScaffoldFrontendCommand extends BaseCommand
         $fs = new Filesystem();
 
         $prodEnv = $framework == 'Z-js' ? $path."/.env.production" : $path."/src/.env.production";
-        $devEnv = $framework == 'Z-js' ? $path."/.env.production" : $path."/src/.env.development";
+        $devEnv = $framework == 'Z-js' ? $path."/.env.development" : $path."/src/.env.development";
 
         $io->info("Creating the production env file at ".$prodEnv);
         $fs->touch($prodEnv);
