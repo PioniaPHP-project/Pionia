@@ -119,11 +119,10 @@ class ScaffoldFrontendCommand extends BaseCommand
 
         $progress = $io->createProgressBar(14);
 
-        if ($framework == "Z-js") {
+        if ($framework === "Z-js") {
             $io->info("Scaffolding your app in ".$path);
             exec(" cd  ".BASEPATH." && npx create-z-project ".$this->directory." -y -f && ".$installCommand, $result);
 
-            $progress->advance(2);
         } else {
 
             // the rest of the frameworks below here can work with both ts and js templates using vite
@@ -143,12 +142,17 @@ class ScaffoldFrontendCommand extends BaseCommand
             }
 
             exec(" cd  ".BASEPATH." &&".$command, $result);
-            $progress->advance(2);
         }
+        $progress->advance(2);
 
         $io->info("Installing dependencies...");
 
         shell_exec(" cd  ".$path." && ".$installCommand);
+
+        // z-js does tends to have a package-lock.json file, drop it or anything else that might be in the way
+        $fs->remove(BASEPATH."/package-lock.json");
+        $fs->remove(BASEPATH."/yarn.lock");
+        $fs->remove(BASEPATH."/node_modules");
 
         $progress->advance(4);
 
@@ -158,8 +162,8 @@ class ScaffoldFrontendCommand extends BaseCommand
 
         $fs = new Filesystem();
 
-        $prodEnv = $path."/src/.env.production";
-        $devEnv = $path."/src/.env.development";
+        $prodEnv = $framework == 'Z-js' ? $path."/.env.production" : $path."/src/.env.production";
+        $devEnv = $framework == 'Z-js' ? $path."/.env.development" : $path."/src/.env.development";
 
         $io->info("Creating the production env file at ".$prodEnv);
         $fs->touch($prodEnv);
