@@ -26,7 +26,7 @@
 
     <div class="bg-dark-subtle w-50 mx-auto rounded my-2 py-2">
         <p class="text-center text-emphasis text-small">You can start by creating your first service with the command:</p>
-            <pre class="text-center text-dark h5">php pionia addservice YourServiceName</pre>
+            <pre class="text-center text-dark h5">php pionia gen:service YourServiceName</pre>
         <p class="text-center text-secondary h6">Then register your service in the associated switch in the switches folder</p>
     </div>
 
