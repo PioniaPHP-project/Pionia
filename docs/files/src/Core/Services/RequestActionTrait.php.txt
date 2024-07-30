@@ -47,6 +47,11 @@ trait RequestActionTrait
                 self::check_one($field, $data);
             }
         } else {
+            if (is_string($required)) {
+                if (!$this->request->getFileByName($required)) {
+                    self::check_one($required, $data);
+                }
+            }
             foreach ($required as $field) {
                 if (!$this->request->getFileByName($field)) {
                     self::check_one($field, $data);

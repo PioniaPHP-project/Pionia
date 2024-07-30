@@ -10,7 +10,7 @@
 <body class="d-flex bg-black">
 <div class="container align-middle">
     <img src="https://pionia.netlify.app/pionia_hu7bc625304583a71a69e31d56c05815e9_99619_602x0_resize_q85_h2_lanczos_3.webp" class="rounded mx-auto d-block" alt="Pionia Framework" >
-    <h1 class="text-light text-center my-5">🚀 You app is awesomely running 🚀</h1>
+    <h1 class="text-light text-center my-5">🚀 Your awesome application is running! 🚀</h1>
 
     <div class="bg-primary pt-5 rounded w-50 mx-auto">
         <p class="text-center text-light h5 ">Welcome to Pionia Framework</p>
