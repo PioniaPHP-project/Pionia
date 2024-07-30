@@ -3,7 +3,7 @@
 namespace Pionia\Generics\Base;
 
 use Exception;
-use Porm\Database\builders\Join;
+use Porm\Database\Builders\Join;
 use Porm\Porm;
 
 trait JoinContract

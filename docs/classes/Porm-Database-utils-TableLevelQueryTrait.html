@@ -174,7 +174,7 @@
                                         <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/porm.html">Porm</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/porm-database.html">Database</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/porm-database-utils.html">utils</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/porm-database-utils.html">Utils</a></li>
     </ul>
 
     <article class="phpdocumentor-element -trait">
@@ -183,11 +183,11 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">29</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.29" class="phpdocumentor-element-found-in__source" data-line="29" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.29" class="phpdocumentor-element-found-in__source" data-line="29" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         
@@ -198,7 +198,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -213,112 +213,127 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_asJson">asJson()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_asJson">asJson()</a>
     <span>
                                 &nbsp;: bool|string    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_asObject">asObject()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_asObject">asObject()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_columns">columns()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_columns">columns()</a>
     <span>
-                                &nbsp;: <a href="classes/Porm-Database-builders-PormObject.html"><abbr title="\Porm\Database\builders\PormObject">PormObject</abbr></a>    </span>
+                                &nbsp;: <a href="classes/Porm-Database-Builders-PormObject.html"><abbr title="\Porm\Database\Builders\PormObject">PormObject</abbr></a>    </span>
 </dt>
 <dd>This defines the table column names to return from the Database</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_deleteAll">deleteAll()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteAll">deleteAll()</a>
     <span>
                                 &nbsp;: <abbr title="\PDOStatement">PDOStatement</abbr>|null    </span>
 </dt>
 <dd>This deletes all items that match the where clause</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_deleteById">deleteById()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteById">deleteById()</a>
     <span>
                                 &nbsp;: <abbr title="\PDOStatement">PDOStatement</abbr>|null    </span>
 </dt>
 <dd>This is under the hood similar to deleteOne but it is more explicit</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_filter">filter()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_filter">filter()</a>
     <span>
-                                &nbsp;: <a href="classes/Porm-Database-builders-Builder.html"><abbr title="\Porm\Database\builders\Builder">Builder</abbr></a>    </span>
+                                &nbsp;: <a href="classes/Porm-Database-Builders-Builder.html"><abbr title="\Porm\Database\Builders\Builder">Builder</abbr></a>    </span>
 </dt>
 <dd>This switches the query to filter mode. It is useful for conditional querying.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_get">get()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_first">first()</a>
     <span>
                                 &nbsp;: object|array&lt;string|int, mixed&gt;|null    </span>
 </dt>
-<dd>Fetches a single item from the Database</dd>
+<dd>This grabs the first [n] items from the Database based on the pkField given</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_has">has()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_get">get()</a>
+    <span>
+                                &nbsp;: object|array&lt;string|int, mixed&gt;|null    </span>
+</dt>
+<dd>Fetches a single item from the Database.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_has">has()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
 <dd>This checks if the table has a record that matches the where clause</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_join">join()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_join">join()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: object|null    </span>
 </dt>
+<dd>Opens the portal to the joins builder. Once you call this, you can call the join methods</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_random">random()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_last">last()</a>
+    <span>
+                                &nbsp;: object|array&lt;string|int, mixed&gt;|null    </span>
+</dt>
+<dd>Grab the last item from the Database based on the pkField clause</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_random">random()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;|mixed|object    </span>
 </dt>
 <dd>Fetches random n items from the table, default to 1</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_raw">raw()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_raw">raw()</a>
     <span>
                                 &nbsp;: <a href="classes/Porm-Core-Raw.html"><abbr title="\Porm\Core\Raw">Raw</abbr></a>    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_save">save()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_save">save()</a>
     <span>
                                 &nbsp;: object    </span>
 </dt>
 <dd>Saves and returns the saved item as an object</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_update">update()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_update">update()</a>
     <span>
                                 &nbsp;: <abbr title="\PDOStatement">PDOStatement</abbr>|null    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_using">using()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_using">using()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
 <dd>This sets the connection to the Database to use for the current query.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_checkFilterMode">checkFilterMode()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_checkFilterMode">checkFilterMode()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>This prevents the use of non-filtering methods in filter mode.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_reboot">reboot()</a>
+    <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_reboot">reboot()</a>
     <span>
                                 &nbsp;: <a href="classes/Porm-Core-Core.html"><abbr title="\Porm\Core\Core">Core</abbr></a>    </span>
 </dt>
@@ -336,7 +351,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -347,15 +362,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_asJson">
         asJson()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_asJson" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_asJson" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">146</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.146" class="phpdocumentor-element-found-in__source" data-line="146" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.146" class="phpdocumentor-element-found-in__source" data-line="146" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
     
@@ -370,7 +385,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_asJson#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_asJson#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -398,15 +413,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_asObject">
         asObject()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_asObject" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_asObject" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">156</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.156" class="phpdocumentor-element-found-in__source" data-line="156" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.156" class="phpdocumentor-element-found-in__source" data-line="156" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
     
@@ -421,7 +436,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_asObject#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_asObject#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -445,22 +460,22 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_columns">
         columns()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_columns" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_columns" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">254</span>
+    <span class="phpdocumentor-element-found-in__line">262</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.254" class="phpdocumentor-element-found-in__source" data-line="254" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.262" class="phpdocumentor-element-found-in__source" data-line="262" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This defines the table column names to return from the Database</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">columns</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$columns</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;*&quot;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-PormObject.html"><abbr title="\Porm\Database\builders\PormObject">PormObject</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">columns</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$columns</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;*&quot;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-Builders-PormObject.html"><abbr title="\Porm\Database\Builders\PormObject">PormObject</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -483,7 +498,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_columns#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_columns#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -519,7 +534,7 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-PormObject.html"><abbr title="\Porm\Database\builders\PormObject">PormObject</abbr></a></span>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-Builders-PormObject.html"><abbr title="\Porm\Database\Builders\PormObject">PormObject</abbr></a></span>
                     &mdash;
                 <section class="phpdocumentor-description"><p>The current Porm object</p>
 </section>
@@ -535,15 +550,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_deleteAll">
         deleteAll()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_deleteAll" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteAll" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">306</span>
+    <span class="phpdocumentor-element-found-in__line">314</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.306" class="phpdocumentor-element-found-in__source" data-line="306" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.314" class="phpdocumentor-element-found-in__source" data-line="314" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This deletes all items that match the where clause</p>
@@ -569,7 +584,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_deleteAll#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteAll#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -608,15 +623,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_deleteById">
         deleteById()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_deleteById" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteById" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">339</span>
+    <span class="phpdocumentor-element-found-in__line">347</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.339" class="phpdocumentor-element-found-in__source" data-line="339" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.347" class="phpdocumentor-element-found-in__source" data-line="347" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This is under the hood similar to deleteOne but it is more explicit</p>
@@ -649,7 +664,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_deleteById#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteById#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -677,22 +692,22 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_filter">
         filter()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_filter" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_filter" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">222</span>
+    <span class="phpdocumentor-element-found-in__line">230</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.222" class="phpdocumentor-element-found-in__source" data-line="222" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.230" class="phpdocumentor-element-found-in__source" data-line="230" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This switches the query to filter mode. It is useful for conditional querying.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">filter</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$where</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Builder.html"><abbr title="\Porm\Database\builders\Builder">Builder</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">filter</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$where</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-Builders-Builder.html"><abbr title="\Porm\Database\Builders\Builder">Builder</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -713,7 +728,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_filter#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_filter#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -741,7 +756,89 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-builders-Builder.html"><abbr title="\Porm\Database\builders\Builder">Builder</abbr></a></span>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Porm-Database-Builders-Builder.html"><abbr title="\Porm\Database\Builders\Builder">Builder</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_first">
+        first()
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_first" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">381</span>
+
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.381" class="phpdocumentor-element-found-in__source" data-line="381" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">This grabs the first [n] items from the Database based on the pkField given</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">first</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$size</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">1</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$where</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pkField</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;id&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object|array&lt;string|int, mixed&gt;|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$size</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">1</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The number of items to fetch</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$where</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The where clause to use</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$pkField</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;id&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The primary key field to use</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_first#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">object|array&lt;string|int, mixed&gt;|null</span>
             </section>
 
 </article>
@@ -753,18 +850,18 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_get">
         get()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_get" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_get" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">182</span>
+    <span class="phpdocumentor-element-found-in__line">186</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.182" class="phpdocumentor-element-found-in__source" data-line="182" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.186" class="phpdocumentor-element-found-in__source" data-line="186" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
-        <p class="phpdocumentor-summary">Fetches a single item from the Database</p>
+        <p class="phpdocumentor-summary">Fetches a single item from the Database.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -772,7 +869,12 @@
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>If the where clause is not passed, it fetches the last item in the table.
+If the where clause is an integer, it fetches the item with the id.
+If the where clause is an array, it fetches the item that matches the where clause.
+If the where clause is null, it fetches the last item in the table.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -796,7 +898,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_get#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_get#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -816,6 +918,7 @@
                                                  <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">   $res1 = Porm::from('users')-&gt;get(1); // fetches a user with id 1
    $res2 = Porm::from('users')-&gt;get(['id' =&gt; 1]); // fetches a user with id 1
    $res3 = Porm::from('users')-&gt;get(['last_name' =&gt; 'Pionia', 'first_name'=&gt;'Framework']); // fetches a user with last name Pionia and first_name as Framework
+  $res4 = Porm::from('users')-&gt;get(); // fetches the latest user in the table
 </code></pre>
 </section>
 
@@ -836,15 +939,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_has">
         has()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_has" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_has" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">46</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.46" class="phpdocumentor-element-found-in__source" data-line="46" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.46" class="phpdocumentor-element-found-in__source" data-line="46" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This checks if the table has a record that matches the where clause</p>
@@ -877,7 +980,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_has#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_has#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -916,21 +1019,22 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_join">
         join()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_join" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_join" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">344</span>
+    <span class="phpdocumentor-element-found-in__line">364</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.344" class="phpdocumentor-element-found-in__source" data-line="344" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.364" class="phpdocumentor-element-found-in__source" data-line="364" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Opens the portal to the joins builder. Once you call this, you can call the join methods</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">join</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$where</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">join</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$where</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -947,8 +1051,114 @@
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_join#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">$res4 = Porm::from(&quot;users&quot;, &quot;u&quot;)
+-&gt;columns([&quot;u.id&quot;, &quot;role_name&quot;, &quot;role.created_at&quot;])
+-&gt;join()-&gt;left(&quot;role&quot;, [u.role_id =&gt; id])
+-&gt;all();
+</code></pre>
+</section>
+
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">object|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_last">
+        last()
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_last" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">407</span>
+
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.407" class="phpdocumentor-element-found-in__source" data-line="407" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Grab the last item from the Database based on the pkField clause</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">last</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$size</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">1</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$where</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pkField</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;id&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object|array&lt;string|int, mixed&gt;|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$size</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">1</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The number of items to fetch</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$where</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The where clause to use</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$pkField</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;id&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The primary key field to use</p>
+</section>
+
+            </dd>
+            </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_last#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">object|array&lt;string|int, mixed&gt;|null</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -958,15 +1168,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_random">
         random()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_random" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_random" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">76</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.76" class="phpdocumentor-element-found-in__source" data-line="76" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.76" class="phpdocumentor-element-found-in__source" data-line="76" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Fetches random n items from the table, default to 1</p>
@@ -999,7 +1209,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_random#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_random#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -1039,15 +1249,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_raw">
         raw()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_raw" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_raw" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">204</span>
+    <span class="phpdocumentor-element-found-in__line">212</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.204" class="phpdocumentor-element-found-in__source" data-line="204" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.212" class="phpdocumentor-element-found-in__source" data-line="212" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
     
@@ -1083,7 +1293,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_raw#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_raw#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -1113,15 +1323,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_save">
         save()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_save" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_save" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">115</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.115" class="phpdocumentor-element-found-in__source" data-line="115" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.115" class="phpdocumentor-element-found-in__source" data-line="115" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Saves and returns the saved item as an object</p>
@@ -1149,7 +1359,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_save#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_save#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -1192,15 +1402,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_update">
         update()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_update" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_update" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">132</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.132" class="phpdocumentor-element-found-in__source" data-line="132" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.132" class="phpdocumentor-element-found-in__source" data-line="132" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
     
@@ -1239,7 +1449,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_update#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_update#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -1267,15 +1477,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_using">
         using()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_using" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_using" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">271</span>
+    <span class="phpdocumentor-element-found-in__line">279</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.271" class="phpdocumentor-element-found-in__source" data-line="271" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.279" class="phpdocumentor-element-found-in__source" data-line="279" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This sets the connection to the Database to use for the current query.</p>
@@ -1305,7 +1515,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_using#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_using#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -1333,15 +1543,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_checkFilterMode">
         checkFilterMode()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_checkFilterMode" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_checkFilterMode" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">325</span>
+    <span class="phpdocumentor-element-found-in__line">333</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.325" class="phpdocumentor-element-found-in__source" data-line="325" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.333" class="phpdocumentor-element-found-in__source" data-line="333" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This prevents the use of non-filtering methods in filter mode.</p>
@@ -1374,7 +1584,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_checkFilterMode#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_checkFilterMode#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -1398,15 +1608,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_reboot">
         reboot()
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_reboot" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_reboot" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php"><a href="files/vendor-pionia-porm-src-database-utils-tablelevelquerytrait.html"><abbr title="vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">284</span>
+    <span class="phpdocumentor-element-found-in__line">292</span>
 
-            <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#source-view.284" class="phpdocumentor-element-found-in__source" data-line="284" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#source-view.292" class="phpdocumentor-element-found-in__source" data-line="292" data-modal="source-view" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This sets up the Database connection to use internally. It is called when the Porm class is being set up.</p>
@@ -1422,7 +1632,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_reboot#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_reboot#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -1448,7 +1658,7 @@
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/vendor/pionia/porm/src/Database/utils/TableLevelQueryTrait.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/vendor/pionia/porm/src/Database/Utils/TableLevelQueryTrait.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -1547,28 +1757,30 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                                <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#toc-methods">Methods</a></li>
+                                                                                <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
                                                 <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_asJson">asJson()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_asObject">asObject()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_columns">columns()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_deleteAll">deleteAll()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_deleteById">deleteById()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_filter">filter()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_get">get()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_has">has()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_join">join()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_random">random()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_raw">raw()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_save">save()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_update">update()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_using">using()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_checkFilterMode">checkFilterMode()</a></li>
-                                            <li><a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#method_reboot">reboot()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_asJson">asJson()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_asObject">asObject()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_columns">columns()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteAll">deleteAll()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteById">deleteById()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_filter">filter()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_first">first()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_get">get()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_has">has()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_join">join()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_last">last()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_random">random()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_raw">raw()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_save">save()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_update">update()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_using">using()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_checkFilterMode">checkFilterMode()</a></li>
+                                            <li><a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_reboot">reboot()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -1588,7 +1800,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/Porm-Database-utils-TableLevelQueryTrait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Porm-Database-Utils-TableLevelQueryTrait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

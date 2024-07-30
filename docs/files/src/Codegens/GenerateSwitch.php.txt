@@ -6,9 +6,6 @@ use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
 use Pionia\Core\BaseApiServiceSwitch;
-use Pionia\Core\Interceptions\BaseMiddleware;
-use Pionia\Request\Request;
-use Pionia\Response\Response;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 

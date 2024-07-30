@@ -4,7 +4,7 @@ namespace Pionia\Generics\Base;
 
 use Exception;
 use Pionia\Database\PaginationCore;
-use Porm\Database\builders\PormObject;
+use Porm\Database\Builders\PormObject;
 use Porm\exceptions\BaseDatabaseException;
 use Porm\Porm;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

@@ -3,8 +3,8 @@
 namespace Pionia\Database;
 
 use Exception;
-use Porm\Database\builders\Join;
-use Porm\Database\builders\Builder;
+use Porm\Database\Builders\Join;
+use Porm\Database\Builders\Builder;
 use Porm\exceptions\BaseDatabaseException;
 use Porm\Porm;
 

@@ -125,11 +125,33 @@
     <a href="namespaces/validators.html" class="">validators</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/porm.html" class="">Porm</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/porm-core.html" class="">Core</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/porm-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/porm-exceptions.html" class="">Exceptions</a>
+                
+            </li>
+            </ul>
+
                         </section>
                 <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Pionia.html" class="">Pionia</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Porm.html" class="">Porm</a>
 </h4>
 
                         </section>
@@ -166,6 +188,7 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -package"><a href="packages/Pionia.html"><abbr title="\Pionia">Pionia</abbr></a></dt>
+            <dt class="phpdocumentor-table-of-contents__entry -package"><a href="packages/Porm.html"><abbr title="\Porm">Porm</abbr></a></dt>
     </dl>
 
 <h4 id="namespaces">
@@ -176,6 +199,7 @@
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -namespace"><a href="namespaces/pionia.html"><abbr title="\Pionia">Pionia</abbr></a></dt>
             <dt class="phpdocumentor-table-of-contents__entry -namespace"><a href="namespaces/validators.html"><abbr title="\validators">validators</abbr></a></dt>
+            <dt class="phpdocumentor-table-of-contents__entry -namespace"><a href="namespaces/porm.html"><abbr title="\Porm">Porm</abbr></a></dt>
     </dl>
 
 
@@ -198,6 +222,12 @@
     <a href="namespaces/default.html#constant_BASEPATH">BASEPATH</a>
     <span>
         &nbsp;= __DIR__ . &#039;/../../&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="namespaces/default.html#constant_BASEPATH">BASEPATH</a>
+    <span>
+        &nbsp;= __DIR__                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
@@ -252,6 +282,12 @@
     <a href="namespaces/default.html#constant_SETTINGS">SETTINGS</a>
     <span>
         &nbsp;= BASEPATH . &#039;settings.ini&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="namespaces/default.html#constant_SETTINGS">SETTINGS</a>
+    <span>
+        &nbsp;= \BASEPATH . &#039;/settings.ini&#039;                            </span>
 </dt>
 
     </dl>
@@ -336,6 +372,35 @@
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">BASEPATH</span>
     = <span class="phpdocumentor-signature__default-value">__DIR__ . &#039;/../../&#039;</span>
+</code>
+
+
+    
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_BASEPATH">
+        BASEPATH
+        <a href="namespaces/default.html#constant_BASEPATH" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/index.php"><a href="files/vendor-pionia-porm-index.html"><abbr title="vendor/pionia/porm/index.php">index.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+
+            <a href="index.html#source-view.18" class="phpdocumentor-element-found-in__source" data-line="18" data-modal="source-view" data-src="files/vendor/pionia/porm/index.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">BASEPATH</span>
+    = <span class="phpdocumentor-signature__default-value">__DIR__</span>
 </code>
 
 
@@ -597,6 +662,35 @@
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">SETTINGS</span>
     = <span class="phpdocumentor-signature__default-value">BASEPATH . &#039;settings.ini&#039;</span>
+</code>
+
+
+    
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SETTINGS">
+        SETTINGS
+        <a href="namespaces/default.html#constant_SETTINGS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="vendor/pionia/porm/index.php"><a href="files/vendor-pionia-porm-index.html"><abbr title="vendor/pionia/porm/index.php">index.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+
+            <a href="index.html#source-view.22" class="phpdocumentor-element-found-in__source" data-line="22" data-modal="source-view" data-src="files/vendor/pionia/porm/index.php.txt"></a>
+    </aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">SETTINGS</span>
+    = <span class="phpdocumentor-signature__default-value">\BASEPATH . &#039;/settings.ini&#039;</span>
 </code>
 
 

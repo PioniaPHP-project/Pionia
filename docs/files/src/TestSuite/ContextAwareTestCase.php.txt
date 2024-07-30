@@ -6,7 +6,7 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use Pionia\Core\Pionia;
 use Pionia\Exceptions\DatabaseException;
-use Porm\core\Database;
+use Porm\Core\Database;
 
 if (!defined('BASEPATH')) {
     define('BASEPATH', __DIR__ . '/../../');
