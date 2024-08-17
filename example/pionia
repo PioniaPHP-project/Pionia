@@ -10,7 +10,7 @@ if (!defined('BASEPATH')) {
 
 // set our settings globally
 if (!defined('SETTINGS')) {
-    define('SETTINGS', BASEPATH . '/settings.ini');
+    define('SETTINGS', BASEPATH . '/database.ini');
 }
 
 if (!file_exists(SETTINGS)) {

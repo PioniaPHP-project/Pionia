@@ -13,13 +13,13 @@ if (!defined('BASEPATH')) {
 }
 
 if (!defined('SETTINGS')) {
-    define('SETTINGS', BASEPATH . 'settings.ini');
+    define('SETTINGS', BASEPATH . 'database.ini');
 }
 /**
  * Provides a context aware test suite.
  *
  * This test suit initialises and establishes a connection to the database.
- * It also loads the settings from the application's settings.ini.
+ * It also loads the settings from the application's database.ini.
  * It should be the preferred choice if tests target context-aware modules in the application.
  *
  * @property $connection The current connection to the server

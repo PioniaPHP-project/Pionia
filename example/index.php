@@ -7,7 +7,7 @@
 //}
 //
 //if (!defined('SETTINGS')) {
-//    define('SETTINGS', __DIR__ . '/settings.ini');
+//    define('SETTINGS', __DIR__ . '/database.ini');
 //}
 //
 //require_once __DIR__."/../src/bootstrap.php";
@@ -28,7 +28,7 @@ if (!defined('BASEPATH')) {
 
 // set our settings globally
 if (!defined('SETTINGS')) {
-    define('SETTINGS', BASEPATH . '/settings.ini');
+    define('SETTINGS', BASEPATH . '/database.ini');
 }
 
 require_once __DIR__ . '/../index.php';

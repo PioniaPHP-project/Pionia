@@ -5,7 +5,7 @@ namespace Pionia\Codegens;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
-use Pionia\Request\BaseRestService;
+use Pionia\Pionia\Http\Services\BaseRestService;
 use Pionia\Response\BaseResponse;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -64,7 +64,7 @@ class Service extends CodeGenerator
         $file->addComment("Remember to register your this service as $name in your service switch.");
 
         if ($this->serviceType === 'Basic'){
-            $namespace->addUse('Pionia\Request\BaseRestService');
+            $namespace->addUse('Pionia\Pionia\Http\Services\BaseRestService');
             $namespace->addUse('Pionia\Response\BaseResponse');
         } else {
             $gs = $this->actions[0]?? 'UniversalGenericService';

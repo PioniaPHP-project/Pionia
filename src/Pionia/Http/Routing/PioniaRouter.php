@@ -1,10 +1,9 @@
 <?php
 
-namespace Pionia\Core\Routing;
+namespace Pionia\Pionia\Http\Routing;
 
-use Pionia\Core\Helpers\SupportedHttpMethods;
+use Exception;
 use Pionia\Core\Helpers\Utilities;
-use Pionia\Exceptions\ControllerException;
 use Symfony\Component\Routing\Route;
 
 
@@ -38,8 +37,6 @@ class PioniaRouter
 {
     protected BaseRoutes $routes;
 
-    private string | null $controller = null;
-
     private string $apiBase = '/api/';
 
     public function getRoutes(): BaseRoutes
@@ -50,7 +47,6 @@ class PioniaRouter
     public function __construct(BaseRoutes | null $routes = null)
     {
         $this->routes = $routes ?? new BaseRoutes();
-
     }
 
     /**
@@ -60,14 +56,14 @@ class PioniaRouter
      * @param string|null $versionName The version name to add the switch to
      *
      * @return PioniaRouter
-     * @throws ControllerException
+     * @throws Exception
      * @example
      * ```php
      * $router = new PioniaRouter();
      * $router->addSwitchFor('app\switches\MySwitch', 'v1');
      * ```
      */
-    public function addSwitchFor(string $switch, ?string $versionName = 'v1'): PioniaRouter
+    public function wireTo(string $switch, ?string $versionName = 'v1'): PioniaRouter
     {
         $cleanVersion = $this->cleanVersion($versionName);
         $path = $this->apiBase.$cleanVersion.'/';
@@ -75,15 +71,19 @@ class PioniaRouter
         $pingName = $cleanVersion.'_ping';
 
         if ($this->routes->get($name)){
-            throw new ControllerException("Switch for version {$versionName} already exists");
+            throw new Exception("Switch for version {$versionName} already exists");
         }
 
         $res = Utilities::extends($switch, 'Pionia\Core\BaseApiServiceSwitch');
 
         if ($res === 'NO_CLASS'){
-            throw new ControllerException("Switch {$switch} class not found");
+            throw new Exception("Switch {$switch} class not found");
         } elseif ($res === 'DOES_NOT') {
-            throw new ControllerException("Switch {$switch} does not implement BaseApiServiceSwitch");
+            throw new Exception("Switch {$switch} does not implement BaseApiServiceSwitch");
+        }
+
+        if (is_subclass_of($switch, 'Pionia\Core\BaseApiServiceSwitch')){
+            throw new Exception("Switch {$switch} does not extend BaseApiServiceSwitch");
         }
 
         // add the only post route
@@ -99,6 +99,14 @@ class PioniaRouter
 
         $this->routes->add($pingName, $pingRoute);
         return $this;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function addSwitchFor(string $switch, ?string $versionName = 'v1'): PioniaRouter
+    {
+        return $this->wireTo($switch, $versionName);
     }
 
     private function cleanVersion(string $str): string

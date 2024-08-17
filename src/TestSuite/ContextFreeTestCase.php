@@ -7,11 +7,11 @@ use Pionia\Core\Pionia;
 
 define('BASEPATH', __DIR__.'/../../');
 
-define('SETTINGS', BASEPATH.'settings.ini');
+define('SETTINGS', BASEPATH.'database.ini');
 /**
  * This is for testing small chunk of your codebase.
  *
- * It only has access to the settings from your settings.ini, but has no access to your database
+ * It only has access to the settings from your database.ini, but has no access to your database
  */
 class ContextFreeTestCase extends TestCase
 {

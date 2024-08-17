@@ -173,7 +173,7 @@ class Utilities
     }
 
     /**
-     * Creates or updates any section of our settings.ini file to the values provided
+     * Creates or updates any section of our database.ini file to the values provided
      * @param string $section The section to update/create
      * @param array $values The values to update/create
      * @return void
@@ -204,7 +204,7 @@ class Utilities
     }
 
     /**
-     * Removes an entire section from the settings.ini file
+     * Removes an entire section from the database.ini file
      * @param string $section
      * @return void
      */

@@ -75,7 +75,7 @@ class CommandInterface
      * Bootstraps the Pionia Command Interface.
      * This method is the entry point for all commands in the framework
      *
-     * It also registers all commands registered in the app settings under settings.ini
+     * It also registers all commands registered in the app settings under database.ini
      * @return ConsoleApplication
      * @throws Exception
      */

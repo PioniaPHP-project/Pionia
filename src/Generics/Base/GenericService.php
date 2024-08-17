@@ -3,7 +3,7 @@
 namespace Pionia\Generics\Base;
 
 use Exception;
-use Pionia\Request\BaseRestService;
+use Pionia\Pionia\Http\Services\BaseRestService;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 abstract class GenericService extends BaseRestService

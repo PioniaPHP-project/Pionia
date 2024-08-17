@@ -206,7 +206,7 @@ class ScaffoldFrontendCommand extends BaseCommand
             "package_manager"=> $this->packageManager
         ]);
 
-        $io->info("Added the `frontend` section in the settings.ini");
+        $io->info("Added the `frontend` section in the database.ini");
 
         $progress->finish();
 

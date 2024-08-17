@@ -1,15 +1,16 @@
 <?php
 
-namespace Pionia\Core\Services;
+namespace Pionia\Pionia\Http\Services;
 
+use Exception;
 use Pionia\Exceptions\ResourceNotFoundException;
-use Pionia\Exceptions\UserUnauthenticatedException;
-use Pionia\Exceptions\UserUnauthorizedException;
-use Pionia\Request\Request;
+use Pionia\Pionia\Base\PioniaApplication;
+use Pionia\Pionia\Base\Utils\Microable;
+use Pionia\Pionia\Contracts\ServiceContract;
+use Pionia\Pionia\Http\Request\Request;
+use Pionia\Pionia\Utilities\Arrayable;
 use Pionia\Response\BaseResponse;
-use ReflectionException;
 use ReflectionMethod;
-
 /**
  * This is the main class all other services must extend.
  * It contains the basic methods that all services will need for authentication and request processing
@@ -22,9 +23,16 @@ use ReflectionMethod;
  * @internal
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  **/
-abstract class ServiceContract
+class BaseService implements ServiceContract
 {
-    use AuthTrait, RequestActionTrait, ValidationTrait;
+    use AuthTrait, RequestActionTrait, Microable;
+
+    private PioniaApplication $app;
+
+    public function __construct(PioniaApplication $app)
+    {
+        $this->app = $app;
+    }
 
     /**
      * @var Request $request The request object
@@ -83,50 +91,73 @@ abstract class ServiceContract
     /**
      * This method is called when the service is called with an action
      *
-     * @param string $action The action to be called
      * @param Request $request The request object
      * @return BaseResponse The response object
-     * @throws ResourceNotFoundException|ReflectionException
-     * @throws UserUnauthenticatedException
-     * @throws UserUnauthorizedException
+     * @throws Exception
      * @internal
      */
-    public function processAction(string $action, Request $request): BaseResponse
+    public function processAction(Request $request): BaseResponse
     {
         $this->request = $request;
 
-        $data = $request->getData();
+        $data = Arrayable::toArrayable($request->getData());
 
-        $service = $data['SERVICE']?? $data['service'] ?? throw new ResourceNotFoundException("Service not defined in request data");
+        if (!$data->has('SERVICE')){
+            throw new Exception("Service undefined!");
+        }
+
+        if (!$data->has("ACTION")){
+            throw new Exception("Action undefined!");
+        }
+
+        $service= $data->get("SERVICE");
+        $action = $data->get("ACTION");
 
         if ($this->serviceRequiresAuth) {
-            $this->mustAuthenticate($this->authMessage??"Service $service requires authentication");
+            $this->mustAuthenticate($this->authMessage ?? "Service $service requires authentication");
         }
 
         if (in_array($action, $this->deactivatedActions)) {
-            throw new ResourceNotFoundException("Action $action is currently deactivated for this service");
+            throw new Exception("Action $action is currently deactivated.");
         }
 
         if (in_array($action, $this->actionsRequiringAuth)) {
             $this->mustAuthenticate("Action $action requires authentication");
         }
 
-        $data = $this->request->getData();
-        $files = $this->request->files;
-        // here we attempt to call the action method on the current class
-        if (method_exists($this, $action)) {
-            if (isset($this->actionPermissions[$action])) {
-                if (is_array($this->actionPermissions[$action])){
-                    $this->canAll($this->actionPermissions[$action]);
+        $files = $request->files;
+
+        // all actions must end with the work Action, otherwise, they will be treated as just helper methods
+        $withActionKey = str_ends_with($action, "Action") ? $action : $action."Action";
+
+        if (method_exists($this, $withActionKey) || $this->hasMacro($withActionKey)) {
+            // its a normal here, we do the checks and load it normally
+            if (isset($this->actionPermissions[$action]) || isset($this->actionPermissions[$withActionKey])) {
+                $toCheck = $this->actionPermissions[$action] ?? $this->actionPermissions[$withActionKey];
+                if (is_array($toCheck)){
+                    $this->canAll($toCheck);
                 }
                 // from version 1.1.4, we started checking permissions that are also strings, not arrays
-                if (is_string($this->actionPermissions[$action])){
-                    $this->can($this->actionPermissions[$action]);
+                if (is_string($toCheck)){
+                    $this->can($toCheck);
                 }
             }
-            $reflection = new ReflectionMethod($this, $action);
-            $reflection->setAccessible(true);
-            return $reflection->invoke($this, $data, $files, $request);
+
+            // load it as a macro
+            if ($this->hasMacro($withActionKey)){
+                $response = $this->$withActionKey($data, $files, $request);
+            } else {
+                // this is a normal action, we call it normally
+                $reflection = new ReflectionMethod($this, $withActionKey);
+                $reflection->setAccessible(true);
+                $response = $reflection->invoke($this, $data, $files, $request);
+            }
+
+            if (is_subclass_of($response, BaseResponse::class)){
+                return $response;
+            }
+
+            throw new Exception("$withActionKey did not return a correct BaseResponse object. Did your return BaseResponse::jsonResponse?");
         }
         throw new ResourceNotFoundException("Action $action not found in the $service context");
     }

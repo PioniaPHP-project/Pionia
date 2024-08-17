@@ -78,7 +78,7 @@ abstract class BaseApiServiceSwitch
         }
 
         if ($serviceKlass) {
-            if (!is_a($serviceKlass, 'Pionia\request\BaseRestService', true)){
+            if (!is_a($serviceKlass, 'Pionia\Pionia\Http\Services\BaseRestService', true)){
                 throw new ResourceNotFoundException("Service $service is not a valid service");
             }
             return $serviceKlass->processAction($action, $request);
