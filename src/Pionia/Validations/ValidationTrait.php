@@ -199,7 +199,6 @@ trait ValidationTrait
 
 
     /**
-     * @param mixed $slug The slug string we are testing
      * @param string|null $regex Your custom regular expression we can depend on instead.
      *
      * @return Validator

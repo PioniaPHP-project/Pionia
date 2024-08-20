@@ -14,7 +14,7 @@ trait AppHelpersTrait
      */
     public function appName(): string
     {
-        return $this->APP_NAME;
+        return $this->context->has("APP_NAME") ? $this->context->get("APP_NAME") : $this->APP_NAME;
     }
 
     /**
@@ -55,7 +55,7 @@ trait AppHelpersTrait
 
     public function environment(): string
     {
-        return $this->env('APP_ENV', 'dev');
+        return $this->env->get('APP_ENV') ?? 'development';
     }
 
     public function os(): string

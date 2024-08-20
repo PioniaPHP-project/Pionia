@@ -84,7 +84,7 @@ class EnvResolver
         $path = $this->envPath($fileName);
 
         $pathLocal = str_ireplace('.ini', '.local.ini', $path);
-
+//
         if ($fs->exists($pathLocal)) {
             $settings = parse_ini_file($path . '.local', true);
             $this->dotenv->populate(array_merge($settings, ['PIONIA_DATABASE_CONFIG_PATH' => $pathLocal]), true);
@@ -98,7 +98,7 @@ class EnvResolver
                 }
             }
         }
-
+//
         if ($this->env->has('APP_ENV')) {
             $env = $this->env->get('APP_ENV');
             $profilePath = str_ireplace('.ini', '.' . $env . '.ini', $path);
@@ -116,9 +116,7 @@ class EnvResolver
                 }
             }
         }
-
-
-        // auto-discover the databases in the environment
+//        // auto-discover the databases in the environment
         $dbSections = [];
         $this->env->each(function ($db, $key) use (&$dbSections) {
             if (is_array($db)) {
@@ -128,10 +126,16 @@ class EnvResolver
                 }
             }
         });
-        $this->dotenv->populate([
-            'DBS_CONNECTIONS' => $dbSections,
-            'DBS_CONNECTIONS_SIZE' => count($dbSections)
+
+       $arrToPopulate = new Arrayable([
+           'DBS_CONNECTIONS_SIZE' => count($dbSections),
         ]);
-        $this->env->merge($_ENV);
+       if (count($dbSections) > 0) {
+           $arrToPopulate->merge(['DBS_CONNECTIONS' => $dbSections]);
+       }
+
+    $this->dotenv->populate($arrToPopulate->all());
+
+    $this->env->merge($_ENV);
     }
 }

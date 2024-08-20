@@ -2,8 +2,8 @@
 
 namespace Pionia\Pionia\Interceptors\Middlewares;
 
+use DI\Container;
 use Exception;
-use Pionia\Pionia\Base\PioniaApplication;
 use Pionia\Pionia\Base\Utils\Microable;
 use Pionia\Pionia\Contracts\MiddlewareInterface;
 use Pionia\Pionia\Utilities\Arrayable;
@@ -28,9 +28,9 @@ class MiddlewareChain
         return $this;
     }
 
-    public function __construct(PioniaApplication $app)
+    public function __construct(Container $app)
     {
-        $this->middlewareContainer = $app->context->get('middlewares');
+        $this->middlewareContainer = $app->get('middlewares');
     }
 
     /**
