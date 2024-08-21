@@ -3,6 +3,7 @@
 namespace Pionia\Pionia\Http\Request;
 
 use Pionia\Pionia\Auth\ContextUserObject;
+use Pionia\Pionia\Utilities\Arrayable;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 
@@ -13,7 +14,6 @@ use Symfony\Component\HttpFoundation\FileBag;
  * All methods on the request object are still available in this class. But more methods have been added to the request object.
  *
  * @property bool $authenticated Whether the request is authenticated or not
- * @property mixed $context The entire app context object
  * @property ContextUserObject|null $auth The currently logged user in context object
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\FileBag;
 class Request extends \Symfony\Component\HttpFoundation\Request
 {
      private bool $authenticated = false;
-     private mixed  $context = null;
 
      private ContextUserObject | null $auth = null;
 
@@ -35,16 +34,6 @@ class Request extends \Symfony\Component\HttpFoundation\Request
     }
 
     /**
-     * This is the entire app context object, it even contains the authentication object itself.
-     * @return mixed
-     */
-    public function getContext(): mixed
-    {
-        return $this->context;
-    }
-
-
-    /**
      * This method checks if the request is authenticated
      * @return bool Whether the request is authenticated or not
      */
@@ -53,7 +42,6 @@ class Request extends \Symfony\Component\HttpFoundation\Request
         return $this->authenticated || ( $this->auth && $this->auth->authenticated);
     }
 
-
     /**
      * This method sets the authentication context for the request
      * @param ContextUserObject $userObject
@@ -61,7 +49,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      */
     public function setAuthenticationContext(ContextUserObject $userObject): static
     {
-        if ($userObject->user){
+        if (!empty($userObject->user)) {
             $userObject->authenticated = true;
             $this->authenticated = true;
         }
@@ -69,30 +57,36 @@ class Request extends \Symfony\Component\HttpFoundation\Request
         return $this;
     }
 
-
     /**
      * This method add data to the context object
      * @param array $contextData The context data to be added to the request
      * @return $this
      */
-    private function setAppContext(array $contextData = []): static
+    private function setArrayContext(array $contextData): static
     {
-        $contextUser = new ContextUserObject();
+        $contextUser = $this->auth ?? new ContextUserObject();
 
         // if the dev has marked the request as authenticated
-        if ($contextData['user']){
+        if ($contextData['user']) {
             $contextUser->user = $contextData['user'];
-            $contextUser->authenticated = true;
-            if ($contextData['authExtra']){
-                $contextUser->authExtra = $contextData['authExtra'];
-            }
-            if ($contextData['permissions']) {
-                $contextUser->permissions = $contextData['permissions'];
-            }
-            $this->setAuthenticationContext($contextUser);
+            unset($contextData['user']);
+            $contextUser->authenticated = $contextData['authenticated'] ?? true;
         }
 
-        $this->context = array_merge($this->context, $contextData);
+        if (isset($contextData['authExtra'])){
+            $contextUser->authExtra = $contextData['authExtra'];
+            unset($contextData['authExtra']);
+        }
+
+        if (isset($contextData['permissions'])) {
+            $contextUser->permissions = $contextData['permissions'];
+            unset($contextData['permissions']);
+        }
+
+        $contextUser->authExtra = array_merge($contextUser->authExtra, $contextData);
+
+        $this->setAuthenticationContext($contextUser);
+
         return $this;
     }
 
@@ -100,11 +94,11 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      * Merges data sent from the client as json and form data as one array where one can access all the request data.
      *
      * This implies that this request is safe for both json and form data scenarios
-     * @return array
+     * @return Arrayable
      */
-    public function getData(): array
+    public function getData(): Arrayable
     {
-        return $this->getPayload()->all();
+        return Arrayable::toArrayable($this->getPayload()->all());
     }
 
     /**

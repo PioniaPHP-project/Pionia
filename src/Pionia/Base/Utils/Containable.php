@@ -2,23 +2,34 @@
 
 namespace Pionia\Pionia\Base\Utils;
 
-use DI\DependencyException;
-use DI\NotFoundException;
+use DI\Container;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
 trait Containable
 {
+    public function __construct(ContainerInterface | Container | null $context = null)
+    {
+        $this->context = $context;
+    }
     /**
      * Application container context
-     * @var ?ContainerInterface
+     * @var ContainerInterface|Container|null
      */
-    public ?ContainerInterface $context;
+    public ContainerInterface | Container | null $context;
 
     public function has(string $key): bool
     {
         return $this->context->has($key);
+    }
+
+    /**
+     * Set a value in the container
+     */
+    public function set(string $name, mixed $value): void
+    {
+        $this->context->set($name, $value);
     }
 
     public function getSilently(mixed $key): mixed

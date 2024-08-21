@@ -12,28 +12,37 @@ class Arrayable
 
     public function __construct(array $array = [])
     {
-        $this->array = $array;
+        if ($this->arrayType($array) === 'indexed') {
+            foreach ($array as $key => $value) {
+                $this->array[(string)$key] = $value;
+            }
+        }
+
     }
 
     /**
      * Checks if an array is associative
+     * @param array|null $arr
      * @return bool
      */
-    public function isAssoc(): bool
+    public function isAssoc(?array $arr = null): bool
     {
-        return array_keys($this->array) !== range(0, count($this->array) - 1);
+        $arr = $arr ?? $this->array;
+        return array_keys($arr) !== range(0, count($arr) - 1);
     }
 
     /**
      * Checks if an array has both numeric and string keys
+     * @param array|null $arr
      * @return bool
      */
-    public function isMixed(): bool
+    public function isMixed(?array $arr = null): bool
     {
+        $arr = $arr ?? $this->array;
         $hasNumericKey = false;
         $hasStringKey = false;
 
-        foreach ($this->array as $key => $value) {
+        foreach ($arr as $key => $value) {
             if (is_int($key)) {
                 $hasNumericKey = true;
             } elseif (is_string($key)) {
@@ -50,13 +59,15 @@ class Arrayable
 
     /**
      * Get the type of the array
+     * @param array|null $arr
      * @return string
      */
-    public function arrayType(): string
+    public function arrayType(?array $arr = null): string
     {
-        if ($this->isMixed()) {
+        $arr = $arr ?? $this->array;
+        if ($this->isMixed($arr)) {
             return 'mixed';
-        } else if ($this->isAssoc()) {
+        } else if ($this->isAssoc($arr)) {
             return 'associative';
         }
         return 'indexed';
@@ -299,7 +310,12 @@ class Arrayable
      */
     public function has($key): bool
     {
-        return isset($this->array[$key]) || isset($this->array[strtolower($key)]) || isset($this->array[strtoupper($key)]);
+        return isset($this->array[$key])
+            || isset($this->array[strtolower($key)])
+            || isset($this->array[strtoupper($key)])
+            || array_key_exists($key, $this->array)
+            || array_key_exists(strtolower($key), $this->array)
+            || array_key_exists(strtoupper($key), $this->array);
     }
 
     public function __get($name)
@@ -370,22 +386,19 @@ class Arrayable
         return $this;
     }
 
-    public function shift(): static
+    public function shift(): mixed
     {
-        array_shift($this->array);
-        return $this;
+        return array_shift($this->array);
     }
 
-    public function pop(): static
+    public function pop(): mixed
     {
-        array_pop($this->array);
-        return $this;
+        return array_pop($this->array);
     }
 
-    public function unshift($value): static
+    public function unshift($value): int
     {
-        array_unshift($this->array, $value);
-        return $this;
+        return array_unshift($this->array, $value);
     }
 
     public function all(): array

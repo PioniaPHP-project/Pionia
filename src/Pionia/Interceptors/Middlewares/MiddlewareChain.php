@@ -36,11 +36,11 @@ class MiddlewareChain
     /**
      * Get the middleware chain
      *
-     * @return Arrayable
+     * @return array
      */
-    public function get(): Arrayable
+    public function get(): array
     {
-        return $this->middlewareContainer;
+        return $this->middlewareContainer->all();
     }
 
     /**
