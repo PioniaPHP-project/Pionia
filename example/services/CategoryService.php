@@ -3,7 +3,7 @@
 namespace Application\Services;
 
 use Pionia\Pionia\Http\Response\BaseResponse;
-use Pionia\Request\BaseRestService;
+use Pionia\Pionia\Http\Services\BaseRestService;
 
 class CategoryService extends BaseRestService
 {
@@ -44,6 +44,6 @@ class CategoryService extends BaseRestService
 
     public function testAction(): BaseResponse
     {
-        return response(0, 'Hello World');
+        return BaseResponse::jsonResponse(0, 'Hello World');
     }
 }

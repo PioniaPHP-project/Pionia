@@ -4,7 +4,7 @@ namespace Pionia\Pionia\Http\Switches;
 
 use Pionia\Pionia\Contracts\ApplicationContract;
 use Pionia\Pionia\Exceptions\UserUnauthenticatedException;
-use Pionia\Exceptions\UserUnauthorizedException;
+use Pionia\Pionia\Exceptions\UserUnauthorizedException;
 use Pionia\Pionia\Base\PioniaApplication;
 use Pionia\Pionia\Contracts\BaseSwitchContract;
 use Pionia\Pionia\Http\Request\Request;
@@ -60,10 +60,15 @@ abstract class BaseApiServiceSwitch implements BaseSwitchContract
         }
 
         if ($serviceKlass) {
-            if (!is_a($serviceKlass, 'Pionia\Pionia\Http\Services\BaseRestService', true)){
+//            if (!is_a($serviceKlass, 'Pionia\Pionia\Http\Services\BaseRestService', true)){
+//                throw new ResourceNotFoundException("Service $service is not a valid service");
+//            }
+            if (method_exists($serviceKlass, 'processAction')){
+                return $serviceKlass->processAction($action, $service);
+            } else {
                 throw new ResourceNotFoundException("Service $service is not a valid service");
             }
-            return $serviceKlass->processAction($action, $service);
+
         }
         throw new ResourceNotFoundException("Service $service not found");
     }

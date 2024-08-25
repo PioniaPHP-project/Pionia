@@ -3,13 +3,12 @@
 namespace Pionia\Pionia\Http\Services;
 
 use Exception;
-use Pionia\Exceptions\ResourceNotFoundException;
+use Pionia\Pionia\Exceptions\ResourceNotFoundException;
 use Pionia\Pionia\Base\PioniaApplication;
 use Pionia\Pionia\Contracts\ServiceContract;
 use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Utils\Arrayable;
 use Pionia\Pionia\Utils\Microable;
-use Pionia\Response\BaseResponse;
+use Pionia\Pionia\Http\Response\BaseResponse;
 use ReflectionMethod;
 
 /**
@@ -92,11 +91,11 @@ class BaseService implements ServiceContract
     /**
      * This method is called when the service is called with an action
      *
-     * @return \Pionia\Pionia\Http\Response\BaseResponse The response object
+     * @return BaseResponse The response object
      * @throws Exception
      * @internal
      */
-    public function processAction(string $action, string $service): \Pionia\Pionia\Http\Response\BaseResponse
+    public function processAction(string $action, string $service): BaseResponse
     {
         $data = $this->request->getData();
 
@@ -140,7 +139,7 @@ class BaseService implements ServiceContract
                 $response = $reflection->invoke($this, $data, $files, $this->request);
             }
 
-            if (is_subclass_of($response, BaseResponse::class)){
+            if (is_a($response, BaseResponse::class)){
                 return $response;
             }
 

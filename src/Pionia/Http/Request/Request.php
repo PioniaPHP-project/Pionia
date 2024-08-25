@@ -105,8 +105,10 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      */
     public function getData(): Arrayable
     {
-        $data = array_merge($this->request->all(), $this->getPayload()->all(), $this->attributes->all(), $this->cookies->all(), $this->files->all());
-        return Arrayable::toArrayable($data);
+        return arr($this->cookies->all())
+            ->merge($this->query->all())
+            ->merge($this->files->all())
+            ->merge($this->getPayload()->all());
     }
 
     /**
