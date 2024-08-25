@@ -88,7 +88,7 @@ class Pionia
      * Resolved the settings from all the possible sources
      *
      * Possible sources are:
-     * - The settings file -- settings.ini
+     * - The settings file -- database.ini
      * - The session -- if the session is active and the session settings are set
      * - The server settings -- Anything in $_SERVER
      * - The environment settings -- Anything in $_ENV

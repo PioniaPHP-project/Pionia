@@ -1,26 +1,10 @@
 #!/usr/bin/env php
 <?php
 
+$app = (require __DIR__ .'/bootstrap/application.php')
+    ->powerUp()
+    ->bootConsole();
 
-use Pionia\command\CommandInterface;
+$code = $app->run();
 
-if (!defined('BASEPATH')) {
-    define('BASEPATH', __DIR__);
-}
-
-// set our settings globally
-if (!defined('SETTINGS')) {
-    define('SETTINGS', BASEPATH . '/database.ini');
-}
-
-if (!file_exists(SETTINGS)) {
-    dd('Settings file not found');
-}
-
-require_once BASEPATH . '/../vendor/autoload.php';
-
-try {
-    CommandInterface::setUp();
-} catch (Exception $e) {
-    dd($e->getMessage());
-}
+exit($code);

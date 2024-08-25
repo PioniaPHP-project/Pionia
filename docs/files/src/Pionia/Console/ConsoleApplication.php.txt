@@ -1,0 +1,97 @@
+<?php
+
+namespace Pionia\Pionia\Console;
+
+use Pionia\Pionia\Base\PioniaApplication;
+use Pionia\Pionia\Console\Events\PioniaConsoleStarted;
+use Pionia\Pionia\Events\PioniaEventDispatcher;
+use Pionia\Pionia\Utils\Arrayable;
+use Pionia\Pionia\Utils\PioniaApplicationType;
+use Pionia\Pionia\Utils\Support;
+use Symfony\Component\Process\PhpExecutableFinder;
+
+class ConsoleApplication extends PioniaApplication
+{
+    public string $appName = 'Pionia';
+
+    public function boot(): void
+    {
+        $this->logger->info("Booting Pionia console application $this->appName");
+        $this->applicationType = PioniaApplicationType::CONSOLE;
+    }
+
+    public function booted(): void
+    {
+        $this->setCatchExceptions(true);
+
+        $this->setAutoExit(false);
+
+        $this->setDispatcher(new PioniaEventDispatcher());
+
+        $this->setVersion($this->appVersion);
+
+        $this->setName($this->appName);
+
+        $this->setDefinition($this->getDefinition());
+
+        $this->syncCommands();
+
+        $this->logger->info("Emitting console started event - ".PioniaConsoleStarted::name());
+
+        $this->dispatcher->dispatch(new PioniaConsoleStarted($this), PioniaConsoleStarted::name());
+
+        $this->logger->info("Pionia console application `$this->appName` booted successfully");
+    }
+
+    /**
+     * Sync the commands from the configuration and add them to the console application
+     */
+    private function syncCommands(): void
+    {
+        $commands = $this->getOrDefault('commands', new Arrayable());
+
+        if ($commands->isEmpty()) {
+            return;
+        }
+
+        $commands->each(function ($command){
+            if (is_string($command) && Support::extends(BaseCommand::class, $command)) {
+                $command = new $command();
+                $this->add($command);
+            } else if (is_subclass_of($command, BaseCommand::class)) {
+                $this->add($command);
+            }
+        });
+
+
+    }
+
+    /**
+     * Get the PHP binary.
+     *
+     * @return string
+     */
+    public static function php(): string
+    {
+       return Support::escapeArgument((new PhpExecutableFinder)->find(false));
+    }
+
+    /**
+     * Get the pionia cli binary.
+     */
+    public static function pioniaBinary(): string
+    {
+        return Support::escapeArgument(defined('PIONIA_BINARY') ? PIONIA_BINARY : 'pionia');
+    }
+
+    /**
+     * Format the given command as a fully-qualified executable command.
+     *
+     * @param  string  $string
+     * @return string
+     */
+    public static function formatCommandString(string $string): string
+    {
+        return sprintf('%s %s %s', self::php(), static::pioniaBinary(), $string);
+    }
+}

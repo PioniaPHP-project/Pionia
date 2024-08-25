@@ -5,12 +5,13 @@ namespace Pionia\Pionia\Http\Services;
 use Exception;
 use Pionia\Exceptions\ResourceNotFoundException;
 use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Base\Utils\Microable;
 use Pionia\Pionia\Contracts\ServiceContract;
 use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Utilities\Arrayable;
+use Pionia\Pionia\Utils\Arrayable;
+use Pionia\Pionia\Utils\Microable;
 use Pionia\Response\BaseResponse;
 use ReflectionMethod;
+
 /**
  * This is the main class all other services must extend.
  * It contains the basic methods that all services will need for authentication and request processing
@@ -27,17 +28,17 @@ class BaseService implements ServiceContract
 {
     use AuthTrait, RequestActionTrait, Microable;
 
-    private PioniaApplication $app;
-
-    public function __construct(PioniaApplication $app)
-    {
-        $this->app = $app;
-    }
-
-    /**
-     * @var Request $request The request object
-     */
+    public PioniaApplication $app;
     public Request $request;
+
+    public function __construct(PioniaApplication $app, Request $request)
+    {
+        if (!defined('pionia')){
+            define('pionia', $app);
+        }
+        $this->app = $app;
+        $this->request = $request;
+    }
 
     /**
      * An array of actions that are deactivated for the current service
@@ -91,27 +92,13 @@ class BaseService implements ServiceContract
     /**
      * This method is called when the service is called with an action
      *
-     * @param Request $request The request object
-     * @return BaseResponse The response object
+     * @return \Pionia\Pionia\Http\Response\BaseResponse The response object
      * @throws Exception
      * @internal
      */
-    public function processAction(Request $request): BaseResponse
+    public function processAction(string $action, string $service): \Pionia\Pionia\Http\Response\BaseResponse
     {
-        $this->request = $request;
-
-        $data = Arrayable::toArrayable($request->getData());
-
-        if (!$data->has('SERVICE')){
-            throw new Exception("Service undefined!");
-        }
-
-        if (!$data->has("ACTION")){
-            throw new Exception("Action undefined!");
-        }
-
-        $service= $data->get("SERVICE");
-        $action = $data->get("ACTION");
+        $data = $this->request->getData();
 
         if ($this->serviceRequiresAuth) {
             $this->mustAuthenticate($this->authMessage ?? "Service $service requires authentication");
@@ -125,7 +112,7 @@ class BaseService implements ServiceContract
             $this->mustAuthenticate("Action $action requires authentication");
         }
 
-        $files = $request->files;
+        $files = $this->request->files;
 
         // all actions must end with the work Action, otherwise, they will be treated as just helper methods
         $withActionKey = str_ends_with($action, "Action") ? $action : $action."Action";
@@ -145,19 +132,19 @@ class BaseService implements ServiceContract
 
             // load it as a macro
             if ($this->hasMacro($withActionKey)){
-                $response = $this->$withActionKey($data, $files, $request);
+                $response = $this->$withActionKey($data, $files, $this->request);
             } else {
                 // this is a normal action, we call it normally
                 $reflection = new ReflectionMethod($this, $withActionKey);
                 $reflection->setAccessible(true);
-                $response = $reflection->invoke($this, $data, $files, $request);
+                $response = $reflection->invoke($this, $data, $files, $this->request);
             }
 
             if (is_subclass_of($response, BaseResponse::class)){
                 return $response;
             }
 
-            throw new Exception("$withActionKey did not return a correct BaseResponse object. Did your return BaseResponse::jsonResponse?");
+            throw new Exception("$withActionKey did not return a correct BaseResponse object. Did your return `response()`?");
         }
         throw new ResourceNotFoundException("Action $action not found in the $service context");
     }

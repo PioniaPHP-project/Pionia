@@ -1,0 +1,15 @@
+<?php
+
+namespace Pionia\Pionia\Console;
+
+use Symfony\Component\Console\Command\Command;
+
+class BaseCommand extends Command
+{
+
+    public function __construct(?string $name = null)
+    {
+        parent::__construct($name);
+    }
+
+}

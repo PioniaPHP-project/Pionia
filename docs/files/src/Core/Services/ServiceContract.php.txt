@@ -2,7 +2,6 @@
 
 namespace Pionia\Core\Services;
 
-use Pionia\Core\Pionia;
 use Pionia\Exceptions\ResourceNotFoundException;
 use Pionia\Exceptions\UserUnauthenticatedException;
 use Pionia\Exceptions\UserUnauthorizedException;

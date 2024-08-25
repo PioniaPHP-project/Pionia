@@ -73,7 +73,7 @@ class BuildFrontendCommand extends BaseCommand
         exec("cd ".$path." && ".$buildCommand, $result);
 
         if (!$fs->exists($buildPath)){
-            $io->error("The Build path $buildPath does not exist even after building, are you sure you're defining it right in your settings.ini?");
+            $io->error("The Build path $buildPath does not exist even after building, are you sure you're defining it right in your database.ini?");
             return self::FAILURE;
         }
 

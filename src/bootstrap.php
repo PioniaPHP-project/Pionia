@@ -9,25 +9,15 @@
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-use Pionia\Pionia\Logging\PioniaLogger;
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Base\Utils\PioniaApplicationType;
 
+use Pionia\Pionia\Base\PioniaApplication;
+use Pionia\Pionia\Events\PioniaEventDispatcher;
+use Pionia\Pionia\Logging\PioniaLogger;
 
 $autoloader = require __DIR__ . '/../vendor/autoload.php';
-
 $container = new DI\Container();
-
+$eventDispatcher = new PioniaEventDispatcher();
+$container->set(PioniaEventDispatcher::class, $eventDispatcher);
 $app = new PioniaApplication($container);
-
-$logger = new PioniaLogger($container);
-$app->setLogger($logger);
-
-$app->runIn(PioniaApplicationType::CONSOLE);
-
-
-
-
-
-
+$app->powerUp();
 

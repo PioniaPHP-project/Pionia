@@ -3,7 +3,8 @@
 namespace Pionia\Pionia\Http\Routing;
 
 use Exception;
-use Pionia\Core\Helpers\Utilities;
+use Pionia\Pionia\Http\Switches\BaseApiServiceSwitch;
+use Pionia\Pionia\Utils\Support;
 use Symfony\Component\Routing\Route;
 
 
@@ -72,17 +73,7 @@ class PioniaRouter
 
         if ($this->routes->get($name)){
             throw new Exception("Switch for version {$versionName} already exists");
-        }
-
-        $res = Utilities::extends($switch, 'Pionia\Core\BaseApiServiceSwitch');
-
-        if ($res === 'NO_CLASS'){
-            throw new Exception("Switch {$switch} class not found");
-        } elseif ($res === 'DOES_NOT') {
-            throw new Exception("Switch {$switch} does not implement BaseApiServiceSwitch");
-        }
-
-        if (is_subclass_of($switch, 'Pionia\Core\BaseApiServiceSwitch')){
+        } else if (!is_subclass_of($switch, BaseApiServiceSwitch::class)){
             throw new Exception("Switch {$switch} does not extend BaseApiServiceSwitch");
         }
 

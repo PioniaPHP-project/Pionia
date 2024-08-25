@@ -7,14 +7,14 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Fruitcake\Cors\CorsService;
 use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Contracts\CorsInterface;
-use Pionia\Pionia\Utilities\Arrayable;
-use Pionia\Request\Request;
-use Pionia\Response\Response;
+use Pionia\Pionia\Contracts\CorsContract;
+use Pionia\Pionia\Utils\Arrayable;
+use Pionia\Pionia\Http\Request\Request;
+use Pionia\Pionia\Http\Response\Response;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class PioniaCors implements CorsInterface
+class PioniaCors implements CorsContract
 {
     public PioniaApplication $application;
 
@@ -26,11 +26,12 @@ class PioniaCors implements CorsInterface
         $this->options = new Arrayable([]);
     }
 
-    public function register(): void
+    public function register(): static
     {
         $this->application->context->set(CorsService::class, function () {
             return new CorsService($this->options->all());
         });
+        return $this;
     }
 
     /**
@@ -39,27 +40,22 @@ class PioniaCors implements CorsInterface
      * @throws ContainerExceptionInterface
      * @throws DependencyException
      */
-    public function resolveRequest(Request $request, Response $response): void
+    public function resolveRequest(Request $request, ?Response $response = null): void
     {
         $cors = $this->application->context->get(CorsService::class);
         if ($cors->isPreflightRequest($request)) {
             $cors->handlePreflightRequest($response);
         }
 
-        if ($cors->isActualRequestAllowed($request)) {
-            $cors->addActualRequestHeaders($response, $request);
-        }
-
         if ($cors->isCorsRequest($request)) {
             $cors->varyHeader($response, 'Origin');
         }
 
-        $cors->addActualRequestHeaders($response, $request);
     }
 
     public function withSettingsNamed(?string $key  = 'cors'): ?array
     {
-        $locals = $this->application->env->get('cors');
+        $locals = $this->application->env->get($key);
         if ($locals) {
             $this->options->merge($locals);
         }

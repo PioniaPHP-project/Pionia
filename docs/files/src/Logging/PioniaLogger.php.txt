@@ -17,8 +17,8 @@ class PioniaLogger
     /**
      * Call this method to initialise the logger.
      *
-     * To turn off debug logging, turn off DEBUG in settings.ini.
-     * You can turn off DEBUG but still want to maintain logging alone, there you leave LOG_REQUESTS on in the settings.ini.
+     * To turn off debug logging, turn off DEBUG in database.ini.
+     * You can turn off DEBUG but still want to maintain logging alone, there you leave LOG_REQUESTS on in the database.ini.
      *
      * Also you can define your own LOG_DESTINATION destination. This is where you want to log to. default is stdout, but it can be file. If
      * it is a file, a clear file path should be provided. It will be created if not already available.
@@ -77,7 +77,7 @@ class PioniaLogger
             $processors = explode(',', $processors);
         }
 
-        // add the processors the developer has registered in the settings.ini file
+        // add the processors the developer has registered in the database.ini file
         if (is_array($processors) && !empty($processors)) {
             foreach ($processors as $processor) {
                 if (!empty($processor)) {
@@ -88,7 +88,7 @@ class PioniaLogger
         }
 
         $logger->pushProcessor(function ($record) use ($debug, $serverSettings, $settings){
-            // here the developer can also log some parts of the settings.ini file
+            // here the developer can also log some parts of the database.ini file
             if (isset($serverSettings['LOGGED_SETTINGS'])){
                 $settings_ = explode(',', $serverSettings['LOGGED_SETTINGS']);
                 if (is_array($settings_) && !empty($settings_)) {

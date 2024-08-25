@@ -10,32 +10,38 @@
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
 
-use Pionia\Core\Pionia;
-use Pionia\Logging\PioniaLogger;
-
-set_exception_handler('exception_handler');
-
-function exception_handler(Throwable $e): void
-{
-    $logger = PioniaLogger::init();
-    $logger->debug($e->getMessage(), $e->getTrace());
-}
+use Pionia\Pionia\Base\PioniaApplication;
+use Pionia\Pionia\Events\PioniaEventDispatcher;
+use Pionia\Pionia\Logging\PioniaLogger;
+use Porm\Core\Database;
 
 $autoloader = require __DIR__ . '/../vendor/autoload.php';
 
-if (!defined("logger")){
-    define('logger', PioniaLogger::init());
-}
+$container = new DI\Container();
 
-$settings = Pionia::resolveSettingsFromIni();
+$eventDispatcher = new PioniaEventDispatcher();
 
-$settings = Pionia::getServerSettings();
+$container->set(PioniaEventDispatcher::class, $eventDispatcher);
 
-if ($settings && array_key_exists('DEBUG', $settings) && $settings['DEBUG']){
-    error_reporting(E_ALL);
-    ini_set('display_errors', '1');
-} else {
-    error_reporting(0);
-    ini_set('display_errors', '0');
-}
+$app = new PioniaApplication($container);
 
+$logger = new PioniaLogger($container);
+$app->setLogger($logger);
+
+$container->set('default', function () {
+    return new Database([
+            'database_type' => 'pgsql',
+            'database_name' => 'auther_db',
+            'server' => 'localhost',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+        ]);
+});
+
+$app->powerUp();
+
+$connection = $container->get('default');
+$porm = new Porm\Porm($connection);
+
+dd($porm::table('user')->all());

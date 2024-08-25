@@ -1,0 +1,20 @@
+<?php
+
+namespace Pionia\Pionia\Events;
+
+use Pionia\Pionia\Utils\Support;
+use Symfony\Contracts\EventDispatcher\Event as SymfonyEvent;
+
+class Event extends SymfonyEvent
+{
+    /**
+     * Get the event name.
+     *
+     * @return string
+     */
+    public static function name(): string
+    {
+        return Support::formatter()->tableize((new \ReflectionClass(static::class))->getShortName());
+    }
+
+}

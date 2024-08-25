@@ -2,6 +2,8 @@
 
 namespace Pionia\Pionia\Http\Response;
 
+use Pionia\Pionia\Utils\Arrayable;
+
 /**
  * This provides a uniform response format for our entire application.
  *
@@ -34,6 +36,8 @@ class BaseResponse
     private string|null $prettyResponse = null;
 
     private array | null $response = null;
+
+    public ?Arrayable $data = null;
 
     public function __construct(mixed $data = null)
     {
@@ -77,18 +81,22 @@ class BaseResponse
      */
     public function build(?array $additionalData = []): static
     {
-        if ($this->response){
-            $data = array_merge($this->response, $additionalData);
-        } else {
-            $res = [
-                'returnCode' => $this->returnCode,
-                'returnMessage' => $this->returnMessage,
-                'returnData' => $this->returnData,
-                'extraData' => $this->extraData
-            ];
-            $data = array_merge($res, $additionalData);
+        $data = new Arrayable($this->response ?? []);
+
+        if (count($additionalData) > 0){
+            $data->merge($additionalData);
         }
-        $this->prettyResponse =  json_encode($data);
+
+        $res = arr([
+            'returnCode' => $this->returnCode ?? 0,
+            'returnMessage' => $this->returnMessage ?? null,
+            'returnData' => $this->returnData ?? null,
+            'extraData' => $this->extraData ?? null,
+        ]);
+
+        $this->data = $res;
+
+        $this->prettyResponse = $res->toJson();
         return $this;
     }
 }

@@ -1,0 +1,22 @@
+<?php
+
+namespace Pionia\Pionia\Contracts;
+
+use Pionia\Pionia\Http\Request\Request;
+use Pionia\Pionia\Http\Response\Response;
+
+interface KernelContract
+{
+    public function handle(Request $request);
+
+    public function terminate(Request $request, Response $response);
+
+    public function boot();
+
+    /**
+     * Get the application instance.
+     *
+     * @return \Pionia\Pionia\Contracts\ApplicationContract
+     */
+    public function getApplication();
+}

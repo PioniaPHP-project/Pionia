@@ -29,7 +29,7 @@ interface AuthenticationChainContract
     /**
      * Run the authentication chain on a request
      */
-    public function run(Request $request);
+    public function handle(Request $request);
 
     /**
      * Run the next authentication backend in the chain.

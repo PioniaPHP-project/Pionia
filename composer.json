@@ -6,7 +6,10 @@
     "keywords": ["php", "framework", "jet2018", "service", "j2j", "Pioneer", "Pionia", "architecture", "performance"],
     "autoload": {
         "psr-4": {
-            "Pionia\\": "src/"
+            "Pionia\\": "src/",
+            "Application\\": "example/",
+            "Application\\Services\\": "example/services/",
+            "Application\\Switches\\": "example/switches/"
         }
     },
     "authors": [
@@ -16,8 +19,8 @@
             "role": "Developer"
         }
     ],
-    "minimum-stability": "stable",
-    "prefer-stable": true,
+    "minimum-stability": "beta",
+    "prefer-stable": false,
     "require-dev": {
         "phpunit/phpunit": "^10.0",
         "php": ">=8.0"
@@ -29,7 +32,6 @@
         "symfony/routing": "^6.4",
         "symfony/console": "^6.4",
         "monolog/monolog": "^3.6",
-        "pionia/porm": "^1.0",
         "nette/php-generator": "^4.1",
         "doctrine/inflector": "^2.0",
         "symfony/filesystem": "^7.1",
@@ -37,9 +39,19 @@
         "psr/container": "^2.0",
         "symfony/finder": "^7.1",
         "php-di/php-di": "^7.0",
-        "symfony/dotenv": "^7.1"
+        "symfony/dotenv": "^7.1",
+        "symfony/process": "^7.1",
+        "symfony/event-dispatcher": "^7.1",
+        "pionia/porm": "^1.0",
+        "nesbot/carbon": "^3.8",
+        "symfony/uid": "^7.1",
+        "ext-pcntl": "*"
     },
     "provide": {
         "psr/container-implementation": "1.0"
+    },
+    "scripts": {
+        "test": "phpunit",
+        "document": "phpDocumentor run -d . -t docs/ --config=phpdoc.dist.xml --force"
     }
 }

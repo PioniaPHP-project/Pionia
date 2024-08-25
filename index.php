@@ -32,3 +32,4 @@ if (!defined("pionia")){
 
 set_error_handler('exceptions_error_handler');
 
+include_once "routes/web.php";

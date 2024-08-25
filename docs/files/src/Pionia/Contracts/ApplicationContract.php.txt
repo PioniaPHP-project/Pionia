@@ -1,0 +1,10 @@
+<?php
+
+namespace Pionia\Pionia\Contracts;
+
+interface ApplicationContract
+{
+    public function boot();
+
+    public function terminate();
+}
