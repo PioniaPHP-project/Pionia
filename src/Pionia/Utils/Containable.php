@@ -3,9 +3,12 @@
 namespace Pionia\Pionia\Utils;
 
 use DI\Container;
+use DI\DependencyException;
+use DI\NotFoundException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use function DI\string;
 
 trait Containable
 {
@@ -70,4 +73,30 @@ trait Containable
     {
         return $this->context->get($key);
     }
+
+    /**
+     * Make an instance of a class from the container. This will throw an exception if the class is not found
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
+    public function contextMake(string $name, array $parameters = []): mixed
+    {
+        return $this->context->make($name, $parameters);
+    }
+
+    /**
+     * Create an instance of a class without throwing an exception when it fails
+     * @param string $name
+     * @param array $parameters
+     * @return mixed
+     */
+    public function contextMakeSilently(string $name, array $parameters = []): mixed
+    {
+        try {
+            return $this->contextMake($name, $parameters);
+        } catch (ContainerExceptionInterface | NotFoundExceptionInterface $e) {
+            return null;
+        }
+    }
+
 }

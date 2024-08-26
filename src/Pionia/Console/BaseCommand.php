@@ -9,12 +9,11 @@ use Pionia\Pionia\Base\PioniaApplication;
 use Pionia\Pionia\Console\Concerns\CallsCommands;
 use Pionia\Pionia\Console\Concerns\HasParameters;
 use Pionia\Pionia\Console\Concerns\InteractsWithIO;
-use Pionia\Pionia\Contracts\IsolatableContract;
 use Pionia\Pionia\Utils\Microable;
+use Pionia\Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 
@@ -26,18 +25,46 @@ class BaseCommand extends Command
         HasParameters,
         CallsCommands;
 
-    protected bool $isolated = false;
-
+    /**
+     * The default description of the command.
+     *
+     * @var string
+     */
     protected string $description;
 
+    /**
+     * The default signature of the command.
+     *
+     * @var string
+     */
     protected string $signature;
 
+    /**
+     * The default help of the command.
+     *
+     * @var string
+     */
     protected string $help;
 
+    /**
+     * The default name of the command.
+     *
+     * @var string
+     */
     protected string $name;
 
+    /**
+     * The default aliases of the command.
+     *
+     * @var array
+     */
     protected array $aliases;
 
+    /**
+     * The default hidden status of the command.
+     *
+     * @var bool
+     */
     protected bool $hidden = false;
 
     private ?PioniaApplication $app;
@@ -78,14 +105,29 @@ class BaseCommand extends Command
         return $returnCode;
     }
 
-    public function __construct(?PioniaApplication $app=null, ?string $name = null)
+    /**
+     * Automatically set the command name from the class name.
+     * @return string
+     */
+    public function resolveCommandNameFromClassName(): string
+    {
+        if (!isset($this->name)) {
+            $parts = explode('\\', static::class);
+            $className = array_pop($parts);
+            // we need to remove the Command suffix or prefix
+            str_ireplace('Command', '', $className);
+            return 'command:'.Support::singularize(Support::toSnakeCase($className));
+        }
+        return $this->name;
+    }
+
+    public function __construct(?PioniaApplication $app=null)
     {
         // We will go ahead and set the name, description, and parameters on console
         // commands just to make things a little easier on the developer. This is
         // so they don't have to all be manually specified in the constructors.
         $this->app = $app;
-        $this->name = $name;
-
+        $this->name = $this->name ?? $this->resolveCommandNameFromClassName();
         parent::__construct($this->name);
 
         // Once we have constructed the command, we'll set the description and other
@@ -111,7 +153,6 @@ class BaseCommand extends Command
     }
 
 
-
     private function setApp(?PioniaApplication $app): void
     {
         $this->app = $app;
@@ -119,10 +160,6 @@ class BaseCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int
      */
     #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -139,7 +176,6 @@ class BaseCommand extends Command
             return (int) call_user_func([$this, $method]);
         } catch (Exception $e) {
             $this->app->logger?->error($e->getMessage());
-
             return static::FAILURE;
         }
     }

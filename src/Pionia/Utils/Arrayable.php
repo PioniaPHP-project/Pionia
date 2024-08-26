@@ -232,9 +232,10 @@ class Arrayable
      *
      * If checkUpperAndLower is set to true, the method will check for uppercase and lowercase cases
      * @param ?string $name
+     * @param mixed|null $default
      * @return mixed
      */
-    public function get(?string $name): mixed
+    public function get(?string $name, mixed $default = null): mixed
     {
         if (!isset($name)) {
             return $this->toArray();
@@ -243,7 +244,8 @@ class Arrayable
         if ($this->has($name)) {
             return $this->array[$name] ?? $this->array[strtolower($name)] ?? $this->array[strtoupper($name)];
         }
-        return null;
+
+        return $default;
     }
 
     /**

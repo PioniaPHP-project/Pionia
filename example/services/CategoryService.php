@@ -44,6 +44,6 @@ class CategoryService extends BaseRestService
 
     public function testAction(): BaseResponse
     {
-        return BaseResponse::jsonResponse(0, 'Hello World');
+        return response(0, 'Hello World');
     }
 }

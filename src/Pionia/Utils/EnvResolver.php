@@ -45,6 +45,13 @@ class EnvResolver
         $this->resolveIniFiles();
 
         $this->resolvePhpFiles();
+
+        // if we found any section called server, we shall merge it with the environment
+        if ($this->env->has('server')) {
+            $this->env->merge($this->env->get('server'));
+            // remove the server section
+            $this->env->remove('server');
+        }
         // we shall resolve the database configurations
         // auto-discover the databases in the environment
         $dbSections = [];

@@ -195,13 +195,6 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         $this->context->set(EnvResolver::class, $this->env);
     }
 
-    public function addEnv(string $key, mixed $value): void
-    {
-        $this->env->add($key, $value);
-        $this->context->set('env', $this->env);
-        $this->context->set(EnvResolver::class, $this->env);
-    }
-
     /**
      * Finally boot the app
      */
@@ -240,11 +233,15 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         }
     }
 
+    /**
+     * Collect all the commands from the environment and the context
+     */
     private function bootstrapCommands(): void
     {
         $commands = new Arrayable();
         // collect all the middlewares from the environment and the context
-        $this->env->has('commands') && $commands->merge($this->env->get('commands'));
+//        $this->env->has('commands') && $commands->merge($this->env->get('commands'));
+        env()->has("commands") && $commands->merge(env('commands'));
 
         if ($scoped = $this->getSilently('commands')) {
             if ($scoped instanceof Arrayable) {
@@ -265,7 +262,8 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     {
         $middlewares = new Arrayable();
         // collect all the middlewares from the environment and the context
-        $this->env->has('middlewares') && $middlewares->merge($this->env->get('middlewares'));
+//        $this->env->has('middlewares') && $middlewares->merge($this->env->get('middlewares'));
+        env()->has("middlewares") && $middlewares->merge(env('middlewares'));
 
         $scopedMiddlewares = $this->getOrDefault('middlewares', []);
 

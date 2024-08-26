@@ -82,22 +82,17 @@ abstract class BaseApiServiceSwitch implements BaseSwitchContract
     public static function processor(Request $request): BaseResponse
     {
         $app = $request->getApplication();
-        $codes = $app->getSilently('env');
 
         try {
             return self::processServices($request, $app);
         } catch (ResourceNotFoundException $e) {
-            $nofFount = $codes->get("not_found_code") ?? 404;
-            return BaseResponse::JsonResponse($nofFount, $e->getMessage());
+            return response(env("not_found_code", 404), $e->getMessage());
         } catch (UserUnauthenticatedException $e) {
-            $auth = $codes->get("unauthenticated_code") ?? 401;
-            return BaseResponse::JsonResponse($auth, $e->getMessage());
+            return response(env("unauthenticated_code", 401), $e->getMessage());
         } catch (ReflectionException $e) {
-            $serverError = $codes->get("server_error_code") ?? 500;
-            return BaseResponse::JsonResponse($serverError, $e->getMessage());
+            return response(env("server_error_code", 500), $e->getMessage());
         } catch (UserUnauthorizedException $e) {
-            $unauth = $codes->get("unauthorized_code") ?? 403;
-            return BaseResponse::JsonResponse($unauth, $e->getMessage());
+            return response(env("unauthorized_code", 403), $e->getMessage());
         }
     }
 

@@ -84,6 +84,16 @@ class Support
     }
 
     /**
+     * Converts any word to its snake case form
+     * @param string $string
+     * @return string
+     */
+    public static function toSnakeCase(string $string): string
+    {
+        return self::formatter()->tableize($string);
+    }
+
+    /**
      * Converts any word to its plural form
      * @param string $word
      * @return string
