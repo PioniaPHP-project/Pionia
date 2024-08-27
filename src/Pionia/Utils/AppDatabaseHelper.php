@@ -12,13 +12,13 @@ trait AppDatabaseHelper
      */
     public function getDiscoveredConnections(): Arrayable
     {
-        $numberDiscovered = env("DBS_CONNECTIONS_SIZE");
+        $numberDiscovered = arr(env('databases'))?->get("size");
 
         if ($numberDiscovered < 1) {
             $this->logger?->info("No database connections discovered!");
             return new Arrayable();
         }
-        $connectionsDiscovered = $this->env->get("DBS_CONNECTIONS");
+        $connectionsDiscovered = arr(env('databases'))?->get("connections");
 
         return new Arrayable($connectionsDiscovered);
     }
@@ -26,17 +26,19 @@ trait AppDatabaseHelper
     private function attemptToConnectToAnyDbAvailable(): void
     {
         // if the developer set the default db, then we attempt to connect to that
-        $defaultDb = $this->env->get('DEFAULT_DATABASE');
+        $defaultDb = arr(env('databases'))?->get('default');
         if (!$defaultDb) {
             $allConnections = $this->getDiscoveredConnections();
 
+            // if the developer did not set the default db, we will use the first connection
             $defaultDb = $allConnections->first();
         }
 
         if (!$defaultDb) {
-            $this->logger?->info("No database connections available");
+            $this->logger?->info("No database connections available!");
             return;
         }
+
         $this->connectToDatabase($defaultDb);
     }
 
@@ -45,7 +47,12 @@ trait AppDatabaseHelper
     {
         $connection = null;
         if (is_string($connectionString)) {
-            $connection = env($connectionString);
+            $connection = arr(env('databases'))?->get($connectionString);
+        }
+
+        if (isset($connection['connected']) && $connection['connected'] === true) {
+            $this->logger?->info("Connection already established to $connectionString");
+            return;
         }
 
         if ($connection) {
@@ -53,8 +60,9 @@ trait AppDatabaseHelper
             $this->context->set($connectionString, function () use ($connection) {
                 return new Porm($connection);
             });
+
             if ($this->context->has($connectionString)) {
-                $this->logger?->info("Connected to `$connectionString` as default database");
+                $_ENV['databases'][$connectionString]['connected'] = true;
             }
         }
     }

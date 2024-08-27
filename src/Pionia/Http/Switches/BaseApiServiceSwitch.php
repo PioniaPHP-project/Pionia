@@ -50,7 +50,7 @@ abstract class BaseApiServiceSwitch implements BaseSwitchContract
         $action = $data->getOrThrow('action',  new ResourceNotFoundException("Action not defined in request data"));
 
         $klass = new static();
-        $registeredServicesList = arr($klass->registerServices() ?? []);
+        $registeredServicesList = $klass->registerServices();
 
         $serviceKlass = $registeredServicesList->get($service);
 

@@ -115,8 +115,8 @@ class WebKernel implements KernelContract
      */
     public function boot(Request $request): void
     {
-        $this->app->dispatch(new PreKernelBootEvent($this, $request), PreKernelBootEvent::name());
-        $this->app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request);
+        app->dispatch(new PreKernelBootEvent($this, $request), PreKernelBootEvent::name());
+        app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request);
         // run the middleware chain
         $middlewareChain = $this->app->getSilently(MiddlewareChain::class);
         if ($middlewareChain) {

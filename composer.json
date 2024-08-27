@@ -44,8 +44,7 @@
         "symfony/event-dispatcher": "^7.1",
         "pionia/porm": "^1.0",
         "nesbot/carbon": "^3.8",
-        "symfony/uid": "^7.1",
-        "ext-pcntl": "*"
+        "symfony/uid": "^7.1"
     },
     "provide": {
         "psr/container-implementation": "1.0"

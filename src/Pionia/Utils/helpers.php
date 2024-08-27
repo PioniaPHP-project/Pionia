@@ -1,8 +1,12 @@
 <?php
 
+use DI\Container;
+use Pionia\Pionia\Base\PioniaApplication;
 use Pionia\Pionia\Http\Response\BaseResponse;
 use Pionia\Pionia\Utils\Arrayable;
 use Pionia\Pionia\Utils\HighOrderTapProxy;
+use Porm\Core\Database;
+use Porm\Porm;
 
 if (! function_exists('tap')) {
     /**
@@ -83,3 +87,66 @@ if (!function_exists('response')) {
         return BaseResponse::jsonResponse($returnCode, $returnMessage, $returnData, $extraData);
     }
 }
+
+
+if (!function_exists('app')) {
+    /**
+     * Helper function to return the application instance
+     */
+    function app(): PioniaApplication
+    {
+        if (isset($GLOBALS['app'])) {
+            return $GLOBALS['app'];
+        }
+
+        return (new PioniaApplication())
+            ->powerUp();
+    }
+}
+
+if (!function_exists('container')) {
+    /**
+     * Helper function to return the application container
+     */
+    function container(): Container
+    {
+        return app()->context;
+    }
+}
+
+if (!function_exists('db')) {
+    /**
+     * Helper function to return the request object
+     * @param string $tableName The name of the table to connect to
+     * @param string|null $connToUse If defined, it will use the connection name to connect to the database
+     */
+    function db(string $tableName, ?string $connToUse = null): ?Porm
+    {
+        $databases = arr(env('databases'));
+
+        if ($databases->isEmpty()) {
+            return null;
+        }
+
+        // here, no connection was defined
+        if ($databases->get('size') < 1) {
+            return null;
+        }
+
+        if (!$connToUse) {
+            $conn = $databases->get('default');
+            $db = app()->getSilently($conn);
+        } else {
+            $conn = $databases->get($connToUse);
+            $db  = app()->contextMakeSilently(Porm::class, ['connection' => $conn]);
+        }
+
+        if (!$db) {
+            return null;
+        }
+
+        app()->context->set('pioniaSqlDb', $db);
+        return $db->table($tableName);
+    }
+}
+

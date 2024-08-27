@@ -216,13 +216,18 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             $this->registerCorsInstance();
             $this->registerBaseRoutesInstance();
 
-            if($this->applicationType !== PioniaApplicationType::TEST) {
+            if ($this->applicationType !== PioniaApplicationType::TEST) {
                 $this->attemptToConnectToAnyDbAvailable();
             }
 
             $this->booted = true;
 
             $this->callBootedCallbacks();
+
+            // we set the app constant to the application so that we can access it globally
+            if (!defined('app')) {
+                define('app', $this);
+            }
             // this runs after the application is booted
             return $this;
         } catch (Exception $e) {

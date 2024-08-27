@@ -49,34 +49,35 @@ class EnvResolver
         // if we found any section called server, we shall merge it with the environment
         if ($this->env->has('server')) {
             $this->env->merge($this->env->get('server'));
-            // remove the server section
-            $this->env->remove('server');
         }
         // we shall resolve the database configurations
         // auto-discover the databases in the environment
         $dbSections = [];
-        $this->env->each(function ($db, $key) use (&$dbSections) {
+        $sectionCount= 0;
+        $connections = [];
+        $this->env->each(function ($db, $key) use (&$dbSections, &$sectionCount, &$connections) {
             if (is_array($db)) {
                 $arr = Arrayable::toArrayable($db);
-                if (($arr->has("database") && $arr->has("type")) || ($arr->has("dsn")) || ($arr->has("database_type") || $arr->has("database_name"))) {
-                    $dbSections[] = $key;
+                if (($arr->has("database") && $arr->has("type"))
+                    || ($arr->has("dsn"))
+                    || ($arr->has("database_type")
+                    || $arr->has("database_name"))
+                ) {
+                    $dbSections[$key] = $db;
+                    $connections[] = $key;
+                    $sectionCount++;
                     // if the developer defined the default db, we shall use this to make the default connection
                     if ($arr->has("default")) {
-                        $this->env->merge(['DEFAULT_DATABASE' => $key]);
+                        $dbSections['default'] = $key;
                     }
                 }
             }
         });
 
-        $arrToPopulate = new Arrayable([
-            'DBS_CONNECTIONS_SIZE' => count($dbSections),
-        ]);
-        if (count($dbSections) > 0) {
-            $arrToPopulate->merge(['DBS_CONNECTIONS' => $dbSections]);
-        }
 
-        $this->dotenv->populate($arrToPopulate->all());
-
+        $dbSections['size'] = $sectionCount;
+        $dbSections['connections'] = $connections;
+        $this->dotenv->populate(['databases' => $dbSections], true);
         $this->env->merge($_ENV);
     }
 

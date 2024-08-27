@@ -28,7 +28,7 @@ trait Containable
      * @param string $key
      * @return bool
      */
-    protected function contextHas(string $key): bool
+    public function contextHas(string $key): bool
     {
         return $this->context->has($key);
     }

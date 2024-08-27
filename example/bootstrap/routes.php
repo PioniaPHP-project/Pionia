@@ -6,6 +6,6 @@ use Pionia\Pionia\Http\Routing\PioniaRouter;
 
 $router = new PioniaRouter();
 
-$router->addSwitchFor(V1Switch::class);
+$router->wireTo(V1Switch::class);
 
 return $router;
