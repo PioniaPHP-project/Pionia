@@ -2,9 +2,9 @@
 
 namespace Pionia\Pionia\Http\Services;
 
-use Pionia\Exceptions\UserUnauthenticatedException;
-use Pionia\Exceptions\UserUnauthorizedException;
 use Pionia\Pionia\Auth\ContextUserObject;
+use Pionia\Pionia\Exceptions\UserUnauthenticatedException;
+use Pionia\Pionia\Exceptions\UserUnauthorizedException;
 
 /**
  * This trait provides common authentication methods for the services

@@ -4,6 +4,6 @@ namespace Pionia\Pionia\Http\Services;
 
 
 /**
- * @inheritDoc
+ * Base Service for generic services
  */
 class BaseRestService extends BaseService {}

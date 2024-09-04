@@ -1,14 +1,15 @@
 <?php
 
-namespace Pionia\Generics;
+namespace Pionia\Pionia\Http\Services\Generics;
 
-use Pionia\Generics\Base\GenericService;
-use Pionia\Generics\Mixins\CreateMixin;
-use Pionia\Generics\Mixins\DeleteMixin;
-use Pionia\Generics\Mixins\ListMixin;
-use Pionia\Generics\Mixins\RandomMixin;
-use Pionia\Generics\Mixins\RetrieveMixin;
-use Pionia\Generics\Mixins\UpdateMixin;
+
+use Pionia\Pionia\Http\Services\Generics\Mixins\CreateMixin;
+use Pionia\Pionia\Http\Services\Generics\Mixins\DeleteMixin;
+use Pionia\Pionia\Http\Services\Generics\Mixins\ListMixin;
+use Pionia\Pionia\Http\Services\Generics\Mixins\RandomMixin;
+use Pionia\Pionia\Http\Services\Generics\Mixins\RetrieveMixin;
+use Pionia\Pionia\Http\Services\Generics\Mixins\UpdateMixin;
+use Pionia\Pionia\Http\Services\GenericService;
 
 /**
  * Adds the retrieve/details, create, list, update, random and delete actions to the service.

@@ -12,6 +12,10 @@ class Arrayable
 {
     use Microable;
 
+    /**
+     * The array to be manipulated
+     * @var array
+     */
     private array $array = [];
 
     public function __construct(array $array = [])
@@ -23,6 +27,17 @@ class Arrayable
         } else {
             $this->array = $array;
         }
+    }
+
+    /**
+     * Return the type of the underlying array object
+     */
+    public function type(): string
+    {
+        if ($this->isEmpty()) {
+            return 'EMPTY';
+        }
+        return strtoupper($this->arrayType());
     }
 
     /**
@@ -130,6 +145,11 @@ class Arrayable
         return $this;
     }
 
+    /**
+     * Each through the array
+     * @param callable $callback
+     * @return Arrayable
+     */
     public function each(callable $callback): static
     {
         foreach ($this->array as $key => $value) {
@@ -138,48 +158,89 @@ class Arrayable
         return $this;
     }
 
+    /**
+     * Sort the array
+     * @param callable $callback
+     * @return Arrayable
+     */
     public function sort(callable $callback): static
     {
         usort($this->array, $callback);
         return $this;
     }
 
+    /**
+     * Sort the keys of the array
+     * @param callable $callback
+     * @return Arrayable
+     */
     public function sortKeys(callable $callback): static
     {
         uksort($this->array, $callback);
         return $this;
     }
 
+    /**
+     * Sort the values of the array
+     * @param callable $callback
+     * @return Arrayable
+     */
     public function sortValues(callable $callback): static
     {
         uasort($this->array, $callback);
         return $this;
     }
 
+    /**
+     * Reverse the array
+     * @return Arrayable
+     */
     public function reverse(): static
     {
         $this->array = array_reverse($this->array);
         return $this;
     }
 
+
+    /**
+     * Slice the array
+     * @param int $offset
+     * @param int|null $length
+     * @param $preserve_keys
+     * @return $this
+     */
     public function slice(int $offset, int $length = null, $preserve_keys = false): static
     {
         $this->array = array_slice($this->array, $offset, $length, $preserve_keys);
         return $this;
     }
 
+    /**
+     * Chunk the array
+     * @param int $size
+     * @param bool $preserve_keys
+     * @return Arrayable
+     */
     public function chunk(int $size, bool $preserve_keys = false): static
     {
         $this->array = array_chunk($this->array, $size, $preserve_keys);
         return $this;
     }
 
+    /**
+     * Convert the keys of the array to lowercase
+     * @return $this
+     */
     public function keysToLowerCase(): static
     {
         $this->array = array_change_key_case($this->array, CASE_LOWER);
         return $this;
     }
 
+    /**
+     * Convert the keys of the array to uppercase
+     * @return $this
+     */
     public function keysToUpperCase(): static
     {
         $this->array = array_change_key_case($this->array, CASE_UPPER);
@@ -187,6 +248,10 @@ class Arrayable
     }
 
 
+    /**
+     * Convert the values of the array to lowercase
+     * @return Arrayable
+     */
     public function valuesToLowerCase(): static
     {
         $this->array = array_map('strtolower', $this->array);
@@ -194,7 +259,7 @@ class Arrayable
     }
 
     /**
-     * Convert the arrayable to an array
+     * Convert the arrayable object to an array
      * @return array
      */
     public function toArray(): array
@@ -202,13 +267,21 @@ class Arrayable
         return $this->array;
     }
 
+    /**
+     * Get the first item in the array
+     * @return false|mixed
+     */
     public function first(): mixed
     {
         $item = reset($this->array);
         return $item === false ? null : $item;
     }
 
-    public function last()
+    /**
+     * Get the last item in the array
+     * @return false|mixed
+     */
+    public function last(): mixed
     {
         return end($this->array);
     }
@@ -246,6 +319,43 @@ class Arrayable
         }
 
         return $default;
+    }
+
+    /**
+     * Set an item in the array by key and value
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
+    public function set(string $key, mixed $value): static
+    {
+        $this->array[$key] = $value;
+        return $this;
+    }
+
+    /**
+     * Adds the $value to the current value of $key.
+     * If the value is numeric, it will be added to the current value
+     * If the value is a string, it will be concatenated to the current value
+     * If the value is an array, it will be merged with the current value
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
+    public function addAtKey(string $key, mixed $value): static
+    {
+        $current = $this->get($key);
+        if (is_array($current) && is_array($value)) {
+            $this->array[$key] = array_merge($current, $value);
+        } else if (is_string($current) && is_string($value)) {
+            $this->array[$key] .= $value;
+        } else if (is_numeric($current) && is_numeric($value)) {
+            $this->array[$key] += $value;
+        } else {
+           $this->set($key, $value);
+        }
+
+        return $this;
     }
 
     /**

@@ -5,6 +5,7 @@ use Pionia\Pionia\Base\PioniaApplication;
 use Pionia\Pionia\Http\Response\BaseResponse;
 use Pionia\Pionia\Utils\Arrayable;
 use Pionia\Pionia\Utils\HighOrderTapProxy;
+use Pionia\Pionia\Utils\Support;
 use Porm\Core\Database;
 use Porm\Porm;
 
@@ -119,8 +120,9 @@ if (!function_exists('db')) {
      * Helper function to return the request object
      * @param string $tableName The name of the table to connect to
      * @param string|null $connToUse If defined, it will use the connection name to connect to the database
+     * @throws Exception
      */
-    function db(string $tableName, ?string $connToUse = null): ?Porm
+    function db(string $tableName, ?string $alias = null, ?string $connToUse = null, ?bool $silent= false): ?Porm
     {
         $databases = arr(env('databases'));
 
@@ -132,13 +134,27 @@ if (!function_exists('db')) {
         if ($databases->get('size') < 1) {
             return null;
         }
+        $defaultConn = $databases->get('default');
 
         if (!$connToUse) {
-            $conn = $databases->get('default');
-            $db = app()->getSilently($conn);
+            $db = app()->getSilently($defaultConn);
         } else {
             $conn = $databases->get($connToUse);
-            $db  = app()->contextMakeSilently(Porm::class, ['connection' => $conn]);
+            // if the developer passed the default, we will use the default connection
+            if ($connToUse === $defaultConn){
+                $db = app()->getSilently($defaultConn);
+            } else {
+                $dbFile = env('PIONIA_DATABASE_CONFIG_PATH');
+                if ($databases->has($connToUse)) {
+                    $db = app()->contextMakeSilently(Porm::class, ['connection' => $conn, 'dbFile' => $dbFile]);
+                } else {
+                    if ($silent) {
+                        return null;
+                    } else {
+                        throw new Exception("The connection $connToUse does not exist in the database configuration, available connections are: " . Support::arrayToString($databases->get('connections')));
+                    }
+                }
+            }
         }
 
         if (!$db) {
@@ -146,7 +162,7 @@ if (!function_exists('db')) {
         }
 
         app()->context->set('pioniaSqlDb', $db);
-        return $db->table($tableName);
+        return app()->getSilently('pioniaSqlDb')->table($tableName, $alias);
     }
 }
 

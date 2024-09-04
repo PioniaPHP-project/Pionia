@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Generics\Mixins;
+namespace Pionia\Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Response\BaseResponse;
+use Pionia\Pionia\Http\Response\BaseResponse;
 
 /**
  * This mixin adds the retrieve method to the class that uses it.
@@ -13,18 +13,21 @@ use Pionia\Response\BaseResponse;
 trait RetrieveMixin
 {
     /**
+     * Retrieve a single item from the table
+     * You can use `details` as an alias for this method
      * @throws Exception
      */
-    public function retrieve(): BaseResponse
+    public function retrieveAction(): BaseResponse
     {
         return BaseResponse::JsonResponse(0, null, $this->getOne());
     }
 
     /**
+     * Alias for the `retrieve` action
      * @throws Exception
      */
-    public function details(): BaseResponse
+    public function detailsAction(): BaseResponse
     {
-        return $this->retrieve();
+        return $this->retrieveAction();
     }
 }

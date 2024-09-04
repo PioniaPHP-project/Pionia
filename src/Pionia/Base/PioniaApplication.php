@@ -125,46 +125,42 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         string $envDir = 'environment'
     )
     {
-        try {
-            $this->booted = false;
+        $this->booted = false;
 
-            parent::__construct($this->appName, $this->appVersion);
+        parent::__construct($this->appName, $this->appVersion);
 
-            $this->env = new Arrayable();
+        $this->env = new Arrayable();
 
-            $this->context = $container?? new Container();
+        $this->context = $container?? new Container();
 
-            $this->dispatcher = $dispatcher ?? $this->getSilently(PioniaEventDispatcher::class) ?? new PioniaEventDispatcher();
-            // if we passed the environment, we use it, otherwise we get it from the context
-            $this->envResolver = $env ?? $this->getSilently(EnvResolver::class) ?? new EnvResolver($envDir);
-            $this->env = $this->envResolver->getEnv();
-            // we set the env to the context
-            $this->context->set('env', $this->env);
+        $this->dispatcher = $dispatcher ?? $this->getSilently(PioniaEventDispatcher::class) ?? new PioniaEventDispatcher();
+        // if we passed the environment, we use it, otherwise we get it from the context
+        $this->envResolver = $env ?? $this->getSilently(EnvResolver::class) ?? new EnvResolver($envDir);
+        $this->env = $this->envResolver->getEnv();
+        // we set the env to the context
+        $this->context->set('env', $this->env);
 
-            $logger = $this->getSilently(LoggerInterface::class);
+        $logger = $this->getSilently(LoggerInterface::class);
 
-            if (!$logger) {
-                $logger = new PioniaLogger($this->context);
-                $this->context->set(LoggerInterface::class, $logger);
-            }
-
-            $this->setLogger($logger);
-
-            // we set the env to the context
-            $this->context->set(EnvResolver::class, $this->env);
-            // we populate the app name from the env or set it to the default
-            $this->context->set('APP_NAME', $this->env->get("APP_NAME") ?? $this->appName);
-
-            // we populate the base directory
-            $this->context->set('BASE_DIR', $this->appRoot());
-
-            // we populate the logs directory
-            $this->context->set('LOGS_DIR', $this->appRoot($this->env->get('LOGS_DIR') ?? 'logs'));
-        } catch (DependencyException|NotFoundException  $e) {
-            $this->logger?->error($e->getMessage());
-            $this->shutdown();
+        if (!$logger) {
+            $logger = new PioniaLogger($this->context);
+            $this->context->set(LoggerInterface::class, $logger);
         }
+
+        $this->setLogger($logger);
+
+        // we set the env to the context
+        $this->context->set(EnvResolver::class, $this->env);
+        // we populate the app name from the env or set it to the default
+        $this->context->set('APP_NAME', $this->env->get("APP_NAME") ?? $this->appName);
+
+        // we populate the base directory
+        $this->context->set('BASE_DIR', $this->appRoot());
+
+        // we populate the logs directory
+        $this->context->set('LOGS_DIR', $this->appRoot($this->env->get('LOGS_DIR') ?? 'logs'));
     }
+
 
     /**
      * Get all the environment variables or the value of a single key
@@ -173,9 +169,9 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     public function getEnv(?string $key = null): mixed
     {
         if ($key) {
-            return $this->env->get($key);
+            return arr($_ENV)->get($key);
         }
-        return $this->env;
+        return arr($_ENV);
     }
 
     /**
@@ -487,5 +483,41 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         return $this->context
             ->make(WebKernel::class, ['application' => $this])
             ->handle($request);
+    }
+
+    /**
+     * If set, these shall be the only addresses that can access the application
+     * @param array $addresses
+     * @return $this
+     */
+    public function allowedOrigins(array $addresses): static
+    {
+        $this->contestArrAdd('allowed_origins', $addresses);
+        return $this;
+    }
+
+    /**
+     * If set, these origins shall be prevented from accessing the application
+     * @param array $origins
+     * @return $this
+     */
+    public function blockedOrigins(array $origins): static
+    {
+        $this->contestArrAdd('blocked_origins', $origins);
+        return $this;
+    }
+
+    /**
+     * If set, only https requests shall be allowed
+     * @return $this
+     */
+    public function httpsOnly(bool $httpsOnly = true): static
+    {
+        if ($this->applicationType === PioniaApplicationType::REST) {
+            $this->context->set('https_only', $httpsOnly);
+            return $this;
+        }
+        $this->logger->info("The `httpsOnly` method can only be called on a REST application");
+        return $this;
     }
 }

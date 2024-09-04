@@ -2,7 +2,8 @@
 
 namespace Pionia\Pionia\Http\Services;
 
-use Pionia\Exceptions\FailedRequiredException;
+use Pionia\Pionia\Exceptions\FailedRequiredException;
+use Pionia\Pionia\Utils\Arrayable;
 
 /**
  * Provides helper methods for request actions
@@ -14,15 +15,15 @@ trait RequestActionTrait
 
     /**
      * Checks if a single field is present in the request data and is not null or empty
-     * @param $field
-     * @param $data
+     * @param string $field
+     * @param Arrayable $data
      * @return void
      * @throws FailedRequiredException
      */
-    private static function checkOne($field, $data): void
+    private static function checkOne(string $field, Arrayable $data): void
     {
-        if (!array_key_exists($field, $data) || $data[$field] === null || $data[$field] === '') {
-            throw new FailedRequiredException("The field $field is required");
+        if($data->has($field) && $data->get($field) === null || $data->get($field) === ''){
+            throw new FailedRequiredException("Field $field is required!");
         }
     }
 

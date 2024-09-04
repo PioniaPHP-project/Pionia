@@ -60,6 +60,14 @@ class MiddlewareChain
     }
 
     /**
+     * @return null|Arrayable
+     */
+    public function middlewareStack(): ?Arrayable
+    {
+        return $this->middlewareContainer;
+    }
+
+    /**
      * Add a middleware to the middleware chain after a specific middleware
      *
      * @param string $middlewareSearch The target middleware in the chain
@@ -149,7 +157,7 @@ class MiddlewareChain
     }
 
 
-    private function isAMiddleware($class): bool
+    public function isAMiddleware($class): bool
     {
         return $class && (Support::implements($class, MiddlewareContract::class) || Support::extends($class, Middleware::class));
     }

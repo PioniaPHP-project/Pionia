@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Generics\Mixins;
+namespace Pionia\Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Response\BaseResponse;
+use Pionia\Pionia\Http\Response\BaseResponse;
 use Porm\exceptions\BaseDatabaseException;
 
 /**
@@ -12,10 +12,11 @@ use Porm\exceptions\BaseDatabaseException;
 trait RandomMixin
 {
     /**
+     * Get a random item or items from the table
      * @throws BaseDatabaseException
      * @throws Exception
      */
-    public function random(): BaseResponse
+    public function randomAction(): BaseResponse
     {
         return BaseResponse::JsonResponse(0, null, $this->randomItem());
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Generics\Mixins;
+namespace Pionia\Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Core\Helpers\Utilities;
-use Pionia\Response\BaseResponse;
+use Pionia\Pionia\Http\Response\BaseResponse;
+use Pionia\Pionia\Utils\Support;
 
 /**
  * This mixin adds the update functionality to the service.
@@ -12,10 +12,21 @@ use Pionia\Response\BaseResponse;
 trait UpdateMixin
 {
     /**
+     * Update an item in the table
+     * You can use `edit` as an alias for this method
      * @throws Exception
      */
-    public function update(): BaseResponse
+    public function updateAction(): BaseResponse
     {
-        return BaseResponse::JsonResponse(0, Utilities::singularize(Utilities::capitalize($this->table)).' updated successfully', $this->updateItem());
+        return BaseResponse::JsonResponse(0, Support::singularize(Support::capitalize($this->table)).' updated successfully', $this->updateItem());
+    }
+
+    /**
+     * Alias for the `update` action
+     * @throws Exception
+     */
+    public function editAction(): BaseResponse
+    {
+        return $this->updateAction();
     }
 }

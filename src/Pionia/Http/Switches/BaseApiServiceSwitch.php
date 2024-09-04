@@ -32,7 +32,7 @@ abstract class BaseApiServiceSwitch implements BaseSwitchContract
      * This is the application object
      * @var PioniaApplication
      */
-    protected PioniaApplication $app;
+    public PioniaApplication $app;
 
     /**
      * This method checks the request data for the `SERVICE` key and processes the service based on it
@@ -56,13 +56,10 @@ abstract class BaseApiServiceSwitch implements BaseSwitchContract
 
         // if the class was defined as a string especially using Service::class, we instantiate it
         if ($serviceKlass && is_string($serviceKlass)){
-            $serviceKlass = $app->context->make($serviceKlass, ['app' => $app, 'request' => $request]);
+            $serviceKlass = container()->make($serviceKlass, ['app' => $app, 'request' => $request]);
         }
 
         if ($serviceKlass) {
-//            if (!is_a($serviceKlass, 'Pionia\Pionia\Http\Services\BaseRestService', true)){
-//                throw new ResourceNotFoundException("Service $service is not a valid service");
-//            }
             if (method_exists($serviceKlass, 'processAction')){
                 return $serviceKlass->processAction($action, $service);
             } else {

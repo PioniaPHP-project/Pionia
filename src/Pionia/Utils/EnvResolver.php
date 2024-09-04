@@ -166,8 +166,13 @@ class EnvResolver
         $arr->each(function ($file) {
             $path = $this->envPath($file);
             $settings = parse_ini_file($path, true);
-            if ($settings) {
-                $this->dotenv->populate($settings, true);
+            $toArrayable = Arrayable::toArrayable($settings);
+            if ($toArrayable->has('server')) {
+                $this->env->merge($toArrayable->get('server'));
+                $toArrayable->remove('server');
+            }
+            if ($toArrayable->isFilled()) {
+                $this->dotenv->populate($toArrayable->all(), true);
                 $this->env->merge($_ENV);
             }
             // mark this as the database configuration file

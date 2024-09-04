@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Generics\Mixins;
+namespace Pionia\Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Core\Helpers\Utilities;
-use Pionia\Response\BaseResponse;
+use Pionia\Pionia\Http\Response\BaseResponse;
+use Pionia\Pionia\Utils\Support;
 
 /**
  * This mixin adds the create functionality to the service.
@@ -16,17 +16,17 @@ trait CreateMixin
      * You can use `save` as an alias for this method
      * @throws Exception
      */
-    public function create(): BaseResponse
+    public function createAction(): BaseResponse
     {
-        return BaseResponse::JsonResponse(0, Utilities::singularize(Utilities::capitalize($this->table)).' created successfully', $this->createItem());
+        return BaseResponse::JsonResponse(0, Support::singularize(Support::capitalize($this->table)).' created successfully', $this->createItem());
     }
 
     /**
-     * Acronym for the `create` method
+     * Alias for the `create` action
      * @throws Exception
      */
-    public function save(): BaseResponse
+    public function saveAction(): BaseResponse
     {
-        return $this->create();
+        return $this->createAction();
     }
 }

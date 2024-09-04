@@ -3,21 +3,19 @@
 namespace Application\Services;
 
 use Pionia\Pionia\Http\Response\BaseResponse;
-use Pionia\Pionia\Http\Services\BaseRestService;
+use Pionia\Pionia\Http\Services\Generics\RetrieveListCreateService;
+use Pionia\Pionia\Http\Services\JoinType;
 
-class CategoryService extends BaseRestService
+class CategoryService extends RetrieveListCreateService
 {
-//    public string $table = 'category';
-//
-//    public string $pk_field = 'id';
-//
-//    public ?array $joins = [
-//        'sub_category' => ['id' => 'category_id'],
-//    ];
-//
-//    public ?array $joinTypes = [
-//        'sub_category' => JoinType::INNER,
-//    ];
+    public string $table = 'user';
+    public string $pk_field = 'id';
+    public ?array $joins = [
+        'role' => ['role_id' => 'id'],
+    ];
+    public ?array $joinTypes = [
+        'sub_category' => JoinType::INNER,
+    ];
 //
 //    public ?array $joinAliases = [
 //        'sub_category' => 'sc',

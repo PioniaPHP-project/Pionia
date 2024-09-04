@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Generics\Mixins;
+namespace Pionia\Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Core\Helpers\Utilities;
-use Pionia\Response\BaseResponse;
+use Pionia\Pionia\Http\Response\BaseResponse;
+use Pionia\Pionia\Utils\Support;
 
 /**
  * This mixin adds the delete functionality to the service.
@@ -12,10 +12,11 @@ use Pionia\Response\BaseResponse;
 trait DeleteMixin
 {
     /**
+     * Delete an item in the table
      * @throws Exception
      */
-    public function delete(): BaseResponse
+    public function deleteAction(): BaseResponse
     {
-        return BaseResponse::JsonResponse(0, Utilities::singularize(Utilities::capitalize($this->table)) . ' deleted successfully', $this->deleteItem());
+        return BaseResponse::JsonResponse(0, Support::singularize(Support::capitalize($this->table)) . ' deleted successfully', $this->deleteItem());
     }
 }

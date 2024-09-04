@@ -6,6 +6,10 @@ define('PIONIA_START', microtime(true));
 
 include __DIR__ . '/../../vendor/autoload.php';
 
+if (!defined('BASEPATH')) {
+    define('BASEPATH', dirname(__DIR__, 1));
+}
+
 /**
  * Boot the application.
  *

@@ -1,11 +1,12 @@
 <?php
 
-namespace Pionia\Generics;
+namespace Pionia\Pionia\Http\Services\Generics;
 
-use Pionia\Generics\Base\GenericService;
-use Pionia\Generics\Mixins\ListMixin;
-use Pionia\Generics\Mixins\RetrieveMixin;
-use Pionia\Generics\Mixins\UpdateMixin;
+
+use Pionia\Pionia\Http\Services\Generics\Mixins\ListMixin;
+use Pionia\Pionia\Http\Services\Generics\Mixins\RetrieveMixin;
+use Pionia\Pionia\Http\Services\Generics\Mixins\UpdateMixin;
+use Pionia\Pionia\Http\Services\GenericService;
 
 /**
  * Adds the retrieve and update actions to the service.

@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Generics\Mixins;
+namespace Pionia\Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Response\BaseResponse;
+use Pionia\Pionia\Http\Response\BaseResponse;
 
 /**
  * This mixin adds the list functionality to the service.
@@ -14,9 +14,10 @@ use Pionia\Response\BaseResponse;
 trait ListMixin
 {
     /**
+     * List all items in the table that match the given criteria
      * @throws Exception
      */
-    public function list(): BaseResponse
+    public function listAction(): BaseResponse
     {
         return BaseResponse::JsonResponse(0, null, $this->getAllWithPagination());
     }

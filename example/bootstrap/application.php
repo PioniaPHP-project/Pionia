@@ -16,6 +16,7 @@ $app
         }
     )->withMiddlewares(function (PioniaApplication $app) {
         return new MiddlewareChain($app);
-    });
+    })
+    ->httpsOnly(false);
 
 return $app;

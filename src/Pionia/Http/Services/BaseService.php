@@ -9,6 +9,7 @@ use Pionia\Pionia\Contracts\ServiceContract;
 use Pionia\Pionia\Http\Request\Request;
 use Pionia\Pionia\Utils\Microable;
 use Pionia\Pionia\Http\Response\BaseResponse;
+use Pionia\Pionia\Utils\Support;
 use ReflectionMethod;
 
 /**
@@ -32,9 +33,6 @@ class BaseService implements ServiceContract
 
     public function __construct(PioniaApplication $app, Request $request)
     {
-        if (!defined('pionia')){
-            define('pionia', $app);
-        }
         $this->app = $app;
         $this->request = $request;
     }
@@ -113,38 +111,43 @@ class BaseService implements ServiceContract
 
         $files = $this->request->files;
 
-        // all actions must end with the work Action, otherwise, they will be treated as just helper methods
-        $withActionKey = str_ends_with($action, "Action") ? $action : $action."Action";
-
-        if (method_exists($this, $withActionKey) || $this->hasMacro($withActionKey)) {
-            // its a normal here, we do the checks and load it normally
-            if (isset($this->actionPermissions[$action]) || isset($this->actionPermissions[$withActionKey])) {
-                $toCheck = $this->actionPermissions[$action] ?? $this->actionPermissions[$withActionKey];
-                if (is_array($toCheck)){
-                    $this->canAll($toCheck);
-                }
-                // from version 1.1.4, we started checking permissions that are also strings, not arrays
-                if (is_string($toCheck)){
-                    $this->can($toCheck);
-                }
-            }
-
-            // load it as a macro
-            if ($this->hasMacro($withActionKey)){
-                $response = $this->$withActionKey($data, $files, $this->request);
-            } else {
-                // this is a normal action, we call it normally
-                $reflection = new ReflectionMethod($this, $withActionKey);
-                $reflection->setAccessible(true);
-                $response = $reflection->invoke($this, $data, $files, $this->request);
-            }
-
-            if (is_a($response, BaseResponse::class)){
-                return $response;
-            }
-
-            throw new Exception("$withActionKey did not return a correct BaseResponse object. Did your return `response()`?");
+        if(!(str_contains($action, 'Action') || str_contains($action, 'action'))){
+            $action = $action . 'Action';
         }
-        throw new ResourceNotFoundException("Action $action not found in the $service context");
+
+        $action = Support::toCamelCase($action);
+
+        if (!method_exists($this, $action)){
+            throw new ResourceNotFoundException("Action $action not found in the $service context");
+        }
+
+
+        // its a normal here, we do the checks and load it normally
+        if (isset($this->actionPermissions[$action])) {
+            $toCheck = $this->actionPermissions[$action];
+            if (is_array($toCheck)){
+                $this->canAll($toCheck);
+            }
+            // from version 1.1.4, we started checking permissions that are also strings, not arrays
+            if (is_string($toCheck)){
+                $this->can($toCheck);
+            }
+        }
+
+        // load it as a macro
+        if ($this->hasMacro($action)){
+            $response = $this->$action($data, $files, $this->request);
+        } else {
+            // this is a normal action, we call it normally
+            $reflection = new ReflectionMethod($this, $action);
+            $reflection->setAccessible(true);
+            $response = $reflection->invoke($this, $data, $files, $this->request);
+        }
+
+        if (is_a($response, BaseResponse::class)){
+            return $response;
+        }
+
+        throw new Exception("$action did not return a correct BaseResponse object. Did your return `response()`?");
     }
 }

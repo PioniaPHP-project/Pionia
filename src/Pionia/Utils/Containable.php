@@ -5,6 +5,7 @@ namespace Pionia\Pionia\Utils;
 use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
+use InvalidArgumentException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -96,6 +97,26 @@ trait Containable
             return $this->contextMake($name, $parameters);
         } catch (ContainerExceptionInterface | NotFoundExceptionInterface $e) {
             return null;
+        }
+    }
+
+    /**
+     * @param string $contextKey
+     * @param array $dataToAdd
+     * @return void
+     */
+    public function contestArrAdd(string $contextKey, array $dataToAdd): void
+    {
+        if ($this->contextHas($contextKey)) {
+            $data = $this->getSilently($contextKey);
+            if (is_a($data, Arrayable::class)) {
+                $data->merge($dataToAdd);
+                $this->context->set($contextKey, $data);
+            } else {
+                throw new InvalidArgumentException("The data in the context key $contextKey is not an instance of Arrayable");
+            }
+        } else {
+            $this->context->set($contextKey, $dataToAdd);
         }
     }
 
