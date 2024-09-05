@@ -5,7 +5,9 @@ require __DIR__ . '/../../vendor/autoload.php';
 use Pionia\Pionia\Base\PioniaApplication;
 use Pionia\Pionia\Middlewares\MiddlewareChain;
 
-$app = new PioniaApplication();
+$appPath = dirname(__DIR__);
+
+$app = new PioniaApplication($appPath);
 
 $app
     ->booted(function ($instance){
@@ -17,6 +19,7 @@ $app
     )->withMiddlewares(function (PioniaApplication $app) {
         return new MiddlewareChain($app);
     })
-    ->httpsOnly(false);
+    ->httpsOnly(false)
+    ->addAlias('app', PioniaApplication::class);
 
 return $app;
