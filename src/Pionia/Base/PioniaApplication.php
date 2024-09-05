@@ -113,32 +113,33 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
 
     /**
      * PioniaApplication constructor.
-     * @param ContainerInterface|Container|null $container
-     * @param PioniaEventDispatcher|null $dispatcher
-     * @param EnvResolver|null $env
-     * @param string $envDir
      */
-    public function __construct(
-        null|ContainerInterface|Container $container = null,
-        ?PioniaEventDispatcher $dispatcher = null,
-        ?EnvResolver $env = null,
-        string $envDir = 'environment'
-    )
+    public function __construct(string $applicationPath = __DIR__)
     {
+        if (!defined('BASEPATH')) {
+            define('BASEPATH', $applicationPath);
+        }
+
         $this->booted = false;
 
         parent::__construct($this->appName, $this->appVersion);
 
         $this->env = new Arrayable();
 
-        $this->context = $container?? new Container();
+        $this->context = $container ?? new Container();
 
         $this->dispatcher = $dispatcher ?? $this->getSilently(PioniaEventDispatcher::class) ?? new PioniaEventDispatcher();
-        // if we passed the environment, we use it, otherwise we get it from the context
-        $this->envResolver = $env ?? $this->getSilently(EnvResolver::class) ?? new EnvResolver($envDir);
-        $this->env = $this->envResolver->getEnv();
+
         // we set the env to the context
+        $this->context->set('aliases', arr([]));
+        $this->builtinDirectories()->each(function ($value, $key){
+            $this->addAlias($key, $this->appRoot($value));
+        });
+        // if we passed the environment, we use it, otherwise we get it from the context
+        $this->envResolver = $this->getSilently(EnvResolver::class) ?? new EnvResolver($this->getDirFor('environment_dir'));
+        $this->env = $this->envResolver->getEnv();
         $this->context->set('env', $this->env);
+
 
         $logger = $this->getSilently(LoggerInterface::class);
 
@@ -164,12 +165,27 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
 
     /**
      * Get all the environment variables or the value of a single key
+     * Will check in the $_ENV, $_SERVER, container, and in the local env array for the same key, other will return all
      * @return PioniaApplicationType
      */
-    public function getEnv(?string $key = null): mixed
+    public function getEnv(?string $key = null, mixed $default = null): mixed
     {
         if ($key) {
-            return arr($_ENV)->get($key);
+             $env = arr($_ENV);
+             $server = arr($_SERVER);
+             if ($env->has($key)){
+                 return $env->get($key);
+             } elseif ($server->has($key)){
+                 return $server->get($key);
+             } elseif ($this->env->has($key)){
+                 return $this->env->get($key);
+             } elseif ($this->contextHas($key)){
+                 return $this->getSilently($key);
+             }
+
+             if ($default){
+                 return $default;
+             }
         }
         return arr($_ENV);
     }
@@ -467,7 +483,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      * @param string $name
      * @return void
      */
-    public function dispatch(object $event, string $name,): void
+    public function dispatch(object $event, string $name): void
     {
         $this->logger->info("Dispatching event $name");
         $this->dispatcher->dispatch($event, $name);
@@ -519,5 +535,41 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         }
         $this->logger->info("The `httpsOnly` method can only be called on a REST application");
         return $this;
+    }
+
+    /**
+     * Adds an alias to the context list of aliases
+     */
+    public function addAlias(string $aliasName, mixed $aliasValue): static
+    {
+        $this->contestArrAdd('aliases', [$aliasName => $aliasValue]);
+        return $this;
+    }
+
+    /**
+     * Get any alias from the context
+     * @param string $aliasName
+     * @param mixed|null $default
+     * @return mixed
+     */
+    public function alias(string $aliasName, mixed $default = null): mixed
+    {
+        $aliases =  $this->getOrDefault('aliases', arr([]));
+
+        if (is_array($aliases)){
+            $aliases = arr($aliases);
+        }
+
+        return $aliases->get($aliasName, $default);
+    }
+
+    /**
+     * Get the directory for a given alias
+     * @param string $aliasName
+     * @return string|null
+     */
+    public function getDirFor(string $aliasName): ?string
+    {
+        return $this->builtinDirectories()->get($aliasName);
     }
 }

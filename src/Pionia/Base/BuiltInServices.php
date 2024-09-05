@@ -38,4 +38,23 @@ trait BuiltInServices
     {
         return Arrayable::toArrayable(allBuiltins()->get('authentications'));
     }
+
+    /**
+     * Builtin Aliases
+     * @return Arrayable
+     */
+    protected function builtInAliases(): Arrayable
+    {
+        return Arrayable::toArrayable(allBuiltins()->get('aliases'));
+    }
+
+    /**
+     * Builtin Aliases
+     * @return Arrayable
+     */
+    protected function builtinDirectories(): Arrayable
+    {
+        return Arrayable::toArrayable(allBuiltins()->get('directories'));
+    }
 }
+

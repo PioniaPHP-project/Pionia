@@ -7,6 +7,7 @@ use JsonException;
 use ReflectionClass;
 use ReflectionException;
 use Throwable;
+use function DI\string;
 
 class Arrayable
 {

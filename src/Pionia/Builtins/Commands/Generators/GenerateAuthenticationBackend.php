@@ -16,20 +16,29 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class CreateAuthenticationBackend extends BaseCommand
+class GenerateAuthenticationBackend extends BaseCommand
 {
     protected string $title = 'Adds a new authentication backend';
     protected  string $help = 'Generates an authentication backend for pionia app.';
     protected string $description = 'Generates an authentication backend for pionia app.';
-    protected string $name = 'gen:auth';
+    protected string $name = 'make:auth';
+    protected array $aliases = ['g:a', 'gen:auth'];
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function getArguments(): array
     {
-        $service_name = $input->getArgument('name');
+        return [
+            ['name', InputArgument::REQUIRED, 'The name of the authentication backend to generate'],
+        ];
+    }
 
-        $io = new SymfonyStyle($input, $output);
-        $io->info("Generating $service_name...");
 
+    protected function handle(): int
+    {
+        $service_name = $this->argument('name');
+
+//        $io = new SymfonyStyle($input, $output);
+        $this->info("Generating $service_name...");
+# TODO start creating the authentication backend
 //        $service = new AuthBackend($service_name, $output);
 //        $service->generate(null, $io);
 

@@ -426,32 +426,32 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-Command-Commands-Frontend-ScaffoldFrontendCommand.html#property_description"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\GenerateAuthenticationBackend",
             "name": "CreateAuthenticationBackend",
             "summary": "For\u0020Creating\u0020a\u0020new\u0020authentication\u0020backend\u0020in\u0020the\u0020authenticationBackends\u0020directory\u0020by\u0020running\u0020\u0060pionia\u0020gen\u003Aauth\u0020\u007Bname\u007D\u0060",
             "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend\u003A\u003Aconfigure\u0028\u0029",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\GenerateAuthenticationBackend\u003A\u003Aconfigure\u0028\u0029",
             "name": "configure",
             "summary": "",
             "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html#method_configure"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend\u003A\u003Aexecute\u0028\u0029",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\GenerateAuthenticationBackend\u003A\u003Aexecute\u0028\u0029",
             "name": "execute",
             "summary": "",
             "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html#method_execute"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend\u003A\u003A\u0024title",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\GenerateAuthenticationBackend\u003A\u003A\u0024title",
             "name": "title",
             "summary": "",
             "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html#property_title"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend\u003A\u003A\u0024description",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\GenerateAuthenticationBackend\u003A\u003A\u0024description",
             "name": "description",
             "summary": "",
             "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html#property_description"
         },                {
-            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\CreateAuthenticationBackend\u003A\u003A\u0024name",
+            "fqsen": "\\Pionia\\Command\\Commands\\Generators\\GenerateAuthenticationBackend\u003A\u003A\u0024name",
             "name": "name",
             "summary": "",
             "url": "classes/Pionia-Command-Commands-Generators-CreateAuthenticationBackend.html#property_name"

@@ -45,19 +45,23 @@ class StartServer extends BaseCommand
      */
     protected int $portOffset = 0;
 
+    /**
+     * Number of times to re-attempt a lost connection
+     * @var int
+     */
     protected int $reattempts = 0;
 
+    /**
+     * The port on which to run the server.
+     * If not passed thru the args, will find it in the settings, otherwise  will fallback to 8000
+     * @return int
+     */
     private function port(): int
     {
         $port = $this->option('port');
 
         if (!$port) {
-            $port = env()->get('port');
-
-            $server = env('server');
-            if ($server) {
-                $port = $server['port']?? 8000;
-            }
+            $port = env('PORT', 8000);
         }
         setEnv('port', $port);
         return (int) $port;

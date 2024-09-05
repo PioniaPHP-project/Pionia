@@ -13,9 +13,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  */
 class AuthBackend extends CodeGenerator
 {
-    private string $dir = BASEPATH.'/app/authentications/';
-    private string $namespace = 'application\authentications';
-
     private array $actions = ['authenticate'];
 
     public function __construct(string $name, ?OutputInterface $output = null)

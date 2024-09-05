@@ -2,9 +2,9 @@
 
 namespace Pionia\Pionia\Utils;
 
-use JetBrains\PhpStorm\NoReturn;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Filesystem\Filesystem;
+use function DI\string;
 
 class EnvResolver
 {
@@ -13,13 +13,21 @@ class EnvResolver
      * Resolved environment variables
      */
     private Arrayable $env;
+    /*
+     * The dotenv instance
+     */
     public Dotenv $dotenv;
 
     /**
+     * The path to the environment directory
      * @var mixed|string
      */
     private string $path;
 
+    /**
+     * All files in the environment directory
+     * @var Arrayable|null
+     */
     private ?Arrayable $allFiles;
 
 
@@ -46,9 +54,17 @@ class EnvResolver
 
         $this->resolvePhpFiles();
 
-        // if we found any section called server, we shall merge it with the environment
+
+        // if we found any section called server, we shall merge it with the environment and remove it
         if ($this->env->has('server')) {
-            $this->env->merge($this->env->get('server'));
+            $this->dotenv->populate($this->env->get('SERVER'));
+            $this->env->remove('server');
+            $vars = str_ireplace('server', '', $_ENV['SYMFONY_DOTENV_VARS']);
+            $vars = trim($vars, ',');
+            $_ENV['SYMFONY_DOTENV_VARS'] = $vars;
+            $_SERVER['SYMFONY_DOTENV_VARS'] = $vars;
+            unset($_ENV['server']);
+            unset($_SERVER['server']);
         }
         // we shall resolve the database configurations
         // auto-discover the databases in the environment
@@ -79,6 +95,7 @@ class EnvResolver
         $dbSections['connections'] = $connections;
         $this->dotenv->populate(['databases' => $dbSections], true);
         $this->env->merge($_ENV);
+        $this->env->merge($_SERVER);
     }
 
     /**
@@ -135,7 +152,7 @@ class EnvResolver
         $environment =  $this->env->get('APP_ENV') ?? $_ENV['APP_ENV'] ?? 'development';
 
         $iniFiles = $this->allFiles->get('ini');
-        $arr = Arrayable::toArrayable($iniFiles);
+        $arr = Arrayable::toArrayable($iniFiles ?? []);
 
         if ($arr->isEmpty()){
             return;
@@ -167,10 +184,6 @@ class EnvResolver
             $path = $this->envPath($file);
             $settings = parse_ini_file($path, true);
             $toArrayable = Arrayable::toArrayable($settings);
-            if ($toArrayable->has('server')) {
-                $this->env->merge($toArrayable->get('server'));
-                $toArrayable->remove('server');
-            }
             if ($toArrayable->isFilled()) {
                 $this->dotenv->populate($toArrayable->all(), true);
                 $this->env->merge($_ENV);

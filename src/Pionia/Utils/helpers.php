@@ -69,8 +69,15 @@ if (! function_exists('setEnv')) {
      */
     function setEnv(string $key, mixed $value): void
     {
-        $_ENV[$key] = $value;
-        $_SERVER[$key] = $value;
+        $env = [...$_ENV, $_SERVER];
+        $actual = $key;
+        if (array_key_exists(strtoupper($key), $env)){
+            $actual = strtoupper($key);
+        } elseif (array_key_exists(strtolower($key), $env)){
+            $actual = strtolower($key);
+        }
+        $_ENV[$actual] = $value;
+        $_SERVER[$actual] = $value;
     }
 }
 
@@ -166,3 +173,25 @@ if (!function_exists('db')) {
     }
 }
 
+
+if (!function_exists('alias')) {
+    function alias($key)
+    {
+        return app()->alias($key);
+    }
+}
+
+if (!function_exists('directoryFor')) {
+    function directoryFor($key)
+    {
+        $dir = arr(allBuiltins()?->get('directories') ?? []);
+        return $dir->get($key);
+    }
+}
+
+if (!function_exists('yesNo')){
+    function yesNo(bool $condition, ?string $yesPhrase = 'Yes', ?string $noPhrase = 'No'): string
+    {
+        return $condition ? $yesPhrase : $noPhrase;
+    }
+}
