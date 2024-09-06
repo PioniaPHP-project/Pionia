@@ -32,4 +32,3 @@ if (!defined('BASEPATH')) {
     ->powerUp()
     // Boot the request kernel and handle the incoming request
     ->handleRequest();
-
