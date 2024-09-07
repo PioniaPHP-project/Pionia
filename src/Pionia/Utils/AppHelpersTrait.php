@@ -14,7 +14,7 @@ trait AppHelpersTrait
      */
     public function appName(): string
     {
-        return $this->context->has("APP_NAME") ? $this->context->get("APP_NAME") : $this->APP_NAME;
+        return $this->getSilently("APP_NAME") ?? $this->APP_NAME;
     }
 
     /**
@@ -33,6 +33,7 @@ trait AppHelpersTrait
     public function setAppName($name): void
     {
         $this->APP_NAME = $name;
+        $this->set('APP_NAME', $name);
     }
 
     /**

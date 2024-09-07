@@ -6,13 +6,15 @@ use Pionia\Pionia\Http\Response\BaseResponse;
 use Pionia\Pionia\Utils\Arrayable;
 use Pionia\Pionia\Utils\HighOrderTapProxy;
 use Pionia\Pionia\Utils\Support;
-use Porm\Core\Database;
 use Porm\Porm;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 if (! function_exists('tap')) {
     /**
      * Call the given Closure with the given value then return the value.
      *
+     * Value returned is not transformed by the closure.
      * @template TValue
      *
      * @param  TValue  $value
@@ -194,4 +196,113 @@ if (!function_exists('yesNo')){
     {
         return $condition ? $yesPhrase : $noPhrase;
     }
+}
+
+
+if (!function_exists('write_ini_file')) {
+    /**
+     * Write an ini configuration file
+     *
+     * @param string $file
+     * @param array  $array
+     * @return bool
+     */
+    function writeIniFile(string $file, array $array = []): bool
+    {
+        // process array
+        $data = array();
+        foreach ($array as $key => $val) {
+            if (is_array($val)) {
+                $data[] = "[$key]";
+                foreach ($val as $skey => $sval) {
+                    if (is_array($sval)) {
+                        foreach ($sval as $_skey => $_sval) {
+                            if (is_numeric($_skey)) {
+                                $data[] = $skey.'[] = '.(is_numeric($_sval) ? $_sval : (ctype_upper($_sval) ? $_sval : '"'.$_sval.'"'));
+                            } else {
+                                $data[] = $skey.'['.$_skey.'] = '.(is_numeric($_sval) ? $_sval : (ctype_upper($_sval) ? $_sval : '"'.$_sval.'"'));
+                            }
+                        }
+                    } else {
+                        $data[] = $skey.' = '.(is_numeric($sval) ? $sval : (ctype_upper($sval) ? $sval : '"'.$sval.'"'));
+                    }
+                }
+            } else {
+                $data[] = $key.' = '.(is_numeric($val) ? $val : (ctype_upper($val) ? $val : '"'.$val.'"'));
+            }
+            // empty line
+            $data[] = null;
+        }
+
+        // open file pointer, init flock options
+        $fp = fopen($file, 'w');
+        $retries = 0;
+        $max_retries = 100;
+
+        if (!$fp) {
+            return false;
+        }
+
+        // loop until get lock, or reach max retries
+        do {
+            if ($retries > 0) {
+                usleep(rand(1, 5000));
+            }
+            $retries += 1;
+        } while (!flock($fp, LOCK_EX) && $retries <= $max_retries);
+
+        // couldn't get the lock
+        if ($retries == $max_retries) {
+            return false;
+        }
+
+        // got lock, write data
+        fwrite($fp, implode(PHP_EOL, $data).PHP_EOL);
+
+        // release lock
+        flock($fp, LOCK_UN);
+        fclose($fp);
+
+        return true;
+    }
+}
+
+
+if (!function_exists('logger')){
+    function logger(): LoggerInterface
+    {
+        return app()?->logger;
+    }
+}
+
+
+/**
+ * This function adds a new section to an ini file
+ * We generally use this to generate and add new sections to the generated.ini file
+ * which holds settings for the auto-generated files
+ *
+ * This function will create the file if it does not exist,
+ * add the section if it does not exist or update the section if it exists
+ * @param string $section
+ * @param array|null $keyValueToAppend
+ * @param string $iniFile
+ * @return bool
+ */
+ function addIniSection(string $section, ?array $keyValueToAppend = [], string $iniFile='generated.ini'): bool
+{
+    $fs = new Filesystem();
+    $file = app()->envPath($iniFile);
+    if (!$fs->exists($file)){
+        $fs->touch($file);
+    }
+    $config = parse_ini_file($file, true);
+    if ($config){
+        $config[$section] = array_merge($config[$section] ?? [], $keyValueToAppend);
+    } else {
+        $config = [$section => $keyValueToAppend];
+    }
+    if (writeIniFile($file, $config)){
+        logger()->info("Settings section $section altered successfully in $iniFile");
+    }
+    return true;
 }

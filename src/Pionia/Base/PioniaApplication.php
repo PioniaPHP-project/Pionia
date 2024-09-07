@@ -29,7 +29,6 @@ use Pionia\Pionia\Utils\Microable;
 use Pionia\Pionia\Utils\PathsTrait;
 use Pionia\Pionia\Utils\PioniaApplicationType;
 use Pionia\Pionia\Utils\Support;
-use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Application;
@@ -135,8 +134,9 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         $this->builtinDirectories()->each(function ($value, $key){
             $this->addAlias($key, $this->appRoot($value));
         });
+        $this->contextArrAdd('aliases', $this->builtinNameSpaces()->all());
         // if we passed the environment, we use it, otherwise we get it from the context
-        $this->envResolver = $this->getSilently(EnvResolver::class) ?? new EnvResolver($this->getDirFor('environment_dir'));
+        $this->envResolver = $this->getSilently(EnvResolver::class) ?? new EnvResolver($this->getDirFor(\DIRECTORIES::ENVIRONMENT_DIR->name));
         $this->env = $this->envResolver->getEnv();
         $this->context->set('env', $this->env);
 
@@ -208,7 +208,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     }
 
     /**
-     * Finally boot the app
+     * Boot the app
      */
     public function powerUp(?PioniaApplicationType $type = null): PioniaApplication
     {
@@ -508,7 +508,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      */
     public function allowedOrigins(array $addresses): static
     {
-        $this->contestArrAdd('allowed_origins', $addresses);
+        $this->contextArrAdd('allowed_origins', $addresses);
         return $this;
     }
 
@@ -519,7 +519,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      */
     public function blockedOrigins(array $origins): static
     {
-        $this->contestArrAdd('blocked_origins', $origins);
+        $this->contextArrAdd('blocked_origins', $origins);
         return $this;
     }
 
@@ -542,7 +542,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      */
     public function addAlias(string $aliasName, mixed $aliasValue): static
     {
-        $this->contestArrAdd('aliases', [$aliasName => $aliasValue]);
+        $this->contextArrAdd('aliases', [$aliasName => $aliasValue]);
         return $this;
     }
 
@@ -563,13 +563,5 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         return $aliases->get($aliasName, $default);
     }
 
-    /**
-     * Get the directory for a given alias
-     * @param string $aliasName
-     * @return string|null
-     */
-    public function getDirFor(string $aliasName): ?string
-    {
-        return $this->builtinDirectories()->get($aliasName);
-    }
+
 }

@@ -4,36 +4,32 @@ namespace Pionia\Pionia\Builtins\Commands\Generators;
 
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
-use Pionia\Pionia\Auth\AuthenticationBackend;
-use Pionia\Pionia\Auth\ContextUserObject;
 use Pionia\Pionia\Console\BaseCommand;
-use Pionia\Pionia\Http\Request\Request;
+use Pionia\Pionia\Http\Switches\BaseApiServiceSwitch;
+use Pionia\Pionia\Utils\Arrayable;
 use Pionia\Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Filesystem\Filesystem;
-
 /**
- * For Creating a new authentication backend in the authenticationBackends directory by running `pionia gen:auth {name}`
- *
- * @since 1.1.6 This command now writes the generated file to the `authentications` directory in your app
+ * Creates a new Pionia Switch in  Switches directory by running `pionia gen:switch {version}`
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class GenerateAuthenticationBackend extends BaseCommand
+class GenerateSwitch extends BaseCommand
 {
-    protected string $title = 'Adds a new authentication backend';
     protected  string $help = 'Generates an authentication backend for pionia app.';
-    protected string $description = 'Generates an authentication backend for pionia app.';
-    protected string $name = 'make:auth';
-    protected array $aliases = ['g:a', 'gen:auth'];
+    protected string $name = 'make:switch';
+    protected  string $title = 'Adds a new switch to pionia app';
+    protected  string $description = 'Generates a switch for a pionia app. Switches map requests to services.';
+    protected array $aliases = ['g:sw', 'switch', 'sw:on', 'switch:on'];
 
-    protected array $action = ['authenticate'];
+    private array $action = ['registerServices'];
 
     public function getArguments(): array
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the authentication backend to generate'],
+            ['name', InputArgument::REQUIRED, 'The name of the switch to generate'],
         ];
     }
 
@@ -53,33 +49,28 @@ class GenerateAuthenticationBackend extends BaseCommand
     public function generate(string $className): void
     {
         $name = $className;
-        if (!str_contains($className,'AuthBackend')) {
-            $name = Support::classify($className . 'AuthBackend');
+        if (!str_contains($className,'Switch')) {
+            $name = Support::classify($className . 'Switch');
         }
 
         $file = new PhpFile;
 
-        $ns = alias("AUTH");
+        $ns = alias(\NAMESPACES::SWITCH_NS->name);
 
         $namespace = $file->addNamespace($ns);
 
-        $file->addComment('This authentication backend is auto-generated from pionia cli.');
+        $file->addComment('This switch is auto-generated from pionia cli.');
 
-        $file->addComment("Remember to register your backend in index.php.");
-
-        $namespace->addUse('Pionia\Pionia\Auth\ContextUserObject');
-
-        $namespace->addUse('Pionia\Pionia\Auth\AuthenticationBackend');
-
-        $namespace->addUse('Pionia\Pionia\Http\Request\Request');
+        $namespace->addUse('Pionia\Pionia\Http\Switches\BaseApiServiceSwitch');
+        $namespace->addUse('Pionia\Pionia\Utils\Arrayable');
 
         $klass = $namespace->addClass($name);
 
-        $klass->setExtends(AuthenticationBackend::class);
+        $klass->setExtends(BaseApiServiceSwitch::class);
 
         $this->addActions($klass);
 
-        $directory = alias('authentication_dir');
+        $directory = alias(\DIRECTORIES::SWITCHES_DIR->name);
 
         $fs = new Filesystem();
 
@@ -87,15 +78,12 @@ class GenerateAuthenticationBackend extends BaseCommand
             $fs->mkdir($directory);
         }
         if ($fs->exists($directory . '/' . $name . '.php')) {
-            $this->error("Authentication Backend $name already exists at $directory.");
+            $this->error("Switch $name already exists at $directory.");
             return;
         }
         $fs->dumpFile($directory.'/'.$name.'.php', $file);
 
-        // update the generated.ini file
-        addIniSection('authentications', [$name => $ns.'\\'.$name]);
-        
-        $this->info("Authentication Backend $name created at $directory.");
+        $this->info("Switch $name created at $directory.");
     }
 
     private function addActions(ClassType $class): void
@@ -107,20 +95,13 @@ class GenerateAuthenticationBackend extends BaseCommand
 
     private function createActionMethod(ClassType $class, string $action): ClassType
     {
-        $method = $class->addMethod($action)
+        $class->addMethod($action)
             ->setPublic()
-            ->setReturnType(ContextUserObject::class)
-            ->setReturnNullable()
-            ->addComment("Implement this method and return your 'ContextUserObject'. You can query your database here too!")
-            ->addBody("\$userObj = new ContextUserObject();")
-            ->addBody("")
-            ->addBody("# your logic here...")
-            ->addBody("")
-            ->addBody("return \$userObj;");
-
-        $method->addParameter('request')
-            ->setType(Request::class);
-
+            ->setReturnType(Arrayable::class)
+            ->addComment("Register services here")
+            ->addBody("return arr([")
+            ->addBody("# Register your services here like `auth=>AuthService::class`")
+            ->addBody("]);");
         return $class;
     }
 }

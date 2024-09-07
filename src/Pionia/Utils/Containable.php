@@ -6,6 +6,10 @@ use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use InvalidArgumentException;
+use Pionia\Pionia\Auth\AuthenticationBackend;
+use Pionia\Pionia\Auth\AuthenticationChain;
+use Pionia\Pionia\Base\PioniaApplication;
+use Pionia\Pionia\Logging\PioniaLogger;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -37,9 +41,10 @@ trait Containable
     /**
      * Set a value in the container
      */
-    public function set(string $name, mixed $value): void
+    public function set(string $name, mixed $value): static
     {
         $this->context->set($name, $value);
+        return $this;
     }
 
     /**
@@ -105,7 +110,7 @@ trait Containable
      * @param array $dataToAdd
      * @return void
      */
-    public function contestArrAdd(string $contextKey, array $dataToAdd): void
+    public function contextArrAdd(string $contextKey, array $dataToAdd): void
     {
         if ($this->contextHas($contextKey)) {
             $data = $this->getSilently($contextKey);

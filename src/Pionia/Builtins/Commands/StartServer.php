@@ -95,8 +95,8 @@ class StartServer extends BaseCommand
      */
     protected function serverCommand($port, $host): array
     {
-        $server = file_exists($this->getApp()->appRoot('example/public/index.php'))
-            ? $this->getApp()->appRoot('example/public/index.php')
+        $server = file_exists(alias(\DIRECTORIES::PUBLIC_DIR->name).'/index.php')
+            ? alias(\DIRECTORIES::PUBLIC_DIR->name).'/index.php'
             : __DIR__.'example/public/index.php';
         return [
             $this->getApp()->phpPath(),

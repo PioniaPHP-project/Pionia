@@ -42,6 +42,7 @@ class CategoryService extends RetrieveListCreateService
 
     public function testAction(): BaseResponse
     {
+        $this->request->getData();
         return response(0, 'Hello World');
     }
 }

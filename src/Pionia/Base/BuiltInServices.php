@@ -56,5 +56,10 @@ trait BuiltInServices
     {
         return Arrayable::toArrayable(allBuiltins()->get('directories'));
     }
+
+    protected function builtinNameSpaces(): Arrayable
+    {
+        return Arrayable::toArrayable(allBuiltins()->get("namespaces"));
+    }
 }
 

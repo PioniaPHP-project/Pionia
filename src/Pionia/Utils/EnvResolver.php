@@ -4,7 +4,6 @@ namespace Pionia\Pionia\Utils;
 
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Filesystem\Filesystem;
-use function DI\string;
 
 class EnvResolver
 {

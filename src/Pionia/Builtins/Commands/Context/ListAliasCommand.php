@@ -8,9 +8,9 @@ use Pionia\Pionia\Utils\Arrayable;
 class ListAliasCommand extends BaseCommand
 {
 
-    protected array $aliases = ['alias', 'aliases'];
+    protected array $aliases = ['alias', 'aliases', 'list:aliases'];
 
-    protected string $name = 'alias:list';
+    protected string $name = 'app:aliases';
 
     protected string $description = 'List all the aliases available in the application';
 
@@ -20,7 +20,7 @@ class ListAliasCommand extends BaseCommand
     {
         $aliases = $this->getApplicationAliases();
         $this->info('AVAILABLE ALIASES IN THE APPLICATION CONTEXT');
-        $this->table(['Name', 'Value', 'Is Directory?'], $aliases , 'box');
+        $this->table(['Name', 'Value', 'Directory?'], $aliases , 'box');
     }
 
     private function getApplicationAliases(): array | Arrayable
