@@ -1,7 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Utils;
+namespace Pionia\Pionia\Base;
 
+use Pionia\Pionia\Collections\Arrayable;
+use Pionia\Pionia\Utils\PathsTrait;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Filesystem\Filesystem;
 

@@ -6,6 +6,7 @@ use Carbon\CarbonInterval;
 use DateInterval;
 use DateTimeInterface;
 use Exception;
+use Pionia\Pionia\Collections\Carbon;
 
 trait InteractsWithTime
 {

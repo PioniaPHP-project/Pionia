@@ -6,10 +6,10 @@ use NAMESPACES;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
+use Pionia\Pionia\Collections\Arrayable;
 use Pionia\Pionia\Console\BaseCommand;
 use Pionia\Pionia\Http\Response\BaseResponse;
 use Pionia\Pionia\Http\Services\Service;
-use Pionia\Pionia\Utils\Arrayable;
 use Pionia\Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -110,7 +110,7 @@ class GenerateService extends BaseCommand
             $namespace->addUse('Pionia\Pionia\Http\Services\Service');
             $namespace->addUse('Pionia\Pionia\Http\Response\BaseResponse');
             $namespace->addUse('Symfony\Component\HttpFoundation\FileBag');
-            $namespace->addUse('Pionia\Pionia\Utils\Arrayable');
+            $namespace->addUse('Pionia\Pionia\Collections\Arrayable');
         } else {
             // import the specific generic service the developer extended
             $gs = $actions->first() ?? 'UniversalGenericService';

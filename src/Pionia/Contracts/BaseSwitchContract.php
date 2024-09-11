@@ -2,7 +2,7 @@
 
 namespace Pionia\Pionia\Contracts;
 
-use Pionia\Pionia\Utils\Arrayable;
+use Pionia\Pionia\Collections\Arrayable;
 
 interface BaseSwitchContract
 {

@@ -1,13 +1,12 @@
 <?php
 
-namespace Pionia\Pionia\Utils;
+namespace Pionia\Pionia\Collections;
 
 use Exception;
 use JsonException;
+use Pionia\Pionia\Utils\Microable;
 use ReflectionClass;
-use ReflectionException;
 use Throwable;
-use function DI\string;
 
 class Arrayable
 {
@@ -722,13 +721,10 @@ class Arrayable
      */
     public function getA(string $key, string $className)
     {
-        $data = $this->get($key);
+        $data = $this->getArray($key);
 
         if (is_null($data)) {
             return null;
-        }
-        if(!is_array($data)) {
-            throw new Exception("Data must be an array, check the response for key $key");
         }
 
         $ref = new ReflectionClass($className);

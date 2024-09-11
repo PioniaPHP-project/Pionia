@@ -2,9 +2,9 @@
 
 namespace Pionia\Pionia\Middlewares;
 
+use Pionia\Pionia\Collections\Arrayable;
 use Pionia\Pionia\Http\Request\Request;
 use Pionia\Pionia\Http\Response\Response;
-use Pionia\Pionia\Utils\Arrayable;
 
 trait MiddlewareTrait
 {

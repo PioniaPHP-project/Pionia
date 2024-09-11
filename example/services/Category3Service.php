@@ -8,9 +8,9 @@
 namespace Application\Services;
 
 use Exception;
+use Pionia\Pionia\Collections\Arrayable;
 use Pionia\Pionia\Http\Response\BaseResponse;
 use Pionia\Pionia\Http\Services\Service;
-use Pionia\Pionia\Utils\Arrayable;
 use Symfony\Component\HttpFoundation\FileBag;
 
 class Category3Service extends Service
@@ -21,6 +21,7 @@ class Category3Service extends Service
      */
 	protected function getCategory3Action(Arrayable $data, ?FileBag $files = null): BaseResponse
 	{
+        $data->getA()
         $results = db('company')->all();
 		return cachedResponse(
             $this,

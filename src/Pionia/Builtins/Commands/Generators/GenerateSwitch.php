@@ -4,13 +4,14 @@ namespace Pionia\Pionia\Builtins\Commands\Generators;
 
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
+use Pionia\Pionia\Collections\Arrayable;
 use Pionia\Pionia\Console\BaseCommand;
 use Pionia\Pionia\Http\Switches\BaseApiServiceSwitch;
-use Pionia\Pionia\Utils\Arrayable;
 use Pionia\Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Filesystem\Filesystem;
+
 /**
  * Creates a new Pionia Switch in  Switches directory by running `pionia gen:switch {version}`
  *
@@ -62,7 +63,7 @@ class GenerateSwitch extends BaseCommand
         $file->addComment('This switch is auto-generated from pionia cli.');
 
         $namespace->addUse('Pionia\Pionia\Http\Switches\BaseApiServiceSwitch');
-        $namespace->addUse('Pionia\Pionia\Utils\Arrayable');
+        $namespace->addUse('Pionia\Pionia\Collections\Arrayable');
 
         $klass = $namespace->addClass($name);
 

@@ -3,7 +3,7 @@
 namespace Pionia\Pionia\Base;
 
 
-use Pionia\Pionia\Utils\Arrayable;
+use Pionia\Pionia\Collections\Arrayable;
 
 include 'All.php';
 

@@ -3,8 +3,8 @@
 namespace Pionia\Pionia\Console\Concerns;
 
 use Closure;
+use Pionia\Pionia\Collections\Arrayable;
 use Pionia\Pionia\Console\OutputStyle;
-use Pionia\Pionia\Utils\Arrayable;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableStyle;

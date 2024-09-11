@@ -2,8 +2,8 @@
 
 namespace Arrayable;
 
+use Pionia\Pionia\Collections\Arrayable;
 use Pionia\Pionia\TestSuite\PioniaTestCase;
-use Pionia\Pionia\Utils\Arrayable;
 
 class ArrayableTest extends PioniaTestCase
 {

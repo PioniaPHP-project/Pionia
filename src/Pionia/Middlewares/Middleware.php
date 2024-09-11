@@ -2,8 +2,8 @@
 
 namespace Pionia\Pionia\Middlewares;
 
+use Pionia\Pionia\Collections\Arrayable;
 use Pionia\Pionia\Contracts\MiddlewareContract;
-use Pionia\Pionia\Utils\Arrayable;
 
 abstract class Middleware implements MiddlewareContract
 {

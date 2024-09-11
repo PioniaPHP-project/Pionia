@@ -3,7 +3,7 @@
 namespace Pionia\Pionia\TestSuite\Helpers;
 
 use Pionia\Pionia\Auth\ContextUserObject;
-use Pionia\Pionia\Utils\EnvResolver;
+use Pionia\Pionia\Base\EnvResolver;
 
 trait HelperMocksTrait
 {

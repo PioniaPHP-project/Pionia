@@ -3,6 +3,8 @@
 namespace Pionia\Pionia\Utils;
 
 use Closure;
+use Pionia\Pionia\Collections\HighOrderTapProxy;
+use Pionia\Pionia\Collections\HighOrderWhenProxy;
 
 trait Conditionable
 {

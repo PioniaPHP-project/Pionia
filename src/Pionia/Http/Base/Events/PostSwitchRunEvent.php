@@ -2,9 +2,9 @@
 
 namespace Pionia\Pionia\Http\Base\Events;
 
+use Pionia\Pionia\Collections\Arrayable;
 use Pionia\Pionia\Events\Event;
 use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Utils\Arrayable;
 
 /**
  * Event runs after the switch runs, you can access the response from this event

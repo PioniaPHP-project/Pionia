@@ -2,7 +2,7 @@
 
 namespace Pionia\Pionia\Validations;
 
-use Pionia\Pionia\Utils\Arrayable;
+use Pionia\Pionia\Collections\Arrayable;
 
 class Validator
 {

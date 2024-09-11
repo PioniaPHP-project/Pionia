@@ -4,7 +4,7 @@ namespace Pionia\Pionia\Http\Request;
 
 use Pionia\Pionia\Auth\ContextUserObject;
 use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Utils\Arrayable;
+use Pionia\Pionia\Collections\Arrayable;
 use Pionia\Pionia\Utils\Microable;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;

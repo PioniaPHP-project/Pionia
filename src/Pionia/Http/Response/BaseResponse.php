@@ -2,9 +2,7 @@
 
 namespace Pionia\Pionia\Http\Response;
 
-use Pionia\Pionia\Cache\Cacheable;
-use Pionia\Pionia\Cache\PioniaCache;
-use Pionia\Pionia\Utils\Arrayable;
+use Pionia\Pionia\Collections\Arrayable;
 
 /**
  * This provides a uniform response format for our entire application.

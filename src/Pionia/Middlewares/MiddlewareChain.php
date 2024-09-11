@@ -4,12 +4,12 @@ namespace Pionia\Pionia\Middlewares;
 
 use Exception;
 use Pionia\Pionia\Base\PioniaApplication;
+use Pionia\Pionia\Collections\Arrayable;
 use Pionia\Pionia\Contracts\MiddlewareContract;
 use Pionia\Pionia\Http\Request\Request;
 use Pionia\Pionia\Http\Response\Response;
 use Pionia\Pionia\Middlewares\Events\PostMiddlewareChainRunEvent;
 use Pionia\Pionia\Middlewares\Events\PreMiddlewareChainRunEvent;
-use Pionia\Pionia\Utils\Arrayable;
 use Pionia\Pionia\Utils\Containable;
 use Pionia\Pionia\Utils\Microable;
 use Pionia\Pionia\Utils\Support;

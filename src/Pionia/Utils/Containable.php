@@ -6,14 +6,11 @@ use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use InvalidArgumentException;
-use Pionia\Pionia\Auth\AuthenticationBackend;
-use Pionia\Pionia\Auth\AuthenticationChain;
 use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Logging\PioniaLogger;
+use Pionia\Pionia\Collections\Arrayable;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use function DI\string;
 
 trait Containable
 {

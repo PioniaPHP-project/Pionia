@@ -9,7 +9,6 @@ use Pionia\Pionia\Http\Services\Generics\Contracts\CrudContract;
 use Pionia\Pionia\Http\Services\Generics\Contracts\EventsContract;
 use Pionia\Pionia\Http\Services\Generics\Contracts\JoinContract;
 use Pionia\Pionia\Http\Services\Generics\Contracts\UploadsContract;
-use Pionia\Pionia\Utils\Arrayable;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 abstract class GenericService extends Service

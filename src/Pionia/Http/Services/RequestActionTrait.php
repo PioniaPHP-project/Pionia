@@ -2,8 +2,8 @@
 
 namespace Pionia\Pionia\Http\Services;
 
+use Pionia\Pionia\Collections\Arrayable;
 use Pionia\Pionia\Exceptions\FailedRequiredException;
-use Pionia\Pionia\Utils\Arrayable;
 
 /**
  * Provides helper methods for request actions

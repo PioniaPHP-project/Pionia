@@ -2,6 +2,7 @@
 
 namespace Pionia\Pionia\Utils;
 
+use Pionia\Pionia\Collections\Arrayable;
 use Porm\Porm;
 
 trait AppDatabaseHelper

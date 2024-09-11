@@ -2,8 +2,8 @@
 
 namespace Pionia\Pionia\Builtins\Commands\Context;
 
+use Pionia\Pionia\Collections\Arrayable;
 use Pionia\Pionia\Console\BaseCommand;
-use Pionia\Pionia\Utils\Arrayable;
 
 class ListAliasCommand extends BaseCommand
 {

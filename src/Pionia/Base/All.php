@@ -36,7 +36,7 @@ enum DIRECTORIES {
 // register here all builtins. These can be commands, Middleware, Authentications, etc.
 if (!function_exists('allBuiltins')) {
 
-    function allBuiltins(): Pionia\Pionia\Utils\Arrayable
+    function allBuiltins(): \Pionia\Pionia\Collections\Arrayable
     {
         return arr([
             'commands' => [
