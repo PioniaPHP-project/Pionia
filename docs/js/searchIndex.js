@@ -6538,7 +6538,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\DI\\Definition\\Source\\DefinitionArray\u003A\u003A\u0024wildcardDefinitions",
             "name": "wildcardDefinitions",
-            "summary": "Cache\u0020of\u0020wildcard\u0020definitions.",
+            "summary": "CacheContract\u0020of\u0020wildcard\u0020definitions.",
             "url": "classes/DI-Definition-Source-DefinitionArray.html#property_wildcardDefinitions"
         },                {
             "fqsen": "\\DI\\Definition\\Source\\DefinitionArray\u003A\u003A\u0024normalizer",

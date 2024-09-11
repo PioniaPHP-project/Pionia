@@ -71,11 +71,18 @@ trait Containable
     }
 
     /**
-     * Get a value from the container or throw an exception
+     * Get a value from the container or throw an exception.
+     *
+     * @see PioniaApplication::resolve() for similar functionality on the application instance
+     *
+     * @param string $key
+     * @return mixed
      * @throws ContainerExceptionInterface
+     * @throws DependencyException
+     * @throws NotFoundException
      * @throws NotFoundExceptionInterface
      */
-    public function getOrFail(mixed $key): mixed
+    public function getOrFail(string $key): mixed
     {
         return $this->context->get($key);
     }

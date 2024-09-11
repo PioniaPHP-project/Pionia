@@ -1,11 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-$app = (require __DIR__ .'/bootstrap/application.php')
-
-    ->powerUp()
+$code =
+    (require __DIR__ .'/bootstrap/application.php')
     ->bootConsole();
-
-$code = $app->run();
 
 exit($code);

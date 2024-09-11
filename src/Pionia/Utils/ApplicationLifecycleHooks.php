@@ -8,9 +8,10 @@ use JetBrains\PhpStorm\NoReturn;
 trait ApplicationLifecycleHooks
 {
     /**
-     * Register the application's booted hooks.
+     * Register callbacks to be run after the application is booted
      * This method can be called multiple times to add more hooks
      *
+     * Hooks here have access to the application instance
      * @param Closure $closure
      * @return static
      */
@@ -21,7 +22,11 @@ trait ApplicationLifecycleHooks
     }
 
     /**
-     * Register a booting callback, runs before the application is booted
+     * Register hooks to mutate the application booting cycle.
+     * Runs before the application is booted
+     * Can be called multiple times to add more hooks.
+     *
+     * All hooks here do not have access to the application instance
      * @param Closure $callback
      * @return $this
      */
@@ -32,10 +37,11 @@ trait ApplicationLifecycleHooks
     }
 
     /**
-     * Register the application's terminating hook listeners.
-     *
+     * Register the application's terminating hooks.
      * All logic that needs to run before the application is terminated
+     * Can be called multiple times to add more hooks
      *
+     * Hooks here have access to the application instance
      * @param Closure $callback
      * @return void
      */
@@ -47,9 +53,10 @@ trait ApplicationLifecycleHooks
 
     /**
      * Register the application's terminated hook listeners.
-     *
      * All logic that needs to run after the application is terminated
+     * Can be called multiple times to add more hooks
      *
+     * Hooks here do not have access to the application instance
      * @param Closure $closure
      * @return void
      */
@@ -64,12 +71,11 @@ trait ApplicationLifecycleHooks
     */
     private function callBootedCallbacks(): void
     {
-        if (count($this->bootedCallbacks) === 0) {
-            return;
+        if (count($this->bootedCallbacks) > 0 ) {
+            array_map(function ($callback) {
+                return $callback($this);
+            }, $this->bootedCallbacks);
         }
-        $this->bootedCallbacks = array_map(function ($callback) {
-            return $callback($this);
-        }, $this->bootedCallbacks);
     }
 
     /**
@@ -77,12 +83,11 @@ trait ApplicationLifecycleHooks
      */
     private function callBootingCallbacks(): void
     {
-        if (count($this->bootingCallbacks) === 0) {
-            return;
+        if (count($this->bootingCallbacks) > 0) {
+            array_map(function ($callback) {
+                return $callback();
+            }, $this->bootingCallbacks);
         }
-        $this->bootingCallbacks = array_map(function ($callback) {
-            return $callback();
-        }, $this->bootingCallbacks);
     }
 
     /**
@@ -90,12 +95,11 @@ trait ApplicationLifecycleHooks
      */
     private function callTerminatingCallbacks(): void
     {
-        if (count($this->terminatingCallbacks) === 0) {
-            return;
+        if (count($this->terminatingCallbacks) > 0) {
+            array_map(function ($callback) {
+                return $callback($this);
+            }, $this->terminatingCallbacks);
         }
-        $this->terminatingCallbacks = array_map(function ($callback) {
-            return $callback($this);
-        }, $this->terminatingCallbacks);
     }
 
     /**
@@ -103,12 +107,11 @@ trait ApplicationLifecycleHooks
      */
     private function callTerminatedCallbacks(): void
     {
-        if (count($this->terminatedCallbacks) === 0) {
-            return;
+        if (count($this->terminatedCallbacks) > 0 ) {
+            array_map(function ($callback) {
+                return $callback();
+            }, $this->terminatedCallbacks);
         }
-        $this->terminatedCallbacks = array_map(function ($callback) {
-            return $callback();
-        }, $this->terminatedCallbacks);
     }
 
     /**

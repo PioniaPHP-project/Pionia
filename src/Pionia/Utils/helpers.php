@@ -2,12 +2,16 @@
 
 use DI\Container;
 use Pionia\Pionia\Base\PioniaApplication;
+use Pionia\Pionia\Cache\PioniaCache;
 use Pionia\Pionia\Http\Response\BaseResponse;
+use Pionia\Pionia\Http\Services\BaseService;
+use Pionia\Pionia\Http\Services\Service;
 use Pionia\Pionia\Utils\Arrayable;
 use Pionia\Pionia\Utils\HighOrderTapProxy;
 use Pionia\Pionia\Utils\Support;
 use Porm\Porm;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Cache\Psr16Cache;
 use Symfony\Component\Filesystem\Filesystem;
 
 if (! function_exists('tap')) {
@@ -92,7 +96,7 @@ if (!function_exists('response')) {
      * @param mixed $extraData
      * @return BaseResponse
      */
-    function response(int $returnCode = 0, ?string $returnMessage = null, mixed $returnData = null, mixed $extraData = null): BaseResponse
+    function response(int $returnCode = 0, ?string $returnMessage = null, mixed $returnData = null, mixed $extraData = null, ): BaseResponse
     {
         return BaseResponse::jsonResponse($returnCode, $returnMessage, $returnData, $extraData);
     }
@@ -143,10 +147,18 @@ if (!function_exists('db')) {
         if ($databases->get('size') < 1) {
             return null;
         }
-        $defaultConn = $databases->get('default');
+        $defaultConn = $databases->get('default') ?? $databases->get('connections')[0];
 
         if (!$connToUse) {
-            $db = app()->getSilently($defaultConn);
+            if (!$defaultConn) {
+                logger()->info("No database connection defined in the database configuration");
+                if ($silent) {
+                    return null;
+                } else {
+                    throw new Exception("No database connection defined in the database configuration");
+                }
+            }
+            $db = app->getSilently($defaultConn);
         } else {
             $conn = $databases->get($connToUse);
             // if the developer passed the default, we will use the default connection
@@ -276,33 +288,67 @@ if (!function_exists('logger')){
 }
 
 
-/**
- * This function adds a new section to an ini file
- * We generally use this to generate and add new sections to the generated.ini file
- * which holds settings for the auto-generated files
- *
- * This function will create the file if it does not exist,
- * add the section if it does not exist or update the section if it exists
- * @param string $section
- * @param array|null $keyValueToAppend
- * @param string $iniFile
- * @return bool
- */
- function addIniSection(string $section, ?array $keyValueToAppend = [], string $iniFile='generated.ini'): bool
-{
-    $fs = new Filesystem();
-    $file = app()->envPath($iniFile);
-    if (!$fs->exists($file)){
-        $fs->touch($file);
+
+if (!function_exists('addIniSection')) {
+    /**
+     * This function adds a new section to an ini file
+     * We generally use this to generate and add new sections to the generated.ini file
+     * which holds settings for the auto-generated files
+     *
+     * This function will create the file if it does not exist,
+     * add the section if it does not exist or update the section if it exists
+     * @param string $section
+     * @param array|null $keyValueToAppend
+     * @param string $iniFile
+     * @return bool
+     */
+    function addIniSection(string $section, ?array $keyValueToAppend = [], string $iniFile = 'generated.ini'): bool
+    {
+        $fs = new Filesystem();
+        $file = app()->envPath($iniFile);
+        if (!$fs->exists($file)) {
+            $fs->touch($file);
+        }
+        $config = parse_ini_file($file, true);
+        if ($config) {
+            $config[$section] = array_merge($config[$section] ?? [], $keyValueToAppend);
+        } else {
+            $config = [$section => $keyValueToAppend];
+        }
+        if (writeIniFile($file, $config)) {
+            logger()->info("Settings section $section altered successfully in $iniFile");
+        }
+        return true;
     }
-    $config = parse_ini_file($file, true);
-    if ($config){
-        $config[$section] = array_merge($config[$section] ?? [], $keyValueToAppend);
-    } else {
-        $config = [$section => $keyValueToAppend];
+}
+
+if (!function_exists('cachedResponse')){
+    /**
+     * This function caches a response if the service has caching enabled.
+     * Cached key is of the format `service_action` in camel case.
+     * If no ttl is defined, caching will happen for only 60 seconds
+     * @note This function is only available if the service has caching enabled
+     * @note This is still under rigorous tests
+     * @param Service $instance The service we are currently in, just pass `this` here!
+     * @param BaseResponse $response The response object to cache, you can use `response()` for this!
+     * @param mixed $ttl The time to live for the cache, defaults to 60 seconds
+     * @return BaseResponse The cached response / the response you passed. It's not tampered with
+     */
+    function cachedResponse(Service $instance, BaseResponse $response, mixed $ttl= 60): BaseResponse
+    {
+        return tap($response, function (BaseResponse $response) use ($instance, $ttl) {
+            if ($cacheinstance = app()->getSilently(PioniaCache::class)) {
+                // caching is enabled, let's cache this response.
+                $instance->setCacheInstance($cacheinstance);
+                $instance->cacheTtl = $ttl;
+
+                $service = $instance->request->getData()->get('service');
+                $action = $instance->request->getData()->get('action');
+                if ($service && $action) {
+                    $key = Support::toSnakeCase($service . '_' . $action);
+                    $instance->cache($key, $response->getPrettyResponse(), $ttl, true);
+                }
+            }
+        });
     }
-    if (writeIniFile($file, $config)){
-        logger()->info("Settings section $section altered successfully in $iniFile");
-    }
-    return true;
 }

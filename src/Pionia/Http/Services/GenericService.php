@@ -12,7 +12,7 @@ use Pionia\Pionia\Http\Services\Generics\Contracts\UploadsContract;
 use Pionia\Pionia\Utils\Arrayable;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-abstract class GenericService extends BaseRestService
+abstract class GenericService extends Service
 {
     /**
      * @var string The base table to be used in the service. This is required when in joins or not

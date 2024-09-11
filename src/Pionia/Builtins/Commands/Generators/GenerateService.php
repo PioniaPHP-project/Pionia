@@ -8,7 +8,7 @@ use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
 use Pionia\Pionia\Console\BaseCommand;
 use Pionia\Pionia\Http\Response\BaseResponse;
-use Pionia\Pionia\Http\Services\BaseRestService;
+use Pionia\Pionia\Http\Services\Service;
 use Pionia\Pionia\Utils\Arrayable;
 use Pionia\Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
@@ -107,7 +107,7 @@ class GenerateService extends BaseCommand
         $file->addComment("Remember to register this service in any of your available switches.");
 
         if ($serviceType === 'Basic'){
-            $namespace->addUse('Pionia\Pionia\Http\Services\BaseRestService');
+            $namespace->addUse('Pionia\Pionia\Http\Services\Service');
             $namespace->addUse('Pionia\Pionia\Http\Response\BaseResponse');
             $namespace->addUse('Symfony\Component\HttpFoundation\FileBag');
             $namespace->addUse('Pionia\Pionia\Utils\Arrayable');
@@ -125,7 +125,7 @@ class GenerateService extends BaseCommand
         $klass = $namespace->addClass($name);
 
         if ($serviceType === 'Basic') {
-            $klass->setExtends(BaseRestService::class);
+            $klass->setExtends(Service::class);
         } else {
             $ks = trim($actions->first() ?? '') ?? 'UniversalGenericService';
             if ($ks === 'GenericService') {

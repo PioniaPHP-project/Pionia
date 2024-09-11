@@ -2,6 +2,7 @@
 
 namespace Pionia\Pionia\Http\Switches;
 
+use Exception;
 use Pionia\Pionia\Contracts\ApplicationContract;
 use Pionia\Pionia\Exceptions\UserUnauthenticatedException;
 use Pionia\Pionia\Exceptions\UserUnauthorizedException;
@@ -9,6 +10,7 @@ use Pionia\Pionia\Base\PioniaApplication;
 use Pionia\Pionia\Contracts\BaseSwitchContract;
 use Pionia\Pionia\Http\Request\Request;
 use Pionia\Pionia\Http\Response\BaseResponse;
+use Pionia\Pionia\Utils\CachedEndpoints;
 use ReflectionException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Throwable;
@@ -28,6 +30,7 @@ use Throwable;
  */
 abstract class BaseApiServiceSwitch implements BaseSwitchContract
 {
+    use CachedEndpoints;
     /**
      * This is the application object
      * @var PioniaApplication
@@ -44,6 +47,17 @@ abstract class BaseApiServiceSwitch implements BaseSwitchContract
      */
     private static function processServices(Request $request, ApplicationContract $app): BaseResponse
     {
+        // if we had the response cached, we return it
+        try {
+            $cachedResponse = self::cacheResponse($request);
+            if ($cachedResponse) {
+                return $cachedResponse;
+            }
+        } catch (Exception $e) {
+            logger()->warning($e);
+            // we have to catch this exception because we don't want to stop the request processing
+        }
+
         $data = $request->getData();
 
         $service = $data->getOrThrow('service', new ResourceNotFoundException("Service not defined in request data"));

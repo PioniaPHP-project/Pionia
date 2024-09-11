@@ -6,9 +6,13 @@ use Closure;
 use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
+use DIRECTORIES;
 use Exception;
 use Pionia\Pionia\Auth\AuthenticationChain;
 use Pionia\Pionia\Base\Events\PioniaConsoleStarted;
+use Pionia\Pionia\Cache\Cacheable;
+use Pionia\Pionia\Cache\PioniaCache;
+use Pionia\Pionia\Cache\PioniaCacheAdaptor;
 use Pionia\Pionia\Console\BaseCommand;
 use Pionia\Pionia\Contracts\ApplicationContract;
 use Pionia\Pionia\Cors\PioniaCors;
@@ -31,6 +35,7 @@ use Pionia\Pionia\Utils\PioniaApplicationType;
 use Pionia\Pionia\Utils\Support;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Process\PhpExecutableFinder;
 
@@ -43,6 +48,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         PathsTrait,
         AppDatabaseHelper,
         BuiltInServices,
+        Cacheable,
         Containable;
 
     /**
@@ -110,6 +116,8 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      */
     protected array $bootingCallbacks = [];
 
+    protected ?PioniaCacheAdaptor $cacheAdaptor = null;
+
     /**
      * PioniaApplication constructor.
      */
@@ -118,6 +126,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         if (!defined('BASEPATH')) {
             define('BASEPATH', $applicationPath);
         }
+        $this->context = new Container();
 
         $this->booted = false;
 
@@ -125,42 +134,92 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
 
         $this->env = new Arrayable();
 
-        $this->context = $container ?? new Container();
-
-        $this->dispatcher = $dispatcher ?? $this->getSilently(PioniaEventDispatcher::class) ?? new PioniaEventDispatcher();
+        $this->dispatcher = $this->getSilently(PioniaEventDispatcher::class) ?? new PioniaEventDispatcher();
 
         // we set the env to the context
         $this->context->set('aliases', arr([]));
+
         $this->builtinDirectories()->each(function ($value, $key){
             $this->addAlias($key, $this->appRoot($value));
         });
         $this->contextArrAdd('aliases', $this->builtinNameSpaces()->all());
         // if we passed the environment, we use it, otherwise we get it from the context
-        $this->envResolver = $this->getSilently(EnvResolver::class) ?? new EnvResolver($this->getDirFor(\DIRECTORIES::ENVIRONMENT_DIR->name));
+        $this->envResolver = $this->getSilently(EnvResolver::class) ?? new EnvResolver($this->getDirFor(DIRECTORIES::ENVIRONMENT_DIR->name));
         $this->env = $this->envResolver->getEnv();
         $this->context->set('env', $this->env);
 
-
-        $logger = $this->getSilently(LoggerInterface::class);
-
-        if (!$logger) {
-            $logger = new PioniaLogger($this->context);
-            $this->context->set(LoggerInterface::class, $logger);
-        }
-
-        $this->setLogger($logger);
+        $this->resolveLogger();
 
         // we set the env to the context
         $this->context->set(EnvResolver::class, $this->env);
         // we populate the app name from the env or set it to the default
         $this->context->set('APP_NAME', $this->env->get("APP_NAME") ?? $this->appName);
-
         // we populate the base directory
         $this->context->set('BASE_DIR', $this->appRoot());
 
         // we populate the logs directory
         $this->context->set('LOGS_DIR', $this->appRoot($this->env->get('LOGS_DIR') ?? 'logs'));
     }
+
+    /**
+     * Set up the context logger
+     * @return $this
+     */
+    private function resolveLogger(): static
+    {
+        $logger = $this->getSilently(LoggerInterface::class);
+
+        if (!$logger) {
+            $logger = new PioniaLogger($this->context);
+            $this->context->set(LoggerInterface::class, $logger);
+        }
+        $this->logger = $logger;
+        return $this;
+    }
+
+    /**
+     * Sets the Cache Adaptor the app shall use hence-forth
+     * Defaults to a filesystem adapter
+     *
+     * All Symfony cache adaptors are supported, even a custom one can be added as long
+     * as it supports the PSR-16 CacheInterface
+     *
+     * The callable receives both the application and the env as arguments
+     * @param callable $cacheAdaptorResolver
+     * @return $this
+     */
+    public function withCacheAdaptor(callable $cacheAdaptorResolver): static
+    {
+        $adaptor = $cacheAdaptorResolver($this, $this->env);
+        if ($adaptor instanceof PioniaCacheAdaptor) {
+            $this->cacheAdaptor = $adaptor;
+        }
+        return $this;
+    }
+
+
+    /**
+     * Set the default caching adaptor to use
+     */
+    private function setDefaultCachingAdaptor(): void
+    {
+        // at this point, we can set the cache instance
+        if (!$this->cacheAdaptor) {
+            $this->context->set(PioniaCacheAdaptor::class, function () {
+                return new FilesystemAdapter(
+                    '', 30,
+                    $this->alias(DIRECTORIES::CACHE_DIR->name)
+                );
+            });
+        } else {
+            $this->context->set(PioniaCacheAdaptor::class, $this->cacheAdaptor);
+        }
+
+        $this->context->set(PioniaCache::class, function () {
+            return new PioniaCache($this->getSilently(PioniaCacheAdaptor::class));
+        });
+    }
+
 
 
     /**
@@ -182,10 +241,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
              } elseif ($this->contextHas($key)){
                  return $this->getSilently($key);
              }
-
-             if ($default){
-                 return $default;
-             }
+             return $default;
         }
         return arr($_ENV);
     }
@@ -218,8 +274,11 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             }
 
             $this->context->set(PioniaApplicationType::class, $this->applicationType);
-
             $this->callBootingCallbacks();
+
+            $this->setDefaultCachingAdaptor();
+
+            $this->cacheInstance = $this->getSilently(PioniaCache::class);
 
             // this is where the actual running of the application happens
             $this->bootstrapMiddlewares();
@@ -231,6 +290,8 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             if ($this->applicationType !== PioniaApplicationType::TEST) {
                 $this->attemptToConnectToAnyDbAvailable();
             }
+
+            $this->withEndPoints();
 
             $this->booted = true;
 
@@ -255,20 +316,23 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      */
     private function bootstrapCommands(): void
     {
-        $commands = new Arrayable();
-        // collect all the middlewares from the environment and the context
-//        $this->env->has('commands') && $commands->merge($this->env->get('commands'));
-        env()->has("commands") && $commands->merge(env('commands'));
+        if ($this->hasCache('app_commands', true)) {
+            $commands = Arrayable::toArrayable($this->getCache('app_commands', true));
+        } else {
+            $commands = new Arrayable();
+            // collect all the middlewares from the environment and the context
+            env()->has("commands") && $commands->merge(env('commands'));
 
-        if ($scoped = $this->getSilently('commands')) {
-            if ($scoped instanceof Arrayable) {
-                $commands->merge($scoped->all());
-            } elseif (is_array($scoped)) {
-                $commands->merge($scoped);
+            if ($scoped = $this->getSilently('commands')) {
+                if ($scoped instanceof Arrayable) {
+                    $commands->merge($scoped->all());
+                } elseif (is_array($scoped)) {
+                    $commands->merge($scoped);
+                }
             }
-        }
 
-        $commands->merge($this->builtInCommands()->all());
+            $commands->merge($this->builtInCommands()->all());
+        }
 
         $this->context->set('commands', $commands);
     }
@@ -277,20 +341,25 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      */
     private function bootstrapMiddlewares(): void
     {
-        $middlewares = new Arrayable();
-        // collect all the middlewares from the environment and the context
+        if ($this->hasCache('app_middlewares', true)) {
+            $middlewares = Arrayable::toArrayable($this->getCache('app_middlewares', true));
+        } else {
+            $middlewares = new Arrayable();
+            // collect all the middlewares from the environment and the context
 //        $this->env->has('middlewares') && $middlewares->merge($this->env->get('middlewares'));
-        env()->has("middlewares") && $middlewares->merge(env('middlewares'));
+            env()->has("middlewares") && $middlewares->merge(env('middlewares'));
 
-        $scopedMiddlewares = $this->getOrDefault('middlewares', []);
+            $scopedMiddlewares = $this->getOrDefault('middlewares', []);
 
-        if ($scopedMiddlewares instanceof Arrayable) {
-            $middlewares->merge($scopedMiddlewares->all());
-        } elseif (is_array($scopedMiddlewares)) {
-            $middlewares->merge($scopedMiddlewares);
+            if ($scopedMiddlewares instanceof Arrayable) {
+                $middlewares->merge($scopedMiddlewares->all());
+            } elseif (is_array($scopedMiddlewares)) {
+                $middlewares->merge($scopedMiddlewares);
+            }
+
+            $middlewares->merge($this->builtInMiddlewares()->all());
+            $this->setCache('app_middlewares', $middlewares->all(), null, true);
         }
-
-        $middlewares->merge($this->builtInMiddlewares()->all());
 
         $this->context->set('middlewares', $middlewares);
 
@@ -301,24 +370,30 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
 
 
     /**
-     * Adds the collected middlewares to the context
+     * Adds the collected auths to the context
+     * Can also cache the authentications for future use
      * @return void
      */
     private function bootstrapAuthentications(): void
     {
-        $authentications = new Arrayable();
-        // collect all the middlewares from the environment and the context
-        $this->env->has('authentications') && $authentications->merge($this->env->get('authentications'));
+        if ($this->hasCache('app_authentications', true)) {
+            $authentications = Arrayable::toArrayable($this->getCache('app_authentications', true));
+        } else {
+            $authentications = new Arrayable();
+            // collect all the middlewares from the environment and the context
+            $this->env->has('authentications') && $authentications->merge($this->env->get('authentications'));
 
-        $scoped = $this->getOrDefault('authentications', []);
+            $scoped = $this->getOrDefault('authentications', []);
 
-        if ($scoped instanceof Arrayable) {
-            $authentications->merge($scoped->all());
-        } elseif (is_array($scoped)) {
-            $authentications->merge($scoped);
+            if ($scoped instanceof Arrayable) {
+                $authentications->merge($scoped->all());
+            } elseif (is_array($scoped)) {
+                $authentications->merge($scoped);
+            }
+            $authentications->merge($this->builtInAuthentications()->all());
+            // cache for future calls
+            $this->setCache('app_authentications', $authentications->all(), null, true);
         }
-
-        $authentications->merge($this->builtInAuthentications()->all());
 
         $this->context->set('authentications', $authentications);
 
@@ -367,10 +442,12 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         $this->logger?->$format($message, $data);
     }
 
-    public function bootConsole(?string $name = 'Pionia Framework'): PioniaApplication
+    /**
+     * @throws Exception
+     */
+    public function bootConsole(?string $name = 'Pionia Framework'): int
     {
-
-        $this->applicationType = PioniaApplicationType::CONSOLE;
+        $this->powerUp(PioniaApplicationType::CONSOLE);
         // we set the auto exit to false
         $this->setAutoExit(false);
 
@@ -380,16 +457,22 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
 
         $this->prepareConsole();
 
-        return $this;
+        return $this->run();
     }
 
 
-    public function withEndPoints(PioniaRouter $router): PioniaApplication
+    public function withEndPoints(): ?PioniaApplication
     {
+        if ($this->hasCache("app_routes", true)) {
+            $routes = $this->getCache("app_routes", true);
+            $router = new PioniaRouter($routes);
+        } else {
+            $router = (require $this->alias(DIRECTORIES::BOOTSTRAP_DIR->name) . DIRECTORY_SEPARATOR . 'routes.php');
+            $this->setCache("app_routes", $router->getRoutes(), null, true);
+        }
         $this->context->set(PioniaRouter::class, $router);
         return $this;
     }
-
     /**
      * Add a single middleware to the chain
      * @param string $middleware
@@ -406,15 +489,21 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         $middlewares = $this->getSilently(MiddlewareChain::class);
         $middlewares->add($middleware);
         $this->context->set(MiddlewareChain::class, $middlewares);
+
+        // we need to also add it to the cached middlewares
+        $this->hasCache('app_middlewares', true) && $this->deleteCache('app_middlewares', true);
+
+        $this->setCache('app_middlewares', $middlewares->all(), null, true);
         return $this;
     }
 
     /**
-     * Add middlewares to the application, if a string is passed, it is assumed to be a path to a file relative to the base directory
+     * When this is used, the closure passed must return a MiddlewareChain instance
+     * Middlewares in this chain will be added to the context and will be the only middlewares used
      * @param Closure $closure
      * @return $this
      */
-    public function withMiddlewares(Closure $closure): static
+    public function middlewareChain(Closure $closure): static
     {
         $middlewares = $closure($this);
         if (!$middlewares instanceof MiddlewareChain) {
@@ -422,7 +511,14 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             return $this;
         }
         $this->context->set(MiddlewareChain::class, $middlewares);
+
         $this->context->set('middlewares', $middlewares->all());
+
+        // we need to also add it to the cached middlewares
+        $this->hasCache('app_middlewares', true) && $this->deleteCache('app_middlewares', true);
+
+        $this->setCache('app_middlewares', $middlewares->all(), null, true);
+
         return $this;
     }
 
@@ -434,7 +530,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         if (! defined('PIONIA_BINARY')) {
             define('PIONIA_BINARY', 'pionia');
         }
-        $commands = $this->getOrDefault('commands', new Arrayable());
+        $commands = $this->hasCache('app_commands', true) ? Arrayable::toArrayable($this->getCache('app_commands', true)) : $this->getOrDefault('commands', new Arrayable());
 
         if ($commands->isFilled()) {
             $commands->each(function (BaseCommand | string $command, $key) {
@@ -496,7 +592,8 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     public function handleRequest(): Response
     {
         $request = Request::createFromGlobals();
-        return $this->context
+        return $this->
+            powerUp()
             ->make(WebKernel::class, ['application' => $this])
             ->handle($request);
     }
@@ -563,5 +660,44 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         return $aliases->get($aliasName, $default);
     }
 
+    /**
+     * Build an entry of the container by its name.
+     *
+     * This method behave like resolve() except resolves the entry again every time.
+     * For example if the entry is a class then a new instance will be created each time.
+     *
+     * This method makes the container behave like a factory.
+     *
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
+    public function make(string $name, array $parameters = []): mixed
+    {
+        return $this->context->make($name, $parameters);
+    }
+
+    /**
+     * Get any entry from the container by its id
+     *
+     * This is an acronym of `getOrFail` which throws an exception if the entry is not found
+     * @see getOrFail()
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
+    public function resolve(string $id)
+    {
+        return $this->context->get($id);
+    }
+
+    /**
+     * Returns a registered command by name or alias.
+     *
+     * @param string $name
+     * @return BaseCommand The command instance associated with the given name or alias
+     */
+    public function get(string $name): BaseCommand
+    {
+        return parent::get($name);
+    }
 
 }

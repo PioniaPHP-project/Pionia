@@ -28,6 +28,7 @@
         "phpunit/phpunit": "^10.0",
         "php": ">=8.0"
     },
+    "bin": ["example/pionia"],
     "require": {
         "ext-json": "*",
         "ext-pdo": "*",
@@ -47,10 +48,16 @@
         "symfony/event-dispatcher": "^7.1",
         "pionia/porm": "^1.0",
         "nesbot/carbon": "^3.8",
-        "symfony/uid": "^7.1"
+        "symfony/uid": "^7.1",
+        "psr/cache": "^3.0",
+        "psr/simple-cache" : "^1.0",
+        "symfony/cache": "^7.1"
     },
     "provide": {
         "psr/container-implementation": "1.0"
+    },
+    "suggest": {
+        "symfony/cache": "If you intend to optin for caching"
     },
     "scripts": {
         "test": "phpunit",

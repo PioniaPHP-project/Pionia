@@ -2,6 +2,8 @@
 
 namespace Pionia\Pionia\Http\Response;
 
+use Pionia\Pionia\Cache\Cacheable;
+use Pionia\Pionia\Cache\PioniaCache;
 use Pionia\Pionia\Utils\Arrayable;
 
 /**
@@ -27,12 +29,10 @@ use Pionia\Pionia\Utils\Arrayable;
  */
 class BaseResponse
 {
-
     private int $returnCode = 0;
     private string | null $returnMessage = null;
     private mixed $returnData;
     private mixed $extraData = null;
-
     private string|null $prettyResponse = null;
 
     private array | null $response = null;
@@ -56,9 +56,9 @@ class BaseResponse
      * All actions in Pionia must return this as the response. This is how Pionia ensures a uniform response format
      *
      * @param int|null $code - the return code to the client side. Defaults to 0 for success
-     * @param string|null $message
-     * @param mixed|null $data
-     * @param array|string|null $extraData
+     * @param string|null $message - the message to send to the client side
+     * @param mixed|null $data - the data to send to the client side
+     * @param array|string|null $extraData - any other data to send to the client side
      * @return BaseResponse
      */
     public static function jsonResponse(?int $code = 0, string|null $message = null, mixed $data = null, array | string | null $extraData = null): static

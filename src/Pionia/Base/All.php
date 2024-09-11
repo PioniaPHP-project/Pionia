@@ -29,6 +29,8 @@ enum DIRECTORIES {
     case BOOTSTRAP_DIR;
     case VENDOR_DIR;
     case PUBLIC_DIR;
+    case CACHE_DIR;
+    case STORAGE_DIR;
 }
 
 // register here all builtins. These can be commands, Middleware, Authentications, etc.
@@ -61,6 +63,8 @@ if (!function_exists('allBuiltins')) {
                 DIRECTORIES::BOOTSTRAP_DIR->name => 'bootstrap',
                 DIRECTORIES::VENDOR_DIR->name => 'vendor',
                 DIRECTORIES::PUBLIC_DIR->name => 'public',
+                DIRECTORIES::CACHE_DIR->name => 'storage/cache',
+                DIRECTORIES::STORAGE_DIR->name => 'storage',
             ],
             'namespaces' => [
                 NAMESPACES::AUTHENTICATION_NS->name =>'Application\Authentications',
