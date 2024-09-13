@@ -1,8 +1,8 @@
 <?php
 
-namespace Pionia\Pionia\Validations;
+namespace Pionia\Validations;
 
-use Pionia\Pionia\Collections\Arrayable;
+use Pionia\Collections\Arrayable;
 
 class Validator
 {

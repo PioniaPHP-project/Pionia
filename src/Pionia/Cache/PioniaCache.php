@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Cache;
+namespace Pionia\Cache;
 
 use Symfony\Component\Cache\Psr16Cache;
 

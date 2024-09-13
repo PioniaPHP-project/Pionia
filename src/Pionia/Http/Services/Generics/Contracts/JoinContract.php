@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services\Generics\Contracts;
+namespace Pionia\Http\Services\Generics\Contracts;
 
 use Exception;
-use Pionia\Pionia\Http\Services\JoinType;
+use Pionia\Http\Services\JoinType;
 use Porm\Database\Builders\Join;
 use Porm\Porm;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services\Generics;
+namespace Pionia\Http\Services\Generics;
 
 
-use Pionia\Pionia\Http\Services\Generics\Mixins\ListMixin;
-use Pionia\Pionia\Http\Services\Generics\Mixins\RandomMixin;
-use Pionia\Pionia\Http\Services\Generics\Mixins\RetrieveMixin;
-use Pionia\Pionia\Http\Services\GenericService;
+use Pionia\Http\Services\Generics\Mixins\ListMixin;
+use Pionia\Http\Services\Generics\Mixins\RandomMixin;
+use Pionia\Http\Services\Generics\Mixins\RetrieveMixin;
+use Pionia\Http\Services\GenericService;
 
 /**
  * Adds the retrieve and create actions to the service.

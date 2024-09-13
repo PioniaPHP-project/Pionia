@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Auth;
+namespace Pionia\Auth;
 
 /**
  * This class is responsible for handling all session related operations

@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\Utils;
+namespace Pionia\Utils;
 
 use Doctrine\Inflector\Inflector;
 use Doctrine\Inflector\InflectorFactory;
-use Pionia\Pionia\Base\PioniaApplication;
+use Pionia\Base\PioniaApplication;
 use ReflectionClass;
 
 class Support

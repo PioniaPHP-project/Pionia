@@ -1,11 +1,11 @@
 <?php
 
-namespace Pionia\Pionia\Http\Request;
+namespace Pionia\Http\Request;
 
-use Pionia\Pionia\Auth\ContextUserObject;
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Collections\Arrayable;
-use Pionia\Pionia\Utils\Microable;
+use Pionia\Auth\ContextUserObject;
+use Pionia\Base\PioniaApplication;
+use Pionia\Collections\Arrayable;
+use Pionia\Utils\Microable;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 

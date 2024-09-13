@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Exceptions;
+namespace Pionia\Exceptions;
 /**
  * This exception is thrown when an error occurs during database connection establishment.
  */

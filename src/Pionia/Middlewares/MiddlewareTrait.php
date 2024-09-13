@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\Middlewares;
+namespace Pionia\Middlewares;
 
-use Pionia\Pionia\Collections\Arrayable;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Http\Response\Response;
+use Pionia\Collections\Arrayable;
+use Pionia\Http\Request\Request;
+use Pionia\Http\Response\Response;
 
 trait MiddlewareTrait
 {

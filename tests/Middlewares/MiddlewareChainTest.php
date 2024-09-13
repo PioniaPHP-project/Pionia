@@ -2,10 +2,10 @@
 
 namespace Middlewares;
 
-use Pionia\Pionia\Middlewares\MiddlewareChain;
-use Pionia\Pionia\TestSuite\Mocks\MiddlewareMock;
-use Pionia\Pionia\TestSuite\Mocks\MiddlewareMock2;
-use Pionia\Pionia\TestSuite\PioniaTestCase;
+use Pionia\Middlewares\MiddlewareChain;
+use Pionia\TestSuite\Mocks\MiddlewareMock;
+use Pionia\TestSuite\Mocks\MiddlewareMock2;
+use Pionia\TestSuite\PioniaTestCase;
 
 class MiddlewareChainTest extends PioniaTestCase
 {

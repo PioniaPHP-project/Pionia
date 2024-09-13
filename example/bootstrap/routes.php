@@ -2,7 +2,7 @@
 require __DIR__ . '/../../vendor/autoload.php';
 
 use Application\Switches\V1Switch;
-use Pionia\Pionia\Http\Routing\PioniaRouter;
+use Pionia\Http\Routing\PioniaRouter;
 
 $router = new PioniaRouter();
 

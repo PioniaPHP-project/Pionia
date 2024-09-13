@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\Utils;
+namespace Pionia\Utils;
 
-use Pionia\Pionia\Cache\PioniaCache;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Http\Response\BaseResponse;
+use Pionia\Cache\PioniaCache;
+use Pionia\Http\Request\Request;
+use Pionia\Http\Response\BaseResponse;
 /**
  * Checks and returns cached moonlight endpoints.
  */

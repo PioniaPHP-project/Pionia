@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services\Generics\Contracts;
+namespace Pionia\Http\Services\Generics\Contracts;
 
 use Exception;
 use Symfony\Component\Filesystem\Filesystem;

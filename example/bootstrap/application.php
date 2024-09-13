@@ -1,8 +1,8 @@
 <?php
 
-require __DIR__ . '/../../vendor/autoload.php';
+use Pionia\Base\PioniaApplication;
 
-use Pionia\Pionia\Base\PioniaApplication;
+include __DIR__ . '/../../vendor/autoload.php';
 
 $appPath = dirname(__DIR__);
 

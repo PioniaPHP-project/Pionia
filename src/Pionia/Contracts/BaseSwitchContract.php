@@ -1,8 +1,8 @@
 <?php
 
-namespace Pionia\Pionia\Contracts;
+namespace Pionia\Contracts;
 
-use Pionia\Pionia\Collections\Arrayable;
+use Pionia\Collections\Arrayable;
 
 interface BaseSwitchContract
 {

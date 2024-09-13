@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Cache;
+namespace Pionia\Cache;
 
 use Exception;
-use Pionia\Pionia\Utils\Support;
+use Pionia\Utils\Support;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\InvalidArgumentException;
 use function DI\string;

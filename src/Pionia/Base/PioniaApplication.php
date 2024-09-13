@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Base;
+namespace Pionia\Base;
 
 use Closure;
 use DI\Container;
@@ -8,34 +8,35 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use DIRECTORIES;
 use Exception;
-use Pionia\Pionia\Auth\AuthenticationChain;
-use Pionia\Pionia\Base\Events\PioniaConsoleStarted;
-use Pionia\Pionia\Cache\Cacheable;
-use Pionia\Pionia\Cache\PioniaCache;
-use Pionia\Pionia\Cache\PioniaCacheAdaptor;
-use Pionia\Pionia\Collections\Arrayable;
-use Pionia\Pionia\Console\BaseCommand;
-use Pionia\Pionia\Contracts\ApplicationContract;
-use Pionia\Pionia\Cors\PioniaCors;
-use Pionia\Pionia\Events\PioniaEventDispatcher;
-use Pionia\Pionia\Http\Base\WebKernel;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Http\Response\Response;
-use Pionia\Pionia\Http\Routing\PioniaRouter;
-use Pionia\Pionia\Logging\PioniaLogger;
-use Pionia\Pionia\Middlewares\MiddlewareChain;
-use Pionia\Pionia\Utils\AppDatabaseHelper;
-use Pionia\Pionia\Utils\AppHelpersTrait;
-use Pionia\Pionia\Utils\ApplicationLifecycleHooks;
-use Pionia\Pionia\Utils\Containable;
-use Pionia\Pionia\Utils\Microable;
-use Pionia\Pionia\Utils\PathsTrait;
-use Pionia\Pionia\Utils\PioniaApplicationType;
-use Pionia\Pionia\Utils\Support;
+use Pionia\Auth\AuthenticationChain;
+use Pionia\Base\Events\PioniaConsoleStarted;
+use Pionia\Cache\Cacheable;
+use Pionia\Cache\PioniaCache;
+use Pionia\Cache\PioniaCacheAdaptor;
+use Pionia\Collections\Arrayable;
+use Pionia\Console\BaseCommand;
+use Pionia\Contracts\ApplicationContract;
+use Pionia\Cors\PioniaCors;
+use Pionia\Events\PioniaEventDispatcher;
+use Pionia\Http\Base\WebKernel;
+use Pionia\Http\Request\Request;
+use Pionia\Http\Response\Response;
+use Pionia\Http\Routing\PioniaRouter;
+use Pionia\Logging\PioniaLogger;
+use Pionia\Middlewares\MiddlewareChain;
+use Pionia\Utils\AppDatabaseHelper;
+use Pionia\Utils\AppHelpersTrait;
+use Pionia\Utils\ApplicationLifecycleHooks;
+use Pionia\Utils\Containable;
+use Pionia\Utils\Microable;
+use Pionia\Utils\PathsTrait;
+use Pionia\Utils\PioniaApplicationType;
+use Pionia\Utils\Support;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Process\PhpExecutableFinder;
 
 
@@ -242,7 +243,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
              }
              return $default;
         }
-        return arr($_ENV);
+        return arr($_ENV)->merge($_SERVER);
     }
 
     /**
@@ -286,10 +287,6 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             $this->registerCorsInstance();
             $this->registerBaseRoutesInstance();
 
-            if ($this->applicationType !== PioniaApplicationType::TEST) {
-                $this->attemptToConnectToAnyDbAvailable();
-            }
-
             $this->withEndPoints();
 
             $this->booted = true;
@@ -308,6 +305,12 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             }
             $this->shutdown();
         }
+    }
+
+    public function addQueryToPool(string $identifier, string $query): static
+    {
+        $this->contextArrAdd('query_pool', [$identifier => $query]);
+        return $this;
     }
 
     /**
@@ -686,16 +689,5 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     public function resolve(string $id)
     {
         return $this->context->get($id);
-    }
-
-    /**
-     * Returns a registered command by name or alias.
-     *
-     * @param string $name
-     * @return BaseCommand The command instance associated with the given name or alias
-     */
-    public function get(string $name): BaseCommand
-    {
-        return parent::get($name);
     }
 }

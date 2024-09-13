@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services\Generics\Mixins;
+namespace Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\BaseResponse;
 use Porm\exceptions\BaseDatabaseException;
 
 /**

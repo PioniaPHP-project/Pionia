@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\Utils;
+namespace Pionia\Utils;
 
 use Closure;
-use Pionia\Pionia\Collections\HighOrderTapProxy;
-use Pionia\Pionia\Collections\HighOrderWhenProxy;
+use Pionia\Collections\HighOrderTapProxy;
+use Pionia\Collections\HighOrderWhenProxy;
 
 trait Conditionable
 {

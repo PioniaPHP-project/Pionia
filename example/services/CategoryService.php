@@ -2,9 +2,9 @@
 
 namespace Application\Services;
 
-use Pionia\Pionia\Http\Response\BaseResponse;
-use Pionia\Pionia\Http\Services\Generics\RetrieveListCreateService;
-use Pionia\Pionia\Http\Services\JoinType;
+use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Services\Generics\RetrieveListCreateService;
+use Pionia\Http\Services\JoinType;
 
 class CategoryService extends RetrieveListCreateService
 {

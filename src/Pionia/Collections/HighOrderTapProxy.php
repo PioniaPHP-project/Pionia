@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Collections;
+namespace Pionia\Collections;
 
 class HighOrderTapProxy
 {

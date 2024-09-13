@@ -1,17 +1,17 @@
 <?php
 
-namespace Pionia\Pionia\Auth;
+namespace Pionia\Auth;
 
-use Pionia\Pionia\Auth\Events\PostAuthRunEvent;
-use Pionia\Pionia\Auth\Events\PreAuthRunEvent;
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Collections\Arrayable;
-use Pionia\Pionia\Contracts\AuthenticationChainContract;
-use Pionia\Pionia\Contracts\AuthenticationContract;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Utils\Containable;
-use Pionia\Pionia\Utils\Microable;
-use Pionia\Pionia\Utils\Support;
+use Pionia\Auth\Events\PostAuthRunEvent;
+use Pionia\Auth\Events\PreAuthRunEvent;
+use Pionia\Base\PioniaApplication;
+use Pionia\Collections\Arrayable;
+use Pionia\Contracts\AuthenticationChainContract;
+use Pionia\Contracts\AuthenticationContract;
+use Pionia\Http\Request\Request;
+use Pionia\Utils\Containable;
+use Pionia\Utils\Microable;
+use Pionia\Utils\Support;
 
 /**
  * Authentication chain.

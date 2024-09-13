@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Logging;
+namespace Pionia\Logging;
 
 use DI\Container;
 use Monolog\Formatter\FormatterInterface;
@@ -11,10 +11,11 @@ use Monolog\Formatter\ScalarFormatter;
 use Monolog\Formatter\SyslogFormatter;
 use Monolog\Handler\ErrorLogHandler;
 use Monolog\Logger;
-use Pionia\Pionia\Base\EnvResolver;
-use Pionia\Pionia\Collections\Arrayable;
-use Pionia\Pionia\Utils\Containable;
+use Pionia\Base\EnvResolver;
+use Pionia\Collections\Arrayable;
+use Pionia\Utils\Containable;
 use Psr\Log\LoggerInterface;
+use Stringable;
 use Symfony\Component\Filesystem\Filesystem;
 
 // The StreamHandler sends log messages to a file on your disk
@@ -259,55 +260,55 @@ class PioniaLogger implements LoggerInterface
         return $data;
     }
 
-    public function emergency(\Stringable|string $message, array $context = []): void
+    public function emergency(Stringable|string $message, array $context = []): void
     {
         $context = $this->hideInLogs($context);
         count($context) > 0 ? $this->baseLogger->emergency($message, $context) : $this->baseLogger->emergency($message);
     }
 
-    public function alert(\Stringable|string $message, array $context = []): void
+    public function alert(Stringable|string $message, array $context = []): void
     {
         $context = $this->hideInLogs($context);
         count($context) > 0 ? $this->baseLogger->alert($message, $context) : $this->baseLogger->alert($message);
     }
 
-    public function critical(\Stringable|string $message, array $context = []): void
+    public function critical(Stringable|string $message, array $context = []): void
     {
         $context = $this->hideInLogs($context);
         count($context) > 0 ? $this->baseLogger->critical($message, $context) : $this->baseLogger->critical($message);
     }
 
-    public function error(\Stringable|string $message, array $context = []): void
+    public function error(Stringable|string $message, array $context = []): void
     {
         $context = $this->hideInLogs($context);
         count($context) > 0 ? $this->baseLogger->error($message, $context) : $this->baseLogger->error($message);
     }
 
-    public function warning(\Stringable|string $message, array $context = []): void
+    public function warning(Stringable|string $message, array $context = []): void
     {
         $context = $this->hideInLogs($context);
         count($context) > 0 ? $this->baseLogger->warning($message, $context) : $this->baseLogger->warning($message);
     }
 
-    public function notice(\Stringable|string $message, array $context = []): void
+    public function notice(Stringable|string $message, array $context = []): void
     {
         $context = $this->hideInLogs($context);
         count($context) > 0 ? $this->baseLogger->notice($message, $context) : $this->baseLogger->notice($message);
     }
 
-    public function info(\Stringable|string $message, array $context = []): void
+    public function info(Stringable|string $message, array $context = []): void
     {
         $context = $this->hideInLogs($context);
         count($context) > 0 ? $this->baseLogger->info($message, $context) : $this->baseLogger->info($message);
     }
 
-    public function debug(\Stringable|string $message, array $context = []): void
+    public function debug(Stringable|string $message, array $context = []): void
     {
         $context = $this->hideInLogs($context);
         count($context) > 0 ? $this->baseLogger->debug($message, $context) : $this->baseLogger->debug($message);
     }
 
-    public function log($level, \Stringable|string $message, array $context = []): void
+    public function log($level, Stringable|string $message, array $context = []): void
     {
         $context = $this->hideInLogs($context);
         count($context) > 0 ? $this->baseLogger->log($level, $message, $context) : $this->baseLogger->log($level, $message);

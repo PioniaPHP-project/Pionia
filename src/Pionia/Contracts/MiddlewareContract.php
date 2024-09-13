@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\Contracts;
+namespace Pionia\Contracts;
 
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Http\Response\Response;
-use Pionia\Pionia\Middlewares\MiddlewareChain;
+use Pionia\Http\Request\Request;
+use Pionia\Http\Response\Response;
+use Pionia\Middlewares\MiddlewareChain;
 
 interface MiddlewareContract
 {

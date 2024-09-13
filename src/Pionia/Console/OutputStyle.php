@@ -1,8 +1,8 @@
 <?php
 
-namespace Pionia\Pionia\Console;
+namespace Pionia\Console;
 
-use Pionia\Pionia\Contracts\NewLineAware;
+use Pionia\Contracts\NewLineAware;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;

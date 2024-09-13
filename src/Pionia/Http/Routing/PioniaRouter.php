@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\Http\Routing;
+namespace Pionia\Http\Routing;
 
 use Exception;
-use Pionia\Pionia\Http\Switches\BaseApiServiceSwitch;
-use Pionia\Pionia\Utils\Support;
+use Pionia\Http\Switches\BaseApiServiceSwitch;
+use Pionia\Utils\Support;
 use Symfony\Component\Routing\Route;
 
 

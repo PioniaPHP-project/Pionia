@@ -1,14 +1,14 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services;
+namespace Pionia\Http\Services;
 
 use Exception;
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Http\Services\Generics\Contracts\CrudContract;
-use Pionia\Pionia\Http\Services\Generics\Contracts\EventsContract;
-use Pionia\Pionia\Http\Services\Generics\Contracts\JoinContract;
-use Pionia\Pionia\Http\Services\Generics\Contracts\UploadsContract;
+use Pionia\Base\PioniaApplication;
+use Pionia\Http\Request\Request;
+use Pionia\Http\Services\Generics\Contracts\CrudContract;
+use Pionia\Http\Services\Generics\Contracts\EventsContract;
+use Pionia\Http\Services\Generics\Contracts\JoinContract;
+use Pionia\Http\Services\Generics\Contracts\UploadsContract;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 abstract class GenericService extends Service

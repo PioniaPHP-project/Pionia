@@ -1,12 +1,12 @@
 <?php
 
-namespace Pionia\Pionia\Utils;
+namespace Pionia\Utils;
 
 use Carbon\CarbonInterval;
 use DateInterval;
 use DateTimeInterface;
 use Exception;
-use Pionia\Pionia\Collections\Carbon;
+use Pionia\Collections\Carbon;
 
 trait InteractsWithTime
 {

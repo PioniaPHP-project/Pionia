@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Builtins\Commands;
+namespace Pionia\Builtins\Commands;
 
-use Pionia\Pionia\Console\BaseCommand;
-use Pionia\Pionia\Utils\InteractsWithTime;
+use Pionia\Console\BaseCommand;
+use Pionia\Utils\InteractsWithTime;
 use Symfony\Component\Console\Input\InputOption;
 
 /**

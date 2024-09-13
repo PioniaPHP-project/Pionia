@@ -1,16 +1,16 @@
 <?php
 
-namespace Pionia\Pionia\Cors;
+namespace Pionia\Cors;
 
 
 use DI\DependencyException;
 use DI\NotFoundException;
 use Fruitcake\Cors\CorsService;
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Collections\Arrayable;
-use Pionia\Pionia\Contracts\CorsContract;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Http\Response\Response;
+use Pionia\Base\PioniaApplication;
+use Pionia\Collections\Arrayable;
+use Pionia\Contracts\CorsContract;
+use Pionia\Http\Request\Request;
+use Pionia\Http\Response\Response;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 

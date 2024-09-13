@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Console\Concerns;
+namespace Pionia\Console\Concerns;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\ExceptionInterface;

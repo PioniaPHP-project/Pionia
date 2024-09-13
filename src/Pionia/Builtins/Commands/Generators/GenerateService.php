@@ -1,16 +1,16 @@
 <?php
 
-namespace Pionia\Pionia\Builtins\Commands\Generators;
+namespace Pionia\Builtins\Commands\Generators;
 
 use NAMESPACES;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
-use Pionia\Pionia\Collections\Arrayable;
-use Pionia\Pionia\Console\BaseCommand;
-use Pionia\Pionia\Http\Response\BaseResponse;
-use Pionia\Pionia\Http\Services\Service;
-use Pionia\Pionia\Utils\Support;
+use Pionia\Collections\Arrayable;
+use Pionia\Console\BaseCommand;
+use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Services\Service;
+use Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Filesystem\Filesystem;
@@ -107,17 +107,17 @@ class GenerateService extends BaseCommand
         $file->addComment("Remember to register this service in any of your available switches.");
 
         if ($serviceType === 'Basic'){
-            $namespace->addUse('Pionia\Pionia\Http\Services\Service');
-            $namespace->addUse('Pionia\Pionia\Http\Response\BaseResponse');
+            $namespace->addUse('Pionia\Http\Services\Service');
+            $namespace->addUse('Pionia\Http\Response\BaseResponse');
             $namespace->addUse('Symfony\Component\HttpFoundation\FileBag');
-            $namespace->addUse('Pionia\Pionia\Collections\Arrayable');
+            $namespace->addUse('Pionia\Collections\Arrayable');
         } else {
             // import the specific generic service the developer extended
             $gs = $actions->first() ?? 'UniversalGenericService';
             if ($gs === 'GenericService') {
-                $namespace->addUse('Pionia\Pionia\Http\Services\GenericService');
+                $namespace->addUse('Pionia\Http\Services\GenericService');
             } else {
-                $namespace->addUse('Pionia\Pionia\Http\Services\Generics\\' . $gs);
+                $namespace->addUse('Pionia\Http\Services\Generics\\' . $gs);
             }
         }
 
@@ -129,9 +129,9 @@ class GenerateService extends BaseCommand
         } else {
             $ks = trim($actions->first() ?? '') ?? 'UniversalGenericService';
             if ($ks === 'GenericService') {
-                $klass->setExtends('Pionia\Pionia\Http\Services\GenericService');
+                $klass->setExtends('Pionia\Http\Services\GenericService');
             } else {
-                $klass->setExtends('Pionia\Pionia\Http\Services\Generics\\' . $gs);
+                $klass->setExtends('Pionia\Http\Services\Generics\\' . $gs);
             }
         }
 

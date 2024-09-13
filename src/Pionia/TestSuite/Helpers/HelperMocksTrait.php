@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\TestSuite\Helpers;
+namespace Pionia\TestSuite\Helpers;
 
-use Pionia\Pionia\Auth\ContextUserObject;
-use Pionia\Pionia\Base\EnvResolver;
+use Pionia\Auth\ContextUserObject;
+use Pionia\Base\EnvResolver;
 
 trait HelperMocksTrait
 {

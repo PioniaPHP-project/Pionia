@@ -1,6 +1,6 @@
 <?php
 
-use Pionia\Pionia\Http\Base\WebKernel;
+use Pionia\Http\Base\WebKernel;
 
 define('PIONIA_START', microtime(true));
 

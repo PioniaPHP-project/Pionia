@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Base;
+namespace Pionia\Base;
 
 
-use Pionia\Pionia\Collections\Arrayable;
+use Pionia\Collections\Arrayable;
 
 include 'All.php';
 

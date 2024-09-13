@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Auth;
+namespace Pionia\Auth;
 
 /**
  * This is the context object holding the current session

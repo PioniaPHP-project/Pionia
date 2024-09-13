@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services;
+namespace Pionia\Http\Services;
 
 
-use Pionia\Pionia\Cache\Cacheable;
+use Pionia\Cache\Cacheable;
 
 /**
  * Base Service for generic services

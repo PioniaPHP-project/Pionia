@@ -1,12 +1,11 @@
 <?php
 
-namespace Pionia\Pionia\Data;
+namespace Pionia\Porm;
 
 use Exception;
-use Porm\Database\Builders\Join;
-use Porm\Database\Builders\Builder;
-use Porm\exceptions\BaseDatabaseException;
-use Porm\Porm;
+use Pionia\Porm\Database\Builders\Builder;
+use Pionia\Porm\Database\Builders\Join;
+use Pionia\Porm\Exceptions\BaseDatabaseException;
 
 class PaginationCore
 {

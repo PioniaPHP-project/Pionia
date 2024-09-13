@@ -1,8 +1,8 @@
 <?php
 
-namespace Pionia\Pionia\Contracts;
+namespace Pionia\Contracts;
 
-use Pionia\Pionia\Http\Request\Request;
+use Pionia\Http\Request\Request;
 
 interface KernelContract
 {

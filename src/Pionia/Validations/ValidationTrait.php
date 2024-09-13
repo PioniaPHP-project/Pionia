@@ -1,5 +1,5 @@
 <?php
-namespace  Pionia\Pionia\Validations;
+namespace  Pionia\Validations;
 
 use Exception;
 use Nette\Utils\Validators;

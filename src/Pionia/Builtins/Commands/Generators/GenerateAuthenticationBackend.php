@@ -1,15 +1,15 @@
 <?php
 
-namespace Pionia\Pionia\Builtins\Commands\Generators;
+namespace Pionia\Builtins\Commands\Generators;
 
 use NAMESPACES;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
-use Pionia\Pionia\Auth\AuthenticationBackend;
-use Pionia\Pionia\Auth\ContextUserObject;
-use Pionia\Pionia\Console\BaseCommand;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Utils\Support;
+use Pionia\Auth\AuthenticationBackend;
+use Pionia\Auth\ContextUserObject;
+use Pionia\Console\BaseCommand;
+use Pionia\Http\Request\Request;
+use Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Filesystem\Filesystem;
@@ -68,11 +68,11 @@ class GenerateAuthenticationBackend extends BaseCommand
 
         $file->addComment("Remember to register your backend in index.php.");
 
-        $namespace->addUse('Pionia\Pionia\Auth\ContextUserObject');
+        $namespace->addUse('Pionia\Auth\ContextUserObject');
 
-        $namespace->addUse('Pionia\Pionia\Auth\AuthenticationBackend');
+        $namespace->addUse('Pionia\Auth\AuthenticationBackend');
 
-        $namespace->addUse('Pionia\Pionia\Http\Request\Request');
+        $namespace->addUse('Pionia\Http\Request\Request');
 
         $klass = $namespace->addClass($name);
 

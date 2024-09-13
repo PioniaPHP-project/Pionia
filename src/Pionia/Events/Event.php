@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Events;
+namespace Pionia\Events;
 
 use AllowDynamicProperties;
-use Pionia\Pionia\Utils\Support;
+use Pionia\Utils\Support;
 use Symfony\Contracts\EventDispatcher\Event as SymfonyEvent;
 
 #[AllowDynamicProperties]

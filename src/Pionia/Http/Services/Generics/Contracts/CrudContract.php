@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services\Generics\Contracts;
+namespace Pionia\Http\Services\Generics\Contracts;
 
 use Exception;
-use Pionia\Pionia\Data\PaginationCore;
+use Pionia\Porm\PaginationCore;
 use Porm\exceptions\BaseDatabaseException;
 use Porm\Porm;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

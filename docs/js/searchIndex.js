@@ -1161,77 +1161,77 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-Core-Services-ValidationTrait.html#property_throwsExceptions"
         },                {
-            "fqsen": "\\Pionia\\Database\\Connection",
+            "fqsen": "\\Pionia\\CDatabase\\Db",
             "name": "Connection",
             "summary": "Provides\u0020a\u0020connection\u0020to\u0020the\u0020database",
             "url": "classes/Pionia-Database-Connection.html"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore",
             "name": "PaginationCore",
             "summary": "",
             "url": "classes/Pionia-Database-PaginationCore.html"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
             "url": "classes/Pionia-Database-PaginationCore.html#method___construct"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003Awhere\u0028\u0029",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003Awhere\u0028\u0029",
             "name": "where",
             "summary": "",
             "url": "classes/Pionia-Database-PaginationCore.html#method_where"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003Acolumns\u0028\u0029",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003Acolumns\u0028\u0029",
             "name": "columns",
             "summary": "Sets\u0020the\u0020columns\u0020to\u0020return\u0020in\u0020the\u0020query",
             "url": "classes/Pionia-Database-PaginationCore.html#method_columns"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003Ainit\u0028\u0029",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003Ainit\u0028\u0029",
             "name": "init",
             "summary": "",
             "url": "classes/Pionia-Database-PaginationCore.html#method_init"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003Apaginate\u0028\u0029",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003Apaginate\u0028\u0029",
             "name": "paginate",
             "summary": "Should\u0020be\u0020called\u0020finally\u0020to\u0020get\u0020the\u0020paginated\u0020data.",
             "url": "classes/Pionia-Database-PaginationCore.html#method_paginate"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003AextractPagination\u0028\u0029",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003AextractPagination\u0028\u0029",
             "name": "extractPagination",
             "summary": "Picks\u0020the\u0020pagination\u0020data\u0020from\u0020the\u0020request.\u0020Pagination\u0020data\u0020can\u0020be\u0020defined\u0020in\u0020the\u0020\u0060PAGINATION\u0060\u0020key\u0020or\u0020the\u0020\u0060pagination\u0060\u0020key.",
             "url": "classes/Pionia-Database-PaginationCore.html#method_extractPagination"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003A\u0024limit",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003A\u0024limit",
             "name": "limit",
             "summary": "",
             "url": "classes/Pionia-Database-PaginationCore.html#property_limit"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003A\u0024offset",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003A\u0024offset",
             "name": "offset",
             "summary": "",
             "url": "classes/Pionia-Database-PaginationCore.html#property_offset"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003A\u0024db",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003A\u0024db",
             "name": "db",
             "summary": "",
             "url": "classes/Pionia-Database-PaginationCore.html#property_db"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003A\u0024reqData",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003A\u0024reqData",
             "name": "reqData",
             "summary": "",
             "url": "classes/Pionia-Database-PaginationCore.html#property_reqData"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003A\u0024parged",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003A\u0024parged",
             "name": "parged",
             "summary": "",
             "url": "classes/Pionia-Database-PaginationCore.html#property_parged"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003A\u0024table",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003A\u0024table",
             "name": "table",
             "summary": "",
             "url": "classes/Pionia-Database-PaginationCore.html#property_table"
         },                {
-            "fqsen": "\\Pionia\\Database\\PaginationCore\u003A\u003A\u0024baseQuery",
+            "fqsen": "\\Pionia\\CDatabase\\PaginationCore\u003A\u003A\u0024baseQuery",
             "name": "baseQuery",
             "summary": "",
             "url": "classes/Pionia-Database-PaginationCore.html#property_baseQuery"
@@ -7048,7 +7048,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Porm\\Core\\Core\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Connect\u0020the\u0020database.",
+            "summary": "DatabaseConnector\u0020the\u0020database.",
             "url": "classes/Porm-Core-Core.html#method___construct"
         },                {
             "fqsen": "\\Porm\\Core\\Core\u003A\u003AcanLog\u0028\u0029",
@@ -7061,42 +7061,42 @@ Search.appendIndex(
             "summary": "The\u0020array\u0020of\u0020logs.",
             "url": "classes/Porm-Core-Core.html#property_logs"
         },                {
-            "fqsen": "\\Porm\\Core\\Database",
+            "fqsen": "\\Porm\\Core\\CDatabase",
             "name": "Database",
             "summary": "",
             "url": "classes/Porm-Core-Database.html"
         },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003Aconfigure\u0028\u0029",
+            "fqsen": "\\Porm\\Core\\CDatabase\u003A\u003Aconfigure\u0028\u0029",
             "name": "configure",
             "summary": "Resolves\u0020the\u0020Database\u0020connection\u0020to\u0020use.\u0020If\u0020the\u0020connection\u0020is\u0020passed,\u0020it\u0020will\u0020use\u0020that\u0020connection.\u0020If\u0020the\u0020options\u0020are\u0020passed,\u0020it\u0020will\u0020use\u0020those\u0020options.\u0020If\u0020the\u0020pdo\u0020is\u0020passed,\u0020it\u0020will\u0020use\u0020that\u0020pdo.",
             "url": "classes/Porm-Core-Database.html#method_configure"
         },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003Abuilder\u0028\u0029",
+            "fqsen": "\\Porm\\Core\\CDatabase\u003A\u003Abuilder\u0028\u0029",
             "name": "builder",
             "summary": "",
             "url": "classes/Porm-Core-Database.html#method_builder"
         },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003AlastId\u0028\u0029",
+            "fqsen": "\\Porm\\Core\\CDatabase\u003A\u003AlastId\u0028\u0029",
             "name": "lastId",
             "summary": "Returns\u0020the\u0020id\u0020of\u0020the\u0020last\u0020inserted\u0020row",
             "url": "classes/Porm-Core-Database.html#method_lastId"
         },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003Apdo\u0028\u0029",
+            "fqsen": "\\Porm\\Core\\CDatabase\u003A\u003Apdo\u0028\u0029",
             "name": "pdo",
             "summary": "Returns\u0020the\u0020underlying\u0020pdo\u0020object\nFrom\u0020this,\u0020you\u0020can\u0020do\u0020anything\u0020you\u0020want\u0020with\u0020the\u0020pdo\u0020object",
             "url": "classes/Porm-Core-Database.html#method_pdo"
         },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003Ause\u0028\u0029",
+            "fqsen": "\\Porm\\Core\\CDatabase\u003A\u003Ause\u0028\u0029",
             "name": "use",
             "summary": "This\u0020is\u0020a\u0020static\u0020method\u0020to\u0020use\u0020a\u0020Database\u0020connection.\u0020It\u0020will\u0020return\u0020a\u0020new\u0020Database\u0020instance\u0020with\u0020the\u0020connection\u0020passed.",
             "url": "classes/Porm-Core-Database.html#method_use"
         },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003A__destruct\u0028\u0029",
+            "fqsen": "\\Porm\\Core\\CDatabase\u003A\u003A__destruct\u0028\u0029",
             "name": "__destruct",
             "summary": "",
             "url": "classes/Porm-Core-Database.html#method___destruct"
         },                {
-            "fqsen": "\\Porm\\Core\\Database\u003A\u003A\u0024options",
+            "fqsen": "\\Porm\\Core\\CDatabase\u003A\u003A\u0024options",
             "name": "options",
             "summary": "These\u0020are\u0020the\u0020Medoo\u0020Object\u0020options\u0020to\u0020pass\u0020along",
             "url": "classes/Porm-Core-Database.html#property_options"
@@ -7108,7 +7108,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Porm\\Core\\Db\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Connect\u0020the\u0020database.",
+            "summary": "DatabaseConnector\u0020the\u0020database.",
             "url": "classes/Porm-Core-Db.html#method___construct"
         },                {
             "fqsen": "\\Porm\\Core\\Db\u003A\u003AmapKey\u0028\u0029",
@@ -7451,602 +7451,602 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Porm-Core-Utilities.html#method_canLog"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg",
             "name": "Agg",
             "summary": "Aggregate\u0020functions\u0020for\u0020the\u0020PORM\u0020library.",
             "url": "classes/Porm-Database-Aggregation-Agg.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Abuild\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Abuild\u0028\u0029",
             "name": "build",
             "summary": "",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_build"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Arandom\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Arandom\u0028\u0029",
             "name": "random",
             "summary": "Assign\u0020a\u0020random\u0020value\u0020to\u0020a\u0020column",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_random"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Asum\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Asum\u0028\u0029",
             "name": "sum",
             "summary": "Get\u0020the\u0020sum\u0020of\u0020a\u0020column\u0020and\u0020assign\u0020it\u0020to\u0020columnName",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_sum"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Aavg\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Aavg\u0028\u0029",
             "name": "avg",
             "summary": "Get\u0020the\u0020average\u0020value\u0020of\u0020a\u0020column\u0020and\u0020assing\u0020it\u0020to\u0020columnName",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_avg"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Amax\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Amax\u0028\u0029",
             "name": "max",
             "summary": "Get\u0020the\u0020maximum\u0020value\u0020of\u0020a\u0020column",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_max"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Anow\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Anow\u0028\u0029",
             "name": "now",
             "summary": "Assign\u0020current\u0020timestamp\u0020to\u0020a\u0020column",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_now"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Auuid\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Auuid\u0028\u0029",
             "name": "uuid",
             "summary": "If\u0020uuid\u0020string\u0020is\u0020passed,\u0020checks\u0020if\u0020a\u0020column\u0020is\u0020matching\u0020the\u0020given\u0020uuid\u0020otherwise\u0020generates\u0020new\u0020one\u0020and\u0020assigns\u0020it\u0020to\u0020the\u0020column\u0020given",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_uuid"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Alt\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Alt\u0028\u0029",
             "name": "lt",
             "summary": "Less\u0020than.",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_lt"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Alte\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Alte\u0028\u0029",
             "name": "lte",
             "summary": "Less\u0020than\u0020or\u0020equal\u0020to.",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_lte"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Agt\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Agt\u0028\u0029",
             "name": "gt",
             "summary": "Greater\u0020than.",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_gt"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Agte\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Agte\u0028\u0029",
             "name": "gte",
             "summary": "Greater\u0020than\u0020or\u0020equal\u0020to.",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_gte"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Aeq\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Aeq\u0028\u0029",
             "name": "eq",
             "summary": "Equal\u0020to.",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_eq"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Aneq\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Aneq\u0028\u0029",
             "name": "neq",
             "summary": "Not\u0020equal\u0020to.",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_neq"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Aplus\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Aplus\u0028\u0029",
             "name": "plus",
             "summary": "add\u0020to\u0020the\u0020column\u0020value",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_plus"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Aminus\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Aminus\u0028\u0029",
             "name": "minus",
             "summary": "subtract\u0020from\u0020the\u0020column\u0020value",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_minus"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Aof\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Aof\u0028\u0029",
             "name": "of",
             "summary": "multiply\u0020the\u0020column\u0020value",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_of"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Ajsonified\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Ajsonified\u0028\u0029",
             "name": "jsonified",
             "summary": "json\u0020encode\u0020the\u0020column\u0020value\u0020and\u0020assign\u0020it\u0020to\u0020the\u0020column",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_jsonified"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Adiv\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Adiv\u0028\u0029",
             "name": "div",
             "summary": "divide\u0020the\u0020column\u0020value",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_div"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Alike\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Alike\u0028\u0029",
             "name": "like",
             "summary": "Used\u0020to\u0020add\u0020a\u0020like\u0020condition\u0020to\u0020a\u0020query",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_like"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003AnotLike\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003AnotLike\u0028\u0029",
             "name": "notLike",
             "summary": "Used\u0020to\u0020add\u0020a\u0020like\u0020condition\u0020to\u0020a\u0020query",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_notLike"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003AcolumnsCompare\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003AcolumnsCompare\u0028\u0029",
             "name": "columnsCompare",
             "summary": "This\u0020compares\u0020two\u0020tables\u0020in\u0020the\u0020db",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_columnsCompare"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Abetween\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Abetween\u0028\u0029",
             "name": "between",
             "summary": "Checks\u0020if\u0020the\u0020value\u0020of\u0020the\u0020\u0024columnName\u0020is\u0020between\u0020the\u0020given\u0020values.",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_between"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003AnotBetween\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003AnotBetween\u0028\u0029",
             "name": "notBetween",
             "summary": "Checks\u0020if\u0020the\u0020value\u0020of\u0020the\u0020\u0024columnName\u0020is\u0020not\u0020between\u0020the\u0020given\u0020values.",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_notBetween"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003Aregex\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003Aregex\u0028\u0029",
             "name": "regex",
             "summary": "Check\u0020if\u0020the\u0020value\u0020of\u0020the\u0020given\u0020column\u0020matches\u0020the\u0020given\u0020regular\u0020expression",
             "url": "classes/Porm-Database-Aggregation-Agg.html#method_regex"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\Agg\u003A\u003A\u0024aggregated",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\Agg\u003A\u003A\u0024aggregated",
             "name": "aggregated",
             "summary": "",
             "url": "classes/Porm-Database-Aggregation-Agg.html#property_aggregated"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\AggregateTrait",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\AggregateTrait",
             "name": "AggregateTrait",
             "summary": "",
             "url": "classes/Porm-Database-Aggregation-AggregateTrait.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\AggregateTrait\u003A\u003Acount\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\AggregateTrait\u003A\u003Acount\u0028\u0029",
             "name": "count",
             "summary": "",
             "url": "classes/Porm-Database-Aggregation-AggregateTrait.html#method_count"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\AggregateTrait\u003A\u003Asum\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\AggregateTrait\u003A\u003Asum\u0028\u0029",
             "name": "sum",
             "summary": "",
             "url": "classes/Porm-Database-Aggregation-AggregateTrait.html#method_sum"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\AggregateTrait\u003A\u003Aavg\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\AggregateTrait\u003A\u003Aavg\u0028\u0029",
             "name": "avg",
             "summary": "",
             "url": "classes/Porm-Database-Aggregation-AggregateTrait.html#method_avg"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\AggregateTrait\u003A\u003Amax\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\AggregateTrait\u003A\u003Amax\u0028\u0029",
             "name": "max",
             "summary": "",
             "url": "classes/Porm-Database-Aggregation-AggregateTrait.html#method_max"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation\\AggregateTrait\u003A\u003Amin\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation\\AggregateTrait\u003A\u003Amin\u0028\u0029",
             "name": "min",
             "summary": "",
             "url": "classes/Porm-Database-Aggregation-AggregateTrait.html#method_min"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector",
             "name": "BaseBuilder",
             "summary": "Provides\u0020a\u0020basis\u0020for\u0020other\u0020query\u0020builders\u0020to\u0020base\u0020on.",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#method___construct"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003AfromContainer\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003AfromContainer\u0028\u0029",
             "name": "fromContainer",
             "summary": "This\u0020grabs\u0020the\u0020database\u0020connection\u0020from\u0020the\u0020container\u0020if\u0020we\u0020are\u0020using\u0020a\u0020container",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#method_fromContainer"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003Asetup\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003Asetup\u0028\u0029",
             "name": "setup",
             "summary": "Sets\u0020up\u0020the\u0020database\u0020connection",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#method_setup"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003Alogs\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003Alogs\u0028\u0029",
             "name": "logs",
             "summary": "Return\u0020all\u0020executed\u0020queries.",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#method_logs"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003AlogLastQuery\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003AlogLastQuery\u0028\u0029",
             "name": "logLastQuery",
             "summary": "Logs\u0020the\u0020last\u0020query\u0020that\u0020was\u0020run",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#method_logLastQuery"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003Afrom\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003Afrom\u0028\u0029",
             "name": "from",
             "summary": "This\u0020sets\u0020the\u0020table\u0020to\u0020use",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#method_from"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003A\u0024table",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003A\u0024table",
             "name": "table",
             "summary": "The\u0020Database\u0020table\u0020to\u0020use.\u0020This\u0020is\u0020for\u0020interoperability\u0020with\u0020other\u0020versions\u0020of\u0020Porm",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#property_table"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003AgetDatabase\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003AgetDatabase\u0028\u0029",
             "name": "getDatabase",
             "summary": "",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#method_getDatabase"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003ArawQuery\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003ArawQuery\u0028\u0029",
             "name": "rawQuery",
             "summary": "This\u0020assists\u0020to\u0020perform\u0020raw\u0020sql\u0020queries",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#method_rawQuery"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003AinTransaction\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003AinTransaction\u0028\u0029",
             "name": "inTransaction",
             "summary": "Using\u0020transactions.\u0020This\u0020is\u0020a\u0020wrapper\u0020for\u0020the\u0020action\u0020method\u0020in\u0020the\u0020Core\u0020class.",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#method_inTransaction"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003Ainfo\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003Ainfo\u0028\u0029",
             "name": "info",
             "summary": "Returns\u0020the\u0020details\u0020of\u0020the\u0020current\u0020db\u0020connection",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#method_info"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003APORM_VERSION",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003APORM_VERSION",
             "name": "PORM_VERSION",
             "summary": "The\u0020version\u0020of\u0020the\u0020Porm\u0020package",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#constant_PORM_VERSION"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003A\u0024database",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003A\u0024database",
             "name": "database",
             "summary": "The\u0020Database\u0020object\u0020to\u0020use",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#property_database"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003A\u0024alias",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003A\u0024alias",
             "name": "alias",
             "summary": "",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#property_alias"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003A\u0024preventHas",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003A\u0024preventHas",
             "name": "preventHas",
             "summary": "",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#property_preventHas"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003A\u0024allowFilterOnly",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003A\u0024allowFilterOnly",
             "name": "allowFilterOnly",
             "summary": "",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#property_allowFilterOnly"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003A\u0024resultSet",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003A\u0024resultSet",
             "name": "resultSet",
             "summary": "",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#property_resultSet"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003A\u0024columns",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003A\u0024columns",
             "name": "columns",
             "summary": "",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#property_columns"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003A\u0024preventRaw",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003A\u0024preventRaw",
             "name": "preventRaw",
             "summary": "",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#property_preventRaw"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\BaseBuilder\u003A\u003A\u0024where",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Connector\u003A\u003A\u0024where",
             "name": "where",
             "summary": "",
             "url": "classes/Porm-Database-Builders-BaseBuilder.html#property_where"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Builder",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Builder",
             "name": "Builder",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Builder.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Builder\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Builder\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Builder.html#method___construct"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Builder\u003A\u003Aget\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Builder\u003A\u003Aget\u0028\u0029",
             "name": "get",
             "summary": "Returns\u0020one\u0020item\u0020from\u0020the\u0020Database",
             "url": "classes/Porm-Database-Builders-Builder.html#method_get"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Builder\u003A\u003Afirst\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Builder\u003A\u003Afirst\u0028\u0029",
             "name": "first",
             "summary": "Same\u0020as\u0020get\u0028\u0029\u0020but\u0020returns\u0020the\u0020first\u0020item\u0020of\u0020the\u0020resultset",
             "url": "classes/Porm-Database-Builders-Builder.html#method_first"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Builder\u003A\u003Amatch\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Builder\u003A\u003Amatch\u0028\u0029",
             "name": "match",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Builder.html#method_match"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Builder\u003A\u003Abuild\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Builder\u003A\u003Abuild\u0028\u0029",
             "name": "build",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Builder.html#method_build"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Builder\u003A\u003A\u0024table",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Builder\u003A\u003A\u0024table",
             "name": "table",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Builder.html#property_table"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Builder\u003A\u003A\u0024database",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Builder\u003A\u003A\u0024database",
             "name": "database",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Builder.html#property_database"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Builder\u003A\u003A\u0024preventLimit",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Builder\u003A\u003A\u0024preventLimit",
             "name": "preventLimit",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Builder.html#property_preventLimit"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Builder\u003A\u003A\u0024where",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Builder\u003A\u003A\u0024where",
             "name": "where",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Builder.html#property_where"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Builder\u003A\u003A\u0024columns",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Builder\u003A\u003A\u0024columns",
             "name": "columns",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Builder.html#property_columns"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Join",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Join",
             "name": "Join",
             "summary": "Builds\u0020relationships\u0020across\u0020multiple\u0020tables.",
             "url": "classes/Porm-Database-Builders-Join.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Join\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Join\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Join.html#method___construct"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Join\u003A\u003AgetJoins\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Join\u003A\u003AgetJoins\u0028\u0029",
             "name": "getJoins",
             "summary": "Returns\u0020the\u0020medoo\u002Dlike\u0020join\u0020array\u0020that\u0020was\u0020generated\u0020after\u0020chaining\u0020multiple\u0020joins",
             "url": "classes/Porm-Database-Builders-Join.html#method_getJoins"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Join\u003A\u003Abuild\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Join\u003A\u003Abuild\u0028\u0029",
             "name": "build",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Join.html#method_build"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Join\u003A\u003Acount\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Join\u003A\u003Acount\u0028\u0029",
             "name": "count",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Join.html#method_count"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Join\u003A\u003A\u0024table",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Join\u003A\u003A\u0024table",
             "name": "table",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Join.html#property_table"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Join\u003A\u003A\u0024database",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Join\u003A\u003A\u0024database",
             "name": "database",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Join.html#property_database"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Join\u003A\u003A\u0024preventLimit",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Join\u003A\u003A\u0024preventLimit",
             "name": "preventLimit",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Join.html#property_preventLimit"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Join\u003A\u003A\u0024where",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Join\u003A\u003A\u0024where",
             "name": "where",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Join.html#property_where"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Join\u003A\u003A\u0024columns",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Join\u003A\u003A\u0024columns",
             "name": "columns",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Join.html#property_columns"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Join\u003A\u003A\u0024joins",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Join\u003A\u003A\u0024joins",
             "name": "joins",
             "summary": "List\u0020of\u0020all\u0020joins\u0020that\u0020are\u0020about\u0020to\u0020be\u0020applied.These\u0020are\u0020in\u0020a\u0020medoo\u0020format.",
             "url": "classes/Porm-Database-Builders-Join.html#property_joins"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Where",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Where",
             "name": "Where",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Where.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Where\u003A\u003Abuild\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Where\u003A\u003Abuild\u0028\u0029",
             "name": "build",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Where.html#method_build"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Where\u003A\u003Aor\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Where\u003A\u003Aor\u0028\u0029",
             "name": "or",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Where.html#method_or"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Where\u003A\u003Aand\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Where\u003A\u003Aand\u0028\u0029",
             "name": "and",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Where.html#method_and"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Where\u003A\u003Acommented\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Where\u003A\u003Acommented\u0028\u0029",
             "name": "commented",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Where.html#method_commented"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders\\Where\u003A\u003A\u0024where",
+            "fqsen": "\\Porm\\CDatabase\\Builders\\Where\u003A\u003A\u0024where",
             "name": "where",
             "summary": "",
             "url": "classes/Porm-Database-Builders-Where.html#property_where"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\FilterTrait",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\FilterTrait",
             "name": "FilterTrait",
             "summary": "",
             "url": "classes/Porm-Database-Utils-FilterTrait.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\FilterTrait\u003A\u003Alimit\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\FilterTrait\u003A\u003Alimit\u0028\u0029",
             "name": "limit",
             "summary": "",
             "url": "classes/Porm-Database-Utils-FilterTrait.html#method_limit"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\FilterTrait\u003A\u003AstartAt\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\FilterTrait\u003A\u003AstartAt\u0028\u0029",
             "name": "startAt",
             "summary": "",
             "url": "classes/Porm-Database-Utils-FilterTrait.html#method_startAt"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\FilterTrait\u003A\u003Agroup\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\FilterTrait\u003A\u003Agroup\u0028\u0029",
             "name": "group",
             "summary": "",
             "url": "classes/Porm-Database-Utils-FilterTrait.html#method_group"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\FilterTrait\u003A\u003Ahaving\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\FilterTrait\u003A\u003Ahaving\u0028\u0029",
             "name": "having",
             "summary": "Adds\u0020a\u0020\u0027having\u0027\u0020clause\u0020to\u0020the\u0020query",
             "url": "classes/Porm-Database-Utils-FilterTrait.html#method_having"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\FilterTrait\u003A\u003AorderBy\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\FilterTrait\u003A\u003AorderBy\u0028\u0029",
             "name": "orderBy",
             "summary": "Orders\u0020the\u0020query\u0020by\u0020certain\u0020value.",
             "url": "classes/Porm-Database-Utils-FilterTrait.html#method_orderBy"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\JoinParseTrait",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\JoinParseTrait",
             "name": "JoinParseTrait",
             "summary": "",
             "url": "classes/Porm-Database-Utils-JoinParseTrait.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\JoinParseTrait\u003A\u003ArunSelect\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\JoinParseTrait\u003A\u003ArunSelect\u0028\u0029",
             "name": "runSelect",
             "summary": "",
             "url": "classes/Porm-Database-Utils-JoinParseTrait.html#method_runSelect"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\JoinParseTrait\u003A\u003Aall\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\JoinParseTrait\u003A\u003Aall\u0028\u0029",
             "name": "all",
             "summary": "Returns\u0020all\u0020items\u0020from\u0020the\u0020Database.\u0020If\u0020a\u0020callback\u0020is\u0020passed,\u0020it\u0020will\u0020be\u0020called\u0020on\u0020each\u0020item\u0020in\u0020the\u0020resultset",
             "url": "classes/Porm-Database-Utils-JoinParseTrait.html#method_all"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\JoinParseTrait\u003A\u003Awhere\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\JoinParseTrait\u003A\u003Awhere\u0028\u0029",
             "name": "where",
             "summary": "",
             "url": "classes/Porm-Database-Utils-JoinParseTrait.html#method_where"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\JoinParseTrait\u003A\u003Ajoin\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\JoinParseTrait\u003A\u003Ajoin\u0028\u0029",
             "name": "join",
             "summary": "",
             "url": "classes/Porm-Database-Utils-JoinParseTrait.html#method_join"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\JoinParseTrait\u003A\u003Ainner\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\JoinParseTrait\u003A\u003Ainner\u0028\u0029",
             "name": "inner",
             "summary": "",
             "url": "classes/Porm-Database-Utils-JoinParseTrait.html#method_inner"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\JoinParseTrait\u003A\u003Aleft\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\JoinParseTrait\u003A\u003Aleft\u0028\u0029",
             "name": "left",
             "summary": "",
             "url": "classes/Porm-Database-Utils-JoinParseTrait.html#method_left"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\JoinParseTrait\u003A\u003Aright\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\JoinParseTrait\u003A\u003Aright\u0028\u0029",
             "name": "right",
             "summary": "",
             "url": "classes/Porm-Database-Utils-JoinParseTrait.html#method_right"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\JoinParseTrait\u003A\u003Afull\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\JoinParseTrait\u003A\u003Afull\u0028\u0029",
             "name": "full",
             "summary": "",
             "url": "classes/Porm-Database-Utils-JoinParseTrait.html#method_full"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\ParseTrait",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\ParseTrait",
             "name": "ParseTrait",
             "summary": "",
             "url": "classes/Porm-Database-Utils-ParseTrait.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\ParseTrait\u003A\u003ArunSelect\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\ParseTrait\u003A\u003ArunSelect\u0028\u0029",
             "name": "runSelect",
             "summary": "",
             "url": "classes/Porm-Database-Utils-ParseTrait.html#method_runSelect"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\ParseTrait\u003A\u003ArunGet\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\ParseTrait\u003A\u003ArunGet\u0028\u0029",
             "name": "runGet",
             "summary": "",
             "url": "classes/Porm-Database-Utils-ParseTrait.html#method_runGet"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\ParseTrait\u003A\u003Aall\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\ParseTrait\u003A\u003Aall\u0028\u0029",
             "name": "all",
             "summary": "Returns\u0020all\u0020items\u0020from\u0020the\u0020Database.\u0020If\u0020a\u0020callback\u0020is\u0020passed,\u0020it\u0020will\u0020be\u0020called\u0020on\u0020each\u0020item\u0020in\u0020the\u0020resultset",
             "url": "classes/Porm-Database-Utils-ParseTrait.html#method_all"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\ParseTrait\u003A\u003Awhere\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\ParseTrait\u003A\u003Awhere\u0028\u0029",
             "name": "where",
             "summary": "",
             "url": "classes/Porm-Database-Utils-ParseTrait.html#method_where"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\ParseTrait\u003A\u003Adelete\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\ParseTrait\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
             "summary": "",
             "url": "classes/Porm-Database-Utils-ParseTrait.html#method_delete"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait",
             "name": "TableLevelQueryTrait",
             "summary": "",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003Ahas\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003Ahas\u0028\u0029",
             "name": "has",
             "summary": "This\u0020checks\u0020if\u0020the\u0020table\u0020has\u0020a\u0020record\u0020that\u0020matches\u0020the\u0020where\u0020clause",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_has"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003Arandom\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003Arandom\u0028\u0029",
             "name": "random",
             "summary": "Fetches\u0020random\u0020n\u0020items\u0020from\u0020the\u0020table,\u0020default\u0020to\u00201",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_random"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003Asave\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003Asave\u0028\u0029",
             "name": "save",
             "summary": "Saves\u0020and\u0020returns\u0020the\u0020saved\u0020item\u0020as\u0020an\u0020object",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_save"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003Aupdate\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003Aupdate\u0028\u0029",
             "name": "update",
             "summary": "",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_update"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003AasJson\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003AasJson\u0028\u0029",
             "name": "asJson",
             "summary": "",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_asJson"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003AasObject\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003AasObject\u0028\u0029",
             "name": "asObject",
             "summary": "",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_asObject"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003Aget\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003Aget\u0028\u0029",
             "name": "get",
             "summary": "Fetches\u0020a\u0020single\u0020item\u0020from\u0020the\u0020Database.",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_get"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003Araw\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003Araw\u0028\u0029",
             "name": "raw",
             "summary": "",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_raw"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003Afilter\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003Afilter\u0028\u0029",
             "name": "filter",
             "summary": "This\u0020switches\u0020the\u0020query\u0020to\u0020filter\u0020mode.\u0020It\u0020is\u0020useful\u0020for\u0020conditional\u0020querying.",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_filter"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003Acolumns\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003Acolumns\u0028\u0029",
             "name": "columns",
             "summary": "This\u0020defines\u0020the\u0020table\u0020column\u0020names\u0020to\u0020return\u0020from\u0020the\u0020Database",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_columns"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003Ausing\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003Ausing\u0028\u0029",
             "name": "using",
             "summary": "This\u0020sets\u0020the\u0020connection\u0020to\u0020the\u0020Database\u0020to\u0020use\u0020for\u0020the\u0020current\u0020query.",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_using"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003AdeleteAll\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003AdeleteAll\u0028\u0029",
             "name": "deleteAll",
             "summary": "This\u0020deletes\u0020all\u0020items\u0020that\u0020match\u0020the\u0020where\u0020clause",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteAll"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003AcheckFilterMode\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003AcheckFilterMode\u0028\u0029",
             "name": "checkFilterMode",
             "summary": "This\u0020prevents\u0020the\u0020use\u0020of\u0020non\u002Dfiltering\u0020methods\u0020in\u0020filter\u0020mode.",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_checkFilterMode"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003AdeleteById\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003AdeleteById\u0028\u0029",
             "name": "deleteById",
             "summary": "This\u0020is\u0020under\u0020the\u0020hood\u0020similar\u0020to\u0020deleteOne\u0020but\u0020it\u0020is\u0020more\u0020explicit",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteById"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003Ajoin\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003Ajoin\u0028\u0029",
             "name": "join",
             "summary": "Opens\u0020the\u0020portal\u0020to\u0020the\u0020joins\u0020builder.\u0020Once\u0020you\u0020call\u0020this,\u0020you\u0020can\u0020call\u0020the\u0020join\u0020methods",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_join"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003Afirst\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003Afirst\u0028\u0029",
             "name": "first",
             "summary": "This\u0020grabs\u0020the\u0020first\u0020\u005Bn\u005D\u0020items\u0020from\u0020the\u0020Database\u0020based\u0020on\u0020the\u0020pkField\u0020given",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_first"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils\\TableLevelQueryTrait\u003A\u003Alast\u0028\u0029",
+            "fqsen": "\\Porm\\CDatabase\\Utils\\TableLevelQueryTrait\u003A\u003Alast\u0028\u0029",
             "name": "last",
             "summary": "Grab\u0020the\u0020last\u0020item\u0020from\u0020the\u0020Database\u0020based\u0020on\u0020the\u0020pkField\u0020clause",
             "url": "classes/Porm-Database-Utils-TableLevelQueryTrait.html#method_last"
@@ -8141,7 +8141,7 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/pionia-core-services.html"
         },                {
-            "fqsen": "\\Pionia\\Database",
+            "fqsen": "\\Pionia\\CDatabase",
             "name": "Database",
             "summary": "",
             "url": "namespaces/pionia-database.html"
@@ -8446,22 +8446,22 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/porm-core.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Aggregation",
+            "fqsen": "\\Porm\\CDatabase\\Aggregation",
             "name": "Aggregation",
             "summary": "",
             "url": "namespaces/porm-database-aggregation.html"
         },                {
-            "fqsen": "\\Porm\\Database",
+            "fqsen": "\\Porm\\CDatabase",
             "name": "Database",
             "summary": "",
             "url": "namespaces/porm-database.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Builders",
+            "fqsen": "\\Porm\\CDatabase\\Builders",
             "name": "Builders",
             "summary": "",
             "url": "namespaces/porm-database-builders.html"
         },                {
-            "fqsen": "\\Porm\\Database\\Utils",
+            "fqsen": "\\Porm\\CDatabase\\Utils",
             "name": "Utils",
             "summary": "",
             "url": "namespaces/porm-database-utils.html"

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services;
+namespace Pionia\Http\Services;
 
 /**
  * Supported join types in Pionia

@@ -1,8 +1,8 @@
 <?php
 
-namespace Pionia\Pionia\Console\Codegens;
+namespace Pionia\Console\Codegens;
 
-use Pionia\Pionia\Utils\Support;
+use Pionia\Utils\Support;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**

@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\Http\Base\Events;
+namespace Pionia\Http\Base\Events;
 
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Events\Event;
-use Pionia\Pionia\Http\Request\Request;
+use Pionia\Base\PioniaApplication;
+use Pionia\Events\Event;
+use Pionia\Http\Request\Request;
 
 /**
  * Event fired before the kernel boots

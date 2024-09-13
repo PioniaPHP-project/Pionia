@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Contracts;
+namespace Pionia\Contracts;
 
 interface IsolatableContract
 {

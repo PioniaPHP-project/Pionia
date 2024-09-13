@@ -1,15 +1,15 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services;
+namespace Pionia\Http\Services;
 
 use Exception;
-use Pionia\Pionia\Exceptions\ResourceNotFoundException;
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Contracts\ServiceContract;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Utils\Microable;
-use Pionia\Pionia\Http\Response\BaseResponse;
-use Pionia\Pionia\Utils\Support;
+use Pionia\Exceptions\ResourceNotFoundException;
+use Pionia\Base\PioniaApplication;
+use Pionia\Contracts\ServiceContract;
+use Pionia\Http\Request\Request;
+use Pionia\Utils\Microable;
+use Pionia\Http\Response\BaseResponse;
+use Pionia\Utils\Support;
 use ReflectionMethod;
 
 /**

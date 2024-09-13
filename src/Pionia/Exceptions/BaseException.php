@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Exceptions;
+namespace Pionia\Exceptions;
 
 use ReturnTypeWillChange;
 use Throwable;

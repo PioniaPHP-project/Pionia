@@ -6,7 +6,7 @@
     "keywords": ["php", "framework", "jet2018", "service", "j2j", "Pioneer", "Pionia", "architecture", "performance"],
     "autoload": {
         "psr-4": {
-            "Pionia\\": "src/",
+            "Pionia\\": "src/Pionia/",
             "Application\\": "example/",
             "Application\\Services\\": "example/services/",
             "Application\\Switches\\": "example/switches/",
@@ -46,7 +46,6 @@
         "symfony/dotenv": "^7.1",
         "symfony/process": "^7.1",
         "symfony/event-dispatcher": "^7.1",
-        "pionia/porm": "^1.0",
         "nesbot/carbon": "^3.8",
         "symfony/uid": "^7.1",
         "psr/cache": "^3.0",

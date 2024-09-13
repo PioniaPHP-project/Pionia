@@ -1,13 +1,13 @@
 <?php
 
-namespace Pionia\Pionia\Utils;
+namespace Pionia\Utils;
 
 use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use InvalidArgumentException;
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Collections\Arrayable;
+use Pionia\Base\PioniaApplication;
+use Pionia\Collections\Arrayable;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;

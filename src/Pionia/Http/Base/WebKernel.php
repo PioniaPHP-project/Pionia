@@ -1,22 +1,22 @@
 <?php
 
-namespace Pionia\Pionia\Http\Base;
+namespace Pionia\Http\Base;
 
 use DI\Container;
 use Exception;
-use Pionia\Pionia\Auth\AuthenticationChain;
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Contracts\KernelContract;
-use Pionia\Pionia\Cors\PioniaCors;
-use Pionia\Pionia\Http\Base\Events\PostSwitchRunEvent;
-use Pionia\Pionia\Http\Base\Events\PreKernelBootEvent;
-use Pionia\Pionia\Http\Base\Events\PreSwitchRunEvent;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Http\Response\BaseResponse;
-use Pionia\Pionia\Http\Response\Response;
-use Pionia\Pionia\Http\Routing\PioniaRouter;
-use Pionia\Pionia\Middlewares\MiddlewareChain;
-use Pionia\Pionia\Utils\Microable;
+use Pionia\Auth\AuthenticationChain;
+use Pionia\Base\PioniaApplication;
+use Pionia\Contracts\KernelContract;
+use Pionia\Cors\PioniaCors;
+use Pionia\Http\Base\Events\PostSwitchRunEvent;
+use Pionia\Http\Base\Events\PreKernelBootEvent;
+use Pionia\Http\Base\Events\PreSwitchRunEvent;
+use Pionia\Http\Request\Request;
+use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\Response;
+use Pionia\Http\Routing\PioniaRouter;
+use Pionia\Middlewares\MiddlewareChain;
+use Pionia\Utils\Microable;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;

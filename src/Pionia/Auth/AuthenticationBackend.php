@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\Auth;
+namespace Pionia\Auth;
 
-use Pionia\Pionia\Contracts\AuthenticationContract;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Utils\Containable;
+use Pionia\Contracts\AuthenticationContract;
+use Pionia\Http\Request\Request;
+use Pionia\Utils\Containable;
 
 /**
  * Base class for other Authentication backend to inherit.

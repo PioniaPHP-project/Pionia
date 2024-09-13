@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services\Generics\Mixins;
+namespace Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Pionia\Http\Response\BaseResponse;
-use Pionia\Pionia\Utils\Support;
+use Pionia\Http\Response\BaseResponse;
+use Pionia\Utils\Support;
 
 /**
  * This mixin adds the update functionality to the service.

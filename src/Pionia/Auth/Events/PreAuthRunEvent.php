@@ -1,8 +1,8 @@
 <?php
 
-namespace Pionia\Pionia\Auth\Events;
+namespace Pionia\Auth\Events;
 
-use Pionia\Pionia\Events\Event;
+use Pionia\Events\Event;
 
 /**
  * Event fired before the authentication chain has been run

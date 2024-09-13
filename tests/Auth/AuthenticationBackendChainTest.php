@@ -2,10 +2,10 @@
 
 namespace Auth;
 
-use Pionia\Pionia\Auth\AuthenticationChain;
-use Pionia\Pionia\Auth\ContextUserObject;
-use Pionia\Pionia\TestSuite\Mocks\AuthenticationBackendMock;
-use Pionia\Pionia\TestSuite\PioniaTestCase;
+use Pionia\Auth\AuthenticationChain;
+use Pionia\Auth\ContextUserObject;
+use Pionia\TestSuite\Mocks\AuthenticationBackendMock;
+use Pionia\TestSuite\PioniaTestCase;
 
 
 class AuthenticationBackendChainTest extends PioniaTestCase

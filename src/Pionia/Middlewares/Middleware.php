@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Middlewares;
+namespace Pionia\Middlewares;
 
-use Pionia\Pionia\Collections\Arrayable;
-use Pionia\Pionia\Contracts\MiddlewareContract;
+use Pionia\Collections\Arrayable;
+use Pionia\Contracts\MiddlewareContract;
 
 abstract class Middleware implements MiddlewareContract
 {

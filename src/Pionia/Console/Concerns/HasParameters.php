@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Console\Concerns;
+namespace Pionia\Console\Concerns;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;

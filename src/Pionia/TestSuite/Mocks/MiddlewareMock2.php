@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\TestSuite\Mocks;
+namespace Pionia\TestSuite\Mocks;
 
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Http\Response\Response;
-use Pionia\Pionia\Middlewares\Middleware;
+use Pionia\Http\Request\Request;
+use Pionia\Http\Response\Response;
+use Pionia\Middlewares\Middleware;
 
 class MiddlewareMock2 extends Middleware
 {

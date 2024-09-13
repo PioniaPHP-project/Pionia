@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Console;
+namespace Pionia\Console;
 
 
 use InvalidArgumentException;

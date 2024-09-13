@@ -1,8 +1,8 @@
 <?php
 
-namespace Pionia\Pionia\Http\Response;
+namespace Pionia\Http\Response;
 
-use Pionia\Pionia\Collections\Arrayable;
+use Pionia\Collections\Arrayable;
 
 /**
  * This provides a uniform response format for our entire application.

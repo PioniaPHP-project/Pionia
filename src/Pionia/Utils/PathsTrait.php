@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Utils;
+namespace Pionia\Utils;
 
 
 trait PathsTrait

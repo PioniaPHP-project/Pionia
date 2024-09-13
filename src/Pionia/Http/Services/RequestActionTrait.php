@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services;
+namespace Pionia\Http\Services;
 
-use Pionia\Pionia\Collections\Arrayable;
-use Pionia\Pionia\Exceptions\FailedRequiredException;
+use Pionia\Collections\Arrayable;
+use Pionia\Exceptions\FailedRequiredException;
 
 /**
  * Provides helper methods for request actions

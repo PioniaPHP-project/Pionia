@@ -1,8 +1,8 @@
 <?php
 
-namespace Pionia\Pionia\Contracts;
+namespace Pionia\Contracts;
 
-use Pionia\Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\BaseResponse;
 
 interface ServiceContract
 {

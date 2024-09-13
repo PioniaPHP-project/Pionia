@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\Collections;
+namespace Pionia\Collections;
 
 use Exception;
 use JsonException;
-use Pionia\Pionia\Utils\Microable;
+use Pionia\Utils\Microable;
 use ReflectionClass;
 use Throwable;
 

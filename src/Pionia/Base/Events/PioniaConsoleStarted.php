@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Base\Events;
+namespace Pionia\Base\Events;
 
 
-use Pionia\Pionia\Events\Event;
+use Pionia\Events\Event;
 
 /**
  * Event fired after the console has been started

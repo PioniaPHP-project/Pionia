@@ -1,11 +1,11 @@
 <?php
 
-namespace Pionia\Pionia\Collections;
+namespace Pionia\Collections;
 
 use Carbon\Carbon as BaseCarbon;
 use Carbon\CarbonImmutable as BaseCarbonImmutable;
-use Pionia\Pionia\Utils\Conditionable;
-use Pionia\Pionia\Utils\Dumpable;
+use Pionia\Utils\Conditionable;
+use Pionia\Utils\Dumpable;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Uid\Ulid;
 

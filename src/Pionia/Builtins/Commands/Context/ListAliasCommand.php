@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Builtins\Commands\Context;
+namespace Pionia\Builtins\Commands\Context;
 
-use Pionia\Pionia\Collections\Arrayable;
-use Pionia\Pionia\Console\BaseCommand;
+use Pionia\Collections\Arrayable;
+use Pionia\Console\BaseCommand;
 
 class ListAliasCommand extends BaseCommand
 {

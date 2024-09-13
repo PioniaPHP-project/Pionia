@@ -1,16 +1,16 @@
 <?php
 
-namespace Pionia\Pionia\Http\Switches;
+namespace Pionia\Http\Switches;
 
 use Exception;
-use Pionia\Pionia\Contracts\ApplicationContract;
-use Pionia\Pionia\Exceptions\UserUnauthenticatedException;
-use Pionia\Pionia\Exceptions\UserUnauthorizedException;
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Contracts\BaseSwitchContract;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Http\Response\BaseResponse;
-use Pionia\Pionia\Utils\CachedEndpoints;
+use Pionia\Contracts\ApplicationContract;
+use Pionia\Exceptions\UserUnauthenticatedException;
+use Pionia\Exceptions\UserUnauthorizedException;
+use Pionia\Base\PioniaApplication;
+use Pionia\Contracts\BaseSwitchContract;
+use Pionia\Http\Request\Request;
+use Pionia\Http\Response\BaseResponse;
+use Pionia\Utils\CachedEndpoints;
 use ReflectionException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Throwable;

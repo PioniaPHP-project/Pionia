@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services\Generics\Contracts;
+namespace Pionia\Http\Services\Generics\Contracts;
 
 /**
  * Events run before and after the create, update and delete actions.

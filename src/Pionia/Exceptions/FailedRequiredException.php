@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Exceptions;
+namespace Pionia\Exceptions;
 /**
  * This exception is thrown when a required field is not provided in the request
  */

@@ -1,14 +1,15 @@
 <?php
 
 use DI\Container;
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Cache\PioniaCache;
-use Pionia\Pionia\Collections\Arrayable;
-use Pionia\Pionia\Collections\HighOrderTapProxy;
-use Pionia\Pionia\Http\Response\BaseResponse;
-use Pionia\Pionia\Http\Services\Service;
-use Pionia\Pionia\Utils\Support;
-use Porm\Porm;
+use Pionia\Base\PioniaApplication;
+use Pionia\Cache\PioniaCache;
+use Pionia\Collections\Arrayable;
+use Pionia\Collections\HighOrderTapProxy;
+use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Services\Service;
+use Pionia\Porm\Core\Porm;
+use Pionia\Porm\Database\Db;
+use Pionia\Utils\Support;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -111,7 +112,11 @@ if (!function_exists('app')) {
             return $GLOBALS['app'];
         }
 
-        return (new PioniaApplication())
+        // if we haven't created a new app instance we create it and return it;
+        if (!defined('BASEPATH')) {
+            define('BASEPATH', dirname(__DIR__, 2));
+        }
+        return (new PioniaApplication(BASEPATH))
             ->powerUp();
     }
 }
@@ -182,6 +187,22 @@ if (!function_exists('db')) {
 
         app()->context->set('pioniaSqlDb', $db);
         return app()->getSilently('pioniaSqlDb')->table($tableName, $alias);
+    }
+}
+
+if (!function_exists('table')){
+    /**
+     * Run any pionia-powered queries
+     * @param string $tableName
+     * @param string|null $tableAlias
+     * @param string|null $using
+     * @return Porm
+     * @throws Exception
+     */
+    function table(string $tableName, ?string $tableAlias = null, ?string $using = null): Porm
+    {
+        return Db::table($tableName, $tableAlias, $using);
+
     }
 }
 

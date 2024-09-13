@@ -1,16 +1,16 @@
 <?php
 
-namespace Pionia\Pionia\Console;
+namespace Pionia\Console;
 
 use AllowDynamicProperties;
 use Closure;
 use Exception;
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Console\Concerns\CallsCommands;
-use Pionia\Pionia\Console\Concerns\HasParameters;
-use Pionia\Pionia\Console\Concerns\InteractsWithIO;
-use Pionia\Pionia\Utils\Microable;
-use Pionia\Pionia\Utils\Support;
+use Pionia\Base\PioniaApplication;
+use Pionia\Console\Concerns\CallsCommands;
+use Pionia\Console\Concerns\HasParameters;
+use Pionia\Console\Concerns\InteractsWithIO;
+use Pionia\Utils\Microable;
+use Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;

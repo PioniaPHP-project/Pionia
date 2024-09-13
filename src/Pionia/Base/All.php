@@ -1,10 +1,13 @@
 <?php
 
-use Pionia\Pionia\Builtins\Commands\Context\ListAliasCommand;
-use Pionia\Pionia\Builtins\Commands\Generators\GenerateAuthenticationBackend;
-use Pionia\Pionia\Builtins\Commands\Generators\GenerateService;
-use Pionia\Pionia\Builtins\Commands\Generators\GenerateSwitch;
-use Pionia\Pionia\Builtins\Commands\StartServer;
+use Pionia\Builtins\Commands\Cache\CacheDeleteCommand;
+use Pionia\Builtins\Commands\Cache\ClearCacheCommand;
+use Pionia\Builtins\Commands\Cache\PruneCacheCommand;
+use Pionia\Builtins\Commands\Context\ListAliasCommand;
+use Pionia\Builtins\Commands\Generators\GenerateAuthenticationBackend;
+use Pionia\Builtins\Commands\Generators\GenerateService;
+use Pionia\Builtins\Commands\Generators\GenerateSwitch;
+use Pionia\Builtins\Commands\StartServer;
 
 include __DIR__.'/../Utils/helpers.php';
 
@@ -36,7 +39,7 @@ enum DIRECTORIES {
 // register here all builtins. These can be commands, Middleware, Authentications, etc.
 if (!function_exists('allBuiltins')) {
 
-    function allBuiltins(): \Pionia\Pionia\Collections\Arrayable
+    function allBuiltins(): \Pionia\Collections\Arrayable
     {
         return arr([
             'commands' => [
@@ -45,6 +48,9 @@ if (!function_exists('allBuiltins')) {
                 'generate_auth' => GenerateAuthenticationBackend::class,
                 'generate_switch' => GenerateSwitch::class,
                 'generate_service' => GenerateService::class,
+                'cache:prune'=>PruneCacheCommand::class,
+                'cache:clear'=>ClearCacheCommand::class,
+                'cache:delete'=>CacheDeleteCommand::class,
             ],
             'authentications' => [
             ],

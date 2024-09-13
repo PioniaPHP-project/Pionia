@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Http\Routing;
+namespace Pionia\Http\Routing;
 
 use Symfony\Component\Routing\RouteCollection;
 
