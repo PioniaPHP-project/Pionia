@@ -53,7 +53,7 @@ class PioniaCors implements CorsContract
             return;
         }
 
-        if ($cors->isCorsRequest($request)) {
+        if ($cors->isCorsRequest($request) && $response) {
             $cors->varyHeader($response, 'Origin');
         }
 

@@ -1,6 +1,7 @@
 <?php
 
 use DI\Container;
+use JetBrains\PhpStorm\NoReturn;
 use Pionia\Base\PioniaApplication;
 use Pionia\Cache\PioniaCache;
 use Pionia\Collections\Arrayable;
@@ -9,8 +10,11 @@ use Pionia\Http\Response\BaseResponse;
 use Pionia\Http\Services\Service;
 use Pionia\Porm\Core\Porm;
 use Pionia\Porm\Database\Db;
+use Pionia\Templating\TemplateEngineInterface;
 use Pionia\Utils\Support;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Asset\PathPackage;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 use Symfony\Component\Filesystem\Filesystem;
 
 if (! function_exists('tap')) {
@@ -57,12 +61,7 @@ if (! function_exists('env')) {
      */
     function env(?string $key =null, mixed $default = null): mixed
     {
-        $env = arr($_SERVER);
-        $env->merge($_ENV);
-        if ($key === null) {
-            return $env;
-        }
-        return $env->get($key, $default);
+        return app()->getEnv($key, $default);
     }
 }
 
@@ -81,8 +80,7 @@ if (! function_exists('setEnv')) {
         } elseif (array_key_exists(strtolower($key), $env)){
             $actual = strtolower($key);
         }
-        $_ENV[$actual] = $value;
-        $_SERVER[$actual] = $value;
+        app()->setEnv($actual, $value);
     }
 }
 
@@ -369,5 +367,55 @@ if (!function_exists('cachedResponse')){
                 }
             }
         });
+    }
+}
+
+
+if (!function_exists('render')){
+    /**
+     * Render a template file from the templates folder.
+     * @param $file
+     * @param array|null $data
+     * @return void
+     */
+    #[NoReturn]
+    function render($file, ? array $data = []): void
+    {
+        app()->getSilently(TemplateEngineInterface::class)?->view($file, $data);
+        exit(1);
+    }
+}
+
+if (!function_exists('parseHtml')){
+    /**
+     * Get all the builtins
+     * @param $file
+     * @param array|null $data
+     * @return array
+     */
+    function parseHtml($file, ? array $data = []): array
+    {
+        return app()->getSilently(TemplateEngineInterface::class)?->parse($file, $data);
+    }
+}
+
+if (!function_exists('asset')){
+    /**
+     * Get the asset path
+     * @param $file
+     * @param string|null $dir
+     * @return string|null
+     */
+    function asset($file, ?string $dir = null): ?string
+    {
+        if (!$dir){
+            $dir = alias(DIRECTORIES::STATIC_DIR->name);
+        }
+        $pkg = new PathPackage($dir, new EmptyVersionStrategy());
+        $path = $pkg->getUrl($file);
+        if (file_exists($path)) {
+            return $path;
+        }
+        return null;
     }
 }

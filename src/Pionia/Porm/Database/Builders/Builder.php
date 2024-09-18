@@ -18,7 +18,7 @@ namespace Pionia\Porm\Database\Builders;
 
 
 use Pionia\Porm\Core\ContractBuilder;
-use Pionia\Porm\Core\Porm;
+use Pionia\Porm\Core\Piql;
 use Pionia\Porm\Database\Aggregation\AggregateTrait;
 use Pionia\Porm\Database\Utils\FilterTrait;
 use Pionia\Porm\Database\Utils\ParseTrait;
@@ -27,7 +27,7 @@ class Builder extends ContractBuilder
 {
     private string $table;
 
-    private Porm $database;
+    private Piql $database;
 
     private bool $preventLimit = false;
 
@@ -41,7 +41,7 @@ class Builder extends ContractBuilder
     use ParseTrait;
     use FilterTrait;
 
-    public function __construct($table, Porm $database, $columns = "*", $where = [])
+    public function __construct($table, Piql $database, $columns = "*", $where = [])
     {
         $this->table = $table;
         $this->database = $database;

@@ -3,9 +3,9 @@
 namespace Pionia\Http\Services\Generics\Contracts;
 
 use Exception;
+use Pionia\Porm\Core\Porm;
+use Pionia\Porm\Exceptions\BaseDatabaseException;
 use Pionia\Porm\PaginationCore;
-use Porm\exceptions\BaseDatabaseException;
-use Porm\Porm;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 trait CrudContract
@@ -192,7 +192,7 @@ trait CrudContract
     private function getOneInternal($id): null | array | object
     {
         $customQueried = $this->getItem();
-        return $customQueried ??  db(tableName: $this->table, connToUse: $this->connection)
+        return $customQueried ??  table($this->table, null, $this->connection)
             ->columns($this->getListColumns())
             ->get([$this->pk_field => $id]);
     }
@@ -223,7 +223,7 @@ trait CrudContract
         if ($this->weShouldJoin()) {
             return $this->getAllItemsJoined();
         }
-        $query =  db(tableName: $this->table, connToUse: $this->connection)
+        $query =  table($this->table, null, $this->connection)
             ->columns($this->getListColumns())
             ->filter();
 
@@ -267,8 +267,8 @@ trait CrudContract
         $deleted = null;
         // run the before delete event and confirm if its not false or null before proceeding
         if ($this->preDelete($item)) {
-            db(tableName: $this->table, connToUse: $this->connection)->inTransaction(function () use ($id, &$deleted) {
-                $deleted =  db(tableName: $this->table, connToUse: $this->connection)
+            table($this->table, $this->connection)->inTransaction(function () use ($id, &$deleted) {
+                $deleted =  table($this->table, $this->connection)
                     ->delete([$this->pk_field => $id]);
             });
              // run the post delete event
@@ -334,8 +334,8 @@ trait CrudContract
 
         $saved = null;
         if ($toSave = $this->preCreate($sanitizedData)) {
-            db(tableName: $this->table, connToUse: $this->connection)->inTransaction(function () use (&$saved, $toSave) {
-                $saved =  db(tableName: $this->table, connToUse: $this->connection)
+            table( $this->table, $this->connection)->inTransaction(function () use (&$saved, $toSave) {
+                $saved =  table($this->table, $this->connection)
                     ->save($toSave);
             });
         }
@@ -358,7 +358,6 @@ trait CrudContract
             limit: $this->limit,
             offset: $this->offset,
             db: $this->connection);
-        dd($paginator);
         $prep1 =  $paginator->columns($this->getListColumns());
 
         $prep1->init(function (Porm $query) {
@@ -393,7 +392,7 @@ trait CrudContract
         $this->detectAndAddColumns();
         $limit = $this->getFieldValue('limit') ?? $this->getFieldValue('size') ?? 1;
 
-        return db(tableName: $this->table, connToUse: $this->connection)
+        return table($this->table, $this->connection)
             ->random($limit);
     }
 
@@ -424,7 +423,7 @@ trait CrudContract
 
         // get the item to be updated
 
-        $item = db(tableName: $this->table, connToUse: $this->connection)
+        $item = table($this->table, $this->connection)
             ->get($id, $this->primaryKey());
 
         if (!$item) {
@@ -464,9 +463,9 @@ trait CrudContract
         $updated = null;
         // run the pre update event and confirm if its not false or null before proceeding
         if ($toSave = $this->preUpdate($toArray)) {
-            db(tableName: $this->table, connToUse: $this->connection)->inTransaction(function () use ($toSave, $id, &$updated) {
-                app()->getSilently('pioniaSqlDb')
-                    ->update($toSave, [$this->primaryKey() => $id]);
+            table($this->table, $this->connection)
+                ->inTransaction(function () use ($toSave, $id, &$updated) {
+                    table($this->table, $this->connection)->update($toSave, [$this->primaryKey() => $id]);
             });
             $updated = $this->getOneInternal($id);
         }

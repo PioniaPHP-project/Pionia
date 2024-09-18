@@ -24,6 +24,8 @@ use Pionia\Http\Response\Response;
 use Pionia\Http\Routing\PioniaRouter;
 use Pionia\Logging\PioniaLogger;
 use Pionia\Middlewares\MiddlewareChain;
+use Pionia\Templating\TemplateEngine;
+use Pionia\Templating\TemplateEngineInterface;
 use Pionia\Utils\AppDatabaseHelper;
 use Pionia\Utils\AppHelpersTrait;
 use Pionia\Utils\ApplicationLifecycleHooks;
@@ -139,10 +141,15 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         // we set the env to the context
         $this->context->set('aliases', arr([]));
 
+        $this->context->set(TemplateEngineInterface::class, function () {
+            return new TemplateEngine();
+        });
+
         $this->builtinDirectories()->each(function ($value, $key){
             $this->addAlias($key, $this->appRoot($value));
         });
         $this->contextArrAdd('aliases', $this->builtinNameSpaces()->all());
+        $this->contextArrAdd('aliases', $this->builtInAliases()->all());
         // if we passed the environment, we use it, otherwise we get it from the context
         $this->envResolver = $this->getSilently(EnvResolver::class) ?? new EnvResolver($this->getDirFor(DIRECTORIES::ENVIRONMENT_DIR->name));
         $this->env = $this->envResolver->getEnv();
@@ -175,6 +182,16 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         }
         $this->logger = $logger;
         return $this;
+    }
+
+    public function isDebug()
+    {
+        return $this->getEnv('DEBUG', true);
+    }
+
+    public function getAppName()
+    {
+        return env('APP_NAME', $this->appName);
     }
 
     /**
@@ -229,13 +246,11 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      */
     public function getEnv(?string $key = null, mixed $default = null): mixed
     {
+        $env = arr($_ENV)->merge($_SERVER);
+
         if ($key) {
-             $env = arr($_ENV);
-             $server = arr($_SERVER);
              if ($env->has($key)){
                  return $env->get($key);
-             } elseif ($server->has($key)){
-                 return $server->get($key);
              } elseif ($this->env->has($key)){
                  return $this->env->get($key);
              } elseif ($this->contextHas($key)){
@@ -243,7 +258,29 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
              }
              return $default;
         }
-        return arr($_ENV)->merge($_SERVER);
+        return $env;
+    }
+
+    public function refreshEnv(): void
+    {
+        $this->envResolver->resolve();
+        $this->env = $this->envResolver->getEnv();
+        $this->context->set('env', $this->env);
+        $this->context->set(EnvResolver::class, $this->env);
+    }
+
+    /**
+     * @param Arrayable|null $env
+     */
+    public function setEnv(string $key, mixed $env, ?bool $override = true): void
+    {
+        $this->envResolver->dotenv->populate([$key => $env], $override);
+        $this->env->set($key, $env);
+    }
+
+    public function welcomePageSettings(): Arrayable
+    {
+        return arr($this->getEnv('welcome', []));
     }
 
     /**
@@ -253,14 +290,6 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     public function isBooted(): bool
     {
         return $this->booted;
-    }
-
-    public function refreshEnv(): void
-    {
-        $this->envResolver->resolve();
-        $this->env = $this->envResolver->getEnv();
-        $this->context->set('env', $this->env);
-        $this->context->set(EnvResolver::class, $this->env);
     }
 
     /**
@@ -473,6 +502,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             $this->setCache("app_routes", $router->getRoutes(), null, true);
         }
         $this->context->set(PioniaRouter::class, $router);
+        $this->context->set('routes', arr($router->getRoutes()->all()));
         return $this;
     }
     /**
@@ -654,11 +684,9 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     public function alias(string $aliasName, mixed $default = null): mixed
     {
         $aliases =  $this->getOrDefault('aliases', arr([]));
-
         if (is_array($aliases)){
             $aliases = arr($aliases);
         }
-
         return $aliases->get($aliasName, $default);
     }
 

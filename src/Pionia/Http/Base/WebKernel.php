@@ -3,7 +3,9 @@
 namespace Pionia\Http\Base;
 
 use DI\Container;
+use DIRECTORIES;
 use Exception;
+use JetBrains\PhpStorm\NoReturn;
 use Pionia\Auth\AuthenticationChain;
 use Pionia\Base\PioniaApplication;
 use Pionia\Contracts\KernelContract;
@@ -18,9 +20,11 @@ use Pionia\Http\Routing\PioniaRouter;
 use Pionia\Middlewares\MiddlewareChain;
 use Pionia\Utils\Microable;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
+use Symfony\Component\Mime\MimeTypes;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Throwable;
@@ -44,10 +48,31 @@ class WebKernel implements KernelContract
         $this->corsWorker = new PioniaCors($application);
     }
 
+    private function isApiRequest(Request $request): bool
+    {
+        return str_starts_with($request->getPathInfo(), '/api/');
+    }
+
+    /**
+     * if the request is on root
+     * E.g. http://localhost:8080/ -- here we either load the default landing framework page or load any
+     * .html file we find in the statics folders
+     * @param Request $request
+     * @return bool
+     */
+    private function isRoot(Request $request): bool
+    {
+        return $request->getPathInfo() === '' || $request->getPathInfo() === '/';
+    }
+
     public function handle(Request $request): Response
     {
         try {
-            $this->boot($request);
+            if ($request->isMethod('GET') && !$this->isApiRequest($request)){
+                $this->resolveFrontEnd($request);
+            }
+
+            $request = $this->boot($request);
 
             $routes = $this->app->getSilently(PioniaRouter::class)->getRoutes();
 
@@ -87,6 +112,83 @@ class WebKernel implements KernelContract
     }
 
     /**
+     * Resolves the front end if the request is a get request and the path is not an api path
+     *
+     * Using any frontend of your choice, you can serve the front end from the root of the project
+     * @param Request $request
+     * @return void
+     */
+    #[NoReturn]
+    private function resolveFrontEnd(Request $request): void
+    {
+        $fs = new Filesystem();
+
+        if ($this->isRoot($request)) {
+            $this->serveSpa($request);
+        } else {
+            // check if its file(images, js, css, etc) and load it
+            $path = trim($request->getPathInfo(), '/');
+            $filePath = asset($path);
+            if ($fs->exists($filePath)) {
+                $response = new Response(file_get_contents($filePath), ResponseAlias::HTTP_OK, ['Content-Type' => $this->autoDiscoverContentType($filePath)]);
+                $this->app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request, $response);
+                $response->prepare($request)->send(false);
+                exit();
+            } else {
+                $this->loadWelcomePage($request);
+            }
+        }
+    }
+
+    public function autoDiscoverContentType(string $filePath): string
+    {
+        $mimes = new MimeTypes();
+        return $mimes->guessMimeType($filePath);
+    }
+
+    /**
+     * The developer can override and access the entire context of the application in the overridden page
+     * @param Request $request
+     * @return void
+     */
+    #[NoReturn] private function loadWelcomePage(Request $request): void
+    {
+        $override = alias(DIRECTORIES::STATIC_DIR->name).DIRECTORY_SEPARATOR.'index.php';
+        if (file_exists($override)) {
+            render($override, [
+                'app' => $this->app,
+                'request' => $request,
+                'container' => $this->container()
+            ]);
+        } else {
+            $welcomePage = alias(DIRECTORIES::WELCOME_PAGE->name);
+            render($welcomePage, [
+                'app' => $this->app,
+                'request' => $request,
+                'container' => $this->container(),
+            ]);
+        }
+    }
+
+    /**
+     * Serve the landing html file of the spa if it exists
+     * @param Request $request
+     * @return void
+     */
+    #[NoReturn]
+    private function serveSpa(Request $request): void
+    {
+        $path = alias(DIRECTORIES::STATIC_DIR->name).DIRECTORY_SEPARATOR.'index.html';
+        if (!file_exists($path)) {
+            $this->loadWelcomePage($request);
+        } else {
+            $response = new Response(file_get_contents($path), ResponseAlias::HTTP_OK, ['Content-Type' => $this->autoDiscoverContentType($path)]);
+            $response->prepare($request)->send();
+            exit();
+        }
+    }
+
+    /**
      * This method is called after the request has been handled
      * @param Request $request
      * @param BaseResponse $response
@@ -110,8 +212,9 @@ class WebKernel implements KernelContract
     /**
      * Boot the kernel. This also runs the middleware chain and the authentication chain
      * @param Request $request
+     * @return Request
      */
-    public function boot(Request $request): void
+    public function boot(Request $request): Request
     {
         app->dispatch(new PreKernelBootEvent($this, $request), PreKernelBootEvent::name());
         app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request);
@@ -128,10 +231,29 @@ class WebKernel implements KernelContract
             $authMiddleware->handle($request);
         }
 
+        return $request;
+
     }
 
     public function getApplication(): PioniaApplication
     {
         return $this->app;
     }
+
+//    private function resolveFrontEnd(Request $request)
+//    {
+//        // if the route does not originate from /api/**
+//        // we should resolve the front end in the static folder
+//        // if its a file, like png, jpeg, serve it as is
+//        $path = $request->getPathInfo();
+//        if (!str_starts_with($path, '/api')) {
+//            $path = alias(\DIRECTORIES::STATIC_DIR->name).DIRECTORY_SEPARATOR.$path;
+//
+//            if (file_exists($path)) {
+//                $response = new Response(file_get_contents($path), ResponseAlias::HTTP_OK, ['content-type' => 'text/html']);
+//                $response->send();
+//                exit();
+//            }
+//        }
+//    }
 }

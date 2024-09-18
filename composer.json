@@ -50,7 +50,10 @@
         "symfony/uid": "^7.1",
         "psr/cache": "^3.0",
         "psr/simple-cache" : "^1.0",
-        "symfony/cache": "^7.1"
+        "symfony/cache": "^7.1",
+        "symfony/asset": "^7.1",
+        "ext-fileinfo": "*",
+        "symfony/mime": "^7.1"
     },
     "provide": {
         "psr/container-implementation": "1.0"

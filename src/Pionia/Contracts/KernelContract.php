@@ -10,7 +10,7 @@ interface KernelContract
 
 //    public function terminate(Request $request, Response $response);
 
-    public function boot(Request $request): void;
+    public function boot(Request $request): Request;
 
     /**
      * Get the application instance.

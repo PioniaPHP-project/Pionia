@@ -79,14 +79,12 @@ abstract class GenericService extends Service
         if ($this->fileColumns && in_array($name, $this->fileColumns)){
             return $this->request->getFileByName($name) ?? null;
         }
-        $data = $this->request->getData();
-        return $data->get($name) ?? null;
+        return $this->request->getData()->get($name);
     }
 
     public function __construct(PioniaApplication $app, Request $request)
     {
         parent::__construct($app, $request);
-        $this->connection = $this->connection ?? arr(env('databases'))->get('default');
     }
 
     /**

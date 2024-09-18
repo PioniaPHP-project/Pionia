@@ -61,9 +61,9 @@ class StartServer extends BaseCommand
         $port = $this->option('port');
 
         if (!$port) {
-            $port = env('PORT', 8000);
+            $port = env('SERVER_PORT', 8000);
         }
-        setEnv('port', $port);
+        setEnv('SERVER_PORT', $port);
         return (int) $port;
     }
 

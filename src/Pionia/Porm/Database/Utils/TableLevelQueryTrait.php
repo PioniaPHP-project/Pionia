@@ -21,7 +21,6 @@ use PDOStatement;
 use Pionia\Porm\Core\Raw;
 use Pionia\Porm\Database\Aggregation\AggregateTrait;
 use Pionia\Porm\Database\Builders\Builder;
-use Psr\Container\ContainerInterface;
 
 trait TableLevelQueryTrait
 {
@@ -266,29 +265,29 @@ trait TableLevelQueryTrait
         return $this;
     }
 
-    /**
-     * This sets the connection to the CDatabase to use for the current query.
-     * It can be used to switch between CDatabase connections.
-     *
-     * @param string|Database|BaseBuilder|ContainerInterface $connection The connection to use, defaults to 'db'
-     * @return TableLevelQueryTrait
-     */
-    public function using(string|Database|BaseBuilder|ContainerInterface $connection = 'db', ?string $containerDbKey = null): static
-    {
-        $this->checkFilterMode('When cannot change the db connection while at this point of the query, 
-        check the usage of `using() method in the query builder of `' . $this->table);
-
-        if ($connection instanceof Database) {
-            $this->database = $connection;
-        } else if (is_string($connection)) {
-            $this->database = Database::builder($connection);
-        } else if ($connection instanceof BaseBuilder) {
-            $this->database = $connection->database;
-        } else if ($connection instanceof ContainerInterface && $containerDbKey) {
-            $this->database = $connection->get($containerDbKey);
-        }
-        return $this;
-    }
+//    /**
+//     * This sets the connection to the CDatabase to use for the current query.
+//     * It can be used to switch between CDatabase connections.
+//     *
+//     * @param string|Database|BaseBuilder|ContainerInterface $connection The connection to use, defaults to 'db'
+//     * @return TableLevelQueryTrait
+//     */
+//    public function using(string|Database|BaseBuilder|ContainerInterface $connection = 'db', ?string $containerDbKey = null): static
+//    {
+//        $this->checkFilterMode('When cannot change the db connection while at this point of the query,
+//        check the usage of `using() method in the query builder of `' . $this->table);
+//
+//        if ($connection instanceof Database) {
+//            $this->database = $connection;
+//        } else if (is_string($connection)) {
+//            $this->database = Database::builder($connection);
+//        } else if ($connection instanceof BaseBuilder) {
+//            $this->database = $connection->database;
+//        } else if ($connection instanceof ContainerInterface && $containerDbKey) {
+//            $this->database = $connection->get($containerDbKey);
+//        }
+//        return $this;
+//    }
 
 
 //    /**

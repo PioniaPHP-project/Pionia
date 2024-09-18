@@ -59,7 +59,7 @@ class Porm
 
     public function __construct(Connection $connection)
     {
-        $this->database = $connection->getApplication()->contextMakeSilently(Piql::class, ['connection'=>$connection]);
+        $this->database = new Piql($connection);
     }
 
     /**

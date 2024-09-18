@@ -43,8 +43,7 @@ class GenerateAuthenticationBackend extends BaseCommand
     {
         $service_name = $this->argument("name");
 
-
-        $this->info("Generating $service_name...");
+        $this->info("Generating $service_name authentication backend in the authentications directory...");
 
         $this->generate($service_name);
 

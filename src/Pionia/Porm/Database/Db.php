@@ -63,23 +63,22 @@ class Db
      * Sets up the database connection
      * @param mixed $connection
      */
-    private function setup(Connection | Porm | array | string $connection = 'default'): Db
+    private function setup(Connection | Porm | array | string $connection = 'default'): void
     {
         if ($connection) {
             if ($connection instanceof Porm){
                 $this->porm = $connection;
-                return $this;
+                return;
             } elseif ($connection instanceof Connection) {
                 $this->connection = $connection;
                 $this->application = $connection->getApplication();
                 $this->porm = new Porm($this->connection);
-                return $this;
+                return;
             }
         }
 
         $this->connection = Connection::connect($this->application, $connection);
         $this->porm = new Porm($this->connection);
-        return $this;
     }
 
     /**

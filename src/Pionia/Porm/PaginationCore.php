@@ -13,7 +13,7 @@ class PaginationCore
 
     public int $offset = 0;
 
-    private string $db = 'db';
+    private ?string $db = null;
 
     private array $reqData = [];
 
@@ -56,7 +56,7 @@ class PaginationCore
      */
     public function init(callable $callback): PaginationCore
     {
-        $query =  db(tableName: $this->table, connToUse: $this->db)
+        $query =  table($this->table, $this->db)
             ->columns($this->parged['columns'])
             ->where($this->parged['where']);
 

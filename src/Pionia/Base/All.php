@@ -4,6 +4,7 @@ use Pionia\Builtins\Commands\Cache\CacheDeleteCommand;
 use Pionia\Builtins\Commands\Cache\ClearCacheCommand;
 use Pionia\Builtins\Commands\Cache\PruneCacheCommand;
 use Pionia\Builtins\Commands\Context\ListAliasCommand;
+use Pionia\Builtins\Commands\Generators\CreateMiddleware;
 use Pionia\Builtins\Commands\Generators\GenerateAuthenticationBackend;
 use Pionia\Builtins\Commands\Generators\GenerateService;
 use Pionia\Builtins\Commands\Generators\GenerateSwitch;
@@ -34,6 +35,8 @@ enum DIRECTORIES {
     case PUBLIC_DIR;
     case CACHE_DIR;
     case STORAGE_DIR;
+    case STATIC_DIR;
+    case WELCOME_PAGE;
 }
 
 // register here all builtins. These can be commands, Middleware, Authentications, etc.
@@ -51,6 +54,7 @@ if (!function_exists('allBuiltins')) {
                 'cache:prune'=>PruneCacheCommand::class,
                 'cache:clear'=>ClearCacheCommand::class,
                 'cache:delete'=>CacheDeleteCommand::class,
+                'make:middleware' => CreateMiddleware::class
             ],
             'authentications' => [
             ],
@@ -71,6 +75,7 @@ if (!function_exists('allBuiltins')) {
                 DIRECTORIES::PUBLIC_DIR->name => 'public',
                 DIRECTORIES::CACHE_DIR->name => 'storage/cache',
                 DIRECTORIES::STORAGE_DIR->name => 'storage',
+                DIRECTORIES::STATIC_DIR->name => 'static',
             ],
             'namespaces' => [
                 NAMESPACES::AUTHENTICATION_NS->name =>'Application\Authentications',
@@ -81,6 +86,7 @@ if (!function_exists('allBuiltins')) {
                 NAMESPACES::MIDDLEWARE_NS->name => 'Application\Middlewares'
             ],
             'aliases' => [
+                DIRECTORIES::WELCOME_PAGE->name => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'templates/index.php'
             ]
         ]);
     }

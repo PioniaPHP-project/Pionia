@@ -4,6 +4,7 @@ namespace Pionia\Builtins\Commands\Cache;
 
 use Pionia\Cache\PioniaCache;
 use Pionia\Console\BaseCommand;
+use Pionia\Templating\TemplateEngine;
 
 class ClearCacheCommand extends BaseCommand
 {
@@ -25,6 +26,8 @@ class ClearCacheCommand extends BaseCommand
                 $this->info('All cached data has been cleared');
             }
         }
+
+        TemplateEngine::clearCache();
     }
 
     private function cacheInstance(): ?PioniaCache
