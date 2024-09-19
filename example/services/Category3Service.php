@@ -11,6 +11,7 @@ use Exception;
 use Pionia\Collections\Arrayable;
 use Pionia\Http\Response\BaseResponse;
 use Pionia\Http\Services\Service;
+use Pionia\Validations\Validator;
 use Symfony\Component\HttpFoundation\FileBag;
 
 class Category3Service extends Service
@@ -21,15 +22,15 @@ class Category3Service extends Service
      */
 	protected function getCategory3Action(Arrayable $data, ?FileBag $files = null): BaseResponse
 	{
-        $results = table('company')->all();
+        $password = validate('password', $this)
+            ->doesNotMatch('password2', 'Can be the same as password2')
+            ->password_pattern
+            ->get();
 
-		return cachedResponse(
-            $this,
-            response(
-                0,
-                'You have reached get_category3_action',
-                $results)
-            , 30);
+
+
+        $results = table('company', null, 'db')->get();
+        return response(0, 'You have reached get_category3_action 4', $results);
 	}
 
 
