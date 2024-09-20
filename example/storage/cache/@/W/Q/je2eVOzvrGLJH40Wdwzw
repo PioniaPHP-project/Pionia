@@ -1,3 +1,3 @@
-1726774251
+1726813825
 app_middlewares
 a:2:{s:17:"EncryptMiddleware";s:41:"Application\Middlewares\EncryptMiddleware";s:17:"DecryptMiddleware";s:41:"Application\Middlewares\DecryptMiddleware";}
