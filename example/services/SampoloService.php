@@ -12,9 +12,7 @@ use Pionia\Http\Services\JoinType;
 
 class SampoloService extends UniversalGenericService
 {
-	public string $table = 'sample_table(st)';
-
-    public string $tableAlias = 'st';
+	public string $table = 'sample_table';
 
     public ?array $fileColumns = ['file'];
 

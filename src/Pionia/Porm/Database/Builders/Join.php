@@ -16,10 +16,12 @@
 
 namespace Pionia\Porm\Database\Builders;
 
-use Porm\Core\ContractBuilder;
-use Porm\Core\Database;
-use Porm\Database\Utils\FilterTrait;
-use Porm\Database\Utils\JoinParseTrait;
+
+
+use Pionia\Porm\Core\ContractBuilder;
+use Pionia\Porm\Core\Piql;
+use Pionia\Porm\Database\Utils\FilterTrait;
+use Pionia\Porm\Database\Utils\JoinParseTrait;
 
 /**
  * Builds relationships across multiple tables.
@@ -28,7 +30,7 @@ class Join extends ContractBuilder
 {
     private string $table;
 
-    private Database $database;
+    private Piql $database;
 
     private bool $preventLimit = false;
 
@@ -47,7 +49,7 @@ class Join extends ContractBuilder
     use JoinParseTrait;
     use FilterTrait;
 
-    public function __construct($table, Database $database, $columns = "*", $where = [])
+    public function __construct($table, Piql $database, $columns = "*", $where = [])
     {
         $this->table = $table;
         $this->database = $database;

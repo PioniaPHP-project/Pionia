@@ -21,6 +21,7 @@ use PDOStatement;
 use Pionia\Porm\Core\Raw;
 use Pionia\Porm\Database\Aggregation\AggregateTrait;
 use Pionia\Porm\Database\Builders\Builder;
+use Pionia\Porm\Database\Builders\Join;
 
 trait TableLevelQueryTrait
 {

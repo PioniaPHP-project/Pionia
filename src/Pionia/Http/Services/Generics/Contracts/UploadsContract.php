@@ -3,6 +3,7 @@
 namespace Pionia\Http\Services\Generics\Contracts;
 
 use Exception;
+use Pionia\Utils\Support;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -32,6 +33,7 @@ trait UploadsContract
      */
     protected function defaultUpload(UploadedFile $file, string $fileName): string
     {
+        $baseDir = alias(\DIRECTORIES::STORAGE_DIR->name);
         $fileSystem = new FileSystem();
         $settings = env('uploads', ['max_size' => 1024 * 1024 * 2, 'media_dir' => 'media', 'media_url' => 'media']);
         $size = $file->getSize();
@@ -43,16 +45,17 @@ trait UploadsContract
         }
         $mediaDir= $settings['media_dir'];
         $mediaUrl= $settings['media_url']?? '/media';
-        $fileName = $file->getClientOriginalName();
+        $extension = $file->guessClientExtension();
+        $fileName = Support::slugify(str_replace($extension, '', trim($file->getClientOriginalName()))). '.' . $extension;
         if (str_starts_with($mediaDir, '/')){
             $mediaDir = substr($mediaDir, 1);
         }
-        $baseDir = app()->appRoot('public');
         if (!str_ends_with($baseDir, '/')){
             $baseDir = $baseDir . '/';
         }
         $fullPath = $baseDir . $mediaDir;
-        if ($fileSystem->exists($fullPath. '/'. $fileName)) {
+        $fileNameToSave = $fullPath.DIRECTORY_SEPARATOR. $fileName;
+        if ($fileSystem->exists($fileNameToSave)) {
             $fileName = time() . '_' . $fileName;
         }
         $file->move($fullPath, $fileName);

@@ -17,8 +17,8 @@
 namespace Pionia\Porm\Database\Aggregation;
 
 use Exception;
-use Porm\Core\ContractBuilder;
-use Porm\Core\Database;
+use Pionia\Porm\Core\ContractBuilder;
+use Pionia\Porm\Core\Piql;
 
 /**
  * Aggregate functions for the PORM library.
@@ -52,7 +52,7 @@ class Agg extends ContractBuilder
      */
     public function random(string $columnName): Agg
     {
-        $arg = [$columnName => Database::raw("RAND()")];
+        $arg = [$columnName => Piql::raw("RAND()")];
         $this->aggregated = array_merge($this->aggregated, $arg);
         return $this;
     }
@@ -65,7 +65,7 @@ class Agg extends ContractBuilder
      */
     public function sum(string $columName, string $column): Agg
     {
-        $arg = [$columName => Database::raw("SUM(<$column>)")];
+        $arg = [$columName => Piql::raw("SUM(<$column>)")];
         $this->aggregated = array_merge($this->aggregated, $arg);
         return $this;
     }
@@ -78,7 +78,7 @@ class Agg extends ContractBuilder
      */
     public function avg(string $columName, string $column): Agg
     {
-        $arg = [$columName => Database::raw("AVG(<$column>)")];
+        $arg = [$columName => Piql::raw("AVG(<$column>)")];
         $this->aggregated = array_merge($this->aggregated, $arg);
         return $this;
     }
@@ -91,7 +91,7 @@ class Agg extends ContractBuilder
      */
     public function max(string $columnName, string $column): Agg
     {
-        $arg = [$columnName => Database::raw("MAX(<$column>)")];
+        $arg = [$columnName => Piql::raw("MAX(<$column>)")];
         $this->aggregated = array_merge($this->aggregated, $arg);
         return $this;
     }
@@ -104,7 +104,7 @@ class Agg extends ContractBuilder
      */
     public function now(string $columName): Agg
     {
-        $arg = [$columName => Database::raw("NOW()")];
+        $arg = [$columName => Piql::raw("NOW()")];
         $this->aggregated = array_merge($this->aggregated, $arg);
         return $this;
     }
@@ -119,7 +119,7 @@ class Agg extends ContractBuilder
     public function uuid(string $columnName, ?string $uuidString): Agg
     {
         if (!$uuidString) {
-            $uuidString = Database::raw("UUID()");
+            $uuidString = Piql::raw("UUID()");
         }
         $arg = [$columnName => $uuidString];
         $this->aggregated = array_merge($this->aggregated, $arg);

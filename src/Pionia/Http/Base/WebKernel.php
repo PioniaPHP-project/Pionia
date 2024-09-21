@@ -21,6 +21,7 @@ use Pionia\Middlewares\MiddlewareChain;
 use Pionia\Utils\Microable;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
@@ -65,6 +66,16 @@ class WebKernel implements KernelContract
         return $request->getPathInfo() === '' || $request->getPathInfo() === '/';
     }
 
+    /**
+     * If its an upload we load it from the media folder in our storage
+     * @param Request $request
+     * @return bool
+     */
+    private function isMedia(Request $request): bool
+    {
+        return str_starts_with($request->getPathInfo(), '/media/');
+    }
+
     public function handle(Request $request): Response
     {
         try {
@@ -105,7 +116,7 @@ class WebKernel implements KernelContract
 
         } catch (Exception | Throwable $e) {
             $this->logger->error("Error handling request " . $request->getMethod() . "::" . $request->getUri(), ["error" => $e->getMessage()]);
-            $response = BaseResponse::jsonResponse(500, $e->getMessage());
+            $response = response(returnCode: env('SERVER_ERROR_CODE', 500), returnMessage: $e->getMessage());
         }
 
         return $this->terminate($request, $response);
@@ -122,15 +133,31 @@ class WebKernel implements KernelContract
     private function resolveFrontEnd(Request $request): void
     {
         $fs = new Filesystem();
-
-        if ($this->isRoot($request)) {
+        if ($this->isMedia($request)){
+            $path = trim($request->getPathInfo(), '/');
+            $filePath = alias(DIRECTORIES::STORAGE_DIR->name).DIRECTORY_SEPARATOR.$path;
+            $file = new File($filePath);
+            if ($file->isFile()) {
+                $response = new Response($file->getContent(), ResponseAlias::HTTP_OK, ['Content-Type' => $file->getMimeType()]);
+                $this->app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request, $response);
+                $response->prepare($request)->send(false);
+            } else {
+                $response = new Response(response(
+                    returnCode: env('NOT_FOUND_CODE', 404),
+                    returnMessage: "File not found"
+                )->getPrettyResponse(), ResponseAlias::HTTP_OK);
+                $response->prepare($request)->send();
+            }
+            exit();
+        } else if ($this->isRoot($request)) {
             $this->serveSpa($request);
-        } else {
+        }  else {
             // check if its file(images, js, css, etc) and load it
             $path = trim($request->getPathInfo(), '/');
             $filePath = asset($path);
             if ($fs->exists($filePath)) {
-                $response = new Response(file_get_contents($filePath), ResponseAlias::HTTP_OK, ['Content-Type' => $this->autoDiscoverContentType($filePath)]);
+                $file = new File($filePath);
+                $response = new Response($file->getContent(), ResponseAlias::HTTP_OK, ['Content-Type' => $file->getMimeType()]);
                 $this->app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request, $response);
                 $response->prepare($request)->send(false);
                 exit();
@@ -179,10 +206,11 @@ class WebKernel implements KernelContract
     private function serveSpa(Request $request): void
     {
         $path = alias(DIRECTORIES::STATIC_DIR->name).DIRECTORY_SEPARATOR.'index.html';
-        if (!file_exists($path)) {
+        $file = new File($path);
+        if (!$file->isFile()) {
             $this->loadWelcomePage($request);
         } else {
-            $response = new Response(file_get_contents($path), ResponseAlias::HTTP_OK, ['Content-Type' => $this->autoDiscoverContentType($path)]);
+            $response = new Response($file->getContent(), ResponseAlias::HTTP_OK, ['Content-Type' => $file->getMimeType()]);
             $response->prepare($request)->send();
             exit();
         }

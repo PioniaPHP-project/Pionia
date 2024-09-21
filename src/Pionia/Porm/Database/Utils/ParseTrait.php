@@ -17,7 +17,6 @@
 namespace Pionia\Porm\Database\Utils;
 
 use PDOStatement;
-use Pionia\Collections\Arrayable;
 
 trait ParseTrait
 {

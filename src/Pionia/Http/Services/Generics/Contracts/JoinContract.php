@@ -4,8 +4,7 @@ namespace Pionia\Http\Services\Generics\Contracts;
 
 use Exception;
 use Pionia\Http\Services\JoinType;
-use Porm\Database\Builders\Join;
-use Porm\Porm;
+use Pionia\Porm\Database\Builders\Join;
 
 trait JoinContract
 {
@@ -208,8 +207,7 @@ trait JoinContract
         $this->detectAndAddColumns();
         $theJoin = $this->getJoinQuery();
         if (!$theJoin || empty($theJoin->getJoins())){
-           $theJoin = Porm::from($this->table)
-                ->using($this->connection)
+           $theJoin = table($this->table, $this->connection)
                 ->columns($this->getListColumns())
                 ->join();
         }

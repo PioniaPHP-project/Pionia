@@ -7,3 +7,7 @@ build
 .phpunit.result.cache
 
 **.log
+
+example/storage/logs
+example/storage/cache
+example/storage/media

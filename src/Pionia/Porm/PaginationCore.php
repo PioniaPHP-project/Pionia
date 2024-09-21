@@ -61,6 +61,7 @@ class PaginationCore
             ->where($this->parged['where']);
 
         $this->baseQuery = $callback($query);
+
         if (!is_a($this->baseQuery, Join::class) && !is_a($this->baseQuery, Builder::class)){
             throw new Exception("Invalid query builder returned from the callback");
         }
