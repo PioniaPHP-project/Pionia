@@ -2,7 +2,7 @@
 
 namespace Pionia\Logging;
 
-use DI\Container;
+use DIRECTORIES;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Formatter\HtmlFormatter;
 use Monolog\Formatter\JsonFormatter;
@@ -11,7 +11,7 @@ use Monolog\Formatter\ScalarFormatter;
 use Monolog\Formatter\SyslogFormatter;
 use Monolog\Handler\ErrorLogHandler;
 use Monolog\Logger;
-use Pionia\Base\EnvResolver;
+use Pionia\Base\PioniaApplication;
 use Pionia\Collections\Arrayable;
 use Pionia\Utils\Containable;
 use Psr\Log\LoggerInterface;
@@ -61,30 +61,21 @@ class PioniaLogger implements LoggerInterface
      */
     private ?string $destination = null;
 
-    public function __construct(Container $context, EnvResolver | Arrayable | null $settings = null)
+    public function __construct(PioniaApplication $app)
     {
-        $this->context = $context;
-        // resolve the settings from the application
-        if ($settings instanceof Arrayable) {
-            $this->settings = $settings;
-        } else if ($context->has('env')) {
-            $this->settings = $this->getSilently('env');
-        } else if ($context->has(EnvResolver::class)) {
-            $resolver = $this->getSilently(EnvResolver::class);
-            $this->settings = $resolver->getEnv();
-        } else {
-            $this->settings = new Arrayable([
+
+        $context = $app->context;
+        $this->context = $app->context;
+
+        $this->settings = arr($app->getEnv('logging') ?? [
                 'APP_NAME' => 'Pionia',
                 'LOG_FORMAT' => 'TEXT',
                 'LOG_PROCESSORS' => [],
                 'LOG_DESTINATION' => 'stdout',
                 'LOG_HANDLERS' => [],
-                'HIDE_IN_LOGS' => 'password,pass,pin,passwd,secret_key,pwd,token,credit_card,creditcard,cc,secret,cvv,cvn',
                 'HIDE_SUB' => '*********'
             ]);
-        }
-//        $settings = $settings?? $application->get('env')->has("logging") ? $application->get('env')->get("logging") : (new );
-
+    
         $name = $this->getOrDefault('APP_NAME', 'Pionia');
 
         if ($this->settings->has('APP_NAME')) {
@@ -155,7 +146,7 @@ class PioniaLogger implements LoggerInterface
                 $stream = 'php://stderr';
                 break;
             default:
-                $dir = $this->getOrFail('LOGS_DIR');
+                $dir = alias(DIRECTORIES::LOGS_DIR->name);
                 $destination = $dir . DIRECTORY_SEPARATOR . $destination;
                 if ($fs->exists($destination)) {
                     $stream = $destination;
@@ -231,8 +222,12 @@ class PioniaLogger implements LoggerInterface
             }
         }
 
-        $formatter->ignoreEmptyContextAndExtra();
-        $formatter->setJsonPrettyPrint(true);
+        if(method_exists($formatter, 'ignoreEmptyContextAndExtra')){ 
+            $formatter->ignoreEmptyContextAndExtra();
+        }
+        if (method_exists($formatter, 'setJsonPrettyPrint')) {
+            $formatter->setJsonPrettyPrint(true);
+        }
         $this->formatter = $formatter;
     }
 

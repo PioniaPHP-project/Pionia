@@ -242,9 +242,20 @@ if (!function_exists('yesNo')){
      * @param string|null $noPhrase The phrase to return if the condition is false
      * @return string
      */
-    function yesNo(bool $condition, ?string $yesPhrase = 'Yes', ?string $noPhrase = 'No'): string
+    function yesNo(mixed $condition, ?string $yesPhrase = 'Yes', ?string $noPhrase = 'No'): string
     {
-        return $condition ? $yesPhrase : $noPhrase;
+        return asBool($condition) ? $yesPhrase : $noPhrase;
+    }
+}
+
+if (!function_exists(function: 'asBool')) {
+    /**
+     * convert a value to a boolean
+     * @return array
+     */
+    function asBool(mixed $value): bool
+    {
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? false;
     }
 }
 

@@ -278,6 +278,7 @@ use Pionia\Utils\Support;
         <div>
             <h1 class="text-success text-center font-monospace">🚀 {{$app->getAppName()}} application is active 🚀</h1>
             <h6 class="font-monospace">Environment: {{env('APP_ENV')}}</h6>
+            <h6 class="font-monospace">Version: {{$app->getVersion()}}</h6>
             <h6 class="font-monospace">DEBUG: {{yesNo(env('DEBUG'))}}</h6>
             <?php if (!$app->welcomePageSettings()->get('HIDE_PORT', false)): ?>
             <h6 class="font-monospace">PORT: {{env('SERVER_PORT')}}</h6>
@@ -286,7 +287,7 @@ use Pionia\Utils\Support;
         </div>
     </div>
 
-    <?php if (!$app->welcomePageSettings()->get('HIDE_QUICK_START', false)): ?>
+    <?php if (!$app->welcomePageSettings()->get('HIDE_QUICK_START', false) && asBool(env('DEBUG'))): ?>
         <hr class="bg-pink-500">
         <h1 class="text-secondary-emphasis my-2 font-monospace">💫 Quick Start</h1>
         <div class="row gap-4 flex-wrap row-cols-3 align-content-center">
@@ -364,7 +365,7 @@ use Pionia\Utils\Support;
     </div>
     <?php endif; ?>
 
-    <?php if (!$app->welcomePageSettings()->get('HIDE_CONTEXT', false)): ?>
+    <?php if (!$app->welcomePageSettings()->get('HIDE_CONTEXT', false) && asBool(env('DEBUG'))): ?>
         <hr class="bg-pink-500">
     <h1 class="text-secondary-emphasis my-2">🏝️ Context</h1>
     <div class="row gap-2 align-content-center">
@@ -400,7 +401,7 @@ use Pionia\Utils\Support;
     </div>
     <?php endif; ?>
 
-    <?php if ($app->isDebug() && !$app->welcomePageSettings()->get('HIDE_ENV', false)): ?>
+    <?php if ($app->isDebug() && !$app->welcomePageSettings()->get('HIDE_ENV', false) && asBool(env('DEBUG'))): ?>
         <hr class="bg-pink-500">
         <h1 class="text-secondary-emphasis my-2">✅ Environment Variables:</h1>
     <div class="border border-danger rounded-1 p-2 bg-slate-200 text-wrap">
