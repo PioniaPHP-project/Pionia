@@ -184,11 +184,6 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         return $this;
     }
 
-    public function isDebug()
-    {
-        return $this->getEnv('DEBUG', true);
-    }
-
     public function getAppName()
     {
         return env('APP_NAME', $this->appName);

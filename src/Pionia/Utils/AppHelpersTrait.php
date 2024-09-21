@@ -41,17 +41,22 @@ trait AppHelpersTrait
      */
     public function isDevelopment(): bool
     {
-        return $this->environment() === 'development';
+        return str_contains($this->environment(), 'dev');
+    }
+
+    public function isDebug()
+    {
+        return $this->getEnv('DEBUG', true);
     }
 
     public function isProduction(): bool
     {
-        return $this->environment() === 'production';
+        return str_contains($this->environment(), 'prod');
     }
 
     public function isTesting(): bool
     {
-        return $this->environment() === 'testing';
+        return str_contains($this->environment(), 'test');
     }
 
     public function environment(): string
