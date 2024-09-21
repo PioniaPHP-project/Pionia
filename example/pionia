@@ -1,15 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-if (PHP_SAPI !== 'cli') {
-    echo 'This script can only be run from the command line.';
-    exit(1);
-}
-
-if (version_compare(PHP_VERSION, '8.1.0', '<')) {
-    echo 'This script requires PHP 8.1 or later.';
-    exit(1);
-}
 if (!defined('PIONIA_START')) {
     define('PIONIA_START', microtime(true));
 }
