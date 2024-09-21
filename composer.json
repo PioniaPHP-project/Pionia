@@ -53,8 +53,7 @@
         "symfony/cache": "^7.1",
         "symfony/asset": "^7.1",
         "ext-fileinfo": "*",
-        "symfony/mime": "^7.1",
-        "composer/composer": "^2.0"
+        "symfony/mime": "^7.1"
     },
     "provide": {
         "psr/container-implementation": "1.0"
