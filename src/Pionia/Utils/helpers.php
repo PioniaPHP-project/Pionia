@@ -6,12 +6,14 @@ use Pionia\Base\PioniaApplication;
 use Pionia\Cache\PioniaCache;
 use Pionia\Collections\Arrayable;
 use Pionia\Collections\HighOrderTapProxy;
+use Pionia\Http\Request\Request;
 use Pionia\Http\Response\BaseResponse;
 use Pionia\Http\Services\Service;
 use Pionia\Porm\Core\Porm;
 use Pionia\Porm\Database\Db;
 use Pionia\Templating\TemplateEngineInterface;
 use Pionia\Utils\Support;
+use Pionia\Validations\Validator;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Asset\PathPackage;
 use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
@@ -191,11 +193,16 @@ if (!function_exists('db')) {
 if (!function_exists('table')){
     /**
      * Run any pionia-powered queries
-     * @param string $tableName
-     * @param string|null $tableAlias
-     * @param string|null $using
-     * @return Porm
+     * @param string $tableName The name of the table to connect to
+     * @param string|null $tableAlias The alias to use for the table provided
+     * @param string|null $using The connection to use
+     * @return Porm The porm instance for further chaining of queries
      * @throws Exception
+     *
+     * @example
+     * ```php
+     * table('users')->where(['username' => 'Pionia'])->get();
+     * ```
      */
     function table(string $tableName, ?string $tableAlias = null, ?string $using = null): Porm
     {
@@ -205,6 +212,10 @@ if (!function_exists('table')){
 }
 
 
+/**
+ * Get any alias from the application container
+ * @return array
+ */
 if (!function_exists('alias')) {
     function alias($key)
     {
@@ -213,6 +224,9 @@ if (!function_exists('alias')) {
 }
 
 if (!function_exists('directoryFor')) {
+    /**
+     * Get any directory from the application container
+     */
     function directoryFor($key)
     {
         $dir = arr(allBuiltins()?->get('directories') ?? []);
@@ -221,6 +235,13 @@ if (!function_exists('directoryFor')) {
 }
 
 if (!function_exists('yesNo')){
+    /**
+     * This function returns a yes or no phrase based on the condition
+     * @param bool $condition The condition to check
+     * @param string|null $yesPhrase The phrase to return if the condition is true
+     * @param string|null $noPhrase The phrase to return if the condition is false
+     * @return string
+     */
     function yesNo(bool $condition, ?string $yesPhrase = 'Yes', ?string $noPhrase = 'No'): string
     {
         return $condition ? $yesPhrase : $noPhrase;
@@ -231,7 +252,7 @@ if (!function_exists('yesNo')){
 if (!function_exists('write_ini_file')) {
     /**
      * Write an ini configuration file
-     *
+     * This writes to the file in a lock-safe manner
      * @param string $file
      * @param array  $array
      * @return bool
@@ -298,6 +319,10 @@ if (!function_exists('write_ini_file')) {
 
 
 if (!function_exists('logger')){
+    /**
+     * Get the logger instance from the application container
+     * @return LoggerInterface
+     */
     function logger(): LoggerInterface
     {
         return app()?->logger;
@@ -370,6 +395,51 @@ if (!function_exists('cachedResponse')){
     }
 }
 
+if (!function_exists('recached')){
+    /**
+     * Acronym for `cachedResponse` function but with more readable arguments
+     * @param Service $instance The service we are currently in, just pass `this` here
+     * @param mixed ...$args The arguments to pass to the `cachedResponse` function
+     * @note This function is only useful if the service has caching enabled
+     * @return BaseResponse
+     */
+    function recached(
+        Service $instance,
+        ...$args,
+    ): BaseResponse
+    {
+        $returnCode = $args['returnCode'] ?? 0;
+        $returnMessage = $args['returnMessage'] ?? null;
+        $returnData = $args['returnData'] ?? null;
+        $extraData = $args['extraData'] ?? null;
+        $ttl = $args['ttl'] ?? 60;
+        return (new class ($instance, $returnCode, $returnMessage, $returnData, $extraData, $ttl) {
+            private Service $instance;
+            private int $returnCode;
+            private string $returnMessage;
+            private mixed $returnData;
+            private mixed $extraData;
+            private mixed $ttl;
+
+            public function __construct(Service $instance, int $returnCode, string $returnMessage, mixed $returnData, mixed $extraData, mixed $ttl)
+            {
+                $this->instance = $instance;
+                $this->returnCode = $returnCode;
+                $this->returnMessage = $returnMessage;
+                $this->returnData = $returnData;
+                $this->extraData = $extraData;
+                $this->ttl = $ttl;
+            }
+
+            public function handle(): BaseResponse
+            {
+                $response = response($this->returnCode, $this->returnMessage, $this->returnData, $this->extraData);
+                return cachedResponse($this->instance, $response, $this->ttl);
+            }
+        })->handle();
+    }
+}
+
 
 if (!function_exists('render')){
     /**
@@ -417,5 +487,65 @@ if (!function_exists('asset')){
             return $path;
         }
         return null;
+    }
+}
+
+
+if (! function_exists('blank')) {
+    /**
+     * Determine if the given value is "blank".
+     *
+     * @phpstan-assert-if-false !=null|'' $value
+     *
+     * @phpstan-assert-if-true !=numeric|bool $value
+     *
+     * @param  mixed  $value
+     * @return bool
+     */
+    function blank(mixed $value): bool
+    {
+        if (is_null($value)) {
+            return true;
+        }
+
+        if (is_string($value)) {
+            return trim($value) === '';
+        }
+
+        if (is_numeric($value) || is_bool($value)) {
+            return false;
+        }
+
+        if ($value instanceof Countable) {
+            return count($value) === 0;
+        }
+
+        if ($value instanceof Stringable) {
+            return trim((string) $value) === '';
+        }
+
+        if (is_a($value, Arrayable::class)) {
+            return $value->isEmpty();
+        }
+
+        return empty($value);
+    }
+}
+
+if (!function_exists('validate')){
+    /**
+     * Validate data
+     * @param string $field
+     * @param Arrayable|Request|Service $data
+     * @return Validator
+     */
+    function validate(string $field, Arrayable | Request | Service $data): Validator
+    {
+        if ($data instanceof Service) {
+            $data = $data->request->getData();
+        } elseif ($data instanceof Request) {
+            $data = $data->getData();
+        }
+        return Validator::validate($field, $data);
     }
 }

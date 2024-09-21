@@ -6,7 +6,6 @@ use Exception;
 use Pionia\Utils\Support;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\InvalidArgumentException;
-use function DI\string;
 
 /**
  * Add caching capabilities to any class.

@@ -5,5 +5,6 @@ composer.lock
 src/Core/.DS_Store
 build
 .phpunit.result.cache
+example
 
 **.log
