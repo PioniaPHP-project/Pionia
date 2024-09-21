@@ -38,7 +38,6 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Process\PhpExecutableFinder;
 
 
@@ -155,8 +154,6 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         $this->env = $this->envResolver->getEnv();
         $this->context->set('env', $this->env);
 
-        $this->resolveLogger();
-
         // we set the env to the context
         $this->context->set(EnvResolver::class, $this->env);
         // we populate the app name from the env or set it to the default
@@ -165,7 +162,9 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         $this->context->set('BASE_DIR', $this->appRoot());
 
         // we populate the logs directory
-        $this->context->set('LOGS_DIR', $this->appRoot($this->env->get('LOGS_DIR') ?? 'logs'));
+        $this->context->set('LOGS_DIR', $this->alias(DIRECTORIES::LOGS_DIR->name));
+
+        $this->resolveLogger();
     }
 
     /**
@@ -177,7 +176,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         $logger = $this->getSilently(LoggerInterface::class);
 
         if (!$logger) {
-            $logger = new PioniaLogger($this->context);
+            $logger = new PioniaLogger($this);
             $this->context->set(LoggerInterface::class, $logger);
         }
         $this->logger = $logger;

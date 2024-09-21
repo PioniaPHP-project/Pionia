@@ -95,7 +95,10 @@ class EnvResolver
         $dbSections['size'] = $sectionCount;
         $dbSections['connections'] = $connections;
         $this->dotenv->populate(['databases' => $dbSections], true);
-        $this->dotenv->populate(['DEBUG' => true]);
+        if (!$this->env->has('DEBUG')){
+            $this->dotenv->populate(['DEBUG' => true], true);
+        }
+        // $this->dotenv->populate(['DEBUG' => true]);
         $this->env->merge($_ENV);
         $this->env->merge($_SERVER);
     }

@@ -39,6 +39,7 @@ enum DIRECTORIES {
     case STORAGE_DIR;
     case STATIC_DIR;
     case WELCOME_PAGE;
+    case LOGS_DIR;
 }
 
 // register here all builtins. These can be commands, Middleware, Authentications, etc.
@@ -77,6 +78,7 @@ if (!function_exists('allBuiltins')) {
                 DIRECTORIES::VENDOR_DIR->name => 'vendor',
                 DIRECTORIES::PUBLIC_DIR->name => 'public',
                 DIRECTORIES::CACHE_DIR->name => 'storage/cache',
+                DIRECTORIES::LOGS_DIR->name => 'storage/logs',
                 DIRECTORIES::STORAGE_DIR->name => 'storage',
                 DIRECTORIES::STATIC_DIR->name => 'static',
             ],

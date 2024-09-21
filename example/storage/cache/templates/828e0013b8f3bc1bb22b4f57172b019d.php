@@ -1,3 +1,4 @@
+<?php class_exists('Pionia\Templating\TemplateEngine') or exit; ?>
 <?php
 
 use Pionia\Collections\Carbon;
@@ -9,7 +10,7 @@ use Pionia\Utils\Support;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{app->getAppName()}} Works</title>
+    <title><?php echo app->getAppName() ?> Works</title>
     <meta name="description" content="Pionia Framework">
     <meta name="author" content="Jete Ezra">
     <link rel="favicon" href="./favicon.ico">
@@ -276,12 +277,12 @@ use Pionia\Utils\Support;
     <div class="d-flex justify-content-start align-items-center gap-2 py-5">
         <img src="./favicon.ico" class="rounded " alt="Pionia Framework" >
         <div>
-            <h1 class="text-success text-center font-monospace">🚀 {{$app->getAppName()}} application is active 🚀</h1>
-            <h6 class="font-monospace">Environment: {{env('APP_ENV')}}</h6>
-            <h6 class="font-monospace">Version: {{$app->getVersion()}}</h6>
-            <h6 class="font-monospace">DEBUG: {{yesNo(env('DEBUG'))}}</h6>
+            <h1 class="text-success text-center font-monospace">🚀 <?php echo $app->getAppName() ?> application is active 🚀</h1>
+            <h6 class="font-monospace">Environment: <?php echo env('APP_ENV') ?></h6>
+            <h6 class="font-monospace">Version: <?php echo $app->getVersion() ?></h6>
+            <h6 class="font-monospace">DEBUG: <?php echo yesNo(env('DEBUG')) ?></h6>
             <?php if (!$app->welcomePageSettings()->get('HIDE_PORT', false)): ?>
-            <h6 class="font-monospace">PORT: {{env('SERVER_PORT')}}</h6>
+            <h6 class="font-monospace">PORT: <?php echo env('SERVER_PORT') ?></h6>
             <?php endif ?>
             <h6 class="font-monospace">START TIME:<?= Carbon::createFromTimestamp(PIONIA_START)->toString()?></h6>
         </div>
@@ -371,32 +372,32 @@ use Pionia\Utils\Support;
     <div class="row gap-2 align-content-center">
         <div class="bg-pink-500 col-2 rounded">
             <p class="text-center text-white text-emphasis text-small rounded-1">Middlewares</p>
-            <p class="text-center text-white h3 ">{{$app->getSilently('middlewares')?->size()}}</p>
+            <p class="text-center text-white h3 "><?php echo $app->getSilently('middlewares')?->size() ?></p>
         </div>
 
         <div class="bg-pink-500 col-2 rounded">
             <p class="text-center text-white  text-emphasis text-small  rounded-1">Authentications</p>
-            <p class="text-center text-white h3 ">{{$app->getSilently('authentications')?->size()}}</p>
+            <p class="text-center text-white h3 "><?php echo $app->getSilently('authentications')?->size() ?></p>
         </div>
 
         <div class="bg-pink-500 col-2 rounded">
             <p class="text-center text-white bg-pink-500 text-emphasis text-small  rounded-1">Routes</p>
-            <p class="text-center text-white h3 ">{{$app->getSilently('routes')?->size()}}</p>
+            <p class="text-center text-white h3 "><?php echo $app->getSilently('routes')?->size() ?></p>
         </div>
 
         <div class="bg-pink-500 col-2 rounded">
             <p class="text-center text-white bg-pink-500 text-emphasis text-small  rounded-1">Aliases</p>
-            <p class="text-center text-white h3 ">{{$app->getSilently('aliases')?->size()}}</p>
+            <p class="text-center text-white h3 "><?php echo $app->getSilently('aliases')?->size() ?></p>
         </div>
 
         <div class="bg-pink-500 col-2 rounded">
             <p class="text-center text-white bg-pink-500 text-emphasis text-small  rounded-1">Commands</p>
-            <p class="text-center text-white h3 ">{{$app->getSilently('commands')?->size()}}</p>
+            <p class="text-center text-white h3 "><?php echo $app->getSilently('commands')?->size() ?></p>
         </div>
 
         <div class="bg-pink-500 col-2 rounded">
             <p class="text-center text-white bg-pink-500 text-emphasis text-small  rounded-1">Db Connections</p>
-            <p class="text-center text-white h3 ">{{$app->getDiscoveredConnections()->size()}}</p>
+            <p class="text-center text-white h3 "><?php echo $app->getDiscoveredConnections()->size() ?></p>
         </div>
     </div>
     <?php endif; ?>
@@ -407,8 +408,8 @@ use Pionia\Utils\Support;
     <div class="border border-danger rounded-1 p-2 bg-slate-200 text-wrap">
         <?php foreach (env()->all() as $key => $value): ?>
                 <div class="d-flex gap-2">
-            <p class="text-center text-white bg-black text-emphasis text-small p-2 align-items-center align-content-center  justify-content-center rounded-1">{{$key}}</p>
-            <p class="text-left text-primary text-sm text-wrap text-break">{{is_array($value) ? Support::jsonify($value) : $value}}</p></div>
+            <p class="text-center text-white bg-black text-emphasis text-small p-2 align-items-center align-content-center  justify-content-center rounded-1"><?php echo $key ?></p>
+            <p class="text-left text-primary text-sm text-wrap text-break"><?php echo is_array($value) ? Support::jsonify($value) : $value ?></p></div>
 
         <?php endforeach; ?>
     </div>
