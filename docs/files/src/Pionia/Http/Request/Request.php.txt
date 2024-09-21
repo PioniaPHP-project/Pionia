@@ -1,9 +1,11 @@
 <?php
 
-namespace Pionia\Pionia\Http\Request;
+namespace Pionia\Http\Request;
 
-use Pionia\Pionia\Auth\ContextUserObject;
-use Pionia\Pionia\Utils\Arrayable;
+use Pionia\Auth\ContextUserObject;
+use Pionia\Base\PioniaApplication;
+use Pionia\Collections\Arrayable;
+use Pionia\Utils\Microable;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 
@@ -20,6 +22,11 @@ use Symfony\Component\HttpFoundation\FileBag;
  */
 class Request extends \Symfony\Component\HttpFoundation\Request
 {
+
+    use Microable;
+
+    private PioniaApplication $app;
+
      private bool $authenticated = false;
 
      private ContextUserObject | null $auth = null;
@@ -98,8 +105,10 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      */
     public function getData(): Arrayable
     {
-        $data = array_merge($this->request->all(), $this->query->all(), $this->attributes->all(), $this->cookies->all(), $this->files->all(), $this->server->all());
-        return Arrayable::toArrayable($data);
+        return arr($this->cookies->all())
+            ->merge($this->query->all())
+            ->merge($this->files->all())
+            ->merge($this->getPayload()->all());
     }
 
     /**
@@ -115,4 +124,13 @@ class Request extends \Symfony\Component\HttpFoundation\Request
         return null;
     }
 
+    public function setApplication(PioniaApplication $application): void
+    {
+        $this->app = $application;
+    }
+
+    public function getApplication(): PioniaApplication
+    {
+        return $this->app;
+    }
 }

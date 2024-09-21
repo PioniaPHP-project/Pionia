@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Utils;
+namespace Pionia\Utils;
 
 
 trait PathsTrait
@@ -49,6 +49,18 @@ trait PathsTrait
 
     public function envPath(?string $path = null): string
     {
-        return $path ? $this->appRoot('environment').DIRECTORY_SEPARATOR.$path : $this->appRoot('environment');
+        $dirs = allBuiltins()->get('directories');
+        $folder = $dirs[\DIRECTORIES::ENVIRONMENT_DIR->name] ?? $this->appRoot('environment');
+        return $path ? $folder.DIRECTORY_SEPARATOR.$path : $folder;
+    }
+
+    /**
+     * Get the directory for a given alias
+     * @param string $aliasName
+     * @return string|null
+     */
+    public function getDirFor(string $aliasName): ?string
+    {
+        return $this->builtinDirectories()->get($aliasName);
     }
 }

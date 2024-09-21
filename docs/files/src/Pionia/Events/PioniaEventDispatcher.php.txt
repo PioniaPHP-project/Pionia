@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Events;
+namespace Pionia\Events;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
 

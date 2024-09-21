@@ -1,72 +1,101 @@
-# Pioneer Core
+# Pionia Core
 
-##### This is the core of the PhP Pioneer Framework
+##### This is the core of the Pionia Framework
 
 
 ## Installation
 
 ```bash
-composer require pionia/pionia-core
+composer require pionia/pionia
 ```
-This is meant for the core developers of the Pioneer Core not the framework itself.
-If you are looking to use or get started with the framework, please find the [Pioneer Framework here](https://github.com/PioniaPHP-project/Pionia-App)
+This is meant for the core developers of the Pionia Core not the framework itself.
+If you are looking to use or get started with the framework, please find the [Pionia Framework here](https://github.com/PioniaPHP-project/Application)
 
 ## Usage
 
-#### [Go to the documentation here](https://pioniaphp-project.github.io/PioniaCore/)
+#### [Go to the documentation here](https://pioniaphp-project.github.io/Pionia/)
 
-# Road Map for the Pioneer Core(Subject to change)
+# Road Map for the Pionia Framework(Subject to change)
 
-> ##### Coverage 28/37 -- 75%
+> ##### Coverage 25/26 -- 96%
 
-### Core 1st Phase
-- [x] Core Kernel
-- [x] Core Config and Settings discovery
-- [x] Core Logger
-- [x] Core Request and Response handling
-- [x] Core Routing matching Moonlight pattern
-- [x] Core Middleware
-- [x] Core Services
-- [x] Core Database Configuration
-- [x] Core Query Builder with integration with PORM
-- [x] Core Authentication and Authorization
-- [x] Core Error Handling to match Moonlight pattern
-- [x] Pionia cli
-- [x] Core Commands and Console
-- [x] Core CodeGenerators
-- [x] Core Documentation
-- [x] Core Performance Testing and Review
-- [x] Core Security Testing and Review
-- [x] Core Documentation Testing and Review
-- [x] Release the first version of the core
+## Packages covered
 
-### Core 3rd Phase
-- [X] Serving static file(hosting frontend using Pionia)
-- [x] Handling file uploads
-- Adding Pionia Mailer
-- Testing and Review
-[-] Update the core docs
-- Release the third version of the core
+- [x] Pionia\Core
+- [x] Authentication
+- [x] Database
+- [x] File System
+-  Mail
+- [x] Session
+- [x] Validation
+- [x] Templating engine
+- [x] Routing
+- [x] Middleware
+- [x] Request
+- [x] Response
+- [x] Services
+- [x] Switches
+- [x] Config and Environments
+- [x] Logging
+- [x] Cors
+- [x] HTTP Kernel
+- [x] Events
+- [x] Console
+- [x] Cache
+- [x] Exception handling
+- [x] Helper functions
+- [x] CLI Bootstrapping
+- [x] Uploading and Serving Media Files
+- [x] Collections
 
-### Core 2nd Phase
+## Setting up the this project
 
-- [x] Core Performance Testing and Review
-- [x] Core Security Testing and Review
-- [x] Core Documentation Testing and Review
-- [x] Data Validators
-- [x] Core Unit Testing
-- [X] Update the core docs 
-- [X] Release the second version of the core
+### Prerequisites
 
+- PHP 8.1 or higher
+- Composer
+- Git
+- Any Editor/IDE of your choice preferably PHPStorm or Intellij IDEA
 
+### Installation
 
-### Core 4th Phase
-- Testing and Review
-- Update the core docs
-- Release the fourth version of the core
-- Community engagement and support
-- Community contributions
+Clone the repository
 
+```bash
+git clone https://github.com/PioniaPHP-project/Pionia.git
+```
+
+Change directory to the project folder
+
+```bash
+cd Pionia
+```
+
+Install the dependencies
+
+```bash
+composer install
+```
+
+### Running the tests
+
+```bash
+composer test
+```
+
+### Compiling the core dev docs
+
+```bash
+composer document
+```
+
+### Contributing
+
+Please read the [CONTRIBUTING.md](/CONTRIBUTING.md) file for more information on how to contribute to this project.
+
+### Authors
+
+- [**Jet2018**](https://github.com/jet2018)
 
 ## License
 [MIT License](/LICENSE)

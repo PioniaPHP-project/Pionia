@@ -1,8 +1,8 @@
 <?php
 
-namespace Pionia\Pionia\Contracts;
+namespace Pionia\Contracts;
 
-use Pionia\Pionia\Http\Request\Request;
+use Pionia\Http\Request\Request;
 
 interface AuthenticationChainContract
 {
@@ -29,7 +29,7 @@ interface AuthenticationChainContract
     /**
      * Run the authentication chain on a request
      */
-    public function run(Request $request);
+    public function handle(Request $request);
 
     /**
      * Run the next authentication backend in the chain.

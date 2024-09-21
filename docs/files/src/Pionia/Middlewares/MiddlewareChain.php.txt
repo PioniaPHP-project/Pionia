@@ -1,21 +1,28 @@
 <?php
 
-namespace Pionia\Pionia\Middlewares;
+namespace Pionia\Middlewares;
 
 use Exception;
-use Pionia\Pionia\Base\PioniaApplication;
-use Pionia\Pionia\Contracts\MiddlewareContract;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\Http\Response\Response;
-use Pionia\Pionia\Utils\Arrayable;
-use Pionia\Pionia\Utils\Containable;
-use Pionia\Pionia\Utils\Microable;
-use Pionia\Pionia\Utils\Support;
+use Pionia\Base\PioniaApplication;
+use Pionia\Collections\Arrayable;
+use Pionia\Contracts\MiddlewareContract;
+use Pionia\Http\Request\Request;
+use Pionia\Http\Response\Response;
+use Pionia\Middlewares\Events\PostMiddlewareChainRunEvent;
+use Pionia\Middlewares\Events\PreMiddlewareChainRunEvent;
+use Pionia\Utils\Containable;
+use Pionia\Utils\Microable;
+use Pionia\Utils\Support;
 
 class MiddlewareChain
 {
 
     use Microable, Containable;
+
+    /**
+     * @var PioniaApplication
+     */
+    private PioniaApplication $app;
 
     private Arrayable $middlewareContainer;
     /**
@@ -30,8 +37,14 @@ class MiddlewareChain
         return $this;
     }
 
+    public function all()
+    {
+        return $this->middlewareContainer->all();
+    }
+
     public function __construct(PioniaApplication $app)
     {
+        $this->app = $app;
         $this->context = $app->context;
         $this->middlewareContainer = $this->getOrDefault('middlewares', new Arrayable([]));
     }
@@ -44,6 +57,14 @@ class MiddlewareChain
     public function get(): array
     {
         return $this->middlewareContainer->all();
+    }
+
+    /**
+     * @return null|Arrayable
+     */
+    public function middlewareStack(): ?Arrayable
+    {
+        return $this->middlewareContainer;
     }
 
     /**
@@ -82,12 +103,42 @@ class MiddlewareChain
     /**
      * Run the middleware chain
      *
+     * Dispatches events before and after the middleware chain is run
+     *
      * @param Request $request
-     * @param Response $response
+     * @param ?Response $response
      */
-    public function rail(Request $request, Response $response): void
+    public function handle(Request $request, ?Response $response = null): void
+    {
+        if ($response){
+            if ($this->app->dispatcher) {
+                $this->app->dispatcher->dispatch(new PostMiddlewareChainRunEvent($this));
+            }
+            $this->rail($request, $response);
+
+            if ($this->app->dispatcher) {
+                $this->app->dispatcher->dispatch(new PostMiddlewareChainRunEvent($this));
+            }
+        }else {
+            if ($this->app->dispatcher) {
+                $this->app->dispatcher->dispatch(new PreMiddlewareChainRunEvent($this));
+            }
+            $this->rail($request);
+        }
+    }
+
+    /**
+     * Run the middleware chain
+     *
+     * @param Request $request
+     * @param ?Response $response
+     */
+    public function rail(Request $request, ?Response $response = null): void
     {
         $current = $this->middlewareContainer->shift();
+        if (!$current) {
+            return;
+        }
         if ($this->isAMiddleware($current)) {
             $firstMiddleware = $this->asMiddleware($current);
             $firstMiddleware->execute($request, $response, $this);
@@ -100,15 +151,15 @@ class MiddlewareChain
     /**
      * Run the next middleware in the chain
      */
-    public function next(Request $request, Response $response, MiddlewareChain $chain): void
+    public function next(Request $request, ?Response $response, MiddlewareChain $chain): void
     {
         $chain->rail($request, $response);
     }
 
 
-    private function isAMiddleware($class): bool
+    public function isAMiddleware($class): bool
     {
-        return Support::implements($class, MiddlewareContract::class) || Support::extends($class, Middleware::class);
+        return $class && (Support::implements($class, MiddlewareContract::class) || Support::extends($class, Middleware::class));
     }
 
     private function asMiddleware($klass): MiddlewareContract

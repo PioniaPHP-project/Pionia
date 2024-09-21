@@ -7,6 +7,7 @@
 namespace Application\Switches;
 
 use Application\Services\AuthService;
+use Application\Services\SampoloService;
 use Pionia\Collections\Arrayable;
 use Pionia\Http\Switches\BaseApiServiceSwitch;
 
@@ -20,6 +21,7 @@ class MainSwitch extends BaseApiServiceSwitch
 		return arr([
 		# Register your services here like `auth=>AuthService::class`
             'auth' => AuthService::class,
+            'sampolo'=> SampoloService::class,
 		]);
 	}
 }

@@ -1,10 +1,7 @@
 <?php
 
-namespace Pionia\Pionia\Contracts;
+namespace Pionia\Contracts;
 
 interface ApplicationContract
 {
-    public function boot();
-
-    public function terminate();
 }

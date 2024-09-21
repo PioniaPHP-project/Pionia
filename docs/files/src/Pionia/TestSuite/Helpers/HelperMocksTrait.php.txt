@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\TestSuite\Helpers;
+namespace Pionia\TestSuite\Helpers;
 
-use Pionia\Pionia\Auth\ContextUserObject;
-use Pionia\Pionia\Utils\EnvResolver;
+use Pionia\Auth\ContextUserObject;
+use Pionia\Base\EnvResolver;
 
 trait HelperMocksTrait
 {
@@ -41,7 +41,7 @@ trait HelperMocksTrait
     public function createMockSettings(): EnvResolver
     {
         $envResolver = new EnvResolver();
-        $envResolver->loadEnv('settings.ini');
+        $envResolver->resolve('database.ini');
         return $envResolver;
     }
 }

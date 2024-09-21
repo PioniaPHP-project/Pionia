@@ -472,6 +472,16 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      */
     public function bootConsole(?string $name = 'Pionia Framework'): int
     {
+        if (PHP_SAPI !== 'cli') {
+            echo 'This script can only be run from the command line.';
+            exit(1);
+        }
+
+        if (version_compare(PHP_VERSION, '8.1.0', '<')) {
+            echo 'This script requires PHP 8.1 or later.';
+            exit(1);
+        }
+
         $this->powerUp(PioniaApplicationType::CONSOLE);
         // we set the auto exit to false
         $this->setAutoExit(false);

@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\Utils;
+namespace Pionia\Utils;
 
 use Doctrine\Inflector\Inflector;
 use Doctrine\Inflector\InflectorFactory;
-use Pionia\Pionia\Base\PioniaApplication;
+use Pionia\Base\PioniaApplication;
 use ReflectionClass;
 
 class Support
@@ -84,6 +84,16 @@ class Support
     }
 
     /**
+     * Converts any word to its snake case form
+     * @param string $string
+     * @return string
+     */
+    public static function toSnakeCase(string $string): string
+    {
+        return self::formatter()->tableize($string);
+    }
+
+    /**
      * Converts any word to its plural form
      * @param string $word
      * @return string
@@ -158,6 +168,25 @@ class Support
             }
         }
         return $keys;
+    }
+
+    /**
+     * Flattens an array
+     * @param array $array
+     * @return array
+     */
+    public static function arrFlatten(array $array): array
+    {
+        $return = array();
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $return = array_merge($return, self::arrFlatten($value));
+            } else {
+                $return[$key] = $value;
+            }
+        }
+        return $return;
+
     }
 
     /**
