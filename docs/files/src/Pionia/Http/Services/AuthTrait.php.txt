@@ -1,10 +1,10 @@
 <?php
 
-namespace Pionia\Pionia\Http\Services;
+namespace Pionia\Http\Services;
 
+use Pionia\Auth\ContextUserObject;
 use Pionia\Exceptions\UserUnauthenticatedException;
 use Pionia\Exceptions\UserUnauthorizedException;
-use Pionia\Pionia\Auth\ContextUserObject;
 
 /**
  * This trait provides common authentication methods for the services

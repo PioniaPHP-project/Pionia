@@ -35,6 +35,11 @@
                 <path>vendor/symfony/**/**</path>
                 <path>vendor/theseer/**/**</path>
                 <path>vendor/autoload.php</path>
+                <path>vendor/laravel/**/**</path>
+                <path>vendor/php-di/**/**</path>
+                <path>vendor/carbon/**/**</path>
+                <path>vendor/fruitcake/**/**</path>
+                <path>tests/**/**</path>
                 <path>example/**/**</path>
             </ignore>
             <extensions>

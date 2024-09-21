@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Pionia\Contracts;
+namespace Pionia\Contracts;
 
-use Pionia\Pionia\Auth\ContextUserObject;
-use Pionia\Pionia\Http\Request\Request;
+use Pionia\Auth\ContextUserObject;
+use Pionia\Http\Request\Request;
 
 /**
  * Authentication contract.

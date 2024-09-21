@@ -2,10 +2,10 @@
 
 namespace Auth;
 
-use Pionia\Pionia\Auth\AuthenticationChain;
-use Pionia\Pionia\Auth\ContextUserObject;
-use Pionia\Pionia\TestSuite\Mocks\AuthenticationBackendMock;
-use Pionia\Pionia\TestSuite\PioniaTestCase;
+use Pionia\Auth\AuthenticationChain;
+use Pionia\Auth\ContextUserObject;
+use Pionia\TestSuite\Mocks\AuthenticationBackendMock;
+use Pionia\TestSuite\PioniaTestCase;
 
 
 class AuthenticationBackendChainTest extends PioniaTestCase
@@ -53,7 +53,7 @@ class AuthenticationBackendChainTest extends PioniaTestCase
     public function testRequestIsAuthenticated()
     {
         $this->chain->addAuthenticationBackend(AuthenticationBackendMock::class);
-        $this->chain->run($this->request);
+        $this->chain->handle($this->request);
         // we check if the auth object is an instance of ContextUserObject
         self::assertInstanceOf(ContextUserObject::class, $this->request->getAuth());
         // we check if the request is authenticated

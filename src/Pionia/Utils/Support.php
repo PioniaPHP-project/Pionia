@@ -171,6 +171,25 @@ class Support
     }
 
     /**
+     * Flattens an array
+     * @param array $array
+     * @return array
+     */
+    public static function arrFlatten(array $array): array
+    {
+        $return = array();
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $return = array_merge($return, self::arrFlatten($value));
+            } else {
+                $return[$key] = $value;
+            }
+        }
+        return $return;
+
+    }
+
+    /**
      * Creates or updates any section of our database.ini file to the values provided
      * @param string $filePath
      * @param string $section The section to update/create

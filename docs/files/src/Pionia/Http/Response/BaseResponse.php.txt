@@ -1,6 +1,8 @@
 <?php
 
-namespace Pionia\Pionia\Http\Response;
+namespace Pionia\Http\Response;
+
+use Pionia\Collections\Arrayable;
 
 /**
  * This provides a uniform response format for our entire application.
@@ -25,15 +27,15 @@ namespace Pionia\Pionia\Http\Response;
  */
 class BaseResponse
 {
-
     private int $returnCode = 0;
     private string | null $returnMessage = null;
     private mixed $returnData;
     private mixed $extraData = null;
-
     private string|null $prettyResponse = null;
 
     private array | null $response = null;
+
+    public ?Arrayable $data = null;
 
     public function __construct(mixed $data = null)
     {
@@ -52,9 +54,9 @@ class BaseResponse
      * All actions in Pionia must return this as the response. This is how Pionia ensures a uniform response format
      *
      * @param int|null $code - the return code to the client side. Defaults to 0 for success
-     * @param string|null $message
-     * @param mixed|null $data
-     * @param array|string|null $extraData
+     * @param string|null $message - the message to send to the client side
+     * @param mixed|null $data - the data to send to the client side
+     * @param array|string|null $extraData - any other data to send to the client side
      * @return BaseResponse
      */
     public static function jsonResponse(?int $code = 0, string|null $message = null, mixed $data = null, array | string | null $extraData = null): static
@@ -77,18 +79,22 @@ class BaseResponse
      */
     public function build(?array $additionalData = []): static
     {
-        if ($this->response){
-            $data = array_merge($this->response, $additionalData);
-        } else {
-            $res = [
-                'returnCode' => $this->returnCode,
-                'returnMessage' => $this->returnMessage,
-                'returnData' => $this->returnData,
-                'extraData' => $this->extraData
-            ];
-            $data = array_merge($res, $additionalData);
+        $data = new Arrayable($this->response ?? []);
+
+        if (count($additionalData) > 0){
+            $data->merge($additionalData);
         }
-        $this->prettyResponse =  json_encode($data);
+
+        $res = arr([
+            'returnCode' => $this->returnCode ?? 0,
+            'returnMessage' => $this->returnMessage ?? null,
+            'returnData' => $this->returnData ?? null,
+            'extraData' => $this->extraData ?? null,
+        ]);
+
+        $this->data = $res;
+
+        $this->prettyResponse = $res->toJson();
         return $this;
     }
 }

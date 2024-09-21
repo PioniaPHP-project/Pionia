@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Http\Routing;
+namespace Pionia\Http\Routing;
 
 /**
  * This class holds the supported http methods in the framework.

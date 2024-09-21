@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Pionia\Utils;
+namespace Pionia\Utils;
 
 trait AppHelpersTrait
 {
@@ -14,7 +14,7 @@ trait AppHelpersTrait
      */
     public function appName(): string
     {
-        return $this->context->has("APP_NAME") ? $this->context->get("APP_NAME") : $this->APP_NAME;
+        return $this->getSilently("APP_NAME") ?? $this->APP_NAME;
     }
 
     /**
@@ -33,6 +33,7 @@ trait AppHelpersTrait
     public function setAppName($name): void
     {
         $this->APP_NAME = $name;
+        $this->set('APP_NAME', $name);
     }
 
     /**
@@ -40,17 +41,22 @@ trait AppHelpersTrait
      */
     public function isDevelopment(): bool
     {
-        return $this->environment() === 'development';
+        return str_contains($this->environment(), 'dev');
+    }
+
+    public function isDebug()
+    {
+        return $this->getEnv('DEBUG', true);
     }
 
     public function isProduction(): bool
     {
-        return $this->environment() === 'production';
+        return str_contains($this->environment(), 'prod');
     }
 
     public function isTesting(): bool
     {
-        return $this->environment() === 'testing';
+        return str_contains($this->environment(), 'test');
     }
 
     public function environment(): string

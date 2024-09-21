@@ -1,11 +1,11 @@
 <?php
 
-namespace Pionia\Pionia\TestSuite\Mocks;
+namespace Pionia\TestSuite\Mocks;
 
-use Pionia\Pionia\Auth\AuthenticationBackend;
-use Pionia\Pionia\Auth\ContextUserObject;
-use Pionia\Pionia\Http\Request\Request;
-use Pionia\Pionia\TestSuite\Helpers\HelperMocksTrait;
+use Pionia\Auth\AuthenticationBackend;
+use Pionia\Auth\ContextUserObject;
+use Pionia\Http\Request\Request;
+use Pionia\TestSuite\Helpers\HelperMocksTrait;
 
 class AuthenticationBackendMock extends AuthenticationBackend
 {
