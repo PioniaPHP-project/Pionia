@@ -2,12 +2,13 @@
 
 # Exit on error
 
+# Handles any errors that occur during the script
+# and reverts back to the previous state
 handle_error() {
     local exit_code=$?
+    echo "An error occurred with exit code $exit_code"
     git add .
     git commit -m "Reverting pre-release actions for version $version"
-    echo "An error occurred with exit code $exit_code"
-    # Additional error handling logic can be added here
     exit $exit_code
 }
 
