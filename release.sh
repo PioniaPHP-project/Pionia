@@ -22,8 +22,6 @@ do
     esac
 done
 
-echo $version
-exit 1
 
 echo "Removing files and tagging version $version"
 
@@ -39,4 +37,3 @@ git push origin $version
 git add .
 
 git commit -m "Running post-release events for version $version"
-

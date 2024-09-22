@@ -64,6 +64,5 @@
     "scripts": {
         "test": "phpunit",
         "document": "phpDocumentor run -d . -t docs/ --config=phpdoc.dist.xml --force",
-        "release": "bash release.sh"
     }
 }
