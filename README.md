@@ -6,7 +6,7 @@
 ## Installation
 
 ```bash
-composer require pionia/pionia
+composer require pionia/pionia-core
 ```
 This is meant for the core developers of the Pionia Core not the framework itself.
 If you are looking to use or get started with the framework, please find the [Pionia Framework here](https://github.com/PioniaPHP-project/Application)
