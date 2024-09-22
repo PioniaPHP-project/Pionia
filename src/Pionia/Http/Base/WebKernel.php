@@ -82,33 +82,23 @@ class WebKernel implements KernelContract
             if ($request->isMethod('GET') && !$this->isApiRequest($request)){
                 $this->resolveFrontEnd($request);
             }
-
             $request = $this->boot($request);
-
             $routes = $this->app->getSilently(PioniaRouter::class)->getRoutes();
-
             // prepare the request for symfony routing
             $controllerResolver = new ControllerResolver($this->logger);
             $argumentResolver = new ArgumentResolver(null, [], $this->container());
             $context = new RequestContext();
             $matcher = new UrlMatcher($routes, $context);
-
             $matcher->getContext()->fromRequest($request);
-
             $request->attributes->add($matcher->match($request->getPathInfo()));
-
             $controller = $controllerResolver->getController($request);
-
             $arguments = $argumentResolver->getArguments($request, $controller);
-
             if ($request->isMethod('POST')) {
                 $this->logger->info("Pionia Request: ", ['method' => $request->getMethod(), 'path' => $request->getPathInfo(), 'data' => $request->getData()->all()]);
             } else {
                 $this->logger->info("Pionia Request: ", ['method' => $request->getMethod(), 'path' => $request->getPathInfo()]);
             }
-
             $this->app->dispatch(new PreSwitchRunEvent($this, $request), PreSwitchRunEvent::name());
-
             // we inject the application into the request so that we can access it in the switch
             $request->setApplication($this->app);
             // forward the request to the switch
