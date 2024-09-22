@@ -136,8 +136,8 @@ class WebKernel implements KernelContract
         if ($this->isMedia($request)){
             $path = trim($request->getPathInfo(), '/');
             $filePath = alias(DIRECTORIES::STORAGE_DIR->name).DIRECTORY_SEPARATOR.$path;
-            $file = new File($filePath);
-            if ($file->isFile()) {
+            if ($fs->exists($filePath)) {
+                $file = new File($filePath);
                 $response = new Response($file->getContent(), ResponseAlias::HTTP_OK, ['Content-Type' => $file->getMimeType()]);
                 $this->app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request, $response);
                 $response->prepare($request)->send(false);
@@ -150,7 +150,7 @@ class WebKernel implements KernelContract
             }
             exit();
         } else if ($this->isRoot($request)) {
-            $this->serveSpa($request);
+            $this->serveSpa($request, $fs);
         }  else {
             // check if its file(images, js, css, etc) and load it
             $path = trim($request->getPathInfo(), '/');
@@ -200,16 +200,17 @@ class WebKernel implements KernelContract
     /**
      * Serve the landing html file of the spa if it exists
      * @param Request $request
+     * @param Filesystem $fs
      * @return void
      */
     #[NoReturn]
-    private function serveSpa(Request $request): void
+    private function serveSpa(Request $request, Filesystem $fs): void
     {
         $path = alias(DIRECTORIES::STATIC_DIR->name).DIRECTORY_SEPARATOR.'index.html';
-        $file = new File($path);
-        if (!$file->isFile()) {
+        if (!$fs->exists($path)) {
             $this->loadWelcomePage($request);
         } else {
+            $file = new File($path);
             $response = new Response($file->getContent(), ResponseAlias::HTTP_OK, ['Content-Type' => $file->getMimeType()]);
             $response->prepare($request)->send();
             exit();
@@ -267,21 +268,4 @@ class WebKernel implements KernelContract
     {
         return $this->app;
     }
-
-//    private function resolveFrontEnd(Request $request)
-//    {
-//        // if the route does not originate from /api/**
-//        // we should resolve the front end in the static folder
-//        // if its a file, like png, jpeg, serve it as is
-//        $path = $request->getPathInfo();
-//        if (!str_starts_with($path, '/api')) {
-//            $path = alias(\DIRECTORIES::STATIC_DIR->name).DIRECTORY_SEPARATOR.$path;
-//
-//            if (file_exists($path)) {
-//                $response = new Response(file_get_contents($path), ResponseAlias::HTTP_OK, ['content-type' => 'text/html']);
-//                $response->send();
-//                exit();
-//            }
-//        }
-//    }
 }
