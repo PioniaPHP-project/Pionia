@@ -22,6 +22,9 @@ do
     esac
 done
 
+echo $version
+exit 1
+
 echo "Removing files and tagging version $version"
 
 git rm -r --cached example
