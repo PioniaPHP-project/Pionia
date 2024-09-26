@@ -1,5 +1,5 @@
 {
-    "name": "pionia/pionia-core",
+    "name": "pionia/pionia",
     "description": "PHP REST-API framework for developers with deadlines",
     "type": "library",
     "license": "MIT",
