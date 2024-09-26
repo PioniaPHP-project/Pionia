@@ -7,8 +7,6 @@
 handle_error() {
     local exit_code=$?
     echo "An error occurred with exit code $exit_code"
-    git add .
-    git commit -m "Reverting pre-release actions for version $version"
     exit $exit_code
 }
 
