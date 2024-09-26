@@ -30,10 +30,6 @@ git rm -r --cached docs
 git rm -r --cached .phpdoc
 git rm -r --cached tests
 
-git tag -a $version -m "Release version $version"
+git tag -a $version -m "Releasing Version $version"
 
 git push origin $version
-
-git add .
-
-git commit -m "Running post-release events for version $version"
