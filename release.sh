@@ -31,3 +31,6 @@ git rm -r --cached tests
 git tag -a $version -m "Releasing Version $version"
 
 git push origin $version
+
+# restore the files
+git add .
