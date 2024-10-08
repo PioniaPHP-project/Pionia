@@ -18,6 +18,7 @@ namespace Pionia\Porm\Database\Utils;
 
 use Exception;
 use PDOStatement;
+use Pionia\Exceptions\NotFoundException;
 use Pionia\Porm\Core\Raw;
 use Pionia\Porm\Database\Aggregation\AggregateTrait;
 use Pionia\Porm\Database\Builders\Builder;
@@ -120,6 +121,38 @@ trait TableLevelQueryTrait
     }
 
     /**
+     * Save multiple items in the database.
+     * @param array $data The data to save. Must be an associative array
+     * @param bool $returning If true, it returns the resultset containing the saved items
+     * @return array|PDOStatement|null
+     * @throws Exception
+     * @since 2.0.3+ - 2024-08-09
+     *@example ```php
+     *   $res = table('users')->saveAll([['first_name' => 'John', 'last_name' => 'Doe'], ['first_name' => 'Jane', 'last_name' => 'Doe']]);
+     *  $r = table('users')->saveAll([['first_name' => 'John', 'last_name' => 'Doe'], ['first_name' => 'Jane', 'last_name' => 'Doe']], true);
+     */
+    public function saveAll(array $data, ?bool $returning = true): null|array|PDOStatement
+    {
+        $this->checkFilterMode("You cannot save at this point in the query, check the usage of the `save()`
+         method in the query builder for " . $this->table);
+        if (!$returning) {
+            $results = null;
+            $this->inTransaction(function () use ($data, &$results) {
+                $results = $this->database->insert($this->table, $data);
+            });
+            return $results;
+        }
+        $results = [];
+        $that = $this;
+        $this->inTransaction(function () use ($data, $that, &$results) {
+            foreach ($data as $datum) {
+                $results[] = $that->save($datum);
+            }
+        });
+        return $results;
+    }
+
+    /**
      * @param array $data
      * @param array|int|string $where
      * @param string|null $idField
@@ -197,6 +230,21 @@ trait TableLevelQueryTrait
         $this->resultSet = $result;
         if ($this->resultSet) {
             return $this->asObject();
+        }
+        return $result;
+    }
+
+    /**
+     * Get a resource or throw an exception if it does not exist
+     * @version 2.0.3+
+     * @since 2.0.3 - 2024-08-09
+     * @throws Exception
+     */
+    public function getOrThrow(int|array|string|null $where = null, ?string $idField = 'id', string $message = 'Item not found'): object|array|null
+    {
+        $result = $this->get($where, $idField);
+        if (!$result) {
+            throw new NotFoundException($message);
         }
         return $result;
     }
