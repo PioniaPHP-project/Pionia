@@ -365,20 +365,23 @@ if (!function_exists('recached')){
     /**
      * Acronym for `cachedResponse` function but with more readable arguments
      * @param Service $instance The service we are currently in, just pass `this` here
-     * @param mixed ...$args The arguments to pass to the `cachedResponse` function
+     * @param int|null $returnCode The return code for the response, defaults to 0
+     * @param string|null $returnMessage The return message for the response, defaults to null
+     * @param mixed|null $returnData The return data for the response, defaults to null
+     * @param mixed|null $extraData The extra data for the response, defaults to null
+     * @param mixed $ttl The time to live for the cache, defaults to 60 seconds
+     * @return BaseResponse The cached response / the response you passed. It's not tampered with
      * @note This function is only useful if the service has caching enabled
-     * @return BaseResponse
      */
     function recached(
         Service $instance,
-        ...$args,
+        ?int $returnCode = 0,
+        ?string $returnMessage=null,
+        mixed $returnData = null,
+        mixed $extraData = null,
+        mixed $ttl = 60
     ): BaseResponse
     {
-        $returnCode = $args['returnCode'] ?? 0;
-        $returnMessage = $args['returnMessage'] ?? null;
-        $returnData = $args['returnData'] ?? null;
-        $extraData = $args['extraData'] ?? null;
-        $ttl = $args['ttl'] ?? 60;
         return (new class ($instance, $returnCode, $returnMessage, $returnData, $extraData, $ttl) {
             private Service $instance;
             private int $returnCode;

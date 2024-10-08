@@ -76,6 +76,20 @@
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/application.html" class="">Application</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/application-services.html" class="">Services</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/application-switches.html" class="">Switches</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/pionia.html" class="">Pionia</a>
 </h4>
     <ul class="phpdocumentor-list">
@@ -158,38 +172,20 @@
             </ul>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="namespaces/carbon.html" class="">Carbon</a>
+    <a href="namespaces/arrayable.html" class="">Arrayable</a>
 </h4>
-    <ul class="phpdocumentor-list">
-                    <li>
-                <a href="namespaces/carbon-doctrine.html" class="">Doctrine</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/carbon-messageformatter.html" class="">MessageFormatter</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/carbon-cli.html" class="">Cli</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/carbon-exceptions.html" class="">Exceptions</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/carbon-laravel.html" class="">Laravel</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/carbon-phpstan.html" class="">PHPStan</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/carbon-traits.html" class="">Traits</a>
-                
-            </li>
-            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/auth.html" class="">Auth</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/middlewares.html" class="">Middlewares</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/pormtests.html" class="">PormTests</a>
+</h4>
 
                         </section>
                 <section class="phpdocumentor-sidebar__category">
@@ -1444,16 +1440,16 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">372</span>
+    <span class="phpdocumentor-element-found-in__line">376</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.372" class="phpdocumentor-element-found-in__source" data-line="372" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.376" class="phpdocumentor-element-found-in__source" data-line="376" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Acronym for `cachedResponse` function but with more readable arguments</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility"></span>
-                    <span class="phpdocumentor-signature__name">recached</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Service">Service</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$instance</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__variadic-operator">...</span><span class="phpdocumentor-signature__argument__name">$args</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\BaseResponse">BaseResponse</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">recached</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Service">Service</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$instance</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$returnCode</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">0</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$returnMessage</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$returnData</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$extraData</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$ttl</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">60</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\BaseResponse">BaseResponse</abbr></span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1468,11 +1464,47 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$args</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                            </dt>
+                <span class="phpdocumentor-signature__argument__name">$returnCode</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">0</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The arguments to pass to the <code class="prettyprint">cachedResponse</code> function</p>
+                    <section class="phpdocumentor-description"><p>The return code for the response, defaults to 0</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$returnMessage</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The return message for the response, defaults to null</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$returnData</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The return data for the response, defaults to null</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$extraData</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The extra data for the response, defaults to null</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$ttl</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">60</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The time to live for the cache, defaults to 60 seconds</p>
 </section>
 
             </dd>
@@ -1499,6 +1531,10 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\BaseResponse">BaseResponse</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The cached response / the response you passed. It's not tampered with</p>
+</section>
+
             </section>
 
 </article>
@@ -1511,9 +1547,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">417</span>
+    <span class="phpdocumentor-element-found-in__line">420</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.417" class="phpdocumentor-element-found-in__source" data-line="417" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.420" class="phpdocumentor-element-found-in__source" data-line="420" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Render a template file from the templates folder.</p>
@@ -1554,9 +1590,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">432</span>
+    <span class="phpdocumentor-element-found-in__line">435</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.432" class="phpdocumentor-element-found-in__source" data-line="432" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.435" class="phpdocumentor-element-found-in__source" data-line="435" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Get all the builtins</p>
@@ -1601,9 +1637,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">445</span>
+    <span class="phpdocumentor-element-found-in__line">448</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.445" class="phpdocumentor-element-found-in__source" data-line="445" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.448" class="phpdocumentor-element-found-in__source" data-line="448" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Get the asset path</p>
@@ -1648,9 +1684,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">471</span>
+    <span class="phpdocumentor-element-found-in__line">474</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.471" class="phpdocumentor-element-found-in__source" data-line="471" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.474" class="phpdocumentor-element-found-in__source" data-line="474" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Determine if the given value is &quot;blank&quot;.</p>
@@ -1713,9 +1749,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">508</span>
+    <span class="phpdocumentor-element-found-in__line">511</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.508" class="phpdocumentor-element-found-in__source" data-line="508" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.511" class="phpdocumentor-element-found-in__source" data-line="511" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Validate data</p>
@@ -1760,9 +1796,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">523</span>
+    <span class="phpdocumentor-element-found-in__line">526</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.523" class="phpdocumentor-element-found-in__source" data-line="523" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.526" class="phpdocumentor-element-found-in__source" data-line="526" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Convert a string to camel case</p>
@@ -1800,9 +1836,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">533</span>
+    <span class="phpdocumentor-element-found-in__line">536</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.533" class="phpdocumentor-element-found-in__source" data-line="533" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.536" class="phpdocumentor-element-found-in__source" data-line="536" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Convert a string to snake case</p>
@@ -1840,9 +1876,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">543</span>
+    <span class="phpdocumentor-element-found-in__line">546</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.543" class="phpdocumentor-element-found-in__source" data-line="543" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.546" class="phpdocumentor-element-found-in__source" data-line="546" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Convert a string to a class name like format</p>
@@ -1880,9 +1916,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">553</span>
+    <span class="phpdocumentor-element-found-in__line">556</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.553" class="phpdocumentor-element-found-in__source" data-line="553" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.556" class="phpdocumentor-element-found-in__source" data-line="556" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Convert an array to a string</p>
@@ -1927,9 +1963,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">563</span>
+    <span class="phpdocumentor-element-found-in__line">566</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.563" class="phpdocumentor-element-found-in__source" data-line="563" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.566" class="phpdocumentor-element-found-in__source" data-line="566" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Convert a string to a slug-like format</p>
@@ -1967,9 +2003,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">573</span>
+    <span class="phpdocumentor-element-found-in__line">576</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.573" class="phpdocumentor-element-found-in__source" data-line="573" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.576" class="phpdocumentor-element-found-in__source" data-line="576" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Convert a string to a singular form</p>
@@ -2007,9 +2043,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">583</span>
+    <span class="phpdocumentor-element-found-in__line">586</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.583" class="phpdocumentor-element-found-in__source" data-line="583" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.586" class="phpdocumentor-element-found-in__source" data-line="586" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Convert a string to a plural form</p>
@@ -2047,9 +2083,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">593</span>
+    <span class="phpdocumentor-element-found-in__line">596</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.593" class="phpdocumentor-element-found-in__source" data-line="593" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.596" class="phpdocumentor-element-found-in__source" data-line="596" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Capitalize a string</p>
@@ -2087,9 +2123,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">603</span>
+    <span class="phpdocumentor-element-found-in__line">606</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.603" class="phpdocumentor-element-found-in__source" data-line="603" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.606" class="phpdocumentor-element-found-in__source" data-line="606" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Convert anything to a json string</p>
@@ -2127,9 +2163,9 @@ If no ttl is defined, caching will happen for only 60 seconds</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Utils/helpers.php"><a href="files/src-pionia-utils-helpers.html"><abbr title="src/Pionia/Utils/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">616</span>
+    <span class="phpdocumentor-element-found-in__line">619</span>
 
-            <a href="files/src-pionia-utils-helpers.html#source-view.616" class="phpdocumentor-element-found-in__source" data-line="616" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
+            <a href="files/src-pionia-utils-helpers.html#source-view.619" class="phpdocumentor-element-found-in__source" data-line="619" data-modal="source-view" data-src="files/src/Pionia/Utils/helpers.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Flatten an array</p>

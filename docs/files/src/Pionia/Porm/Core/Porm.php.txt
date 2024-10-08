@@ -131,6 +131,15 @@ class Porm
         return $this->database->info();
     }
 
+    /**
+     * Returns the last saved id
+     * @return string|null
+     */
+    public function lastSaved(): ?string
+    {
+     return $this->database->id();
+    }
+
     public function setDatabase(Piql $database): void
     {
         $this->database = $database;

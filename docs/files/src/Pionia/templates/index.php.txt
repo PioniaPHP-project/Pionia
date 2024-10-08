@@ -19,8 +19,9 @@ use Pionia\Utils\Support;
         .bg-pionia {
             background: url('./pionia_logo.webp');
             background-position: center;
-            background-repeat: no-repeat;
-            backdrop-filter: blur(10px)
+            background-repeat: space;
+            backdrop-filter: blur(20px);
+            min-height: 100vh;
         }
         .bg-inherit	{ background-color: inherit; }
         .bg-current	{ background-color: currentColor; }
@@ -271,7 +272,7 @@ use Pionia\Utils\Support;
         .bg-rose-950	{ background-color: rgb(76 5 25); }
     </style>
 </head>
-<body class="flex-1 d-flex bg-primary-subtle bg-pionia">
+<body class="flex-1 d-flex bg-primary-subtle bg-pionia fw-bolder">
 <div class="container font-monospace">
     <div class="d-flex justify-content-start align-items-center gap-2 py-5">
         <img src="./favicon.ico" class="rounded " alt="Pionia Framework" >
@@ -290,11 +291,11 @@ use Pionia\Utils\Support;
     <?php if (!$app->welcomePageSettings()->get('HIDE_QUICK_START', false) && asBool(env('DEBUG'))): ?>
         <hr class="bg-pink-500">
         <h1 class="text-secondary-emphasis my-2 font-monospace">💫 Quick Start</h1>
-        <div class="row gap-4 flex-wrap row-cols-3 align-content-center">
-        <div class="bg-zinc-300 rounded">
-            <p class="text-center text-dark text-emphasis bg-rose-50 text-small rounded-1 font-monospace">Pionia CLI:</p>
+        <div class="d-flex gap-2 flex-auto flex-wrap row-cols-4 align-content-center">
+        <div class="bg-zinc-300 rounded p-2">
+            <p class="text-center text-emphasis bg-rose-50 text-small rounded-1 font-monospace">Pionia Cli:</p>
             <div class="flex d-flex align-items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" fill="currentColor" class="bi bi-terminal" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" fill="currentColor" class="bi bi-terminal text-white" viewBox="0 0 16 16">
                     <path d="M6 9a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3A.5.5 0 0 1 6 9M3.854 4.146a.5.5 0 1 0-.708.708L4.793 6.5 3.146 8.146a.5.5 0 1 0 .708.708l2-2a.5.5 0 0 0 0-.708z"/>
                     <path d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/>
                 </svg>
@@ -303,19 +304,19 @@ use Pionia\Utils\Support;
             <p class="text-center text-black-50 text-wrap text-break">To view all available commands in the Pionia </p>
         </div>
 
-        <div class="bg-zinc-300 rounded">
+        <div class="bg-zinc-300 rounded p-2">
             <p class="text-center text-dark text-emphasis bg-rose-50 text-small rounded-1">Pionia Services</p>
             <div class="flex d-flex align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" fill="currentColor" class="bi bi-terminal" viewBox="0 0 16 16">
                     <path d="M6 9a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3A.5.5 0 0 1 6 9M3.854 4.146a.5.5 0 1 0-.708.708L4.793 6.5 3.146 8.146a.5.5 0 1 0 .708.708l2-2a.5.5 0 0 0 0-.708z"/>
                     <path d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/>
                 </svg>
-            <pre class="text-center text-black h4 fw-bolder">php pionia gen:service name </pre>
+            <pre class="text-center text-black h4 fw-bolder">php pionia make:service name </pre>
             </div>
             <p class="text-center text-black-50 ">These can be basic services or generics</p>
         </div>
 
-        <div class="bg-zinc-300  rounded">
+        <div class="bg-zinc-300 p-2 rounded">
             <p class="text-center text-dark text-emphasis bg-rose-50 text-small rounded-1">Pionia Switches</p>
             <div class="flex d-flex align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" fill="currentColor" class="bi bi-terminal" viewBox="0 0 16 16">
@@ -327,7 +328,7 @@ use Pionia\Utils\Support;
             <p class="text-center text-black-50">These register services that are under a specific version</p>
         </div>
 
-        <div class="bg-zinc-300 rounded mr-1">
+        <div class="bg-zinc-300 rounded p-2">
             <p class="text-center text-dark text-emphasis bg-rose-50 text-small rounded-1">Pionia Aliases</p>
             <div class="flex d-flex align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" fill="currentColor" class="bi bi-terminal" viewBox="0 0 16 16">
@@ -339,7 +340,7 @@ use Pionia\Utils\Support;
             <p class="text-center text-black-50">View all aliases in the context</p>
         </div>
 
-        <div class="bg-zinc-300 rounded">
+        <div class="bg-zinc-300 p-2 rounded">
             <p class="text-center text-dark text-emphasis bg-rose-50 text-small rounded-1">Pionia Authentication</p>
             <div class="flex d-flex align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" fill="currentColor" class="bi bi-terminal" viewBox="0 0 16 16">
@@ -351,7 +352,7 @@ use Pionia\Utils\Support;
             <p class="text-center text-black-50">Add any authentication you prefer for your API</p>
         </div>
 
-        <div class="bg-zinc-300 rounded">
+        <div class="bg-zinc-300 p-2 rounded">
             <p class="text-center text-dark text-emphasis bg-rose-50 text-small rounded-1">Pionia Caching</p>
             <div class="flex d-flex align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" fill="currentColor" class="bi bi-terminal" viewBox="0 0 16 16">
@@ -415,7 +416,7 @@ use Pionia\Utils\Support;
     <?php endif; ?>
 
 
-    <div class="text-dark-emphasis font-monospace mx-auto align-middle w-50 text-center">
+    <div class="text-dark-emphasis font-monospace mx-auto align-middle w-50 text-center position-fixed ">
         <hr>
            This framework is looking for sponsorship. If you are interested in sponsoring this project, please reach out on
         <a href="https://www.linkedin.com/in/jetezra/" target="_blank" class="text-info">LinkedIn</a>.

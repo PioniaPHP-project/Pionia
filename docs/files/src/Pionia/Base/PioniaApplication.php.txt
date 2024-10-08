@@ -62,7 +62,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      * Framework version
      * @var string
      */
-    public string $appVersion = '2.0.0';
+    public string $appVersion = '2.0.2';
 
     /**
      * Application type

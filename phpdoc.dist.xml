@@ -18,29 +18,7 @@
             </source>
             <output>.</output>
             <ignore hidden="true" symlinks="false">
-                <path>vendor/bin/**/**</path>
-                <path>vendor/brick/**/**</path>
-                <path>vendor/catfan/**/**</path>
-                <path>vendor/composer/**/**</path>
-                <path>vendor/doctrine/**/**</path>
-                <path>vendor/monolog/**/**</path>
-                <path>vendor/myclabs/**/**</path>
-                <path>vendor/nette/**/**</path>
-                <path>vendor/nikic/**/**</path>
-                <path>vendor/phar-io/**/**</path>
-                <path>vendor/phpunit/**/**</path>
-                <path>vendor/psr/**/**</path>
-                <path>vendor/ramsey/**/**</path>
-                <path>vendor/sebastian/**/**</path>
-                <path>vendor/symfony/**/**</path>
-                <path>vendor/theseer/**/**</path>
-                <path>vendor/autoload.php</path>
-                <path>vendor/laravel/**/**</path>
-                <path>vendor/php-di/**/**</path>
-                <path>vendor/carbon/**/**</path>
-                <path>vendor/fruitcake/**/**</path>
-                <path>tests/**/**</path>
-                <path>example/**/**</path>
+                <path>vendor/**/**</path>
             </ignore>
             <extensions>
                 <extension>php</extension>

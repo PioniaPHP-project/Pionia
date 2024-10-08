@@ -76,6 +76,20 @@
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/application.html" class="">Application</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/application-services.html" class="">Services</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/application-switches.html" class="">Switches</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/pionia.html" class="">Pionia</a>
 </h4>
     <ul class="phpdocumentor-list">
@@ -158,38 +172,20 @@
             </ul>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="namespaces/carbon.html" class="">Carbon</a>
+    <a href="namespaces/arrayable.html" class="">Arrayable</a>
 </h4>
-    <ul class="phpdocumentor-list">
-                    <li>
-                <a href="namespaces/carbon-doctrine.html" class="">Doctrine</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/carbon-messageformatter.html" class="">MessageFormatter</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/carbon-cli.html" class="">Cli</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/carbon-exceptions.html" class="">Exceptions</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/carbon-laravel.html" class="">Laravel</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/carbon-phpstan.html" class="">PHPStan</a>
-                
-            </li>
-                    <li>
-                <a href="namespaces/carbon-traits.html" class="">Traits</a>
-                
-            </li>
-            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/auth.html" class="">Auth</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/middlewares.html" class="">Middlewares</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/pormtests.html" class="">PormTests</a>
+</h4>
 
                         </section>
                 <section class="phpdocumentor-sidebar__category">
@@ -244,9 +240,9 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.26" class="phpdocumentor-element-found-in__source" data-line="26" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.29" class="phpdocumentor-element-found-in__source" data-line="29" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         
@@ -296,6 +292,13 @@
 <dd>This defines the table column names to return from the CDatabase</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_createOrUpdate">createOrUpdate()</a>
+    <span>
+                                &nbsp;: object|array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Acronym for saveOrUpdate</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteAll">deleteAll()</a>
     <span>
                                 &nbsp;: <abbr title="\PDOStatement">PDOStatement</abbr>|null    </span>
@@ -329,6 +332,13 @@
                                 &nbsp;: object|array&lt;string|int, mixed&gt;|null    </span>
 </dt>
 <dd>Fetches a single item from the CDatabase.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_getOrThrow">getOrThrow()</a>
+    <span>
+                                &nbsp;: object|array&lt;string|int, mixed&gt;|null    </span>
+</dt>
+<dd>Get a resource or throw an exception if it does not exist</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_has">has()</a>
@@ -372,6 +382,21 @@
 <dd>Saves and returns the saved item as an object</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_saveAll">saveAll()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;|<abbr title="\PDOStatement">PDOStatement</abbr>|null    </span>
+</dt>
+<dd>Save multiple items in the database.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_saveOrUpdate">saveOrUpdate()</a>
+    <span>
+                                &nbsp;: object|array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Create a new item or update an existing item
+Supports both single and multiple items</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_update">update()</a>
     <span>
                                 &nbsp;: <abbr title="\PDOStatement">PDOStatement</abbr>|null    </span>
@@ -413,9 +438,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">143</span>
+    <span class="phpdocumentor-element-found-in__line">178</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.143" class="phpdocumentor-element-found-in__source" data-line="143" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.178" class="phpdocumentor-element-found-in__source" data-line="178" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
     
@@ -464,9 +489,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">153</span>
+    <span class="phpdocumentor-element-found-in__line">188</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.153" class="phpdocumentor-element-found-in__source" data-line="153" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.188" class="phpdocumentor-element-found-in__source" data-line="188" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
     
@@ -511,9 +536,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">259</span>
+    <span class="phpdocumentor-element-found-in__line">355</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.259" class="phpdocumentor-element-found-in__source" data-line="259" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.355" class="phpdocumentor-element-found-in__source" data-line="355" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This defines the table column names to return from the CDatabase</p>
@@ -589,6 +614,92 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_createOrUpdate">
+        createOrUpdate()
+        <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_createOrUpdate" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">295</span>
+
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.295" class="phpdocumentor-element-found-in__source" data-line="295" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Acronym for saveOrUpdate</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">createOrUpdate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|<a href="classes/Pionia-Collections-Arrayable.html"><abbr title="\Pionia\Collections\Arrayable">Arrayable</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pkField</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;id&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object|array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$data</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|<a href="classes/Pionia-Collections-Arrayable.html"><abbr title="\Pionia\Collections\Arrayable">Arrayable</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$pkField</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;id&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_createOrUpdate#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>$this-&gt;saveOrUpdate()</p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">2.0.3+</span>
+                                                                                
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">object|array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_deleteAll">
         deleteAll()
         <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteAll" class="headerlink"><i class="fas fa-link"></i></a>
@@ -597,9 +708,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">320</span>
+    <span class="phpdocumentor-element-found-in__line">416</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.320" class="phpdocumentor-element-found-in__source" data-line="320" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.416" class="phpdocumentor-element-found-in__source" data-line="416" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This deletes all items that match the where clause</p>
@@ -670,9 +781,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">353</span>
+    <span class="phpdocumentor-element-found-in__line">450</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.353" class="phpdocumentor-element-found-in__source" data-line="353" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.450" class="phpdocumentor-element-found-in__source" data-line="450" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This is under the hood similar to deleteOne but it is more explicit</p>
@@ -739,9 +850,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">228</span>
+    <span class="phpdocumentor-element-found-in__line">324</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.228" class="phpdocumentor-element-found-in__source" data-line="228" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.324" class="phpdocumentor-element-found-in__source" data-line="324" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This switches the query to filter mode. It is useful for conditional querying.</p>
@@ -815,9 +926,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">387</span>
+    <span class="phpdocumentor-element-found-in__line">484</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.387" class="phpdocumentor-element-found-in__source" data-line="387" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.484" class="phpdocumentor-element-found-in__source" data-line="484" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This grabs the first [n] items from the CDatabase based on the pkField given</p>
@@ -897,9 +1008,9 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">183</span>
+    <span class="phpdocumentor-element-found-in__line">218</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.183" class="phpdocumentor-element-found-in__source" data-line="183" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.218" class="phpdocumentor-element-found-in__source" data-line="218" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Fetches a single item from the CDatabase.</p>
@@ -978,6 +1089,102 @@ If the where clause is null, it fetches the last item in the table.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getOrThrow">
+        getOrThrow()
+        <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_getOrThrow" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">245</span>
+
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.245" class="phpdocumentor-element-found-in__source" data-line="245" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Get a resource or throw an exception if it does not exist</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getOrThrow</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">int|array&lt;string|int, mixed&gt;|string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$where</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;Item not found&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idField</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;id&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object|array&lt;string|int, mixed&gt;|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$where</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|array&lt;string|int, mixed&gt;|string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;Item not found&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$idField</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;id&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_getOrThrow#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">version</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">2.0.3+</span>
+                                                                                
+                                             
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">2.0.3</span>
+                                                                                
+                                                 <section class="phpdocumentor-description"><ul>
+<li>2024-08-09</li>
+</ul>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">object|array&lt;string|int, mixed&gt;|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_has">
         has()
         <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_has" class="headerlink"><i class="fas fa-link"></i></a>
@@ -986,9 +1193,9 @@ If the where clause is null, it fetches the last item in the table.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.43" class="phpdocumentor-element-found-in__source" data-line="43" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.46" class="phpdocumentor-element-found-in__source" data-line="46" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This checks if the table has a record that matches the where clause</p>
@@ -1066,9 +1273,9 @@ If the where clause is null, it fetches the last item in the table.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">370</span>
+    <span class="phpdocumentor-element-found-in__line">467</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.370" class="phpdocumentor-element-found-in__source" data-line="370" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.467" class="phpdocumentor-element-found-in__source" data-line="467" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Opens the portal to the joins builder. Once you call this, you can call the join methods</p>
@@ -1133,9 +1340,9 @@ If the where clause is null, it fetches the last item in the table.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">416</span>
+    <span class="phpdocumentor-element-found-in__line">513</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.416" class="phpdocumentor-element-found-in__source" data-line="416" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.513" class="phpdocumentor-element-found-in__source" data-line="513" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Grab the last item from the CDatabase based on the pkField clause</p>
@@ -1215,9 +1422,9 @@ If the where clause is null, it fetches the last item in the table.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">76</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.73" class="phpdocumentor-element-found-in__source" data-line="73" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.76" class="phpdocumentor-element-found-in__source" data-line="76" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Fetches random n items from the table, default to 1</p>
@@ -1296,9 +1503,9 @@ If the where clause is null, it fetches the last item in the table.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">210</span>
+    <span class="phpdocumentor-element-found-in__line">306</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.210" class="phpdocumentor-element-found-in__source" data-line="210" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.306" class="phpdocumentor-element-found-in__source" data-line="306" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
     
@@ -1370,9 +1577,9 @@ If the where clause is null, it fetches the last item in the table.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">112</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.112" class="phpdocumentor-element-found-in__source" data-line="112" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.115" class="phpdocumentor-element-found-in__source" data-line="115" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Saves and returns the saved item as an object</p>
@@ -1441,6 +1648,180 @@ If the where clause is null, it fetches the last item in the table.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_saveAll">
+        saveAll()
+        <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_saveAll" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">136</span>
+
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.136" class="phpdocumentor-element-found-in__source" data-line="136" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Save multiple items in the database.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">saveAll</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$returning</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|<abbr title="\PDOStatement">PDOStatement</abbr>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$data</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The data to save. Must be an associative array</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$returning</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>If true, it returns the resultset containing the saved items</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_saveAll#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">2.0.3+</span>
+                                                                                
+                                                 <section class="phpdocumentor-description"><ul>
+<li>2024-08-09</li>
+</ul>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php"> $res = table('users')-&gt;saveAll([['first_name' =&gt; 'John', 'last_name' =&gt; 'Doe'], ['first_name' =&gt; 'Jane', 'last_name' =&gt; 'Doe']]);
+$r = table('users')-&gt;saveAll([['first_name' =&gt; 'John', 'last_name' =&gt; 'Doe'], ['first_name' =&gt; 'Jane', 'last_name' =&gt; 'Doe']], true);
+</code></pre>
+</section>
+
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|<abbr title="\PDOStatement">PDOStatement</abbr>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_saveOrUpdate">
+        saveOrUpdate()
+        <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_saveOrUpdate" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">260</span>
+
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.260" class="phpdocumentor-element-found-in__source" data-line="260" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Create a new item or update an existing item
+Supports both single and multiple items</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">saveOrUpdate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|<a href="classes/Pionia-Collections-Arrayable.html"><abbr title="\Pionia\Collections\Arrayable">Arrayable</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pkField</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;id&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object|array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$data</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|<a href="classes/Pionia-Collections-Arrayable.html"><abbr title="\Pionia\Collections\Arrayable">Arrayable</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$pkField</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;id&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_saveOrUpdate#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">2.0.3+</span>
+                                                                                
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">object|array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_update">
         update()
         <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_update" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1449,9 +1830,9 @@ If the where clause is null, it fetches the last item in the table.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">129</span>
+    <span class="phpdocumentor-element-found-in__line">164</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.129" class="phpdocumentor-element-found-in__source" data-line="129" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.164" class="phpdocumentor-element-found-in__source" data-line="164" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
     
@@ -1524,9 +1905,9 @@ If the where clause is null, it fetches the last item in the table.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php"><a href="files/src-pionia-porm-database-utils-tablelevelquerytrait.html"><abbr title="src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php">TableLevelQueryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">339</span>
+    <span class="phpdocumentor-element-found-in__line">435</span>
 
-            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.339" class="phpdocumentor-element-found-in__source" data-line="339" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
+            <a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#source-view.435" class="phpdocumentor-element-found-in__source" data-line="435" data-modal="source-view" data-src="files/src/Pionia/Porm/Database/Utils/TableLevelQueryTrait.php.txt"></a>
     </aside>
 
         <p class="phpdocumentor-summary">This prevents the use of non-filtering methods in filter mode.</p>
@@ -1689,17 +2070,21 @@ If the where clause is null, it fetches the last item in the table.</p>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_asJson">asJson()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_asObject">asObject()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_columns">columns()</a></li>
+                                            <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_createOrUpdate">createOrUpdate()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteAll">deleteAll()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_deleteById">deleteById()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_filter">filter()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_first">first()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_get">get()</a></li>
+                                            <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_getOrThrow">getOrThrow()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_has">has()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_join">join()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_last">last()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_random">random()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_raw">raw()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_save">save()</a></li>
+                                            <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_saveAll">saveAll()</a></li>
+                                            <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_saveOrUpdate">saveOrUpdate()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_update">update()</a></li>
                                             <li><a href="classes/Pionia-Porm-Database-Utils-TableLevelQueryTrait.html#method_checkFilterMode">checkFilterMode()</a></li>
                                     </ul>
