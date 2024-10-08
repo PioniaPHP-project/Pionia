@@ -18,6 +18,8 @@ namespace Pionia\Porm\Database\Utils;
 
 use Exception;
 use PDOStatement;
+use Pionia\Collections\Arrayable;
+use Pionia\Exceptions\DatabaseException;
 use Pionia\Exceptions\NotFoundException;
 use Pionia\Porm\Core\Raw;
 use Pionia\Porm\Database\Aggregation\AggregateTrait;
@@ -240,13 +242,55 @@ trait TableLevelQueryTrait
      * @since 2.0.3 - 2024-08-09
      * @throws Exception
      */
-    public function getOrThrow(int|array|string|null $where = null, ?string $idField = 'id', string $message = 'Item not found'): object|array|null
+    public function getOrThrow(int|array|string|null $where = null, string $message = 'Item not found', ?string $idField = 'id'): object|array|null
     {
         $result = $this->get($where, $idField);
         if (!$result) {
             throw new NotFoundException($message);
         }
         return $result;
+    }
+
+    /**
+     * Create a new item or update an existing item
+     * Supports both single and multiple items
+     * @throws Exception
+     */
+    public function saveOrUpdate(array | Arrayable $data, string $pkField = 'id'): object | array
+    {
+        $this->checkFilterMode("You cannot save at this point in the query, check the usage of the `save()`
+         method in the query builder for " . $this->table);
+        if (is_array($data)) {
+            $data = arr($data);
+        }
+        if ($data->isEmpty()){
+            throw new DatabaseException("You cannot save an empty array");
+        }
+        // if it is an array of arrays, then we save or update each item
+        if (is_array($data->at(0))) {
+            $items = [];
+            $data->each(function($item) use (&$items, $pkField){
+                $items[] = $this->saveOrUpdate(arr($item), $pkField);
+            });
+            return $items;
+        }
+        if ($data->has($pkField)) {
+            $id = $data->get($pkField);
+            $this->update($data->toArray(), $id, $pkField);
+            return $this->get($id);
+        }
+
+        return $this->save($data->all());
+    }
+
+    /**
+     * Acronym for saveOrUpdate
+     * @see $this->saveOrUpdate()
+     * @throws Exception
+     */
+    public function createOrUpdate(array | Arrayable $data, string $pkField = 'id'): object | array
+    {
+        return $this->saveOrUpdate($data, $pkField);
     }
 
     /**

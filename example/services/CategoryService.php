@@ -34,9 +34,8 @@ class CategoryService extends Service
      */
     protected function listAction(Arrayable $request): BaseResponse
     {
-
         return response(0,
-            'You have reached list_company_action action', db("company")->all());
+            'You have reached list_company_action action', db("skill")->all());
     }
 
     /**
@@ -44,9 +43,18 @@ class CategoryService extends Service
      */
     protected function bulkAction(Arrayable $request): BaseResponse
     {
-        $data = $request->getOrThrow('data', 'Data is required');
-        logger()->info('Bulk data', $data);
-        $saved = db('skill')->saveAll($data);
+        $id = $request->get('id');
+        $saved = db('skill')->getOrThrow($id, 'Skill not found');
         return response(0, 'You have reached bulk_save action', $saved);
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function saveOrUpdateAction(Arrayable $request): BaseResponse
+    {
+        $data = $request->get('data');
+        $saved = db('skill')->saveOrUpdate($data);
+        return response(0, null, $saved);
     }
 }
