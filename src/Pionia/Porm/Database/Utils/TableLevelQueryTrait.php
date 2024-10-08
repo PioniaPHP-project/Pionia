@@ -255,6 +255,7 @@ trait TableLevelQueryTrait
      * Create a new item or update an existing item
      * Supports both single and multiple items
      * @throws Exception
+     * @since 2.0.3+
      */
     public function saveOrUpdate(array | Arrayable $data, string $pkField = 'id'): object | array
     {
@@ -274,12 +275,14 @@ trait TableLevelQueryTrait
             });
             return $items;
         }
-        if ($data->has($pkField)) {
-            $id = $data->get($pkField);
+
+        if ($data->has($pkField) && $this->has($id = $data->get($pkField), $pkField)) {
+
             $this->update($data->toArray(), $id, $pkField);
             return $this->get($id);
         }
 
+        $data->remove($pkField);
         return $this->save($data->all());
     }
 
@@ -287,6 +290,7 @@ trait TableLevelQueryTrait
      * Acronym for saveOrUpdate
      * @see $this->saveOrUpdate()
      * @throws Exception
+     * @since 2.0.3+
      */
     public function createOrUpdate(array | Arrayable $data, string $pkField = 'id'): object | array
     {
@@ -431,6 +435,7 @@ trait TableLevelQueryTrait
     private function checkFilterMode($msg = 'Query is in filter mode, you cannot use this method in filter mode'): void
     {
         if ($this->allowFilterOnly) {
+            logger()->warning($msg);
             throw new Exception($msg);
         }
     }
