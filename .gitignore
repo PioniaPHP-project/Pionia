@@ -8,6 +8,7 @@ build
 
 **.log
 
-example/storage/logs
-example/storage/cache
-example/storage/media
+example
+docs
+
+
