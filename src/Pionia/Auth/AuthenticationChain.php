@@ -92,6 +92,17 @@ class AuthenticationChain implements AuthenticationChainContract
         return $this;
     }
 
+    /**
+     * Add multiple authentications at ago
+     * @param array|Arrayable $authentications
+     * @return $this
+     */
+    public function addAll(array | Arrayable $authentications): static
+    {
+        $this->authentications->merge($this->authentications);
+        return $this;
+    }
+
     private function run(Request $request): void
     {
         if ($this->authentications->isEmpty() || $request->isAuthenticated()) {

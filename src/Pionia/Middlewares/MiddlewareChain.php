@@ -37,6 +37,11 @@ class MiddlewareChain
         return $this;
     }
 
+    public function addAll(array | Arrayable $middlewares)
+    {
+        return $this->middlewareContainer->merge($middlewares);
+    }
+
     public function all()
     {
         return $this->middlewareContainer->all();

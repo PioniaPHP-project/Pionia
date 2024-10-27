@@ -16,8 +16,10 @@ use Pionia\Cache\PioniaCacheAdaptor;
 use Pionia\Collections\Arrayable;
 use Pionia\Console\BaseCommand;
 use Pionia\Contracts\ApplicationContract;
+use Pionia\Contracts\ProviderContract;
 use Pionia\Cors\PioniaCors;
 use Pionia\Events\PioniaEventDispatcher;
+use Pionia\Exceptions\InvalidProviderException;
 use Pionia\Http\Base\WebKernel;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
@@ -36,6 +38,7 @@ use Pionia\Utils\PioniaApplicationType;
 use Pionia\Utils\Support;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use SebastianBergmann\LinesOfCode\IllogicalValuesException;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Process\PhpExecutableFinder;
@@ -59,6 +62,12 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     public string $appName = 'Pionia Framework';
 
     /**
+     * App specific cacheacbles' time to live in caches.
+     * @var int
+     */
+    public int $appItemsCacheTTL= 0; // indefinitely
+
+    /**
      * Framework version
      * @var string
      */
@@ -75,6 +84,20 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      * @var ?Arrayable
      */
     public ?Arrayable $env;
+
+    /**
+     * These shall be used to run the onBooted and onTermine lifecycle hooks against every provider
+     * @var Arrayable
+     */
+    public Arrayable $appProviders;
+
+    /**
+     * Resolved cached providers are cached,
+     * if the provider is not found in caches,
+     * then we resolve it as new, and cache for later requests
+     * @var Arrayable|null
+     */
+    public ?Arrayable $unResolvedAppProviders = null;
 
     /**
      * Logger instance
@@ -134,6 +157,8 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         parent::__construct($this->appName, $this->appVersion);
 
         $this->env = new Arrayable();
+
+        $this->appProviders = new Arrayable([]);
 
         $this->dispatcher = $this->getSilently(PioniaEventDispatcher::class) ?? new PioniaEventDispatcher();
 
@@ -303,6 +328,9 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
 
             $this->cacheInstance = $this->getSilently(PioniaCache::class);
 
+            // collect the app providers
+            $this->resolveProviders();
+
             // this is where the actual running of the application happens
             $this->bootstrapMiddlewares();
             $this->bootstrapAuthentications();
@@ -315,7 +343,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             $this->booted = true;
 
             $this->callBootedCallbacks();
-
+            $this->bootProviders();
             // we set the app constant to the application so that we can access it globally
             if (!defined('app')) {
                 define('app', $this);
@@ -328,6 +356,17 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             }
             $this->shutdown();
         }
+    }
+
+    /**
+     * Runs the boot method of each provider
+     * @return void
+     */
+    private function bootProviders(): void
+    {
+        $this->appProviders?->each(function ($provider){
+            $this->contextMakeSilently($provider, ['app' => $this])->onBooted();
+        });
     }
 
     public function addQueryToPool(string $identifier, string $query): static
@@ -345,7 +384,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             $commands = Arrayable::toArrayable($this->getCache('app_commands', true));
         } else {
             $commands = new Arrayable();
-            // collect all the middlewares from the environment and the context
+            // collect all the commands from the environment and the context
             env()->has("commands") && $commands->merge(env('commands'));
 
             if ($scoped = $this->getSilently('commands')) {
@@ -355,17 +394,45 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
                     $commands->merge($scoped);
                 }
             }
-
             $commands->merge($this->builtInCommands()->all());
+            // register commands from providers too
+            if ($this->unResolvedAppProviders?->isFilled()) {
+                $commands = $this->bootstrapCommandsFromProviders($commands);
+            }
         }
 
         $this->context->set('commands', $commands);
     }
 
     /**
+     * Collect commands from app providers
+     * @param Arrayable $commands
+     * @return Arrayable
+     */
+    public function bootstrapCommandsFromProviders(Arrayable $commands): Arrayable
+    {
+        $bootstrapped = arr($this->hasCache('bootstrapped_commands') ? $this->getCache('bootstrapped_commands') : []);
+
+        $this->unResolvedAppProviders?->each(function($provider) use (&$commands, &$bootstrapped){
+            if (!$this->isCachedIn('bootstrapped_commands', $provider)){
+                $providerKlass = new $provider($this);
+                $commands->merge($providerKlass->commands());
+                $bootstrapped->add($provider);
+            }
+        });
+        $this->updateCache('bootstrapped_commands', $bootstrapped->all(), true, $this->appItemsCacheTTL);
+        return $commands;
+    }
+
+    /**
      */
     private function bootstrapMiddlewares(): void
     {
+        $this->context->set(MiddlewareChain::class, function () {
+            return new MiddlewareChain($this);
+        });
+        $middlewares = null;
+
         if ($this->hasCache('app_middlewares', true)) {
             $middlewares = Arrayable::toArrayable($this->getCache('app_middlewares', true));
         } else {
@@ -381,16 +448,37 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             } elseif (is_array($scopedMiddlewares)) {
                 $middlewares->merge($scopedMiddlewares);
             }
-
             $middlewares->merge($this->builtInMiddlewares()->all());
-            $this->setCache('app_middlewares', $middlewares->all(), null, true);
+            $this->setCache('app_middlewares', $middlewares->all(), $this->appItemsCacheTTL, true);
+        }
+
+        if ($this->unResolvedAppProviders?->isFilled()) {
+            $chain = $this->bootstrapMiddlewaresInProviders($middlewares);
+            $middlewares->merge($chain->all());
+            $this->updateCache('app_middlewares', $middlewares->all(), true,  $this->appItemsCacheTTL);
         }
 
         $this->context->set('middlewares', $middlewares);
 
-        $this->context->set(MiddlewareChain::class, function () {
-            return new MiddlewareChain($this);
+    }
+
+    /**
+     * Passes the middleware chain in the app providers and caches the process
+     * @param $middlewares
+     * @return MiddlewareChain
+     */
+    private function bootstrapMiddlewaresInProviders($middlewares): MiddlewareChain
+    {
+        $bootstrapped = arr($this->getCache('bootstrapped_middlewares') ?? []);
+        $chain = new MiddlewareChain($this);
+        $chain->addAll($middlewares);
+        $this->unResolvedAppProviders?->each(function($provider) use (&$chain, &$bootstrapped){
+            $providerKlass = new $provider($this);
+            $providerKlass->middlewares($chain);
+            $bootstrapped->add($provider);
         });
+        $this->updateCache('bootstrapped_middlewares', $bootstrapped, true, $this->appItemsCacheTTL);
+        return $chain;
     }
 
 
@@ -417,7 +505,14 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             }
             $authentications->merge($this->builtInAuthentications()->all());
             // cache for future calls
-            $this->setCache('app_authentications', $authentications->all(), null, true);
+            $this->setCache('app_authentications', $authentications->all(), $this->appItemsCacheTTL, true);
+        }
+
+        // bootstrap authentications from providers
+        if($this->unResolvedAppProviders?->isFilled()) {
+            $chain = $this->bootAuthenticationsInProviders($authentications);
+            $authentications->merge($chain->getAuthentications());
+            $this->updateCache('app_authentications',  $authentications->all(), true, $this->appItemsCacheTTL);
         }
 
         $this->context->set('authentications', $authentications);
@@ -425,6 +520,26 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         $this->context->set(AuthenticationChain::class, function () {
             return new AuthenticationChain($this);
         });
+    }
+
+    /**
+     * Bootstrap authentications coming from providers. This runs post internal authentications
+     * @param $authentications
+     * @return AuthenticationChain
+     */
+    protected function bootAuthenticationsInProviders($authentications): AuthenticationChain
+    {
+        $chain = new AuthenticationChain($this);
+        $chain->addAll($authentications);
+        $bootstrapped = arr($this->getCache('bootstrapped_authentications') ?? []);
+        $this->unResolvedAppProviders?->each(function ($provider) use (&$chain, &$bootstrapped) {
+            $providerKlass = new $provider($this);
+            $providerKlass->authentications($chain);
+            $bootstrapped->add($provider);
+        });
+        // cache for later
+        $this->updateCache('bootstrapped_authentications', $bootstrapped->all(), true, $this->appItemsCacheTTL);
+        return $chain;
     }
 
     /**
@@ -459,6 +574,48 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     {
         $this->logger = $logger;
         $this->context->set(LoggerInterface::class, $logger);
+    }
+
+    /**
+     * Checks if a certain keyToCheck is set in the cache under a certain keyCached.
+     *
+     * This is useful if you want to check if a certain items is in a certain cached array or arrayable
+     *
+     * Outside the app context, you can use `is_cached_in()` to achieve the same.
+     * @param string $keyCached
+     * @param string $keyToCheck
+     * @param bool|null $checkExact
+     * @return bool
+     */
+    public function isCachedIn(string $keyCached, string $keyToCheck, ?bool $checkExact = true): bool
+    {
+        // if the cache key is not defined at all, we return immediately
+        if (!$this->hasCache($keyCached, $checkExact)){
+            return false;
+        }
+
+        $poolCached = $this->getCache($keyCached, $checkExact);
+        // if the value of the cached data is null, we stop here
+        if (empty($poolCached)){
+            return false;
+        }
+        // this implies the cached item is the key to check too
+        if ($keyCached === $keyToCheck){
+            return true;
+        }
+
+        // if we cached an array, we check if the array has the keyToCheck
+        if (is_array($poolCached) && array_key_exists($keyToCheck, $poolCached)){
+            return true;
+        }
+
+        // we also check the same if we cached an arrayable
+        if ($poolCached instanceof Arrayable && $poolCached->has($keyToCheck)){
+            return true;
+        }
+
+        // more options can be considered here, but for now we resolve to failing
+        return false;
     }
 
     protected function report(string $format, string $message, ?array $data = []): void
@@ -503,11 +660,27 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
             $router = new PioniaRouter($routes);
         } else {
             $router = (require $this->alias(DIRECTORIES::BOOTSTRAP_DIR->name) . DIRECTORY_SEPARATOR . 'routes.php');
-            $this->setCache("app_routes", $router->getRoutes(), null, true);
+            // merge all routes from the providers too
+            if ($this->unResolvedAppProviders?->isFilled()) {
+                $router = $this->resolveRoutesFromProviders($router);
+            }
+            $this->setCache("app_routes", $router->getRoutes(), $this->appItemsCacheTTL, true);
         }
         $this->context->set(PioniaRouter::class, $router);
         $this->context->set('routes', arr($router->getRoutes()->all()));
         return $this;
+    }
+
+    protected function resolveRoutesFromProviders(PioniaRouter $router): PioniaRouter
+    {
+        $bootstrapped = arr($this->getCache('bootstrapped_routes') ?? []);
+        $this->unResolvedAppProviders?->each(function ($provider) use (&$router, &$bootstrapped){
+            $providerKlass = new $provider($this);
+            $router = $providerKlass->routes($router);
+            $bootstrapped->add($provider);
+        });
+        $this->updateCache('bootstrapped_routes', $bootstrapped->all(), true, $this->appItemsCacheTTL);
+        return $router;
     }
     /**
      * Add a single middleware to the chain
@@ -516,6 +689,11 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      */
     public function addMiddleware(string $middleware): static
     {
+        // we have already cached this middleware
+        if ($this->isCachedIn('app_middlewares', $middleware, true)){
+            return $this;
+        }
+
         $middlewares = $this->contextHas(MiddlewareChain::class);
         if (!$middlewares) {
            $this->context->set(MiddlewareChain::class, function () {
@@ -526,10 +704,8 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         $middlewares->add($middleware);
         $this->context->set(MiddlewareChain::class, $middlewares);
 
-        // we need to also add it to the cached middlewares
-        $this->hasCache('app_middlewares', true) && $this->deleteCache('app_middlewares', true);
-
-        $this->setCache('app_middlewares', $middlewares->all(), null, true);
+//        // we need to also add it to the cached middlewares
+        $this->updateCache('app_middlewares', $middlewares->all(), true, $this->appItemsCacheTTL);
         return $this;
     }
 
@@ -551,10 +727,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         $this->context->set('middlewares', $middlewares->all());
 
         // we need to also add it to the cached middlewares
-        $this->hasCache('app_middlewares', true) && $this->deleteCache('app_middlewares', true);
-
-        $this->setCache('app_middlewares', $middlewares->all(), null, true);
-
+        $this->updateCache('app_middlewares', $middlewares->all(), true, $this->appItemsCacheTTL);
         return $this;
     }
 
@@ -721,5 +894,94 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     public function resolve(string $id)
     {
         return $this->context->get($id);
+    }
+
+    /**
+     * Register a new provider in the app context(di)
+     * Appends the new provider into the existing array of providers
+     * @throws InvalidProviderException
+     */
+    public function addAppProvider(string $provider): static
+    {
+        // if we already cached this provider in app providers, we stop here
+        if ($this->isCachedIn('app_providers', $provider)){
+            return $this;
+        }
+
+        if (!Support::implements($provider, ProviderContract::class)){
+            throw new InvalidProviderException($provider .' is not a valid Pionia AppProvider');
+        }
+        // we add it in the cached providers
+        if($this->hasCache('app_providers')){
+            $cachedProviders = $this->getCache('app_providers', true);
+            if ($cachedProviders instanceof Arrayable){
+                $cachedProviders->add($provider);
+                $this->updateCache('app_providers', $cachedProviders, true, $this->appItemsCacheTTL);
+            } else if (is_array($cachedProviders)){
+                $cachedProviders = array_merge($cachedProviders, [$provider => $provider]);
+                $this->updateCache('app_providers', $cachedProviders, true, $this->appItemsCacheTTL);
+            } else {
+                throw new InvalidProviderException("Invalid cached app providers");
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * we only want to start resolving only new providers
+     * @return Arrayable|null
+     */
+    private function calculateUnresolvedProviders(): ?Arrayable
+    {
+        $cached = arr($this->getCache('app_providers') ?? []);
+        $all = arr($this->getEnv('app_providers', []));
+        if ($cached->isEmpty()){
+            return $all;
+        }
+        if ($all->isEmpty()){
+            return arr([]);
+        }
+        $this->unResolvedAppProviders = $all->differenceFrom($cached);
+        return $this->unResolvedAppProviders;
+    }
+
+    /**
+     * Registers all app providers registered in the .ini files that were collected in the env
+     * @param bool $considerCached
+     * @return PioniaApplication
+     * @throws InvalidProviderException
+     */
+    protected function resolveProviders(bool $considerCached = true): static
+    {
+        if ($considerCached){
+            $providersArr = $this->getCache("app_providers", true);
+            if ($providersArr){
+                $this->set("app_providers", arr($providersArr));
+                $this->appProviders = $providersArr;
+            } else {
+                // if we have no cached providers, then
+                $this->resolveProviders(false);
+            }
+            $this->calculateUnresolvedProviders();
+            return $this;
+        }
+        // we only come here if our providers weren't cached already
+        // here we re-collect them from the config
+        $providers= $this->env->has('app_providers') ? $this->env->get('app_providers', []) : [];
+        $fineProviders = arr([]);
+        arr($providers)->each(function ($value, $key) use ($fineProviders) {
+            if (!Support::implements($value, ProviderContract::class)){
+                $this->logger->warning($value.' is not a valid app provider, therefore skipped.');
+            }
+            $fineProviders->add($key, $value);
+        });
+        $providersArr = $this->builtinProviders()->merge($fineProviders);
+        if ($providersArr->isFilled()){
+            $this->set("app_providers", $providersArr);
+            $this->setCache("app_providers", $providersArr->toArray(), $this->appItemsCacheTTL, true);
+            $this->appProviders = $providersArr;
+            $this->unResolvedAppProviders = $this->calculateUnresolvedProviders();
+        }
+        return $this;
     }
 }

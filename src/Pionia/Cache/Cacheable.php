@@ -68,6 +68,14 @@ trait Cacheable
         return $this->setCache($key, $value, $ttl, $exact);
     }
 
+    public function updateCache($key, $newValue, $exact = false, ?int $ttl =null): void
+    {
+        if ($this->hasCache($key)){
+            $this->deleteCache($key, $exact);
+        }
+        $this->setCache($key, $newValue, $ttl, $exact);
+    }
+
     /**
      * @param $key
      * @param bool|null $exact

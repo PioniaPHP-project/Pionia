@@ -4,6 +4,7 @@ namespace Pionia\Utils;
 
 use Closure;
 use JetBrains\PhpStorm\NoReturn;
+use Pionia\Collections\Arrayable;
 
 trait ApplicationLifecycleHooks
 {
@@ -125,6 +126,12 @@ trait ApplicationLifecycleHooks
         $this->report('info', 'Shutting down the application');
 
         $this->callTerminatingCallbacks();
+        // run the termination hook on each provider
+        if ($this->appProviders->isFilled()) {
+            $this->appProviders->each(function ($provider) {
+                $this->contextMakeSilently($provider, ['app' => $this])->onTerminate();
+            });
+        }
         $this->context = null;
         $this->env = null;
         $this->envResolver = null;
@@ -136,6 +143,7 @@ trait ApplicationLifecycleHooks
         $this->bootingCallbacks = [];
         $this->callTerminatedCallbacks();
         $this->terminatedCallbacks = [];
+        $this->appProviders = new Arrayable();
         exit($status);
     }
 

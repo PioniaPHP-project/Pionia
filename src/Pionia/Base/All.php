@@ -92,6 +92,9 @@ if (!function_exists('allBuiltins')) {
             ],
             'aliases' => [
                 DIRECTORIES::WELCOME_PAGE->name => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'templates/index.php'
+            ],
+            'providers' => [
+
             ]
         ]);
     }

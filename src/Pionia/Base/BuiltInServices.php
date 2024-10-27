@@ -61,5 +61,10 @@ trait BuiltInServices
     {
         return Arrayable::toArrayable(allBuiltins()->get("namespaces"));
     }
+
+    protected function builtinProviders(): Arrayable
+    {
+        return Arrayable::toArrayable(allBuiltins()->get('providers'));
+    }
 }
 

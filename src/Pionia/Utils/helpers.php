@@ -621,3 +621,11 @@ if (!function_exists('flatten')){
         return Support::arrFlatten($flatten);
     }
 }
+
+
+if (!function_exists('is_cached_in')){
+    function is_cached_in($keyCached, $keyToCheck): bool
+    {
+        return app()->isCachedIn($keyCached, $keyToCheck);
+    }
+}

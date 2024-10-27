@@ -464,11 +464,14 @@ class Arrayable
 
     /**
      * Merge a whole into the current array
-     * @param array $array
+     * @param array|Arrayable $array $array
      * @return Arrayable
      */
-    public function merge(array $array): static
+    public function merge(array | Arrayable $array): static
     {
+        if ($array instanceof Arrayable){
+            return $this->merge($array->toArray());
+        }
         $this->array = array_merge($this->array, $array);
         return $this;
     }
@@ -759,4 +762,16 @@ class Arrayable
         }
         return null;
     }
+
+    /**
+     * Returns the items in the current array that are not in the other array
+     * @param Arrayable|array $arrayable
+     * @return Arrayable
+     */
+    public function differenceFrom(Arrayable | array $arrayable): Arrayable
+    {
+        $diff = array_diff($this->array, $arrayable->all());
+        return new Arrayable($diff);
+    }
 }
+
