@@ -790,7 +790,6 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
      */
     public function dispatch(object $event, string $name): void
     {
-        $this->logger->info("Dispatching event $name");
         $this->dispatcher->dispatch($event, $name);
     }
 
@@ -899,31 +898,18 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     /**
      * Register a new provider in the app context(di)
      * Appends the new provider into the existing array of providers
-     * @throws InvalidProviderException
      */
     public function addAppProvider(string $provider): static
     {
         // if we already cached this provider in app providers, we stop here
-        if ($this->isCachedIn('app_providers', $provider)){
+        if (!Support::implements($provider, ProviderContract::class)){
+            $this->logger()->warning($provider .' is not a valid Pionia AppProvider, therefore, skipping.');
             return $this;
         }
-
-        if (!Support::implements($provider, ProviderContract::class)){
-            throw new InvalidProviderException($provider .' is not a valid Pionia AppProvider');
-        }
-        // we add it in the cached providers
-        if($this->hasCache('app_providers')){
-            $cachedProviders = $this->getCache('app_providers', true);
-            if ($cachedProviders instanceof Arrayable){
-                $cachedProviders->add($provider);
-                $this->updateCache('app_providers', $cachedProviders, true, $this->appItemsCacheTTL);
-            } else if (is_array($cachedProviders)){
-                $cachedProviders = array_merge($cachedProviders, [$provider => $provider]);
-                $this->updateCache('app_providers', $cachedProviders, true, $this->appItemsCacheTTL);
-            } else {
-                throw new InvalidProviderException("Invalid cached app providers");
-            }
-        }
+        $others = arr($this->env->get('app_providers', []));
+        $others->add($provider);
+        $this->setEnv('app_providers', $others->all());
+        $this->appProviders->add($provider);
         return $this;
     }
 

@@ -25,6 +25,7 @@ class MiddlewareChain
     private PioniaApplication $app;
 
     private Arrayable $middlewareContainer;
+    private Arrayable $middlewareStackCopy;
     /**
      * Add a middleware to the middleware chain
      *
@@ -115,18 +116,21 @@ class MiddlewareChain
      */
     public function handle(Request $request, ?Response $response = null): void
     {
+        $copy = clone $this->middlewareContainer;
+        // we need to take a snapshot of the middleware stack so that we can run the chain multiple times
+        $this->middlewareStackCopy = $copy;
         if ($response){
             if ($this->app->dispatcher) {
-                $this->app->dispatcher->dispatch(new PostMiddlewareChainRunEvent($this));
+                $this->app->dispatch(new PostMiddlewareChainRunEvent($this), PostMiddlewareChainRunEvent::name());
             }
             $this->rail($request, $response);
 
             if ($this->app->dispatcher) {
-                $this->app->dispatcher->dispatch(new PostMiddlewareChainRunEvent($this));
+                $this->app->dispatch(new PostMiddlewareChainRunEvent($this), PostMiddlewareChainRunEvent::name());
             }
-        }else {
+        } else {
             if ($this->app->dispatcher) {
-                $this->app->dispatcher->dispatch(new PreMiddlewareChainRunEvent($this));
+                $this->app->dispatch(new PreMiddlewareChainRunEvent($this), PreMiddlewareChainRunEvent::name());
             }
             $this->rail($request);
         }
@@ -138,9 +142,9 @@ class MiddlewareChain
      * @param Request $request
      * @param ?Response $response
      */
-    public function rail(Request $request, ?Response $response = null): void
+    private function rail(Request $request, ?Response $response = null): void
     {
-        $current = $this->middlewareContainer->shift();
+        $current = $this->middlewareStackCopy->shift();
         if (!$current) {
             return;
         }

@@ -37,7 +37,6 @@ use Pionia\Base\PioniaApplication;
  *
  * The application instance is returned at the end of the file.
  *
- * >>>>>
  */
 
 
@@ -45,7 +44,6 @@ use Pionia\Base\PioniaApplication;
  * ---------------------------------------------------------------
  * Setup the application start time if not already defined
  * ---------------------------------------------------------------
- * >>>>>
  */
 if (!defined(constant_name: 'PIONIA_START')) {
     define('PIONIA_START', microtime(true));
@@ -55,7 +53,6 @@ if (!defined(constant_name: 'PIONIA_START')) {
  * ---------------------------------------------------------------
  * Define the base path
  * ---------------------------------------------------------------
- * >>>>>
  */
 if (!defined('BASEPATH')) {
     define('BASEPATH', dirname(__DIR__, 1));
@@ -65,7 +62,6 @@ if (!defined('BASEPATH')) {
  * ---------------------------------------------------------------
  * Load the composer autoloader
  * ---------------------------------------------------------------
- * >>>>>
  */
 include BASEPATH . '/../vendor/autoload.php';
 
@@ -73,16 +69,34 @@ include BASEPATH . '/../vendor/autoload.php';
  * ---------------------------------------------------------------
  * Create the application instance
  * ---------------------------------------------------------------
- * >>>>>
  */
 $app = new PioniaApplication(BASEPATH);
+
+
+/**
+ * ---------------------------------------------------------------
+ * Register the app providers
+ * ---------------------------------------------------------------
+ * App providers are packages that do not only target to serve Pionia, but also,
+ * target to mutate the lifecycle and normal operations of the Application instance.
+ *
+ * These can be registered in the any .ini file or below using the following method.
+ *
+ * This method can be called as many times as possible to add more providers.
+ */
+//$app->addAppProvider(SamplePackageProvider::class);
+//    ->addAppProvider(SamplePackageProvider::class);
+
 
 /**
  * ---------------------------------------------------------------
  * Register the application's lifecycle hooks
  * ---------------------------------------------------------------
- * >>>>>
+ *
+ * This is where you can hook into the application's lifecycle.
+ *
  */
+
 //$app->booting(function () {
 //    // Add your booting hooks here
 //});
@@ -99,11 +113,11 @@ $app = new PioniaApplication(BASEPATH);
 //    // Add your terminated hooks here
 //});
 
+
 /**
  * ---------------------------------------------------------------
  * Return the application instance
  * ---------------------------------------------------------------
  * This must stay as the last line of the file.
- * >>>>>
  */
 return $app;
