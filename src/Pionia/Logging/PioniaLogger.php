@@ -30,7 +30,6 @@ class PioniaLogger implements LoggerInterface
      */
     private string $name;
 
-
     /**
      * @var ?Arrayable log handlers to use
      */
@@ -75,7 +74,7 @@ class PioniaLogger implements LoggerInterface
                 'LOG_HANDLERS' => [],
                 'HIDE_SUB' => '*********'
             ]);
-    
+
         $name = $this->getOrDefault('APP_NAME', 'Pionia');
 
         if ($this->settings->has('APP_NAME')) {
@@ -222,7 +221,7 @@ class PioniaLogger implements LoggerInterface
             }
         }
 
-        if(method_exists($formatter, 'ignoreEmptyContextAndExtra')){ 
+        if(method_exists($formatter, 'ignoreEmptyContextAndExtra')){
             $formatter->ignoreEmptyContextAndExtra();
         }
         if (method_exists($formatter, 'setJsonPrettyPrint')) {

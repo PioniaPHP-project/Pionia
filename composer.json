@@ -63,6 +63,7 @@
     },
     "scripts": {
         "test": "phpunit",
-        "document": "phpDocumentor run -d . -t docs/ --config=phpdoc.dist.xml --force"
+        "document": "phpDocumentor run -d . -t docs/ --config=phpdoc.dist.xml --force",
+        "changelog": "git log --pretty=format:'- %s' > CHANGELOG.md"
     }
 }
