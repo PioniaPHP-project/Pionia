@@ -98,4 +98,4 @@ Please read the [CONTRIBUTING.md](/CONTRIBUTING.md) file for more information on
 - [**Jet2018**](https://github.com/jet2018)
 
 ## License
-[MIT License](/LICENSE)
+[MIT License](https://github.com/PioniaPHP-project/.github/blob/main/profile/LICENCE.md)
