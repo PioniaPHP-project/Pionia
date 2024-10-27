@@ -934,7 +934,9 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     private function calculateUnresolvedProviders(): ?Arrayable
     {
         $cached = arr($this->getCache('app_providers') ?? []);
-        $all = arr($this->getEnv('app_providers', []));
+        $envProvided = arr($this->getEnv('app_providers', []));
+        $builtIns = $this->builtinProviders();
+        $all = $builtIns->merge($envProvided);
         if ($cached->isEmpty()){
             return $all;
         }
