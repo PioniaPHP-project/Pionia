@@ -1,0 +1,47 @@
+
+<?php
+
+
+/**
+ * This is the bootstrap file for the framework
+ *
+ * It is the entry point for the framework and should be included in all files that need to use the framework
+ *
+ * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
+ */
+
+use Pionia\Pionia\Base\PioniaApplication;
+use Pionia\Pionia\Events\PioniaEventDispatcher;
+use Pionia\Pionia\Logging\PioniaLogger;
+use Porm\Core\Database;
+
+$autoloader = require __DIR__ . '/../vendor/autoload.php';
+
+$container = new DI\Container();
+
+$eventDispatcher = new PioniaEventDispatcher();
+
+$container->set(PioniaEventDispatcher::class, $eventDispatcher);
+
+$app = new PioniaApplication($container);
+
+$logger = new PioniaLogger($container);
+$app->setLogger($logger);
+
+$container->set('default', function () {
+    return new Database([
+            'database_type' => 'pgsql',
+            'database_name' => 'auther_db',
+            'server' => 'localhost',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+        ]);
+});
+
+$app->powerUp();
+
+$connection = $container->get('default');
+$porm = new Porm\Porm($connection);
+
+dd($porm::table('user')->all());
