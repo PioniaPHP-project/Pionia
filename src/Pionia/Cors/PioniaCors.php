@@ -3,153 +3,155 @@
 namespace Pionia\Cors;
 
 
-use DI\DependencyException;
-use DI\NotFoundException;
-use Fruitcake\Cors\CorsService;
-use Pionia\Base\PioniaApplication;
 use Pionia\Collections\Arrayable;
 use Pionia\Contracts\CorsContract;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
+use Pionia\Utils\Support;
 
+/***
+ * Handles cors in Pionia requests and applications.
+ * Supports allowing specific origins and blocking certain origins from accessing your endpoint
+ */
 class PioniaCors implements CorsContract
 {
-    public PioniaApplication $application;
+    private ?Arrayable $settings;
 
-    public Arrayable $options;
 
-    public function __construct(PioniaApplication $application)
+    public function handle($request): void
     {
-        $this->application = $application;
-        $this->options = new Arrayable([]);
+        $this
+            ->addAllowedHeaders()
+            ->addAllowedMethods()
+            ->addAllowedOrigin()
+            ->addMaxAge()
+            ->handlePreflight($request)
+            ->blockNonAllowedOrigins($request)
+            ->resolveHttps($request);
     }
 
-    public function register(): static
+    public function __construct()
     {
-        $this->application->context->set(CorsService::class, function () {
-            return new CorsService($this->options->all());
-        });
+        $this->settings = arr(array(
+            'allowed_origins' => '*',
+            'allowed_headers' => '*',
+            'credentials' => 'true',
+            'max_age' => 86400,
+        ));
+
+        $this->settings->merge(arr(env('cors', [])));
+        // force the methods to be those supported by Pionia Application
+        $this->settings->set('allowed_methods', Support::arrayToString(app()->supportedMethods()));
+        // start adding the headers
+    }
+
+    private function isPreflight(Request $request): bool
+    {
+        return $request->isMethod('OPTIONS');
+    }
+
+    private function blockNonAllowedOrigins(Request $request): ?static
+    {
+        if ($this->isPreflight($request)){
+            return $this;
+        }
+
+        $blocked = app()->getSilently("blocked_origins");
+        $serverOrigin = env('HTTP_ORIGIN', '');
+        if ($blocked && count($blocked) > 0) {
+            if (in_array($serverOrigin, $blocked) || in_array('*', $blocked)) {
+                $response = new Response();
+                $response->setStatusCode(Response::HTTP_OK);
+                $res = response(403, 'Traffic from '. $serverOrigin .' is currently not accepted by '. app()->getAppName());
+                $response->setContent($res->getPrettyResponse());
+                $response->prepare($request)->send();
+                exit();
+            }
+        }
         return $this;
     }
 
-    /**
-     * @throws NotFoundExceptionInterface
-     * @throws NotFoundException
-     * @throws ContainerExceptionInterface
-     * @throws DependencyException
-     */
-    public function resolveRequest(Request $request, ?Response $response = null): void
+    private function addAllowedOrigin(): static
     {
-        $cors = $this->application->getOrDefault(CorsService::class, new CorsService($this->options->all()));
-        $this->mergeAllowedOrigins();
-        if ($this->preventBlockedOrigins($request, $response))
-        {
-            return;
-        }
-        // if by any chance the developer only permitted https connections, we should check if the request is secure
-        if (!$this->resolveHttps($request, $response)) {
-            return;
-        }
+        $allowedOrigins = $this->settings->get('allowed_origins', '*');
 
-        if ($cors->isCorsRequest($request) && $response) {
-            $cors->varyHeader($response, 'Origin');
-        }
+        $allowOrigin = '*';
 
+        if ($allowedOrigins !== '*') {
 
-        if ($cors->isPreflightRequest($request)) {
-            $cors->handlePreflightRequest($response);
-        }
+            $allowOriginArray = explode(',', $allowedOrigins);
 
-        if ($cors->isCorsRequest($request)) {
-            $cors->varyHeader($response, 'Origin');
-        }
+            $contextAllowedOrigins = app()->getSilently('allowed_origins');
 
-    }
+            if ($contextAllowedOrigins && !empty($allowOriginArray)) {
+                // remove "*" from the array
+                $allowOriginArray = array_values(array_filter($allowOriginArray, function ($value) {
+                    return $value !== '*';
+                }));
 
-    /**
-     * Merge the allowed origins from the application configuration and let the cors middleware handle the rest
-     * @return void
-     */
-    private function mergeAllowedOrigins(): void
-    {
-        $this->options->addAtKey('allowedOrigins', $this->application->getOrDefault('allowed_origins', []));
-    }
-
-    /**
-     * prevent all blocked origins from accessing the application
-     * @param Request $request
-     * @param ?Response $response
-     * @return bool
-     */
-    private function preventBlockedOrigins(Request $request, ?Response $response): bool
-    {
-        // we only want to do this if the request is cross-origin
-        if ($request->headers->has('Origin')) {
-            $serverOrigin = $request->headers->get('Origin');
-
-            if (!$serverOrigin) {
-                return false;
+                $allowOriginArray = array_merge($allowOriginArray, $contextAllowedOrigins);
             }
 
-            $blockedOrigins = $this->application->getOrDefault('blocked_origins', []);
+            $serverOrigin = env('HTTP_ORIGIN', '');
 
-            if ($blockedOrigins && is_array($blockedOrigins) && in_array($serverOrigin, $blockedOrigins)) {
-                $response->setStatusCode(200);
-                $res = response(403, 'Access to this resource is forbidden');
-                $response->setContent($res->getPrettyResponse());
-                return true;
+            if (in_array($serverOrigin, $allowOriginArray)) {
+                $allowOrigin = $allowedOrigins;
+            } else {
+                $allowOrigin = '';
             }
-            return false;
         }
-        return false;
+        header('Access-Control-Allow-Origin: '.$allowOrigin);
+        return $this;
     }
 
-    private function resolveHttps($request, $response): bool
+    private function addAllowedHeaders(): static
     {
-        $httpsOnly = $this->application->getOrDefault('https_only', false);
+        $allowedHeaders = $this->settings->get('allowed_headers', '*');
+        header('Access-Control-Allow-Headers: '.$allowedHeaders);
+        return $this;
+    }
+
+    private function addAllowedMethods(): static
+    {
+        header('Access-Control-Allow-Methods: '.$this->settings->get('allowed_methods', 'GET, POST, OPTIONS'));
+        return $this;
+    }
+
+    private function handlePreflight(Request $request): ?static
+    {
+        if ($request->isMethod('OPTIONS')){
+            $response = new Response();
+            $response->setStatusCode(201);
+            $response->prepare($request)->send();
+            exit();
+        }
+
+        return $this;
+    }
+
+    private function addMaxAge(): static
+    {
+        $maxAge = $this->settings->get('max_age', 86400);
+        header('Access-Control-Max-Age: '.$maxAge);
+        return $this;
+    }
+
+    private function resolveHttps($request): ?static
+    {
+        $httpsOnly = app()->getOrDefault('https_only', false);
         if (!$httpsOnly) {
             $httpsOnly = env('HTTPS_ONLY', false);
         }
         if ($httpsOnly && !$request->isSecure()) {
+            $response = new Response();
             $response->setStatusCode(200);
             $res = response(403, 'Only HTTPS connections are allowed');
             $response->setContent($res->getPrettyResponse());
-            return false;
+            $response->prepare($request)->send();
+            exit(1);
         }
-        return true;
+
+        return $this;
     }
-
-    public function withSettingsNamed(?string $key  = 'cors'): ?array
-    {
-        $locals = env($key);
-        if ($locals && is_array($locals)) {
-            $this->options->merge($locals);
-        }
-        return $this->options->all();
-    }
-
-    public function options(?string $corsKey = 'cors'): array
-    {
-        $options = [
-            'allowedOrigins' => ['*'],
-            'allowedMethods' => ['GET', 'POST', 'OPTIONS'],
-            'allowedHeaders' => [],
-            'exposedHeaders' => [],
-            'maxAge' => 0,
-            'supportsCredentials' => false,
-            'allowedOriginsPatterns' => [],
-        ];
-
-        $settings = $this->withSettingsNamed($corsKey);
-
-        if ($settings) {
-            $options = array_merge($options, $settings);
-        }
-        $this->options->merge($options);
-        return $this->options->all();
-    }
-
 }
 

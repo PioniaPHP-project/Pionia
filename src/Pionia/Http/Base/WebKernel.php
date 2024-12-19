@@ -36,8 +36,6 @@ class WebKernel implements KernelContract
 
     private PioniaApplication $app;
 
-    private PioniaCors $corsWorker;
-
     private LoggerInterface $logger;
 
     public function __construct(PioniaApplication $application)
@@ -45,8 +43,6 @@ class WebKernel implements KernelContract
         $this->app = $application;
 
         $this->logger = $application->logger;
-
-        $this->corsWorker = new PioniaCors($application);
     }
 
     private function isApiRequest(Request $request): bool
@@ -82,6 +78,7 @@ class WebKernel implements KernelContract
             if ($request->isMethod('GET') && !$this->isApiRequest($request)){
                 $this->resolveFrontEnd($request);
             }
+            $this->app->make(PioniaCors::class)->handle($request);
             $request = $this->boot($request);
             $routes = $this->app->getSilently(PioniaRouter::class)->getRoutes();
             // prepare the request for symfony routing
@@ -129,7 +126,7 @@ class WebKernel implements KernelContract
             if ($fs->exists($filePath)) {
                 $file = new File($filePath);
                 $response = new Response($file->getContent(), ResponseAlias::HTTP_OK, ['Content-Type' => $file->getMimeType()]);
-                $this->app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request, $response);
+//                $this->app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request, $response);
                 $response->prepare($request)->send(false);
             } else {
                 $response = new Response(response(
@@ -148,7 +145,7 @@ class WebKernel implements KernelContract
             if ($fs->exists($filePath)) {
                 $file = new File($filePath);
                 $response = new Response($file->getContent(), ResponseAlias::HTTP_OK, ['Content-Type' => $file->getMimeType()]);
-                $this->app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request, $response);
+//                $this->app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request, $response);
                 $response->prepare($request)->send(false);
                 exit();
             } else {
@@ -217,7 +214,7 @@ class WebKernel implements KernelContract
     {
         $this->app->dispatch(new PostSwitchRunEvent($this, $request, $response->data->all()), PostSwitchRunEvent::name());
         $res = new Response($response->getPrettyResponse(), ResponseAlias::HTTP_OK, ['content-type' => 'application/json']);
-        $this->app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request, $res);
+//        $this->app->make(PioniaCors::class, ['request' => $request, 'response' => new Response()]);
         $this->app->getSilently(MiddlewareChain::class)?->handle($request, $res);
         return $res->prepare($request)->send();
     }
@@ -236,7 +233,6 @@ class WebKernel implements KernelContract
     public function boot(Request $request): Request
     {
         app->dispatch(new PreKernelBootEvent($this, $request), PreKernelBootEvent::name());
-        app->getSilently(PioniaCors::class)?->register()?->resolveRequest($request);
         // run the middleware chain
         $middlewareChain = $this->app->getSilently(MiddlewareChain::class);
         if ($middlewareChain) {

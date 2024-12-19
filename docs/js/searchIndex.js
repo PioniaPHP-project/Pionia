@@ -666,6 +666,11 @@ Search.appendIndex(
             "summary": "Checks\u0020if\u0020a\u0020certain\u0020keyToCheck\u0020is\u0020set\u0020in\u0020the\u0020cache\u0020under\u0020a\u0020certain\u0020keyCached.",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_isCachedIn"
         },                {
+            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AsupportedMethods\u0028\u0029",
+            "name": "supportedMethods",
+            "summary": "",
+            "url": "classes/Pionia-Base-PioniaApplication.html#method_supportedMethods"
+        },                {
             "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003Areport\u0028\u0029",
             "name": "report",
             "summary": "",
@@ -2626,50 +2631,60 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Pionia-Cors-PioniaCors.html"
         },                {
+            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "",
+            "url": "classes/Pionia-Cors-PioniaCors.html#method_handle"
+        },                {
             "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
             "url": "classes/Pionia-Cors-PioniaCors.html#method___construct"
         },                {
-            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003Aregister\u0028\u0029",
-            "name": "register",
+            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003AisPreflight\u0028\u0029",
+            "name": "isPreflight",
             "summary": "",
-            "url": "classes/Pionia-Cors-PioniaCors.html#method_register"
+            "url": "classes/Pionia-Cors-PioniaCors.html#method_isPreflight"
         },                {
-            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003AresolveRequest\u0028\u0029",
-            "name": "resolveRequest",
+            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003AblockNonAllowedOrigins\u0028\u0029",
+            "name": "blockNonAllowedOrigins",
             "summary": "",
-            "url": "classes/Pionia-Cors-PioniaCors.html#method_resolveRequest"
+            "url": "classes/Pionia-Cors-PioniaCors.html#method_blockNonAllowedOrigins"
         },                {
-            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003AmergeAllowedOrigins\u0028\u0029",
-            "name": "mergeAllowedOrigins",
-            "summary": "Merge\u0020the\u0020allowed\u0020origins\u0020from\u0020the\u0020application\u0020configuration\u0020and\u0020let\u0020the\u0020cors\u0020middleware\u0020handle\u0020the\u0020rest",
-            "url": "classes/Pionia-Cors-PioniaCors.html#method_mergeAllowedOrigins"
+            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003AaddAllowedOrigin\u0028\u0029",
+            "name": "addAllowedOrigin",
+            "summary": "",
+            "url": "classes/Pionia-Cors-PioniaCors.html#method_addAllowedOrigin"
         },                {
-            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003ApreventBlockedOrigins\u0028\u0029",
-            "name": "preventBlockedOrigins",
-            "summary": "prevent\u0020all\u0020blocked\u0020origins\u0020from\u0020accessing\u0020the\u0020application",
-            "url": "classes/Pionia-Cors-PioniaCors.html#method_preventBlockedOrigins"
+            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003AaddAllowedHeaders\u0028\u0029",
+            "name": "addAllowedHeaders",
+            "summary": "",
+            "url": "classes/Pionia-Cors-PioniaCors.html#method_addAllowedHeaders"
+        },                {
+            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003AaddAllowedMethods\u0028\u0029",
+            "name": "addAllowedMethods",
+            "summary": "",
+            "url": "classes/Pionia-Cors-PioniaCors.html#method_addAllowedMethods"
+        },                {
+            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003AhandlePreflight\u0028\u0029",
+            "name": "handlePreflight",
+            "summary": "",
+            "url": "classes/Pionia-Cors-PioniaCors.html#method_handlePreflight"
+        },                {
+            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003AaddMaxAge\u0028\u0029",
+            "name": "addMaxAge",
+            "summary": "",
+            "url": "classes/Pionia-Cors-PioniaCors.html#method_addMaxAge"
         },                {
             "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003AresolveHttps\u0028\u0029",
             "name": "resolveHttps",
             "summary": "",
             "url": "classes/Pionia-Cors-PioniaCors.html#method_resolveHttps"
         },                {
-            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003AwithSettingsNamed\u0028\u0029",
-            "name": "withSettingsNamed",
+            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003A\u0024settings",
+            "name": "settings",
             "summary": "",
-            "url": "classes/Pionia-Cors-PioniaCors.html#method_withSettingsNamed"
-        },                {
-            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003A\u0024options",
-            "name": "options",
-            "summary": "",
-            "url": "classes/Pionia-Cors-PioniaCors.html#property_options"
-        },                {
-            "fqsen": "\\Pionia\\Cors\\PioniaCors\u003A\u003A\u0024application",
-            "name": "application",
-            "summary": "",
-            "url": "classes/Pionia-Cors-PioniaCors.html#property_application"
+            "url": "classes/Pionia-Cors-PioniaCors.html#property_settings"
         },                {
             "fqsen": "\\Pionia\\Events\\Event",
             "name": "Event",
@@ -2870,11 +2885,6 @@ Search.appendIndex(
             "name": "app",
             "summary": "",
             "url": "classes/Pionia-Http-Base-WebKernel.html#property_app"
-        },                {
-            "fqsen": "\\Pionia\\Http\\Base\\WebKernel\u003A\u003A\u0024corsWorker",
-            "name": "corsWorker",
-            "summary": "",
-            "url": "classes/Pionia-Http-Base-WebKernel.html#property_corsWorker"
         },                {
             "fqsen": "\\Pionia\\Http\\Base\\WebKernel\u003A\u003A\u0024logger",
             "name": "logger",

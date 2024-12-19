@@ -618,6 +618,11 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
         return false;
     }
 
+    public function supportedMethods(): array
+    {
+        return ['POST', 'GET', 'OPTIONS', 'HEADS'];
+    }
+
     protected function report(string $format, string $message, ?array $data = []): void
     {
         $format = strtolower($format);
@@ -814,6 +819,7 @@ class PioniaApplication extends Application implements ApplicationContract,  Log
     public function allowedOrigins(array $addresses): static
     {
         $this->contextArrAdd('allowed_origins', $addresses);
+
         return $this;
     }
 

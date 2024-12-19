@@ -113,6 +113,9 @@ $app = new PioniaApplication(BASEPATH);
 //    // Add your terminated hooks here
 //});
 
+$app
+    //->httpsOnly()
+    ->blockedOrigins(['http://localhost:4200']);
 
 /**
  * ---------------------------------------------------------------
