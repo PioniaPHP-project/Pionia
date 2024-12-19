@@ -100,8 +100,8 @@ class GenerateCommand extends BaseCommand
             } else {
                 $kind = $this->choice("Argument Kind", ['Optional', 'Required', 'Array'], 'Optional');
                 argument_description:
-                $description = $this->ask("Please enter the description of the argument.");
-                if (empty($description)) {
+                $argDescription = $this->ask("Please enter the description of the argument.");
+                if (empty($argDescription)) {
                     $this->warn("We can't add an empty description.");
                     goto argument_description;
                 }
@@ -112,21 +112,21 @@ class GenerateCommand extends BaseCommand
                         $arguments[] = [
                             'name' => trim($argument),
                             'mode' => $kind,
-                            'description' => $description,
+                            'description' => $argDescription,
                             'default' => $defaultValue
                         ];
                     } else {
                         $arguments[] = [
                             'name' => trim($argument),
                             'mode' => $kind,
-                            'description' => $description,
+                            'description' => $argDescription,
                         ];
                     }
                 } else {
                     $arguments[] = [
                         'name' => trim($argument),
                         'mode' => $kind,
-                        'description' => $description,
+                        'description' => $argDescription,
                     ];
                 }
             }
@@ -144,8 +144,8 @@ class GenerateCommand extends BaseCommand
                 $shortCut = $this->ask("Please enter the short option for $option.", strtolower(substr($option, 0, 1)));
                 $mode = $this->choice("Option Mode", ['None','Optional', 'Required', 'Array', 'Negate-able'], 'None');
                 option_description:
-                $description = $this->ask("Please enter the description of $option option.");
-                if (empty($description)) {
+                $opDescription = $this->ask("Please enter the description of $option option.");
+                if (empty($opDescription)) {
                     $this->warn("We can't add an empty description.");
                     goto option_description;
                 }
@@ -156,7 +156,7 @@ class GenerateCommand extends BaseCommand
                             'name' => trim($option),
                             'shortcut' => $shortCut,
                             'mode' => $mode,
-                            'description' => $description,
+                            'description' => $opDescription,
                             'default' => $defaultValue
                         ];
                     } else {
@@ -164,7 +164,7 @@ class GenerateCommand extends BaseCommand
                             'name' => trim($option),
                             'shortcut' => $shortCut,
                             'mode' => $mode,
-                            'description' => $description,
+                            'description' => $opDescription,
                         ];
                     }
                 } else {
@@ -172,7 +172,7 @@ class GenerateCommand extends BaseCommand
                         'name' => trim($option),
                         'shortcut' => $shortCut,
                         'mode' => $mode,
-                        'description' => $description,
+                        'description' => $opDescription,
                     ];
                 }
             }

@@ -9,4 +9,4 @@ build
 **.log
 
 
-database.sqlite3
+*.sqlite3
