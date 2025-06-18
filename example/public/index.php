@@ -1,12 +1,4 @@
 <?php
-if (!defined('BASEPATH')) {
-    define('BASEPATH', dirname(__DIR__, 1));
-}
-
-
-define('PIONIA_START', microtime(true));
-
-include BASEPATH . '/../vendor/autoload.php';
 
 /**
  * >>>>>
@@ -24,6 +16,5 @@ include BASEPATH . '/../vendor/autoload.php';
  *
  * >>>>>
  */
-(require BASEPATH . '/bootstrap/application.php')
-    // Boot the request kernel and handle the incoming request
-    ->handleRequest();
+(require __DIR__ . '/../bootstrap/routes.php')
+    ->bootHttp();

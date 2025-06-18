@@ -1,11 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-if (!defined('PIONIA_START')) {
-    define('PIONIA_START', microtime(true));
-}
-
-$code = (require __DIR__ .'/bootstrap/application.php')
-        ->bootConsole();
+$code = (require __DIR__.'/bootstrap/routes.php')
+    ->bootConsole();
 
 exit($code);
