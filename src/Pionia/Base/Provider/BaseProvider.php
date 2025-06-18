@@ -3,7 +3,7 @@
 namespace Pionia\Base\Provider;
 
 use Pionia\Auth\AuthenticationChain;
-use Pionia\Base\PioniaApplication;
+use Pionia\Base\WebApplication;
 use Pionia\Contracts\ProviderContract;
 use Pionia\Http\Routing\PioniaRouter;
 use Pionia\Middlewares\MiddlewareChain;
@@ -18,13 +18,13 @@ abstract class BaseProvider implements ProviderContract
 {
     use Microable;
 
-    protected PioniaApplication $pionia;
+    protected WebApplication $pionia;
 
     /**
      * BaseProvider constructor.
-     * @param PioniaApplication $pionia
+     * @param WebApplication $pionia
      */
-    public function __construct(PioniaApplication $pionia)
+    public function __construct(WebApplication $pionia)
     {
         $this->pionia = $pionia;
     }

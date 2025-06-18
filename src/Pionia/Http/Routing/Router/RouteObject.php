@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Http\Routing;
+namespace Pionia\Http\Routing\Router;
 
 use Symfony\Component\Routing\Route;
 
@@ -9,7 +9,7 @@ class RouteObject
     private ?string $path = null;
     private array $options = [];
     private string $host  = '';
-    private string $schemas   = '';
+    private array $schemas   = ["http", "https"];
     private string  $conditions  = '';
 
     private array $methods = [];
@@ -52,9 +52,11 @@ class RouteObject
         return $this;
     }
 
-    public function schemas($schemas): static
+    public function addSchema($schema): static
     {
-        $this->schemas = $schemas;
+        if (!in_array($schema, $this->schemas)) {
+            $this->schemas[]=$schema;
+        }
         return $this;
     }
 

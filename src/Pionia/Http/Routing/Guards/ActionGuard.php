@@ -8,7 +8,7 @@ use Pionia\Collections\Arrayable;
  * Adds guards for service actions in the same service
  * @final
  */
-class RouteActionsGuard implements RouteGuardInterface
+class ActionGuard implements RouteGuardInterface
 {
     /**
      * The list of rules to add

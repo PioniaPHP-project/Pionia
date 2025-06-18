@@ -5,10 +5,12 @@ namespace Pionia\Console;
 use AllowDynamicProperties;
 use Closure;
 use Exception;
-use Pionia\Base\PioniaApplication;
+use Pionia\Base\Pionia;
+use Pionia\Base\WebApplication;
 use Pionia\Console\Concerns\CallsCommands;
 use Pionia\Console\Concerns\HasParameters;
 use Pionia\Console\Concerns\InteractsWithIO;
+use Pionia\Contracts\ApplicationContract;
 use Pionia\Utils\Microable;
 use Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
@@ -67,7 +69,7 @@ class BaseCommand extends Command
      */
     protected bool $hidden = false;
 
-    private ?PioniaApplication $app;
+    private ?ApplicationContract $app;
 
     protected function resolveCommand($command): Command
     {
@@ -75,7 +77,7 @@ class BaseCommand extends Command
             if (! class_exists($command)) {
                 return $this->getApplication()->find($command);
             }
-            $command = $this->app->getSilently($command);
+            $command = realm()->getSilently($command);
         }
         if ($command instanceof Command) {
             $command->setApplication($this->getApplication());
@@ -86,7 +88,7 @@ class BaseCommand extends Command
         return $command;
     }
 
-    public function getApp(): ?PioniaApplication
+    public function getApp(): ?ApplicationContract
     {
         return $this->app;
     }
@@ -121,7 +123,7 @@ class BaseCommand extends Command
         return $this->name;
     }
 
-    public function __construct(?PioniaApplication $app=null)
+    public function __construct(?ApplicationContract $app=null)
     {
         // We will go ahead and set the name, description, and parameters on console
         // commands just to make things a little easier on the developer. This is
@@ -153,7 +155,7 @@ class BaseCommand extends Command
     }
 
 
-    private function setApp(?PioniaApplication $app): void
+    private function setApp(?WebApplication $app): void
     {
         $this->app = $app;
     }
@@ -166,7 +168,7 @@ class BaseCommand extends Command
     {
         $this->input = $input;
 
-        $this->output = $output instanceof OutputStyle ? $output : $this->app->context->make(
+        $this->output = $output instanceof OutputStyle ? $output : realm()->make(
             OutputStyle::class, ['input' => $input, 'output' => $output]
         );
 
@@ -175,7 +177,7 @@ class BaseCommand extends Command
         try {
             return (int) call_user_func([$this, $method]);
         } catch (Exception $e) {
-            $this->app->logger?->error($e->getMessage());
+            logger()?->error($e->getMessage());
             return static::FAILURE;
         }
     }

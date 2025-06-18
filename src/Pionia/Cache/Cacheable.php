@@ -4,19 +4,14 @@ namespace Pionia\Cache;
 
 use Exception;
 use Pionia\Utils\Support;
-use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\InvalidArgumentException;
+use Symfony\Component\Cache\Psr16Cache;
 
 /**
  * Add caching capabilities to any class.
  */
 trait Cacheable
 {
-    /**
-     * The cache instance to use for caching.
-     * @var ?PioniaCache
-     */
-    private ?PioniaCache $cacheInstance = null;
     /**
      * The cache prefix to use for caching.
      * @var string
@@ -30,19 +25,6 @@ trait Cacheable
     public int $cacheTtl = 60;
 
     /**
-     * Set the cache instance to use for caching.
-     * @param ?PioniaCache $cache
-     */
-    public function setCacheInstance(?PioniaCache $cache): void
-    {
-        if ($cache === null) {
-            $this->cacheInstance = app()->getSilently(PioniaCache::class);
-        } else {
-            $this->cacheInstance = $cache;
-        }
-    }
-
-    /**
      * Caches the value if the value is not null.
      * @param string $key The key to cache
      * @param mixed $value The value to cache
@@ -50,10 +32,10 @@ trait Cacheable
      * @param bool|null $exact If passed, the key won't be parsed at all, it will be cached as is.
      * @return bool|mixed
      */
-    public function cache(string $key, mixed $value = null, mixed $ttl = null, ?bool $exact = false): mixed
+    public function cache(string $key, mixed $value = null, mixed $ttl = null, ?bool $exact = true): mixed
     {
-        if (!$this->cacheInstance) {
-            $this->logger()->warning('Pionia Cache is not active');
+        if (!$this->cacheInstance()) {
+            logger()->warning('Pionia Cache is not active');
             return null;
         }
         if (!$exact) {
@@ -84,27 +66,32 @@ trait Cacheable
     public function getCache($key, ?bool $exact = false): mixed
     {
         try {
-            if (!$this->cacheInstance) {
-                $this->logger()->warning('Pionia Cache is not active');
+            if (!$this->realm()->cacheInstance()) {
+                logger()->warning('Pionia Cache is not active');
                 return null;
             }
 
             if (!$exact) {
                 $key = $this->getKeyName($key);
             }
-            return $this->cacheInstance->get($key);
+            return $this->cacheInstance()->get($key);
         } catch (InvalidArgumentException $e) {
-            $this->logger()->error($e->getMessage());
+            logger()->error($e->getMessage());
             return null;
         }
+    }
+
+    private function cacheInstance(): Psr16Cache
+    {
+       return $this->realm()->cacheInstance();
     }
 
     public function setCache(string $key, mixed $value, mixed $ttl = null, ?bool $exact = false): bool
     {
         try {
 
-            if (!$this->cacheInstance) {
-                $this->logger()->warning('Pionia Cache is not active');
+            if (!$this->cacheInstance()) {
+                logger()->warning('Pionia Cache is not active');
                 // we just ignore caching if the cache is not set.
                 return true;
             }
@@ -114,9 +101,9 @@ trait Cacheable
             if ($ttl === null) {
                 $ttl = $this->cacheTtl;
             }
-            return $this->cacheInstance?->set($key, $value, $ttl);
+            return $this->cacheInstance()?->set($key, $value, $ttl);
         } catch (InvalidArgumentException $e) {
-            $this->logger()->error($e->getMessage());
+            logger()->error($e->getMessage());
             return false;
         }
     }
@@ -130,16 +117,16 @@ trait Cacheable
     public function deleteCache(string $key, ?bool $exact = false): bool
     {
         try {
-            if (!$this->cacheInstance) {
-                $this->logger()->warning('Pionia Cache is not active');
+            if (!$this->cacheInstance()) {
+                logger()->warning('Pionia Cache is not active');
                 return false;
             }
             if (!$exact) {
                 $key = $this->getKeyName($key);
             }
-            return $this->cacheInstance?->delete($key);
+            return $this->cacheInstance()?->delete($key);
         } catch (InvalidArgumentException $e) {
-            $this->logger()->error($e->getMessage());
+            logger()->error($e->getMessage());
             return false;
         }
     }
@@ -158,7 +145,7 @@ trait Cacheable
             }
             return Support::toSnakeCase($key);
         } catch (Exception $e) {
-            $this->logger()->error($e->getMessage());
+            logger()->error($e->getMessage());
             return Support::toSnakeCase($key);
         }
     }
@@ -166,8 +153,8 @@ trait Cacheable
     private function cleanCacheKey(string $key): string
     {
         $sr = trim($key);
-        $sr = str_ireplace('.', '_', $key);
-        $sr = str_ireplace('\\', '_', $key);
+        $sr = str_ireplace('.', '_', $sr);
+        $sr = str_ireplace('\\', '_', $sr);
         $sr = str_ireplace('/', '_', $sr);
         $sr = str_ireplace(' ', '_', $sr);
         return $sr;
@@ -183,15 +170,15 @@ trait Cacheable
     public function hasCache($key, ?bool $exact = false): bool
     {
         try {
-            if (!$this->cacheInstance) {
+            if (!$this->cacheInstance()) {
                 return false;
             }
             if (!$exact) {
                 $key = $this->getKeyName($key);
             }
-            return $this->cacheInstance?->has($key);
+            return $this->cacheInstance()?->has($key);
         } catch (InvalidArgumentException $e) {
-            $this->logger()->error($e->getMessage());
+            logger()->error($e->getMessage());
             return false;
         }
     }
@@ -204,14 +191,14 @@ trait Cacheable
      */
     public function ClearByKeys(array $keys, ?bool $exact = false): bool
     {
-        if (!$this->cacheInstance) {
+        if (!$this->cacheInstance()) {
             return false;
         }
         foreach ($keys as $key) {
             try {
                 $this->deleteCache($key, $exact);
             } catch (Exception $e) {
-                $this->logger()->error($e->getMessage());
+                logger()->error($e->getMessage());
                 return false;
             }
         }
@@ -220,12 +207,7 @@ trait Cacheable
 
     public function getCacheInstance(): ?PioniaCache
     {
-        return $this->cacheInstance;
-    }
-
-    private function logger(): ?LoggerInterface
-    {
-        return property_exists($this, 'logger') && $this->logger ? $this->logger : logger();
+        return $this->cacheInstance();
     }
 
 }

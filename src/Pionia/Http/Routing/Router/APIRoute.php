@@ -1,9 +1,11 @@
 <?php
 
-namespace Pionia\Http\Routing;
+namespace Pionia\Http\Routing\Router;
 use Pionia\Http\Routing\Guards\RouteGuardInterface;
+use Pionia\Http\Routing\SupportedHttpMethods;
 use Pionia\Realm\RealmContract;
 use Symfony\Component\Routing\Route;
+
 class APIRoute implements APIRouteInterface
 {
     private string $version = 'v1/';
@@ -31,7 +33,7 @@ class APIRoute implements APIRouteInterface
         return new static($switch, $version);
     }
 
-    function allowGet(bool $bool = true): static {
+    function onlyGet(?bool $bool = true): static {
         if ($bool){
             $this->methods = array_filter($this->methods, fn ($method) => $method !== 'GET');
         }
@@ -40,10 +42,10 @@ class APIRoute implements APIRouteInterface
 
     function noGet(): static
     {
-        return $this->allowGet(false);
+        return $this->onlyGet(false);
     }
 
-    function allowPost(bool $bool = true): static
+    function onlyPost(bool $bool = true): static
     {
         if ($bool){
             $this->methods = array_filter($this->methods, fn ($method) => $method !== 'POST');
@@ -51,10 +53,15 @@ class APIRoute implements APIRouteInterface
         return $this;
     }
 
+    /**
+     * Only POST requests will be allowed for the entire API related to the target switch and version
+     * @return $this
+     */
     function noPost(): static
     {
-        return $this->allowPost(false);
+        return $this->onlyPost(false);
     }
+
 
     function name(string $name): static
     {
@@ -62,12 +69,22 @@ class APIRoute implements APIRouteInterface
         return $this;
     }
 
+    /**
+     * Set the target API version, defaults to v1/, adding an already existing version will raise an exception
+     * @param string $version
+     * @return $this
+     */
     function version(string $version): static
     {
         $this->version = $version;
         return $this;
     }
 
+    /**
+     * Add guards to the services under the specified and their actions too
+     * @param RouteGuardInterface $guard
+     * @return $this
+     */
     function withGuard(RouteGuardInterface $guard): static
     {
         $this->guard = $guard;
@@ -76,6 +93,7 @@ class APIRoute implements APIRouteInterface
 
     private function cleanVersion($base, $version){
         // if it starts with a /, we trim if off
+
     }
 
     protected function build(RealmContract $realm): Route
@@ -84,6 +102,6 @@ class APIRoute implements APIRouteInterface
 
         $path = $this->cleanVersion($base, $this->version);
 
-        return new Route($path);
+        return new Route($path, []);
     }
 }

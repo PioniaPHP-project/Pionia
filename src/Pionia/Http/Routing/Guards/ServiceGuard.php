@@ -8,7 +8,7 @@ use Pionia\Collections\Arrayable;
  * Adds guards for services in the same switch
  * @final
  */
-class RouteServiceGuard implements RouteGuardInterface
+class ServiceGuard implements RouteGuardInterface
 {
     /**
      * The list of rules to add
@@ -24,25 +24,25 @@ class RouteServiceGuard implements RouteGuardInterface
 
     /**
      * Used to initialize rules for one service at a time.
-     * @see RouteServiceGuard::services() if you intend to target multiple services in the same switch
-     * @param $service
+     * @param string $serviceName the name of the target that was used while registering the service
      * @return static
+     *@see ServiceGuard::services() if you intend to target multiple services in the same switch
      */
-    static function service($service): static
+    static function service(string $serviceName): static
     {
         $instance = new static();
-        $instance->services[] = $service;
+        $instance->services[] = $serviceName;
         return $instance;
     }
 
     /**
      * Adds multiple services under the same switch onto which the next-defined rules shall apply
-     * @param array $services
+     * @param array $serviceNames Names of the services used while registering them.
      * @return static
      */
-    static function services(array $services): static {
+    static function services(array $serviceNames): static {
         $instance = new static();
-        $instance->services = array_merge($services, $instance->services);
+        $instance->services = array_merge($serviceNames, $instance->services);
         return $instance;
     }
 

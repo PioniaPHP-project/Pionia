@@ -2,7 +2,8 @@
 
 namespace Pionia\Http\Routing;
 
-class RouterContract
+interface RouterContract
 {
+    public function switch(string $switch, string $version, ?array $schemas = ['https', 'http']);
 
 }

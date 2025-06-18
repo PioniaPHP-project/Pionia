@@ -3,7 +3,7 @@
 namespace Pionia\Http\Services;
 
 use Exception;
-use Pionia\Base\PioniaApplication;
+use Pionia\Base\WebApplication;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Services\Generics\Contracts\CrudContract;
 use Pionia\Http\Services\Generics\Contracts\EventsContract;
@@ -82,7 +82,7 @@ abstract class GenericService extends Service
         return $this->request->getData()->get($name);
     }
 
-    public function __construct(PioniaApplication $app, Request $request)
+    public function __construct(WebApplication $app, Request $request)
     {
         parent::__construct($app, $request);
     }

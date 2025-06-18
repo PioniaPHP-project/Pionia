@@ -1,9 +1,9 @@
 <?php
 
-namespace Pionia\Utils;
+namespace Pionia\Realm;
 
 use InvalidArgumentException;
-use Pionia\Base\PioniaApplication;
+use Pionia\Base\WebApplication;
 use Pionia\Collections\Arrayable;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -77,14 +77,10 @@ trait ContainableRealm
      */
     public function getSilently(mixed $key): mixed
     {
-        try {
-            if ($this->contextHas($key)) {
-                return $this->getOrFail($key);
-            }
-            return null;
-        } catch (ContainerExceptionInterface | NotFoundExceptionInterface $e) {
-            return null;
+        if ($this->contextHas($key)) {
+            return $this->getOrFail($key);
         }
+        return null;
     }
 
     /**
@@ -98,10 +94,10 @@ trait ContainableRealm
     /**
      * Get a value from the container or throw an exception.
      *
-     * @see PioniaApplication::resolve() for similar functionality on the application instance
-     *
      * @param string $key
      * @return mixed
+     *@see WebApplication::resolve() for similar functionality on the application instance
+     *
      */
     public function getOrFail(string $key): mixed
     {
@@ -133,11 +129,14 @@ trait ContainableRealm
 
     /**
      * @param string $contextKey
-     * @param array $dataToAdd
-     * @return void
+     * @param array|null $dataToAdd
+     * @return ContainableRealm
      */
-    public function contextArrAdd(string $contextKey, array $dataToAdd): void
+    public function contextArrAdd(string $contextKey, ?array $dataToAdd = []): static
     {
+        if (!$dataToAdd){
+            return $this;
+        }
         if ($this->contextHas($contextKey)) {
             $data = $this->getSilently($contextKey);
             if (is_a($data, Arrayable::class)) {
@@ -149,6 +148,8 @@ trait ContainableRealm
         } else {
             $this->set($contextKey, $dataToAdd);
         }
+
+        return $this;
     }
 
 }

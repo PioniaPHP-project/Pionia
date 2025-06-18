@@ -78,7 +78,7 @@ trait MiddlewareTrait
         if ($response){
             $this->beforeResponse();
 
-            $this->onResponse($response);
+            $this->onResponse($response, $request);
 
             $this->afterResponse();
         } else {

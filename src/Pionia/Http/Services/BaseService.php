@@ -4,9 +4,12 @@ namespace Pionia\Http\Services;
 
 use Exception;
 use Pionia\Exceptions\ResourceNotFoundException;
-use Pionia\Base\PioniaApplication;
+use Pionia\Base\WebApplication;
 use Pionia\Contracts\ServiceContract;
+use Pionia\Exceptions\UserUnauthenticatedException;
+use Pionia\Exceptions\UserUnauthorizedException;
 use Pionia\Http\Request\Request;
+use Pionia\Http\Response\Response;
 use Pionia\Utils\Microable;
 use Pionia\Http\Response\BaseResponse;
 use Pionia\Utils\Support;
@@ -28,12 +31,10 @@ class BaseService implements ServiceContract
 {
     use AuthTrait, RequestActionTrait, Microable;
 
-    public PioniaApplication $app;
     public Request $request;
 
-    public function __construct(PioniaApplication $app, Request $request)
+    public function __construct(Request $request)
     {
-        $this->app = $app;
         $this->request = $request;
     }
 
@@ -89,8 +90,8 @@ class BaseService implements ServiceContract
     /**
      * This method is called when the service is called with an action
      *
-     * @return BaseResponse The response object
-     * @throws Exception
+     * @param string $action
+     * @param string $service
      * @internal
      */
     public function processAction(string $action, string $service): BaseResponse

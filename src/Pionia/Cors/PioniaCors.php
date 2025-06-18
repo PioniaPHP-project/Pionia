@@ -40,8 +40,6 @@ class PioniaCors implements CorsContract
         ));
 
         $this->settings->merge(arr(env('cors', [])));
-        // force the methods to be those supported by Pionia Application
-        $this->settings->set('allowed_methods', Support::arrayToString(app()->supportedMethods()));
         // start adding the headers
     }
 
@@ -113,7 +111,7 @@ class PioniaCors implements CorsContract
 
     private function addAllowedMethods(): static
     {
-        header('Access-Control-Allow-Methods: '.$this->settings->get('allowed_methods', 'GET, POST, OPTIONS'));
+        header('Access-Control-Allow-Methods: '.$this->settings->get('allowed_methods'));
         return $this;
     }
 

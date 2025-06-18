@@ -5,6 +5,7 @@ namespace Pionia\Builtins\Commands;
 use Pionia\Console\BaseCommand;
 use Pionia\Utils\InteractsWithTime;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * For starting the command line server. This should be good choice only in development
@@ -72,10 +73,10 @@ class StartServer extends BaseCommand
         $this->reattempts = $this->option('tries') ?? 0;
         $port = $port ?? $this->port();
         $host = $this->host();
-        $this->output->writeln("Starting ".$this->getApp()->appName." on http://" .$host.':'.$port);
+        $this->output->writeln("Starting ".realm()->appName." on http://" .$host.':'.$port);
         $this->output->writeln('Press Ctrl+C to stop the server');
         $output = shell_exec(implode(' ', $this->serverCommand($port, $host)));
-
+        print_r($output);
         if (!$output && $this->reattempts > 0) {
             $this->reattempts -= $this->reattempts;
             $this->portOffset += 1;
@@ -95,11 +96,11 @@ class StartServer extends BaseCommand
      */
     protected function serverCommand($port, $host): array
     {
-        $server = file_exists(alias(\DIRECTORIES::PUBLIC_DIR->name).'/index.php')
-            ? alias(\DIRECTORIES::PUBLIC_DIR->name).'/index.php'
-            : __DIR__.'example/public/index.php';
+        $fileSystem = new Filesystem();
+        $alias= alias(\DIRECTORIES::PUBLIC_DIR->name);
+        $server = $fileSystem->exists($alias) ? $alias.'/index.php': __DIR__.'example/public/index.php';
         return [
-            $this->getApp()->phpPath(),
+            realm()->phpPath(),
             '-S',
             $host.':'.$port,
             $server,

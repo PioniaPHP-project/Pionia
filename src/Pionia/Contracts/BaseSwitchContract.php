@@ -28,6 +28,6 @@ interface BaseSwitchContract
      * @version 1.1.7 array can be in the format of `['SERVICE_NAME' => SERVICE_CLASS::class]`.
      *
      */
-     public function registerServices() :Arrayable;
+     public static function registerServices() :Arrayable;
 
 }

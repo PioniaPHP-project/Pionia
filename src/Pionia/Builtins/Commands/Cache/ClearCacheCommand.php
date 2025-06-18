@@ -32,7 +32,7 @@ class ClearCacheCommand extends BaseCommand
 
     private function cacheInstance(): ?PioniaCache
     {
-        $cacheInstance = $this->getApp()->getSilently(PioniaCache::class);
+        $cacheInstance =app()->getSilently(PioniaCache::class);
         if ($cacheInstance){
             $this->info("Found the cache instance");
             return $cacheInstance;

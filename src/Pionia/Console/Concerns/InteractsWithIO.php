@@ -37,7 +37,7 @@ trait InteractsWithIO
     protected int $verbosity = OutputInterface::VERBOSITY_NORMAL;
 
     /**
-     * The mapping between human readable verbosity levels and Symfony's OutputInterface.
+     * The mapping between human-readable verbosity levels and Symfony's OutputInterface.
      *
      * @var array
      */
@@ -66,7 +66,7 @@ trait InteractsWithIO
      * @param string|null $key
      * @return array|string|bool|null
      */
-    public function argument(string $key = null): bool|array|string|null
+    public function argument(?string $key = null): bool|array|string|null
     {
         if (is_null($key)) {
             return $this->input->getArguments();
@@ -102,7 +102,7 @@ trait InteractsWithIO
      * @param string|null $key
      * @return string|array|bool|null
      */
-    public function option(string $key = null): bool|array|string|null
+    public function option(?string $key = null): bool|array|string|null
     {
         if (is_null($key)) {
             return $this->input->getOptions();
@@ -140,7 +140,7 @@ trait InteractsWithIO
      * @param string|null $default
      * @return mixed
      */
-    public function ask(string $question, string $default = null): mixed
+    public function ask(string $question, ?string $default = null): mixed
     {
         return $this->output->ask($question, $default);
     }
@@ -153,7 +153,7 @@ trait InteractsWithIO
      * @param string|null $default
      * @return mixed
      */
-    public function anticipate(string $question, callable|array $choices, string $default = null): mixed
+    public function anticipate(string $question, callable|array $choices, ?string $default = null): mixed
     {
         return $this->askWithCompletion($question, $choices, $default);
     }
@@ -166,7 +166,7 @@ trait InteractsWithIO
      * @param string|null $default
      * @return mixed
      */
-    public function askWithCompletion(string $question, callable|array $choices, string $default = null): mixed
+    public function askWithCompletion(string $question, callable|array $choices, ?string $default = null): mixed
     {
         $question = new Question($question, $default);
 
@@ -203,7 +203,7 @@ trait InteractsWithIO
      * @param bool $multiple
      * @return string|array
      */
-    public function choice(string $question, array $choices, int|string $default = null, mixed $attempts = null, bool $multiple = false): array|string
+    public function choice(string $question, array $choices, int|string|null $default = null, mixed $attempts = null, bool $multiple = false): array|string
     {
         $question = new ChoiceQuestion($question, $choices, $default);
 
@@ -290,7 +290,7 @@ trait InteractsWithIO
      * @param int|string|null $verbosity
      * @return void
      */
-    public function line(string $string, string $style = null, int|string $verbosity = null): void
+    public function line(string $string, ?string $style = null, int|string|null $verbosity = null): void
     {
         $styled = $style ? "<$style>$string</$style>" : $string;
 
@@ -304,7 +304,7 @@ trait InteractsWithIO
      * @param int|string|null $verbosity
      * @return void
      */
-    public function comment(string $string, int|string $verbosity = null): void
+    public function comment(string $string, int|string|null $verbosity = null): void
     {
         $this->line($string, 'comment', $verbosity);
     }
@@ -316,7 +316,7 @@ trait InteractsWithIO
      * @param int|string|null $verbosity
      * @return void
      */
-    public function question(string $string, int|string $verbosity = null): void
+    public function question(string $string, int|string|null $verbosity = null): void
     {
         $this->line($string, 'question', $verbosity);
     }
@@ -328,7 +328,7 @@ trait InteractsWithIO
      * @param int|string|null $verbosity
      * @return void
      */
-    public function error(string $string, int|string $verbosity = null): void
+    public function error(string $string, int|string|null $verbosity = null): void
     {
         $this->line($string, 'error', $verbosity);
     }
@@ -340,7 +340,7 @@ trait InteractsWithIO
      * @param int|string|null $verbosity
      * @return void
      */
-    public function warn(string $string, int|string $verbosity = null): void
+    public function warn(string $string, int|string|null $verbosity = null): void
     {
         if (! $this->output->getFormatter()->hasStyle('warning')) {
             $style = new OutputFormatterStyle('yellow');
@@ -358,7 +358,7 @@ trait InteractsWithIO
      * @param int|string|null $verbosity
      * @return void
      */
-    public function alert(string $string, int|string $verbosity = null): void
+    public function alert(string $string, int|string|null $verbosity = null): void
     {
         $length = strlen(strip_tags($string)) + 12;
 
@@ -421,7 +421,7 @@ trait InteractsWithIO
      * @param int|string|null $level
      * @return int
      */
-    protected function parseVerbosity(int|string $level = null): int
+    protected function parseVerbosity(int|string|null $level = null): int
     {
         if (isset($this->verbosityMap[$level])) {
             $level = $this->verbosityMap[$level];

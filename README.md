@@ -2,7 +2,7 @@
 
 ##### This is the core of the Pionia Framework
 
-
+[//]: # (Adding get api endpoints like /api/v1/service/action, here we also send get requests normally!)
 ## Installation
 
 ```bash

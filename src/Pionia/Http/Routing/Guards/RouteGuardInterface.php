@@ -1,6 +1,8 @@
 <?php
 
-namespace Pionia\Http\Routing;
+namespace Pionia\Http\Routing\Guards;
+
+use Pionia\Collections\Arrayable;
 
 interface RouteGuardInterface
 {
@@ -10,4 +12,6 @@ interface RouteGuardInterface
     function inMaintenanceMode(): static;
     function postOnly(): static;
     function getOnly(): static;
+
+    function get(): Arrayable;
 }

@@ -18,9 +18,11 @@ class Arrayable
      */
     private array $array = [];
 
-    public function __construct(array $array = [])
+    public function __construct(array | Arrayable $array = [])
     {
-        if ($this->arrayType($array) === 'indexed') {
+        if ($array instanceof Arrayable) {
+            $this->array = $array->toArray();
+        } else if ($this->arrayType($array) === 'indexed') {
             foreach ($array as $key => $value) {
                 $this->array[(string)$key] = $value;
             }
@@ -209,7 +211,7 @@ class Arrayable
      * @param $preserve_keys
      * @return $this
      */
-    public function slice(int $offset, int $length = null, $preserve_keys = false): static
+    public function slice(int $offset, ?int $length = null, ?bool $preserve_keys = false): static
     {
         $this->array = array_slice($this->array, $offset, $length, $preserve_keys);
         return $this;
@@ -464,10 +466,10 @@ class Arrayable
 
     /**
      * Merge a whole into the current array
-     * @param array|Arrayable $array $array
+     * @param array|Arrayable|null $array |Arrayable $array $array
      * @return Arrayable
      */
-    public function merge(array | Arrayable $array): static
+    public function merge(array | Arrayable | null $array = []): static
     {
         if ($array instanceof Arrayable){
             return $this->merge($array->toArray());

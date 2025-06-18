@@ -4,7 +4,7 @@ namespace Pionia\Utils;
 
 use Doctrine\Inflector\Inflector;
 use Doctrine\Inflector\InflectorFactory;
-use Pionia\Base\PioniaApplication;
+use Pionia\Base\WebApplication;
 use ReflectionClass;
 
 class Support
@@ -194,10 +194,10 @@ class Support
      * @param string $filePath
      * @param string $section The section to update/create
      * @param array $values The values to update/create
-     * @param PioniaApplication|null $application
+     * @param WebApplication|null $application
      * @return void
      */
-    public static function updateSettingsFileSection(string $filePath, string $section, array $values, PioniaApplication|null $application = null): void
+    public static function updateSettingsFileSection(string $filePath, string $section, array $values, WebApplication|null $application = null): void
     {
         if (count($values) > 0 && self::isValidIniFile($filePath)) {
             $config_data = parse_ini_file($filePath, true);
@@ -237,10 +237,10 @@ class Support
      * Removes an entire section from the database.ini file
      * @param string $filePath
      * @param string $section
-     * @param PioniaApplication|null $application
+     * @param WebApplication|null $application
      * @return void
      */
-    public static function inidelsection(string $filePath, string $section, ?PioniaApplication $application): void
+    public static function inidelsection(string $filePath, string $section, ?WebApplication $application): void
     {
         if (!self::isValidIniFile($filePath)) {
             return;

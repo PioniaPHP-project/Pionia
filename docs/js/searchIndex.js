@@ -546,317 +546,317 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#constant_PIONIA_BINARY"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication",
+            "fqsen": "\\Pionia\\Base\\WebApplication",
             "name": "PioniaApplication",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "PioniaApplication\u0020constructor.",
+            "summary": "WebApplication\u0020constructor.",
             "url": "classes/Pionia-Base-PioniaApplication.html#method___construct"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AresolveLogger\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AresolveLogger\u0028\u0029",
             "name": "resolveLogger",
             "summary": "Set\u0020up\u0020the\u0020context\u0020logger",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_resolveLogger"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AgetAppName\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AgetAppName\u0028\u0029",
             "name": "getAppName",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_getAppName"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AwithCacheAdaptor\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AwithCacheAdaptor\u0028\u0029",
             "name": "withCacheAdaptor",
             "summary": "Sets\u0020the\u0020Cache\u0020Adaptor\u0020the\u0020app\u0020shall\u0020use\u0020hence\u002Dforth\nDefaults\u0020to\u0020a\u0020filesystem\u0020adapter",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_withCacheAdaptor"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AsetDefaultCachingAdaptor\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AsetDefaultCachingAdaptor\u0028\u0029",
             "name": "setDefaultCachingAdaptor",
             "summary": "Set\u0020the\u0020default\u0020caching\u0020adaptor\u0020to\u0020use",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_setDefaultCachingAdaptor"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AgetEnv\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AgetEnv\u0028\u0029",
             "name": "getEnv",
             "summary": "Get\u0020all\u0020the\u0020environment\u0020variables\u0020or\u0020the\u0020value\u0020of\u0020a\u0020single\u0020key\nWill\u0020check\u0020in\u0020the\u0020\u0024_ENV,\u0020\u0024_SERVER,\u0020container,\u0020and\u0020in\u0020the\u0020local\u0020env\u0020array\u0020for\u0020the\u0020same\u0020key,\u0020other\u0020will\u0020return\u0020all",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_getEnv"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003ArefreshEnv\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003ArefreshEnv\u0028\u0029",
             "name": "refreshEnv",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_refreshEnv"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AsetEnv\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AsetEnv\u0028\u0029",
             "name": "setEnv",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_setEnv"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AwelcomePageSettings\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AwelcomePageSettings\u0028\u0029",
             "name": "welcomePageSettings",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_welcomePageSettings"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AisBooted\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AisBooted\u0028\u0029",
             "name": "isBooted",
             "summary": "Check\u0020if\u0020the\u0020application\u0020is\u0020booted",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_isBooted"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003ApowerUp\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003ApowerUp\u0028\u0029",
             "name": "powerUp",
             "summary": "Boot\u0020the\u0020app",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_powerUp"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AbootProviders\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AbootProviders\u0028\u0029",
             "name": "bootProviders",
             "summary": "Runs\u0020the\u0020boot\u0020method\u0020of\u0020each\u0020provider",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_bootProviders"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AaddQueryToPool\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AaddQueryToPool\u0028\u0029",
             "name": "addQueryToPool",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_addQueryToPool"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AbootstrapCommands\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AbootstrapCommands\u0028\u0029",
             "name": "bootstrapCommands",
             "summary": "Collect\u0020all\u0020the\u0020commands\u0020from\u0020the\u0020environment\u0020and\u0020the\u0020context",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_bootstrapCommands"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AbootstrapCommandsFromProviders\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AbootstrapCommandsFromProviders\u0028\u0029",
             "name": "bootstrapCommandsFromProviders",
             "summary": "Collect\u0020commands\u0020from\u0020app\u0020providers",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_bootstrapCommandsFromProviders"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AbootstrapMiddlewares\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AbootstrapMiddlewares\u0028\u0029",
             "name": "bootstrapMiddlewares",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_bootstrapMiddlewares"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AbootstrapMiddlewaresInProviders\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AbootstrapMiddlewaresInProviders\u0028\u0029",
             "name": "bootstrapMiddlewaresInProviders",
             "summary": "Passes\u0020the\u0020middleware\u0020chain\u0020in\u0020the\u0020app\u0020providers\u0020and\u0020caches\u0020the\u0020process",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_bootstrapMiddlewaresInProviders"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AbootstrapAuthentications\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AbootstrapAuthentications\u0028\u0029",
             "name": "bootstrapAuthentications",
             "summary": "Adds\u0020the\u0020collected\u0020auths\u0020to\u0020the\u0020context\nCan\u0020also\u0020cache\u0020the\u0020authentications\u0020for\u0020future\u0020use",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_bootstrapAuthentications"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AbootAuthenticationsInProviders\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AbootAuthenticationsInProviders\u0028\u0029",
             "name": "bootAuthenticationsInProviders",
             "summary": "Bootstrap\u0020authentications\u0020coming\u0020from\u0020providers.\u0020This\u0020runs\u0020post\u0020internal\u0020authentications",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_bootAuthenticationsInProviders"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AregisterCorsInstance\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AregisterCorsInstance\u0028\u0029",
             "name": "registerCorsInstance",
             "summary": "Add\u0020the\u0020cors\u0020instance\u0020to\u0020the\u0020context",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_registerCorsInstance"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AregisterBaseRoutesInstance\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AregisterBaseRoutesInstance\u0028\u0029",
             "name": "registerBaseRoutesInstance",
             "summary": "Add\u0020the\u0020base\u0020routes\u0020instance\u0020to\u0020the\u0020context\nWe\u0020shall\u0020be\u0020merging\u0020all\u0020routes\u0020to\u0020this\u0020instance",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_registerBaseRoutesInstance"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AsetLogger\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AsetLogger\u0028\u0029",
             "name": "setLogger",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_setLogger"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AisCachedIn\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AisCachedIn\u0028\u0029",
             "name": "isCachedIn",
             "summary": "Checks\u0020if\u0020a\u0020certain\u0020keyToCheck\u0020is\u0020set\u0020in\u0020the\u0020cache\u0020under\u0020a\u0020certain\u0020keyCached.",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_isCachedIn"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AsupportedMethods\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AsupportedMethods\u0028\u0029",
             "name": "supportedMethods",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_supportedMethods"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003Areport\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003Areport\u0028\u0029",
             "name": "report",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_report"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AbootConsole\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AbootConsole\u0028\u0029",
             "name": "bootConsole",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_bootConsole"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AwithEndPoints\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AwithEndPoints\u0028\u0029",
             "name": "withEndPoints",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_withEndPoints"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AresolveRoutesFromProviders\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AresolveRoutesFromProviders\u0028\u0029",
             "name": "resolveRoutesFromProviders",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_resolveRoutesFromProviders"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AaddMiddleware\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AaddMiddleware\u0028\u0029",
             "name": "addMiddleware",
             "summary": "Add\u0020a\u0020single\u0020middleware\u0020to\u0020the\u0020chain",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_addMiddleware"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AmiddlewareChain\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AmiddlewareChain\u0028\u0029",
             "name": "middlewareChain",
             "summary": "When\u0020this\u0020is\u0020used,\u0020the\u0020closure\u0020passed\u0020must\u0020return\u0020a\u0020MiddlewareChain\u0020instance\nMiddlewares\u0020in\u0020this\u0020chain\u0020will\u0020be\u0020added\u0020to\u0020the\u0020context\u0020and\u0020will\u0020be\u0020the\u0020only\u0020middlewares\u0020used",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_middlewareChain"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AprepareConsole\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AprepareConsole\u0028\u0029",
             "name": "prepareConsole",
             "summary": "Sync\u0020the\u0020commands\u0020from\u0020the\u0020configuration\u0020and\u0020add\u0020them\u0020to\u0020the\u0020console\u0020application",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_prepareConsole"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003Aphp\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003Aphp\u0028\u0029",
             "name": "php",
             "summary": "Get\u0020the\u0020PHP\u0020binary.",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_php"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003ApioniaBinary\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003ApioniaBinary\u0028\u0029",
             "name": "pioniaBinary",
             "summary": "Get\u0020the\u0020pionia\u0020cli\u0020binary.",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_pioniaBinary"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AformatCommandString\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AformatCommandString\u0028\u0029",
             "name": "formatCommandString",
             "summary": "Format\u0020the\u0020given\u0020command\u0020as\u0020a\u0020fully\u002Dqualified\u0020executable\u0020command.",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_formatCommandString"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003Adispatch\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003Adispatch\u0028\u0029",
             "name": "dispatch",
             "summary": "Dispatches\u0020an\u0020event\u0020from\u0020anywhere\u0020in\u0020the\u0020application",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_dispatch"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AhandleRequest\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AhandleRequest\u0028\u0029",
             "name": "handleRequest",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_handleRequest"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AallowedOrigins\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AallowedOrigins\u0028\u0029",
             "name": "allowedOrigins",
             "summary": "If\u0020set,\u0020these\u0020shall\u0020be\u0020the\u0020only\u0020addresses\u0020that\u0020can\u0020access\u0020the\u0020application",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_allowedOrigins"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AblockedOrigins\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AblockedOrigins\u0028\u0029",
             "name": "blockedOrigins",
             "summary": "If\u0020set,\u0020these\u0020origins\u0020shall\u0020be\u0020prevented\u0020from\u0020accessing\u0020the\u0020application",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_blockedOrigins"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AhttpsOnly\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AhttpsOnly\u0028\u0029",
             "name": "httpsOnly",
             "summary": "If\u0020set,\u0020only\u0020https\u0020requests\u0020shall\u0020be\u0020allowed",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_httpsOnly"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AaddAlias\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AaddAlias\u0028\u0029",
             "name": "addAlias",
             "summary": "Adds\u0020an\u0020alias\u0020to\u0020the\u0020context\u0020list\u0020of\u0020aliases",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_addAlias"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003Aalias\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003Aalias\u0028\u0029",
             "name": "alias",
             "summary": "Get\u0020any\u0020alias\u0020from\u0020the\u0020context",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_alias"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003Amake\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003Amake\u0028\u0029",
             "name": "make",
             "summary": "Build\u0020an\u0020entry\u0020of\u0020the\u0020container\u0020by\u0020its\u0020name.",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_make"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003Aresolve\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003Aresolve\u0028\u0029",
             "name": "resolve",
             "summary": "Get\u0020any\u0020entry\u0020from\u0020the\u0020container\u0020by\u0020its\u0020id",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_resolve"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AaddAppProvider\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AaddAppProvider\u0028\u0029",
             "name": "addAppProvider",
             "summary": "Register\u0020a\u0020new\u0020provider\u0020in\u0020the\u0020app\u0020context\u0028di\u0029\nAppends\u0020the\u0020new\u0020provider\u0020into\u0020the\u0020existing\u0020array\u0020of\u0020providers",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_addAppProvider"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AcalculateUnresolvedProviders\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AcalculateUnresolvedProviders\u0028\u0029",
             "name": "calculateUnresolvedProviders",
             "summary": "we\u0020only\u0020want\u0020to\u0020start\u0020resolving\u0020only\u0020new\u0020providers",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_calculateUnresolvedProviders"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003AresolveProviders\u0028\u0029",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003AresolveProviders\u0028\u0029",
             "name": "resolveProviders",
             "summary": "Registers\u0020all\u0020app\u0020providers\u0020registered\u0020in\u0020the\u0020.ini\u0020files\u0020that\u0020were\u0020collected\u0020in\u0020the\u0020env",
             "url": "classes/Pionia-Base-PioniaApplication.html#method_resolveProviders"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024appName",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024appName",
             "name": "appName",
             "summary": "Application\u0020name",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_appName"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024appItemsCacheTTL",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024appItemsCacheTTL",
             "name": "appItemsCacheTTL",
             "summary": "App\u0020specific\u0020cacheacbles\u0027\u0020time\u0020to\u0020live\u0020in\u0020caches.",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_appItemsCacheTTL"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024appVersion",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024appVersion",
             "name": "appVersion",
             "summary": "Framework\u0020version",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_appVersion"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024applicationType",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024applicationType",
             "name": "applicationType",
             "summary": "Application\u0020type",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_applicationType"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024env",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024env",
             "name": "env",
             "summary": "Environment\u0020variables",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_env"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024appProviders",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024appProviders",
             "name": "appProviders",
             "summary": "These\u0020shall\u0020be\u0020used\u0020to\u0020run\u0020the\u0020onBooted\u0020and\u0020onTermine\u0020lifecycle\u0020hooks\u0020against\u0020every\u0020provider",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_appProviders"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024unResolvedAppProviders",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024unResolvedAppProviders",
             "name": "unResolvedAppProviders",
             "summary": "Resolved\u0020cached\u0020providers\u0020are\u0020cached,\nif\u0020the\u0020provider\u0020is\u0020not\u0020found\u0020in\u0020caches,\nthen\u0020we\u0020resolve\u0020it\u0020as\u0020new,\u0020and\u0020cache\u0020for\u0020later\u0020requests",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_unResolvedAppProviders"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024logger",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024logger",
             "name": "logger",
             "summary": "Logger\u0020instance",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_logger"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024envResolver",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024envResolver",
             "name": "envResolver",
             "summary": "Environment\u0020resolver",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_envResolver"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024dispatcher",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024dispatcher",
             "name": "dispatcher",
             "summary": "Event\u0020dispatcher",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_dispatcher"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024bootedCallbacks",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024bootedCallbacks",
             "name": "bootedCallbacks",
             "summary": "The\u0020booted\u0020callbacks",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_bootedCallbacks"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024terminatingCallbacks",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024terminatingCallbacks",
             "name": "terminatingCallbacks",
             "summary": "The\u0020terminating\u0020callbacks,\u0020run\u0020before\u0020terminating\u0020the\u0020application",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_terminatingCallbacks"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024terminatedCallbacks",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024terminatedCallbacks",
             "name": "terminatedCallbacks",
             "summary": "The\u0020terminated\u0020callbacks,\u0020run\u0020after\u0020terminating\u0020the\u0020application",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_terminatedCallbacks"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024booted",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024booted",
             "name": "booted",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_booted"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024bootingCallbacks",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024bootingCallbacks",
             "name": "bootingCallbacks",
             "summary": "The\u0020booting\u0020callbacks,\u0020callbacks\u0020to\u0020call\u0020before\u0020the\u0020app\u0020runs",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_bootingCallbacks"
         },                {
-            "fqsen": "\\Pionia\\Base\\PioniaApplication\u003A\u003A\u0024cacheAdaptor",
+            "fqsen": "\\Pionia\\Base\\WebApplication\u003A\u003A\u0024cacheAdaptor",
             "name": "cacheAdaptor",
             "summary": "",
             "url": "classes/Pionia-Base-PioniaApplication.html#property_cacheAdaptor"

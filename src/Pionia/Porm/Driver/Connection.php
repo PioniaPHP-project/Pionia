@@ -5,11 +5,11 @@ namespace Pionia\Porm\Driver;
 use InvalidArgumentException;
 use PDO;
 use PDOException;
-use Pionia\Base\PioniaApplication;
+use Pionia\Base\WebApplication;
+use Pionia\Realm\AppRealm;
 
 class Connection implements DatabaseDriverInterface
 {
-    protected ?PioniaApplication $application;
 
     protected ?PDO $pdo;
 
@@ -24,20 +24,19 @@ class Connection implements DatabaseDriverInterface
     protected bool $logging = false;
 
 
-    private function __construct(?PioniaApplication $application, null|string|array|PDO $connection = 'default')
+    private function __construct( null|string|array|PDO $connection = 'default')
     {
-        $this->application = $application ?? app();
 
         if (is_null($connection)){
             // set up the default connection
-            if ($this->application->getDiscoveredConnections()->isEmpty()){
-                $this->application->logger->error("No Porm connections to connect to!");
+            if (app()->getDiscoveredConnections()->isEmpty()){
+                logger()->error("No Porm connections to connect to!");
             }
-            $options = $this->application->defaultOrFirst();
+            $options = app()->defaultOrFirst();
         } else if (is_array($connection)){
             $options = $connection;
         } else {
-            $options = $this->application->defaultOrFirst($connection);
+            $options = app()->defaultOrFirst($connection);
         }
 
         if (!$options){
@@ -76,7 +75,7 @@ class Connection implements DatabaseDriverInterface
             $this->logging = $options['logging'];
         }
 
-        if($this->application->getEnv('LOG_QUERIES') || $this->application->getEnv('SHOW_QUERIES')){
+        if(app()->env('LOG_QUERIES') || app()->env('SHOW_QUERIES')){
             $this->logging = true;
         }
 
@@ -98,7 +97,7 @@ class Connection implements DatabaseDriverInterface
 
         if (isset($options['pdo'])) {
             if (!$options['pdo'] instanceof PDO) {
-                $this->application->logger->error('Invalid PDO object supplied.');
+                logger()->error('Invalid PDO object supplied.');
                 throw new InvalidArgumentException('Invalid PDO object supplied.');
             }
             $this->pdo = $options['pdo'];
@@ -112,7 +111,7 @@ class Connection implements DatabaseDriverInterface
             if (is_array($options['dsn']) && isset($options['dsn']['driver'])) {
                 $attr = $options['dsn'];
             } else {
-                $this->application->logger->error('Invalid DSN option supplied.');
+                logger()->error('Invalid DSN option supplied.');
                 throw new InvalidArgumentException('Invalid DSN option supplied.');
             }
         } else {
@@ -256,14 +255,14 @@ class Connection implements DatabaseDriverInterface
         }
 
         if (!isset($attr)) {
-            $this->application->logger->error('Incorrect connection options.');
+            logger()->error('Incorrect connection options.');
             throw new InvalidArgumentException('Incorrect connection options.');
         }
 
         $driver = $attr['driver'];
 
         if (!in_array($driver, PDO::getAvailableDrivers())) {
-            $this->application->logger->error("Unsupported PDO driver: {$driver}.");
+            logger()->error("Unsupported PDO driver: {$driver}.");
             throw new InvalidArgumentException("Unsupported PDO driver: {$driver}.");
         }
 
@@ -318,20 +317,11 @@ class Connection implements DatabaseDriverInterface
                 $this->pdo->exec($value);
             }
         } catch (PDOException $e) {
-            $this->application->logger->error($e->getMessage());
+            logger()->error($e->getMessage());
             throw new PDOException($e->getMessage());
         }
     }
 
-    public function getApplication(): ?PioniaApplication
-    {
-        return $this->application;
-    }
-
-    public function setApplication(?PioniaApplication $application): void
-    {
-        $this->application = $application;
-    }
 
     public function getPdo(): ?PDO
     {
@@ -393,8 +383,8 @@ class Connection implements DatabaseDriverInterface
         $this->logging = $logging;
     }
 
-    public static function connect(?PioniaApplication $application, null|string|array|PDO $connection = 'default'): static
+    public static function connect(null|string|array|PDO $connection = 'default'): static
     {
-        return new Connection($application, $connection);
+        return new Connection($connection);
     }
 }

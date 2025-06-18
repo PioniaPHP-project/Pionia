@@ -6,7 +6,7 @@ use DI\Container;
 use Monolog\Logger;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
-use Pionia\Base\PioniaApplication;
+use Pionia\Base\WebApplication;
 use Pionia\Events\PioniaEventDispatcher;
 use Pionia\Http\Request\Request;
 use Pionia\Logging\PioniaLogger;
@@ -18,7 +18,7 @@ class PioniaTestCase extends TestCase
 {
     use HelperMocksTrait;
 
-    public ?PioniaApplication $application = null;
+    public ?WebApplication $application = null;
 
     public ?Request $request;
 
@@ -57,12 +57,11 @@ class PioniaTestCase extends TestCase
     /**
      * @throws Exception
      */
-    public function applicationMock(): PioniaApplication
+    public function applicationMock(): WebApplication
     {
-        $application = $this->createMock(PioniaApplication::class);
+        $application = $this->createMock(WebApplication::class);
         $application->context = $this->createMock(Container::class);
         $application->dispatcher = $this->createMock(PioniaEventDispatcher::class);
-        $application->setLogger($this->createMock(Logger::class));
 
         $application->powerUp(PioniaApplicationType::TEST);
         $this->application = $application;

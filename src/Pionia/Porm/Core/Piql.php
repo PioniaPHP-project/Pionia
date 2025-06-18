@@ -23,7 +23,7 @@ use InvalidArgumentException;
 use PDO;
 use PDOException;
 use PDOStatement;
-use Pionia\Base\PioniaApplication;
+use Pionia\Base\WebApplication;
 use Pionia\Porm\Driver\Connection;
 use Pionia\Utils\InteractsWithTime;
 
@@ -171,11 +171,6 @@ class Piql
      */
     public ?array $errorInfo = null;
 
-    /**
-     * Pionia application instance
-     * @var PioniaApplication
-     */
-    public PioniaApplication $application;
 
     /**
      * DatabaseConnector the database.
@@ -203,7 +198,6 @@ class Piql
 
     public function __construct(Connection $connection)
     {
-        $this->application = $connection->getApplication();
         $this->type = $connection->getType();
         $this->prefix = $connection->getPrefix();
         $this->dsn = $connection->getDsn();
@@ -245,7 +239,7 @@ class Piql
      * @codeCoverageIgnore
      * @return PDOStatement|null
      */
-    public function exec(string $statement, array $map = [], callable $callback = null): ?PDOStatement
+    public function exec(string $statement, array $map = [], ?callable $callback = null): ?PDOStatement
     {
         $this->statement = null;
         $this->errorInfo = null;
@@ -1129,7 +1123,7 @@ class Piql
         array $columnMap,
         array &$stack,
         bool  $root,
-        array &$result = null
+        ?array &$result = null
     ): void
     {
         if ($root) {
@@ -1402,7 +1396,7 @@ class Piql
      * @param string $primaryKey
      * @return PDOStatement|null
      */
-    public function insert(string $table, array $values, string $primaryKey = null): ?PDOStatement
+    public function insert(string $table, array $values, ?string $primaryKey = null): ?PDOStatement
     {
         $stack = [];
         $columns = [];
@@ -1865,7 +1859,7 @@ class Piql
      * @codeCoverageIgnore
      * @return string|null
      */
-    public function id(string $name = null): ?string
+    public function id(?string $name = null): ?string
     {
         $type = $this->type;
 

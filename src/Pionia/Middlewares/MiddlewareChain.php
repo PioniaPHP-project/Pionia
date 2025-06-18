@@ -3,26 +3,19 @@
 namespace Pionia\Middlewares;
 
 use Exception;
-use Pionia\Base\PioniaApplication;
 use Pionia\Collections\Arrayable;
 use Pionia\Contracts\MiddlewareContract;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
 use Pionia\Middlewares\Events\PostMiddlewareChainRunEvent;
 use Pionia\Middlewares\Events\PreMiddlewareChainRunEvent;
-use Pionia\Utils\Containable;
 use Pionia\Utils\Microable;
 use Pionia\Utils\Support;
 
 class MiddlewareChain
 {
 
-    use Microable, Containable;
-
-    /**
-     * @var PioniaApplication
-     */
-    private PioniaApplication $app;
+    use Microable;
 
     private Arrayable $middlewareContainer;
     private Arrayable $middlewareStackCopy;
@@ -48,11 +41,9 @@ class MiddlewareChain
         return $this->middlewareContainer->all();
     }
 
-    public function __construct(PioniaApplication $app)
+    public function __construct()
     {
-        $this->app = $app;
-        $this->context = $app->context;
-        $this->middlewareContainer = $this->getOrDefault('middlewares', new Arrayable([]));
+        $this->middlewareContainer = app()->getOrDefault(app()::MIDDLEWARE_TAG, new Arrayable([]));
     }
 
     /**
@@ -83,12 +74,18 @@ class MiddlewareChain
     public function addAfter(string $middlewareSearch, string $middlewareToInsert): static
     {
         $this->middlewareContainer->addAfter($middlewareSearch, $middlewareToInsert);
-        $this->context->set('middlewares', $this->middlewareContainer);
+        return $this->update();
+    }
+
+    private function update(): static
+    {
+        app()->set(app()::MIDDLEWARE_TAG, $this->middlewareContainer);
+        app()->updateCache('app_middlewares', $this->middlewareContainer->all(), true, 200);
         return $this;
     }
 
     /**
-     * Add a middleware before another middleware
+     * Add middleware before another middleware
      *
      * @param string $middlewareSearch The target middleware in the chain
      * @param string $middlewareToInsert The new middleware we are registering
@@ -99,11 +96,10 @@ class MiddlewareChain
     {
         if ($this->isAMiddleware($middlewareToInsert)) {
             $this->middlewareContainer->addBefore($middlewareSearch, $middlewareToInsert);
-            $this->context->set('middlewares', $this->middlewareContainer);
         } else {
             throw new Exception("Middleware must be implementing MiddlewareContract or extending Middleware");
         }
-        return $this;
+        return $this->update();
     }
 
     /**
@@ -120,18 +116,12 @@ class MiddlewareChain
         // we need to take a snapshot of the middleware stack so that we can run the chain multiple times
         $this->middlewareStackCopy = $copy;
         if ($response){
-            if ($this->app->dispatcher) {
-                $this->app->dispatch(new PostMiddlewareChainRunEvent($this), PostMiddlewareChainRunEvent::name());
-            }
+            event(new PostMiddlewareChainRunEvent($this), PostMiddlewareChainRunEvent::name());
             $this->rail($request, $response);
 
-            if ($this->app->dispatcher) {
-                $this->app->dispatch(new PostMiddlewareChainRunEvent($this), PostMiddlewareChainRunEvent::name());
-            }
+            event(new PostMiddlewareChainRunEvent($this), PostMiddlewareChainRunEvent::name());
         } else {
-            if ($this->app->dispatcher) {
-                $this->app->dispatch(new PreMiddlewareChainRunEvent($this), PreMiddlewareChainRunEvent::name());
-            }
+            event(new PreMiddlewareChainRunEvent($this), PreMiddlewareChainRunEvent::name());
             $this->rail($request);
         }
     }

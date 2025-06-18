@@ -3,7 +3,7 @@
 namespace Pionia\Http\Request;
 
 use Pionia\Auth\ContextUserObject;
-use Pionia\Base\PioniaApplication;
+use Pionia\Base\WebApplication;
 use Pionia\Collections\Arrayable;
 use Pionia\Utils\Microable;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -24,8 +24,6 @@ class Request extends \Symfony\Component\HttpFoundation\Request
 {
 
     use Microable;
-
-    private PioniaApplication $app;
 
      private bool $authenticated = false;
 
@@ -124,13 +122,4 @@ class Request extends \Symfony\Component\HttpFoundation\Request
         return null;
     }
 
-    public function setApplication(PioniaApplication $application): void
-    {
-        $this->app = $application;
-    }
-
-    public function getApplication(): PioniaApplication
-    {
-        return $this->app;
-    }
 }

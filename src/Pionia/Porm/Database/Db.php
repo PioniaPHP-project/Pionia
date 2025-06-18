@@ -17,21 +17,17 @@
 namespace Pionia\Porm\Database;
 
 use Exception;
-use Pionia\Base\PioniaApplication;
+use Pionia\Base\WebApplication;
 use Pionia\Collections\Arrayable;
 use Pionia\Porm\Core\Porm;
 use Pionia\Porm\Driver\Connection;
+use Pionia\Realm\AppRealm;
 
 /**
  * Provides a basis for other query builders to base on.
  */
 class Db
 {
-    /**
-     * The Pionia application instance
-     */
-    private PioniaApplication $application;
-
     /**
      * The connection to use
      * @var Connection
@@ -46,14 +42,12 @@ class Db
     /**
      * Setup the database connection
      */
-    public function __construct(?PioniaApplication $application = null, Connection | null | string | array $connection = 'default')
+    public function __construct(Connection | null | string | array $connection = 'default')
     {
         if ($connection instanceof Connection) {
-            $this->application = $connection->getApplication();
             $this->connection = $connection;
             $this->porm = new Porm($this->connection);
         } else {
-            $this->application = $application ?? app();
             // if no connection, we setup the default along
             $this->setup($connection);
         }
@@ -71,13 +65,12 @@ class Db
                 return;
             } elseif ($connection instanceof Connection) {
                 $this->connection = $connection;
-                $this->application = $connection->getApplication();
                 $this->porm = new Porm($this->connection);
                 return;
             }
         }
 
-        $this->connection = Connection::connect($this->application, $connection);
+        $this->connection = Connection::connect($connection);
         $this->porm = new Porm($this->connection);
     }
 

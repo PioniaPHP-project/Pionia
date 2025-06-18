@@ -6,7 +6,7 @@ use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use InvalidArgumentException;
-use Pionia\Base\PioniaApplication;
+use Pionia\Base\WebApplication;
 use Pionia\Collections\Arrayable;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -70,14 +70,14 @@ trait Containable
     /**
      * Get a value from the container or throw an exception.
      *
-     * @see PioniaApplication::resolve() for similar functionality on the application instance
-     *
      * @param string $key
      * @return mixed
      * @throws ContainerExceptionInterface
      * @throws DependencyException
      * @throws NotFoundException
      * @throws NotFoundExceptionInterface
+     *@see WebApplication::resolve() for similar functionality on the application instance
+     *
      */
     public function getOrFail(string $key): mixed
     {

@@ -11,6 +11,7 @@ use Pionia\Builtins\Commands\Generators\GenerateService;
 use Pionia\Builtins\Commands\Generators\GenerateSwitch;
 use Pionia\Builtins\Commands\StartServer;
 use Pionia\Collections\Arrayable;
+use Pionia\Middlewares\Builtins\CacheMiddleware;
 
 include __DIR__.'/../Utils/helpers.php';
 
@@ -63,6 +64,7 @@ if (!function_exists('allBuiltins')) {
             'authentications' => [
             ],
             'middlewares' => [
+                'cache'=> CacheMiddleware::class
             ],
             // all these directories are relative to the root directory of the application
             'directories' => [
@@ -80,7 +82,7 @@ if (!function_exists('allBuiltins')) {
                 DIRECTORIES::CACHE_DIR->name => 'storage/cache',
                 DIRECTORIES::LOGS_DIR->name => 'storage/logs',
                 DIRECTORIES::STORAGE_DIR->name => 'storage',
-                DIRECTORIES::STATIC_DIR->name => 'static',
+                DIRECTORIES::STATIC_DIR->name => 'public/static',
             ],
             'namespaces' => [
                 NAMESPACES::AUTHENTICATION_NS->name =>'Application\Authentications',

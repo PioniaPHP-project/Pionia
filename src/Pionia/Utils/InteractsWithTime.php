@@ -73,7 +73,7 @@ trait InteractsWithTime
      * @return string
      * @throws Exception
      */
-    protected function runTimeForHumans(float $startTime, float $endTime = null): string
+    protected function runTimeForHumans(float $startTime, ?float $endTime = null): string
     {
         $endTime ??= microtime(true);
 

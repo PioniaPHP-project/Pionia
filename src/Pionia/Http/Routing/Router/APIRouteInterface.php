@@ -1,6 +1,6 @@
 <?php
 
-namespace Pionia\Http\Routing;
+namespace Pionia\Http\Routing\Router;
 
 interface APIRouteInterface
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Pionia\Http\Routing;
+namespace Pionia\Http\Routing\Router;
 
 use DIRECTORIES;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
 use Pionia\Realm\AppRealm;
-use Pionia\Templating\TemplateEngineInterface;
+use Pionia\Realm\RealmContract;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -16,12 +16,40 @@ use Symfony\Component\Routing\RouteCollection;
 class DefaultRoutes
 {
     private RouteCollection  $defaultRoutes;
-    private AppRealm  $appRealm;
-
-    public function __construct(AppRealm $realm)
+    public function __construct()
     {
-        $this->appRealm = $realm;
         $this->defaultRoutes = new RouteCollection();
+    }
+
+    private function errorMessage($request, $code, $message): Response
+    {
+        $json = $request->query->has('json');
+        if ($json){
+            return new Response(response($code, $message)->getPrettyResponse(), 200, ['application/json']);
+        } else {
+            $html = "<div style='
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                    background: #f5f7fa;
+                    font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;
+                '>
+                    <div style='
+                        background: white;
+                        padding: 40px 60px;
+                        border-radius: 16px;
+                        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+                        text-align: center;
+                        max-width: 500px;
+                    ' role='alert'>
+                        <img src='/static/favicon.ico' alt='App Icon' style='width: 90px; margin-bottom: 20px;'>
+                        <div style='font-size: 82px; font-weight: 600; color: #2b2b2b;'>{$code}</div>
+                        <div style='font-size: 20px; color: #666;'>{$message}</div>
+                    </div>
+                </div>";
+            return new Response($html, $code, ['text/html']);
+        }
     }
 
     /**
@@ -33,7 +61,7 @@ class DefaultRoutes
     {
         $this->defaultRoutes->add(
             'home', RouteObject::get('/')
-            ->controller([DefaultRoutes::class, 'homeResolver'])
+            ->controller(['_controller' => DefaultRoutes::class . '::homeResolver'])
             ->build()
         );
         return $this;
@@ -43,19 +71,32 @@ class DefaultRoutes
      * Adds the default routes for the homepage, statics files and html
      * @return $this
      */
-    public function collect(): static
+    public function collect(RealmContract $appRealm): static
     {
        $this->addRouteForHome()
-            ->addRouteForMediaFiles()
-            ->addStaticFiles()
-            ->otherStaticFilesRouter();
+            ->addRouteForMediaFiles();
 
-       $this->appRealm->updateCache(AppRealm::APP_ROUTES_TAG, $this->defaultRoutes, true);
-       $this->appRealm->set(AppRealm::APP_ROUTES_TAG, $this->defaultRoutes);
+        $routes = $appRealm->getOrDefault(AppRealm::APP_ROUTES_TAG, new RouteCollection());
+        $routes->addCollection($this->defaultRoutes);
+        $appRealm->updateCache(AppRealm::APP_ROUTES_TAG, $routes, true, 10);
+        $appRealm->set(AppRealm::APP_ROUTES_TAG, $routes);
        return $this;
     }
 
-    private function homeResolver(Request $request): Response
+    public static function collectStaticRoutes(RealmContract $appRealm): static
+    {
+        $instance = new static();
+        $instance
+//            ->otherStaticFilesRouter()
+            ->addStaticFiles();
+        $routes = $appRealm->getOrDefault(AppRealm::APP_ROUTES_TAG, new RouteCollection());
+        $routes->addCollection($instance->defaultRoutes);
+        $appRealm->updateCache(AppRealm::APP_ROUTES_TAG, $routes, true, 10);
+        $appRealm->set(AppRealm::APP_ROUTES_TAG, $routes);
+        return $instance;
+    }
+
+    public function homeResolver(Request $request): Response
     {
         // check if we have an index.html in the static folder otherwise, serve the inbuilt html
         $fileManager = new Filesystem();
@@ -64,16 +105,14 @@ class DefaultRoutes
 
         if ($fileManager->exists($staticPage)) {
             // send the file here
-            $response->setContent($fileManager->readFile($staticPage));
+            $content = $fileManager->readFile($staticPage);
+            $response->setContent($content);
         } else {
-            $welcomePage = path(DIRECTORIES::WELCOME_PAGE->name);
-            if ($fileManager->exists($welcomePage)) {
-                $content = app()->getSilently(TemplateEngineInterface::class)?->view($welcomePage, [
+            $welcomePage = __DIR__.'/../../../templates/index.php';
+            render($welcomePage, [
                     'app' => realm(),
                     'request' => $request,
                 ]);
-
-            }
         }
         $response =  new Response($content, 200, ['Content-Type' => 'text/html']);
         return $response->prepare($request)->send();
@@ -83,46 +122,61 @@ class DefaultRoutes
      * Resolves all files served in the static folder
      * @return $this
      */
-    private function otherStaticFilesRouter(): static
+    public function otherStaticFilesRouter(): static
     {
         $this->defaultRoutes->add(
             'statics', RouteObject::get('/{path}')
-            ->options(['path' => '.+'])
-            ->controller([DefaultRoutes::class, 'staticFilesRouter'])
+            ->requires(['path' => '.+'])
+            ->controller(['_controller' => DefaultRoutes::class . '::staticFilesRouter'])
             ->build()
         );
         return $this;
     }
 
+    private function guessMimeType($file)
+    {
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+        $defaultMimeMap = [
+            'css' => 'text/css',
+            'js' => 'application/javascript',
+            'json' => 'application/json',
+            'png' => 'image/png',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'svg' => 'image/svg+xml',
+            'woff2' => 'font/woff2',
+            'ttf' => 'font/ttf',
+            'html' => 'text/html',
+        ];
+        $mimeTypes = new MimeTypes();
+       return $mimeTypes->guessMimeType($file)
+            ?? $defaultMimeMap[strtolower($extension)]
+            ?? 'application/octet-stream';
+    }
+
     /**
      * Serve any other files in the static folder
-     * @param Request $request
-     * @return $this
+     * @return Response|BinaryFileResponse
      */
-    private function staticFilesRouter(Request $request): static
+    public function staticFilesRouter(Request $request): Response | BinaryFileResponse
     {
         $fileManager = new Filesystem();
         $_path = $request->attributes->get('path');
-        $requestedFile = path(DIRECTORIES::STATIC_DIR->name.DIRECTORY_SEPARATOR.$_path);
-
-
+        $requestedFile = path(directoryFor(DIRECTORIES::STATIC_DIR->name).DIRECTORY_SEPARATOR.$_path);
         if (!$requestedFile || !$fileManager->exists($requestedFile)) {
-            $response = new Response("File not found", 404);
-            $response->send();
-            return $this;
+            return $this->errorMessage($request, 404, 'Resource not found or did not match any endpoints')
+                ->prepare($request)->send();
         }
 
         // Get MIME type
-        $mimeInstance = new MimeTypes();
-        $mime = $mimeInstance->guessMimeType($requestedFile);
+        $mime = $this->guessMimeType($requestedFile);
+
 
         // Serve a file
         $response = new BinaryFileResponse($requestedFile);
         $response->headers->set('Content-Type', $mime);
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, basename($requestedFile));
-        $response->send();
-
-        return $this;
+        return $response->prepare($request)->send();
     }
 
     /**
@@ -134,7 +188,7 @@ class DefaultRoutes
         $this->defaultRoutes->add(
             'static', RouteObject::get('/static/{path}')
             ->options(['path' => '.+'])
-            ->controller([DefaultRoutes::class, "staticFilesRouter"])
+            ->controller(['_controller' => DefaultRoutes::class . '::staticFilesRouter'])
             ->build()
         );
         return $this;
@@ -148,44 +202,41 @@ class DefaultRoutes
     private function addRouteForMediaFiles(): static
     {
         $this->defaultRoutes->add('media', RouteObject::get('/media/{path}')
-            ->controller([DefaultRoutes::class, 'mediaFilesRouter'])
+            ->controller(['_controller' => DefaultRoutes::class . '::mediaFilesRouter'])
             ->options(['path' => '.+'])
             ->build());
         return $this;
     }
 
-    private function mediaFilesRouter(Request $request): static
+    public function mediaFilesRouter(Request $request): Response | BinaryFileResponse
     {
         // Get the dynamic {path} parameter from the route
         $path = $request->attributes->get('path');
 
-        // Base directory for static assets (e.g., /your_project/static/)
-        $baseDir = path(DIRECTORIES::STATIC_DIR->name);
+        $requestedFile = path(directoryFor(DIRECTORIES::STATIC_DIR->name).DIRECTORY_SEPARATOR.$path);
 
-        // Build the full file path
-        $requestedFile = path($baseDir . DIRECTORY_SEPARATOR . $path);
 
         // Security check to prevent directory traversal
         if (
             !$requestedFile ||
-            !str_starts_with($requestedFile, realpath($baseDir)) ||
+            !str_starts_with($requestedFile, realpath($requestedFile)) ||
             !is_file($requestedFile)
         ) {
-            $response = new Response("File not found", 404);
-            $response->send();
-            return $this;
+            return $this->errorMessage( $request, 404, 'Resource not found or did not match any endpoints')
+                ->prepare($request)->send();
         }
 
         // Determine content type (MIME)
-        $mime = mime_content_type($requestedFile) ?: 'application/octet-stream';
+        $mimeType = new MimeTypes();
+        $mime = $mimeType->guessMimeType($requestedFile) ?: 'application/octet-stream';
+        logger()->info($mime);
 
         // Serve the file
         $response = new BinaryFileResponse($requestedFile);
         $response->headers->set('Content-Type', $mime);
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, basename($requestedFile));
-        $response->send();
 
-        return $this;
+        return $response->prepare($request)->send();
     }
 
 }

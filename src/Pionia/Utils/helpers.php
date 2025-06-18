@@ -1,16 +1,18 @@
 <?php
 
-use DI\Container;
 use JetBrains\PhpStorm\NoReturn;
-use Pionia\Base\PioniaApplication;
 use Pionia\Cache\PioniaCache;
 use Pionia\Collections\Arrayable;
 use Pionia\Collections\HighOrderTapProxy;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Routing\PioniaRouter;
+use Pionia\Http\Routing\Router\RouteObject;
 use Pionia\Http\Services\Service;
 use Pionia\Porm\Core\Porm;
 use Pionia\Porm\Database\Db;
+use Pionia\Realm\AppRealm;
+use Pionia\Realm\RealmContract;
 use Pionia\Templating\TemplateEngineInterface;
 use Pionia\Utils\Support;
 use Pionia\Validations\Validator;
@@ -18,6 +20,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Asset\PathPackage;
 use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Routing\RouteCollection;
 
 if (! function_exists('tap')) {
     /**
@@ -30,7 +33,7 @@ if (! function_exists('tap')) {
      * @param (callable(TValue): mixed)|null $callback
      * @return HighOrderTapProxy|TValue
      */
-    function tap($value, callable $callback = null)
+    function tap($value, ?callable $callback = null)
     {
         if (is_null($callback)) {
             return new HighOrderTapProxy($value);
@@ -42,14 +45,21 @@ if (! function_exists('tap')) {
     }
 }
 
+if (! function_exists('route')){
+    function route(RealmContract $app): PioniaRouter
+    {
+        return new PioniaRouter($app);
+    }
+}
+
 if (! function_exists('arr')) {
     /**
      * Get an item from an array using "dot" notation.
      *
-     * @param ?array $array
+     * @param Arrayable|array|null $array $array
      * @return Arrayable
      */
-    function arr(?array $array): Arrayable
+    function arr(null | Arrayable | array $array = []): Arrayable
     {
         return new Arrayable($array);
     }
@@ -63,7 +73,7 @@ if (! function_exists('env')) {
      */
     function env(?string $key =null, mixed $default = null): mixed
     {
-        return app()->getEnv($key, $default);
+        return app()->env($key, $default);
     }
 }
 
@@ -82,7 +92,7 @@ if (! function_exists('setEnv')) {
         } elseif (array_key_exists(strtolower($key), $env)){
             $actual = strtolower($key);
         }
-        app()->setEnv($actual, $value);
+        realm()->setEnv($actual, $value);
     }
 }
 
@@ -102,35 +112,6 @@ if (!function_exists('response')) {
 }
 
 
-if (!function_exists('app')) {
-    /**
-     * Helper function to return the application instance
-     */
-    function app(): PioniaApplication
-    {
-        if (isset($GLOBALS['app'])) {
-            return $GLOBALS['app'];
-        }
-
-        // if we haven't created a new app instance we create it and return it;
-        if (!defined('BASEPATH')) {
-            define('BASEPATH', dirname(__DIR__, 2));
-        }
-        return (new PioniaApplication(BASEPATH))
-            ->powerUp();
-    }
-}
-
-if (!function_exists('container')) {
-    /**
-     * Helper function to return the application container
-     */
-    function container(): Container
-    {
-        return app()->context;
-    }
-}
-
 if (!function_exists('db')) {
     /**
      * Run any pionia-powered queries
@@ -142,7 +123,7 @@ if (!function_exists('db')) {
      */
     function db(string $tableName, ?string $tableAlias = null, ?string $using = null): ?Porm
     {
-       return table($tableName, $tableAlias, $using);
+        return table($tableName, $tableAlias, $using);
     }
 }
 
@@ -283,18 +264,12 @@ if (!function_exists('write_ini_file')) {
     }
 }
 
-
-if (!function_exists('logger')){
-    /**
-     * Get the logger instance from the application container
-     * @return LoggerInterface
-     */
-    function logger(): LoggerInterface
+if (!function_exists('path')){
+    function path(string $path): string
     {
-        return app()?->logger;
+        return app()->appRoot($path);
     }
 }
-
 
 
 if (!function_exists('addIniSection')) {
@@ -347,7 +322,6 @@ if (!function_exists('cachedResponse')){
         return tap($response, function (BaseResponse $response) use ($instance, $ttl) {
             if ($cacheinstance = app()->getSilently(PioniaCache::class)) {
                 // caching is enabled, let's cache this response.
-                $instance->setCacheInstance($cacheinstance);
                 $instance->cacheTtl = $ttl;
 
                 $service = $instance->request->getData()->get('service');
@@ -422,6 +396,51 @@ if (!function_exists('render')){
     {
         app()->getSilently(TemplateEngineInterface::class)?->view($file, $data);
         exit(1);
+    }
+}
+
+if (!function_exists('post')) {
+    function post(string $path): RouteObject
+    {
+        return RouteObject::post($path);
+    }
+}
+
+
+if (!function_exists('get')) {
+    function get(string $path): RouteObject
+    {
+        return RouteObject::get($path);
+    }
+}
+
+if (!function_exists('allRoutes')){
+    function allRoutes(): RouteCollection
+    {
+
+        return app()->getRoutes();
+    }
+}
+
+if (!function_exists('baseUrl')){
+    /**
+     * Base url of the api. This is before the version.
+     *
+     * To set this, just add `API_BASE` in the environment, otherwise, defaults to `/api/`
+     *
+     * @return string
+     * @example ``` /api/ ```
+     */
+    function baseUrl(): string
+    {
+        $base =  env('API_BASE', '/api/');
+        if (!str_starts_with($base, '/')) {
+            $base = '/'.$base;
+        }
+        if (!str_ends_with($base, '/')) {
+            $base .= '/';
+        }
+        return $base;
     }
 }
 
@@ -627,5 +646,281 @@ if (!function_exists('is_cached_in')){
     function is_cached_in($keyCached, $keyToCheck): bool
     {
         return app()->isCachedIn($keyCached, $keyToCheck);
+    }
+}
+
+
+if (!function_exists('realm')) {
+    function realm(): AppRealm
+    {
+        return container();
+    }
+}
+
+if (!function_exists('event')) {
+    function event(object $event,?string $eventName = null): object
+    {
+        return realm()->event()->dispatch($event, $eventName);
+    }
+}
+
+if (!function_exists('listen')) {
+    function listen(string $eventName, array|callable $listener, int $priority = 0): void
+    {
+        realm()->event()->addListener($eventName, $listener, $priority);
+    }
+}
+
+if (!function_exists('container')) {
+    /**
+     * @see app(), realm(), pionia()
+     */
+    function container(): AppRealm
+    {
+        return require container_path();
+    }
+}
+
+
+if (!function_exists('app')) {
+    /**
+     * Instance of the application container
+     */
+    function app(): AppRealm
+    {
+        return container();
+    }
+}
+
+
+if (!function_exists('commands')) {
+    /**
+     * Returns all commands that have been registered in the container
+     */
+    function commands(): Arrayable
+    {
+        return container()->getSilently(AppRealm::COMMANDS_TAG);
+    }
+}
+
+if (!function_exists('services')) {
+    /**
+     * Returns all services that have been registered in the container
+     */
+    function services(?string $key = null): array
+    {
+        $services =  container()->getSilently(AppRealm::SERVICES_TAG);
+        if ($key) {
+            if ($_services =  $services[$key]){
+                return $_services;
+            }
+        }
+        return $services;
+    }
+}
+
+if (!function_exists('aliases')) {
+    /**
+     * Returns all aliases that have been registered in the container
+     */
+    function aliases(): Arrayable
+    {
+        return container()->getSilently(AppRealm::ALIASES_TAG);
+    }
+}
+
+if (!function_exists('auths')) {
+    /**
+     * Returns all authentications that have been registered in the container
+     */
+    function authentications(): Arrayable
+    {
+        return container()->getSilently(AppRealm::AUTHENTICATIONS_TAG);
+    }
+}
+
+if (!function_exists('middlewares')) {
+    /**
+     * Returns all middlewares that have been registered in the container
+     */
+    function middlewares()
+    {
+        return container()->getSilently(AppRealm::MIDDLEWARE_TAG);
+    }
+}
+
+if (!function_exists("apiBase")) {
+    function apiBase() {
+        return app()->getSilently(app()::APP_API_BASE_TAG);
+    }
+}
+
+
+if (!function_exists('pionia')) {
+    /**
+     * @see app()
+     */
+    function pionia(): AppRealm
+    {
+        return container();
+    }
+}
+
+if (!function_exists('env_keys')) {
+    /**
+     * Returns all collected keys as an array
+     */
+    function envKeys(): array
+    {
+        $key = env('SYMFONY_DOTENV_VARS');
+        return explode(',', $key);
+    }
+}
+
+if (!function_exists('container_path')){
+    function container_path(): string
+    {
+        if (defined('CONTAINER_PATH')) {
+            return CONTAINER_PATH;
+        }
+        $path = BASE_PATH.DIRECTORY_SEPARATOR.'bootstrap'.DIRECTORY_SEPARATOR.'routes.php';
+        define('CONTAINER_PATH', $path);
+        return $path;
+    }
+}
+
+if (!function_exists('env')) {
+    /**
+     * Get the entire environment or get a specific key from the environment
+     */
+    function env(?string $key, mixed $default)
+    {
+        return realm()->env($key, $default);
+    }
+}
+
+
+if (!function_exists('logger')) {
+    /**
+     * Logger Instance
+     * @return mixed
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    function logger(): LoggerInterface
+    {
+        return realm()->get(LoggerInterface::class);
+    }
+}
+
+/**
+ * @see timeAgo()
+ */
+if (!function_exists('time_ago')){
+    function time_ago(int|float $time): string
+    {
+        return timeAgo($time);
+    }
+}
+
+/**
+ * Can start from this to interact with  carbon Date
+ */
+if (!function_exists('now')){
+    function now(): DateTime
+    {
+        return \Pionia\Collections\Carbon::now();
+    }
+}
+
+/**
+ * Human readable time
+ */
+if (!function_exists('timeAgo')) {
+    function timeAgo($datetime): string
+    {
+        return \Pionia\Collections\Carbon::createFromTimestamp($datetime)->diffForHumans();
+    }
+}
+
+if (!function_exists('debug')) {
+    function isDebug(): string
+    {
+        return app()->isDebug();
+    }
+}
+
+
+if (!function_exists('indented')) {
+    function indented($key, $value, $indent = 0) {
+        $space = str_repeat('&nbsp;', $indent * 4); // HTML-friendly indent (4 spaces per level)
+
+        if (is_array($value)) {
+//            echo "<p>{$space}<strong>" . htmlspecialchars($key) . ":</strong> </p>";
+            foreach ($value as $subKey => $subValue) {
+                indented($subKey, $subValue, $indent + 1);
+            }
+        } elseif (is_string($value)) {
+            echo "<p>{$space}" . htmlspecialchars($key) . ": " . htmlspecialchars($value)."</p>";
+        } else {
+            // handle int/bool/null, etc.
+            echo "<p>{$space}" . htmlspecialchars($key) . ": " . htmlspecialchars(json_encode($value)) . "</p>";
+        }
+    }
+}
+
+
+if (!function_exists('framework')) {
+    /**
+     * Get the framework name wherever you're
+     * @return string
+     */
+    function framework(): string
+    {
+        return app()->getSilently('FRAMEWORK');
+    }
+}
+
+if (!function_exists('version')) {
+    /**
+     * Get the version code whereever you're
+     * @return string
+     */
+    function version(): string
+    {
+        return app()->appVersion;
+    }
+}
+
+if (!function_exists('frameworkLogo')) {
+    /**
+     * Get the logo of the framework from anywhere.
+     * @return string
+     */
+    function frameworkLogo()
+    {
+        return app()->getSilently('FRAMEWORK_ICON');
+    }
+}
+
+if (!function_exists('frameworkTag')) {
+    /**
+     * Get the framework description tag anywhere
+     * @return string
+     */
+    function frameworkTag(): string
+    {
+        return app()->getSilently('FRAMEWORK_DESCRIPTION');
+    }
+}
+
+if (!function_exists('appName')) {
+    /**
+     * Get the application name of the initialized application
+     * @return string
+     */
+    function appName(): string
+    {
+        return app()->getAppName();
     }
 }

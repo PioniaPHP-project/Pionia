@@ -26,15 +26,12 @@ trait PathsTrait
     /**
      * The root folder of the application.
      * @param string|null $path
-     * @param int $levels
      * @return string
      */
-    public function appRoot(?string $path = null, $levels = 3): string
+    public function appRoot(?string $path = null): string
     {
-        if (defined("BASEPATH")){
-            return BASEPATH.($path ? DIRECTORY_SEPARATOR.$path : '');
-        }
-        return dirname(__DIR__, $levels).($path ? DIRECTORY_SEPARATOR.$path : '');
+        $root = $this->getOrDefault('app.path', BASE_PATH);
+        return $root.($path ? DIRECTORY_SEPARATOR.$path : '');
     }
 
     public function phpVersion(): string

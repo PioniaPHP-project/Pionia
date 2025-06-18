@@ -3,55 +3,157 @@
 namespace Pionia\Http\Routing;
 
 use Exception;
+use InvalidArgumentException;
+use Pionia\Contracts\BaseSwitchContract;
+use Pionia\Http\Routing\Router\RouteObject;
 use Pionia\Http\Switches\BaseApiServiceSwitch;
+use Pionia\Realm\AppRealm;
+use Pionia\Realm\RealmContract;
+use SebastianBergmann\LinesOfCode\IllogicalValuesException;
 use Symfony\Component\Routing\Route;
 
 
 /**
  * This is the basis for defining routes in the application.
  *
- *
- * You can only add `post` and `get` routes as that what the framework tends to support.
- *
- * If you need more methods, you can add them to the SupportedHttpMethods class and implement them here.
- * However, this is meant for core framework developers only.
- *
- * @example
- * ```php
- * // deprecated version
- * $router = new PioniaRouter();
- * $router->addGroup('app\controller\MyController')
- *    ->post('myAction', 'myAction')
- *   ->get('myAction', 'myAction');
- *
- * // new version
- * $router = new PioniaRouter();
- * $router->addSwitchFor('app\switches\MySwitch', 'v1');
- * ```
- *
- *
- *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class PioniaRouter
+class PioniaRouter implements RouterContract
 {
     protected BaseRoutes $routes;
 
     private string $apiBase = '/api/';
 
-    public function getRoutes(): BaseRoutes
+    private ?RealmContract $app;
+
+    /**
+     * PioniaRouter constructor.
+     *
+     * @param RealmContract $app The application instance
+     */
+
+    public function __construct(RealmContract $app)
+    {
+        $this->routes = $routes ?? new BaseRoutes();
+        $this->app = $app;
+        $this->apiBase = $app->env($app::APP_API_BASE_TAG, $this->apiBase) ?? $app->getOrDefault($app::APP_API_BASE_TAG, $this->apiBase);
+    }
+
+    /**
+     * Update the base path for the API routes.
+     * Defaults to `/api/`.
+     * @param string|null $base
+     * @return $this
+     */
+    public function base(?string $base = null): static
+    {
+        if ($base) {
+            $base = trim($base);
+            if (!str_starts_with($base, '/')) {
+                $base = '/' . $base;
+            }
+            if (!str_ends_with($base, '/')) {
+                $base .= '/';
+            }
+            $this->apiBase = $base;
+            $this->app->set($this->app::APP_API_BASE_TAG, $base);
+        }
+        return $this;
+    }
+
+    private function addStatusEndpoint(string $version, string $service, string $path): static
+    {
+        $route = RouteObject::get($path."ping")
+            ->controller(['_controller' => $service . '::ping'])
+            ->addSchema('https')
+            ->addSchema('http')
+            ->addMethod('GET')
+            ->build();
+        $this->routes->add($version . '_ping', $route);
+
+        $this->app->addRoutes($this->routes);
+        return $this;
+    }
+
+
+    /**
+     * Adds a switch for a certain api version
+     * This is the new implementation of the `addSwitchFor` method.
+     * addSwitchFor and `wireTo` is deprecated fully and will be removed in the next version.
+     *
+     * Adds also the status endpoint for the switch. which can be accessed by hitting ping
+     */
+    public function switch(string $switch, string $version, ?array $schemas = ['https', 'http'], ?array $methods = ['POST', 'GET']): static
+    {
+        if (!is_a($switch, BaseSwitchContract::class, true)){
+            throw new InvalidArgumentException($switch . ' is not a valid Pionia switch');
+        }
+
+        if (!is_array($methods) || empty($methods)) {
+            $methods = ['POST', 'GET'];
+        }
+
+        if (!is_array($schemas) || empty($schemas)){
+            $schemas = ['https', 'http'];
+        }
+
+        $path = $this->asApiVersion($version);
+
+        $controller = $switch . '::processor';
+
+        if (in_array('GET', $methods)){
+            $getPath = $this->asGetApiVersion($path);
+            $getRoute = RouteObject::get($getPath)
+                ->controller(['_controller' => $controller]);
+            foreach ($schemas as $schema) {
+                $getRoute->addSchema($schema);
+            }
+            $gr = $getRoute->build();
+            $this->routes->add('GET_'.$version, $gr);
+        }
+
+        $route = RouteObject::post($path)
+            ->controller(['_controller' => $controller]);
+
+        foreach ($schemas as $schema) {
+            $route->addSchema($schema);
+        }
+        $postRoute = $route->build();
+        $this->routes->add($version, $postRoute);
+        $this->app->contextArrAdd(AppRealm::SWITCHES_TAGS, [$version => $switch]);
+        $this->app->contextArrAdd(AppRealm::SERVICES_TAG, [$controller => $switch::registerServices()->all()]);
+        return $this->addStatusEndpoint($version, $switch, $path);
+    }
+
+    /**
+     * @internal For internal use only.
+     * Returns the routes object that can be added to the container
+     */
+    function get(): BaseRoutes
     {
         return $this->routes;
     }
 
-    public function __construct(BaseRoutes | null $routes = null)
+    protected function asApiVersion(string $version): string
     {
-        $this->routes = $routes ?? new BaseRoutes();
+        $cleanVersion = $this->cleanVersion($version);
+        return $this->apiBase . $cleanVersion . '/';
+    }
+
+    protected function asGetApiVersion(string $path): string
+    {
+        if (!str_ends_with($path, "/")){
+            $path .= "/";
+        }
+
+        return $path."{service}/{action}/";
     }
 
     /**
      * Adds a switch for a certain api version
      *
+     * @deprecated see new implementation `switch` method
+     * @see PioniaRouter::switch()
      * @param string $switch The switch to add
      * @param string|null $versionName The version name to add the switch to
      *
@@ -63,7 +165,7 @@ class PioniaRouter
      * $router->addSwitchFor('app\switches\MySwitch', 'v1');
      * ```
      */
-    public function wireTo(string $switch, ?string $versionName = 'v1'): PioniaRouter
+    public function wireTo(string $switch, ?string $versionName = 'v1'): static
     {
         $cleanVersion = $this->cleanVersion($versionName);
         $path = $this->apiBase.$cleanVersion.'/';
@@ -91,25 +193,9 @@ class PioniaRouter
         return $this;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function addSwitchFor(string $switch, ?string $versionName = 'v1'): PioniaRouter
-    {
-        return $this->wireTo($switch, $versionName);
-    }
-
     private function cleanVersion(string $str): string
     {
-        if (str_starts_with($str, "/")){
-            $str = substr($str, 1);
-        }
-
-        if (str_ends_with($str, "/")){
-            $str = substr($str, 0, -1);
-        }
-
-        return $str;
+        return preg_replace('/[^a-zA-Z0-9_]/', '', strtolower(trim($str)));
     }
 
 }

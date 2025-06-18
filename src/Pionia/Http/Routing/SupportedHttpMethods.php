@@ -13,4 +13,6 @@ abstract class SupportedHttpMethods
  {
      const POST = 'POST';
      const GET = 'GET';
+     const HEAD = 'HEAD';
+     const OPTIONS = 'OPTIONS';
  }

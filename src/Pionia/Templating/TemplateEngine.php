@@ -4,6 +4,8 @@ namespace Pionia\Templating;
 
 use DIRECTORIES;
 use Pionia\Cache\Cacheable;
+use Pionia\Realm\AppRealm;
+use Symfony\Component\Cache\Psr16Cache;
 use Symfony\Component\Filesystem\Filesystem;
 
 class TemplateEngine implements TemplateEngineInterface {
@@ -18,6 +20,16 @@ class TemplateEngine implements TemplateEngineInterface {
         require $cached_file;
     }
 
+    public function realm(): AppRealm
+    {
+        return realm();
+    }
+
+    private function cacheInstance(): Psr16Cache
+    {
+        return app()->cacheInstance();
+    }
+
     public function parse($file, $data = array()): string
     {
         $cached_file = $this->cached($file);
@@ -30,8 +42,11 @@ class TemplateEngine implements TemplateEngineInterface {
         return alias(DIRECTORIES::CACHE_DIR->name).DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR;
     }
 
-    private function cached($file): string
+    private function cached($file): ?string
     {
+        if ($file == null){
+            return null;
+        }
         $fs = new Filesystem();
         $fileName = md5(basename($file));
         if ($this->hasCache($fileName, true)) {
@@ -53,7 +68,7 @@ class TemplateEngine implements TemplateEngineInterface {
             $code = $this->compileCode($code);
             $fs->dumpFile($cached_file, '<?php class_exists(\'' . __CLASS__ . '\') or exit; ?>' . PHP_EOL . $code);
         }
-        $this->setCache($fileName, $cached_file, 1000000, true);
+        $this->setCache($fileName, $cached_file, 0, true);
         return $cached_file;
     }
 

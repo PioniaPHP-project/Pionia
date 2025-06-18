@@ -4,12 +4,10 @@ namespace Pionia\Auth;
 
 use Pionia\Auth\Events\PostAuthRunEvent;
 use Pionia\Auth\Events\PreAuthRunEvent;
-use Pionia\Base\PioniaApplication;
 use Pionia\Collections\Arrayable;
 use Pionia\Contracts\AuthenticationChainContract;
 use Pionia\Contracts\AuthenticationContract;
 use Pionia\Http\Request\Request;
-use Pionia\Utils\Containable;
 use Pionia\Utils\Microable;
 use Pionia\Utils\Support;
 
@@ -22,17 +20,13 @@ use Pionia\Utils\Support;
  */
 class AuthenticationChain implements AuthenticationChainContract
 {
-    use Microable, Containable;
+    use Microable;
 
     private Arrayable $authentications;
 
-    private PioniaApplication $application;
-
-    public function __construct(PioniaApplication $application)
+    public function __construct()
     {
-        $this->context = $application->context;
-        $this->application = $application;
-        $this->authentications = $this->getOrDefault('authentications', new Arrayable());
+        $this->authentications = app()->getOrDefault(app()::AUTHENTICATIONS_TAG, new Arrayable([]));
     }
     /*
      * Checks if a string rep is actually an AuthenticationContract
@@ -48,14 +42,25 @@ class AuthenticationChain implements AuthenticationChainContract
             throw new \InvalidArgumentException("The $authenticationContract authentication must extend " . AuthenticationBackend::class);
         }
         $this->authentications->add($authenticationContract);
-        return $this;
+        return $this->updateAuthenticationsInContext();
     }
 
+    /**
+     * Returns a list of all registered authentications
+     * @return array
+     */
     public function getAuthentications(): array
     {
         return $this->authentications->all();
     }
 
+    /**
+     * Adds an authentication before another authentication.
+     * Cool for prioritizing certain authentications over others.
+     * @param string $authToPoint
+     * @param string $authToAdd
+     * @return $this
+     */
     public function addBefore(string $authToPoint, string $authToAdd): static
     {
         if (!$this->isAuthenticationContract($authToAdd)) {
@@ -68,10 +73,9 @@ class AuthenticationChain implements AuthenticationChainContract
 
         $this->authentications->addBefore($authToPoint, $authToAdd);
 
-        $this->application->logger?->info("Added authentication before $authToPoint");
+        logger()->info("Added authentication before $authToPoint");
         // we need to repopulate the container with the new authentications
-        $this->set('authentications', $this->authentications);
-        return $this;
+        return $this->updateAuthenticationsInContext();
     }
 
     public function addAfter(string $authToPoint, string $authToAdd): static
@@ -86,9 +90,15 @@ class AuthenticationChain implements AuthenticationChainContract
 
         $this->authentications->addAfter($authToPoint, $authToAdd);
 
-        $this->application->logger?->info("Added authentication after $authToPoint");
+        logger()?->info("Added authentication after $authToPoint");
         // we need to repopulate the container with the new authentications
-        $this->set('authentications', $this->authentications);
+        return $this->updateAuthenticationsInContext();
+    }
+
+    private function updateAuthenticationsInContext(): static
+    {
+        app()->contextArrAdd(app()::AUTHENTICATIONS_TAG, $this->authentications)
+            ->cache(app()::AUTHENTICATIONS_TAG, $this->authentications);
         return $this;
     }
 
@@ -99,8 +109,8 @@ class AuthenticationChain implements AuthenticationChainContract
      */
     public function addAll(array | Arrayable $authentications): static
     {
-        $this->authentications->merge($this->authentications);
-        return $this;
+        $this->authentications->merge($authentications);
+        return $this->updateAuthenticationsInContext();
     }
 
     private function run(Request $request): void
@@ -113,7 +123,7 @@ class AuthenticationChain implements AuthenticationChainContract
             return;
         }
         // we create the object first
-        $authObj = new $auth($this->context);
+        $authObj = new $auth($this);
 
         $service = $request->getData()->get("service");
 
@@ -124,7 +134,7 @@ class AuthenticationChain implements AuthenticationChainContract
                 // we then run the backend
                 $this->next($request, $authObj);
             } else {
-                $this->application->logger?->info("$auth authentication backend skipped on $service");
+                logger()?->info("$auth authentication backend skipped on $service");
                 $this->run($request);
             }
         }
@@ -136,21 +146,17 @@ class AuthenticationChain implements AuthenticationChainContract
      */
     public function handle(Request $request): void
     {
-        if ($this->application->dispatcher){
-            $this->application->dispatcher->dispatch(new PreAuthRunEvent($this), PreAuthRunEvent::name());
-        }
+        event(new PreAuthRunEvent($this), PreAuthRunEvent::name());
 
         $this->run($request);
 
-        if ($this->application->dispatcher){
-            $this->application->dispatcher->dispatch(new PostAuthRunEvent($this), PostAuthRunEvent::name());
-        }
+        event(new PostAuthRunEvent($this), PostAuthRunEvent::name());
     }
 
     private function canRunOnCurrentService(AuthenticationBackend $auth, ?string $currentService): bool
     {
         if ($auth->limitServices) {
-            $limits = Arrayable::toArrayable($auth->limitServices);
+            $limits = arr($auth->limitServices);
             if ($limits->isEmpty()){
                 return true;
             }

@@ -20,7 +20,7 @@ interface MiddlewareContract
      *
      * @param Response $response - The response object
      */
-    public function onResponse(Response $response);
+    public function onResponse(Response $response, Request $request);
 
     /**
      * This method is called to run the middleware. Every middleware must implement this method.
