@@ -13,4 +13,17 @@ namespace Pionia\Http\Response;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class Response extends \Symfony\Component\HttpFoundation\Response {}
+class Response extends \Symfony\Component\HttpFoundation\Response
+{
+    public const JSON_HEADERS = ['Content-Type' => 'application/json; charset=UTF-8'];
+
+    public static function json(string $content, int $status = 200, array $headers = []): self
+    {
+        return new self($content, $status, array_merge(self::JSON_HEADERS, $headers));
+    }
+
+    public static function fromEnvelope(BaseResponse $envelope, int $status = 200, array $headers = []): self
+    {
+        return self::json($envelope->getPrettyResponse() ?? '', $status, $headers);
+    }
+}

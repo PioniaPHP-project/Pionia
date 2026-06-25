@@ -192,7 +192,11 @@ class GenerateService extends BaseCommand
         $method = $class->addMethod($actionName)
             ->setProtected()
             ->setReturnType(BaseResponse::class)
-            ->addComment("$actionName action")
+            ->addComment(ucfirst(Support::toSnakeCase($action)) . ' action.')
+            ->addComment('')
+            ->addComment('@moonlight-action ' . Support::toSnakeCase($action))
+            ->addComment('@moonlight-summary TODO: describe this action')
+            ->addComment('@moonlight-example {"service":"' . Support::toSnakeCase($baseName) . '","action":"' . Support::toSnakeCase($action) . '"}')
             ->addBody("return response(0, 'You have reached $action action');");
 
         $method->addParameter('data')

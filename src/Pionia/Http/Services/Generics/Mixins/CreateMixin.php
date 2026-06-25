@@ -14,6 +14,9 @@ trait CreateMixin
     /**
      * Create a new item in the table
      * You can use `save` as an alias for this method
+     *
+     * @moonlight-action create
+     * @moonlight-summary Create a new row
      * @throws Exception
      */
     public function createAction(): BaseResponse

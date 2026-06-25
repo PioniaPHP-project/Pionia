@@ -289,6 +289,22 @@ class Arrayable
     }
 
     /**
+     * Find the first value matching the callback (PHP 8.4 array_find).
+     */
+    public function find(callable $callback): mixed
+    {
+        return array_find($this->array, $callback);
+    }
+
+    /**
+     * Whether any value matches the callback (PHP 8.4 array_any).
+     */
+    public function any(callable $callback): bool
+    {
+        return array_any($this->array, $callback);
+    }
+
+    /**
      * Convert the arrayable to json
      * @return string
      */

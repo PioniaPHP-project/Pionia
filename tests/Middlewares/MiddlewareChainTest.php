@@ -13,15 +13,21 @@ class MiddlewareChainTest extends PioniaTestCase
 {
     private MiddlewareChain $chain;
 
+    private Arrayable $originalMiddleware;
+
     public function setUp(): void
     {
         parent::setUp();
+        $stack = app()->getOrDefault(AppRealm::MIDDLEWARE_TAG, new Arrayable([]));
+        $this->originalMiddleware = $stack instanceof Arrayable ? clone $stack : new Arrayable((array) $stack);
         realm()->set(AppRealm::MIDDLEWARE_TAG, new Arrayable([]));
         $this->chain = new MiddlewareChain();
     }
 
     public function tearDown(): void
     {
+        realm()->set(AppRealm::MIDDLEWARE_TAG, $this->originalMiddleware);
+        app()->updateCache('app_middlewares', $this->originalMiddleware->all(), true, 200);
         parent::tearDown();
         unset($this->chain);
     }

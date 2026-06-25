@@ -16,7 +16,9 @@ trait AppDatabaseHelper
         $numberDiscovered = arr(env('databases'))?->get("size");
 
         if ($numberDiscovered < 1) {
-            $this->logger?->info("No database connections discovered!");
+            if (function_exists('logger')) {
+                logger()->info('No database connections discovered!');
+            }
             return new Arrayable();
         }
         $connectionsDiscovered = arr(env('databases'))?->get("connections");

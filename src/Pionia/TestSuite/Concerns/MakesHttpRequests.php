@@ -2,7 +2,6 @@
 
 namespace Pionia\TestSuite\Concerns;
 
-use Pionia\Http\Base\WebKernel;
 use Pionia\Http\Request\Request;
 use Pionia\TestSuite\TestResponse;
 
@@ -10,14 +9,7 @@ trait MakesHttpRequests
 {
     protected function dispatchRequest(Request $request): TestResponse
     {
-        $kernel = app()->make(WebKernel::class);
-
-        ob_start();
-        try {
-            $response = $kernel->handle($request);
-        } finally {
-            ob_end_clean();
-        }
+        $response = $this->webApplication()->handleRequest($request);
 
         return new TestResponse($response);
     }

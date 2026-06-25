@@ -46,4 +46,77 @@ trait InteractsWithTestEnvironment
             $_SERVER[$envKey] = $previous[$key];
         }
     }
+
+    protected function setDocsEnv(?bool $enabled = null, ?string $token = null): void
+    {
+        if ($enabled === null) {
+            unset($_ENV['DOCS_ENABLED'], $_SERVER['DOCS_ENABLED']);
+        } else {
+            $_ENV['DOCS_ENABLED'] = $enabled ? 'true' : 'false';
+            $_SERVER['DOCS_ENABLED'] = $_ENV['DOCS_ENABLED'];
+        }
+
+        if ($token === null) {
+            unset($_ENV['DOCS_TOKEN'], $_SERVER['DOCS_TOKEN']);
+        } else {
+            $_ENV['DOCS_TOKEN'] = $token;
+            $_SERVER['DOCS_TOKEN'] = $token;
+        }
+    }
+
+    protected function clearDocsEnv(): void
+    {
+        $this->setDocsEnv(null, null);
+    }
+
+    protected function setStatsEnv(?bool $enabled = null, ?string $token = null): void
+    {
+        if ($enabled === null) {
+            unset($_ENV['STATS_ENABLED'], $_SERVER['STATS_ENABLED']);
+        } else {
+            $_ENV['STATS_ENABLED'] = $enabled ? 'true' : 'false';
+            $_SERVER['STATS_ENABLED'] = $_ENV['STATS_ENABLED'];
+        }
+
+        if ($token === null) {
+            unset($_ENV['STATS_TOKEN'], $_SERVER['STATS_TOKEN']);
+        } else {
+            $_ENV['STATS_TOKEN'] = $token;
+            $_SERVER['STATS_TOKEN'] = $token;
+        }
+    }
+
+    protected function clearStatsEnv(): void
+    {
+        $this->setStatsEnv(null, null);
+    }
+
+    protected function setMaintenanceEnv(?bool $enabled = null, ?string $message = null, ?string $bypassToken = null): void
+    {
+        if ($enabled === null) {
+            unset($_ENV['MAINTENANCE_MODE'], $_SERVER['MAINTENANCE_MODE']);
+        } else {
+            $_ENV['MAINTENANCE_MODE'] = $enabled ? 'true' : 'false';
+            $_SERVER['MAINTENANCE_MODE'] = $_ENV['MAINTENANCE_MODE'];
+        }
+
+        if ($message === null) {
+            unset($_ENV['MAINTENANCE_MESSAGE'], $_SERVER['MAINTENANCE_MESSAGE']);
+        } else {
+            $_ENV['MAINTENANCE_MESSAGE'] = $message;
+            $_SERVER['MAINTENANCE_MESSAGE'] = $message;
+        }
+
+        if ($bypassToken === null) {
+            unset($_ENV['MAINTENANCE_BYPASS_TOKEN'], $_SERVER['MAINTENANCE_BYPASS_TOKEN']);
+        } else {
+            $_ENV['MAINTENANCE_BYPASS_TOKEN'] = $bypassToken;
+            $_SERVER['MAINTENANCE_BYPASS_TOKEN'] = $bypassToken;
+        }
+    }
+
+    protected function clearMaintenanceEnv(): void
+    {
+        $this->setMaintenanceEnv(null, null, null);
+    }
 }

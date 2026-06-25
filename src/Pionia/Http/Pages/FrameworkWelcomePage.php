@@ -2,11 +2,9 @@
 
 namespace Pionia\Http\Pages;
 
-use Pionia\Collections\Arrayable;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
 use Pionia\Realm\RealmContract;
-use Symfony\Component\Routing\Route;
 
 class FrameworkWelcomePage
 {
@@ -57,8 +55,13 @@ class FrameworkWelcomePage
             : "{$appName} is ready to serve requests.";
 
         $quickStart = !$this->welcomeFlag('HIDE_QUICK_START') ? $this->quickStartBlock($apiVersionBase, $pingPath, $port) : '';
-        $debugPanel = $this->shouldShowContextPanel() ? $this->debugPanel() : '';
         $features = $this->featuresSection($framework);
+        $devNavLinks = $this->developerNavLinks();
+        $devHeroLinks = $this->developerHeroLinks();
+        $devToolsStrip = $this->developerToolsStrip();
+        $themeInit = PioniaTheme::initScript();
+        $themeAssets = PioniaTheme::stylesheetTags();
+        $themeToggle = PioniaTheme::toggleButton();
 
         return <<<HTML
 <!DOCTYPE html>
@@ -69,12 +72,14 @@ class FrameworkWelcomePage
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{$frameworkTag}">
     <link rel="icon" href="{$favicon}">
+    {$themeInit}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{$welcomeCss}">
+    {$themeAssets}
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark pionia-nav py-3">
@@ -86,8 +91,10 @@ class FrameworkWelcomePage
                 <div class="small text-white-50">{$appName}</div>
             </div>
         </div>
-        <div class="d-none d-md-flex gap-2 ms-auto">
-            <a href="https://pionia.netlify.app/" target="_blank" rel="noopener" class="btn btn-sm btn-pionia-outline">Docs</a>
+        <div class="d-none d-md-flex gap-2 ms-auto align-items-center">
+            {$themeToggle}
+            {$devNavLinks}
+            <a href="https://pionia.netlify.app/" target="_blank" rel="noopener" class="btn btn-sm btn-pionia-outline">Guide</a>
             <a href="https://github.com/PioniaPHP-project/Application" target="_blank" rel="noopener" class="btn btn-sm btn-pionia-outline">GitHub</a>
         </div>
     </div>
@@ -103,7 +110,8 @@ class FrameworkWelcomePage
                 <p class="hero-lead mb-4">{$frameworkTag}</p>
                 <div class="d-flex flex-wrap gap-2">
                     <a href="{$pingPath}" class="btn btn-lg btn-pionia">Check API status</a>
-                    <a href="https://pionia.netlify.app/" target="_blank" rel="noopener" class="btn btn-lg btn-pionia-outline">Read the docs</a>
+                    {$devHeroLinks}
+                    <a href="https://pionia.netlify.app/" target="_blank" rel="noopener" class="btn btn-lg btn-pionia-outline">Framework guide</a>
                 </div>
             </div>
             <div class="col-lg-5">
@@ -118,9 +126,9 @@ class FrameworkWelcomePage
     </div>
 </section>
 
+{$devToolsStrip}
 {$features}
 {$quickStart}
-{$debugPanel}
 
 <footer class="pionia-footer text-center py-5">
     <img src="{$logo}" class="d-block mx-auto mb-3" alt="{$appName}">
@@ -170,10 +178,120 @@ HTML;
 HTML;
     }
 
+    /**
+     * @return list<array{href: string, label: string, description: string, icon: string}>
+     */
+    private function developerLinks(): array
+    {
+        $links = [];
+
+        if (apiDocsEnabled()) {
+            $links[] = [
+                'href' => '/docs',
+                'label' => 'API docs',
+                'description' => 'Interactive Scalar reference for Moonlight services.',
+                'icon' => 'bi-journal-code',
+            ];
+            $links[] = [
+                'href' => '/docs/openapi.json',
+                'label' => 'OpenAPI spec',
+                'description' => 'Machine-readable OpenAPI 3.1 document.',
+                'icon' => 'bi-braces-asterisk',
+            ];
+        }
+
+        if (apiStatsEnabled()) {
+            $links[] = [
+                'href' => '/stats',
+                'label' => 'Developer stats',
+                'description' => 'Health, routes, environment, and runtime dashboard.',
+                'icon' => 'bi-speedometer2',
+            ];
+        }
+
+        return $links;
+    }
+
+    private function developerNavLinks(): string
+    {
+        $html = '';
+        foreach ($this->developerLinks() as $link) {
+            if ($link['href'] === '/docs/openapi.json') {
+                continue;
+            }
+
+            $href = $this->e($link['href']);
+            $label = $this->e($link['label']);
+            $icon = $this->e($link['icon']);
+            $html .= <<<HTML
+<a href="{$href}" class="btn btn-sm btn-pionia-outline"><i class="bi {$icon} me-1" aria-hidden="true"></i>{$label}</a>
+HTML;
+        }
+
+        return $html;
+    }
+
+    private function developerHeroLinks(): string
+    {
+        $html = '';
+        foreach ($this->developerLinks() as $link) {
+            if ($link['href'] === '/docs/openapi.json') {
+                continue;
+            }
+
+            $href = $this->e($link['href']);
+            $label = $this->e($link['label']);
+            $html .= <<<HTML
+<a href="{$href}" class="btn btn-lg btn-pionia-outline">{$label}</a>
+HTML;
+        }
+
+        return $html;
+    }
+
+    private function developerToolsStrip(): string
+    {
+        $links = $this->developerLinks();
+        if ($links === []) {
+            return '';
+        }
+
+        $cards = '';
+        foreach ($links as $link) {
+            $href = $this->e($link['href']);
+            $label = $this->e($link['label']);
+            $description = $this->e($link['description']);
+            $icon = $this->e($link['icon']);
+            $cards .= <<<HTML
+<div class="col-md-4">
+    <a href="{$href}" class="developer-link-card">
+        <span class="developer-link-icon"><i class="bi {$icon}" aria-hidden="true"></i></span>
+        <span class="developer-link-label">{$label}</span>
+        <span class="developer-link-desc">{$description}</span>
+    </a>
+</div>
+HTML;
+        }
+
+        return <<<HTML
+<section class="py-4 developer-tools-strip">
+    <div class="container">
+        <div class="row g-3">
+            {$cards}
+        </div>
+    </div>
+</section>
+HTML;
+    }
+
     private function quickStartBlock(string $apiVersionBase, string $pingPath, int $port): string
     {
         $pingUrl = $this->e("http://127.0.0.1:{$port}{$pingPath}");
         $postUrl = $this->e("http://127.0.0.1:{$port}{$apiVersionBase}");
+        $catalogUrl = $this->e("http://127.0.0.1:{$port}/docs");
+        $catalogLine = apiDocsEnabled()
+            ? "\n\n# Browse interactive API docs\nopen {$catalogUrl}"
+            : '';
 
         return <<<HTML
 <section class="py-5">
@@ -188,173 +306,13 @@ curl -s "{$pingUrl}" | jq
 # Call a service action
 curl -s -X POST "{$postUrl}" \\
   -H "Content-Type: application/json" \\
-  -d '{"service":"auth","action":"list_auth"}' | jq</pre>
+  -d '{"service":"auth","action":"list_auth"}' | jq{$catalogLine}</pre>
                 </div>
             </div>
         </div>
     </div>
 </section>
 HTML;
-    }
-
-    private function debugPanel(): string
-    {
-        return <<<HTML
-<section class="py-5 section-muted" id="debug-context">
-    <div class="container">
-        <div class="text-center mb-4">
-            <h2 class="section-title">Developer context</h2>
-            <p class="text-muted mb-0">Live snapshot of your bootstrapped application. Visible only in debug mode.</p>
-        </div>
-        <div class="debug-shell">
-            <ul class="nav nav-tabs" id="pioniaContextTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="env-tab" data-bs-toggle="tab" data-bs-target="#env-panel" type="button" role="tab">Environment</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="routes-tab" data-bs-toggle="tab" data-bs-target="#routes-panel" type="button" role="tab">Routes</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="commands-tab" data-bs-toggle="tab" data-bs-target="#commands-panel" type="button" role="tab">Commands</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="middlewares-tab" data-bs-toggle="tab" data-bs-target="#middlewares-panel" type="button" role="tab">Middlewares</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="auth-tab" data-bs-toggle="tab" data-bs-target="#auth-panel" type="button" role="tab">Authentications</button>
-                </li>
-            </ul>
-            <div class="tab-content p-3 p-md-4" id="pioniaContextTabsContent">
-                <div class="tab-pane fade show active" id="env-panel" role="tabpanel">
-                    {$this->table('Variable', 'Value', $this->environmentRows())}
-                </div>
-                <div class="tab-pane fade" id="routes-panel" role="tabpanel">
-                    {$this->table('Name', 'Path · Methods · Handler', $this->routeRows())}
-                </div>
-                <div class="tab-pane fade" id="commands-panel" role="tabpanel">
-                    {$this->table('Name', 'Class', $this->keyValueRows(commands()))}
-                </div>
-                <div class="tab-pane fade" id="middlewares-panel" role="tabpanel">
-                    {$this->table('Name', 'Class', $this->keyValueRows(middlewares()))}
-                </div>
-                <div class="tab-pane fade" id="auth-panel" role="tabpanel">
-                    {$this->table('Name', 'Class', $this->keyValueRows(authentications()))}
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-HTML;
-    }
-
-  /**
-   * @param list<array{0: string, 1: string}> $rows
-   */
-    private function table(string $headingA, string $headingB, array $rows): string
-    {
-        $body = '';
-        foreach ($rows as [$left, $right]) {
-            $body .= '<tr><td>' . $left . '</td><td>' . $right . '</td></tr>';
-        }
-
-        if ($body === '') {
-            $body = '<tr><td colspan="2" class="text-muted">Nothing registered yet.</td></tr>';
-        }
-
-        return <<<HTML
-<div class="table-responsive">
-    <table class="table table-hover debug-table align-middle">
-        <thead><tr><th>{$this->e($headingA)}</th><th>{$this->e($headingB)}</th></tr></thead>
-        <tbody>{$body}</tbody>
-    </table>
-</div>
-HTML;
-    }
-
-  /**
-   * @return list<array{0: string, 1: string}>
-   */
-    private function environmentRows(): array
-    {
-        if ($this->welcomeFlag('HIDE_ENV')) {
-            return [];
-        }
-
-        $rows = [];
-        foreach ($this->envKeys() as $key) {
-            if ($key === '') {
-                continue;
-            }
-
-            $value = env($key);
-            $display = $this->isSensitiveEnvKey($key)
-                ? '<span class="text-muted">••••••••</span>'
-                : $this->formatCellValue($value);
-
-            $rows[] = ['<code>' . $this->e($key) . '</code>', $display];
-        }
-
-        return $rows;
-    }
-
-  /**
-   * @return list<array{0: string, 1: string}>
-   */
-    private function routeRows(): array
-    {
-        $rows = [];
-
-        foreach (allRoutes()->all() as $name => $route) {
-            if (!$route instanceof Route) {
-                continue;
-            }
-
-            $controller = $route->getDefaults()['_controller'] ?? '—';
-            $methods = implode(', ', $route->getMethods());
-            $detail = '<code>' . $this->e($route->getPath()) . '</code>'
-                . '<div class="small text-muted mt-1">' . $this->e($methods) . ' · ' . $this->e((string) $controller) . '</div>';
-
-            $rows[] = [$this->e((string) $name), $detail];
-        }
-
-        return $rows;
-    }
-
-  /**
-   * @return list<array{0: string, 1: string}>
-   */
-    private function keyValueRows(mixed $collection): array
-    {
-        $rows = [];
-        $items = $collection instanceof Arrayable ? $collection->all() : (array) $collection;
-
-        foreach ($items as $key => $value) {
-            $rows[] = [$this->e((string) $key), '<code>' . $this->e($this->stringifyValue($value)) . '</code>'];
-        }
-
-        return $rows;
-    }
-
-  /** @return list<string> */
-    private function envKeys(): array
-    {
-        $keys = envKeys();
-        if ($keys !== []) {
-            return array_values(array_filter(array_map('trim', $keys)));
-        }
-
-        $merged = array_merge(array_keys($_ENV), array_keys($_SERVER));
-
-        return array_values(array_unique(array_filter($merged, static fn (string $key): bool => !str_starts_with($key, 'SYMFONY_'))));
-    }
-
-    private function shouldShowContextPanel(): bool
-    {
-        if (!realm()->isDebug()) {
-            return false;
-        }
-
-        return !$this->welcomeFlag('HIDE_CONTEXT');
     }
 
     private function welcomeFlag(string $key): bool
@@ -365,60 +323,6 @@ HTML;
         }
 
         return filter_var($welcome[$key], FILTER_VALIDATE_BOOLEAN);
-    }
-
-    private function isSensitiveEnvKey(string $key): bool
-    {
-        $hidden = ['password', 'pass', 'pin', 'token', 'secret', 'pwd', 'credential', 'cvv'];
-        $logging = env('logging', []);
-        if (is_array($logging) && !empty($logging['HIDE_IN_LOGS'])) {
-            $hidden = array_merge($hidden, array_map('trim', explode(',', (string) $logging['HIDE_IN_LOGS'])));
-        }
-
-        $lower = strtolower($key);
-        foreach ($hidden as $needle) {
-            if ($needle !== '' && str_contains($lower, strtolower($needle))) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function formatCellValue(mixed $value): string
-    {
-        if (is_array($value) || $value instanceof Arrayable) {
-            $encoded = json_encode($value instanceof Arrayable ? $value->all() : $value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-            return '<pre class="mb-0 small">' . $this->e((string) $encoded) . '</pre>';
-        }
-
-        if (is_bool($value)) {
-            return $value ? 'true' : 'false';
-        }
-
-        if ($value === null) {
-            return '<span class="text-muted">null</span>';
-        }
-
-        return $this->e((string) $value);
-    }
-
-    private function stringifyValue(mixed $value): string
-    {
-        if (is_string($value)) {
-            return $value;
-        }
-
-        if (is_scalar($value) || $value === null) {
-            return (string) json_encode($value);
-        }
-
-        if ($value instanceof Arrayable) {
-            return json_encode($value->all()) ?: '';
-        }
-
-        return is_object($value) ? $value::class : gettype($value);
     }
 
     private function e(string $value): string

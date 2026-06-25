@@ -14,6 +14,9 @@ trait UpdateMixin
     /**
      * Update an item in the table
      * You can use `edit` as an alias for this method
+     *
+     * @moonlight-action update
+     * @moonlight-summary Update an existing row
      * @throws Exception
      */
     public function updateAction(): BaseResponse

@@ -1,0 +1,185 @@
+.pionia-theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.pionia-theme-toggle .pionia-theme-icon-light,
+html[data-theme="dark"] .pionia-theme-toggle .pionia-theme-icon-dark {
+    display: none;
+}
+
+html[data-theme="dark"] .pionia-theme-toggle .pionia-theme-icon-light {
+    display: inline-block;
+}
+
+.pionia-theme-toggle .pionia-theme-icon-dark {
+    display: inline-block;
+}
+
+.pionia-error-page {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--pionia-surface, #f5f7fa);
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    color: var(--pionia-text, #1f1a24);
+}
+
+.pionia-error-card {
+    background: var(--pionia-card-bg, #fff);
+    padding: 40px 60px;
+    border-radius: 16px;
+    box-shadow: var(--pionia-shadow, 0 8px 30px rgba(0, 0, 0, 0.1));
+    text-align: center;
+    max-width: 520px;
+    border: 1px solid var(--pionia-border, transparent);
+}
+
+.pionia-error-code {
+    font-size: 82px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.pionia-error-message {
+    font-size: 20px;
+    color: var(--pionia-muted, #666);
+    margin-top: 12px;
+}
+
+.pionia-docs-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 1rem;
+    background: var(--pionia-nav-bg, rgba(61, 16, 79, 0.96));
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pionia-docs-toolbar-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --pionia-surface: #120818;
+    --pionia-border: #2d2438;
+    --pionia-text: #efe9f5;
+    --pionia-muted: #b8adc4;
+    --pionia-card-bg: #1a1220;
+    --pionia-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    --pionia-nav-bg: rgba(18, 8, 24, 0.98);
+}
+
+html[data-theme="dark"] body {
+    background: var(--pionia-surface);
+    color: var(--pionia-text);
+}
+
+html[data-theme="dark"] .text-muted {
+    color: var(--pionia-muted) !important;
+}
+
+html[data-theme="dark"] .section-muted,
+html[data-theme="dark"] .stats-page {
+    background: var(--pionia-surface);
+    color: var(--pionia-text);
+}
+
+html[data-theme="dark"] .section-title,
+html[data-theme="dark"] .feature-card h5,
+html[data-theme="dark"] .quickstart-card .card-header {
+    color: var(--pionia-text);
+}
+
+html[data-theme="dark"] .feature-card,
+html[data-theme="dark"] .quickstart-card,
+html[data-theme="dark"] .developer-link-card,
+html[data-theme="dark"] .debug-shell,
+html[data-theme="dark"] .health-card,
+html[data-theme="dark"] .stats-page .debug-shell {
+    background: var(--pionia-card-bg);
+    border-color: var(--pionia-border);
+    color: var(--pionia-text);
+}
+
+html[data-theme="dark"] .feature-card .text-muted,
+html[data-theme="dark"] .developer-link-desc,
+html[data-theme="dark"] .health-message,
+html[data-theme="dark"] .debug-table thead th,
+html[data-theme="dark"] .debug-detail {
+    color: var(--pionia-muted);
+}
+
+html[data-theme="dark"] .debug-shell .nav-tabs,
+html[data-theme="dark"] .stats-page .nav-tabs {
+    background: #16101c;
+    border-color: var(--pionia-border);
+}
+
+html[data-theme="dark"] .debug-shell .nav-tabs .nav-link,
+html[data-theme="dark"] .stats-page .nav-tabs .nav-link {
+    color: var(--pionia-muted);
+}
+
+html[data-theme="dark"] .debug-shell .nav-tabs .nav-link.active,
+html[data-theme="dark"] .stats-page .nav-tabs .nav-link.active {
+    color: #e9d4ff;
+    background: var(--pionia-card-bg);
+}
+
+html[data-theme="dark"] .debug-table thead th {
+    background: #16101c;
+}
+
+html[data-theme="dark"] .debug-table tbody td {
+    color: var(--pionia-text);
+    border-color: var(--pionia-border);
+}
+
+html[data-theme="dark"] .debug-table tbody tr:hover {
+    background: #1f1729;
+}
+
+html[data-theme="dark"] .debug-table code,
+html[data-theme="dark"] .feature-card code {
+    background: #2a2035;
+    color: #e9d4ff;
+}
+
+html[data-theme="dark"] .code-block {
+    background: #0d0812;
+    color: #efe9f5;
+}
+
+html[data-theme="dark"] .feature-icon {
+    background: #2a2035;
+    color: #d8b4ff;
+}
+
+html[data-theme="dark"] .developer-link-icon {
+    background: #2a2035;
+    color: #d8b4ff;
+}
+
+html[data-theme="dark"] .developer-link-label {
+    color: var(--pionia-text);
+}
+
+html[data-theme="dark"] .developer-tools-strip {
+    background: var(--pionia-surface);
+    border-color: var(--pionia-border);
+}
+
+html[data-theme="dark"] .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--pionia-text);
+    --bs-table-border-color: var(--pionia-border);
+    --bs-table-hover-bg: #1f1729;
+}

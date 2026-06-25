@@ -60,10 +60,14 @@ Optional lock (`example/environment/settings.ini`):
 ```ini
 [docs]
 ENABLED=true
-TOKEN=your-secret
+TOKEN=your-docs-secret
+
+[stats]
+ENABLED=true
+TOKEN=your-stats-secret
 ```
 
-Then open `/docs?token=your-secret`. Without a valid token, docs return 401.
+Then open `/docs?token=...` and `/stats?token=...` (separate tokens).
 
 See [`docs/MOONLIGHT-DOCS.md`](../docs/MOONLIGHT-DOCS.md) for the full tag reference.
 

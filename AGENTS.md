@@ -19,6 +19,32 @@ Guidance for AI agents and contributors working in this repository.
 
 **Helpers:** `app()`, `realm()`, and `container()` return the same booted `AppRealm` instance.
 
+## HTTP request lifecycle (Phase 4)
+
+Split **boot** from **handle** for FPM today and RoadRunner workers later:
+
+| Method | Role |
+|--------|------|
+| `WebApplication::bootOnce()` | Run `powerUp()` once per process (`$booted` guard) |
+| `WebApplication::handleRequest(Request)` | Match route + return `Response` (no `send()`) |
+| `WebApplication::fly()` | `createFromGlobals()` → `handleRequest()` → `send()` (FPM entry) |
+| `WebApplication::resetBetweenRequests()` | Flush per-request hooks (worker mode) |
+
+`WebKernel::terminate()` only **prepares** the response; the caller sends it. In tests use `handleRequest()` or `MakesHttpRequests` traits.
+
+`runtimeMode()` — `fpm` \| `cli` \| `worker` \| `testing` (`PIONIA_TESTING` / `PIONIA_RUNTIME`).
+
+`renderToString()` renders without `exit()`; `render()` exits only outside worker/testing modes.
+
+## Database connections
+
+`ConnectionManager` pools PDO instances per process. `Connection::connect('default')` reuses the pool; `Connection::open()` bypasses it (tests, one-off configs).
+
+```php
+connectionManager()->connection('default');
+connectionManager()->disconnect(); // worker shutdown only — not per HTTP request
+```
+
 ## API model (switch / service / action)
 
 - **Switch** (`Application\Switches\*`) — versioned API entry (`/api/v1/`, `/api/v2/`).
@@ -39,6 +65,9 @@ router($app)->switch(MainSwitch::class, 'v1');
 | `defaultApiVersion()` | `v1` |
 | `apiVersionPath()` | `/api/v1/` |
 | `apiPingPath()` | `/api/v1/ping` |
+| `apiCatalogPath()` | `/api/v1/__catalog` (JSON catalog, debug only) |
+| `/docs` | Interactive Scalar UI (`DOCS_ENABLED` or `DEBUG`) |
+| `/stats` | Developer health dashboard (`STATS_ENABLED` or `DEBUG`) |
 
 ```bash
 curl -s http://127.0.0.1:8003/api/v1/ping
@@ -46,6 +75,38 @@ curl -s -X POST http://127.0.0.1:8003/api/v1/ \
   -H "Content-Type: application/json" \
   -d '{"service":"auth","action":"list_auth"}'
 ```
+
+## API documentation (Moonlight)
+
+Document actions with `@moonlight-*` PHPDoc or `#[MoonlightAction]`. Full reference: [`docs/MOONLIGHT-DOCS.md`](docs/MOONLIGHT-DOCS.md).
+
+```bash
+composer document:api          # example/docs/api/openapi.json + index.md + index.html
+composer document:api:check    # CI drift check
+php example/pionia api:catalog # JSON catalog (stdout)
+open http://127.0.0.1:8003/docs  # when DOCS_ENABLED or DEBUG
+curl -s http://127.0.0.1:8003/api/v1/__catalog  # JSON catalog (same gate)
+```
+
+**Runtime docs gate** (`example/environment/settings.ini` or `.env`):
+
+| Setting | Purpose |
+|---------|---------|
+| `DOCS_ENABLED=true` | Expose `/docs` when `DEBUG=false` (e.g. staging) |
+| `DOCS_TOKEN=secret` | Require `?token=secret` or `X-Docs-Token` header |
+| `STATS_ENABLED=true` | Expose `/stats` when `DEBUG=false` |
+| `STATS_TOKEN=secret` | Separate token for stats (`X-Stats-Token`) |
+| *(unset)* | Docs/stats follow `DEBUG` (default dev behaviour) |
+
+| Tag | Purpose |
+|-----|---------|
+| `@moonlight-service` | Service alias (class level) |
+| `@moonlight-action` | Action name |
+| `@moonlight-summary` | One-line description |
+| `@moonlight-param type name Description` | Request body field |
+| `@moonlight-example {...}` | Example JSON payload |
+
+Framework internals: `composer document:framework` → `build/docs/` (phpDocumentor). Moonlight covers the `{ service, action }` API.
 
 ## Exception pipeline
 
@@ -134,6 +195,19 @@ $this->postApi('auth', 'list_auth');
 ## PHP version
 
 Minimum **PHP 8.5**. Avoid deprecated patterns (e.g. `ReflectionMethod::setAccessible()`).
+
+### PHP 8.5 features in use
+
+| Feature | Where |
+|---------|--------|
+| `#[\NoDiscard]` | `response()`, `app()`, `table()`, API path helpers |
+| `\|>` pipe operator | `WebKernel::prepareRequest()` |
+| `array_find` / `array_any` | `Arrayable::find()`, `Arrayable::any()` |
+| `get_exception_handler()` | Tests assert handlers registered at boot |
+| `renderToString()` | Preferred over deprecated `render()` |
+| `RuntimeMode` | FPM / CLI / worker / testing lifecycle |
+
+Centralized path safety: `Pionia\Utils\SafePath::resolveFileWithinBase()` (static/media routers).
 
 ## Packagist releases
 

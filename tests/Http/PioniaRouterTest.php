@@ -25,7 +25,11 @@ class PioniaRouterTest extends PioniaTestCase
 
         $routes = $router->get();
         $this->assertNotNull($routes->get('v2'));
+        $this->assertNotNull($routes->get('v2_noslash'));
+        $this->assertNotNull($routes->get('v2_overview'));
+        $this->assertNotNull($routes->get('v2_overview_noslash'));
         $this->assertNotNull($routes->get('GET_v2'));
+        $this->assertNotNull($routes->get('GET_v2_noslash'));
         $this->assertNotNull($routes->get('v2_ping'));
     }
 }

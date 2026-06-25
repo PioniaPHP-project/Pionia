@@ -15,6 +15,9 @@ trait ListMixin
 {
     /**
      * List all items in the table that match the given criteria
+     *
+     * @moonlight-action list
+     * @moonlight-summary List rows with optional pagination
      * @throws Exception
      */
     public function listAction(): BaseResponse

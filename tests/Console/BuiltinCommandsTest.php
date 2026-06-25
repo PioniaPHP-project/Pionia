@@ -12,5 +12,7 @@ class BuiltinCommandsTest extends PioniaTestCase
 
         $this->assertSame(0, $code);
         $this->assertStringContainsString('serve', $this->consoleOutput());
+        $this->assertStringContainsString('api:docs', $this->consoleOutput());
+        $this->assertStringContainsString('api:catalog', $this->consoleOutput());
     }
 }

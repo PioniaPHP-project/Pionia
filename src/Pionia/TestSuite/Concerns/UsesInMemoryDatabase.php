@@ -14,7 +14,7 @@ trait UsesInMemoryDatabase
         $this->testPdo = new PDO('sqlite::memory:');
         $this->testPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        return Connection::connect([
+        return Connection::open([
             'type' => 'sqlite',
             'database' => ':memory:',
             'pdo' => $this->testPdo,

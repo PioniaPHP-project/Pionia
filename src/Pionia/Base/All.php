@@ -9,6 +9,8 @@ use Pionia\Builtins\Commands\Generators\GenerateAuthenticationBackend;
 use Pionia\Builtins\Commands\Generators\GenerateCommand;
 use Pionia\Builtins\Commands\Generators\GenerateService;
 use Pionia\Builtins\Commands\Generators\GenerateSwitch;
+use Pionia\Builtins\Commands\GenerateApiCatalog;
+use Pionia\Builtins\Commands\GenerateApiDocs;
 use Pionia\Builtins\Commands\StartServer;
 use Pionia\Collections\Arrayable;
 use Pionia\Middlewares\Builtins\CacheMiddleware;
@@ -60,6 +62,8 @@ if (!function_exists('allBuiltins')) {
                 'cache:delete'=>CacheDeleteCommand::class,
                 'make:middleware' => CreateMiddleware::class,
                 'make:command' => GenerateCommand::class,
+                'api:docs' => GenerateApiDocs::class,
+                'api:catalog' => GenerateApiCatalog::class,
             ],
             'authentications' => [
             ],

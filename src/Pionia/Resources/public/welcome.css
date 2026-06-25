@@ -142,6 +142,55 @@ body {
     background: var(--pionia-surface);
 }
 
+.developer-tools-strip {
+    background: var(--pionia-surface);
+    border-bottom: 1px solid var(--pionia-border);
+}
+
+.developer-link-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    height: 100%;
+    padding: 1rem 1.1rem;
+    border-radius: var(--pionia-radius);
+    border: 1px solid var(--pionia-border);
+    background: #fff;
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.developer-link-card:hover {
+    border-color: #cdb8e4;
+    box-shadow: var(--pionia-shadow);
+    transform: translateY(-1px);
+    color: inherit;
+}
+
+.developer-link-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 10px;
+    background: #f4ecff;
+    color: var(--pionia-purple-deep);
+    font-size: 1rem;
+}
+
+.developer-link-label {
+    font-weight: 600;
+    color: var(--pionia-text);
+}
+
+.developer-link-desc {
+    font-size: 0.875rem;
+    color: var(--pionia-muted);
+    line-height: 1.45;
+}
+
 .section-title {
     font-weight: 700;
     letter-spacing: -0.02em;

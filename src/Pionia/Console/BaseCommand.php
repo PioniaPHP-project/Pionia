@@ -141,7 +141,7 @@ class BaseCommand extends Command
             $this->setDescription($this->description);
         }
 
-        $this->setHelp($this->help);
+        $this->setHelp($this->help ?? '');
 
         $this->setHidden($this->isHidden());
 

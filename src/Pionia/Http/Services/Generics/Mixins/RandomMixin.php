@@ -13,6 +13,9 @@ trait RandomMixin
 {
     /**
      * Get a random item or items from the table
+     *
+     * @moonlight-action random
+     * @moonlight-summary Return random row(s)
      * @throws BaseDatabaseException
      * @throws Exception
      */

@@ -290,7 +290,7 @@ trait InteractsWithIO
      * @param int|string $verbosity
      * @return void
      */
-    public function line(string $string, ?string $style = null, int|string $verbosity = 'normal'): void
+    public function line(string $string, ?string $style = null, int|string|null $verbosity = 'normal'): void
     {
         $styled = $style ? "<$style>$string</$style>" : $string;
 
@@ -421,8 +421,12 @@ trait InteractsWithIO
      * @param int|string $level
      * @return int
      */
-    protected function parseVerbosity(int|string $level = 'normal'): int
+    protected function parseVerbosity(int|string|null $level = 'normal'): int
     {
+        if ($level === null) {
+            $level = 'normal';
+        }
+
         if (isset($this->verbosityMap[$level])) {
             $level = $this->verbosityMap[$level];
         } elseif (! is_int($level)) {

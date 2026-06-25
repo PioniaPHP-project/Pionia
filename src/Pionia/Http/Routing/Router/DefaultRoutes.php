@@ -3,11 +3,19 @@
 namespace Pionia\Http\Routing\Router;
 
 use DIRECTORIES;
+use Pionia\Http\Pages\HttpErrorPage;
+use Pionia\Http\Pages\DeveloperStatsPage;
 use Pionia\Http\Pages\FrameworkWelcomePage;
+use Pionia\Http\Monitoring\StatsGate;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
+use Pionia\Documentation\ApiDocsUiExporter;
+use Pionia\Documentation\DocsGate;
+use Pionia\Documentation\MoonlightDocCollector;
+use Pionia\Documentation\OpenApiExporter;
 use Pionia\Realm\AppRealm;
 use Pionia\Realm\RealmContract;
+use Pionia\Utils\SafePath;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -24,33 +32,7 @@ class DefaultRoutes
 
     private function errorMessage($request, $code, $message): Response
     {
-        $json = $request->query->has('json');
-        if ($json){
-            return new Response(response($code, $message)->getPrettyResponse(), 200, ['application/json']);
-        } else {
-            $html = "<div style='
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100vh;
-                    background: #f5f7fa;
-                    font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;
-                '>
-                    <div style='
-                        background: white;
-                        padding: 40px 60px;
-                        border-radius: 16px;
-                        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-                        text-align: center;
-                        max-width: 500px;
-                    ' role='alert'>
-                        <img src='/static/favicon.ico' alt='App Icon' style='width: 90px; margin-bottom: 20px;'>
-                        <div style='font-size: 82px; font-weight: 600; color: #2b2b2b;'>{$code}</div>
-                        <div style='font-size: 20px; color: #666;'>{$message}</div>
-                    </div>
-                </div>";
-            return new Response($html, $code, ['text/html']);
-        }
+        return HttpErrorPage::respond($request, (int) $code, (string) $message);
     }
 
     /**
@@ -75,6 +57,8 @@ class DefaultRoutes
     public function collect(RealmContract $appRealm): static
     {
        $this->addRouteForHome()
+            ->addDocsRoutes()
+            ->addStatsRoutes()
             ->addRouteForMediaFiles()
             ->addFrameworkAssetsRoute();
 
@@ -111,6 +95,89 @@ class DefaultRoutes
         }
 
         return FrameworkWelcomePage::for($request, realm())->toResponse();
+    }
+
+    private function addDocsRoutes(): static
+    {
+        $this->defaultRoutes->add(
+            'docs',
+            RouteObject::get('/docs')
+                ->controller(['_controller' => DefaultRoutes::class . '::docsUiResolver'])
+                ->build()
+        );
+
+        $this->defaultRoutes->add(
+            'docs_openapi',
+            RouteObject::get('/docs/openapi.json')
+                ->controller(['_controller' => DefaultRoutes::class . '::openApiSpecResolver'])
+                ->build()
+        );
+
+        return $this;
+    }
+
+    public function docsUiResolver(Request $request): Response
+    {
+        if ($denied = DocsGate::deny($request, htmlOnForbidden: true)) {
+            return $denied;
+        }
+
+        $catalog = (new MoonlightDocCollector())->collect();
+        $html = (new ApiDocsUiExporter())->render($catalog, DocsGate::specUrl($request));
+
+        return new Response($html, 200, ['Content-Type' => 'text/html; charset=UTF-8']);
+    }
+
+    public function openApiSpecResolver(Request $request): Response
+    {
+        if ($denied = DocsGate::deny($request)) {
+            return $denied;
+        }
+
+        $catalog = (new MoonlightDocCollector())->collect();
+        $json = (new OpenApiExporter())->export($catalog);
+
+        return Response::json($json);
+    }
+
+    private function addStatsRoutes(): static
+    {
+        $this->defaultRoutes->add(
+            'stats',
+            RouteObject::get('/stats')
+                ->controller(['_controller' => DefaultRoutes::class . '::statsUiResolver'])
+                ->build()
+        );
+
+        $this->defaultRoutes->add(
+            'stats_json',
+            RouteObject::get('/stats.json')
+                ->controller(['_controller' => DefaultRoutes::class . '::statsJsonResolver'])
+                ->build()
+        );
+
+        return $this;
+    }
+
+    public function statsUiResolver(Request $request): Response
+    {
+        if ($denied = StatsGate::deny($request, htmlOnForbidden: true)) {
+            return $denied;
+        }
+
+        return DeveloperStatsPage::for($request, realm())->toResponse();
+    }
+
+    public function statsJsonResolver(Request $request): Response
+    {
+        if ($denied = StatsGate::deny($request)) {
+            return $denied;
+        }
+
+        $payload = DeveloperStatsPage::for($request, realm())->payload();
+        $json = json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+
+        return Response::json($json);
     }
 
     private function addFrameworkAssetsRoute(): static
@@ -191,26 +258,7 @@ class DefaultRoutes
 
     private function resolvePathWithinBase(string $baseDir, string $relativePath): ?string
     {
-        $base = str_starts_with($baseDir, DIRECTORY_SEPARATOR)
-            ? $baseDir
-            : path($baseDir);
-        $baseReal = realpath($base);
-        if ($baseReal === false) {
-            return null;
-        }
-
-        $candidate = $baseReal . DIRECTORY_SEPARATOR . ltrim($relativePath, '/');
-        $resolved = realpath($candidate);
-        if ($resolved === false || !is_file($resolved)) {
-            return null;
-        }
-
-        $basePrefix = rtrim($baseReal, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-        if (!str_starts_with($resolved, $basePrefix) && $resolved !== $baseReal) {
-            return null;
-        }
-
-        return $resolved;
+        return SafePath::resolveFileWithinBase($baseDir, $relativePath);
     }
 
     /**

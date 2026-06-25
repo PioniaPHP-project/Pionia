@@ -17,7 +17,7 @@ class DatabaseConnectionTest extends PioniaTestCase
 
     public function testTestModeSkipsPdo(): void
     {
-        $connection = Connection::connect([
+        $connection = Connection::open([
             'type' => 'sqlite',
             'testMode' => true,
         ]);

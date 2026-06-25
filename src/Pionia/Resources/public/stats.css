@@ -1,0 +1,81 @@
+.stats-page {
+    background: var(--pionia-surface);
+    min-height: 100vh;
+}
+
+.health-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.health-card {
+    background: #fff;
+    border: 1px solid var(--pionia-border);
+    border-radius: var(--pionia-radius);
+    padding: 1rem 1.1rem;
+    box-shadow: 0 8px 24px rgba(61, 16, 79, 0.06);
+}
+
+.health-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--pionia-muted);
+    margin-bottom: 0.35rem;
+}
+
+.health-status {
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 0.35rem;
+}
+
+.health-message {
+    font-size: 0.875rem;
+    color: var(--pionia-muted);
+}
+
+.health-ok {
+    border-left: 4px solid #2e7d32;
+}
+
+.health-warn {
+    border-left: 4px solid #ed6c02;
+}
+
+.health-critical {
+    border-left: 4px solid #c62828;
+}
+
+.health-overall.health-ok {
+    background: rgba(46, 125, 50, 0.15);
+    color: #c8f5c8;
+}
+
+.health-overall.health-warn {
+    background: rgba(237, 108, 2, 0.18);
+    color: #ffe0b2;
+}
+
+.health-overall.health-critical {
+    background: rgba(198, 40, 40, 0.18);
+    color: #ffcdd2;
+}
+
+.stats-page .debug-shell {
+    background: #fff;
+    border: 1px solid var(--pionia-border);
+    border-radius: var(--pionia-radius);
+    box-shadow: var(--pionia-shadow);
+}
+
+.stats-page .nav-tabs {
+    border-bottom-color: var(--pionia-border);
+    padding: 0 1rem;
+}
+
+.stats-page .nav-tabs .nav-link.active {
+    color: var(--pionia-purple);
+    border-color: var(--pionia-border) var(--pionia-border) #fff;
+}

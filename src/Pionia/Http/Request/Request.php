@@ -62,6 +62,14 @@ class Request extends \Symfony\Component\HttpFoundation\Request
         return $this;
     }
 
+    public function clearAuthentication(): static
+    {
+        $this->authenticated = false;
+        $this->auth = null;
+
+        return $this;
+    }
+
     /**
      * This method add data to the context object
      * @param array $contextData The context data to be added to the request

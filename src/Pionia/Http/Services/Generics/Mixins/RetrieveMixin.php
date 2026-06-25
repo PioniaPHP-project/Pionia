@@ -15,6 +15,9 @@ trait RetrieveMixin
     /**
      * Retrieve a single item from the table
      * You can use `details` as an alias for this method
+     *
+     * @moonlight-action retrieve
+     * @moonlight-summary Fetch one row by primary key
      * @throws Exception
      */
     public function retrieveAction(): BaseResponse

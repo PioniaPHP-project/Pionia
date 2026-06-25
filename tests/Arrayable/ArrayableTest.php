@@ -72,6 +72,19 @@ class ArrayableTest extends PioniaTestCase
         self::assertEquals('Jane Doe', $last);
     }
 
+    public function testArrayableFindUsesNativeArrayFind(): void
+    {
+        $this->arrayable->merge(['a' => 1, 'b' => 2, 'c' => 3]);
+        $this->assertSame(2, $this->arrayable->find(static fn (int $value): bool => $value === 2));
+    }
+
+    public function testArrayableAnyUsesNativeArrayAny(): void
+    {
+        $this->arrayable->merge(['a' => 1, 'b' => 2]);
+        $this->assertTrue($this->arrayable->any(static fn (int $value): bool => $value > 1));
+        $this->assertFalse($this->arrayable->any(static fn (int $value): bool => $value > 10));
+    }
+
     public function testArrayableSlice()
     {
         $this->arrayable->add('first', 'John Doe');

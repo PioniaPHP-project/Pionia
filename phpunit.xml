@@ -9,12 +9,18 @@
             <directory>tests/Exceptions</directory>
             <directory>tests/Logging</directory>
             <directory>tests/Http</directory>
+            <directory>tests/Runtime</directory>
+            <directory>tests/TestSuite</directory>
+            <directory>tests/Utils</directory>
         </testsuite>
         <testsuite name="Feature">
             <directory>tests/Feature</directory>
         </testsuite>
         <testsuite name="Console">
             <directory>tests/Console</directory>
+        </testsuite>
+        <testsuite name="Documentation">
+            <directory>tests/Documentation</directory>
         </testsuite>
     </testsuites>
 

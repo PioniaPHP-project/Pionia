@@ -105,15 +105,39 @@ class WebApplication  implements ApplicationContract
     }
 
     /**
+     * Boot providers, routes, and middleware once per process.
+     */
+    public function bootOnce(): static
+    {
+        $this->powerUp();
+
+        return $this;
+    }
+
+    /**
+     * Handle a single HTTP request without reading globals or sending the response.
+     *
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
+    public function handleRequest(Request $request): Response | BinaryFileResponse
+    {
+        return $this->bootOnce()
+            ->make(WebKernel::class)
+            ->handle($request);
+    }
+
+    /**
      * @throws DependencyException
      * @throws NotFoundException
      */
     public function fly(): Response | BinaryFileResponse
     {
         $request = Request::createFromGlobals();
-        return $this->powerUp()
-            ->make(WebKernel::class)
-            ->handle($request);
+        $response = $this->handleRequest($request);
+        $response->send();
+
+        return $response;
     }
 
     /**

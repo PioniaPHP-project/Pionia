@@ -9,12 +9,12 @@
 
     <paths>
         <output>build/docs</output>
-        <cache>build/cache</cache>
+        <cache>build/cache/phpdoc</cache>
     </paths>
     <version number="1.0.0">
         <api format="php">
             <source dsn=".">
-                <path>src</path>
+                <path>src/Pionia</path>
             </source>
             <output>.</output>
             <ignore hidden="true" symlinks="false">

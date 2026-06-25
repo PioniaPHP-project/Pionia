@@ -13,6 +13,9 @@ trait DeleteMixin
 {
     /**
      * Delete an item in the table
+     *
+     * @moonlight-action delete
+     * @moonlight-summary Delete a row by primary key
      * @throws Exception
      */
     public function deleteAction(): BaseResponse

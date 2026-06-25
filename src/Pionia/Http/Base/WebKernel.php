@@ -4,6 +4,8 @@ namespace Pionia\Http\Base;
 
 use Pionia\Auth\AuthenticationChain;
 use Pionia\Contracts\KernelContract;
+use Pionia\Http\HttpExceptionRenderer;
+use Pionia\Http\MaintenanceMode;
 use Pionia\Http\Base\Events\PreKernelBootEvent;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
@@ -24,7 +26,7 @@ class WebKernel implements KernelContract
     private function prepareRequest(Request $request): Response | BinaryFileResponse
     {
         $context = new RequestContext();
-        $request = $this->boot($request);
+        $request = $request |> $this->boot(...);
         $context->fromRequest($request);
         $routes = app()->getSilently(AppRealm::APP_ROUTES_TAG);
         $matcher = new UrlMatcher($routes, $context);
@@ -39,11 +41,14 @@ class WebKernel implements KernelContract
 
     public function handle(Request $request): Response | BinaryFileResponse
     {
+        if ($maintenance = MaintenanceMode::respond($request)) {
+            return $this->terminate($maintenance, $request);
+        }
+
         try {
             $response = $this->prepareRequest($request);
         } catch (Throwable $e) {
-            $response = pionia_handle_exception($e, $request);
-            $response = new Response($response->getPrettyResponse(), 200);
+            $response = (new HttpExceptionRenderer())->render($e, $request);
         }
 
         return $this->terminate($response, $request);
@@ -108,7 +113,7 @@ class WebKernel implements KernelContract
             }
         }
 
-        return $response->prepare($request)->send();
+        return $response->prepare($request);
     }
 
 

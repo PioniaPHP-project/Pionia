@@ -62,10 +62,39 @@ trait AppMixin
     protected array $bootingCallbacks = [];
 
     /**
-     * Boot the app
+     * Hooks run after each HTTP request in worker mode (reset state).
+     *
+     * @var list<\Closure>
      */
+    protected array $betweenRequestCallbacks = [];
+
+    public function isBooted(): bool
+    {
+        return $this->booted;
+    }
+
+    /**
+     * Register a callback to run after each request in persistent runtimes.
+     */
+    public function afterRequest(\Closure $callback): static
+    {
+        $this->betweenRequestCallbacks[] = $callback;
+
+        return $this;
+    }
+
+    public function resetBetweenRequests(): void
+    {
+        foreach ($this->betweenRequestCallbacks as $callback) {
+            $callback($this);
+        }
+    }
     public function powerUp(?PioniaApplicationType $type = null): ApplicationContract
     {
+        if ($this->booted) {
+            return $this;
+        }
+
         try {
             $this->realm->set(PioniaApplicationType::class, $this->appType());
             $this->callBootingCallbacks();

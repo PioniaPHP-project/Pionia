@@ -102,27 +102,61 @@ class PioniaRouter implements RouterContract
 
         $controller = $switch . '::processor';
 
-        if (in_array('GET', $methods)){
-            $getPath = $this->asGetApiVersion($path);
-            $getRoute = RouteObject::get($getPath)
-                ->controller(['_controller' => $controller]);
-            foreach ($schemas as $schema) {
-                $getRoute->addSchema($schema);
+        if (in_array('GET', $methods)) {
+            foreach ($this->trailingSlashVariants($this->asGetApiVersion($path)) as $index => $getPath) {
+                $getRoute = RouteObject::get($getPath)
+                    ->controller(['_controller' => $controller]);
+                foreach ($schemas as $schema) {
+                    $getRoute->addSchema($schema);
+                }
+                $this->routes->add($this->routeVariantName('GET_' . $version, $index), $getRoute->build());
             }
-            $gr = $getRoute->build();
-            $this->routes->add('GET_'.$version, $gr);
         }
 
-        $route = RouteObject::post($path)
-            ->controller(['_controller' => $controller]);
+        foreach ($this->trailingSlashVariants($path) as $index => $postPath) {
+            $route = RouteObject::post($postPath)
+                ->controller(['_controller' => $controller]);
 
-        foreach ($schemas as $schema) {
-            $route->addSchema($schema);
+            foreach ($schemas as $schema) {
+                $route->addSchema($schema);
+            }
+            $this->routes->add($this->routeVariantName($version, $index), $route->build());
         }
-        $postRoute = $route->build();
-        $this->routes->add($version, $postRoute);
+
+        if (in_array('GET', $methods)) {
+            foreach ($this->trailingSlashVariants($path) as $index => $overviewPath) {
+                $overviewRoute = RouteObject::get($overviewPath)
+                    ->controller([
+                        '_controller' => $switch . '::overview',
+                        'apiVersion' => $version,
+                    ]);
+                foreach ($schemas as $schema) {
+                    $overviewRoute->addSchema($schema);
+                }
+                $this->routes->add($this->routeVariantName($version . '_overview', $index), $overviewRoute->build());
+            }
+        }
+
         $this->registerSwitchContext($version, $switch, $controller);
-        return $this->addStatusEndpoint($version, $switch, $path);
+        return $this->addStatusEndpoint($version, $switch, $path)
+            ->addCatalogEndpoint($version, $switch, $path);
+    }
+
+    private function addCatalogEndpoint(string $version, string $switch, string $path): static
+    {
+        foreach (['__catalog', '__catalog/'] as $suffix) {
+            $route = RouteObject::get($path . $suffix)
+                ->controller(['_controller' => $switch . '::catalog'])
+                ->addSchema('https')
+                ->addSchema('http')
+                ->addMethod('GET')
+                ->build();
+            $this->routes->add($version . '_catalog' . str_replace('/', '_', $suffix), $route);
+        }
+
+        $this->app->addRoutes($this->routes);
+
+        return $this;
     }
 
     private function registerSwitchContext(string $version, string $switch, string $controller): void
@@ -196,18 +230,41 @@ class PioniaRouter implements RouterContract
         }
 
         // add the only post route
-        $postRoute = new Route($path, [
-            '_controller' => $switch . '::processor',
-        ], [], [], null, [], SupportedHttpMethods::POST);
+        foreach ($this->trailingSlashVariants($path) as $index => $variantPath) {
+            $postRoute = new Route($variantPath, [
+                '_controller' => $switch . '::processor',
+            ], [], [], null, [], SupportedHttpMethods::POST);
 
-        $this->routes->add($name, $postRoute);
+            $this->routes->add($this->routeVariantName($name, $index), $postRoute);
+        }
 
-        $pingRoute = new Route($path, [
-            '_controller' => $switch . '::ping',
-        ], [], [], null, [], SupportedHttpMethods::GET);
+        foreach ($this->trailingSlashVariants($path) as $index => $variantPath) {
+            $pingRoute = new Route($variantPath, [
+                '_controller' => $switch . '::ping',
+            ], [], [], null, [], SupportedHttpMethods::GET);
 
-        $this->routes->add($pingName, $pingRoute);
+            $this->routes->add($this->routeVariantName($pingName, $index), $pingRoute);
+        }
         return $this;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function trailingSlashVariants(string $path): array
+    {
+        $without = rtrim($path, '/');
+
+        if ($without === '') {
+            return ['/'];
+        }
+
+        return [$without, $without . '/'];
+    }
+
+    private function routeVariantName(string $base, int $index): string
+    {
+        return $index === 0 ? $base . '_noslash' : $base;
     }
 
     private function cleanVersion(string $str): string

@@ -30,7 +30,7 @@ class FrameworkWelcomePageTest extends PioniaTestCase
         $this->assertStringContainsString('public/index.html', $html);
     }
 
-    public function testDebugPanelShowsAllContextTabsWhenDebugEnabled(): void
+    public function testWelcomePageDoesNotIncludeDeveloperContextPanel(): void
     {
         $previous = $this->captureDebugEnv();
 
@@ -38,23 +38,8 @@ class FrameworkWelcomePageTest extends PioniaTestCase
             $this->setDebugEnv(true);
             $html = FrameworkWelcomePage::for(Request::create('/'), realm())->toResponse()->getContent();
 
-            foreach (['Environment', 'Routes', 'Commands', 'Middlewares', 'Authentications'] as $tab) {
-                $this->assertStringContainsString($tab, $html);
-            }
-        } finally {
-            $this->restoreDebugEnv($previous);
-        }
-    }
-
-    public function testDebugPanelHiddenWhenNotInDebugMode(): void
-    {
-        $previous = $this->captureDebugEnv();
-
-        try {
-            $this->setDebugEnv(false);
-            $html = FrameworkWelcomePage::for(Request::create('/'), realm())->toResponse()->getContent();
-
             $this->assertStringNotContainsString('id="pioniaContextTabs"', $html);
+            $this->assertStringNotContainsString('Developer context', $html);
         } finally {
             $this->restoreDebugEnv($previous);
         }
@@ -70,6 +55,49 @@ class FrameworkWelcomePageTest extends PioniaTestCase
 
         $this->assertInstanceOf(BinaryFileResponse::class, $response);
         $this->assertSame(200, $response->getStatusCode());
+    }
+
+    public function testWelcomePageShowsDeveloperLinksWhenEnabled(): void
+    {
+        $previous = $this->captureDebugEnv();
+
+        try {
+            $this->setDebugEnv(true);
+            $this->clearDocsEnv();
+            $this->clearStatsEnv();
+
+            $html = FrameworkWelcomePage::for(Request::create('/'), realm())->toResponse()->getContent();
+
+            $this->assertStringContainsString('href="/docs"', $html);
+            $this->assertStringContainsString('href="/stats"', $html);
+            $this->assertStringContainsString('href="/docs/openapi.json"', $html);
+            $this->assertStringContainsString('developer-tools-strip', $html);
+        } finally {
+            $this->restoreDebugEnv($previous);
+            $this->clearDocsEnv();
+            $this->clearStatsEnv();
+        }
+    }
+
+    public function testWelcomePageHidesDeveloperLinksWhenDisabled(): void
+    {
+        $previous = $this->captureDebugEnv();
+
+        try {
+            $this->setDebugEnv(false);
+            $this->setDocsEnv(false);
+            $this->setStatsEnv(false);
+
+            $html = FrameworkWelcomePage::for(Request::create('/'), realm())->toResponse()->getContent();
+
+            $this->assertStringNotContainsString('developer-tools-strip', $html);
+            $this->assertStringNotContainsString('href="/docs"', $html);
+            $this->assertStringNotContainsString('href="/stats"', $html);
+        } finally {
+            $this->restoreDebugEnv($previous);
+            $this->clearDocsEnv();
+            $this->clearStatsEnv();
+        }
     }
 
     public function testHomeResolverUsesFrameworkWelcomeWhenNoUserIndex(): void

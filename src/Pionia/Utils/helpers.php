@@ -13,6 +13,7 @@ use Pionia\Porm\Core\Porm;
 use Pionia\Porm\Database\Db;
 use Pionia\Realm\AppRealm;
 use Pionia\Realm\RealmContract;
+use Pionia\Runtime\RuntimeMode;
 use Pionia\Templating\TemplateEngineInterface;
 use Pionia\Utils\Support;
 use Pionia\Validations\Validator;
@@ -132,12 +133,8 @@ if (!function_exists('report')) {
 if (!function_exists('response')) {
     /**
      * Helper function to return a response
-     * @param $returnCode int
-     * @param string|null $returnMessage
-     * @param mixed $returnData
-     * @param mixed $extraData
-     * @return BaseResponse
      */
+    #[\NoDiscard]
     function response(int $returnCode = 0, ?string $returnMessage = null, mixed $returnData = null, mixed $extraData = null, ): BaseResponse
     {
         return BaseResponse::jsonResponse($returnCode, $returnMessage, $returnData, $extraData);
@@ -174,9 +171,18 @@ if (!function_exists('table')){
      * table('users')->where(['username' => 'Pionia'])->get();
      * ```
      */
+    #[\NoDiscard]
     function table(string $tableName, ?string $tableAlias = null, ?string $using = null): Porm
     {
         return Db::table($tableName, $tableAlias, $using);
+    }
+}
+
+if (!function_exists('connectionManager')) {
+    #[\NoDiscard]
+    function connectionManager(): \Pionia\Porm\ConnectionManager
+    {
+        return app()->get(\Pionia\Porm\ConnectionManager::class);
     }
 }
 
@@ -417,18 +423,35 @@ if (!function_exists('recached')){
 }
 
 
+if (!function_exists('renderToString')){
+    /**
+     * Render a template without terminating the process.
+     */
+    function renderToString($file, ?array $data = []): string
+    {
+        ob_start();
+        app()->getSilently(TemplateEngineInterface::class)?->view($file, $data);
+
+        return (string) ob_get_clean();
+    }
+}
+
 if (!function_exists('render')){
     /**
-     * Render a template file from the templates folder.
-     * @param $file
-     * @param array|null $data
-     * @return void
+     * Render a template file. In FPM/CLI mode the script exits after output; in worker/testing mode it returns.
+     *
+     * @deprecated Use renderToString() and send the result yourself.
      */
-    #[NoReturn]
-    function render($file, ? array $data = []): void
+    #[\Deprecated(message: 'Use renderToString() instead', since: '2.1')]
+    function render($file, ?array $data = []): void
     {
-        app()->getSilently(TemplateEngineInterface::class)?->view($file, $data);
-        exit(1);
+        echo renderToString($file, $data);
+
+        if (runtimeMode() === RuntimeMode::Worker || runtimeMode() === RuntimeMode::Testing) {
+            return;
+        }
+
+        exit(0);
     }
 }
 
@@ -684,6 +707,7 @@ if (!function_exists('is_cached_in')){
 
 
 if (!function_exists('realm')) {
+    #[\NoDiscard]
     function realm(): AppRealm
     {
         return container();
@@ -708,6 +732,7 @@ if (!function_exists('container')) {
     /**
      * @see app(), realm(), pionia()
      */
+    #[\NoDiscard]
     function container(): AppRealm
     {
         static $instance = null;
@@ -725,9 +750,45 @@ if (!function_exists('app')) {
     /**
      * Instance of the application container
      */
+    #[\NoDiscard]
     function app(): AppRealm
     {
         return container();
+    }
+}
+
+if (!function_exists('runtimeMode')) {
+    function runtimeMode(): RuntimeMode
+    {
+        static $mode = null;
+        if ($mode instanceof RuntimeMode) {
+            return $mode;
+        }
+
+        if (defined('PIONIA_RUNTIME')) {
+            $mode = RuntimeMode::tryFrom((string) PIONIA_RUNTIME) ?? RuntimeMode::Fpm;
+
+            return $mode;
+        }
+
+        if (defined('PIONIA_TESTING') && PIONIA_TESTING) {
+            $mode = RuntimeMode::Testing;
+
+            return $mode;
+        }
+
+        $mode = PHP_SAPI === 'cli' ? RuntimeMode::Cli : RuntimeMode::Fpm;
+
+        return $mode;
+    }
+}
+
+if (!function_exists('setRuntimeMode')) {
+    function setRuntimeMode(RuntimeMode $mode): void
+    {
+        if (!defined('PIONIA_RUNTIME')) {
+            define('PIONIA_RUNTIME', $mode->value);
+        }
     }
 }
 
@@ -826,6 +887,7 @@ if (!function_exists('apiVersionPath')) {
     /**
      * Versioned API prefix, e.g. /api/v1/
      */
+    #[\NoDiscard]
     function apiVersionPath(?string $version = null): string
     {
         $version ??= defaultApiVersion();
@@ -839,17 +901,273 @@ if (!function_exists('apiPingPath')) {
     /**
      * Status endpoint for a switch version, e.g. /api/v1/ping
      */
+    #[\NoDiscard]
     function apiPingPath(?string $version = null): string
     {
         return rtrim(apiVersionPath($version), '/') . '/ping';
     }
 }
 
+if (!function_exists('apiCatalogPath')) {
+    /**
+     * Moonlight catalog path for a versioned API (gated by docs settings).
+     */
+    #[\NoDiscard]
+    function apiCatalogPath(?string $version = null): string
+    {
+        return rtrim(apiVersionPath($version), '/') . '/__catalog';
+    }
+}
+
+if (!function_exists('apiDocsConfig')) {
+    /**
+     * @return array<string, mixed>
+     */
+    function apiDocsConfig(): array
+    {
+        $docs = env('docs', []);
+
+        return is_array($docs) ? $docs : [];
+    }
+}
+
+if (!function_exists('apiDocsEnabled')) {
+    /**
+     * Whether runtime API docs are exposed.
+     *
+     * Explicit `[docs] ENABLED` / `DOCS_ENABLED` overrides; otherwise follows `DEBUG`.
+     */
+    function apiDocsEnabled(): bool
+    {
+        $docs = apiDocsConfig();
+
+        foreach (['ENABLED', 'enabled'] as $key) {
+            if (array_key_exists($key, $docs)) {
+                return filter_var($docs[$key], FILTER_VALIDATE_BOOLEAN);
+            }
+        }
+
+        $explicit = env('DOCS_ENABLED');
+        if ($explicit !== null && $explicit !== '') {
+            return filter_var($explicit, FILTER_VALIDATE_BOOLEAN);
+        }
+
+        return isDebug();
+    }
+}
+
+if (!function_exists('apiDocsToken')) {
+    /**
+     * Optional shared secret for docs routes. Null means no token required.
+     */
+    function apiDocsToken(): ?string
+    {
+        $docs = apiDocsConfig();
+
+        foreach (['TOKEN', 'token'] as $key) {
+            if (!empty($docs[$key]) && is_string($docs[$key])) {
+                return $docs[$key];
+            }
+        }
+
+        $token = env('DOCS_TOKEN');
+
+        return is_string($token) && $token !== '' ? $token : null;
+    }
+}
+
+if (!function_exists('apiDocsAuthorized')) {
+    /**
+     * Whether the request satisfies the optional docs token gate.
+     */
+    function apiDocsAuthorized(Request $request): bool
+    {
+        $required = apiDocsToken();
+        if ($required === null) {
+            return true;
+        }
+
+        $provided = (string) ($request->headers->get('X-Docs-Token') ?? $request->query->get('token') ?? '');
+
+        return $provided !== '' && hash_equals($required, $provided);
+    }
+}
+
+if (!function_exists('apiStatsConfig')) {
+    /**
+     * @return array<string, mixed>
+     */
+    function apiStatsConfig(): array
+    {
+        $stats = env('stats', []);
+
+        return is_array($stats) ? $stats : [];
+    }
+}
+
+if (!function_exists('apiStatsEnabled')) {
+    /**
+     * Whether the developer stats dashboard is exposed.
+     *
+     * Explicit `[stats] ENABLED` / `STATS_ENABLED` overrides; otherwise follows `DEBUG`.
+     */
+    function apiStatsEnabled(): bool
+    {
+        $stats = apiStatsConfig();
+
+        foreach (['ENABLED', 'enabled'] as $key) {
+            if (array_key_exists($key, $stats)) {
+                return filter_var($stats[$key], FILTER_VALIDATE_BOOLEAN);
+            }
+        }
+
+        $explicit = env('STATS_ENABLED');
+        if ($explicit !== null && $explicit !== '') {
+            return filter_var($explicit, FILTER_VALIDATE_BOOLEAN);
+        }
+
+        return isDebug();
+    }
+}
+
+if (!function_exists('apiStatsToken')) {
+    function apiStatsToken(): ?string
+    {
+        $stats = apiStatsConfig();
+
+        foreach (['TOKEN', 'token'] as $key) {
+            if (!empty($stats[$key]) && is_string($stats[$key])) {
+                return $stats[$key];
+            }
+        }
+
+        $token = env('STATS_TOKEN');
+
+        return is_string($token) && $token !== '' ? $token : null;
+    }
+}
+
+if (!function_exists('apiStatsAuthorized')) {
+    function apiStatsAuthorized(Request $request): bool
+    {
+        $required = apiStatsToken();
+        if ($required === null) {
+            return true;
+        }
+
+        $provided = (string) ($request->headers->get('X-Stats-Token') ?? $request->query->get('token') ?? '');
+
+        return $provided !== '' && hash_equals($required, $provided);
+    }
+}
+
+
+if (!function_exists('maintenanceConfig')) {
+    /**
+     * @return array<string, mixed>
+     */
+    function maintenanceConfig(): array
+    {
+        $maintenance = env('maintenance', []);
+
+        return is_array($maintenance) ? $maintenance : [];
+    }
+}
+
+if (!function_exists('maintenanceModeEnabled')) {
+    function maintenanceModeEnabled(): bool
+    {
+        $maintenance = maintenanceConfig();
+
+        foreach (['ENABLED', 'enabled'] as $key) {
+            if (array_key_exists($key, $maintenance)) {
+                return filter_var($maintenance[$key], FILTER_VALIDATE_BOOLEAN);
+            }
+        }
+
+        $explicit = env('MAINTENANCE_MODE');
+        if ($explicit !== null && $explicit !== '') {
+            return filter_var($explicit, FILTER_VALIDATE_BOOLEAN);
+        }
+
+        return false;
+    }
+}
+
+if (!function_exists('maintenanceMessage')) {
+    function maintenanceMessage(): string
+    {
+        $maintenance = maintenanceConfig();
+
+        foreach (['MESSAGE', 'message'] as $key) {
+            if (!empty($maintenance[$key]) && is_string($maintenance[$key])) {
+                return $maintenance[$key];
+            }
+        }
+
+        $message = env('MAINTENANCE_MESSAGE');
+
+        return is_string($message) && $message !== ''
+            ? $message
+            : 'The application is undergoing scheduled maintenance. Please try again shortly.';
+    }
+}
+
+if (!function_exists('maintenanceRetryAfter')) {
+    function maintenanceRetryAfter(): ?int
+    {
+        $maintenance = maintenanceConfig();
+
+        foreach (['RETRY_AFTER', 'retry_after'] as $key) {
+            if (isset($maintenance[$key]) && is_numeric($maintenance[$key])) {
+                return max(0, (int) $maintenance[$key]);
+            }
+        }
+
+        $retryAfter = env('MAINTENANCE_RETRY_AFTER');
+
+        return is_numeric($retryAfter) ? max(0, (int) $retryAfter) : null;
+    }
+}
+
+if (!function_exists('maintenanceBypassToken')) {
+    function maintenanceBypassToken(): ?string
+    {
+        $maintenance = maintenanceConfig();
+
+        foreach (['BYPASS_TOKEN', 'bypass_token', 'TOKEN', 'token'] as $key) {
+            if (!empty($maintenance[$key]) && is_string($maintenance[$key])) {
+                return $maintenance[$key];
+            }
+        }
+
+        $token = env('MAINTENANCE_BYPASS_TOKEN');
+
+        return is_string($token) && $token !== '' ? $token : null;
+    }
+}
+
+if (!function_exists('maintenanceBypassAuthorized')) {
+    function maintenanceBypassAuthorized(Request $request): bool
+    {
+        $required = maintenanceBypassToken();
+        if ($required === null) {
+            return false;
+        }
+
+        $provided = (string) ($request->headers->get('X-Maintenance-Bypass')
+            ?? $request->query->get('bypass')
+            ?? '');
+
+        return $provided !== '' && hash_equals($required, $provided);
+    }
+}
 
 if (!function_exists('pionia')) {
     /**
      * @see app()
      */
+    #[\NoDiscard]
     function pionia(): AppRealm
     {
         return container();

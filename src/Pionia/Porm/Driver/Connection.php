@@ -5,6 +5,7 @@ namespace Pionia\Porm\Driver;
 use InvalidArgumentException;
 use PDO;
 use PDOException;
+use Pionia\Porm\ConnectionManager;
 use Pionia\Base\WebApplication;
 use Pionia\Realm\AppRealm;
 
@@ -385,6 +386,44 @@ class Connection implements DatabaseDriverInterface
 
     public static function connect(null|string|array|PDO $connection = 'default'): static
     {
-        return new Connection($connection);
+        if (self::shouldUseManager($connection)) {
+            return app()->get(ConnectionManager::class)->connection(
+                is_string($connection) || is_array($connection) ? $connection : 'default'
+            );
+        }
+
+        return self::open($connection);
+    }
+
+    /**
+     * Open a new connection without going through the manager pool.
+     */
+    public static function open(null|string|array|PDO $connection = 'default'): static
+    {
+        return new self($connection);
+    }
+
+    private static function shouldUseManager(null|string|array|PDO $connection): bool
+    {
+        if ($connection instanceof PDO) {
+            return false;
+        }
+
+        if (is_array($connection)) {
+            if (isset($connection['pdo']) || !empty($connection['testMode'])) {
+                return false;
+            }
+        }
+
+        if (!function_exists('app')) {
+            return false;
+        }
+
+        try {
+            return app()->has(ConnectionManager::class);
+        } catch (\Throwable) {
+            return false;
+        }
     }
 }
+

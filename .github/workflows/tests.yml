@@ -28,6 +28,9 @@ jobs:
       - name: Enforce minimum coverage
         run: php bin/coverage-check build/coverage.xml 50
 
+      - name: Verify Moonlight API docs
+        run: composer document:api:check
+
       - name: Upload coverage
         uses: actions/upload-artifact@v4
         if: always()

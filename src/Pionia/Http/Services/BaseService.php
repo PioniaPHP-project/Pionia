@@ -19,6 +19,9 @@ use ReflectionMethod;
  * This is the main class all other services must extend.
  * It contains the basic methods that all services will need for authentication and request processing
  *
+ * Document actions with `@moonlight-*` PHPDoc tags or `#[MoonlightAction]` — see `docs/MOONLIGHT-DOCS.md`.
+ * Generate API reference: `pionia api:docs`.
+ *
  * @property Request $request The request object
  * @property array $deactivatedActions An array of actions that are deactivated for the current service
  * @property array $actionsRequiringAuth An array of actions that require authentication

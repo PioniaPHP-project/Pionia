@@ -32,5 +32,8 @@ If you change services, switches, or `settings.ini`, update `example/README.md` 
 ## Documentation
 
 - `AGENTS.md` — architecture and conventions for agents/contributors
+- `docs/MOONLIGHT-DOCS.md` — `@moonlight-*` tag reference for API actions
 - `example/README.md` — running the dev harness
-- User-facing docs live in the separate [pionia-docs](https://pionia.netlify.app/) repo (sync via satellite plan)
+- **Moonlight API:** `composer document:api` → `example/docs/api/`; CI runs `document:api:check`
+- **Framework internals:** `composer document:framework` → `build/docs/` (requires phpDocumentor in dev)
+- User-facing docs live in the separate [pionia-docs](https://pionia.netlify.app/) repo

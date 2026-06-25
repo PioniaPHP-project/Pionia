@@ -123,6 +123,11 @@ trait ApplicationLifecycleHooks
     #[NoReturn]
     public function terminate(int $status = 1): void
     {
+        if (runtimeMode() === \Pionia\Runtime\RuntimeMode::Worker
+            || runtimeMode() === \Pionia\Runtime\RuntimeMode::Testing) {
+            return;
+        }
+
         $this->report('info', 'Shutting down the application');
 
         $this->callTerminatingCallbacks();

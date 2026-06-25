@@ -11,6 +11,7 @@ class ExampleApiTest extends PioniaTestCase
         $response = $this->getApiPing();
 
         $this->assertSame(200, $response->status());
+        $this->assertStringContainsString('application/json', (string) $response->header('Content-Type'));
         $this->assertJsonStructure(['returnCode', 'returnMessage', 'returnData'], $response);
         $this->assertPioniaOk($response);
         $this->assertSame('pong', $response->json()['returnMessage']);
@@ -21,6 +22,19 @@ class ExampleApiTest extends PioniaTestCase
         $response = $this->postApi('auth', 'list_auth');
 
         $this->assertSame(200, $response->status());
+        $this->assertStringContainsString('application/json', (string) $response->header('Content-Type'));
+        $this->assertPioniaOk($response);
+    }
+
+    public function testPostDispatchWorksWithoutTrailingSlash(): void
+    {
+        $response = $this->post(rtrim(apiVersionPath(), '/'), [
+            'service' => 'auth',
+            'action' => 'list_auth',
+        ]);
+
+        $this->assertSame(200, $response->status());
+        $this->assertStringContainsString('application/json', (string) $response->header('Content-Type'));
         $this->assertPioniaOk($response);
     }
 

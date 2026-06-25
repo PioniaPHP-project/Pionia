@@ -2,25 +2,33 @@
 
 namespace Http;
 
-use Pionia\Http\Base\WebKernel;
 use Pionia\Http\Request\Request;
 use Pionia\TestSuite\PioniaTestCase;
 
 class WebKernelExceptionTest extends PioniaTestCase
 {
-    public function testUnhandledRouteExceptionReturnsJsonEnvelope(): void
+    public function testUnhandledRouteExceptionReturnsHtmlPage(): void
     {
-        $kernel = new WebKernel();
-        $request = Request::create('/this-route-does-not-exist-phase1', 'GET');
+        $response = $this->webApplication()->handleRequest(
+            Request::create('/this-route-does-not-exist-phase1', 'GET')
+        );
 
-        ob_start();
-        $response = $kernel->handle($request);
-        ob_end_clean();
+        $this->assertSame(404, $response->getStatusCode());
+        $this->assertStringContainsString('text/html', (string) $response->headers->get('Content-Type'));
+        $this->assertStringContainsString('not found', strtolower((string) $response->getContent()));
+    }
 
-        $payload = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    public function testUnhandledRouteExceptionReturnsJsonForApiClients(): void
+    {
+        $response = $this->webApplication()->handleRequest(
+            Request::create('/this-route-does-not-exist-phase1', 'GET', [], [], [], [
+                'HTTP_ACCEPT' => 'application/json',
+            ])
+        );
 
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertGreaterThan(0, $payload['returnCode']);
-        $this->assertNotEmpty($payload['returnMessage']);
+        $this->assertSame(404, $response->getStatusCode());
+        $payload = json_decode((string) $response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame(404, $payload['returnCode']);
+        $this->assertNull($payload['returnData']);
     }
 }

@@ -18,6 +18,8 @@ use Pionia\Http\Routing\SupportedHttpMethods;
 use Pionia\Exceptions\ExceptionPipeline;
 use Pionia\Logging\LogManager;
 use Pionia\Middlewares\MiddlewareChain;
+use Pionia\Porm\ConnectionManager;
+use Pionia\Runtime\RuntimeMode;
 use Pionia\Templating\TemplateEngine;
 use Pionia\Templating\TemplateEngineInterface;
 use Pionia\Utils\AppDatabaseHelper;
@@ -218,6 +220,8 @@ class AppRealm implements RealmContract, ContainerInterface
             return new TemplateEngine();
         });
 
+        $this->set(ConnectionManager::class, new ConnectionManager($this));
+
         $this->realm()->set(MiddlewareChain::class, function () {
             return new MiddlewareChain();
         });
@@ -254,13 +258,16 @@ class AppRealm implements RealmContract, ContainerInterface
             try {
                 $response = pionia_handle_exception($e);
                 if (PHP_SAPI !== 'cli') {
-                    (new \Pionia\Http\Response\Response($response->getPrettyResponse(), 200))->send();
+                    \Pionia\Http\Response\Response::fromEnvelope($response)->send();
                 }
             } catch (\Throwable $handlerError) {
                 error_log($handlerError->getMessage());
                 error_log($e->getMessage());
             }
-            exit(1);
+
+            if (runtimeMode() !== RuntimeMode::Testing && runtimeMode() !== RuntimeMode::Worker) {
+                exit(1);
+            }
         });
     }
 
