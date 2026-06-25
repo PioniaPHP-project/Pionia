@@ -35,6 +35,38 @@ Registered services: `auth`, `category`, `sampolo` (`switches/MainSwitch.php`).
 
 `sampolo` is the canonical **generic CRUD** demo (`SampoloService` → `sample_table`).
 
+## API documentation
+
+Actions are documented with `@moonlight-*` PHPDoc tags on service classes. Generate OpenAPI + Markdown:
+
+```bash
+composer document:api          # from repo root → example/docs/api/
+composer document:api:check    # CI drift check
+```
+
+Outputs: `docs/api/openapi.json`, `docs/api/index.md`, and `docs/api/index.html` (Scalar UI).
+
+Runtime docs (gated by `DOCS_ENABLED` or `DEBUG=true`):
+
+```bash
+open http://127.0.0.1:8003/docs
+curl -s http://127.0.0.1:8003/docs/openapi.json | jq
+php example/pionia api:catalog
+curl -s http://127.0.0.1:8003/api/v1/__catalog | jq
+```
+
+Optional lock (`example/environment/settings.ini`):
+
+```ini
+[docs]
+ENABLED=true
+TOKEN=your-secret
+```
+
+Then open `/docs?token=your-secret`. Without a valid token, docs return 401.
+
+See [`docs/MOONLIGHT-DOCS.md`](../docs/MOONLIGHT-DOCS.md) for the full tag reference.
+
 ## Database (SQLite default)
 
 Default connection is **SQLite** (`database.sqlite3` in the example root, gitignored).
@@ -45,6 +77,8 @@ php bin/init-db.php    # creates DB from database/schema.sql
 ```
 
 PostgreSQL settings remain under `[db_pgsql]` in `settings.ini` if you prefer Postgres.
+
+Connections are pooled per process via `ConnectionManager` — `db()` / `table()` reuse the same PDO until the worker exits.
 
 ## Middleware & authentication
 

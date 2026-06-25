@@ -1,10 +1,13 @@
 <?php
 
 /**
- * This service is auto-generated from pionia cli.
- * Remember to register this service in any of your available switches.
+ * Generic CRUD demo over `sample_table` with company join.
+ *
+ * @moonlight-service sampolo
+ * @moonlight-version v1
+ * @moonlight-table sample_table
+ * @moonlight-auth none
  */
-
 namespace Application\Services;
 
 use Pionia\Http\Services\Generics\UniversalGenericService;
@@ -36,5 +39,4 @@ class SampoloService extends UniversalGenericService
     public ?array $joinTypes = [
         'company' => JoinType::LEFT
     ];
-
 }

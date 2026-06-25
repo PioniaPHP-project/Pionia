@@ -1,10 +1,12 @@
 <?php
 
 /**
- * This service is auto-generated from pionia cli.
- * Remember to register this service in any of your available switches.
+ * Category and skill management — custom actions beyond generic CRUD.
+ *
+ * @moonlight-service category
+ * @moonlight-version v1
+ * @moonlight-table company
  */
-
 namespace Application\Services;
 
 use Exception;
@@ -17,7 +19,14 @@ use Throwable;
 class CategoryService extends Service
 {
     /**
-     * updateCategoryAction action
+     * Update a company/category row by id.
+     *
+     * @moonlight-action update
+     * @moonlight-summary Updates a company record
+     * @moonlight-param int id Row id
+     * @moonlight-param string name New name
+     * @moonlight-return object updated row in returnData
+     * @moonlight-example {"service":"category","action":"update","id":1,"name":"Acme"}
      * @throws Exception
      * @throws Throwable
      */
@@ -30,6 +39,12 @@ class CategoryService extends Service
 	}
 
     /**
+     * List skills linked to categories.
+     *
+     * @moonlight-action list
+     * @moonlight-summary Lists skill rows
+     * @moonlight-return array items in returnData
+     * @moonlight-example {"service":"category","action":"list"}
      * @throws Exception
      */
     protected function listAction(Arrayable $request): BaseResponse
@@ -39,6 +54,12 @@ class CategoryService extends Service
     }
 
     /**
+     * Fetch a single skill by id.
+     *
+     * @moonlight-action bulk
+     * @moonlight-summary Returns one skill row by id
+     * @moonlight-param int id Skill id
+     * @moonlight-example {"service":"category","action":"bulk","id":1}
      * @throws Throwable
      */
     protected function bulkAction(Arrayable $request): BaseResponse
@@ -49,6 +70,12 @@ class CategoryService extends Service
     }
 
     /**
+     * Create or update a skill row.
+     *
+     * @moonlight-action save_or_update
+     * @moonlight-summary Upserts a skill record
+     * @moonlight-param object data Row payload
+     * @moonlight-example {"service":"category","action":"save_or_update","data":{"name":"PHP"}}
      * @throws Exception
      */
     protected function saveOrUpdateAction(Arrayable $request): BaseResponse
