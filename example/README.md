@@ -31,7 +31,33 @@ curl -s -X POST http://127.0.0.1:8003/api/v1/ \
   -d '{"service":"auth","action":"list_auth"}' | jq
 ```
 
-Registered services: `auth`, `category` (`switches/MainSwitch.php`).
+Registered services: `auth`, `category`, `sampolo` (`switches/MainSwitch.php`).
+
+`sampolo` is the canonical **generic CRUD** demo (`SampoloService` → `sample_table`).
+
+## Database (SQLite default)
+
+Default connection is **SQLite** (`database.sqlite3` in the example root, gitignored).
+
+```bash
+cd example
+php bin/init-db.php    # creates DB from database/schema.sql
+```
+
+PostgreSQL settings remain under `[db_pgsql]` in `settings.ini` if you prefer Postgres.
+
+## Middleware & authentication
+
+Registered in `environment/settings.ini`:
+
+| Key | Class | Purpose |
+|-----|-------|---------|
+| `request_id` | `Application\Middlewares\RequestIdMiddleware` | Adds `X-Request-Id` header |
+| `demo` | `Application\Authentications\DemoAuthentication` | `Authorization: Bearer demo-token` |
+
+```bash
+curl -s http://127.0.0.1:8003/api/v1/ping -H "Authorization: Bearer demo-token"
+```
 
 ## Config
 

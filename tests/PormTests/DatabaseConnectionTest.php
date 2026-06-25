@@ -4,32 +4,25 @@ namespace PormTests;
 
 use Pionia\Porm\Driver\Connection;
 use Pionia\TestSuite\PioniaTestCase;
-use function PHPUnit\Framework\assertInstanceOf;
-use function PHPUnit\Framework\assertTrue;
 
 class DatabaseConnectionTest extends PioniaTestCase
 {
-    public Connection $connection;
-
-    protected function setUp(): void
+  public function testInMemorySqliteConnection(): void
     {
-        parent::setUp();
-        $this->connection = Connection::connect([
+        $connection = $this->useInMemoryDatabase();
+
+        $this->assertInstanceOf(Connection::class, $connection);
+        $this->assertNotNull($this->testPdo);
+    }
+
+    public function testTestModeSkipsPdo(): void
+    {
+        $connection = Connection::connect([
             'type' => 'sqlite',
-            'database' => BASE_PATH . '/database.sqlite3',
             'testMode' => true,
         ]);
-        $this->connection->setTestMode(true);
-    }
 
-    public function testConnection()
-    {
-        assertInstanceOf(Connection::class, $this->connection);
+        $this->assertInstanceOf(Connection::class, $connection);
+        $this->assertTrue($connection->isTestMode());
     }
-
-    public function testConnectionIsTestMode()
-    {
-        assertTrue($this->connection->isTestMode());
-    }
-
 }

@@ -105,15 +105,17 @@ Prefer **`bin/test`** (or `./vendor/bin/phpunit`) for clean output on PHP 8.5:
 
 ```bash
 bin/test
+composer test:feature   # HTTP integration tests only
 ```
 
-`composer test` works too, but PHP 8.5 may print deprecation notices from **Composer's own PHAR** (`react/promise` inside `/usr/local/bin/composer`) before PHPUnit runs. Those are not from PioniaCore and do not affect results.
-
-To keep using the `composer` CLI with quieter output (suppresses deprecations from Composer's PHAR on PHP 8.5):
+With **pcov** or **xdebug**:
 
 ```bash
-php -d error_reporting=24575 $(which composer) test
+composer test:coverage
+php bin/coverage-check build/coverage.xml 50
 ```
+
+See [CONTRIBUTING.md](/CONTRIBUTING.md) and `AGENTS.md` for the `Pionia\TestSuite` traits.
 
 ### Compiling the core dev docs
 
@@ -123,7 +125,7 @@ composer document
 
 ### Contributing
 
-Please read the [CONTRIBUTING.md](/CONTRIBUTING.md) file for more information on how to contribute to this project.
+Please read [CONTRIBUTING.md](/CONTRIBUTING.md) for testing requirements and PR guidelines.
 
 ### Authors
 

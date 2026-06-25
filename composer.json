@@ -66,6 +66,11 @@
     },
     "scripts": {
         "test": "php vendor/bin/phpunit",
+        "test:unit": "php vendor/bin/phpunit --testsuite Unit",
+        "test:feature": "php vendor/bin/phpunit --testsuite Feature",
+        "test:console": "php vendor/bin/phpunit --testsuite Console",
+        "test:coverage": "php vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml",
+        "test:ci": "mkdir -p build && php vendor/bin/phpunit --coverage-clover=build/coverage.xml --coverage-text",
         "document": "phpDocumentor run -d . -t docs/ --config=phpdoc.dist.xml --force",
         "changelog": "git log --pretty=format:'- %s' > CHANGELOG.md"
     },

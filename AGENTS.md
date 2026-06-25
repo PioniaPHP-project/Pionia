@@ -97,6 +97,40 @@ User assets: `public/static/` via `/static/{path}`; media uploads via `/media/{p
 - **Every feature change must include tests** in the same PR.
 - Test bootstrap: `tests/bootstrap.php` loads the example app with `PIONIA_TESTING` (null logger, `DEBUG=false`). Use `InteractsWithTestEnvironment::setDebugEnv()` when a test needs debug behavior.
 
+### Composer scripts
+
+| Script | Purpose |
+|--------|---------|
+| `composer test` | Full suite |
+| `composer test:unit` | Unit tests only |
+| `composer test:feature` | HTTP integration (`tests/Feature/`) |
+| `composer test:console` | CLI smoke tests |
+| `composer test:coverage` | Text + Clover report (`build/coverage.xml`) |
+| `composer test:ci` | CI entry (coverage Clover) |
+
+CI (`.github/workflows/tests.yml`) runs on PHP 8.5 with **pcov** and enforces **50%** line coverage on `src/Pionia/` via `bin/coverage-check`.
+
+### `Pionia\TestSuite` traits
+
+Extend `Pionia\TestSuite\PioniaTestCase` (includes all traits below):
+
+| Trait | Use |
+|-------|-----|
+| `CreatesApplication` | `application()`, `webApplication()` |
+| `MakesHttpRequests` | `get()`, `postApi()`, `getApiPing()` → `TestResponse` |
+| `AssertsPioniaResponses` | `assertPioniaOk()`, `assertPioniaError()`, `assertJsonStructure()` |
+| `UsesInMemoryDatabase` | `useInMemoryDatabase()` for Porm tests |
+| `InteractsWithConsole` | `artisan('list')`, `assertExitCode(0)` |
+| `InteractsWithTestEnvironment` | Toggle `DEBUG` per test |
+
+Example feature test:
+
+```php
+$response = $this->getApiPing();
+$this->assertPioniaOk($response);
+$this->postApi('auth', 'list_auth');
+```
+
 ## PHP version
 
 Minimum **PHP 8.5**. Avoid deprecated patterns (e.g. `ReflectionMethod::setAccessible()`).

@@ -1,0 +1,42 @@
+#!/usr/bin/env php
+<?php
+
+if ($argc < 3) {
+    fwrite(STDERR, "Usage: coverage-check <clover.xml> <minimum-percent>\n");
+    exit(1);
+}
+
+[$script, $file, $minimum] = $argv;
+$minimum = (float) $minimum;
+
+if (!is_file($file)) {
+    fwrite(STDERR, "Coverage file not found: {$file}\n");
+    exit(1);
+}
+
+$xml = simplexml_load_file($file);
+if ($xml === false) {
+    fwrite(STDERR, "Invalid coverage XML: {$file}\n");
+    exit(1);
+}
+
+$metrics = $xml->project->metrics;
+$statements = (int) ($metrics['statements'] ?? 0);
+$covered = (int) ($metrics['coveredstatements'] ?? 0);
+
+if ($statements === 0) {
+    fwrite(STDERR, "No statements in coverage report.\n");
+    exit(1);
+}
+
+$percent = ($covered / $statements) * 100;
+$formatted = number_format($percent, 2);
+
+echo "Line coverage: {$formatted}% ({$covered}/{$statements})\n";
+
+if ($percent < $minimum) {
+    fwrite(STDERR, "Coverage {$formatted}% is below minimum {$minimum}%.\n");
+    exit(1);
+}
+
+exit(0);
