@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Run PHPUnit without loading the Composer PHAR (avoids PHP 8.5 deprecation noise from Composer's bundled deps).
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+exec php "${ROOT}/vendor/bin/phpunit" "$@"

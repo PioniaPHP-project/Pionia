@@ -3,15 +3,12 @@
 namespace Pionia\Http\Switches;
 
 use Exception;
-use Pionia\Exceptions\UserUnauthenticatedException;
-use Pionia\Exceptions\UserUnauthorizedException;
 use Pionia\Contracts\BaseSwitchContract;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\BaseResponse;
 use Pionia\Http\Response\Response;
 use Pionia\Http\Routing\SupportedHttpMethods;
 use Pionia\Utils\CachedEndpoints;
-use ReflectionException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Throwable;
 
@@ -62,7 +59,8 @@ abstract class BaseApiServiceSwitch implements BaseSwitchContract
         }
 
         $controller = get_called_class()."::processor";
-        $serviceKlass = services($controller)[$service];
+        $registry = services($controller);
+        $serviceKlass = is_array($registry) ? ($registry[$service] ?? null) : null;
 
         // if the class was defined as a string especially using Service::class, we instantiate it
         if ($serviceKlass && is_string($serviceKlass)){
@@ -88,17 +86,15 @@ abstract class BaseApiServiceSwitch implements BaseSwitchContract
     public static function processor(Request $request): Response
     {
         try {
-            $response =  self::processServices($request);
-        } catch (ResourceNotFoundException $e) {
-            $response = response(env("not_found_code", 404), $e->getMessage());
-        } catch (UserUnauthenticatedException $e) {
-            $response = response(env("unauthenticated_code", 401), $e->getMessage());
-        } catch (ReflectionException $e) {
-            $response = response(env("server_error_code", 500), $e->getMessage());
-        } catch (UserUnauthorizedException $e) {
-            $response = response(env("unauthorized_code", 403), $e->getMessage());
+            $response = self::processServices($request);
+        } catch (Throwable $e) {
+            $response = pionia_handle_exception($e, $request);
         }
-        logger()->debug($response->getPrettyResponse());
+
+        if (shouldLogResponses()) {
+            logger()->debug($response->getPrettyResponse());
+        }
+
         return new Response($response->getPrettyResponse(), 200);
     }
 
@@ -110,15 +106,20 @@ abstract class BaseApiServiceSwitch implements BaseSwitchContract
     public static function ping(Request $request): Response
     {
         $data = [
-            'framework' => app()->getAppName(),
-            'version'=> app()->phpVersion(),
+            'app' => app()->getAppName(),
+            'pv'=> app()->phpVersion(),
+            'fv'=> app()->appVersion,
             'port' => $request->getPort(),
             'uri' => $request->getRequestUri(),
             'schema' => $request->getScheme(),
         ];
 
-        $response =  response(0, 'pong', isDebug() ? $data : null);
-        logger()->info($response->getPrettyResponse());
+        $response = response(0, 'pong', isDebug() ? $data : null);
+
+        if (shouldLogResponses()) {
+            logger()->info($response->getPrettyResponse());
+        }
+
         return new Response($response->getPrettyResponse(), 200);
     }
 }

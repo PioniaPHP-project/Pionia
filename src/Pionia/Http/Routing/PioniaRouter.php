@@ -4,6 +4,7 @@ namespace Pionia\Http\Routing;
 
 use Exception;
 use InvalidArgumentException;
+use Pionia\Collections\Arrayable;
 use Pionia\Contracts\BaseSwitchContract;
 use Pionia\Http\Routing\Router\RouteObject;
 use Pionia\Http\Switches\BaseApiServiceSwitch;
@@ -34,7 +35,7 @@ class PioniaRouter implements RouterContract
 
     public function __construct(RealmContract $app)
     {
-        $this->routes = $routes ?? new BaseRoutes();
+        $this->routes = new BaseRoutes();
         $this->app = $app;
         $this->apiBase = $app->env($app::APP_API_BASE_TAG, $this->apiBase) ?? $app->getOrDefault($app::APP_API_BASE_TAG, $this->apiBase);
     }
@@ -81,7 +82,7 @@ class PioniaRouter implements RouterContract
      * This is the new implementation of the `addSwitchFor` method.
      * addSwitchFor and `wireTo` is deprecated fully and will be removed in the next version.
      *
-     * Adds also the status endpoint for the switch. which can be accessed by hitting ping
+     * Adds also the status endpoint for the switch at `{apiBase}{version}/ping` (e.g. `/api/v1/ping`).
      */
     public function switch(string $switch, string $version, ?array $schemas = ['https', 'http'], ?array $methods = ['POST', 'GET']): static
     {
@@ -120,9 +121,25 @@ class PioniaRouter implements RouterContract
         }
         $postRoute = $route->build();
         $this->routes->add($version, $postRoute);
-        $this->app->contextArrAdd(AppRealm::SWITCHES_TAGS, [$version => $switch]);
-        $this->app->contextArrAdd(AppRealm::SERVICES_TAG, [$controller => $switch::registerServices()->all()]);
+        $this->registerSwitchContext($version, $switch, $controller);
         return $this->addStatusEndpoint($version, $switch, $path);
+    }
+
+    private function registerSwitchContext(string $version, string $switch, string $controller): void
+    {
+        $switches = $this->app->getOrDefault(AppRealm::SWITCHES_TAGS, arr([]));
+        if (!$switches instanceof Arrayable) {
+            $switches = arr((array) $switches);
+        }
+        $switches->add($version, $switch);
+        $this->app->set(AppRealm::SWITCHES_TAGS, $switches);
+
+        $services = $this->app->getOrDefault(AppRealm::SERVICES_TAG, arr([]));
+        if (!$services instanceof Arrayable) {
+            $services = arr((array) $services);
+        }
+        $services->add($controller, $switch::registerServices()->all());
+        $this->app->set(AppRealm::SERVICES_TAG, $services);
     }
 
     /**

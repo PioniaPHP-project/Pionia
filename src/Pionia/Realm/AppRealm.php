@@ -15,7 +15,8 @@ use Pionia\Cache\PioniaCache;
 use Pionia\Collections\Arrayable;
 use Pionia\Events\PioniaEventDispatcher;
 use Pionia\Http\Routing\SupportedHttpMethods;
-use Pionia\Logging\PioniaLogger;
+use Pionia\Exceptions\ExceptionPipeline;
+use Pionia\Logging\LogManager;
 use Pionia\Middlewares\MiddlewareChain;
 use Pionia\Templating\TemplateEngine;
 use Pionia\Templating\TemplateEngineInterface;
@@ -32,7 +33,7 @@ use Symfony\Component\Cache\Adapter\Psr16Adapter;
  */
 class AppRealm implements RealmContract, ContainerInterface
 {
-    use ContainableRealm, BuiltInServices, PathsTrait, Cacheable, RoutingTrait, AppDatabaseHelper;
+    use ContainableRealm, BuiltInServices, PathsTrait, Cacheable, RoutingTrait, AppDatabaseHelper, HandlesExceptions;
     private array $bootingProviders = [];
     private array $bootedProviders = [];
     public const MIDDLEWARE_TAG = 'app.middlewares';
@@ -66,6 +67,7 @@ class AppRealm implements RealmContract, ContainerInterface
     public function __construct(?ContainerInterface $container = new Container())
     {
         $this->context = $container;
+        $this->setErrorHandler(GlobalExceptionHandler::class);
     }
 
     /**
@@ -200,9 +202,13 @@ class AppRealm implements RealmContract, ContainerInterface
             return new Logger($name);
         });
 
+        $this->set(LogManager::class, fn () => new LogManager($this));
+
         $this->set(LoggerInterface::class, function () {
-            return new PioniaLogger();
+            return $this->get(LogManager::class)->channel();
         });
+
+        $this->set(ExceptionPipeline::class, fn () => $this->exceptions());
 
         $this->set(PioniaEventDispatcher::class, function () {
             return new PioniaEventDispatcher();
@@ -231,6 +237,31 @@ class AppRealm implements RealmContract, ContainerInterface
 
         $this->resolveRoutes()
             ->addDefaultStaticFiles();
+
+        $this->registerExceptionHandlers();
+    }
+
+    private function registerExceptionHandlers(): void
+    {
+        set_error_handler(function (int $severity, string $message, string $file, int $line): bool {
+            if (!(error_reporting() & $severity)) {
+                return false;
+            }
+            throw new \ErrorException($message, 0, $severity, $file, $line);
+        });
+
+        set_exception_handler(function (\Throwable $e): void {
+            try {
+                $response = pionia_handle_exception($e);
+                if (PHP_SAPI !== 'cli') {
+                    (new \Pionia\Http\Response\Response($response->getPrettyResponse(), 200))->send();
+                }
+            } catch (\Throwable $handlerError) {
+                error_log($handlerError->getMessage());
+                error_log($e->getMessage());
+            }
+            exit(1);
+        });
     }
 
     /**
@@ -432,6 +463,17 @@ class AppRealm implements RealmContract, ContainerInterface
     {
         $this->bootedProviders[] = $callable;
         return $this;
+    }
+
+    function setErrorHandler($handler): static
+    {
+        $this->set('error_handler', $handler);
+        return $this;
+    }
+
+    function getErrorHandler()
+    {
+        return $this->getOrDefault('error_handler', GlobalExceptionHandler::class);
     }
 }
 

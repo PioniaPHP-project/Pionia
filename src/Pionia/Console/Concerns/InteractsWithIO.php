@@ -274,10 +274,10 @@ trait InteractsWithIO
      * Write a string as information output.
      *
      * @param string $string
-     * @param int|string|null $verbosity
+     * @param string | int $verbosity
      * @return void
      */
-    public function info(string $string, int|string|null $verbosity = null): void
+    public function info(string $string, string | int $verbosity = 'normal'): void
     {
         $this->line($string, 'info', $verbosity);
     }
@@ -287,10 +287,10 @@ trait InteractsWithIO
      *
      * @param string $string
      * @param string|null $style
-     * @param int|string|null $verbosity
+     * @param int|string $verbosity
      * @return void
      */
-    public function line(string $string, ?string $style = null, int|string|null $verbosity = null): void
+    public function line(string $string, ?string $style = null, int|string $verbosity = 'normal'): void
     {
         $styled = $style ? "<$style>$string</$style>" : $string;
 
@@ -418,10 +418,10 @@ trait InteractsWithIO
     /**
      * Get the verbosity level in terms of Symfony's OutputInterface level.
      *
-     * @param int|string|null $level
+     * @param int|string $level
      * @return int
      */
-    protected function parseVerbosity(int|string|null $level = null): int
+    protected function parseVerbosity(int|string $level = 'normal'): int
     {
         if (isset($this->verbosityMap[$level])) {
             $level = $this->verbosityMap[$level];

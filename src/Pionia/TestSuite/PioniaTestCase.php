@@ -2,32 +2,23 @@
 
 namespace Pionia\TestSuite;
 
-use DI\Container;
-use Monolog\Logger;
-use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Pionia\Base\WebApplication;
-use Pionia\Events\PioniaEventDispatcher;
 use Pionia\Http\Request\Request;
-use Pionia\Logging\PioniaLogger;
+use Pionia\Realm\AppRealm;
 use Pionia\TestSuite\Helpers\HelperMocksTrait;
-use Pionia\Utils\PioniaApplicationType;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class PioniaTestCase extends TestCase
 {
     use HelperMocksTrait;
 
-    public ?WebApplication $application = null;
+    public WebApplication | null $application = null;
 
     public ?Request $request;
 
-    /**
-     * @throws Exception
-     */
     protected function setUp(): void
     {
-        $this->applicationMock();
+        $this->application = app()->make(AppRealm::WEB_APP_TAG);
         $this->requestMock();
     }
 
@@ -50,21 +41,5 @@ class PioniaTestCase extends TestCase
         }
         $this->request = Request::create($url, $requestType, $data);
         return $this->request;
-    }
-
-
-
-    /**
-     * @throws Exception
-     */
-    public function applicationMock(): WebApplication
-    {
-        $application = $this->createMock(WebApplication::class);
-        $application->context = $this->createMock(Container::class);
-        $application->dispatcher = $this->createMock(PioniaEventDispatcher::class);
-
-        $application->powerUp(PioniaApplicationType::TEST);
-        $this->application = $application;
-        return $application;
     }
 }

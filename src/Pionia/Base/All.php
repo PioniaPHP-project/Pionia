@@ -93,7 +93,7 @@ if (!function_exists('allBuiltins')) {
                 NAMESPACES::MIDDLEWARE_NS->name => 'Application\Middlewares'
             ],
             'aliases' => [
-                DIRECTORIES::WELCOME_PAGE->name => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'templates/index.php'
+                DIRECTORIES::WELCOME_PAGE->name => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'index.html'
             ],
             'providers' => [
 

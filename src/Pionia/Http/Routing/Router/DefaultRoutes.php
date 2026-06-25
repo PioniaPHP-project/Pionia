@@ -3,6 +3,7 @@
 namespace Pionia\Http\Routing\Router;
 
 use DIRECTORIES;
+use Pionia\Http\Pages\FrameworkWelcomePage;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
 use Pionia\Realm\AppRealm;
@@ -74,7 +75,8 @@ class DefaultRoutes
     public function collect(RealmContract $appRealm): static
     {
        $this->addRouteForHome()
-            ->addRouteForMediaFiles();
+            ->addRouteForMediaFiles()
+            ->addFrameworkAssetsRoute();
 
         $routes = $appRealm->getOrDefault(AppRealm::APP_ROUTES_TAG, new RouteCollection());
         $routes->addCollection($this->defaultRoutes);
@@ -98,24 +100,47 @@ class DefaultRoutes
 
     public function homeResolver(Request $request): Response
     {
-        // check if we have an index.html in the static folder otherwise, serve the inbuilt html
-        $fileManager = new Filesystem();
-        $staticPage = path(directoryFor(DIRECTORIES::STATIC_DIR->name).DIRECTORY_SEPARATOR.'index.html');
-        $response = new Response();
+        $userIndex = path(directoryFor(DIRECTORIES::PUBLIC_DIR->name) . DIRECTORY_SEPARATOR . 'index.html');
 
-        if ($fileManager->exists($staticPage)) {
-            // send the file here
-            $content = $fileManager->readFile($staticPage);
-            $response->setContent($content);
-        } else {
-            $welcomePage = __DIR__.'/../../../templates/index.php';
-            render($welcomePage, [
-                    'app' => realm(),
-                    'request' => $request,
-                ]);
+        if (is_file($userIndex)) {
+            return new Response(
+                (string) file_get_contents($userIndex),
+                200,
+                ['Content-Type' => 'text/html; charset=UTF-8']
+            );
         }
-        $response =  new Response($content, 200, ['Content-Type' => 'text/html']);
-        return $response->prepare($request)->send();
+
+        return FrameworkWelcomePage::for($request, realm())->toResponse();
+    }
+
+    private function addFrameworkAssetsRoute(): static
+    {
+        $this->defaultRoutes->add(
+            'pionia_assets',
+            RouteObject::get('/__pionia/{path}')
+                ->options(['path' => '.+'])
+                ->controller(['_controller' => DefaultRoutes::class . '::frameworkAssetsRouter'])
+                ->build()
+        );
+
+        return $this;
+    }
+
+    public function frameworkAssetsRouter(Request $request): Response | BinaryFileResponse
+    {
+        $_path = $request->attributes->get('path');
+        $requestedFile = $this->resolvePathWithinBase(FrameworkWelcomePage::resourcesPath(), $_path);
+
+        if ($requestedFile === null) {
+            return $this->errorMessage($request, 404, 'Framework asset not found');
+        }
+
+        $mime = $this->guessMimeType($requestedFile);
+        $response = new BinaryFileResponse($requestedFile);
+        $response->headers->set('Content-Type', $mime);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, basename($requestedFile));
+
+        return $response;
     }
 
     /**
@@ -135,7 +160,6 @@ class DefaultRoutes
 
     private function guessMimeType($file)
     {
-        $extension = pathinfo($file, PATHINFO_EXTENSION);
         $defaultMimeMap = [
             'css' => 'text/css',
             'js' => 'application/javascript',
@@ -143,15 +167,50 @@ class DefaultRoutes
             'png' => 'image/png',
             'jpg' => 'image/jpeg',
             'jpeg' => 'image/jpeg',
+            'ico' => 'image/x-icon',
             'svg' => 'image/svg+xml',
             'woff2' => 'font/woff2',
             'ttf' => 'font/ttf',
             'html' => 'text/html',
+            'txt' => 'text/plain',
         ];
-        $mimeTypes = new MimeTypes();
-       return $mimeTypes->guessMimeType($file)
-            ?? $defaultMimeMap[strtolower($extension)]
-            ?? 'application/octet-stream';
+
+        $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION) ?: '');
+
+        try {
+            $mimeTypes = new MimeTypes();
+            $guessed = $mimeTypes->guessMimeType($file);
+            if ($guessed !== null) {
+                return $guessed;
+            }
+        } catch (\Throwable) {
+        }
+
+        return $defaultMimeMap[$extension] ?? 'application/octet-stream';
+    }
+
+    private function resolvePathWithinBase(string $baseDir, string $relativePath): ?string
+    {
+        $base = str_starts_with($baseDir, DIRECTORY_SEPARATOR)
+            ? $baseDir
+            : path($baseDir);
+        $baseReal = realpath($base);
+        if ($baseReal === false) {
+            return null;
+        }
+
+        $candidate = $baseReal . DIRECTORY_SEPARATOR . ltrim($relativePath, '/');
+        $resolved = realpath($candidate);
+        if ($resolved === false || !is_file($resolved)) {
+            return null;
+        }
+
+        $basePrefix = rtrim($baseReal, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (!str_starts_with($resolved, $basePrefix) && $resolved !== $baseReal) {
+            return null;
+        }
+
+        return $resolved;
     }
 
     /**
@@ -160,23 +219,21 @@ class DefaultRoutes
      */
     public function staticFilesRouter(Request $request): Response | BinaryFileResponse
     {
-        $fileManager = new Filesystem();
         $_path = $request->attributes->get('path');
-        $requestedFile = path(directoryFor(DIRECTORIES::STATIC_DIR->name).DIRECTORY_SEPARATOR.$_path);
-        if (!$requestedFile || !$fileManager->exists($requestedFile)) {
-            return $this->errorMessage($request, 404, 'Resource not found or did not match any endpoints')
-                ->prepare($request)->send();
+        $staticBase = alias(DIRECTORIES::STATIC_DIR->name);
+        $requestedFile = $this->resolvePathWithinBase($staticBase, $_path);
+
+        if ($requestedFile === null) {
+            return $this->errorMessage($request, 404, 'Resource not found or did not match any endpoints');
         }
 
-        // Get MIME type
         $mime = $this->guessMimeType($requestedFile);
 
-
-        // Serve a file
         $response = new BinaryFileResponse($requestedFile);
         $response->headers->set('Content-Type', $mime);
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, basename($requestedFile));
-        return $response->prepare($request)->send();
+
+        return $response;
     }
 
     /**
@@ -210,33 +267,23 @@ class DefaultRoutes
 
     public function mediaFilesRouter(Request $request): Response | BinaryFileResponse
     {
-        // Get the dynamic {path} parameter from the route
         $path = $request->attributes->get('path');
+        $uploadSettings = env('uploads', ['media_dir' => 'media']);
+        $mediaDir = $uploadSettings['media_dir'] ?? 'media';
+        $mediaBase = alias(DIRECTORIES::STORAGE_DIR->name) . DIRECTORY_SEPARATOR . $mediaDir;
+        $requestedFile = $this->resolvePathWithinBase($mediaBase, $path);
 
-        $requestedFile = path(directoryFor(DIRECTORIES::STATIC_DIR->name).DIRECTORY_SEPARATOR.$path);
-
-
-        // Security check to prevent directory traversal
-        if (
-            !$requestedFile ||
-            !str_starts_with($requestedFile, realpath($requestedFile)) ||
-            !is_file($requestedFile)
-        ) {
-            return $this->errorMessage( $request, 404, 'Resource not found or did not match any endpoints')
-                ->prepare($request)->send();
+        if ($requestedFile === null) {
+            return $this->errorMessage($request, 404, 'Resource not found or did not match any endpoints');
         }
 
-        // Determine content type (MIME)
-        $mimeType = new MimeTypes();
-        $mime = $mimeType->guessMimeType($requestedFile) ?: 'application/octet-stream';
-        logger()->info($mime);
+        $mime = $this->guessMimeType($requestedFile);
 
-        // Serve the file
         $response = new BinaryFileResponse($requestedFile);
         $response->headers->set('Content-Type', $mime);
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, basename($requestedFile));
 
-        return $response->prepare($request)->send();
+        return $response;
     }
 
 }

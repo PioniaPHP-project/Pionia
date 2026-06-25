@@ -52,7 +52,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark pionia-color">
     <div class="container">
         <div class="d-inline-flex align-content-center align-items-center">
-            <img src="favicon.ico" style="height: 40px" alt="">
+            <img src="./favicon.ico" style="height: 40px" alt="">
             <a class="navbar-brand fw-bold" href="#"><?php echo framework() ?></a>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -230,7 +230,7 @@
 <?php endif; ?>
 <!-- Footer -->
 <footer class="text-center py-4 bg-dark text-white">
-    <img src="/static/pionia_logo.webp" class="mx-auto h-25 w-25" alt="<?php echo app()->getAppName() ?> - <?php echo env('APP_ENV') ?>"/>
+    <img src="./static/pionia_logo.webp" class="mx-auto h-25 w-25" alt="<?php echo app()->getAppName() ?> - <?php echo env('APP_ENV') ?>"/>
 
     <div class="container">
         &copy; <?= date('Y') ?> <?php echo framework() ?> &mdash; ❤️ <?php echo frameworkTag() ?>

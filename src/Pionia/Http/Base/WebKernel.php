@@ -9,7 +9,6 @@ use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
 use Pionia\Middlewares\MiddlewareChain;
 use Pionia\Realm\AppRealm;
-use Pionia\Realm\RealmContract;
 use Pionia\Utils\Microable;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
@@ -38,14 +37,15 @@ class WebKernel implements KernelContract
         return call_user_func_array($controller, $arguments);
     }
 
-    public function handle(Request $request): Response
+    public function handle(Request $request): Response | BinaryFileResponse
     {
         try {
             $response = $this->prepareRequest($request);
         } catch (Throwable $e) {
-            logger()->error("Error handling request " . $request->getMethod() . "::" . $request->getUri(), ["error" => $e->getMessage()]);
-            $response =  (new Response(response(env('SERVER_ERROR_CODE', 500), $e->getMessage())->getPrettyResponse(), 200));
+            $response = pionia_handle_exception($e, $request);
+            $response = new Response($response->getPrettyResponse(), 200);
         }
+
         return $this->terminate($response, $request);
     }
 
@@ -99,12 +99,15 @@ class WebKernel implements KernelContract
      * @param Response $response
      * @return Response
      */
-    public function terminate(Response $response, Request $request):Response
+    public function terminate(Response | BinaryFileResponse $response, Request $request): Response | BinaryFileResponse
     {
-        $middlewareChain = realm()->getSilently(MiddlewareChain::class);
-        if ($middlewareChain) {
-            $middlewareChain->handle($request, $response);
+        if ($response instanceof Response) {
+            $middlewareChain = realm()->getSilently(MiddlewareChain::class);
+            if ($middlewareChain) {
+                $middlewareChain->handle($request, $response);
+            }
         }
+
         return $response->prepare($request)->send();
     }
 

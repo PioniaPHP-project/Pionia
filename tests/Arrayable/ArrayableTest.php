@@ -310,6 +310,25 @@ class ArrayableTest extends PioniaTestCase
         $this->arrayable->getOrThrow('new', new \Exception('Key not found'));
     }
 
+    public function testAddAfterMatchesValueNotOnlyKey(): void
+    {
+        $this->arrayable->add('cache', 'Pionia\\Middlewares\\Builtins\\CacheMiddleware');
+        $this->arrayable->addAfter('Pionia\\Middlewares\\Builtins\\CacheMiddleware', 'after-middleware');
+
+        $stack = array_values($this->arrayable->all());
+        $this->assertSame('after-middleware', $stack[1]);
+    }
+
+    public function testAddBeforeMatchesValueNotOnlyKey(): void
+    {
+        $this->arrayable->add('cache', 'Pionia\\Middlewares\\Builtins\\CacheMiddleware');
+        $this->arrayable->addBefore('Pionia\\Middlewares\\Builtins\\CacheMiddleware', 'before-middleware');
+
+        $stack = array_values($this->arrayable->all());
+        $this->assertSame('before-middleware', $stack[0]);
+        $this->assertSame('Pionia\\Middlewares\\Builtins\\CacheMiddleware', $stack[1]);
+    }
+
     public function testGetJson()
     {
         $this->arrayable->merge([

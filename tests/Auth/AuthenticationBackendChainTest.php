@@ -4,22 +4,27 @@ namespace Auth;
 
 use Pionia\Auth\AuthenticationChain;
 use Pionia\Auth\ContextUserObject;
+use Pionia\Collections\Arrayable;
+use Pionia\Realm\AppRealm;
 use Pionia\TestSuite\Mocks\AuthenticationBackendMock;
 use Pionia\TestSuite\PioniaTestCase;
 
 
 class AuthenticationBackendChainTest extends PioniaTestCase
 {
+    private AuthenticationChain $chain;
+
     public function setUp(): void
     {
         parent::setUp();
-        $this->chain = new AuthenticationChain($this->application);
+        realm()->set(AppRealm::AUTHENTICATIONS_TAG, new Arrayable([]));
+        $this->chain = new AuthenticationChain();
     }
 
     public function tearDown(): void
     {
         parent::tearDown();
-        $this->chain = null;
+        unset($this->chain);
     }
 
     public function testAuthenticationChainCreation()
@@ -43,7 +48,7 @@ class AuthenticationBackendChainTest extends PioniaTestCase
     {
         $this->chain->addAuthenticationBackend(AuthenticationBackendMock::class);
 
-        $auth = new AuthenticationBackendMock($this->application->context);
+        $auth = new AuthenticationBackendMock(realm());
 
         $authenticate = $auth->authenticate($this->request);
 

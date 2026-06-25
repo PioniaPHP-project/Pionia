@@ -72,4 +72,14 @@ abstract class BaseProvider implements ProviderContract
      * Add logic to the application's terminating hook.
      */
     public function onTerminate(): void {}
+
+  /**
+   * Configure framework logging channels.
+   */
+    public function configureLogging(\Pionia\Logging\LogManager $log): void {}
+
+  /**
+   * Customize the exception pipeline.
+   */
+    public function configureExceptions(\Pionia\Exceptions\ExceptionPipeline $exceptions): void {}
 }

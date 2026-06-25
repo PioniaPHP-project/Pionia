@@ -97,8 +97,9 @@ class AuthenticationChain implements AuthenticationChainContract
 
     private function updateAuthenticationsInContext(): static
     {
-        app()->contextArrAdd(app()::AUTHENTICATIONS_TAG, $this->authentications)
-            ->cache(app()::AUTHENTICATIONS_TAG, $this->authentications);
+        app()->set(app()::AUTHENTICATIONS_TAG, $this->authentications);
+        app()->cache(app()::AUTHENTICATIONS_TAG, $this->authentications->all());
+
         return $this;
     }
 
@@ -123,7 +124,7 @@ class AuthenticationChain implements AuthenticationChainContract
             return;
         }
         // we create the object first
-        $authObj = new $auth($this);
+        $authObj = new $auth(realm());
 
         $service = $request->getData()->get("service");
 

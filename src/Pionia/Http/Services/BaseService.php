@@ -141,7 +141,6 @@ class BaseService implements ServiceContract
         } else {
             // this is a normal action, we call it normally
             $reflection = new ReflectionMethod($this, $action);
-            $reflection->setAccessible(true);
             $response = $reflection->invoke($this, $data, $files, $this->request);
         }
 

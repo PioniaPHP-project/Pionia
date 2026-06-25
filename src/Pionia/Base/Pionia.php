@@ -6,7 +6,6 @@ namespace Pionia\Base;
 use Exception;
 use Pionia\Base\Events\PioniaConsoleStarted;
 use Pionia\Cache\Cacheable;
-use Pionia\Collections\Arrayable;
 use Pionia\Console\BaseCommand;
 use Pionia\Contracts\ApplicationContract;
 use Pionia\Realm\AppRealm;
@@ -102,8 +101,8 @@ class Pionia extends Application implements ApplicationContract
             exit(1);
         }
 
-        if (version_compare(PHP_VERSION, '8.1.0', '<')) {
-            echo 'This script requires PHP 8.1 or later.';
+        if (version_compare(PHP_VERSION, '8.5.0', '<')) {
+            echo 'This script requires PHP 8.5 or later.';
             exit(1);
         }
         $this->powerUp(PioniaApplicationType::CONSOLE);

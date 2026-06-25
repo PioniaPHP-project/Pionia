@@ -43,7 +43,8 @@ class MiddlewareChain
 
     public function __construct()
     {
-        $this->middlewareContainer = app()->getOrDefault(app()::MIDDLEWARE_TAG, new Arrayable([]));
+        $stack = app()->getOrDefault(app()::MIDDLEWARE_TAG, new Arrayable([]));
+        $this->middlewareContainer = $stack instanceof Arrayable ? clone $stack : new Arrayable($stack);
     }
 
     /**

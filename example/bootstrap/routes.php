@@ -7,7 +7,7 @@ use Application\Switches\MainSwitch;
 
 $app = require __DIR__.DIRECTORY_SEPARATOR.'application.php';
 
-$router = route($app)
+router($app)
     ->switch(MainSwitch::class, 'v1');
 
 return $app;

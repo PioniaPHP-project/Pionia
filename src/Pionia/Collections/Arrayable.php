@@ -488,7 +488,7 @@ class Arrayable
         $array = [];
         foreach ($this->array as $k => $v) {
             $array[$k] = $v;
-            if ($k === $positionKey) {
+            if ($k === $positionKey || $v === $positionKey) {
                 $array[$key] = $value ?? $key;
             }
         }
@@ -500,7 +500,7 @@ class Arrayable
     {
         $array = [];
         foreach ($this->array as $k => $v) {
-            if ($k === $positionKey) {
+            if ($k === $positionKey || $v === $positionKey) {
                 $array[$key] = $value ?? $key;
             }
             $array[$k] = $v;

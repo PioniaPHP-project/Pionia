@@ -52,7 +52,7 @@ If you are looking to use or get started with the framework, please find the [Pi
 
 ### Prerequisites
 
-- PHP 8.1 or higher
+- PHP 8.5 or higher
 - Composer
 - Git
 - Any Editor/IDE of your choice preferably PHPStorm or Intellij IDEA
@@ -62,13 +62,13 @@ If you are looking to use or get started with the framework, please find the [Pi
 Clone the repository
 
 ```bash
-git clone https://github.com/PioniaPHP-project/Pionia.git
+git clone https://github.com/PioniaPHP-project/PioniaCore.git
 ```
 
 Change directory to the project folder
 
 ```bash
-cd Pionia
+cd PioniaCore
 ```
 
 Install the dependencies
@@ -77,10 +77,42 @@ Install the dependencies
 composer install
 ```
 
-### Running the tests
+### Running the example app
+
+From the `example/` directory:
 
 ```bash
-composer test
+cd example
+php pionia serve
+```
+
+Then open `http://127.0.0.1:8003/` (port from `example/environment/.env`).
+
+API routes are **versioned** — register switches in `bootstrap/routes.php` (e.g. `v1` → `/api/v1/`):
+
+```bash
+curl -s http://127.0.0.1:8003/api/v1/ping
+curl -s -X POST http://127.0.0.1:8003/api/v1/ \
+  -H "Content-Type: application/json" \
+  -d '{"service":"auth","action":"list_auth"}'
+```
+
+Helpers: `apiVersionPath()`, `apiPingPath()`, `defaultApiVersion()` in `src/Pionia/Utils/helpers.php`.
+
+### Running the tests
+
+Prefer **`bin/test`** (or `./vendor/bin/phpunit`) for clean output on PHP 8.5:
+
+```bash
+bin/test
+```
+
+`composer test` works too, but PHP 8.5 may print deprecation notices from **Composer's own PHAR** (`react/promise` inside `/usr/local/bin/composer`) before PHPUnit runs. Those are not from PioniaCore and do not affect results.
+
+To keep using the `composer` CLI with quieter output (suppresses deprecations from Composer's PHAR on PHP 8.5):
+
+```bash
+php -d error_reporting=24575 $(which composer) test
 ```
 
 ### Compiling the core dev docs

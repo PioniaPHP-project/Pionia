@@ -194,6 +194,6 @@ class WebApplication  implements ApplicationContract
 
     function appType(): PioniaApplicationType
     {
-        return PioniaApplicationType::CONSOLE;
+        return PioniaApplicationType::REST;
     }
 }

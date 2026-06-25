@@ -21,7 +21,7 @@ class MiddlewareMock2 extends Middleware
     /**
      * @inheritDoc
      */
-    public function onResponse(Response $response): void
+    public function onResponse(Response $response, Request $request): void
     {
         $response->headers->set('X-Test-Response-Header-One', 'test-Response-header-2');
         $response->setCache(['max-age' => 3600, 'public' => true]);

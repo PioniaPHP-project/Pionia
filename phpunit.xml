@@ -1,4 +1,4 @@
-<phpunit colors="true" bootstrap="vendor/autoload.php">
+<phpunit colors="true" bootstrap="tests/bootstrap.php">
     <testsuites>
         <testsuite name="Pionia Core Tests">
             <directory>tests</directory>

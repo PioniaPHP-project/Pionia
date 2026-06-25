@@ -2,24 +2,28 @@
 
 namespace Middlewares;
 
+use Pionia\Collections\Arrayable;
 use Pionia\Middlewares\MiddlewareChain;
+use Pionia\Realm\AppRealm;
 use Pionia\TestSuite\Mocks\MiddlewareMock;
 use Pionia\TestSuite\Mocks\MiddlewareMock2;
 use Pionia\TestSuite\PioniaTestCase;
 
 class MiddlewareChainTest extends PioniaTestCase
 {
+    private MiddlewareChain $chain;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->chain = new MiddlewareChain($this->application);
+        realm()->set(AppRealm::MIDDLEWARE_TAG, new Arrayable([]));
+        $this->chain = new MiddlewareChain();
     }
 
     public function tearDown(): void
     {
         parent::tearDown();
-        $this->chain = null;
+        unset($this->chain);
     }
 
     public function testMiddlewareChainCreation()
@@ -49,7 +53,12 @@ class MiddlewareChainTest extends PioniaTestCase
     {
         $this->chain->add(MiddlewareMock::class);
         $this->chain->addAfter(MiddlewareMock::class, MiddlewareMock2::class);
-        $this->assertEquals(MiddlewareMock2::class, $this->chain->middlewareStack()->at(1));
+        $stack = array_values($this->chain->all());
+        $mockIndex = array_search(MiddlewareMock::class, $stack, true);
+        $mock2Index = array_search(MiddlewareMock2::class, $stack, true);
+        $this->assertNotFalse($mockIndex);
+        $this->assertNotFalse($mock2Index);
+        $this->assertSame($mockIndex + 1, $mock2Index);
     }
 
     /**
@@ -61,7 +70,12 @@ class MiddlewareChainTest extends PioniaTestCase
     {
         $this->chain->add(MiddlewareMock::class);
         $this->chain->addBefore(MiddlewareMock::class, MiddlewareMock2::class);
-        $this->assertEquals(MiddlewareMock2::class, $this->chain->middlewareStack()->at(0));
+        $stack = array_values($this->chain->all());
+        $mockIndex = array_search(MiddlewareMock::class, $stack, true);
+        $mock2Index = array_search(MiddlewareMock2::class, $stack, true);
+        $this->assertNotFalse($mockIndex);
+        $this->assertNotFalse($mock2Index);
+        $this->assertLessThan($mockIndex, $mock2Index);
     }
 
     /**

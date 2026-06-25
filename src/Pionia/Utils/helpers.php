@@ -52,6 +52,13 @@ if (! function_exists('route')){
     }
 }
 
+if (! function_exists('router')){
+    function router(RealmContract $app): PioniaRouter
+    {
+        return new PioniaRouter($app);
+    }
+}
+
 if (! function_exists('arr')) {
     /**
      * Get an item from an array using "dot" notation.
@@ -93,6 +100,32 @@ if (! function_exists('setEnv')) {
             $actual = strtolower($key);
         }
         realm()->setEnv($actual, $value);
+    }
+}
+
+if (!function_exists('pionia_handle_exception')) {
+    /**
+     * Resolve a throwable through the configured global exception handler.
+     */
+    function pionia_handle_exception(\Throwable $e, ?Request $request = null): BaseResponse
+    {
+        return realm()->exceptions()->handle($e, $request);
+    }
+}
+
+if (!function_exists('report')) {
+    /**
+     * Report an exception or message through the exception pipeline logger.
+     */
+    function report(\Throwable|string $message, array $context = []): void
+    {
+        if ($message instanceof \Throwable) {
+            realm()->exceptions()->report($message);
+
+            return;
+        }
+
+        logger()->error($message, $context);
     }
 }
 
@@ -424,12 +457,12 @@ if (!function_exists('allRoutes')){
 
 if (!function_exists('baseUrl')){
     /**
-     * Base url of the api. This is before the version.
+     * Unversioned API prefix (before the switch version).
      *
-     * To set this, just add `API_BASE` in the environment, otherwise, defaults to `/api/`
+     * To set this, add `API_BASE` in the environment; otherwise defaults to `/api/`.
+     * For versioned URLs use `apiVersionPath()`; for the status endpoint use `apiPingPath()`.
      *
-     * @return string
-     * @example ``` /api/ ```
+     * @return string e.g. `/api/`
      */
     function baseUrl(): string
     {
@@ -677,7 +710,13 @@ if (!function_exists('container')) {
      */
     function container(): AppRealm
     {
-        return require container_path();
+        static $instance = null;
+
+        if ($instance === null) {
+            $instance = require container_path();
+        }
+
+        return $instance;
     }
 }
 
@@ -709,12 +748,17 @@ if (!function_exists('services')) {
      */
     function services(?string $key = null): array
     {
-        $services =  container()->getSilently(AppRealm::SERVICES_TAG);
-        if ($key) {
-            if ($_services =  $services[$key]){
-                return $_services;
-            }
+        $services = container()->getSilently(AppRealm::SERVICES_TAG);
+        if ($services instanceof Arrayable) {
+            $services = $services->all();
+        } elseif (!is_array($services)) {
+            $services = (array) $services;
         }
+
+        if ($key) {
+            return $services[$key] ?? [];
+        }
+
         return $services;
     }
 }
@@ -750,8 +794,54 @@ if (!function_exists('middlewares')) {
 }
 
 if (!function_exists("apiBase")) {
+    /**
+     * Unversioned API prefix from the app context (same as `baseUrl()`).
+     *
+     * @see apiVersionPath() for `/api/v1/`
+     * @see apiPingPath() for `/api/v1/ping`
+     */
     function apiBase() {
         return app()->getSilently(app()::APP_API_BASE_TAG);
+    }
+}
+
+if (!function_exists('defaultApiVersion')) {
+    /**
+     * First registered switch version, e.g. v1.
+     */
+    function defaultApiVersion(): string
+    {
+        $switches = app()->getSilently(AppRealm::SWITCHES_TAGS);
+        if ($switches instanceof Arrayable) {
+            $keys = array_keys($switches->all());
+        } else {
+            $keys = array_keys((array) $switches);
+        }
+
+        return $keys[0] ?? 'v1';
+    }
+}
+
+if (!function_exists('apiVersionPath')) {
+    /**
+     * Versioned API prefix, e.g. /api/v1/
+     */
+    function apiVersionPath(?string $version = null): string
+    {
+        $version ??= defaultApiVersion();
+        $base = rtrim((string) apiBase(), '/');
+
+        return $base . '/' . trim($version, '/') . '/';
+    }
+}
+
+if (!function_exists('apiPingPath')) {
+    /**
+     * Status endpoint for a switch version, e.g. /api/v1/ping
+     */
+    function apiPingPath(?string $version = null): string
+    {
+        return rtrim(apiVersionPath($version), '/') . '/ping';
     }
 }
 
@@ -800,6 +890,19 @@ if (!function_exists('env')) {
 }
 
 
+if (!function_exists('shouldLogResponses')) {
+  /**
+   * Whether API responses should be written to the log (see [logging] LOG_RESPONSES).
+   */
+    function shouldLogResponses(): bool
+    {
+        $logging = env('logging', []);
+        $value = is_array($logging) ? ($logging['LOG_RESPONSES'] ?? false) : false;
+
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+}
+
 if (!function_exists('logger')) {
     /**
      * Logger Instance
@@ -807,8 +910,12 @@ if (!function_exists('logger')) {
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    function logger(): LoggerInterface
+    function logger(?string $channel = null): LoggerInterface
     {
+        if ($channel !== null) {
+            return realm()->get(\Pionia\Logging\LogManager::class)->channel($channel);
+        }
+
         return realm()->get(LoggerInterface::class);
     }
 }
@@ -843,8 +950,8 @@ if (!function_exists('timeAgo')) {
     }
 }
 
-if (!function_exists('debug')) {
-    function isDebug(): string
+if (!function_exists('isDebug')) {
+    function isDebug(): bool
     {
         return app()->isDebug();
     }
