@@ -13,7 +13,7 @@ use Exception;
 use Pionia\Collections\Arrayable;
 use Pionia\Http\Response\BaseResponse;
 use Pionia\Http\Services\Service;
-use Symfony\Component\HttpFoundation\FileBag;
+use Pionia\Http\Bag\FileBag;
 use Throwable;
 
 class CategoryService extends Service
