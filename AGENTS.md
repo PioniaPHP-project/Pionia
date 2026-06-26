@@ -26,9 +26,21 @@ Split **boot** from **handle** for FPM today and RoadRunner workers later:
 | Method | Role |
 |--------|------|
 | `WebApplication::bootOnce()` | Run `powerUp()` once per process (`$booted` guard) |
-| `WebApplication::handleRequest(Request)` | Match route + return `Response` (no `send()`) |
+| `WebApplication::handleRequest(Request)` | Match route + return `Response` (no `send()`); auto `resetBetweenRequests()` in worker mode |
 | `WebApplication::fly()` | `createFromGlobals()` → `handleRequest()` → `send()` (FPM entry) |
 | `WebApplication::resetBetweenRequests()` | Flush per-request hooks (worker mode) |
+
+**RoadRunner (Phase 5):**
+
+```bash
+composer require spiral/roadrunner-http nyholm/psr7   # in your app
+./rr get -l ./rr                                     # download binary once
+php example/pionia runserver                          # or ./rr serve -c example/.rr.yaml
+```
+
+- Worker entry: `example/worker.php` (boot once, PSR-7 loop)
+- Config: `example/.rr.yaml`
+- `ConnectionManager` keeps PDO alive across requests; `disconnect()` on worker shutdown only
 
 `WebKernel::terminate()` only **prepares** the response; the caller sends it. In tests use `handleRequest()` or `MakesHttpRequests` traits.
 

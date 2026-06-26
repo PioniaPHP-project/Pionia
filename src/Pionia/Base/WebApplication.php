@@ -122,9 +122,15 @@ class WebApplication  implements ApplicationContract
      */
     public function handleRequest(Request $request): Response | BinaryFileResponse
     {
-        return $this->bootOnce()
-            ->make(WebKernel::class)
-            ->handle($request);
+        try {
+            return $this->bootOnce()
+                ->make(WebKernel::class)
+                ->handle($request);
+        } finally {
+            if (runtimeMode() === \Pionia\Runtime\RuntimeMode::Worker) {
+                $this->resetBetweenRequests();
+            }
+        }
     }
 
     /**

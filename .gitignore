@@ -10,3 +10,6 @@ build
 
 
 *.sqlite3
+example/rr
+example/.pid
+example/storage/metrics/

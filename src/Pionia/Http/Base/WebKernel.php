@@ -6,6 +6,7 @@ use Pionia\Auth\AuthenticationChain;
 use Pionia\Contracts\KernelContract;
 use Pionia\Http\HttpExceptionRenderer;
 use Pionia\Http\MaintenanceMode;
+use Pionia\Http\Monitoring\RequestMetrics;
 use Pionia\Http\Base\Events\PreKernelBootEvent;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
@@ -41,8 +42,10 @@ class WebKernel implements KernelContract
 
     public function handle(Request $request): Response | BinaryFileResponse
     {
+        $started = hrtime(true);
+
         if ($maintenance = MaintenanceMode::respond($request)) {
-            return $this->terminate($maintenance, $request);
+            return $this->terminate($maintenance, $request, $started);
         }
 
         try {
@@ -51,7 +54,7 @@ class WebKernel implements KernelContract
             $response = (new HttpExceptionRenderer())->render($e, $request);
         }
 
-        return $this->terminate($response, $request);
+        return $this->terminate($response, $request, $started);
     }
 
 //    public function handles(Request $request): Response
@@ -104,8 +107,13 @@ class WebKernel implements KernelContract
      * @param Response $response
      * @return Response
      */
-    public function terminate(Response | BinaryFileResponse $response, Request $request): Response | BinaryFileResponse
+    public function terminate(Response | BinaryFileResponse $response, Request $request, ?int $startedAt = null): Response | BinaryFileResponse
     {
+        if ($startedAt !== null) {
+            $durationMs = (hrtime(true) - $startedAt) / 1_000_000;
+            RequestMetrics::record($request, $response, $durationMs);
+        }
+
         if ($response instanceof Response) {
             $middlewareChain = realm()->getSilently(MiddlewareChain::class);
             if ($middlewareChain) {

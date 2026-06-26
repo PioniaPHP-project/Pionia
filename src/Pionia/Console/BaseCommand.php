@@ -4,7 +4,6 @@ namespace Pionia\Console;
 
 use AllowDynamicProperties;
 use Closure;
-use Exception;
 use Pionia\Base\Pionia;
 use Pionia\Base\WebApplication;
 use Pionia\Console\Concerns\CallsCommands;
@@ -176,8 +175,18 @@ class BaseCommand extends Command
 
         try {
             return (int) call_user_func([$this, $method]);
-        } catch (Exception $e) {
-            logger()?->error($e->getMessage());
+        } catch (\Throwable $e) {
+            logger()?->error($e->getMessage(), [
+                'exception' => $e::class,
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+
+            if (isset($this->output)) {
+                $this->output->writeln('<error>' . $e->getMessage() . '</error>');
+                $this->output->writeln('<comment>' . $e->getFile() . ':' . $e->getLine() . '</comment>');
+            }
+
             return static::FAILURE;
         }
     }

@@ -4,6 +4,7 @@ namespace Pionia\Http\Pages;
 
 use Pionia\Collections\Arrayable;
 use Pionia\Documentation\MoonlightDocCollector;
+use Pionia\Http\Monitoring\RequestMetrics;
 use Pionia\Http\Request\Request;
 use Pionia\Realm\AppRealm;
 use Pionia\Realm\RealmContract;
@@ -28,6 +29,7 @@ class DeveloperStatsCollector
             'runtime' => $this->runtime(),
             'system' => $this->system(),
             'request' => $this->requestSnapshot(),
+            'request_metrics' => $this->requestMetrics(),
             'stack' => $this->stack(),
             'services' => $this->services(),
         ];
@@ -166,6 +168,14 @@ class DeveloperStatsCollector
             'user_agent' => $this->request->headers->get('User-Agent'),
             'request_id' => $this->request->headers->get('X-Request-Id'),
         ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function requestMetrics(): array
+    {
+        return RequestMetrics::snapshot();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Feature;
 
+use Pionia\Http\Monitoring\RequestMetrics;
 use Pionia\TestSuite\Concerns\InteractsWithTestEnvironment;
 use Pionia\TestSuite\PioniaTestCase;
 
@@ -11,6 +12,7 @@ class DeveloperStatsTest extends PioniaTestCase
 
     protected function tearDown(): void
     {
+        RequestMetrics::reset();
         $this->clearStatsEnv();
         parent::tearDown();
     }
@@ -43,6 +45,35 @@ class DeveloperStatsTest extends PioniaTestCase
         $this->assertArrayHasKey('health', $payload);
         $this->assertArrayHasKey('system', $payload);
         $this->assertArrayHasKey('application', $payload);
+        $this->assertArrayHasKey('request_metrics', $payload);
+    }
+
+    public function testStatsJsonIncludesRequestMetricsAfterTraffic(): void
+    {
+        $this->setDebugEnv(true);
+        $this->clearStatsEnv();
+        RequestMetrics::reset();
+
+        $this->getApiPing();
+        $this->postApi('auth', 'list_auth');
+
+        $response = $this->get('/stats.json', ['HTTP_ACCEPT' => 'application/json']);
+        $payload = $response->json();
+
+        $this->assertGreaterThanOrEqual(2, $payload['request_metrics']['total_requests'] ?? 0);
+        $this->assertArrayHasKey('heavy_endpoints', $payload['request_metrics']);
+        $this->assertArrayHasKey('high_traffic_endpoints', $payload['request_metrics']);
+    }
+
+    public function testStatsPageShowsRequestsTab(): void
+    {
+        $this->setDebugEnv(true);
+        $this->clearStatsEnv();
+
+        $response = $this->get('/stats');
+
+        $this->assertStringContainsString('requests-panel', $response->content());
+        $this->assertStringContainsString('Heaviest endpoints', $response->content());
     }
 
     public function testStatsHiddenWhenNotEnabled(): void

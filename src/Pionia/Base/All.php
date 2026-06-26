@@ -11,7 +11,10 @@ use Pionia\Builtins\Commands\Generators\GenerateService;
 use Pionia\Builtins\Commands\Generators\GenerateSwitch;
 use Pionia\Builtins\Commands\GenerateApiCatalog;
 use Pionia\Builtins\Commands\GenerateApiDocs;
+use Pionia\Builtins\Commands\StartRoadRunnerServer;
 use Pionia\Builtins\Commands\StartServer;
+use Pionia\Builtins\Commands\StopRoadRunnerServer;
+use Pionia\Builtins\Commands\ViewStats;
 use Pionia\Collections\Arrayable;
 use Pionia\Middlewares\Builtins\CacheMiddleware;
 
@@ -53,6 +56,8 @@ if (!function_exists('allBuiltins')) {
         return arr([
             'commands' => [
                 'serve' => StartServer::class,
+                'runserver' => StartRoadRunnerServer::class,
+                'stopserver' => StopRoadRunnerServer::class,
                 'aliases' => ListAliasCommand::class,
                 'generate_auth' => GenerateAuthenticationBackend::class,
                 'generate_switch' => GenerateSwitch::class,
@@ -64,6 +69,7 @@ if (!function_exists('allBuiltins')) {
                 'make:command' => GenerateCommand::class,
                 'api:docs' => GenerateApiDocs::class,
                 'api:catalog' => GenerateApiCatalog::class,
+                'stats:view' => ViewStats::class,
             ],
             'authentications' => [
             ],

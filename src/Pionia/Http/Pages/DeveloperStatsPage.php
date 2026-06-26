@@ -46,6 +46,11 @@ class DeveloperStatsPage
         $overviewRows = $this->overviewRows($stats);
         $systemRows = $this->systemRows($stats['system'] ?? []);
         $runtimeRows = $this->flatRows($stats['runtime'] ?? []);
+        $metrics = $stats['request_metrics'] ?? [];
+        $metricsSummaryRows = $this->metricsSummaryRows($metrics);
+        $heavyRows = $this->endpointMetricRows($metrics['heavy_endpoints'] ?? []);
+        $trafficRows = $this->endpointMetricRows($metrics['high_traffic_endpoints'] ?? []);
+        $apiTrafficRows = $this->endpointMetricRows($metrics['api_by_traffic'] ?? []);
         $themeInit = PioniaTheme::initScript();
         $themeAssets = PioniaTheme::stylesheetTags();
         $themeToggle = PioniaTheme::toggleButton();
@@ -100,6 +105,7 @@ class DeveloperStatsPage
             <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#env-panel" type="button">Environment</button></li>
             <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#routes-panel" type="button">Routes</button></li>
             <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#stack-panel" type="button">Stack</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#requests-panel" type="button">Requests</button></li>
             <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#services-panel" type="button">Services</button></li>
         </ul>
         <div class="tab-content p-3 p-md-4">
@@ -112,6 +118,13 @@ class DeveloperStatsPage
                 {$this->table('Commands', 'Class', $context->keyValueRows(commands()))}
                 {$this->table('Middlewares', 'Class', $context->keyValueRows(middlewares()))}
                 {$this->table('Authentications', 'Class', $context->keyValueRows(authentications()))}
+            </div>
+            <div class="tab-pane fade" id="requests-panel">
+                <p class="text-muted small mb-3">Rolling request metrics from <code>storage/metrics/requests.jsonl</code>. API endpoints are grouped by <code>service::action</code>.</p>
+                {$this->table('Metric', 'Value', $metricsSummaryRows)}
+                {$this->metricsTable('Heaviest endpoints (avg ms)', $heavyRows)}
+                {$this->metricsTable('Highest traffic', $trafficRows)}
+                {$this->metricsTable('API traffic (service · action)', $apiTrafficRows)}
             </div>
             <div class="tab-pane fade" id="services-panel">{$this->table('Version / Service', 'Class · Actions', $context->serviceRows())}</div>
         </div>
@@ -178,7 +191,58 @@ HTML;
             ['Client IP', $this->e((string) ($req['ip'] ?? ''))],
             ['Docs exposed', ($stack['docs_enabled'] ?? false) ? 'yes' : 'no'],
             ['Stats exposed', ($stack['stats_enabled'] ?? false) ? 'yes' : 'no'],
+            ['Avg request time', $this->e((string) (($stats['request_metrics']['avg_duration_ms'] ?? 0)) . ' ms')],
+            ['Requests recorded', $this->e((string) ($stats['request_metrics']['total_requests'] ?? 0))],
         ];
+    }
+
+    /**
+     * @param array<string, mixed> $metrics
+     * @return list<array{0: string, 1: string}>
+     */
+    private function metricsSummaryRows(array $metrics): array
+    {
+        return [
+            ['Recording', ($metrics['enabled'] ?? false) ? 'enabled' : 'disabled'],
+            ['Total requests', $this->e((string) ($metrics['total_requests'] ?? 0))],
+            ['Unique endpoints', $this->e((string) ($metrics['unique_endpoints'] ?? 0))],
+            ['Average duration', $this->e((string) ($metrics['avg_duration_ms'] ?? 0)) . ' ms'],
+            ['API requests', $this->e((string) ($metrics['api_requests'] ?? 0))],
+            ['HTTP requests', $this->e((string) ($metrics['http_requests'] ?? 0))],
+            ['First recorded', $this->e((string) ($metrics['started_at'] ?? 'n/a'))],
+            ['Last recorded', $this->e((string) ($metrics['updated_at'] ?? 'n/a'))],
+        ];
+    }
+
+    /**
+     * @param list<array<string, mixed>> $rows
+     * @return list<array{0: string, 1: string}>
+     */
+    private function endpointMetricRows(array $rows): array
+    {
+        $table = [];
+        foreach ($rows as $row) {
+            $label = $this->e((string) ($row['label'] ?? ''));
+            $count = (int) ($row['count'] ?? 0);
+            $avg = (string) ($row['avg_ms'] ?? 0);
+            $max = (string) ($row['max_ms'] ?? 0);
+            $errors = (int) ($row['errors'] ?? 0);
+            $detail = "{$count} hits · avg {$avg} ms · max {$max} ms";
+            if ($errors > 0) {
+                $detail .= " · {$errors} errors";
+            }
+            $table[] = [$label, $this->e($detail)];
+        }
+
+        return $table;
+    }
+
+    /**
+     * @param list<array{0: string, 1: string}> $rows
+     */
+    private function metricsTable(string $title, array $rows): string
+    {
+        return '<h3 class="h6 mt-4 mb-2">' . $this->e($title) . '</h3>' . $this->table('Endpoint', 'Metrics', $rows);
     }
 
     /**

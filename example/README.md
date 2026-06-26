@@ -12,6 +12,21 @@ php pionia serve
 
 Default URL: `http://127.0.0.1:8003/` (see `environment/.env` for `PORT`).
 
+## RoadRunner (persistent workers)
+
+For production-like local testing with boot-once workers:
+
+```bash
+composer install   # includes spiral/roadrunner-http in dev
+cd example
+./../vendor/bin/rr get -l ./rr   # download RoadRunner binary once
+php pionia runserver              # listens on port from .rr.yaml
+```
+
+Or run the binary directly: `./rr serve -c .rr.yaml`
+
+The `worker.php` entry bootstraps Pionia once per worker process. PDO connections are pooled via `ConnectionManager` for the lifetime of the worker.
+
 ## API
 
 Switches are registered in `bootstrap/routes.php`. The example registers `MainSwitch` as **`v1`**, so all API traffic goes under **`/api/v1/`** — not `/api/` alone.
