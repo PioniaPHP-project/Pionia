@@ -8,8 +8,8 @@ use Pionia\Collections\Arrayable;
 use Pionia\Console\BaseCommand;
 use Pionia\Http\Switches\BaseApiServiceSwitch;
 use Pionia\Utils\Support;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+use Pionia\Console\Command;
+use Pionia\Console\Input\InputArgument;
 use Pionia\Utils\Filesystem;
 
 /**

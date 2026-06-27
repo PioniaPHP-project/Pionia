@@ -2,7 +2,7 @@
 
 namespace Pionia\Builtins\Commands\Concerns;
 
-use Symfony\Component\Process\Process;
+use Pionia\Process\Process;
 
 trait ManagesRoadRunnerProcess
 {
@@ -134,5 +134,106 @@ trait ManagesRoadRunnerProcess
         }
 
         return array_merge($env, $extra);
+    }
+
+    private function roadRunnerAppRoot(): string
+    {
+        if (defined('BASE_PATH')) {
+            return (string) BASE_PATH;
+        }
+
+        return (string) getcwd();
+    }
+
+    private function resolveRoadRunnerLogPath(?string $custom = null): string
+    {
+        if (is_string($custom) && $custom !== '') {
+            return $custom;
+        }
+
+        if (function_exists('alias')) {
+            try {
+                return alias(\DIRECTORIES::LOGS_DIR->name) . DIRECTORY_SEPARATOR . 'roadrunner.log';
+            } catch (\Throwable) {
+            }
+        }
+
+        return $this->roadRunnerAppRoot() . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . 'roadrunner.log';
+    }
+
+    private function roadRunnerRuntimePath(string $cwd): string
+    {
+        return rtrim($cwd, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . '.rr.runtime.json';
+    }
+
+    /**
+     * @param array<string, mixed> $state
+     */
+    private function writeRoadRunnerRuntime(string $cwd, array $state): void
+    {
+        file_put_contents(
+            $this->roadRunnerRuntimePath($cwd),
+            json_encode($state, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
+        );
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    private function readRoadRunnerRuntime(string $cwd): ?array
+    {
+        $path = $this->roadRunnerRuntimePath($cwd);
+        if (!is_readable($path)) {
+            return null;
+        }
+
+        $data = json_decode((string) file_get_contents($path), true);
+
+        return is_array($data) ? $data : null;
+    }
+
+    private function clearRoadRunnerRuntime(string $cwd): void
+    {
+        $path = $this->roadRunnerRuntimePath($cwd);
+        if (is_file($path)) {
+            @unlink($path);
+        }
+    }
+
+    /**
+     * Ports that may host this app's RoadRunner HTTP listener.
+     *
+     * @return list<int>
+     */
+    private function resolveRoadRunnerPorts(string $configPath, null|int|string $portOverride = null): array
+    {
+        $ports = [];
+        $cwd = dirname($configPath);
+
+        if (is_scalar($portOverride) && $portOverride !== '' && $portOverride !== false) {
+            $ports[] = (int) $portOverride;
+        }
+
+        $runtime = $this->readRoadRunnerRuntime($cwd);
+        if ($runtime !== null && isset($runtime['port'])) {
+            $ports[] = (int) $runtime['port'];
+        }
+
+        $ports[] = (int) $this->resolveListenAddress($configPath)['port'];
+
+        foreach (['PORT', 'SERVER_PORT'] as $key) {
+            if (!function_exists('env')) {
+                continue;
+            }
+
+            $value = env($key);
+            if (is_scalar($value) && $value !== '') {
+                $ports[] = (int) $value;
+            }
+        }
+
+        $ports = array_values(array_unique(array_filter($ports, static fn (int $port): bool => $port > 0)));
+
+        return $ports;
     }
 }

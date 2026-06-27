@@ -5,7 +5,7 @@ namespace Pionia\Builtins\Commands\Cache;
 use Pionia\Cache\PioniaCache;
 use Pionia\Console\BaseCommand;
 use Psr\SimpleCache\InvalidArgumentException;
-use Symfony\Component\Console\Input\InputArgument;
+use Pionia\Console\Input\InputArgument;
 
 class CacheDeleteCommand extends BaseCommand
 {

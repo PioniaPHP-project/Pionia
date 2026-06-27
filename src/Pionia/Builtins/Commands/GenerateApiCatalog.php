@@ -5,8 +5,8 @@ namespace Pionia\Builtins\Commands;
 use Pionia\Console\BaseCommand;
 use Pionia\Documentation\MoonlightCatalogExporter;
 use Pionia\Documentation\MoonlightDocCollector;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
+use Pionia\Console\Command;
+use Pionia\Console\Input\InputOption;
 
 class GenerateApiCatalog extends BaseCommand
 {

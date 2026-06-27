@@ -2,157 +2,207 @@
 
 namespace Pionia\Console;
 
+use Pionia\Console\Helper\ProgressBar;
+use Pionia\Console\Input\InputInterface;
+use Pionia\Console\Output\OutputInterface;
+use Pionia\Console\Question\ChoiceQuestion;
+use Pionia\Console\Question\Question;
 use Pionia\Contracts\NewLineAware;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
-class OutputStyle extends SymfonyStyle implements NewLineAware
+class OutputStyle implements OutputInterface, NewLineAware
 {
-    /**
-     * The output instance.
-     */
+    public const OUTPUT_NORMAL = Output\OutputInterface::OUTPUT_NORMAL;
+
     private OutputInterface $output;
 
-    /**
-     * The number of trailing new lines written by the last output.
-     *
-     * This is initialized as 1 to account for the new line written by the shell after executing a command.
-     */
     protected int $newLinesWritten = 1;
 
-    /**
-     * Create a new Console OutputStyle instance.
-     *
-     * @param  InputInterface  $input
-     * @param  OutputInterface  $output
-     * @return void
-     */
-    public function __construct(InputInterface $input, OutputInterface $output)
-    {
+    public function __construct(
+        private readonly InputInterface $input,
+        OutputInterface $output,
+    ) {
         $this->output = $output;
-
-        parent::__construct($input, $output);
     }
 
     public function askQuestion(Question $question): mixed
     {
-        try {
-            return parent::askQuestion($question);
-        } finally {
-            $this->newLinesWritten++;
+        if (!$this->input->isInteractive()) {
+            return $question->getDefault();
         }
+
+        if ($question instanceof ChoiceQuestion) {
+            return $this->askChoice($question);
+        }
+
+        $prompt = $question->getQuestion();
+        $default = $question->getDefault();
+        if ($default !== null && $default !== '') {
+            $prompt .= ' [' . $default . ']';
+        }
+        $prompt .= ': ';
+
+        if ($question->isHidden()) {
+            $this->write($prompt);
+            $answer = $this->readHidden();
+
+            return $answer !== '' ? $answer : $default;
+        }
+
+        $answer = $this->readLine($prompt);
+
+        return $answer !== '' ? $answer : $default;
     }
 
-    /**
-     */
-    public function write(string|iterable $messages, bool $newline = false, int $options = 0): void
+    public function confirm(string $question, bool $default = false): bool
+    {
+        $suffix = $default ? '[Y/n]' : '[y/N]';
+        $answer = strtolower((string) $this->ask($question . ' ' . $suffix, $default ? 'yes' : 'no'));
+
+        return in_array($answer, ['y', 'yes', '1', 'true'], true);
+    }
+
+    public function ask(string $question, ?string $default = null): mixed
+    {
+        return $this->askQuestion(new Question($question, $default));
+    }
+
+    public function createProgressBar(int $max = 0): ProgressBar
+    {
+        return new ProgressBar($this, $max);
+    }
+
+    public function write(string|iterable $messages, bool $newline = false, int $options = self::OUTPUT_NORMAL): void
     {
         $this->newLinesWritten = $this->trailingNewLineCount($messages) + (int) $newline;
-
-        parent::write($messages, $newline, $options);
+        $this->output->write($messages, $newline, $options);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    #[\Override]
     public function writeln(string|iterable $messages, int $type = self::OUTPUT_NORMAL): void
     {
         $this->newLinesWritten = $this->trailingNewLineCount($messages) + 1;
-
-        parent::writeln($messages, $type);
+        $this->output->writeln($messages, $type);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    #[\Override]
     public function newLine(int $count = 1): void
     {
         $this->newLinesWritten += $count;
-
-        parent::newLine($count);
+        for ($i = 0; $i < $count; $i++) {
+            $this->output->writeln('');
+        }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function newLinesWritten(): int
     {
-        if ($this->output instanceof static) {
-            return $this->output->newLinesWritten();
-        }
-
         return $this->newLinesWritten;
     }
 
-    /*
-     * Count the number of trailing new lines in a string.
-     *
-     * @param  string|iterable  $messages
-     */
-    protected function trailingNewLineCount($messages): int
-    {
-        if (is_iterable($messages)) {
-            $string = '';
-
-            foreach ($messages as $message) {
-                $string .= $message.PHP_EOL;
-            }
-        } else {
-            $string = $messages;
-        }
-
-        return strlen($string) - strlen(rtrim($string, PHP_EOL));
-    }
-
-    /**
-     * Returns whether verbosity is quiet (-q).
-     *
-     * @return bool
-     */
     public function isQuiet(): bool
     {
         return $this->output->isQuiet();
     }
 
-    /**
-     * Returns whether verbosity is verbose (-v).
-     *
-     * @return bool
-     */
     public function isVerbose(): bool
     {
         return $this->output->isVerbose();
     }
 
-    /**
-     * Returns whether verbosity is very verbose (-vv).
-     *
-     * @return bool
-     */
     public function isVeryVerbose(): bool
     {
         return $this->output->isVeryVerbose();
     }
 
-    /**
-     * Returns whether verbosity is debug (-vvv).
-     *
-     * @return bool
-     */
     public function isDebug(): bool
     {
         return $this->output->isDebug();
     }
 
-    /**
-     * Get the underlying Symfony output implementation.
-     */
+    public function getFormatter(): Output\OutputFormatter
+    {
+        return $this->output->getFormatter();
+    }
+
+    public function setVerbosity(int $level): void
+    {
+        $this->output->setVerbosity($level);
+    }
+
+    public function getVerbosity(): int
+    {
+        return $this->output->getVerbosity();
+    }
+
+    public function setDecorated(bool $decorated): void
+    {
+        $this->output->setDecorated($decorated);
+    }
+
+    public function isDecorated(): bool
+    {
+        return $this->output->isDecorated();
+    }
+
     public function getOutput(): OutputInterface
     {
         return $this->output;
+    }
+
+    private function askChoice(ChoiceQuestion $question): string|array
+    {
+        $choices = $question->getChoices();
+        $labels = array_values($choices);
+        foreach ($labels as $index => $label) {
+            $this->writeln(sprintf(' [%s] %s', $index, $label));
+        }
+
+        $default = $question->getDefault();
+        $answer = $this->readLine($question->getQuestion() . ': ');
+        if ($answer === '' && $default !== null) {
+            $answer = (string) $default;
+        }
+
+        if ($question->isMultiselect()) {
+            return array_map(fn ($i) => $labels[(int) $i] ?? $i, explode(',', $answer));
+        }
+
+        return $labels[(int) $answer] ?? $answer;
+    }
+
+    private function readLine(string $prompt): string
+    {
+        if (function_exists('readline')) {
+            $line = readline($prompt);
+
+            return is_string($line) ? trim($line) : '';
+        }
+
+        $this->write($prompt);
+        $line = fgets(STDIN);
+
+        return $line === false ? '' : trim($line);
+    }
+
+    private function readHidden(): string
+    {
+        if (PHP_OS_FAMILY !== 'Windows' && shell_exec('which stty') !== null) {
+            shell_exec('stty -echo');
+            $line = trim((string) fgets(STDIN));
+            shell_exec('stty echo');
+            $this->newLine();
+
+            return $line;
+        }
+
+        return trim((string) fgets(STDIN));
+    }
+
+    protected function trailingNewLineCount(string|iterable $messages): int
+    {
+        if (is_iterable($messages)) {
+            $string = implode(PHP_EOL, iterator_to_array($messages));
+        } else {
+            $string = $messages;
+        }
+
+        return strlen($string) - strlen(rtrim($string, PHP_EOL));
     }
 }

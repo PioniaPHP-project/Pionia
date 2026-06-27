@@ -2,21 +2,12 @@
 
 namespace Pionia\Console;
 
-
 use InvalidArgumentException;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
+use Pionia\Console\Input\InputArgument;
+use Pionia\Console\Input\InputOption;
 
 class Parser
 {
-    /**
-     * Parse the given console command definition into an array.
-     *
-     * @param  string  $expression
-     * @return array
-     *
-     * @throws InvalidArgumentException
-     */
     public static function parse(string $expression): array
     {
         $name = static::name($expression);
@@ -28,14 +19,6 @@ class Parser
         return [$name, [], []];
     }
 
-    /**
-     * Extract the name of the command from the expression.
-     *
-     * @param  string  $expression
-     * @return string
-     *
-     * @throws InvalidArgumentException
-     */
     protected static function name(string $expression): string
     {
         if (! preg_match('/[^\s]+/', $expression, $matches)) {
@@ -45,16 +28,9 @@ class Parser
         return $matches[0];
     }
 
-    /**
-     * Extract all parameters from the tokens.
-     *
-     * @param  array  $tokens
-     * @return array
-     */
     protected static function parameters(array $tokens): array
     {
         $arguments = [];
-
         $options = [];
 
         foreach ($tokens as $token) {
@@ -68,12 +44,6 @@ class Parser
         return [$arguments, $options];
     }
 
-    /**
-     * Parse an argument expression.
-     *
-     * @param  string  $token
-     * @return InputArgument
-     */
     protected static function parseArgument(string $token): InputArgument
     {
         [$token, $description] = static::extractDescription($token);
@@ -88,18 +58,11 @@ class Parser
         };
     }
 
-    /**
-     * Parse an option expression.
-     *
-     * @param  string  $token
-     * @return InputOption
-     */
     protected static function parseOption(string $token): InputOption
     {
         [$token, $description] = static::extractDescription($token);
 
         $matches = preg_split('/\s*\|\s*/', $token, 2);
-
         $shortcut = null;
 
         if (isset($matches[1])) {
@@ -116,12 +79,6 @@ class Parser
         };
     }
 
-    /**
-     * Parse the token into its token and description segments.
-     *
-     * @param  string  $token
-     * @return array
-     */
     protected static function extractDescription(string $token): array
     {
         $parts = preg_split('/\s+:\s+/', trim($token), 2);

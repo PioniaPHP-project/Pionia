@@ -10,8 +10,8 @@ use Pionia\Auth\ContextUserObject;
 use Pionia\Console\BaseCommand;
 use Pionia\Http\Request\Request;
 use Pionia\Utils\Support;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+use Pionia\Console\Command;
+use Pionia\Console\Input\InputArgument;
 use Pionia\Utils\Filesystem;
 
 /**

@@ -6,8 +6,8 @@ use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Pionia\Console\BaseCommand;
 use Pionia\Utils\Support;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+use Pionia\Console\Command;
+use Pionia\Console\Input\InputArgument;
 use Pionia\Utils\Filesystem;
 
 /**
@@ -201,9 +201,9 @@ class GenerateCommand extends BaseCommand
         $file->addComment('This command is auto-generated from pionia cli.');
 
         $namespace->addUse('Pionia\Console\BaseCommand');
-        $namespace->addUse('Symfony\Component\Console\Input\InputArgument');
-        $namespace->addUse('Symfony\Component\Console\Input\InputOption');
-        $namespace->addUse('Symfony\Component\Console\Command\Command');
+        $namespace->addUse('Pionia\Console\Input\InputArgument');
+        $namespace->addUse('Pionia\Console\Input\InputOption');
+        $namespace->addUse('Pionia\Console\Command');
 
         $klass = $namespace->addClass($name);
 

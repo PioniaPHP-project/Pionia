@@ -1070,6 +1070,21 @@ if (!function_exists('maintenanceConfig')) {
      */
     function maintenanceConfig(): array
     {
+        $path = null;
+        try {
+            $path = app()->envPath('settings.ini');
+        } catch (\Throwable) {
+            $path = null;
+        }
+
+        if (is_string($path) && is_file($path)) {
+            clearstatcache(true, $path);
+            $settings = parse_ini_file($path, true);
+            $section = $settings['maintenance'] ?? null;
+
+            return is_array($section) ? $section : [];
+        }
+
         $maintenance = env('maintenance', []);
 
         return is_array($maintenance) ? $maintenance : [];

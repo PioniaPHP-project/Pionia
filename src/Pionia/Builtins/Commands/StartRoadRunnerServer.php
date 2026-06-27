@@ -5,10 +5,10 @@ namespace Pionia\Builtins\Commands;
 use Pionia\Builtins\Commands\Concerns\ManagesRoadRunnerProcess;
 use Pionia\Console\BaseCommand;
 use Pionia\Http\Worker\RoadRunnerWorker;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
+use Pionia\Console\Command;
+use Pionia\Console\Input\InputOption;
 use Pionia\Utils\Filesystem;
-use Symfony\Component\Process\Process;
+use Pionia\Process\Process;
 
 /**
  * Serve the application via RoadRunner (persistent PHP workers).
@@ -175,7 +175,7 @@ class StartRoadRunnerServer extends BaseCommand
             @unlink($pidFile);
         }
 
-        $log = $this->resolveLogPath();
+        $log = $this->resolveRoadRunnerLogPath($this->option('log'));
         $dir = dirname($log);
         if (!is_dir($dir) && !mkdir($dir, 0775, true) && !is_dir($dir)) {
             $this->error("Could not create log directory: {$dir}");
@@ -208,6 +208,16 @@ class StartRoadRunnerServer extends BaseCommand
 
         $pid = is_readable($pidFile) ? trim((string) file_get_contents($pidFile)) : null;
 
+        [$host, $port] = array_pad(explode(':', $httpAddress, 2), 2, null);
+        $this->writeRoadRunnerRuntime($cwd, [
+            'http_address' => $httpAddress,
+            'host' => $host,
+            'port' => (int) $port,
+            'config' => $this->resolveConfigPath(),
+            'pid' => $pid,
+            'started_at' => date('c'),
+        ]);
+
         $this->output->writeln('<info>RoadRunner started in background</info> for ' . realm()->getAppName());
         $this->output->writeln("HTTP: http://{$httpAddress}");
         if ($pid !== null && $pid !== '') {
@@ -220,32 +230,6 @@ class StartRoadRunnerServer extends BaseCommand
         return Command::SUCCESS;
     }
 
-    private function resolveLogPath(): string
-    {
-        $custom = $this->option('log');
-        if (is_string($custom) && $custom !== '') {
-            return $custom;
-        }
-
-        if (function_exists('alias')) {
-            try {
-                return alias(\DIRECTORIES::LOGS_DIR->name) . DIRECTORY_SEPARATOR . 'roadrunner.log';
-            } catch (\Throwable) {
-            }
-        }
-
-        return $this->appRoot() . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . 'roadrunner.log';
-    }
-
-    private function appRoot(): string
-    {
-        if (defined('BASE_PATH')) {
-            return (string) BASE_PATH;
-        }
-
-        return (string) getcwd();
-    }
-
     private function resolveConfigPath(): string
     {
         $custom = $this->option('config');
@@ -253,7 +237,7 @@ class StartRoadRunnerServer extends BaseCommand
             return $custom;
         }
 
-        return $this->appRoot() . DIRECTORY_SEPARATOR . '.rr.yaml';
+        return $this->roadRunnerAppRoot() . DIRECTORY_SEPARATOR . '.rr.yaml';
     }
 
     private function resolveWorkerPath(): string
@@ -263,12 +247,12 @@ class StartRoadRunnerServer extends BaseCommand
             return $custom;
         }
 
-        return $this->appRoot() . DIRECTORY_SEPARATOR . 'worker.php';
+        return $this->roadRunnerAppRoot() . DIRECTORY_SEPARATOR . 'worker.php';
     }
 
     private function resolveRoadRunnerBinary(): ?string
     {
-        $root = $this->appRoot();
+        $root = $this->roadRunnerAppRoot();
         $candidates = [
             $root . DIRECTORY_SEPARATOR . 'rr',
         ];
@@ -307,7 +291,7 @@ class StartRoadRunnerServer extends BaseCommand
      */
     private function rrInstallCommands(): array
     {
-        $root = $this->appRoot();
+        $root = $this->roadRunnerAppRoot();
         $lines = [];
 
         $rrGet = $this->rrGetBinary();
@@ -331,8 +315,8 @@ class StartRoadRunnerServer extends BaseCommand
     private function rrGetBinary(): ?string
     {
         $candidates = [
-            $this->appRoot() . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'rr',
-            dirname($this->appRoot()) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'rr',
+            $this->roadRunnerAppRoot() . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'rr',
+            dirname($this->roadRunnerAppRoot()) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'rr',
         ];
 
         foreach ($candidates as $path) {

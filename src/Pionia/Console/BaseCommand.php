@@ -4,18 +4,16 @@ namespace Pionia\Console;
 
 use AllowDynamicProperties;
 use Closure;
-use Pionia\Base\Pionia;
 use Pionia\Base\WebApplication;
 use Pionia\Console\Concerns\CallsCommands;
 use Pionia\Console\Concerns\HasParameters;
 use Pionia\Console\Concerns\InteractsWithIO;
+use Pionia\Console\Input\ArrayInput;
+use Pionia\Console\Input\InputInterface;
+use Pionia\Console\Output\OutputInterface;
 use Pionia\Contracts\ApplicationContract;
 use Pionia\Utils\Microable;
 use Pionia\Utils\Support;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 
 #[AllowDynamicProperties]
@@ -26,46 +24,16 @@ class BaseCommand extends Command
         HasParameters,
         CallsCommands;
 
-    /**
-     * The default description of the command.
-     *
-     * @var string
-     */
     protected string $description;
 
-    /**
-     * The default signature of the command.
-     *
-     * @var string
-     */
     protected string $signature;
 
-    /**
-     * The default help of the command.
-     *
-     * @var string
-     */
     protected string $help;
 
-    /**
-     * The default name of the command.
-     *
-     * @var string
-     */
     protected string $name;
 
-    /**
-     * The default aliases of the command.
-     *
-     * @var array
-     */
     protected array $aliases;
 
-    /**
-     * The default hidden status of the command.
-     *
-     * @var bool
-     */
     protected bool $hidden = false;
 
     private ?ApplicationContract $app;
@@ -84,6 +52,7 @@ class BaseCommand extends Command
         if ($command instanceof self) {
             $command->setApp($this->getApp());
         }
+
         return $command;
     }
 
@@ -98,42 +67,34 @@ class BaseCommand extends Command
     public function callCommand(array $arguments, ?Closure $postRun = null): int
     {
         $cmd = new ArrayInput($arguments);
-        $returnCode =  $this->getApplication()->doRun($cmd, $this->output);
+        $returnCode = $this->getApplication()->doRun($cmd, $this->output);
         if ($postRun) {
             $postRun($returnCode, $this->output);
         }
         $this->setOutput($this->output);
+
         return $returnCode;
     }
 
-    /**
-     * Automatically set the command name from the class name.
-     * @return string
-     */
     public function resolveCommandNameFromClassName(): string
     {
         if (!isset($this->name)) {
             $parts = explode('\\', static::class);
             $className = array_pop($parts);
-            // we need to remove the Command suffix or prefix
             str_ireplace('Command', '', $className);
+
             return 'command:'.Support::singularize(Support::toSnakeCase($className));
         }
+
         return $this->name;
     }
 
-    public function __construct(?ApplicationContract $app=null)
+    public function __construct(?ApplicationContract $app = null)
     {
-        // We will go ahead and set the name, description, and parameters on console
-        // commands just to make things a little easier on the developer. This is
-        // so they don't have to all be manually specified in the constructors.
         $this->app = $app;
         $this->name = $this->name ?? $this->resolveCommandNameFromClassName();
         parent::__construct($this->name);
 
-        // Once we have constructed the command, we'll set the description and other
-        // related properties of the command. If a signature wasn't used to build
-        // the command we'll set the arguments and the options on this command.
         if (! isset($this->description)) {
             $this->setDescription((string) static::getDefaultDescription());
         } else {
@@ -142,40 +103,45 @@ class BaseCommand extends Command
 
         $this->setHelp($this->help ?? '');
 
-        $this->setHidden($this->isHidden());
+        $this->setHidden($this->hidden);
 
         if (isset($this->aliases)) {
             $this->setAliases($this->aliases);
         }
 
-        if (! isset($this->signature)) {
+        if (isset($this->signature)) {
+            [$name, $arguments, $options] = Parser::parse($this->signature);
+            $this->setName($name);
+            foreach ($arguments as $argument) {
+                $this->getDefinition()->addArgument($argument);
+            }
+            foreach ($options as $option) {
+                $this->getDefinition()->addOption($option);
+            }
+        } else {
             $this->specifyParameters();
         }
     }
-
 
     private function setApp(?WebApplication $app): void
     {
         $this->app = $app;
     }
 
-    /**
-     * Execute the console command.
-     */
-    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->input = $input;
 
         $this->output = $output instanceof OutputStyle ? $output : realm()->make(
-            OutputStyle::class, ['input' => $input, 'output' => $output]
+            OutputStyle::class,
+            ['input' => $input, 'output' => $output],
         );
 
         $method = method_exists($this, 'handle') ? 'handle' : '__invoke';
 
         try {
             return (int) call_user_func([$this, $method]);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             logger()?->error($e->getMessage(), [
                 'exception' => $e::class,
                 'file' => $e->getFile(),
@@ -190,5 +156,4 @@ class BaseCommand extends Command
             return static::FAILURE;
         }
     }
-
 }

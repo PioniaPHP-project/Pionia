@@ -6,9 +6,9 @@ use Pionia\Console\BaseCommand;
 use Pionia\Http\Monitoring\RequestMetrics;
 use Pionia\Http\Pages\DeveloperStatsCollector;
 use Pionia\Http\Request\Request;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Helper\Table;
+use Pionia\Console\Command;
+use Pionia\Console\Input\InputOption;
+use Pionia\Console\Helper\Table;
 
 class ViewStats extends BaseCommand
 {

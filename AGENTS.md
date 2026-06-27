@@ -37,7 +37,10 @@ composer require spiral/roadrunner-http nyholm/psr7   # in your app
 ./rr get -l ./rr                                     # download binary once
 php example/pionia runserver                          # foreground (alias: roadrunner, rr:serve)
 php example/pionia runserver --detach                 # background; logs to storage/logs/roadrunner.log
+php example/pionia runserver:logs                     # tail logs in real time (Ctrl+C to stop)
 php example/pionia stopserver                         # stop RoadRunner (alias: serve:rr:stop)
+php example/pionia maintenance:on                     # HTTP 503 for visitors (alias: down)
+php example/pionia maintenance:off                    # back to normal (alias: up)
 ```
 
 - Worker entry: `example/worker.php` (boot once, PSR-7 loop)
@@ -209,13 +212,29 @@ app()->cache()->store('redis')->set('session:1', $payload, 900);
 
 Framework internals (providers, routes, templates) use the default store from `[cache] STORE`.
 
-### CLI maintenance
+### Cache CLI
 
 | Command | Action |
 |---------|--------|
 | `cache:clear` | Wipe the active store |
 | `cache:prune` | Remove expired entries (filesystem, database, array) |
 | `cache:delete {key}` | Delete one key |
+
+### Application maintenance mode
+
+Put the app behind a 503 gate for all HTTP routes except `/__pionia/*` assets.
+
+| Command | Alias | Action |
+|---------|-------|--------|
+| `maintenance:on` | `down` | Enable maintenance (`[maintenance] ENABLED=true` in `environment/settings.ini`) |
+| `maintenance:off` | `up` | Disable maintenance |
+
+```bash
+php example/pionia maintenance:on --message="Deploying" --retry-after=300 --bypass=secret
+php example/pionia maintenance:off
+```
+
+RoadRunner workers re-read `settings.ini` on each request (no restart required). Bypass with `?bypass=secret` or `X-Maintenance-Bypass` header. You can also configure `[maintenance]` statically in `settings.ini` or via `MAINTENANCE_MODE=true` in `.env`.
 
 ### Register a custom store (application)
 
@@ -250,6 +269,29 @@ $app->withCacheAdaptor(fn ($app, $env) => new MyCacheAdapter());
 5. Register via `CacheManager::extend()` in dev; open a PR to add built-in stores under `src/Pionia/Cache/Adapters/` and wire them in `CacheManager::buildStore()`.
 
 **Adopting community adapters into core:** prefer zero Composer deps, optional PHP extensions with clear errors, tests under `tests/Cache/`, and INI config documented above. Suggest optional extensions in `composer.json` `suggest` (e.g. `ext-redis`, `ext-apcu`).
+
+## Console (native CLI)
+
+Pionia ships a native console (`Pionia\Console\Application`) — no `symfony/console` in framework `require`.
+
+### Commands
+
+- Extend `Pionia\Console\BaseCommand` and implement `handle(): int`.
+- Register args/options via `getArguments()` / `getOptions()` tuple arrays, or a `$signature` string (parsed by `Parser`).
+- Styled output: `$this->info()`, `error()`, `warn()`, `table()`, `ask()`, `confirm()`, `choice()`, `withProgressBar()`.
+- Colors use `<info>`, `<comment>`, `<error>`, `<warning>` tags; disable with `--no-ansi`.
+
+### Interactive shell
+
+```bash
+php pionia shell    # aliases: tinker, repl
+```
+
+REPL with `app()`, `realm()`, `env()`, `logger()`, `cache()` available. Meta commands: `help`, `exit`, `clear`, `:history`.
+
+### Generate custom commands
+
+`make:command` scaffolds commands using `Pionia\Console\Input\InputArgument` / `InputOption`.
 
 ## Static files & welcome page
 
@@ -345,13 +387,10 @@ Pionia is reducing Symfony surface area. **Removed** from `composer.json`:
 | `symfony/finder` | *(unused in framework; removed from require — dev tools may still pull transitively)* |
 | `symfony/event-dispatcher` | `Pionia\Events\PioniaEventDispatcher` (PSR-14) |
 | `symfony/cache` | `Pionia\Cache\CacheManager` + `CacheAdapterInterface` (PSR-16) |
+| `symfony/process` | `Pionia\Process\Process` + `PhpExecutable` |
+| `symfony/console` | `Pionia\Console\Application` + `BaseCommand` + `shell` REPL |
 
-**Still required** (for now):
-
-| Package | Used for |
-|---------|----------|
-| `symfony/console` | CLI commands |
-| `symfony/process` | RoadRunner / dev server |
+**Symfony in dev only:** `spiral/roadrunner-cli` may pull `symfony/console` transitively — not used by Pionia runtime code.
 
 Routing exceptions: `Pionia\Http\Routing\Exception\RouteNotFoundException`, `MethodNotAllowedException`. HTTP 404 for missing resources: `Pionia\Exceptions\ResourceNotFoundException`.
 

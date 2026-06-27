@@ -4,7 +4,7 @@ namespace Pionia\Builtins\Commands;
 
 use Pionia\Console\BaseCommand;
 use Pionia\Utils\InteractsWithTime;
-use Symfony\Component\Console\Input\InputOption;
+use Pionia\Console\Input\InputOption;
 use Pionia\Utils\Filesystem;
 
 /**

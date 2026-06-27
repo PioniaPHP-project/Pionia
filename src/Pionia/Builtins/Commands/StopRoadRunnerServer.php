@@ -4,10 +4,10 @@ namespace Pionia\Builtins\Commands;
 
 use Pionia\Builtins\Commands\Concerns\ManagesRoadRunnerProcess;
 use Pionia\Console\BaseCommand;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Process\Exception\ProcessSignaledException;
-use Symfony\Component\Process\Process;
+use Pionia\Console\Command;
+use Pionia\Console\Input\InputOption;
+use Pionia\Process\Process;
+use Pionia\Process\ProcessSignaledException;
 
 /**
  * Stop RoadRunner instances for this app (foreground, detached, or orphaned).
@@ -40,9 +40,16 @@ class StopRoadRunnerServer extends BaseCommand
 
         $cwd = dirname($config);
         $pidFile = $cwd . DIRECTORY_SEPARATOR . '.pid';
-        $port = $this->resolveHttpPort($config);
+        $ports = $this->resolveRoadRunnerPorts($config, $this->option('port'));
+        $anyListener = false;
+        foreach ($ports as $port) {
+            if ($this->isPortListening($port)) {
+                $anyListener = true;
+                break;
+            }
+        }
 
-        if (!is_file($pidFile) && !$this->isPortListening($port)) {
+        if (!is_file($pidFile) && !$anyListener) {
             $this->warn('No running RoadRunner instance found.');
 
             return Command::SUCCESS;
@@ -64,18 +71,30 @@ class StopRoadRunnerServer extends BaseCommand
             }
         }
 
-        $this->stopListenersOnPort($port, (bool) $this->option('force'));
+        $force = (bool) $this->option('force');
+        foreach ($ports as $port) {
+            $this->stopListenersOnPort($port, $force);
+        }
 
         if (is_file($pidFile)) {
             @unlink($pidFile);
         }
 
-        if ($this->isPortListening($port)) {
-            $this->error("Port {$port} is still in use. Try: php pionia stopserver --force");
+        $stillListening = [];
+        foreach ($ports as $port) {
+            if ($this->isPortListening($port)) {
+                $stillListening[] = $port;
+            }
+        }
+
+        if ($stillListening !== []) {
+            $portList = implode(', ', array_map('strval', $stillListening));
+            $this->error("Port(s) still in use: {$portList}. Try: php pionia stopserver --force");
 
             return Command::FAILURE;
         }
 
+        $this->clearRoadRunnerRuntime($cwd);
         $this->output->writeln('<info>RoadRunner stopped.</info>');
 
         return Command::SUCCESS;
@@ -90,25 +109,6 @@ class StopRoadRunnerServer extends BaseCommand
         ];
     }
 
-    private function resolveHttpPort(string $configPath): int
-    {
-        $portOverride = $this->option('port');
-        if (is_scalar($portOverride) && $portOverride !== '' && $portOverride !== false) {
-            return (int) $portOverride;
-        }
-
-        return (int) $this->resolveListenAddress($configPath)['port'];
-    }
-
-    private function appRoot(): string
-    {
-        if (defined('BASE_PATH')) {
-            return (string) BASE_PATH;
-        }
-
-        return (string) getcwd();
-    }
-
     private function resolveConfigPath(): string
     {
         $custom = $this->option('config');
@@ -116,12 +116,12 @@ class StopRoadRunnerServer extends BaseCommand
             return $custom;
         }
 
-        return $this->appRoot() . DIRECTORY_SEPARATOR . '.rr.yaml';
+        return $this->roadRunnerAppRoot() . DIRECTORY_SEPARATOR . '.rr.yaml';
     }
 
     private function resolveRoadRunnerBinary(): ?string
     {
-        $candidate = $this->appRoot() . DIRECTORY_SEPARATOR . 'rr';
+        $candidate = $this->roadRunnerAppRoot() . DIRECTORY_SEPARATOR . 'rr';
 
         return is_file($candidate) && is_executable($candidate) ? $candidate : null;
     }

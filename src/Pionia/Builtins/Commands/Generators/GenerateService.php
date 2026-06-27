@@ -11,8 +11,8 @@ use Pionia\Console\BaseCommand;
 use Pionia\Http\Response\BaseResponse;
 use Pionia\Http\Services\Service;
 use Pionia\Utils\Support;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+use Pionia\Console\Command;
+use Pionia\Console\Input\InputArgument;
 use Pionia\Utils\Filesystem;
 use Pionia\Http\Bag\FileBag;
 

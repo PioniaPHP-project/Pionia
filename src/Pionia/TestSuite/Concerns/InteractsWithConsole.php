@@ -5,8 +5,8 @@ namespace Pionia\TestSuite\Concerns;
 use Pionia\Base\Pionia;
 use Pionia\Realm\AppRealm;
 use Pionia\Utils\PioniaApplicationType;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\BufferedOutput;
+use Pionia\Console\Input\ArrayInput;
+use Pionia\Console\Output\BufferedOutput;
 
 trait InteractsWithConsole
 {

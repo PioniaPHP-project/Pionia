@@ -46,8 +46,8 @@ trait PathsTrait
 
     public function envPath(?string $path = null): string
     {
-        $dirs = allBuiltins()->get('directories');
-        $folder = $dirs[\DIRECTORIES::ENVIRONMENT_DIR->name] ?? $this->appRoot('environment');
+        $folder = $this->alias(\DIRECTORIES::ENVIRONMENT_DIR->name) ?? $this->appRoot('environment');
+
         return $path ? $folder.DIRECTORY_SEPARATOR.$path : $folder;
     }
 

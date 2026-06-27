@@ -2,19 +2,13 @@
 
 namespace Pionia\Console\Concerns;
 
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
+use Pionia\Console\Input\InputArgument;
+use Pionia\Console\Input\InputOption;
 
 trait HasParameters
 {
-    /**
-     * Specify the arguments and options on the command.
-     */
     protected function specifyParameters(): void
     {
-        // We will loop through all of the arguments and options for the command and
-        // set them all on the base command instance. This specifies what can get
-        // passed into these commands as "parameters" to control the execution.
         foreach ($this->getArguments() as $arguments) {
             if ($arguments instanceof InputArgument) {
                 $this->getDefinition()->addArgument($arguments);
@@ -32,17 +26,11 @@ trait HasParameters
         }
     }
 
-    /**
-     * Get the console command arguments.
-     */
     protected function getArguments(): array
     {
         return [];
     }
 
-    /**
-     * Get the console command options.
-     */
     protected function getOptions(): array
     {
         return [];

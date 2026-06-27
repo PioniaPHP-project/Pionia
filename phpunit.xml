@@ -9,6 +9,7 @@
             <directory>tests/Exceptions</directory>
             <directory>tests/Events</directory>
             <directory>tests/Cache</directory>
+            <directory>tests/Process</directory>
             <directory>tests/Logging</directory>
             <directory>tests/Http</directory>
             <directory>tests/Runtime</directory>
