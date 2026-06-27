@@ -2,14 +2,19 @@
 
 namespace Pionia\Cache\Adapters;
 
+use Pionia\Cache\Concerns\ValidatesCacheKeys;
 use Pionia\Cache\Contracts\CacheAdapterInterface;
 use Pionia\Cache\Contracts\PrunableCacheAdapterInterface;
+use Pionia\Cache\InvalidCacheArgumentException;
+use Pionia\Cache\Support\CacheTtl;
 
 /**
  * PSR-16 filesystem cache store (Symfony FilesystemAdapter replacement).
  */
 final class FilesystemCacheAdapter implements CacheAdapterInterface, PrunableCacheAdapterInterface
 {
+    use ValidatesCacheKeys;
+
     public function __construct(
         private readonly string $directory,
         private readonly int $defaultTtl = 0,
@@ -41,7 +46,7 @@ final class FilesystemCacheAdapter implements CacheAdapterInterface, PrunableCac
     public function set($key, $value, $ttl = null): bool
     {
         $this->assertValidKey($key);
-        $expiresAt = $this->expiresAt($ttl ?? $this->defaultTtl);
+        $expiresAt = CacheTtl::expiresAt($ttl, $this->defaultTtl);
         $path = $this->pathFor((string) $key);
         $encoded = json_encode([
             'expires' => $expiresAt,
@@ -171,7 +176,7 @@ final class FilesystemCacheAdapter implements CacheAdapterInterface, PrunableCac
         }
 
         $expires = $payload['expires'] ?? null;
-        if ($expires !== null && $expires <= time()) {
+        if (CacheTtl::isExpired($expires !== null ? (int) $expires : null)) {
             return null;
         }
 
@@ -182,33 +187,5 @@ final class FilesystemCacheAdapter implements CacheAdapterInterface, PrunableCac
         }
 
         return ['value' => $value];
-    }
-
-    private function expiresAt(null|int|\DateInterval $ttl): ?int
-    {
-        if ($ttl === null) {
-            return null;
-        }
-
-        if ($ttl instanceof \DateInterval) {
-            return (new \DateTimeImmutable())->add($ttl)->getTimestamp();
-        }
-
-        if ($ttl <= 0) {
-            return null;
-        }
-
-        return time() + $ttl;
-    }
-
-    private function assertValidKey(mixed $key): void
-    {
-        if (!is_string($key) || $key === '') {
-            throw new InvalidCacheArgumentException('Cache key must be a non-empty string.');
-        }
-
-        if (preg_match('#[{}()\/\\\\@:]#', $key)) {
-            throw new InvalidCacheArgumentException(sprintf('Cache key "%s" contains reserved characters.', $key));
-        }
     }
 }

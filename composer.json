@@ -57,7 +57,9 @@
     },
     "suggest": {
         "spiral/roadrunner-http": "Persistent HTTP workers via RoadRunner (runserver)",
-        "nyholm/psr7": "PSR-7 messages for RoadRunner integration"
+        "nyholm/psr7": "PSR-7 messages for RoadRunner integration",
+        "ext-apcu": "APCu cache store (cache STORE=apcu; ideal for RoadRunner workers)",
+        "ext-redis": "Redis cache store (cache STORE=redis)"
     },
     "scripts": {
         "test": "php vendor/bin/phpunit",

@@ -2,6 +2,8 @@
 
 namespace Cache;
 
+use Pionia\Cache\Adapters\ArrayCacheAdapter;
+use Pionia\Cache\Adapters\NullCacheAdapter;
 use Pionia\Cache\CacheManager;
 use Pionia\Cache\Contracts\CacheAdapterInterface;
 use Pionia\Cache\PioniaCache;
@@ -9,12 +11,20 @@ use Pionia\TestSuite\PioniaTestCase;
 
 class CacheManagerTest extends PioniaTestCase
 {
+    public function testBuiltInArrayAndNullStoresResolve(): void
+    {
+        $manager = realm()->cache();
+
+        $this->assertInstanceOf(ArrayCacheAdapter::class, $manager->store('array'));
+        $this->assertInstanceOf(NullCacheAdapter::class, $manager->store('null'));
+    }
+
     public function testExtendRegistersCustomAdapter(): void
     {
         $manager = realm()->cache();
-        $manager->extend('memory', static fn () => new InMemoryCacheAdapter());
+        $manager->extend('custom', static fn () => new ArrayCacheAdapter());
 
-        $adapter = $manager->store('memory');
+        $adapter = $manager->store('custom');
         $adapter->set('key', 'value');
 
         $this->assertSame('value', $adapter->get('key'));
@@ -22,75 +32,19 @@ class CacheManagerTest extends PioniaTestCase
 
     public function testPioniaCacheDelegatesToAdapter(): void
     {
-        $adapter = new InMemoryCacheAdapter();
+        $adapter = new ArrayCacheAdapter();
         $cache = new PioniaCache($adapter);
         $cache->set('ping', 'pong');
 
         $this->assertSame('pong', $cache->get('ping'));
     }
-}
 
-final class InMemoryCacheAdapter implements CacheAdapterInterface
-{
-    /** @var array<string, mixed> */
-    private array $data = [];
-
-    public function get($key, $default = null): mixed
+    public function testBuiltinStoreNamesIncludeRegisteredAdapters(): void
     {
-        return $this->data[$key] ?? $default;
-    }
+        $names = realm()->cache()->registeredStoreNames();
 
-    public function set($key, $value, $ttl = null): bool
-    {
-        $this->data[$key] = $value;
-
-        return true;
-    }
-
-    public function delete($key): bool
-    {
-        unset($this->data[$key]);
-
-        return true;
-    }
-
-    public function clear(): bool
-    {
-        $this->data = [];
-
-        return true;
-    }
-
-    public function getMultiple($keys, $default = null): iterable
-    {
-        $values = [];
-        foreach ($keys as $key) {
-            $values[$key] = $this->get($key, $default);
-        }
-
-        return $values;
-    }
-
-    public function setMultiple($values, $ttl = null): bool
-    {
-        foreach ($values as $key => $value) {
-            $this->set($key, $value, $ttl);
-        }
-
-        return true;
-    }
-
-    public function deleteMultiple($keys): bool
-    {
-        foreach ($keys as $key) {
-            $this->delete($key);
-        }
-
-        return true;
-    }
-
-    public function has($key): bool
-    {
-        return array_key_exists($key, $this->data);
+        $this->assertContains('filesystem', $names);
+        $this->assertContains('redis', $names);
+        $this->assertContains('array', $names);
     }
 }

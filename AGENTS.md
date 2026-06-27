@@ -150,8 +150,106 @@ $app->exceptions()
 
 - Default logger: `logger()` → `LogManager` default channel → `PioniaLogger`.
 - Named channel: `logger('api')`; register via `LogManager::extend()` or provider `configureLogging()`.
-- Cache stores: `app()->cache()->extend('redis', fn ($app, $config) => new RedisCacheAdapter(...))` or provider `configureCaching()`; replace default via `withCacheAdaptor()`.
 - Sensitive keys redacted via `[logging] HIDE_IN_LOGS` in `settings.ini`.
+
+## Caching (PSR-16)
+
+Pionia ships a native cache layer (`PioniaCache` + `CacheManager`). All stores implement `Pionia\Cache\Contracts\CacheAdapterInterface` (extends PSR-16).
+
+### Built-in stores
+
+| Store | `STORE` value | Best for |
+|-------|---------------|----------|
+| Filesystem | `filesystem` (default) | Single server, no extra extensions |
+| Array | `array` | Tests, scripts, per-worker memory |
+| Null | `null` | Disable caching without code changes |
+| Database | `database` | Shared cache via existing PDO connection |
+| APCu | `apcu` | RoadRunner / FPM workers on one host (`ext-apcu`) |
+| Redis | `redis` | Production clusters (`ext-redis`) |
+
+Aliases: `file`, `memory`, `void`, `db`.
+
+### Choose a store (`environment/settings.ini`)
+
+```ini
+[cache]
+STORE=filesystem
+TTL=3600
+
+; Per-store options — use a section named cache_<store> or cache.stores.<store>
+[cache_redis]
+host=127.0.0.1
+port=6379
+prefix=pionia:
+password=
+database=0
+
+[cache_database]
+connection=default
+table=cache
+
+[cache_apcu]
+prefix=pionia_
+
+[cache_filesystem]
+path=storage/cache
+```
+
+Or set `STORE=array` / `STORE=null` for local dev and CI.
+
+### Use the cache in code
+
+```php
+app()->cacheInstance()->set('rates', $rates, 300);
+$value = app()->cacheInstance()->get('rates');
+
+// Named store (custom or built-in)
+app()->cache()->store('redis')->set('session:1', $payload, 900);
+```
+
+Framework internals (providers, routes, templates) use the default store from `[cache] STORE`.
+
+### CLI maintenance
+
+| Command | Action |
+|---------|--------|
+| `cache:clear` | Wipe the active store |
+| `cache:prune` | Remove expired entries (filesystem, database, array) |
+| `cache:delete {key}` | Delete one key |
+
+### Register a custom store (application)
+
+In a `BaseProvider` subclass:
+
+```php
+public function configureCaching(\Pionia\Cache\CacheManager $cache): void
+{
+    $cache->extend('memcached', function ($app, array $config) {
+        return new MemcachedCacheAdapter(
+            servers: $config['servers'] ?? ['127.0.0.1:11211'],
+            prefix: $config['prefix'] ?? 'pionia_',
+        );
+    });
+}
+```
+
+Then `[cache] STORE=memcached` and `[cache_memcached]` (or `cache.stores.memcached`) for options.
+
+Replace the default adapter entirely at bootstrap:
+
+```php
+$app->withCacheAdaptor(fn ($app, $env) => new MyCacheAdapter());
+```
+
+### Write an adapter (for apps or core contributions)
+
+1. Implement `CacheAdapterInterface` (all PSR-16 methods; keep `$key` untyped for `psr/simple-cache` v1).
+2. Optionally implement `PrunableCacheAdapterInterface` if the backend supports TTL cleanup.
+3. Reuse `Pionia\Cache\Concerns\ValidatesCacheKeys` and `ImplementsBulkCacheOperations` for key rules and bulk ops.
+4. Throw `Pionia\Cache\InvalidCacheArgumentException` for bad keys (reserved chars: `{}()/\@:`).
+5. Register via `CacheManager::extend()` in dev; open a PR to add built-in stores under `src/Pionia/Cache/Adapters/` and wire them in `CacheManager::buildStore()`.
+
+**Adopting community adapters into core:** prefer zero Composer deps, optional PHP extensions with clear errors, tests under `tests/Cache/`, and INI config documented above. Suggest optional extensions in `composer.json` `suggest` (e.g. `ext-redis`, `ext-apcu`).
 
 ## Static files & welcome page
 
