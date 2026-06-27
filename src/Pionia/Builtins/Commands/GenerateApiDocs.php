@@ -9,7 +9,7 @@ use Pionia\Documentation\MoonlightDocCollector;
 use Pionia\Documentation\OpenApiExporter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Filesystem\Filesystem;
+use Pionia\Utils\Filesystem;
 
 class GenerateApiDocs extends BaseCommand
 {

@@ -2,9 +2,9 @@
 
 namespace Pionia\Http\Routing\Router;
 use Pionia\Http\Routing\Guards\RouteGuardInterface;
+use Pionia\Http\Routing\RouteDefinition;
 use Pionia\Http\Routing\SupportedHttpMethods;
 use Pionia\Realm\RealmContract;
-use Symfony\Component\Routing\Route;
 
 class APIRoute implements APIRouteInterface
 {
@@ -96,12 +96,12 @@ class APIRoute implements APIRouteInterface
 
     }
 
-    protected function build(RealmContract $realm): Route
+    protected function build(RealmContract $realm): RouteDefinition
     {
         $base = $realm->getOrDefault('API_BASE', '/api/');
 
         $path = $this->cleanVersion($base, $this->version);
 
-        return new Route($path, []);
+        return new RouteDefinition($path, []);
     }
 }

@@ -12,7 +12,7 @@ use Pionia\Middlewares\Middleware;
 use Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Filesystem\Filesystem;
+use Pionia\Utils\Filesystem;
 
 /**
  * For Creating a new middleware in the middlewares directory by running `pionia gen:middleware {name}`

@@ -9,8 +9,8 @@ use Pionia\Http\Request\Request;
 use Pionia\Http\Response\BaseResponse;
 use Pionia\Http\Response\Response;
 use Pionia\Http\Routing\SupportedHttpMethods;
+use Pionia\Exceptions\ResourceNotFoundException;
 use Pionia\Utils\CachedEndpoints;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Throwable;
 
 /**

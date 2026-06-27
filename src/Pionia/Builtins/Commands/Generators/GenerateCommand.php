@@ -8,7 +8,7 @@ use Pionia\Console\BaseCommand;
 use Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Filesystem\Filesystem;
+use Pionia\Utils\Filesystem;
 
 /**
  * This command is used to generate a new custom command.

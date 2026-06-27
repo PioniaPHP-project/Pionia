@@ -3,13 +3,13 @@
 namespace Pionia\Http\Worker;
 
 use Pionia\Http\Request\Request;
+use Pionia\Http\Response\BinaryFileResponse;
 use Pionia\Http\Response\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
- * Converts between PSR-7 (RoadRunner) and Pionia/Symfony HTTP messages.
+ * Converts between PSR-7 (RoadRunner) and Pionia HTTP messages.
  */
 class Psr7Bridge
 {
@@ -59,7 +59,7 @@ class Psr7Bridge
         );
     }
 
-    public static function toPsr7Response(\Symfony\Component\HttpFoundation\Response $response): ResponseInterface
+    public static function toPsr7Response(Response $response): ResponseInterface
     {
         $response->prepare(Request::create('/'));
 

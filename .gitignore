@@ -13,3 +13,6 @@ build
 example/rr
 example/.pid
 example/storage/metrics/
+example/rr
+example/.pid
+example/storage/metrics/

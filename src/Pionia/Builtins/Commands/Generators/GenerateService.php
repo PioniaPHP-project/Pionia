@@ -13,8 +13,8 @@ use Pionia\Http\Services\Service;
 use Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\FileBag;
+use Pionia\Utils\Filesystem;
+use Pionia\Http\Bag\FileBag;
 
 /**
  * For Creating a new service in the services directory by running `pionia gen:service {name}`
@@ -109,7 +109,7 @@ class GenerateService extends BaseCommand
         if ($serviceType === 'Basic'){
             $namespace->addUse('Pionia\Http\Services\Service');
             $namespace->addUse('Pionia\Http\Response\BaseResponse');
-            $namespace->addUse('Symfony\Component\HttpFoundation\FileBag');
+            $namespace->addUse('Pionia\Http\Bag\FileBag');
             $namespace->addUse('Pionia\Collections\Arrayable');
         } else {
             // import the specific generic service the developer extended

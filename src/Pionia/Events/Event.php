@@ -4,11 +4,13 @@ namespace Pionia\Events;
 
 use AllowDynamicProperties;
 use Pionia\Utils\Support;
-use Symfony\Contracts\EventDispatcher\Event as SymfonyEvent;
+use Psr\EventDispatcher\StoppableEventInterface;
 
 #[AllowDynamicProperties]
-class Event extends SymfonyEvent
+class Event implements StoppableEventInterface
 {
+    private bool $propagationStopped = false;
+
     public function __construct(...$args)
     {
         foreach ($args as $key => $value) {
@@ -16,19 +18,23 @@ class Event extends SymfonyEvent
         }
     }
 
-    public function __set(string $name, $value): void
+    public function __set(string $name, mixed $value): void
     {
         $this->{$name} = $value;
     }
 
-    /**
-     * Get the event name.
-     *
-     * @return string
-     */
     public static function name(): string
     {
         return Support::formatter()->tableize((new \ReflectionClass(static::class))->getShortName());
     }
 
+    public function isPropagationStopped(): bool
+    {
+        return $this->propagationStopped;
+    }
+
+    public function stopPropagation(): void
+    {
+        $this->propagationStopped = true;
+    }
 }

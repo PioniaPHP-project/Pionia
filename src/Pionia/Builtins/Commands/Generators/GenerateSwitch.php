@@ -10,7 +10,7 @@ use Pionia\Http\Switches\BaseApiServiceSwitch;
 use Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Filesystem\Filesystem;
+use Pionia\Utils\Filesystem;
 
 /**
  * Creates a new Pionia Switch in  Switches directory by running `pionia gen:switch {version}`

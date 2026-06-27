@@ -134,8 +134,10 @@ trait AppMixin
      */
     private function bootProviders(): void
     {
-        $this->appProviders?->each(function ($provider){
-            $this->realm()->contextMakeSilently($provider, ['app' => $this])->onBooted();
+        $this->appProviders?->each(function ($provider) {
+            $instance = $this->realm()->contextMakeSilently($provider, ['app' => $this]);
+            $instance->configureCaching($this->realm()->cache());
+            $instance->onBooted();
         });
     }
 

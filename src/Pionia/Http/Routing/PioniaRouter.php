@@ -7,11 +7,11 @@ use InvalidArgumentException;
 use Pionia\Collections\Arrayable;
 use Pionia\Contracts\BaseSwitchContract;
 use Pionia\Http\Routing\Router\RouteObject;
+use Pionia\Http\Routing\SupportedHttpMethods;
 use Pionia\Http\Switches\BaseApiServiceSwitch;
 use Pionia\Realm\AppRealm;
 use Pionia\Realm\RealmContract;
 use SebastianBergmann\LinesOfCode\IllogicalValuesException;
-use Symfony\Component\Routing\Route;
 
 
 /**
@@ -231,17 +231,17 @@ class PioniaRouter implements RouterContract
 
         // add the only post route
         foreach ($this->trailingSlashVariants($path) as $index => $variantPath) {
-            $postRoute = new Route($variantPath, [
-                '_controller' => $switch . '::processor',
-            ], [], [], null, [], SupportedHttpMethods::POST);
+            $postRoute = RouteObject::post($variantPath)
+                ->controller(['_controller' => $switch . '::processor'])
+                ->build();
 
             $this->routes->add($this->routeVariantName($name, $index), $postRoute);
         }
 
         foreach ($this->trailingSlashVariants($path) as $index => $variantPath) {
-            $pingRoute = new Route($variantPath, [
-                '_controller' => $switch . '::ping',
-            ], [], [], null, [], SupportedHttpMethods::GET);
+            $pingRoute = RouteObject::get($variantPath . 'ping')
+                ->controller(['_controller' => $switch . '::ping'])
+                ->build();
 
             $this->routes->add($this->routeVariantName($pingName, $index), $pingRoute);
         }

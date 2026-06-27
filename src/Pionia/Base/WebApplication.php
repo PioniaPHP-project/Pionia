@@ -19,7 +19,7 @@ use Pionia\Utils\AppHelpersTrait;
 use Pionia\Utils\Microable;
 use Pionia\Utils\PioniaApplicationType;
 use Pionia\Utils\Support;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Pionia\Http\Response\BinaryFileResponse;
 
 
 class WebApplication  implements ApplicationContract
@@ -114,6 +114,8 @@ class WebApplication  implements ApplicationContract
         return $this;
     }
 
+    private ?WebKernel $httpKernel = null;
+
     /**
      * Handle a single HTTP request without reading globals or sending the response.
      *
@@ -124,13 +126,19 @@ class WebApplication  implements ApplicationContract
     {
         try {
             return $this->bootOnce()
-                ->make(WebKernel::class)
+                ->httpKernel()
                 ->handle($request);
         } finally {
             if (runtimeMode() === \Pionia\Runtime\RuntimeMode::Worker) {
+                \Pionia\Http\Monitoring\RequestMetrics::flush();
                 $this->resetBetweenRequests();
             }
         }
+    }
+
+    private function httpKernel(): WebKernel
+    {
+        return $this->httpKernel ??= $this->make(WebKernel::class);
     }
 
     /**

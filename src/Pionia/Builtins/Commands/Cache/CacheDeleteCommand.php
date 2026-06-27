@@ -2,11 +2,9 @@
 
 namespace Pionia\Builtins\Commands\Cache;
 
-use Pionia\Cache\PioniaCacheAdaptor;
+use Pionia\Cache\PioniaCache;
 use Pionia\Console\BaseCommand;
-use Psr\Cache\InvalidArgumentException;
-use Symfony\Component\Cache\Adapter\Psr16Adapter;
-use Symfony\Component\Cache\Psr16Cache;
+use Psr\SimpleCache\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
 
 class CacheDeleteCommand extends BaseCommand
@@ -33,25 +31,28 @@ class CacheDeleteCommand extends BaseCommand
         $cache = $this->cacheInstance();
         if ($cache) {
             try {
-                if ($cache->hasItem($key)) {
-                    $deleted = $cache->getItem($key);
-                    $this->info(strval($deleted->get()));
+                if ($cache->has($key)) {
+                    $value = $cache->get($key);
+                    $cache->delete($key);
+                    $this->info(is_scalar($value) ? (string) $value : json_encode($value));
                 } else {
-                    $this->info("Cache Item not found");
+                    $this->info('Cache item not found');
                 }
-            } catch (InvalidArgumentException  $exception){
+            } catch (InvalidArgumentException $exception) {
                 $this->error($exception->getMessage());
             }
         }
     }
 
-    private function cacheInstance(): ?Psr16Adapter
+    private function cacheInstance(): ?PioniaCache
     {
-        $cacheInstance = $this->getApp()->getSilently(Psr16Adapter::class);
-        if ($cacheInstance){
-            $this->info("Found the cache instance");
+        $cacheInstance = $this->getApp()->getSilently(PioniaCache::class);
+        if ($cacheInstance) {
+            $this->info('Found the cache instance');
+
             return $cacheInstance;
         }
+
         return null;
     }
 }

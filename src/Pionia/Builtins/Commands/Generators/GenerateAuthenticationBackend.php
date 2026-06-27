@@ -12,7 +12,7 @@ use Pionia\Http\Request\Request;
 use Pionia\Utils\Support;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Filesystem\Filesystem;
+use Pionia\Utils\Filesystem;
 
 /**
  * For Creating a new authentication backend in the authenticationBackends directory by running `pionia gen:auth {name}`

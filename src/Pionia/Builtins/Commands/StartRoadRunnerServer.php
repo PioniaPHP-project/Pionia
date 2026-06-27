@@ -7,7 +7,7 @@ use Pionia\Console\BaseCommand;
 use Pionia\Http\Worker\RoadRunnerWorker;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Filesystem\Filesystem;
+use Pionia\Utils\Filesystem;
 use Symfony\Component\Process\Process;
 
 /**

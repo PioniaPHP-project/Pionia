@@ -2,10 +2,9 @@
 
 namespace Pionia\Realm;
 
+use Pionia\Http\Routing\RouteTable;
 use Pionia\Http\Routing\Router\DefaultRoutes;
 use Pionia\Http\Routing\Router\RouteObject;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Routing\RouteCollection;
 
 trait RoutingTrait
 {
@@ -13,7 +12,7 @@ trait RoutingTrait
     private function resolveRoutes(): static
     {
 
-        $cachedRoutes = new RouteCollection();
+        $cachedRoutes = new RouteTable();
         $this->set(self::APP_ROUTES_TAG, $cachedRoutes);
 
         (new DefaultRoutes())->collect($this);
@@ -39,12 +38,12 @@ trait RoutingTrait
         return $this;
     }
 
-    public function getRoutes(): RouteCollection
+    public function getRoutes(): RouteTable
     {
-        return $this->getSilently(self::APP_ROUTES_TAG) ?? $this->getCache(self::APP_ROUTES_TAG, true) ?? new RouteCollection();
+        return $this->getSilently(self::APP_ROUTES_TAG) ?? $this->getCache(self::APP_ROUTES_TAG, true) ?? new RouteTable();
     }
 
-    public function addRoutes(RouteCollection $collection): static {
+    public function addRoutes(RouteTable $collection): static {
         $routes = $this->getRoutes();
 
         $routes->addCollection($collection);

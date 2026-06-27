@@ -18,10 +18,8 @@ use Pionia\Templating\TemplateEngineInterface;
 use Pionia\Utils\Support;
 use Pionia\Validations\Validator;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Asset\PathPackage;
-use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Routing\RouteCollection;
+use Pionia\Utils\Filesystem;
+use Pionia\Http\Routing\RouteTable;
 
 if (! function_exists('tap')) {
     /**
@@ -130,6 +128,8 @@ if (!function_exists('report')) {
     }
 }
 
+
+
 if (!function_exists('response')) {
     /**
      * Helper function to return a response
@@ -185,6 +185,7 @@ if (!function_exists('connectionManager')) {
         return app()->get(\Pionia\Porm\ConnectionManager::class);
     }
 }
+
 
 
 /**
@@ -471,7 +472,7 @@ if (!function_exists('get')) {
 }
 
 if (!function_exists('allRoutes')){
-    function allRoutes(): RouteCollection
+    function allRoutes(): RouteTable
     {
 
         return app()->getRoutes();
@@ -522,15 +523,13 @@ if (!function_exists('asset')){
      */
     function asset($file, ?string $dir = null): ?string
     {
-        if (!$dir){
+        if (!$dir) {
             $dir = alias(DIRECTORIES::STATIC_DIR->name);
         }
-        $pkg = new PathPackage($dir, new EmptyVersionStrategy());
-        $path = $pkg->getUrl($file);
-        if (file_exists($path)) {
-            return $path;
-        }
-        return null;
+
+        $path = rtrim($dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim((string) $file, DIRECTORY_SEPARATOR);
+
+        return is_file($path) ? $path : null;
     }
 }
 
@@ -793,6 +792,8 @@ if (!function_exists('setRuntimeMode')) {
 }
 
 
+
+
 if (!function_exists('commands')) {
     /**
      * Returns all commands that have been registered in the container
@@ -910,7 +911,7 @@ if (!function_exists('apiPingPath')) {
 
 if (!function_exists('apiCatalogPath')) {
     /**
-     * Moonlight catalog path for a versioned API (gated by docs settings).
+     * Debug-only Moonlight catalog path for a versioned API (requires APP_DEBUG).
      */
     #[\NoDiscard]
     function apiCatalogPath(?string $version = null): string
@@ -918,6 +919,7 @@ if (!function_exists('apiCatalogPath')) {
         return rtrim(apiVersionPath($version), '/') . '/__catalog';
     }
 }
+
 
 if (!function_exists('apiDocsConfig')) {
     /**
@@ -1163,6 +1165,12 @@ if (!function_exists('maintenanceBypassAuthorized')) {
     }
 }
 
+
+
+
+
+
+
 if (!function_exists('pionia')) {
     /**
      * @see app()
@@ -1180,8 +1188,12 @@ if (!function_exists('env_keys')) {
      */
     function envKeys(): array
     {
-        $key = env('SYMFONY_DOTENV_VARS');
-        return explode(',', $key);
+        $key = env('PIONIA_ENV_VARS', env('SYMFONY_DOTENV_VARS', ''));
+        if (!is_string($key) || $key === '') {
+            return [];
+        }
+
+        return array_values(array_filter(array_map('trim', explode(',', $key))));
     }
 }
 
@@ -1220,6 +1232,7 @@ if (!function_exists('shouldLogResponses')) {
         return filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 }
+
 
 if (!function_exists('logger')) {
     /**

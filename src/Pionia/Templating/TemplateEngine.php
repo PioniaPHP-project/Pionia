@@ -4,9 +4,9 @@ namespace Pionia\Templating;
 
 use DIRECTORIES;
 use Pionia\Cache\Cacheable;
+use Pionia\Cache\PioniaCache;
 use Pionia\Realm\AppRealm;
-use Symfony\Component\Cache\Psr16Cache;
-use Symfony\Component\Filesystem\Filesystem;
+use Pionia\Utils\Filesystem;
 
 class TemplateEngine implements TemplateEngineInterface {
     use Cacheable;
@@ -25,7 +25,7 @@ class TemplateEngine implements TemplateEngineInterface {
         return realm();
     }
 
-    private function cacheInstance(): Psr16Cache
+    private function cacheInstance(): PioniaCache
     {
         return app()->cacheInstance();
     }

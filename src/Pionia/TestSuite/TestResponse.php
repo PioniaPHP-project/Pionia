@@ -3,8 +3,8 @@
 namespace Pionia\TestSuite;
 
 use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\BinaryFileResponse;
 use Pionia\Http\Response\Response;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class TestResponse
 {

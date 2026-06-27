@@ -3,55 +3,147 @@
 namespace Pionia\Http\Request;
 
 use Pionia\Auth\ContextUserObject;
-use Pionia\Base\WebApplication;
 use Pionia\Collections\Arrayable;
+use Pionia\Http\Bag\FileBag;
+use Pionia\Http\Bag\HeaderBag;
+use Pionia\Http\Bag\ParameterBag;
+use Pionia\Http\UploadedFile;
 use Pionia\Utils\Microable;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\FileBag;
 
 /**
- *
- * This method extends the Symfony request class to add more functionality to the request object.
- *
- * All methods on the request object are still available in this class. But more methods have been added to the request object.
+ * Native HTTP request object for Pionia (no Symfony dependency).
  *
  * @property bool $authenticated Whether the request is authenticated or not
  * @property ContextUserObject|null $auth The currently logged user in context object
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class Request extends \Symfony\Component\HttpFoundation\Request
+class Request
 {
-
     use Microable;
 
-     private bool $authenticated = false;
+    public readonly HeaderBag $headers;
 
-     private ContextUserObject | null $auth = null;
+    public readonly ParameterBag $query;
+
+    public readonly ParameterBag $request;
+
+    public readonly ParameterBag $attributes;
+
+    public readonly ParameterBag $cookies;
+
+    public readonly FileBag $files;
+
+    private bool $authenticated = false;
+
+    private ContextUserObject | null $auth = null;
+
+    private ?Arrayable $dataCache = null;
+
+    private ?ParameterBag $payloadCache = null;
+
+    public function __construct(
+        private readonly array $server = [],
+        private readonly string $content = '',
+        array $query = [],
+        array $request = [],
+        array $attributes = [],
+        array $cookies = [],
+        array $files = [],
+        ?HeaderBag $headers = null,
+    ) {
+        $this->query = new ParameterBag($query);
+        $this->request = new ParameterBag($request);
+        $this->attributes = new ParameterBag($attributes);
+        $this->cookies = new ParameterBag($cookies);
+        $this->files = new FileBag($files);
+        $this->headers = $headers ?? self::headersFromServer($server);
+    }
 
     /**
-     * The currently logged user in context object
-     * @return ContextUserObject|null The currently logged in user object or null if no user is logged in
+     * @param array<string, mixed> $parameters
+     * @param array<string, mixed> $cookies
+     * @param array<string, mixed> $files
+     * @param array<string, mixed> $server
      */
+    public static function create(
+        string $uri,
+        string $method = 'GET',
+        array $parameters = [],
+        array $cookies = [],
+        array $files = [],
+        array $server = [],
+        ?string $content = null,
+    ): static {
+        $parts = parse_url($uri) ?: [];
+        $path = $parts['path'] ?? '/';
+        $queryString = $parts['query'] ?? '';
+
+        $server = array_replace([
+            'SERVER_NAME' => 'localhost',
+            'HTTP_HOST' => 'localhost',
+            'SERVER_PORT' => 80,
+            'REQUEST_URI' => $uri,
+            'REQUEST_METHOD' => strtoupper($method),
+            'SCRIPT_NAME' => '',
+            'QUERY_STRING' => $queryString,
+        ], $server);
+
+        $server['REQUEST_METHOD'] = strtoupper($method);
+        $server['REQUEST_URI'] = $uri;
+        $server['QUERY_STRING'] = $queryString;
+
+        $query = $parameters;
+        if ($queryString !== '' && $query === []) {
+            parse_str($queryString, $query);
+        }
+
+        $requestParams = in_array(strtoupper($method), ['POST', 'PUT', 'PATCH', 'DELETE'], true)
+            && ($content === null || $content === '')
+            ? $parameters
+            : [];
+
+        if ($requestParams !== [] && $query === $parameters) {
+            $query = [];
+        }
+
+        return new static(
+            $server,
+            $content ?? '',
+            $query,
+            $requestParams,
+            [],
+            $cookies,
+            $files,
+        );
+    }
+
+    public static function createFromGlobals(): static
+    {
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+        $content = file_get_contents('php://input') ?: '';
+
+        return new static(
+            $_SERVER,
+            $content,
+            $_GET,
+            $_POST,
+            [],
+            $_COOKIE,
+            $_FILES,
+        );
+    }
+
     public function getAuth(): ?ContextUserObject
     {
         return $this->auth;
     }
 
-    /**
-     * This method checks if the request is authenticated
-     * @return bool Whether the request is authenticated or not
-     */
     public function isAuthenticated(): bool
     {
-        return $this->authenticated || ( $this->auth && $this->auth->authenticated);
+        return $this->authenticated || ($this->auth && $this->auth->authenticated);
     }
 
-    /**
-     * This method sets the authentication context for the request
-     * @param ContextUserObject $userObject
-     * @return $this
-     */
     public function setAuthenticationContext(ContextUserObject $userObject): static
     {
         if (!empty($userObject->user)) {
@@ -59,6 +151,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
             $this->authenticated = true;
         }
         $this->auth = $userObject;
+
         return $this;
     }
 
@@ -70,64 +163,166 @@ class Request extends \Symfony\Component\HttpFoundation\Request
         return $this;
     }
 
-    /**
-     * This method add data to the context object
-     * @param array $contextData The context data to be added to the request
-     * @return $this
-     */
-    private function setArrayContext(array $contextData): static
-    {
-        $contextUser = $this->auth ?? new ContextUserObject();
-
-        // if the dev has marked the request as authenticated
-        if ($contextData['user']) {
-            $contextUser->user = $contextData['user'];
-            unset($contextData['user']);
-            $contextUser->authenticated = $contextData['authenticated'] ?? true;
-        }
-
-        if (isset($contextData['authExtra'])){
-            $contextUser->authExtra = $contextData['authExtra'];
-            unset($contextData['authExtra']);
-        }
-
-        if (isset($contextData['permissions'])) {
-            $contextUser->permissions = $contextData['permissions'];
-            unset($contextData['permissions']);
-        }
-
-        $contextUser->authExtra = array_merge($contextUser->authExtra, $contextData);
-
-        $this->setAuthenticationContext($contextUser);
-
-        return $this;
-    }
-
-    /**
-     * Merges data sent from the client as json and form data as one array where one can access all the request data.
-     *
-     * This implies that this request is safe for both json and form data scenarios
-     * @return Arrayable
-     */
     public function getData(): Arrayable
     {
-        return arr($this->cookies->all())
+        if ($this->dataCache !== null) {
+            return $this->dataCache;
+        }
+
+        return $this->dataCache = arr($this->cookies->all())
             ->merge($this->query->all())
             ->merge($this->files->all())
             ->merge($this->getPayload()->all());
     }
 
-    /**
-     * Returns the file from the request if the request was submitted as form data
-     * @param $fileName
-     * @return FileBag|null
-     */
-    public function getFileByName($fileName) : ?UploadedFile
+    public function getFileByName(string $fileName): ?UploadedFile
     {
         if ($this->getContentTypeFormat() === 'form') {
-            return $this->files->get($fileName);
+            $file = $this->files->get($fileName);
+
+            return $file instanceof UploadedFile ? $file : null;
         }
+
         return null;
     }
 
+    public function getMethod(): string
+    {
+        return strtoupper((string) ($this->server['REQUEST_METHOD'] ?? 'GET'));
+    }
+
+    public function isMethod(string $method): bool
+    {
+        return $this->getMethod() === strtoupper($method);
+    }
+
+    public function getPathInfo(): string
+    {
+        $requestUri = (string) ($this->server['REQUEST_URI'] ?? '/');
+        $path = parse_url($requestUri, PHP_URL_PATH);
+
+        return $path === '' || $path === null ? '/' : $path;
+    }
+
+    public function getRequestUri(): string
+    {
+        return (string) ($this->server['REQUEST_URI'] ?? $this->getPathInfo());
+    }
+
+    public function getScheme(): string
+    {
+        if (($this->server['HTTPS'] ?? '') === 'on' || ($this->server['HTTPS'] ?? '') === '1') {
+            return 'https';
+        }
+
+        if (($this->server['SERVER_PORT'] ?? null) === '443') {
+            return 'https';
+        }
+
+        return 'http';
+    }
+
+    public function getPort(): int
+    {
+        if (isset($this->server['SERVER_PORT'])) {
+            return (int) $this->server['SERVER_PORT'];
+        }
+
+        return $this->getScheme() === 'https' ? 443 : 80;
+    }
+
+    public function getHost(): string
+    {
+        if (isset($this->server['HTTP_HOST'])) {
+            $host = (string) $this->server['HTTP_HOST'];
+
+            return explode(':', $host)[0];
+        }
+
+        return (string) ($this->server['SERVER_NAME'] ?? 'localhost');
+    }
+
+    public function getClientIp(): ?string
+    {
+        foreach (['HTTP_X_FORWARDED_FOR', 'HTTP_CLIENT_IP', 'REMOTE_ADDR'] as $key) {
+            if (!empty($this->server[$key])) {
+                $value = (string) $this->server[$key];
+
+                return trim(explode(',', $value)[0]);
+            }
+        }
+
+        return null;
+    }
+
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    public function getContentTypeFormat(): ?string
+    {
+        $contentType = (string) $this->headers->get('Content-Type', '');
+
+        return match (true) {
+            str_contains($contentType, 'json') => 'json',
+            str_contains($contentType, 'form-urlencoded') || str_contains($contentType, 'multipart') => 'form',
+            default => null,
+        };
+    }
+
+    public function getPayload(): ParameterBag
+    {
+        if ($this->payloadCache !== null) {
+            return $this->payloadCache;
+        }
+
+        if ($this->getContentTypeFormat() === 'json') {
+            $decoded = json_decode($this->getContent(), true);
+
+            return $this->payloadCache = new ParameterBag(is_array($decoded) ? $decoded : []);
+        }
+
+        return $this->payloadCache = new ParameterBag($this->request->all());
+    }
+
+    public function get(string $key, mixed $default = null): mixed
+    {
+        if ($this->query->has($key)) {
+            return $this->query->get($key);
+        }
+
+        if ($this->request->has($key)) {
+            return $this->request->get($key);
+        }
+
+        return $this->getPayload()->get($key, $default);
+    }
+
+  /**
+     * @param array<string, mixed> $server
+     */
+    private static function headersFromServer(array $server): HeaderBag
+    {
+        $headers = [];
+
+        foreach ($server as $key => $value) {
+            if (!is_string($key) || !str_starts_with($key, 'HTTP_')) {
+                continue;
+            }
+
+            $name = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($key, 5)))));
+            $headers[$name] = [(string) $value];
+        }
+
+        if (isset($server['CONTENT_TYPE'])) {
+            $headers['Content-Type'] = [(string) $server['CONTENT_TYPE']];
+        }
+
+        if (isset($server['CONTENT_LENGTH'])) {
+            $headers['Content-Length'] = [(string) $server['CONTENT_LENGTH']];
+        }
+
+        return new HeaderBag($headers);
+    }
 }

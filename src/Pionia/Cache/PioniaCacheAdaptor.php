@@ -2,6 +2,12 @@
 
 namespace Pionia\Cache;
 
-use Symfony\Component\Cache\Adapter\Psr16Adapter;
+use Pionia\Cache\Adapters\FilesystemCacheAdapter;
+use Pionia\Cache\Contracts\CacheAdapterInterface;
 
-class PioniaCacheAdaptor extends Psr16Adapter {}
+/**
+ * @deprecated Use {@see FilesystemCacheAdapter} or register a store via {@see CacheManager::extend()}.
+ */
+class PioniaCacheAdaptor extends FilesystemCacheAdapter implements CacheAdapterInterface
+{
+}

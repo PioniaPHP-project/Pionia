@@ -4,8 +4,8 @@ namespace Pionia\Cache;
 
 use Exception;
 use Pionia\Utils\Support;
+use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
-use Symfony\Component\Cache\Psr16Cache;
 
 /**
  * Add caching capabilities to any class.
@@ -81,7 +81,7 @@ trait Cacheable
         }
     }
 
-    private function cacheInstance(): Psr16Cache
+    private function cacheInstance(): CacheInterface
     {
        return $this->realm()->cacheInstance();
     }

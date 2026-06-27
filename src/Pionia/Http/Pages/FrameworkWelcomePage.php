@@ -47,6 +47,7 @@ class FrameworkWelcomePage
         $logo = self::ASSET_PREFIX . '/pionia_logo.webp';
         $favicon = self::ASSET_PREFIX . '/favicon.ico';
         $welcomeCss = self::ASSET_PREFIX . '/welcome.css';
+        $welcomeCss = self::ASSET_PREFIX . '/welcome.css';
         $debug = realm()->isDebug();
         $port = (int) $this->request->getPort();
         $host = $this->e($this->request->getHost());

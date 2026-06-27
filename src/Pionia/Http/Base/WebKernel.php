@@ -11,33 +11,32 @@ use Pionia\Http\Base\Events\PreKernelBootEvent;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
 use Pionia\Middlewares\MiddlewareChain;
-use Pionia\Realm\AppRealm;
 use Pionia\Utils\Microable;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
-use Symfony\Component\HttpKernel\Controller\ControllerResolver;
-use Symfony\Component\Routing\Matcher\UrlMatcher;
-use Symfony\Component\Routing\RequestContext;
+use Pionia\Http\Response\BinaryFileResponse;
 use Throwable;
 
 class WebKernel implements KernelContract
 {
     use Microable;
 
+    private readonly WebKernelRuntime $runtime;
+
+    private readonly HttpExceptionRenderer $exceptionRenderer;
+
+    public function __construct(?WebKernelRuntime $runtime = null)
+    {
+        $this->runtime = $runtime ?? new WebKernelRuntime();
+        $this->exceptionRenderer = new HttpExceptionRenderer();
+        WebKernelRuntime::registerShutdownFlush();
+    }
+
     private function prepareRequest(Request $request): Response | BinaryFileResponse
     {
-        $context = new RequestContext();
-        $request = $request |> $this->boot(...);
-        $context->fromRequest($request);
-        $routes = app()->getSilently(AppRealm::APP_ROUTES_TAG);
-        $matcher = new UrlMatcher($routes, $context);
-        $matched = $matcher->match($request->getPathInfo());
-        $request->attributes->add($matched);
-        $controllerResolver = new ControllerResolver(logger());
-        $argumentResolver = new ArgumentResolver(null, [], container());
-        $controller = $controllerResolver->getController($request);
-        $arguments = $argumentResolver->getArguments($request, $controller);
-        return call_user_func_array($controller, $arguments);
+        $request = $this->boot($request);
+        $this->runtime->syncContext($request);
+        $request->attributes->add($this->runtime->match($request));
+
+        return $this->runtime->dispatch()->invoke($request);
     }
 
     public function handle(Request $request): Response | BinaryFileResponse
@@ -51,62 +50,12 @@ class WebKernel implements KernelContract
         try {
             $response = $this->prepareRequest($request);
         } catch (Throwable $e) {
-            $response = (new HttpExceptionRenderer())->render($e, $request);
+            $response = $this->exceptionRenderer->render($e, $request);
         }
 
         return $this->terminate($response, $request, $started);
     }
 
-//    public function handles(Request $request): Response
-//    {
-//        try {
-//            realm()->make(PioniaCors::class)->handle($request);
-//            $request = $this->boot($request);
-//            $routes = realm()->getSilently(AppRealm::APP_ROUTES_TAG);
-//            // prepare the request for symfony routing
-//            $controllerResolver = new ControllerResolver(logger());
-//            $argumentResolver = new ArgumentResolver(null, [], $this->container());
-//            $context = new RequestContext();
-//            $matcher = new UrlMatcher($routes, $context);
-//            $matcher->getContext()->fromRequest($request);
-//            $parameters = $matcher->match($request->getPathInfo());
-//            dd($parameters);
-//            $request->attributes->add($parameters);
-//            dd($parameters);
-//
-//            dd($request);
-//
-//
-//            $controller = $controllerResolver->getController($request);
-//            $arguments = $argumentResolver->getArguments($request, $controller);
-//            if ($request->isMethod('POST')) {
-//                logger()->info("Pionia Request: ", ['method' => $request->getMethod(), 'path' => $request->getPathInfo(), 'data' => $request->getData()->all()]);
-//            } else {
-//                logger()->info("Pionia Request: ", ['method' => $request->getMethod(), 'path' => $request->getPathInfo()]);
-//            }
-//            realm()->event()->dispatch(new PreSwitchRunEvent($this, $request), PreSwitchRunEvent::name());
-//            // we inject the application into the request so that we can access it in the switch
-//            $request->setApplication(app());
-//            // forward the request to the switch
-//            $response = call_user_func_array($controller, $arguments);
-//
-//        } catch (Exception | Throwable $e) {
-//            logger()->error("Error handling request " . $request->getMethod() . "::" . $request->getUri(), ["error" => $e->getMessage()]);
-//            $response = response(returnCode: env('SERVER_ERROR_CODE', 500), returnMessage: $e->getMessage());
-//        }
-//
-//        return $this->terminate($request, $response);
-//    }
-
-
-
-
-    /**
-     * This method is called after the request has been handled
-     * @param Request $request
-     * @param Response $response
-     * @return Response
-     */
     public function terminate(Response | BinaryFileResponse $response, Request $request, ?int $startedAt = null): Response | BinaryFileResponse
     {
         if ($startedAt !== null) {
@@ -124,29 +73,20 @@ class WebKernel implements KernelContract
         return $response->prepare($request);
     }
 
-
-    /**
-     * Boot the kernel. This also runs the middleware chain and the authentication chain
-     * @param Request $request
-     * @return Request
-     */
     public function boot(Request $request): Request
     {
         event(new PreKernelBootEvent($this, $request), PreKernelBootEvent::name());
-        // run the middleware chain
+
         $middlewareChain = realm()->getSilently(MiddlewareChain::class);
         if ($middlewareChain) {
             $middlewareChain->handle($request);
         }
 
-        // run the authentication chain
         $authMiddleware = realm()->getSilently(AuthenticationChain::class);
-
         if ($authMiddleware) {
             $authMiddleware->handle($request);
         }
 
         return $request;
-
     }
 }

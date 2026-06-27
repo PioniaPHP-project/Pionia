@@ -4,7 +4,7 @@ namespace Pionia\Http\Pages;
 
 use Pionia\Collections\Arrayable;
 use Pionia\Documentation\MoonlightDocCollector;
-use Symfony\Component\Routing\Route;
+use Pionia\Http\Routing\RouteDefinition;
 
 /**
  * Shared developer-context tables (environment, routes, stack, services).
@@ -45,13 +45,13 @@ class DeveloperContextData
         $rows = [];
 
         foreach (allRoutes()->all() as $name => $route) {
-            if (!$route instanceof Route) {
+            if (!$route instanceof RouteDefinition) {
                 continue;
             }
 
-            $controller = $route->getDefaults()['_controller'] ?? '—';
-            $methods = implode(', ', $route->getMethods());
-            $detail = '<code>' . $this->e($route->getPath()) . '</code>'
+            $controller = $route->default('_controller', '—');
+            $methods = implode(', ', $route->methods());
+            $detail = '<code>' . $this->e($route->path()) . '</code>'
                 . '<div class="small debug-detail mt-1">' . $this->e($methods) . ' · ' . $this->e((string) $controller) . '</div>';
 
             $rows[] = [$this->e((string) $name), $detail];

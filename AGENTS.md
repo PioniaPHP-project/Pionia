@@ -35,12 +35,15 @@ Split **boot** from **handle** for FPM today and RoadRunner workers later:
 ```bash
 composer require spiral/roadrunner-http nyholm/psr7   # in your app
 ./rr get -l ./rr                                     # download binary once
-php example/pionia runserver                          # or ./rr serve -c example/.rr.yaml
+php example/pionia runserver                          # foreground (alias: roadrunner, rr:serve)
+php example/pionia runserver --detach                 # background; logs to storage/logs/roadrunner.log
+php example/pionia stopserver                         # stop RoadRunner (alias: serve:rr:stop)
 ```
 
 - Worker entry: `example/worker.php` (boot once, PSR-7 loop)
-- Config: `example/.rr.yaml`
+- Config: `example/.rr.yaml` (listen port must match `PORT` in `.env`)
 - `ConnectionManager` keeps PDO alive across requests; `disconnect()` on worker shutdown only
+- Built-in dev server: `php pionia serve` (PHP `-S`, no RoadRunner)
 
 `WebKernel::terminate()` only **prepares** the response; the caller sends it. In tests use `handleRequest()` or `MakesHttpRequests` traits.
 
@@ -80,12 +83,16 @@ router($app)->switch(MainSwitch::class, 'v1');
 | `apiCatalogPath()` | `/api/v1/__catalog` (JSON catalog, debug only) |
 | `/docs` | Interactive Scalar UI (`DOCS_ENABLED` or `DEBUG`) |
 | `/stats` | Developer health dashboard (`STATS_ENABLED` or `DEBUG`) |
+| `/stats.json` | Same data as JSON (`STATS_TOKEN` / `X-Stats-Token`) |
 
 ```bash
 curl -s http://127.0.0.1:8003/api/v1/ping
 curl -s -X POST http://127.0.0.1:8003/api/v1/ \
   -H "Content-Type: application/json" \
   -d '{"service":"auth","action":"list_auth"}'
+php example/pionia stats:view          # terminal request metrics (aliases: stats, viewstats)
+php example/pionia stats:view --json   # JSON snapshot
+php example/pionia stats:view --reset  # clear storage/metrics/requests.jsonl
 ```
 
 ## API documentation (Moonlight)
@@ -108,6 +115,7 @@ curl -s http://127.0.0.1:8003/api/v1/__catalog  # JSON catalog (same gate)
 | `DOCS_TOKEN=secret` | Require `?token=secret` or `X-Docs-Token` header |
 | `STATS_ENABLED=true` | Expose `/stats` when `DEBUG=false` |
 | `STATS_TOKEN=secret` | Separate token for stats (`X-Stats-Token`) |
+| `[metrics] ENABLED=false` | Disable request metrics writes (stats page still works) |
 | *(unset)* | Docs/stats follow `DEBUG` (default dev behaviour) |
 
 | Tag | Purpose |
@@ -142,6 +150,7 @@ $app->exceptions()
 
 - Default logger: `logger()` → `LogManager` default channel → `PioniaLogger`.
 - Named channel: `logger('api')`; register via `LogManager::extend()` or provider `configureLogging()`.
+- Cache stores: `app()->cache()->extend('redis', fn ($app, $config) => new RedisCacheAdapter(...))` or provider `configureCaching()`; replace default via `withCacheAdaptor()`.
 - Sensitive keys redacted via `[logging] HIDE_IN_LOGS` in `settings.ini`.
 
 ## Static files & welcome page
@@ -160,7 +169,7 @@ User assets: `public/static/` via `/static/{path}`; media uploads via `/media/{p
 | Hook | Where |
 |------|--------|
 | Routes / switches | `bootstrap/routes.php` |
-| Providers | `BaseProvider`: `routes()`, `middlewares()`, `authentications()`, `configureLogging()`, `configureExceptions()` |
+| Providers | `BaseProvider`: `routes()`, `middlewares()`, `authentications()`, `configureLogging()`, `configureCaching()`, `configureExceptions()` |
 | Middleware / auth | Environment `settings.ini` or provider chains |
 | Exception handler | `$app->exceptions()` or `error_handler` binding |
 
@@ -220,6 +229,33 @@ Minimum **PHP 8.5**. Avoid deprecated patterns (e.g. `ReflectionMethod::setAcces
 | `RuntimeMode` | FPM / CLI / worker / testing lifecycle |
 
 Centralized path safety: `Pionia\Utils\SafePath::resolveFileWithinBase()` (static/media routers).
+
+## Symfony dependency reduction (Phase 6)
+
+Pionia is reducing Symfony surface area. **Removed** from `composer.json`:
+
+| Package | Replaced by |
+|---------|-------------|
+| `symfony/http-kernel` | `RouteDispatcher` (native controller dispatch) |
+| `symfony/mime` | `Pionia\Http\Mime\MimeType` |
+| `symfony/asset` | `asset()` helper (no PathPackage) |
+| `symfony/routing` | `RouteDefinition`, `RouteTable`, `RouteMatcher` |
+| `symfony/http-foundation` | `Request`, `Response`, `BinaryFileResponse`, `ParameterBag`, `HeaderBag`, `FileBag`, `UploadedFile` |
+| `symfony/filesystem` | `Pionia\Utils\Filesystem` |
+| `symfony/dotenv` | `Pionia\Utils\Dotenv` |
+| `symfony/uid` | `Pionia\Utils\Ulid` |
+| `symfony/finder` | *(unused in framework; removed from require — dev tools may still pull transitively)* |
+| `symfony/event-dispatcher` | `Pionia\Events\PioniaEventDispatcher` (PSR-14) |
+| `symfony/cache` | `Pionia\Cache\CacheManager` + `CacheAdapterInterface` (PSR-16) |
+
+**Still required** (for now):
+
+| Package | Used for |
+|---------|----------|
+| `symfony/console` | CLI commands |
+| `symfony/process` | RoadRunner / dev server |
+
+Routing exceptions: `Pionia\Http\Routing\Exception\RouteNotFoundException`, `MethodNotAllowedException`. HTTP 404 for missing resources: `Pionia\Exceptions\ResourceNotFoundException`.
 
 ## Packagist releases
 

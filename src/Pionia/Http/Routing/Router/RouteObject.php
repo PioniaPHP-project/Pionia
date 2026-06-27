@@ -2,7 +2,7 @@
 
 namespace Pionia\Http\Routing\Router;
 
-use Symfony\Component\Routing\Route;
+use Pionia\Http\Routing\RouteDefinition;
 
 class RouteObject
 {
@@ -42,7 +42,7 @@ class RouteObject
 
     public function requires(array $requirements): static
     {
-        $this->requirements = $requirements;
+        $this->requirements = array_merge($this->requirements, $requirements);
         return $this;
     }
 
@@ -62,7 +62,7 @@ class RouteObject
 
     public function options(?array $options = []): static
     {
-        $this->options = array_merge($this->options, $options);
+        $this->options = array_merge($this->options, $options ?? []);
         return $this;
     }
 
@@ -85,17 +85,21 @@ class RouteObject
         return $this;
     }
 
-    public function build(): Route
+    public function build(): RouteDefinition
     {
-        return new Route(
-            $this->path,
+        $requirements = $this->requirements;
+
+        foreach ($this->options as $key => $value) {
+            if (is_string($key) && str_contains((string) $this->path, '{' . $key . '}')) {
+                $requirements[$key] = (string) $value;
+            }
+        }
+
+        return new RouteDefinition(
+            (string) $this->path,
             $this->controller,
-            $this->requirements,
-            $this->options,
-            $this->host,
-            $this->schemas,
+            $requirements,
             $this->methods,
-            $this->conditions
         );
     }
 

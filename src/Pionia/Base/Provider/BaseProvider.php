@@ -79,6 +79,11 @@ abstract class BaseProvider implements ProviderContract
     public function configureLogging(\Pionia\Logging\LogManager $log): void {}
 
   /**
+   * Register custom cache stores or replace the default adapter.
+   */
+    public function configureCaching(\Pionia\Cache\CacheManager $cache): void {}
+
+  /**
    * Customize the exception pipeline.
    */
     public function configureExceptions(\Pionia\Exceptions\ExceptionPipeline $exceptions): void {}

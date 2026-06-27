@@ -11,11 +11,14 @@ use Pionia\Base\EnvResolver;
 use Pionia\Base\Pionia;
 use Pionia\Base\WebApplication;
 use Pionia\Cache\Cacheable;
+use Pionia\Cache\CacheManager;
+use Pionia\Cache\Contracts\CacheAdapterInterface;
 use Pionia\Cache\PioniaCache;
 use Pionia\Collections\Arrayable;
 use Pionia\Events\PioniaEventDispatcher;
 use Pionia\Http\Routing\SupportedHttpMethods;
 use Pionia\Exceptions\ExceptionPipeline;
+use Pionia\Http\Base\WebKernel;
 use Pionia\Logging\LogManager;
 use Pionia\Middlewares\MiddlewareChain;
 use Pionia\Porm\ConnectionManager;
@@ -26,8 +29,6 @@ use Pionia\Utils\AppDatabaseHelper;
 use Pionia\Utils\PathsTrait;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use Symfony\Component\Cache\Adapter\Psr16Adapter;
 
 /**
  * We need to separate the DI from the app instance itself
@@ -38,6 +39,7 @@ class AppRealm implements RealmContract, ContainerInterface
     use ContainableRealm, BuiltInServices, PathsTrait, Cacheable, RoutingTrait, AppDatabaseHelper, HandlesExceptions;
     private array $bootingProviders = [];
     private array $bootedProviders = [];
+    private bool $resolvingCache = false;
     public const MIDDLEWARE_TAG = 'app.middlewares';
     public const AUTHENTICATIONS_TAG = 'app.authentications';
     public const COMMANDS_TAG = 'app.commands';
@@ -94,19 +96,19 @@ class AppRealm implements RealmContract, ContainerInterface
             return new WebApplication($this);
         });
 
-        $this->set(Psr16Adapter::class, function () {
-            return new FilesystemAdapter(
-                '', 30,
-                $this->alias(DIRECTORIES::CACHE_DIR->name)
-            );
-        });
+        $this->set(CacheManager::class, fn () => new CacheManager($this));
 
         $this->context->set(PioniaCache::class, function () {
-            return new PioniaCache($this->getSilently(Psr16Adapter::class));
+            $this->resolvingCache = true;
+            try {
+                return new PioniaCache($this->get(CacheManager::class)->store());
+            } finally {
+                $this->resolvingCache = false;
+            }
         });
 
         $this->set(EnvResolver::class, function () {
-            new EnvResolver($this->getDirFor(DIRECTORIES::ENVIRONMENT_DIR->name));
+            return new EnvResolver($this->getDirFor(DIRECTORIES::ENVIRONMENT_DIR->name));
         });
 
         $this->resolveEnv();
@@ -226,6 +228,8 @@ class AppRealm implements RealmContract, ContainerInterface
             return new MiddlewareChain();
         });
 
+        $this->set(WebKernel::class, new WebKernel());
+
         $this->realm()->set(AuthenticationChain::class, function (){
             return new AuthenticationChain();
         });
@@ -286,14 +290,39 @@ class AppRealm implements RealmContract, ContainerInterface
     private function resolveEnvArray($key): static
     {
         $keyClear = str_replace('.', '_', $key);
-        if ($this->hasCache($keyClear, true)){
-            $resolved = $this->getCache($key, true);
-        } else {
-            $resolved = $this->env($keyClear, []);
+        $resolved = [];
+
+        if ($this->hasCache($keyClear, true)) {
+            $cached = $this->getCache($key, true);
+            $resolved = is_object($cached) ? $cached->all() : (array) $cached;
         }
+
+        $fromEnv = $this->envArrayFromResolver($keyClear);
+        if ($fromEnv !== []) {
+            $resolved = array_merge($resolved, $fromEnv);
+        } elseif ($resolved === []) {
+            $resolved = $this->env($keyClear, []);
+            $resolved = is_object($resolved) ? $resolved->all() : (array) $resolved;
+        }
+
         $this->contextArrAdd($key, $resolved);
         $this->cache($keyClear, $this->getOrDefault($key, []));
         return $this;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function envArrayFromResolver(string $keyClear): array
+    {
+        $tag = $this->getSilently(self::APP_ENV_TAG);
+        if (!$tag?->has($keyClear)) {
+            return [];
+        }
+
+        $value = $tag->get($keyClear);
+
+        return is_array($value) ? $value : (is_object($value) ? $value->all() : []);
     }
 
     /**
@@ -327,23 +356,27 @@ class AppRealm implements RealmContract, ContainerInterface
     }
 
     /**
-     * Sets the Cache Adaptor the app shall use hence-forth
-     * Defaults to a filesystem adapter
+     * Sets the cache adapter the app shall use.
      *
-     * All Symfony cache adaptors are supported, even a custom one can be added as long
-     * as it supports the PSR-16 CacheInterface
+     * The callable must return a {@see CacheAdapterInterface} (PSR-16).
+     * For named stores, prefer {@see CacheManager::extend()} from a provider's configureCaching().
      *
-     * The callable receives both the application and the env as arguments
-     * @param callable $cacheAdaptorResolver
-     * @return $this
+     * @param callable(RealmContract, mixed): CacheAdapterInterface $cacheAdaptorResolver
      */
     public function withCacheAdaptor(callable $cacheAdaptorResolver): static
     {
-        $adaptor = $cacheAdaptorResolver($this, $this->env());
-        if ($adaptor instanceof Psr16Adapter) {
-            $this->set(Psr16Adapter::class, $adaptor);
+        $adapter = $cacheAdaptorResolver($this, $this->env());
+        if ($adapter instanceof CacheAdapterInterface) {
+            $this->get(CacheManager::class)->withAdapter($adapter);
+            $this->context->set(PioniaCache::class, fn () => new PioniaCache($adapter));
         }
+
         return $this;
+    }
+
+    public function cache(): CacheManager
+    {
+        return $this->get(CacheManager::class);
     }
 
     /**
@@ -432,9 +465,13 @@ class AppRealm implements RealmContract, ContainerInterface
         $this->refreshEnv();
     }
 
-    public function cacheInstance(): PioniaCache
+    public function cacheInstance(): ?PioniaCache
     {
-       return $this->getSilently(PioniaCache::class);
+        if ($this->resolvingCache) {
+            return null;
+        }
+
+        return $this->getSilently(PioniaCache::class);
     }
 
     public function event(): PioniaEventDispatcher

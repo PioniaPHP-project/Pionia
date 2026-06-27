@@ -7,7 +7,7 @@ use Carbon\CarbonImmutable as BaseCarbonImmutable;
 use Pionia\Utils\Conditionable;
 use Pionia\Utils\Dumpable;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\Uid\Ulid;
+use Pionia\Utils\Ulid;
 
 class Carbon extends BaseCarbon
 {

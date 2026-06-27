@@ -3,9 +3,9 @@
 namespace Pionia\Base;
 
 use Pionia\Collections\Arrayable;
+use Pionia\Utils\Dotenv;
+use Pionia\Utils\Filesystem;
 use Pionia\Utils\PathsTrait;
-use Symfony\Component\Dotenv\Dotenv;
-use Symfony\Component\Filesystem\Filesystem;
 
 class EnvResolver
 {
@@ -36,11 +36,40 @@ class EnvResolver
     {
         $this->env = new Arrayable();
         $this->dotenv = new Dotenv();
-        $this->path = $path;
+        $this->path = $path ?? 'environment';
         // we have all files in the environment directory
         $this->allFiles = $this->all() ?? Arrayable::toArrayable([]);
         // load the environment variables
         $this->resolve();
+    }
+
+    /**
+     * Absolute path to the environment directory (settings.ini, .env, etc.).
+     */
+    private function environmentDirectory(): string
+    {
+        $path = $this->path;
+
+        if ($path !== '' && is_dir($path)) {
+            return rtrim($path, DIRECTORY_SEPARATOR);
+        }
+
+        if ($path !== '' && defined('BASE_PATH') && is_dir(BASE_PATH . DIRECTORY_SEPARATOR . $path)) {
+            return BASE_PATH . DIRECTORY_SEPARATOR . $path;
+        }
+
+        if (defined('BASE_PATH')) {
+            return BASE_PATH . DIRECTORY_SEPARATOR . 'environment';
+        }
+
+        return 'environment';
+    }
+
+    private function envPath(?string $file = null): string
+    {
+        $base = $this->environmentDirectory();
+
+        return $file ? $base . DIRECTORY_SEPARATOR . $file : $base;
     }
 
     /**
@@ -262,6 +291,9 @@ class EnvResolver
 
     public function getEnvKeys()
     {
+        if ($this->env->has('PIONIA_ENV_VARS')) {
+            return $this->env->get('PIONIA_ENV_VARS');
+        }
         if ($this->env->has('SYMFONY_DOTENV_VARS')){
             return $this->env->get('SYMFONY_DOTENV_VARS');
         }

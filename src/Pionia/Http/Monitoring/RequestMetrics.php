@@ -3,8 +3,8 @@
 namespace Pionia\Http\Monitoring;
 
 use Pionia\Http\Request\Request;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Pionia\Http\Response\BinaryFileResponse;
+use Pionia\Http\Response\Response;
 
 /**
  * Records HTTP/API request timing and aggregates for the developer stats dashboard.
@@ -16,6 +16,11 @@ class RequestMetrics
     private const int MAX_LINES = 20_000;
 
     private const int DEFAULT_TOP = 10;
+
+    private const int BUFFER_FLUSH_SIZE = 25;
+
+    /** @var list<string> */
+    private static array $buffer = [];
 
     public static function enabled(): bool
     {
@@ -47,7 +52,21 @@ class RequestMetrics
             'endpoint' => $endpoint,
         ], JSON_THROW_ON_ERROR);
 
-        self::appendLine($line . "\n");
+        self::$buffer[] = $line . "\n";
+
+        if (count(self::$buffer) >= self::BUFFER_FLUSH_SIZE) {
+            self::flush();
+        }
+    }
+
+    public static function flush(): void
+    {
+        if (self::$buffer === []) {
+            return;
+        }
+
+        self::appendLines(self::$buffer);
+        self::$buffer = [];
     }
 
     /**
@@ -55,6 +74,8 @@ class RequestMetrics
      */
     public static function snapshot(int $top = self::DEFAULT_TOP): array
     {
+        self::flush();
+
         $entries = self::readEntries();
         if ($entries === []) {
             return self::emptySnapshot();
@@ -138,6 +159,7 @@ class RequestMetrics
 
     public static function reset(): void
     {
+        self::$buffer = [];
         $path = self::logPath();
         if (is_file($path)) {
             @unlink($path);
@@ -259,7 +281,10 @@ class RequestMetrics
         ];
     }
 
-    private static function appendLine(string $line): void
+    /**
+     * @param list<string> $lines
+     */
+    private static function appendLines(array $lines): void
     {
         $path = self::logPath();
         $dir = dirname($path);
@@ -278,7 +303,7 @@ class RequestMetrics
             }
 
             fseek($handle, 0, SEEK_END);
-            fwrite($handle, $line);
+            fwrite($handle, implode('', $lines));
             fflush($handle);
 
             $size = ftell($handle);
@@ -289,6 +314,11 @@ class RequestMetrics
             flock($handle, LOCK_UN);
             fclose($handle);
         }
+    }
+
+    private static function appendLine(string $line): void
+    {
+        self::appendLines([$line]);
     }
 
     /**

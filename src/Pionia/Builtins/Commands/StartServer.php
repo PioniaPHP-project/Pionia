@@ -5,7 +5,7 @@ namespace Pionia\Builtins\Commands;
 use Pionia\Console\BaseCommand;
 use Pionia\Utils\InteractsWithTime;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Filesystem\Filesystem;
+use Pionia\Utils\Filesystem;
 
 /**
  * For starting the command line server. This should be good choice only in development

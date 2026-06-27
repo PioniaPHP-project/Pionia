@@ -6,7 +6,7 @@ use Exception;
 use Pionia\Porm\Core\Porm;
 use Pionia\Porm\Exceptions\BaseDatabaseException;
 use Pionia\Porm\PaginationCore;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Pionia\Http\UploadedFile;
 
 trait CrudContract
 {

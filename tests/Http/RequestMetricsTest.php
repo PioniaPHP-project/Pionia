@@ -5,7 +5,7 @@ namespace Http;
 use Pionia\Http\Monitoring\RequestMetrics;
 use Pionia\Http\Request\Request;
 use Pionia\TestSuite\PioniaTestCase;
-use Symfony\Component\HttpFoundation\Response;
+use Pionia\Http\Response\Response;
 
 class RequestMetricsTest extends PioniaTestCase
 {

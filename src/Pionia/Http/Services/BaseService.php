@@ -13,7 +13,6 @@ use Pionia\Http\Response\Response;
 use Pionia\Utils\Microable;
 use Pionia\Http\Response\BaseResponse;
 use Pionia\Utils\Support;
-use ReflectionMethod;
 
 /**
  * This is the main class all other services must extend.
@@ -138,14 +137,8 @@ class BaseService implements ServiceContract
             }
         }
 
-        // load it as a macro
-        if ($this->hasMacro($action)){
-            $response = $this->$action($data, $files, $this->request);
-        } else {
-            // this is a normal action, we call it normally
-            $reflection = new ReflectionMethod($this, $action);
-            $response = $reflection->invoke($this, $data, $files, $this->request);
-        }
+        // load it as a macro or a normal action method
+        $response = $this->$action($data, $files, $this->request);
 
         if (is_a($response, BaseResponse::class)){
             return $response;

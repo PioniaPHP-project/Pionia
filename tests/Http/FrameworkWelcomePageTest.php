@@ -7,8 +7,8 @@ use Pionia\Http\Request\Request;
 use Pionia\Http\Routing\Router\DefaultRoutes;
 use Pionia\TestSuite\Concerns\InteractsWithTestEnvironment;
 use Pionia\TestSuite\PioniaTestCase;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Pionia\Http\Response\BinaryFileResponse;
+use Pionia\Http\Response\Response;
 
 class FrameworkWelcomePageTest extends PioniaTestCase
 {

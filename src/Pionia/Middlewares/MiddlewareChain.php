@@ -162,9 +162,11 @@ class MiddlewareChain
         return $class && (Support::implements($class, MiddlewareContract::class) || Support::extends($class, Middleware::class));
     }
 
+    private array $middlewareInstances = [];
+
     private function asMiddleware($klass): MiddlewareContract
     {
-        return new $klass();
+        return $this->middlewareInstances[$klass] ??= new $klass();
     }
 
 

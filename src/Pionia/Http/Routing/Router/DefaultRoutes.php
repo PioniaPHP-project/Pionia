@@ -8,26 +8,24 @@ use Pionia\Http\Pages\DeveloperStatsPage;
 use Pionia\Http\Pages\FrameworkWelcomePage;
 use Pionia\Http\Monitoring\StatsGate;
 use Pionia\Http\Request\Request;
+use Pionia\Http\Response\BinaryFileResponse;
 use Pionia\Http\Response\Response;
 use Pionia\Documentation\ApiDocsUiExporter;
 use Pionia\Documentation\DocsGate;
 use Pionia\Documentation\MoonlightDocCollector;
 use Pionia\Documentation\OpenApiExporter;
+use Pionia\Http\Mime\MimeType;
+use Pionia\Http\Routing\RouteTable;
 use Pionia\Realm\AppRealm;
 use Pionia\Realm\RealmContract;
 use Pionia\Utils\SafePath;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\Mime\MimeTypes;
-use Symfony\Component\Routing\RouteCollection;
 
 class DefaultRoutes
 {
-    private RouteCollection  $defaultRoutes;
+    private RouteTable $defaultRoutes;
     public function __construct()
     {
-        $this->defaultRoutes = new RouteCollection();
+        $this->defaultRoutes = new RouteTable();
     }
 
     private function errorMessage($request, $code, $message): Response
@@ -62,7 +60,7 @@ class DefaultRoutes
             ->addRouteForMediaFiles()
             ->addFrameworkAssetsRoute();
 
-        $routes = $appRealm->getOrDefault(AppRealm::APP_ROUTES_TAG, new RouteCollection());
+        $routes = $appRealm->getOrDefault(AppRealm::APP_ROUTES_TAG, new RouteTable());
         $routes->addCollection($this->defaultRoutes);
         $appRealm->updateCache(AppRealm::APP_ROUTES_TAG, $routes, true, 10);
         $appRealm->set(AppRealm::APP_ROUTES_TAG, $routes);
@@ -75,7 +73,7 @@ class DefaultRoutes
         $instance
 //            ->otherStaticFilesRouter()
             ->addStaticFiles();
-        $routes = $appRealm->getOrDefault(AppRealm::APP_ROUTES_TAG, new RouteCollection());
+        $routes = $appRealm->getOrDefault(AppRealm::APP_ROUTES_TAG, new RouteTable());
         $routes->addCollection($instance->defaultRoutes);
         $appRealm->updateCache(AppRealm::APP_ROUTES_TAG, $routes, true, 10);
         $appRealm->set(AppRealm::APP_ROUTES_TAG, $routes);
@@ -205,7 +203,7 @@ class DefaultRoutes
         $mime = $this->guessMimeType($requestedFile);
         $response = new BinaryFileResponse($requestedFile);
         $response->headers->set('Content-Type', $mime);
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, basename($requestedFile));
+        $response->setContentDisposition(BinaryFileResponse::DISPOSITION_INLINE, basename($requestedFile));
 
         return $response;
     }
@@ -227,33 +225,7 @@ class DefaultRoutes
 
     private function guessMimeType($file)
     {
-        $defaultMimeMap = [
-            'css' => 'text/css',
-            'js' => 'application/javascript',
-            'json' => 'application/json',
-            'png' => 'image/png',
-            'jpg' => 'image/jpeg',
-            'jpeg' => 'image/jpeg',
-            'ico' => 'image/x-icon',
-            'svg' => 'image/svg+xml',
-            'woff2' => 'font/woff2',
-            'ttf' => 'font/ttf',
-            'html' => 'text/html',
-            'txt' => 'text/plain',
-        ];
-
-        $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION) ?: '');
-
-        try {
-            $mimeTypes = new MimeTypes();
-            $guessed = $mimeTypes->guessMimeType($file);
-            if ($guessed !== null) {
-                return $guessed;
-            }
-        } catch (\Throwable) {
-        }
-
-        return $defaultMimeMap[$extension] ?? 'application/octet-stream';
+        return MimeType::guess((string) $file);
     }
 
     private function resolvePathWithinBase(string $baseDir, string $relativePath): ?string
@@ -279,7 +251,7 @@ class DefaultRoutes
 
         $response = new BinaryFileResponse($requestedFile);
         $response->headers->set('Content-Type', $mime);
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, basename($requestedFile));
+        $response->setContentDisposition(BinaryFileResponse::DISPOSITION_INLINE, basename($requestedFile));
 
         return $response;
     }
@@ -329,7 +301,7 @@ class DefaultRoutes
 
         $response = new BinaryFileResponse($requestedFile);
         $response->headers->set('Content-Type', $mime);
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, basename($requestedFile));
+        $response->setContentDisposition(BinaryFileResponse::DISPOSITION_INLINE, basename($requestedFile));
 
         return $response;
     }

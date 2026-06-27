@@ -4,7 +4,7 @@ namespace Pionia\Contracts;
 
 use Pionia\Http\Response\Response;
 use Pionia\Utils\PioniaApplicationType;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Pionia\Http\Response\BinaryFileResponse;
 
 interface ApplicationContract
 {

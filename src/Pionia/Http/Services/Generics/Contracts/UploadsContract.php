@@ -4,8 +4,8 @@ namespace Pionia\Http\Services\Generics\Contracts;
 
 use Exception;
 use Pionia\Utils\Support;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Pionia\Http\Bag\FileBag;
+use Pionia\Http\UploadedFile;
 
 trait UploadsContract
 {
@@ -34,7 +34,6 @@ trait UploadsContract
     protected function defaultUpload(UploadedFile $file, string $fileName): string
     {
         $baseDir = alias(\DIRECTORIES::STORAGE_DIR->name);
-        $fileSystem = new FileSystem();
         $settings = env('uploads', ['max_size' => 1024 * 1024 * 2, 'media_dir' => 'media', 'media_url' => 'media']);
         $size = $file->getSize();
         if (isset($settings['max_size']) && $size > $settings['max_size']) {
@@ -55,7 +54,7 @@ trait UploadsContract
         }
         $fullPath = $baseDir . $mediaDir;
         $fileNameToSave = $fullPath.DIRECTORY_SEPARATOR. $fileName;
-        if ($fileSystem->exists($fileNameToSave)) {
+        if (file_exists($fileNameToSave)) {
             $fileName = time() . '_' . $fileName;
         }
         $file->move($fullPath, $fileName);

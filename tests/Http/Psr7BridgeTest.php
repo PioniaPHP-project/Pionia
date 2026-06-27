@@ -7,8 +7,8 @@ use Pionia\Http\Worker\Psr7Bridge;
 use Pionia\Http\Worker\RoadRunnerWorker;
 use Pionia\Runtime\RuntimeMode;
 use Pionia\TestSuite\PioniaTestCase;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Pionia\Http\Response\BinaryFileResponse;
+use Pionia\Http\Response\Response;
 
 class Psr7BridgeTest extends PioniaTestCase
 {

@@ -3,6 +3,7 @@
 namespace Realm;
 
 use Exception;
+use Pionia\Exceptions\ResourceNotFoundException;
 use Pionia\Exceptions\UserUnauthenticatedException;
 use Pionia\Exceptions\UserUnauthorizedException;
 use Pionia\Http\Request\Request;
@@ -10,7 +11,6 @@ use Pionia\Realm\GlobalExceptionHandler;
 use Pionia\TestSuite\AssertsPioniaResponses;
 use Pionia\TestSuite\Concerns\InteractsWithTestEnvironment;
 use Pionia\TestSuite\PioniaTestCase;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class GlobalExceptionHandlerTest extends PioniaTestCase
 {

@@ -5,9 +5,10 @@ namespace Pionia\Realm;
 use Pionia\Contracts\ExceptionHandlerContract;
 use Pionia\Exceptions\UserUnauthenticatedException;
 use Pionia\Exceptions\UserUnauthorizedException;
+use Pionia\Exceptions\ResourceNotFoundException;
+use Pionia\Http\Routing\Exception\RouteNotFoundException;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\BaseResponse;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Throwable;
 
 class GlobalExceptionHandler implements ExceptionHandlerContract
@@ -40,7 +41,8 @@ class GlobalExceptionHandler implements ExceptionHandlerContract
     private function resolveStatusCode(Throwable $e): int
     {
         return match (true) {
-            $e instanceof ResourceNotFoundException => (int) env('not_found_code', 404),
+            $e instanceof ResourceNotFoundException,
+            $e instanceof RouteNotFoundException => (int) env('not_found_code', 404),
             $e instanceof UserUnauthenticatedException => (int) env('unauthenticated_code', 401),
             $e instanceof UserUnauthorizedException => (int) env('unauthorized_code', 403),
             method_exists($e, 'getStatusCode') => (int) $e->getStatusCode(),

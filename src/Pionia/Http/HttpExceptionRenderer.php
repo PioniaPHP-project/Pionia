@@ -3,17 +3,17 @@
 namespace Pionia\Http;
 
 use Pionia\Http\Pages\HttpErrorPage;
+use Pionia\Http\Routing\Exception\MethodNotAllowedException;
+use Pionia\Http\Routing\Exception\RouteNotFoundException;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
-use Symfony\Component\Routing\Exception\MethodNotAllowedException;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Throwable;
 
 class HttpExceptionRenderer
 {
     public function render(Throwable $e, Request $request): Response
     {
-        if ($e instanceof ResourceNotFoundException) {
+        if ($e instanceof RouteNotFoundException) {
             return HttpErrorPage::respond(
                 $request,
                 (int) env('NOT_FOUND_CODE', 404),
