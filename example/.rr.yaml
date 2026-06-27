@@ -5,7 +5,7 @@ server:
   relay: pipes
 
 http:
-  address: 127.0.0.1:8003
+  address: 127.0.0.1:8080
   middleware: ["gzip"]
   pool:
     num_workers: 2
