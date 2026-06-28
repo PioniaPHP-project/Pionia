@@ -3,14 +3,15 @@
 namespace Application\Switches;
 
 use Application\Services\WelcomeService;
+use Pionia\Collections\Arrayable;
 use Pionia\Http\Switches\BaseApiServiceSwitch;
 
 class MainSwitch extends BaseApiServiceSwitch
 {
-    public static function registerServices(): array
+    public static function registerServices(): Arrayable
     {
-        return [
+        return arr([
             'welcome' => WelcomeService::class,
-        ];
+        ]);
     }
 }
