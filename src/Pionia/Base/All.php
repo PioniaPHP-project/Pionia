@@ -9,10 +9,16 @@ use Pionia\Builtins\Commands\Generators\GenerateAuthenticationBackend;
 use Pionia\Builtins\Commands\Generators\GenerateCommand;
 use Pionia\Builtins\Commands\Generators\GenerateService;
 use Pionia\Builtins\Commands\Generators\GenerateSwitch;
+use Pionia\Builtins\Commands\Frontend\BuildFrontendCommand;
+use Pionia\Builtins\Commands\Frontend\CleanFrontendCommand;
+use Pionia\Builtins\Commands\Frontend\DevFrontendCommand;
+use Pionia\Builtins\Commands\Frontend\DropFrontendCommand;
+use Pionia\Builtins\Commands\Frontend\ScaffoldFrontendCommand;
 use Pionia\Builtins\Commands\GenerateApiCatalog;
 use Pionia\Builtins\Commands\GenerateApiDocs;
 use Pionia\Builtins\Commands\MaintenanceOffCommand;
 use Pionia\Builtins\Commands\MaintenanceOnCommand;
+use Pionia\Builtins\Commands\NewApplicationCommand;
 use Pionia\Builtins\Commands\StartRoadRunnerServer;
 use Pionia\Builtins\Commands\StartServer;
 use Pionia\Builtins\Commands\StopRoadRunnerServer;
@@ -76,6 +82,12 @@ if (!function_exists('allBuiltins')) {
                 'stats:view' => ViewStats::class,
                 'maintenance:on' => MaintenanceOnCommand::class,
                 'maintenance:off' => MaintenanceOffCommand::class,
+                'new' => NewApplicationCommand::class,
+                'frontend:scaffold' => ScaffoldFrontendCommand::class,
+                'frontend:build' => BuildFrontendCommand::class,
+                'frontend:dev' => DevFrontendCommand::class,
+                'frontend:clean' => CleanFrontendCommand::class,
+                'frontend:drop' => DropFrontendCommand::class,
             ],
             'authentications' => [
             ],

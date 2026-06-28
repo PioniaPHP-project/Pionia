@@ -29,6 +29,12 @@ final class ShellCommand extends BaseCommand
             return Command::FAILURE;
         }
 
+        if (!function_exists('readline') && (!defined('STDIN') || !@stream_isatty(STDIN))) {
+            $this->error('Shell requires an interactive terminal (TTY).');
+
+            return Command::FAILURE;
+        }
+
         $this->info('Pionia interactive shell');
         $this->comment('Helpers: app(), realm(), env(), logger(), cache()');
         $this->comment('Meta: help, exit, clear, :history');

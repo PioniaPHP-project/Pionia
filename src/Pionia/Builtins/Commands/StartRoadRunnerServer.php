@@ -79,7 +79,15 @@ class StartRoadRunnerServer extends BaseCommand
             return Command::FAILURE;
         }
 
-        $command = $this->buildServeCommand($binary, $cwd, $config, $httpAddress, $listen['address'], true, $this->option('detach'));
+        $command = $this->buildServeCommand(
+            $binary,
+            $cwd,
+            $config,
+            $httpAddress,
+            $listen['address'],
+            true,
+            (bool) $this->option('detach'),
+        );
 
         if ($this->option('detach')) {
             return $this->startDetached($command, $cwd, $httpAddress);

@@ -1,0 +1,21 @@
+{
+    "name": "{{VENDOR}}/{{APP_SLUG}}",
+    "description": "{{APP_NAME}} — Pionia application",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.5",
+        "pionia/pionia-core": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Application\\": "./"
+        }
+    },
+    "scripts": {
+        "serve": "php pionia serve",
+        "test": "php vendor/bin/phpunit"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

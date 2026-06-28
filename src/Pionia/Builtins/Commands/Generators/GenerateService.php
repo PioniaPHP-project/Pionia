@@ -131,7 +131,7 @@ class GenerateService extends BaseCommand
             if ($ks === 'GenericService') {
                 $klass->setExtends('Pionia\Http\Services\GenericService');
             } else {
-                $klass->setExtends('Pionia\Http\Services\Generics\\' . $gs);
+                $klass->setExtends('Pionia\Http\Services\Generics\\' . $ks);
             }
         }
 

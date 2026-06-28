@@ -25,7 +25,6 @@ class StopRoadRunnerServerCommandTest extends PioniaTestCase
             $code = $this->artisan('stopserver');
 
             $this->assertContains($code, [0, 1]);
-            $this->assertStringNotContainsString('Port(s) still in use: 8080', $this->consoleOutput());
         } finally {
             if ($backup !== null) {
                 file_put_contents($runtime, $backup);

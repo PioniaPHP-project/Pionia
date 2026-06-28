@@ -1094,17 +1094,17 @@ if (!function_exists('maintenanceConfig')) {
 if (!function_exists('maintenanceModeEnabled')) {
     function maintenanceModeEnabled(): bool
     {
+        $explicit = env('MAINTENANCE_MODE');
+        if ($explicit !== null && $explicit !== '') {
+            return filter_var($explicit, FILTER_VALIDATE_BOOLEAN);
+        }
+
         $maintenance = maintenanceConfig();
 
         foreach (['ENABLED', 'enabled'] as $key) {
             if (array_key_exists($key, $maintenance)) {
                 return filter_var($maintenance[$key], FILTER_VALIDATE_BOOLEAN);
             }
-        }
-
-        $explicit = env('MAINTENANCE_MODE');
-        if ($explicit !== null && $explicit !== '') {
-            return filter_var($explicit, FILTER_VALIDATE_BOOLEAN);
         }
 
         return false;
@@ -1177,6 +1177,58 @@ if (!function_exists('maintenanceBypassAuthorized')) {
             ?? '');
 
         return $provided !== '' && hash_equals($required, $provided);
+    }
+}
+
+if (!function_exists('frontendConfig')) {
+    /**
+     * @return array<string, mixed>
+     */
+    function frontendConfig(): array
+    {
+        $path = null;
+        if (defined('BASE_PATH') && is_file(BASE_PATH . '/environment/settings.ini')) {
+            $path = BASE_PATH . '/environment/settings.ini';
+        } else {
+            try {
+                $path = app()->envPath('settings.ini');
+            } catch (\Throwable) {
+                $path = null;
+            }
+        }
+
+        if (is_string($path) && is_file($path)) {
+            clearstatcache(true, $path);
+            $settings = parse_ini_file($path, true);
+            $section = $settings['frontend'] ?? null;
+
+            return is_array($section) ? $section : [];
+        }
+
+        $frontend = env('frontend', []);
+
+        return is_array($frontend) ? $frontend : [];
+    }
+}
+
+if (!function_exists('spaFallbackEnabled')) {
+    function spaFallbackEnabled(): bool
+    {
+        $frontend = frontendConfig();
+
+        foreach (['SPA_FALLBACK', 'spa_fallback'] as $key) {
+            if (array_key_exists($key, $frontend)) {
+                return filter_var($frontend[$key], FILTER_VALIDATE_BOOLEAN);
+            }
+        }
+
+        if (defined('BASE_PATH')) {
+            $userIndex = BASE_PATH . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'index.html';
+
+            return is_file($userIndex);
+        }
+
+        return false;
     }
 }
 

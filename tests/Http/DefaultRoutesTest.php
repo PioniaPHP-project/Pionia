@@ -92,4 +92,39 @@ class DefaultRoutesTest extends PioniaTestCase
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(404, $response->getStatusCode());
     }
+
+    public function testSpaFallbackServesIndexHtmlForClientRoutes(): void
+    {
+        $public = alias(\DIRECTORIES::PUBLIC_DIR->name);
+        $index = $public . DIRECTORY_SEPARATOR . 'spa-test-index.html';
+        $original = is_file($public . '/index.html') ? file_get_contents($public . '/index.html') : null;
+
+        file_put_contents($public . '/index.html', '<!DOCTYPE html><html><body>SPA</body></html>');
+
+        try {
+            $request = Request::create('/dashboard/settings');
+            $request->attributes->set('path', 'dashboard/settings');
+
+            $response = $this->routes->spaFallbackRouter($request);
+
+            $this->assertSame(200, $response->getStatusCode());
+            $this->assertStringContainsString('SPA', (string) $response->getContent());
+        } finally {
+            if ($original !== null) {
+                file_put_contents($public . '/index.html', $original);
+            } elseif (is_file($public . '/index.html')) {
+                unlink($public . '/index.html');
+            }
+        }
+    }
+
+    public function testSpaFallbackBlocksApiPaths(): void
+    {
+        $request = Request::create('/api/v1/ping');
+        $request->attributes->set('path', 'api/v1/ping');
+
+        $response = $this->routes->spaFallbackRouter($request);
+
+        $this->assertSame(404, $response->getStatusCode());
+    }
 }

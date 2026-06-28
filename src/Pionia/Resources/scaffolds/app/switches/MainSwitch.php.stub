@@ -1,0 +1,16 @@
+<?php
+
+namespace Application\Switches;
+
+use Application\Services\WelcomeService;
+use Pionia\Http\Switches\BaseApiServiceSwitch;
+
+class MainSwitch extends BaseApiServiceSwitch
+{
+    public static function registerServices(): array
+    {
+        return [
+            'welcome' => WelcomeService::class,
+        ];
+    }
+}

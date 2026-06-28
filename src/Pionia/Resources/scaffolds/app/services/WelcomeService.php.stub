@@ -1,0 +1,21 @@
+<?php
+
+namespace Application\Services;
+
+use Pionia\Collections\Arrayable;
+use Pionia\Http\Bag\FileBag;
+use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Services\Service;
+
+class WelcomeService extends Service
+{
+    /**
+     * @moonlight-action ping
+     * @moonlight-summary Health check for {{APP_NAME}}
+     * @moonlight-example {"service":"welcome","action":"ping"}
+     */
+    protected function pingAction(Arrayable $data, ?FileBag $files = null): BaseResponse
+    {
+        return response(0, 'Welcome to {{APP_NAME}}', ['app' => '{{APP_NAME}}']);
+    }
+}

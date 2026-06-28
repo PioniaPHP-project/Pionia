@@ -5,12 +5,10 @@ namespace Pionia\Http\Switches;
 use Exception;
 use Pionia\Contracts\BaseSwitchContract;
 use Pionia\Documentation\DocsGate;
+use Pionia\Http\Moonlight\MoonlightDispatcher;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\BaseResponse;
 use Pionia\Http\Response\Response;
-use Pionia\Http\Routing\SupportedHttpMethods;
-use Pionia\Exceptions\ResourceNotFoundException;
-use Pionia\Utils\CachedEndpoints;
 use Throwable;
 
 /**
@@ -28,8 +26,6 @@ use Throwable;
  */
 abstract class BaseApiServiceSwitch implements BaseSwitchContract
 {
-    use CachedEndpoints;
-
     /**
      * This method checks the request data for the `SERVICE` key and processes the service based on it
      *
@@ -39,44 +35,9 @@ abstract class BaseApiServiceSwitch implements BaseSwitchContract
      */
     private static function processServices(Request $request): BaseResponse
     {
-        // if we had the response cached, we return it
-        try {
-            $cachedResponse = self::cacheResponse($request);
-            if ($cachedResponse) {
-                return $cachedResponse;
-            }
-        } catch (Exception $e) {
-            logger()->warning($e);
-        }
+        $controller = get_called_class() . '::processor';
 
-        if ($request->isMethod(SupportedHttpMethods::GET)){
-            $data = $request->attributes;
-            $service = $data->getString("service") ?? throw new ResourceNotFoundException("Service not defined in request data");
-            $action = $data->getString("action") ?? throw new ResourceNotFoundException("Action not defined in request data");
-        } else {
-            $data = $request->getData();
-            $service = $data->getOrThrow('service', new ResourceNotFoundException("Service not defined in request data"));
-            $action = $data->getOrThrow('action',  new ResourceNotFoundException("Action not defined in request data"));
-        }
-
-        $controller = get_called_class()."::processor";
-        $registry = services($controller);
-        $serviceKlass = is_array($registry) ? ($registry[$service] ?? null) : null;
-
-        // if the class was defined as a string especially using Service::class, we instantiate it
-        if ($serviceKlass && is_string($serviceKlass)){
-            $serviceKlass = container()->make($serviceKlass, ['request' => $request]);
-        }
-
-        if ($serviceKlass) {
-            if (method_exists($serviceKlass, 'processAction')){
-                return $serviceKlass->processAction($action, $service);
-            } else {
-                throw new ResourceNotFoundException("Service $service is not a valid service");
-            }
-
-        }
-        throw new ResourceNotFoundException("Service $service not found");
+        return MoonlightDispatcher::dispatch($request, fn () => services($controller));
     }
 
     /**

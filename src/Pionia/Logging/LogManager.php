@@ -70,6 +70,12 @@ class LogManager
             return new NullLogger();
         }
 
+        if ($driver === 'file') {
+            $path = (string) ($config['path'] ?? $this->app->alias(\DIRECTORIES::LOGS_DIR->name) . '/app.log');
+
+            return new FileLogger($path, $name, $config);
+        }
+
         if ($driver === 'single' || $driver === 'stack') {
             return new PioniaLogger();
         }

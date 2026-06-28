@@ -71,7 +71,8 @@ class DefaultRoutes
     {
         $instance = new static();
         $instance
-//            ->otherStaticFilesRouter()
+            ->addPublicAssetRoutes()
+            ->addSpaFallbackRoute()
             ->addStaticFiles();
         $routes = $appRealm->getOrDefault(AppRealm::APP_ROUTES_TAG, new RouteTable());
         $routes->addCollection($instance->defaultRoutes);
@@ -304,6 +305,97 @@ class DefaultRoutes
         $response->setContentDisposition(BinaryFileResponse::DISPOSITION_INLINE, basename($requestedFile));
 
         return $response;
+    }
+
+    private function addPublicAssetRoutes(): static
+    {
+        $this->defaultRoutes->add(
+            'public_assets',
+            RouteObject::get('/assets/{path}')
+                ->options(['path' => '.+'])
+                ->controller(['_controller' => DefaultRoutes::class . '::publicAssetsRouter'])
+                ->build()
+        );
+
+        return $this;
+    }
+
+    public function publicAssetsRouter(Request $request): Response | BinaryFileResponse
+    {
+        $_path = (string) $request->attributes->get('path');
+        $publicBase = alias(DIRECTORIES::PUBLIC_DIR->name) . DIRECTORY_SEPARATOR . 'assets';
+        $requestedFile = $this->resolvePathWithinBase($publicBase, $_path);
+
+        if ($requestedFile === null) {
+            return $this->errorMessage($request, 404, 'Asset not found');
+        }
+
+        $response = new BinaryFileResponse($requestedFile);
+        $response->headers->set('Content-Type', $this->guessMimeType($requestedFile));
+        $response->setContentDisposition(BinaryFileResponse::DISPOSITION_INLINE, basename($requestedFile));
+
+        return $response;
+    }
+
+    private function addSpaFallbackRoute(): static
+    {
+        if (!spaFallbackEnabled()) {
+            return $this;
+        }
+
+        $this->defaultRoutes->add(
+            'spa_fallback',
+            RouteObject::get('/{path}')
+                ->requires(['path' => '.+'])
+                ->controller(['_controller' => DefaultRoutes::class . '::spaFallbackRouter'])
+                ->build()
+        );
+
+        return $this;
+    }
+
+    public function spaFallbackRouter(Request $request): Response | BinaryFileResponse
+    {
+        $path = (string) $request->attributes->get('path');
+
+        if ($this->isReservedSpaPath($path)) {
+            return $this->errorMessage($request, 404, 'Resource not found or did not match any endpoints');
+        }
+
+        $publicBase = alias(DIRECTORIES::PUBLIC_DIR->name);
+        $requestedFile = $this->resolvePathWithinBase($publicBase, $path);
+
+        if ($requestedFile !== null && is_file($requestedFile)) {
+            $response = new BinaryFileResponse($requestedFile);
+            $response->headers->set('Content-Type', $this->guessMimeType($requestedFile));
+            $response->setContentDisposition(BinaryFileResponse::DISPOSITION_INLINE, basename($requestedFile));
+
+            return $response;
+        }
+
+        $index = $this->resolvePathWithinBase($publicBase, 'index.html');
+        if ($index !== null && is_file($index)) {
+            return new Response(
+                (string) file_get_contents($index),
+                200,
+                ['Content-Type' => 'text/html; charset=UTF-8']
+            );
+        }
+
+        return $this->errorMessage($request, 404, 'Resource not found or did not match any endpoints');
+    }
+
+    private function isReservedSpaPath(string $path): bool
+    {
+        $normalized = ltrim(strtolower($path), '/');
+
+        foreach (['api/', '__pionia/', 'static/', 'media/', 'docs', 'stats'] as $prefix) {
+            if (str_starts_with($normalized, $prefix)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

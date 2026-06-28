@@ -304,6 +304,40 @@ REPL with `app()`, `realm()`, `env()`, `logger()`, `cache()` available. Meta com
 
 User assets: `public/static/` via `/static/{path}`; media uploads via `/media/{path}` from `storage/media`.
 
+### Vite full-stack frontend (Phase 7)
+
+Scaffold, develop, and deploy a Vite SPA alongside the Moonlight API:
+
+| Command | Action |
+|---------|--------|
+| `frontend:scaffold` | Create Vite app in `frontend/` (React, Vue, …) |
+| `frontend:dev` | Vite dev server with `/api` proxy to Pionia |
+| `frontend:build` | Build and copy `dist/` → `public/` |
+| `frontend:clean` | Remove deployed assets from `public/` (keeps `public/static/`) |
+| `frontend:drop` | Delete `frontend/` and `[frontend]` settings |
+
+Configure via `[frontend]` in `environment/settings.ini`. When `SPA_FALLBACK=true` or `public/index.html` exists, client routes fall back to the SPA shell.
+
+```bash
+php pionia frontend:scaffold --framework=react-ts --yes
+php pionia serve          # terminal 1 — API on PORT
+php pionia frontend:dev   # terminal 2 — Vite on :5173
+php pionia frontend:build # production — serves from public/
+```
+
+### New application scaffold (Phase 8)
+
+```bash
+php pionia new my-app --install
+php pionia new my-app --install --with-frontend=react-ts
+```
+
+Creates bootstrap, environment, services, switches, and `composer.json` from core stubs (`src/Pionia/Resources/scaffolds/app/`).
+
+### Moonlight async foundation (Phase 9)
+
+`Pionia\Http\Moonlight\MoonlightDispatcher` centralizes `{ service, action }` dispatch for HTTP, jobs, and future WebSocket transports. `MoonlightJobPayload` + `MoonlightJobDispatcher` provide the RoadRunner Jobs integration point (currently synchronous until RR Jobs plugin is wired).
+
 ## Extension points
 
 | Hook | Where |

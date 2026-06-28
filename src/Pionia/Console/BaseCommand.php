@@ -8,6 +8,7 @@ use Pionia\Base\WebApplication;
 use Pionia\Console\Concerns\CallsCommands;
 use Pionia\Console\Concerns\HasParameters;
 use Pionia\Console\Concerns\InteractsWithIO;
+use Pionia\Console\Input\ArgvInput;
 use Pionia\Console\Input\ArrayInput;
 use Pionia\Console\Input\InputInterface;
 use Pionia\Console\Output\OutputInterface;
@@ -155,5 +156,38 @@ class BaseCommand extends Command
 
             return static::FAILURE;
         }
+    }
+
+    public function run(InputInterface $input, OutputInterface $output): int
+    {
+        $this->mergeApplicationDefinition(false);
+
+        if ($input instanceof ArgvInput) {
+            $input = $input->withTokens($this->stripCommandTokens($input->getTokens()));
+        }
+
+        $input->bind($this->getDefinition());
+
+        return $this->execute($input, $output);
+    }
+
+    /**
+     * @param list<string> $tokens
+     *
+     * @return list<string>
+     */
+    private function stripCommandTokens(array $tokens): array
+    {
+        if ($tokens === []) {
+            return $tokens;
+        }
+
+        $names = array_merge([$this->getName()], $this->getAliases());
+
+        if (in_array($tokens[0], $names, true)) {
+            return array_slice($tokens, 1);
+        }
+
+        return $tokens;
     }
 }

@@ -304,7 +304,7 @@ trait AppMixin
         }
 
         realm()->set(PioniaRouter::class, function () {
-            return new PioniaRouter();
+            return new PioniaRouter(realm());
         });
     }
 

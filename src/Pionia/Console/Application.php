@@ -146,6 +146,10 @@ class Application
 
     public function doRun(InputInterface $input, OutputInterface $output): int
     {
+        if ($input instanceof ArgvInput) {
+            return $this->doRunArgv($input, $output);
+        }
+
         try {
             $input->bind($this->definition);
         } catch (\Throwable $e) {
@@ -156,6 +160,31 @@ class Application
 
         $this->configureIO($input, $output);
 
+        return $this->runBoundCommand($input, $output, null);
+    }
+
+    private function doRunArgv(ArgvInput $input, OutputInterface $output): int
+    {
+        $commandName = $this->resolveCommandNameFromArgv($input->getTokens());
+
+        try {
+            $appInput = new ArrayInput(array_merge(
+                ['command' => $commandName],
+                $this->extractApplicationOptions($input->getTokens()),
+            ));
+            $appInput->bind($this->definition);
+            $this->configureIO($appInput, $output);
+        } catch (\Throwable $e) {
+            $output->writeln('<error>' . $e->getMessage() . '</error>');
+
+            return Command::FAILURE;
+        }
+
+        return $this->runBoundCommand($appInput, $output, $input);
+    }
+
+    private function runBoundCommand(InputInterface $input, OutputInterface $output, ?ArgvInput $commandArgv): int
+    {
         $commandName = null;
         if ($input instanceof ArrayInput) {
             $commandName = $input->getCommandName();
@@ -201,7 +230,71 @@ class Application
             return Command::FAILURE;
         }
 
-        return $command->run($input, $output);
+        return $command->run($this->prepareCommandInput($input, $commandArgv), $output);
+    }
+
+    private function prepareCommandInput(InputInterface $appInput, ?ArgvInput $commandArgv): InputInterface
+    {
+        $commandInput = $commandArgv ?? $appInput;
+
+        if ($appInput->getOption('no-interaction')) {
+            $commandInput->setInteractive(false);
+        }
+
+        return $commandInput;
+    }
+
+    /**
+     * @param list<string> $tokens
+     */
+    private function resolveCommandNameFromArgv(array $tokens): string
+    {
+        foreach ($tokens as $token) {
+            if ($token === '--') {
+                break;
+            }
+
+            if (str_starts_with($token, '-')) {
+                continue;
+            }
+
+            return $token;
+        }
+
+        return 'list';
+    }
+
+    /**
+     * @param list<string> $tokens
+     *
+     * @return array<string, mixed>
+     */
+    private function extractApplicationOptions(array $tokens): array
+    {
+        $options = [];
+        $global = [
+            'help' => ['--help', '-h'],
+            'quiet' => ['--quiet', '-q'],
+            'verbose' => ['--verbose', '-v', '-vv', '-vvv'],
+            'version' => ['--version', '-V'],
+            'ansi' => ['--ansi'],
+            'no-ansi' => ['--no-ansi'],
+            'no-interaction' => ['--no-interaction', '-n'],
+        ];
+
+        foreach ($tokens as $token) {
+            if ($token === '--') {
+                break;
+            }
+
+            foreach ($global as $name => $flags) {
+                if (in_array($token, $flags, true)) {
+                    $options['--' . $name] = true;
+                }
+            }
+        }
+
+        return $options;
     }
 
     protected function configureIO(InputInterface $input, OutputInterface $output): void
