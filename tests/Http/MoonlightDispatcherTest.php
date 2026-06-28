@@ -42,9 +42,22 @@ class MoonlightDispatcherTest extends PioniaTestCase
         $job = new MoonlightJobPayload('auth', 'list_auth');
         $registry = fn () => ['auth' => \Application\Services\AuthService::class];
 
-        $response = MoonlightJobDispatcher::dispatch($job, $registry);
+        $response = MoonlightJobDispatcher::dispatchSync($job, $registry);
 
         $this->assertPioniaOk($response);
+    }
+
+    public function testJobPayloadFromArrayStripsReservedKeys(): void
+    {
+        $job = MoonlightJobPayload::fromArray([
+            'service' => 'auth',
+            'action' => 'list_auth',
+            'payload' => ['foo' => 'bar'],
+            'switch' => 'Application\\Switches\\MainSwitch',
+        ]);
+
+        $this->assertSame(['foo' => 'bar'], $job->payload);
+        $this->assertSame('Application\\Switches\\MainSwitch', $job->switch);
     }
 
     public function testResolveServiceAndActionFromPostBody(): void

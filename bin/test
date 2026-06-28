@@ -1,5 +1,64 @@
 #!/usr/bin/env bash
-# Run PHPUnit without loading the Composer PHAR (avoids PHP 8.5 deprecation noise from Composer's bundled deps).
+# Run PHPUnit with readable output (suite labels + test names).
+#
+# Usage:
+#   bin/test                  # all suites, TestDox summary per suite
+#   bin/test -v|--verbose     # all suites, live test name as each runs
+#   bin/test --testsuite Unit # pass-through (always uses --testdox unless -v)
+#   bin/test tests/Http/...   # single file or filter
 set -euo pipefail
+set -o pipefail
+
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-exec php "${ROOT}/vendor/bin/phpunit" "$@"
+PHPUNIT=(php "${ROOT}/vendor/bin/phpunit" --colors=always)
+SUITES=(Unit Feature Console Documentation)
+VERBOSE=0
+ARGS=()
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -v|--verbose)
+            VERBOSE=1
+            shift
+            ;;
+        *)
+            ARGS+=("$1")
+            shift
+            ;;
+    esac
+done
+
+filter_debug_output() {
+    grep -E '^(Test (Prepared|Passed|Failed|Skipped|Errored)|Test Suite Started \(|OK |FAILURES!|ERRORS!|Tests: |Time: )' || true
+}
+
+run_suite() {
+    local suite="$1"
+    echo ""
+    echo "══════════════════════════════════════════════════════════════"
+    echo "  $suite"
+    echo "══════════════════════════════════════════════════════════════"
+
+    if [[ "$VERBOSE" -eq 1 ]]; then
+        "${PHPUNIT[@]}" --debug --testsuite "$suite" 2>&1 | filter_debug_output
+    else
+        "${PHPUNIT[@]}" --testdox --testsuite "$suite"
+    fi
+}
+
+run_direct() {
+    if [[ "$VERBOSE" -eq 1 ]]; then
+        "${PHPUNIT[@]}" --debug "${ARGS[@]}" 2>&1 | filter_debug_output
+    else
+        "${PHPUNIT[@]}" --testdox "${ARGS[@]}"
+    fi
+}
+
+if [[ ${#ARGS[@]} -eq 0 ]]; then
+    for suite in "${SUITES[@]}"; do
+        run_suite "$suite"
+    done
+    echo ""
+else
+    run_direct
+fi

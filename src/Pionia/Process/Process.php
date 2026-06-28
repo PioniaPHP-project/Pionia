@@ -200,11 +200,21 @@ final class Process
         }
 
         $status = proc_get_status($resource);
-        if ($status['running']) {
-            proc_close($resource);
-        } else {
-            $this->exitCode = (int) $status['exitcode'];
-            proc_close($resource);
+        while ($status['running']) {
+            usleep(10_000);
+            $status = proc_get_status($resource);
+            if ($status['signaled']) {
+                proc_close($resource);
+                throw new ProcessSignaledException((int) $status['termsig']);
+            }
+        }
+
+        $exitCode = proc_close($resource);
+        if ($exitCode !== -1) {
+            $this->exitCode = $exitCode;
+        } elseif (!$status['running']) {
+            $code = (int) $status['exitcode'];
+            $this->exitCode = $code >= 0 ? $code : 1;
         }
 
         return $this->exitCode;

@@ -1,5 +1,8 @@
 version: "3"
 
+rpc:
+  listen: tcp://127.0.0.1:6001
+
 server:
   command: "php worker.php"
   relay: pipes
@@ -12,6 +15,24 @@ http:
     max_jobs: 0
     allocate_timeout: 60s
     destroy_timeout: 60s
+
+jobs:
+  consume: ["moonlight"]
+  pool:
+    num_workers: 2
+    allocate_timeout: 60s
+    destroy_timeout: 60s
+  pipelines:
+    moonlight:
+      driver: memory
+      config:
+        priority: 10
+        prefetch: 100
+
+# Centrifugo WebSockets (optional — requires roadrunner-php/centrifugo + Centrifugo server):
+# centrifuge:
+#   proxy_address: "http://127.0.0.1:8000/api"
+#   grpc_api: true
 
 logs:
   mode: development

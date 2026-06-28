@@ -23,10 +23,16 @@ final readonly class MoonlightJobPayload
      */
     public static function fromArray(array $data): self
     {
+        $payload = is_array($data['payload'] ?? null)
+            ? $data['payload']
+            : $data;
+
+        unset($payload['service'], $payload['action'], $payload['switch']);
+
         return new self(
             service: (string) ($data['service'] ?? ''),
             action: (string) ($data['action'] ?? ''),
-            payload: is_array($data['payload'] ?? null) ? $data['payload'] : $data,
+            payload: $payload,
             switch: isset($data['switch']) ? (string) $data['switch'] : null,
         );
     }

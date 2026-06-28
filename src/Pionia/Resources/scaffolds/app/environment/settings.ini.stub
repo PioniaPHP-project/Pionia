@@ -19,3 +19,12 @@ default=true
 allowed_origins=http://localhost:5173,http://127.0.0.1:5173
 allowed_headers=*
 credentials=true
+
+[jobs]
+ENABLED=false
+PIPELINE=moonlight
+RPC=tcp://127.0.0.1:6001
+
+[realtime]
+ENABLED=false
+CHANNEL_PREFIX=moonlight

@@ -1,0 +1,25 @@
+version: "3"
+
+rpc:
+  listen: tcp://127.0.0.1:6001
+
+server:
+  command: "php worker.php"
+  relay: pipes
+
+http:
+  address: 127.0.0.1:8080
+  pool:
+    num_workers: 2
+
+jobs:
+  consume: ["moonlight"]
+  pool:
+    num_workers: 2
+  pipelines:
+    moonlight:
+      driver: memory
+
+logs:
+  mode: development
+  level: info

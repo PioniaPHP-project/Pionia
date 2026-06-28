@@ -1232,9 +1232,95 @@ if (!function_exists('spaFallbackEnabled')) {
     }
 }
 
+if (!function_exists('jobsConfig')) {
+    /**
+     * @return array<string, mixed>
+     */
+    function jobsConfig(): array
+    {
+        $path = null;
+        if (defined('BASE_PATH') && is_file(BASE_PATH . '/environment/settings.ini')) {
+            $path = BASE_PATH . '/environment/settings.ini';
+        } else {
+            try {
+                $path = app()->envPath('settings.ini');
+            } catch (\Throwable) {
+                $path = null;
+            }
+        }
 
+        if (is_string($path) && is_file($path)) {
+            clearstatcache(true, $path);
+            $settings = parse_ini_file($path, true);
+            $section = $settings['jobs'] ?? null;
 
+            return is_array($section) ? $section : [];
+        }
 
+        $jobs = env('jobs', []);
+
+        return is_array($jobs) ? $jobs : [];
+    }
+}
+
+if (!function_exists('moonlightJobsEnabled')) {
+    function moonlightJobsEnabled(): bool
+    {
+        $jobs = jobsConfig();
+
+        foreach (['ENABLED', 'enabled'] as $key) {
+            if (array_key_exists($key, $jobs)) {
+                return filter_var($jobs[$key], FILTER_VALIDATE_BOOLEAN);
+            }
+        }
+
+        return filter_var(env('JOBS_ENABLED', false), FILTER_VALIDATE_BOOLEAN);
+    }
+}
+
+if (!function_exists('realtimeConfig')) {
+    /**
+     * @return array<string, mixed>
+     */
+    function realtimeConfig(): array
+    {
+        $path = null;
+        if (defined('BASE_PATH') && is_file(BASE_PATH . '/environment/settings.ini')) {
+            $path = BASE_PATH . '/environment/settings.ini';
+        } else {
+            try {
+                $path = app()->envPath('settings.ini');
+            } catch (\Throwable) {
+                $path = null;
+            }
+        }
+
+        if (is_string($path) && is_file($path)) {
+            clearstatcache(true, $path);
+            $settings = parse_ini_file($path, true);
+            $section = $settings['realtime'] ?? null;
+
+            return is_array($section) ? $section : [];
+        }
+
+        $realtime = env('realtime', []);
+
+        return is_array($realtime) ? $realtime : [];
+    }
+}
+
+if (!function_exists('moonlight')) {
+    /**
+     * Moonlight service/action dispatch (sync, async jobs, WebSocket frames).
+     */
+    #[\NoDiscard]
+    function moonlight(): \Pionia\Http\Moonlight\Moonlight
+    {
+        static $instance = null;
+
+        return $instance ??= new \Pionia\Http\Moonlight\Moonlight();
+    }
+}
 
 
 

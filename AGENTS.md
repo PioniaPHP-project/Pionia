@@ -334,9 +334,33 @@ php pionia new my-app --install --with-frontend=react-ts
 
 Creates bootstrap, environment, services, switches, and `composer.json` from core stubs (`src/Pionia/Resources/scaffolds/app/`).
 
-### Moonlight async foundation (Phase 9)
+### Moonlight async & realtime (Phase 9)
 
-`Pionia\Http\Moonlight\MoonlightDispatcher` centralizes `{ service, action }` dispatch for HTTP, jobs, and future WebSocket transports. `MoonlightJobPayload` + `MoonlightJobDispatcher` provide the RoadRunner Jobs integration point (currently synchronous until RR Jobs plugin is wired).
+All transports share the same `{ service, action, ...params }` envelope:
+
+| Transport | Entry |
+|-----------|--------|
+| HTTP | `POST /api/v1/` (existing) |
+| Programmatic | `moonlight()->dispatch('auth', 'list_auth')` |
+| Async jobs | `moonlight()->async('reports', 'generate', ['month' => '01'])` |
+| WebSocket RPC | Centrifugo frame → `MoonlightFrameHandler` |
+
+**RoadRunner Jobs** — enable in `settings.ini`:
+
+```ini
+[jobs]
+ENABLED = true
+PIPELINE = moonlight
+RPC = tcp://127.0.0.1:6001
+```
+
+`.rr.yaml` needs `rpc` + `jobs` sections (see `example/.rr.yaml`). `worker.php` uses `PioniaWorker`, which routes by `RR_MODE` to HTTP, job consumer, or Centrifuge handler.
+
+When jobs are enabled and RR is running, `moonlight()->async()` returns `returnCode: 202` with `job_id`. In tests (`PIONIA_TESTING`), jobs run synchronously unless `PIONIA_JOBS_QUEUE=1`.
+
+**WebSockets** — optional Centrifugo via RoadRunner `centrifuge` plugin. Install `roadrunner-php/centrifugo`, uncomment `centrifuge` in `.rr.yaml`, set `[realtime] ENABLED=true`. RPC frames use the same Moonlight envelope; responses match the HTTP JSON shape.
+
+Key classes: `MoonlightDispatcher`, `MoonlightJobQueue`, `MoonlightJobConsumer`, `MoonlightFrameHandler`, `PioniaWorker`, `RealtimeGateway`.
 
 ## Extension points
 
@@ -349,7 +373,9 @@ Creates bootstrap, environment, services, switches, and `composer.json` from cor
 
 ## Testing policy
 
-- Run `bin/test` (PHPUnit on PHP 8.5+).
+- Run `bin/test` (PHPUnit on PHP 8.5+). Output uses **TestDox** (readable test names) grouped by suite.
+- `bin/test --verbose` (or `composer test:verbose`) prints each test name **as it runs**.
+- Pass any PHPUnit args through: `bin/test --testsuite Console`, `bin/test tests/Http/FooTest.php`.
 - **Every feature change must include tests** in the same PR.
 - Test bootstrap: `tests/bootstrap.php` loads the example app with `PIONIA_TESTING` (null logger, `DEBUG=false`). Use `InteractsWithTestEnvironment::setDebugEnv()` when a test needs debug behavior.
 
@@ -357,12 +383,13 @@ Creates bootstrap, environment, services, switches, and `composer.json` from cor
 
 | Script | Purpose |
 |--------|---------|
-| `composer test` | Full suite |
+| `composer test` | Full suite (TestDox, labeled by suite) |
+| `composer test:verbose` | Full suite, live test name per test |
 | `composer test:unit` | Unit tests only |
 | `composer test:feature` | HTTP integration (`tests/Feature/`) |
 | `composer test:console` | CLI smoke tests |
 | `composer test:coverage` | Text + Clover report (`build/coverage.xml`) |
-| `composer test:ci` | CI entry (coverage Clover) |
+| `composer test:ci` | CI entry (coverage Clover; plain PHPUnit for CI) |
 
 CI (`.github/workflows/tests.yml`) runs on PHP 8.5 with **pcov** and enforces **50%** line coverage on `src/Pionia/` via `bin/coverage-check`.
 
