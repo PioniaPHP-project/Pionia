@@ -11,6 +11,16 @@ Guidance for AI agents and contributors working in this repository.
 | `tests/` | PHPUnit suite; run via `bin/test` |
 | `example/environment/` | `.env`, `settings.ini`, database config |
 
+## Related repositories (v3)
+
+| Repo | Packagist | Role |
+|------|-----------|------|
+| [PioniaCore](https://github.com/PioniaPHP-project/PioniaCore) | `pionia/pionia-core` | Framework library (this repo) |
+| [Pionia-App](https://github.com/PioniaPHP-project/Pionia-App) | `pionia/pionia-app` | Application template (`pionia new` output) |
+| [pionia-docs](https://github.com/PioniaPHP-project/pionia-docs) | — | Hugo guides at [pionia.netlify.app](https://pionia.netlify.app) |
+
+Local paths (monorepo): `../JetFramework` (app template), `../pionia-docs`.
+
 ## Bootstrap & request flow
 
 1. `example/bootstrap/application.php` → `AppRealm::create()` boots the realm (singleton).
@@ -44,7 +54,7 @@ php example/pionia maintenance:off                    # back to normal (alias: u
 ```
 
 - Worker entry: `example/worker.php` (boot once, PSR-7 loop)
-- Config: `example/.rr.yaml` (listen port must match `PORT` in `.env`)
+- Config: `example/.rr.yaml` — HTTP listen port resolves as **CLI `--port`** → **`PORT` / `SERVER_PORT` in `.env`** → **`[roadrunner]` or `[server]` in `settings.ini`** → **`.rr.yaml` `http.address`** → **default `9000`**. `runserver` passes `-o http.address=…` when the resolved address differs from the file.
 - `ConnectionManager` keeps PDO alive across requests; `disconnect()` on worker shutdown only
 - Built-in dev server: `php pionia serve` (PHP `-S`, no RoadRunner)
 

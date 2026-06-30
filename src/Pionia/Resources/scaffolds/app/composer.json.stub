@@ -14,7 +14,10 @@
     },
     "scripts": {
         "serve": "php pionia serve",
-        "test": "php vendor/bin/phpunit"
+        "test": "php vendor/bin/phpunit",
+        "post-create-project-cmd": [
+            "php storage/scripts/rename.php"
+        ]
     },
     "minimum-stability": "stable",
     "prefer-stable": true

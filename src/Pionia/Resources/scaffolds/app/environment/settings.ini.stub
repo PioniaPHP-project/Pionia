@@ -20,6 +20,10 @@ allowed_origins=http://localhost:5173,http://127.0.0.1:5173
 allowed_headers=*
 credentials=true
 
+[roadrunner]
+HOST=127.0.0.1
+PORT=9000
+
 [jobs]
 ENABLED=false
 PIPELINE=moonlight

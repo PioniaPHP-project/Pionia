@@ -3,6 +3,7 @@
 namespace Pionia\Http\Base;
 
 use Pionia\Auth\AuthenticationChain;
+use Pionia\Contracts\CorsContract;
 use Pionia\Contracts\KernelContract;
 use Pionia\Http\HttpExceptionRenderer;
 use Pionia\Http\MaintenanceMode;
@@ -47,6 +48,10 @@ class WebKernel implements KernelContract
             return $this->terminate($maintenance, $request, $started);
         }
 
+        if ($cors = $this->corsEarlyResponse($request)) {
+            return $this->terminate($cors, $request, $started);
+        }
+
         try {
             $response = $this->prepareRequest($request);
         } catch (Throwable $e) {
@@ -64,6 +69,11 @@ class WebKernel implements KernelContract
         }
 
         if ($response instanceof Response) {
+            $cors = realm()->getSilently(CorsContract::class);
+            if ($cors instanceof CorsContract) {
+                $cors->applyToResponse($response, $request);
+            }
+
             $middlewareChain = realm()->getSilently(MiddlewareChain::class);
             if ($middlewareChain) {
                 $middlewareChain->handle($request, $response);
@@ -71,6 +81,13 @@ class WebKernel implements KernelContract
         }
 
         return $response->prepare($request);
+    }
+
+    private function corsEarlyResponse(Request $request): ?Response
+    {
+        $cors = realm()->getSilently(CorsContract::class);
+
+        return $cors instanceof CorsContract ? $cors->handle($request) : null;
     }
 
     public function boot(Request $request): Request

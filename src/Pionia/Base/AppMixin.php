@@ -8,6 +8,7 @@ use Pionia\Auth\AuthenticationChain;
 use Pionia\Collections\Arrayable;
 use Pionia\Contracts\ApplicationContract;
 use Pionia\Contracts\ProviderContract;
+use Pionia\Contracts\CorsContract;
 use Pionia\Cors\PioniaCors;
 use Pionia\Exceptions\InvalidProviderException;
 use Pionia\Http\Routing\PioniaRouter;
@@ -333,9 +334,10 @@ trait AppMixin
      */
     private function registerCorsInstance(): void
     {
-        realm()->set(PioniaCors::class, function () {
+        realm()->set(PioniaCors::class, static function () {
             return new PioniaCors();
         });
+        realm()->set(CorsContract::class, static fn () => realm()->make(PioniaCors::class));
     }
 
 

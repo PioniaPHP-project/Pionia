@@ -2,47 +2,25 @@
 
 namespace Pionia\Builtins\Commands\Concerns;
 
+use Pionia\Http\Worker\RoadRunnerListenResolver;
 use Pionia\Process\Process;
 
 trait ManagesRoadRunnerProcess
 {
     /**
-     * @return array{address: string, host: string, port: string}
+     * @return array{address: string, host: string, port: string, yaml_address: string}
      */
-    private function resolveListenAddress(string $configPath): array
-    {
-        $content = is_readable($configPath) ? file_get_contents($configPath) : false;
-        $address = '127.0.0.1:8080';
-
-        if (is_string($content) && preg_match('/^\s*address:\s*([^\s#"\']+)/m', $content, $matches)) {
-            $address = trim($matches[1], " \t\"'");
-        }
-
-        return $this->parseHttpAddress($address);
+    private function resolveListenAddress(
+        string $configPath,
+        ?string $cliHost = null,
+        int|string|null|false $cliPort = null,
+    ): array {
+        return $this->roadRunnerListenResolver()->resolve($configPath, $cliHost, $cliPort);
     }
 
-    /**
-     * @return array{address: string, host: string, port: string}
-     */
-    private function parseHttpAddress(string $address): array
+    private function roadRunnerListenResolver(): RoadRunnerListenResolver
     {
-        $address = trim($address);
-
-        if ($address === '') {
-            return ['address' => '127.0.0.1:8080', 'host' => '127.0.0.1', 'port' => '8080'];
-        }
-
-        if (str_starts_with($address, ':')) {
-            return ['address' => '127.0.0.1' . $address, 'host' => '127.0.0.1', 'port' => substr($address, 1)];
-        }
-
-        if (!str_contains($address, ':')) {
-            return ['address' => '127.0.0.1:' . $address, 'host' => '127.0.0.1', 'port' => $address];
-        }
-
-        [$host, $port] = explode(':', $address, 2);
-
-        return ['address' => $host . ':' . $port, 'host' => $host, 'port' => $port];
+        return new RoadRunnerListenResolver();
     }
 
     private function isPortListening(int $port): bool
@@ -210,26 +188,12 @@ trait ManagesRoadRunnerProcess
         $ports = [];
         $cwd = dirname($configPath);
 
-        if (is_scalar($portOverride) && $portOverride !== '' && $portOverride !== false) {
-            $ports[] = (int) $portOverride;
-        }
+        $listen = $this->resolveListenAddress($configPath, null, $portOverride);
+        $ports[] = (int) $listen['port'];
 
         $runtime = $this->readRoadRunnerRuntime($cwd);
         if ($runtime !== null && isset($runtime['port'])) {
             $ports[] = (int) $runtime['port'];
-        }
-
-        $ports[] = (int) $this->resolveListenAddress($configPath)['port'];
-
-        foreach (['PORT', 'SERVER_PORT'] as $key) {
-            if (!function_exists('env')) {
-                continue;
-            }
-
-            $value = env($key);
-            if (is_scalar($value) && $value !== '') {
-                $ports[] = (int) $value;
-            }
         }
 
         $ports = array_values(array_unique(array_filter($ports, static fn (int $port): bool => $port > 0)));

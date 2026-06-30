@@ -104,7 +104,7 @@ class StopRoadRunnerServer extends BaseCommand
     {
         return [
             ['config', null, InputOption::VALUE_OPTIONAL, 'Path to .rr.yaml', null],
-            ['port', null, InputOption::VALUE_OPTIONAL, 'HTTP port to stop (defaults to .rr.yaml http.address)', null],
+            ['port', null, InputOption::VALUE_OPTIONAL, 'HTTP port to stop (defaults to resolved listen port)', null],
             ['force', 'f', InputOption::VALUE_NONE, 'Force stop listeners on the HTTP port'],
         ];
     }

@@ -20,7 +20,7 @@ For production-like local testing with boot-once workers:
 composer install   # includes spiral/roadrunner-http in dev
 cd example
 ./../vendor/bin/rr get -l ./rr   # download RoadRunner binary once
-php pionia runserver              # listens on port from .rr.yaml
+php pionia runserver              # HTTP port from PORT/.env (8003 here) or default 9000
 ```
 
 Or run the binary directly: `./rr serve -c .rr.yaml`

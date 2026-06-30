@@ -60,16 +60,14 @@ class StartRoadRunnerServer extends BaseCommand
             return Command::FAILURE;
         }
 
-        $listen = $this->resolveListenAddress($config);
-        $hostOverride = $this->option('host');
-        $portOverride = $this->option('port');
-        $host = is_string($hostOverride) && $hostOverride !== ''
-            ? $hostOverride
-            : $listen['host'];
-        $port = is_scalar($portOverride) && $portOverride !== '' && $portOverride !== false
-            ? (string) $portOverride
-            : $listen['port'];
-        $httpAddress = $host . ':' . $port;
+        $listen = $this->resolveListenAddress(
+            $config,
+            is_string($this->option('host')) ? $this->option('host') : null,
+            $this->option('port'),
+        );
+        $host = $listen['host'];
+        $port = $listen['port'];
+        $httpAddress = $listen['address'];
         $cwd = dirname($config);
 
         if ($this->isPortListening((int) $port)) {
@@ -84,7 +82,7 @@ class StartRoadRunnerServer extends BaseCommand
             $cwd,
             $config,
             $httpAddress,
-            $listen['address'],
+            $listen['yaml_address'],
             true,
             (bool) $this->option('detach'),
         );
@@ -126,8 +124,8 @@ class StartRoadRunnerServer extends BaseCommand
         return [
             ['config', null, InputOption::VALUE_OPTIONAL, 'Path to .rr.yaml', null],
             ['worker', null, InputOption::VALUE_OPTIONAL, 'Path to worker.php', null],
-            ['host', null, InputOption::VALUE_OPTIONAL, 'HTTP host (overrides .rr.yaml http.address)', null],
-            ['port', null, InputOption::VALUE_OPTIONAL, 'HTTP port (overrides .rr.yaml http.address)', null],
+            ['host', null, InputOption::VALUE_OPTIONAL, 'HTTP host (overrides env/settings/.rr.yaml)', null],
+            ['port', null, InputOption::VALUE_OPTIONAL, 'HTTP port (overrides env/settings/.rr.yaml; default 9000)', null],
             ['detach', 'D', InputOption::VALUE_NONE, 'Run RoadRunner in the background (writes .pid, logs to storage/logs/roadrunner.log)'],
             ['log', null, InputOption::VALUE_OPTIONAL, 'Log file when using --detach', null],
         ];
