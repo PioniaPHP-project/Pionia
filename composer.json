@@ -34,7 +34,9 @@
         "spiral/roadrunner-http": "^3.5",
         "spiral/roadrunner-cli": "^2.6",
         "nyholm/psr7": "^1.8",
-        "spiral/roadrunner-jobs": "^4.0"
+        "spiral/roadrunner-jobs": "^4.0",
+        "react/promise": "^3.2",
+        "react/promise": "^3.2"
     },
     "require": {
         "php": ">=8.5",
@@ -60,7 +62,8 @@
         "roadrunner-php/centrifugo": "WebSocket RPC via RoadRunner Centrifuge plugin",
         "nyholm/psr7": "PSR-7 messages for RoadRunner integration",
         "ext-apcu": "APCu cache store (cache STORE=apcu; ideal for RoadRunner workers)",
-        "ext-redis": "Redis cache store (cache STORE=redis)"
+        "ext-redis": "Redis cache store (cache STORE=redis)",
+        "react/promise": "Promise chaining for async() background work"
     },
     "scripts": {
         "test": "bash bin/test",

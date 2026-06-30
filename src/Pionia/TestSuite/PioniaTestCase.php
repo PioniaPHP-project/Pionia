@@ -33,6 +33,10 @@ class PioniaTestCase extends TestCase
 
     protected function tearDown(): void
     {
+        if (class_exists(\Pionia\Http\Background\DeferredWorkBuffer::class)) {
+            \Pionia\Http\Background\DeferredWorkBuffer::reset();
+        }
+
         $this->tearDownInMemoryDatabase();
         $this->application = null;
         $this->request = null;

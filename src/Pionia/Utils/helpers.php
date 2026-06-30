@@ -1322,6 +1322,72 @@ if (!function_exists('moonlight')) {
     }
 }
 
+if (!function_exists('async')) {
+    /**
+     * Queue background work (closure after response, or Moonlight job on flush).
+     *
+     * @param \Closure|string $target Closure for inline deferred work, or Moonlight service name
+     * @param string $action Moonlight action when $target is a service name
+     * @param array<string, mixed> $payload Moonlight payload
+     *
+     * @return \React\Promise\PromiseInterface
+     */
+    #[\NoDiscard]
+    function async(
+        \Closure|string $target,
+        string $action = '',
+        array $payload = [],
+        ?string $switch = null,
+    ): \React\Promise\PromiseInterface {
+        return \Pionia\Http\Background\Async::dispatch($target, $action, $payload, $switch);
+    }
+}
+
+if (!function_exists('await')) {
+    /**
+     * Block until a promise settles. Triggers deferred flush when work is still buffered.
+     */
+    function await(\React\Promise\PromiseInterface $promise, ?float $timeoutSeconds = null): mixed
+    {
+        return \Pionia\Http\Background\PromiseAwait::await($promise, $timeoutSeconds);
+    }
+}
+
+if (!function_exists('promiseCatch')) {
+    /**
+     * @return \React\Promise\PromiseInterface
+     */
+    function promiseCatch(
+        \React\Promise\PromiseInterface $promise,
+        callable $onRejected,
+    ): \React\Promise\PromiseInterface {
+        return $promise->then(null, $onRejected);
+    }
+}
+
+if (!function_exists('promiseFinally')) {
+    /**
+     * @return \React\Promise\PromiseInterface
+     */
+    function promiseFinally(
+        \React\Promise\PromiseInterface $promise,
+        callable $onFinally,
+    ): \React\Promise\PromiseInterface {
+        return $promise->then(
+            static function (mixed $value) use ($onFinally) {
+                $onFinally();
+
+                return $value;
+            },
+            static function (\Throwable $reason) use ($onFinally) {
+                $onFinally();
+
+                return \React\Promise\reject($reason);
+            },
+        );
+    }
+}
+
 
 
 if (!function_exists('pionia')) {

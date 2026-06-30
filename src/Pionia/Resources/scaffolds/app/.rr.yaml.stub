@@ -19,6 +19,10 @@ jobs:
   pipelines:
     moonlight:
       driver: memory
+      # Production: switch to redis (see docs — background jobs)
+      # driver: redis
+      # config:
+      #   addrs: ["127.0.0.1:6379"]
 
 logs:
   mode: development

@@ -66,6 +66,7 @@ class RoadRunnerWorker
                 $request = Psr7Bridge::toPioniaRequest($psrRequest);
                 $response = $this->app->handleRequest($request);
                 $psr7->respond(Psr7Bridge::toPsr7Response($response));
+                \Pionia\Http\Background\Background::flushDeferredWork();
             } catch (\Throwable $e) {
                 if (function_exists('logger')) {
                     logger()->error('RoadRunner worker error: ' . $e->getMessage(), ['exception' => $e]);

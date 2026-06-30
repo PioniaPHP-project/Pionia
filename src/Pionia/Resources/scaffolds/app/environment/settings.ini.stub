@@ -25,6 +25,7 @@ HOST=127.0.0.1
 PORT=9000
 
 [jobs]
+# Set ENABLED=true when using php pionia runserver with RR jobs pool
 ENABLED=false
 PIPELINE=moonlight
 RPC=tcp://127.0.0.1:6001

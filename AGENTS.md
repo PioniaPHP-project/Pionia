@@ -372,6 +372,48 @@ When jobs are enabled and RR is running, `moonlight()->async()` returns `returnC
 
 Key classes: `MoonlightDispatcher`, `MoonlightJobQueue`, `MoonlightJobConsumer`, `MoonlightFrameHandler`, `PioniaWorker`, `RealtimeGateway`.
 
+### Background work (`async()`)
+
+Developer-facing background API (requires `composer require react/promise` in apps):
+
+```php
+// Closure — runs after the HTTP response is sent (same PHP process)
+async(function () use ($user) {
+    logger()->info('Sending welcome', ['email' => $user->email]);
+})->then(fn () => logger()->info('sent'))
+  ->catch(fn (\Throwable $e) => logger()->error($e->getMessage()));
+
+// Moonlight job — queued on flush when RoadRunner Jobs is enabled
+async('mail', 'send_welcome', ['email' => $user->email]);
+```
+
+| Form | When it runs | Best for |
+|------|----------------|----------|
+| `async(Closure)` | After `respond()` / `send()` | Quick post-response work (webhooks, logging) |
+| `async('service', 'action', $payload)` | RR Jobs worker when queue available; else sync after response | Email, reports, durable work |
+
+**`async()` vs `moonlight()->async()`** — global `async()` returns a `PromiseInterface` and defers until after the response. `moonlight()->async()` returns an HTTP-shaped `202` immediately when the queue accepts the job (API-style).
+
+**Running without RoadRunner** (`php pionia serve`, nginx/FPM):
+
+- Closure `async()` still works (flush after `send()`; FPM uses `fastcgi_finish_request()` when available).
+- String `async()` falls back to `dispatchSync()` on flush — request still succeeds; work runs after the client gets the response.
+- Set `[jobs] ENABLED=true` only when `rr` is running with a jobs pool; otherwise you get a warning + sync fallback.
+
+**Config** — PHP `[jobs]` in `settings.ini`; queue driver in `.rr.yaml` (`memory` dev, `redis` prod):
+
+```yaml
+pipelines:
+  moonlight:
+    driver: redis
+    config:
+      addrs: ["127.0.0.1:6379"]
+```
+
+**Promise semantics (v3.0):** fulfillment means local execution or job **accepted** by RR (`JobSubmission`), not remote job completion.
+
+Key classes: `Async`, `DeferredWorkBuffer`, `Background`, `JobSubmission`, `PromiseAwait`.
+
 ## Extension points
 
 | Hook | Where |

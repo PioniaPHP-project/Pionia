@@ -29,7 +29,7 @@ final class MoonlightJobDispatcher
             logger()->info('Moonlight job dispatch', $job->toArray());
         }
 
-        if (self::shouldQueue()) {
+        if (\Pionia\Http\Background\Background::shouldQueue()) {
             $jobId = MoonlightJobQueue::push($job);
 
             if ($jobId !== null) {
@@ -38,18 +38,5 @@ final class MoonlightJobDispatcher
         }
 
         return self::dispatchSync($job, $serviceRegistry);
-    }
-
-    private static function shouldQueue(): bool
-    {
-        if (!function_exists('moonlightJobsEnabled') || !moonlightJobsEnabled()) {
-            return false;
-        }
-
-        if (defined('PIONIA_TESTING') && PIONIA_TESTING && !getenv('PIONIA_JOBS_QUEUE')) {
-            return false;
-        }
-
-        return MoonlightJobQueue::isAvailable();
     }
 }

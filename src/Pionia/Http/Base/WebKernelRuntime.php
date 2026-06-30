@@ -44,6 +44,7 @@ final class WebKernelRuntime
     {
         register_shutdown_function(static function (): void {
             RequestMetrics::flush();
+            \Pionia\Http\Background\Background::flushDeferredWork();
         });
     }
 }

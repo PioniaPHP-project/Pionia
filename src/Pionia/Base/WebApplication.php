@@ -150,6 +150,8 @@ class WebApplication  implements ApplicationContract
         $request = Request::createFromGlobals();
         $response = $this->handleRequest($request);
         $response->send();
+        \Pionia\Http\Background\Background::finishRequestForClient();
+        \Pionia\Http\Background\Background::flushDeferredWork();
 
         return $response;
     }

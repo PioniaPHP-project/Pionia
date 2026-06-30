@@ -28,6 +28,7 @@ jobs:
       config:
         priority: 10
         prefetch: 100
+      # Production: driver: redis + addrs (see AGENTS.md — Background work)
 
 # Centrifugo WebSockets (optional — requires roadrunner-php/centrifugo + Centrifugo server):
 # centrifuge:

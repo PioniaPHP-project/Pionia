@@ -8,6 +8,7 @@ namespace Application\Switches;
 
 use Application\Services\AuthService;
 use Application\Services\CategoryService;
+use Application\Services\MailService;
 use Application\Services\SampoloService;
 use Pionia\Collections\Arrayable;
 use Pionia\Http\Switches\BaseApiServiceSwitch;
@@ -22,6 +23,7 @@ class MainSwitch extends BaseApiServiceSwitch
 		return arr([
             'auth' => AuthService::class,
             'category'=> CategoryService::class,
+            'mail' => MailService::class,
             'sampolo' => SampoloService::class,
 		]);
 	}
