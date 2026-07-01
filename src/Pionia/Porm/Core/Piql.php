@@ -74,6 +74,11 @@ class Piql
     public string $type;
 
     /**
+     * When false, [Object] column casts return the raw DB string instead of unserialize().
+     */
+    protected bool $allowObjectCast = false;
+
+    /**
      * Table prefix.
      *
      * @var string
@@ -204,6 +209,7 @@ class Piql
         $this->pdo = $connection->getPdo();
         $this->testMode = $connection->isTestMode();
         $this->logging = $connection->isLogging();
+        $this->allowObjectCast = $connection->isAllowObjectCast();
     }
 
     /**
@@ -1199,7 +1205,11 @@ class Piql
                             break;
 
                         case 'Object':
-                            $stack[$columnKey] = unserialize($item);
+                            if (!$this->allowObjectCast) {
+                                $stack[$columnKey] = $item;
+                                break;
+                            }
+                            $stack[$columnKey] = unserialize($item, ['allowed_classes' => false]);
                             break;
 
                         case 'JSON':
@@ -1500,6 +1510,71 @@ class Piql
     }
 
     /**
+     * Insert or update on primary-key conflict (sqlite, mysql, pgsql). Returns null when unsupported.
+     */
+    public function upsert(string $table, array $data, string $primaryKey = 'id'): ?PDOStatement
+    {
+        if (!in_array($this->type, ['sqlite', 'mysql', 'pgsql'], true)) {
+            return null;
+        }
+
+        if (!array_key_exists($primaryKey, $data)) {
+            return $this->insert($table, $data);
+        }
+
+        $map = [];
+        $stack = [];
+        $columns = array_keys($data);
+        $values = [];
+
+        foreach ($columns as $key) {
+            $value = $data[$key];
+            $type = gettype($value);
+
+            if ($raw = $this->buildRaw($value, $map)) {
+                $values[] = $raw;
+                continue;
+            }
+
+            $mapKey = $this->mapKey();
+            $values[] = $mapKey;
+            $map[$mapKey] = $this->typeMap($value, $type);
+        }
+
+        $fields = array_map(
+            fn (string $key) => $this->columnQuote(preg_replace('/(\s*\[JSON\])$/i', '', $key)),
+            $columns
+        );
+
+        $updateParts = [];
+        foreach ($fields as $index => $quoted) {
+            $column = $columns[$index];
+            if ($column === $primaryKey) {
+                continue;
+            }
+            $updateParts[] = $this->type === 'mysql'
+                ? "{$quoted} = VALUES({$quoted})"
+                : "{$quoted} = excluded.{$quoted}";
+        }
+
+        if ($updateParts === []) {
+            return $this->insert($table, $data);
+        }
+
+        $query = 'INSERT INTO ' . $this->tableQuote($table)
+            . ' (' . implode(', ', $fields) . ') VALUES (' . implode(', ', $values) . ')';
+
+        $pkQuoted = $this->columnQuote($primaryKey);
+
+        $query .= match ($this->type) {
+            'mysql' => ' ON DUPLICATE KEY UPDATE ' . implode(', ', $updateParts),
+            default => " ON CONFLICT ({$pkQuoted}) DO UPDATE SET " . implode(', ', $updateParts),
+        };
+
+        return $this->exec($query, $map);
+    }
+
+    /**
      * Modify data from the table.
      *
      * @param string $table
@@ -1532,7 +1607,9 @@ class Piql
 
             if (isset($match['operator'])) {
                 if (is_numeric($value)) {
-                    $fields[] = "{$column} = {$column} {$match['operator']} {$value}";
+                    $mapKey = $this->mapKey();
+                    $fields[] = "{$column} = {$column} {$match['operator']} {$mapKey}";
+                    $map[$mapKey] = $this->typeMap($value, $type === 'double' ? 'double' : 'integer');
                 }
             } else {
                 $mapKey = $this->mapKey();
@@ -1958,6 +2035,21 @@ class Piql
         $log = $this->logs[array_key_last($this->logs)];
 
         return $this->generate($log[0], $log[1]);
+    }
+
+    /**
+     * Return the last prepared statement and its bound parameter map (placeholders not inlined).
+     *
+     * @return array{0: string, 1: array}|null
+     * @codeCoverageIgnore
+     */
+    public function lastPrepared(): ?array
+    {
+        if (empty($this->logs)) {
+            return null;
+        }
+
+        return $this->logs[array_key_last($this->logs)];
     }
 
     /**

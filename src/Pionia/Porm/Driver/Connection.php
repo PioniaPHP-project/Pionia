@@ -24,6 +24,8 @@ class Connection implements DatabaseDriverInterface
 
     protected bool $logging = false;
 
+    protected bool $allowObjectCast = false;
+
 
     private function __construct( null|string|array|PDO $connection = 'default')
     {
@@ -47,6 +49,15 @@ class Connection implements DatabaseDriverInterface
 
         if (isset($options['prefix'])) {
             $this->prefix = $options['prefix'];
+        }
+
+        if (isset($options['allow_object_cast'])) {
+            $this->allowObjectCast = (bool) $options['allow_object_cast'];
+        } elseif (function_exists('app')) {
+            try {
+                $this->allowObjectCast = filter_var(app()->env('PORM_ALLOW_OBJECT_CAST', false), FILTER_VALIDATE_BOOLEAN);
+            } catch (\Throwable) {
+            }
         }
 
         if (isset($options['testMode']) && $options['testMode']) {
@@ -377,6 +388,11 @@ class Connection implements DatabaseDriverInterface
     public function isLogging(): bool
     {
         return $this->logging;
+    }
+
+    public function isAllowObjectCast(): bool
+    {
+        return $this->allowObjectCast;
     }
 
     public function setLogging(bool $logging): void

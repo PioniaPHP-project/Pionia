@@ -73,4 +73,14 @@ class ExampleSampoloServiceTest extends PioniaTestCase
         $this->assertPioniaOk($response);
         $this->assertNotNull($response->json()['returnData']);
     }
+
+    public function testSampoloRetrieveReturnsJoinedRow(): void
+    {
+        $response = $this->postApi('sampolo', 'retrieve', ['id' => 1]);
+
+        $this->assertPioniaOk($response);
+        $row = $response->json()['returnData'];
+        $this->assertNotNull($row);
+        $this->assertArrayHasKey('company_name', (array) $row);
+    }
 }

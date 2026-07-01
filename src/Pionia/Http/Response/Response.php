@@ -81,6 +81,6 @@ class Response
             }
         }
 
-        echo $this->content;
+        echo $this->getContent();
     }
 }

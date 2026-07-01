@@ -3,6 +3,7 @@
 namespace Pionia\Http\Services\Generics\Contracts;
 
 use Exception;
+use Pionia\Exceptions\ValidationException;
 use Pionia\Http\Services\JoinType;
 use Pionia\Porm\Database\Builders\Join;
 
@@ -124,8 +125,14 @@ trait JoinContract
      */
     private function getOneJoined(): ?object
     {
-        $id = $this->getFieldValue($this->pk_field) ?? throw new Exception("Field {$this->pk_field} is required");
-        $items = $this->attachJoins()->where([$this->pk_field => $id])->limit(1)->all();
+        $id = $this->getFieldValue($this->primaryKey()) ?? $this->getFieldValue($this->pk_field)
+            ?? throw new ValidationException('Field ' . $this->primaryKey() . ' is required');
+
+        $pkColumn = $this->baseAlias
+            ? $this->baseAlias . '.' . $this->primaryKey()
+            : $this->pk_field;
+
+        $items = $this->attachJoins()->where([$pkColumn => $id])->limit(1)->all();
 
         if (count($items) > 0) {
             $row = $items[0];

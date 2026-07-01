@@ -42,6 +42,7 @@ Operators: `equals`, `not_equal`, `starts_with`, `ends_with`, `includes`, `in`, 
 | `Builder` | `src/Pionia/Porm/Database/Builders/Builder.php` |
 | `Join` | `src/Pionia/Porm/Database/Builders/Join.php` |
 | `JoinOn` | `src/Pionia/Porm/Database/Builders/JoinOn.php` — ON/USING helpers |
+| `JoinLoader` | `src/Pionia/Porm/Database/Builders/JoinLoader.php` — manual eager-load |
 | `Where` | `src/Pionia/Porm/Database/Builders/Where.php` |
 | `WhereExpression` | `src/Pionia/Porm/Database/Builders/WhereExpression.php` — fluent operator compiler |
 | `Agg` | `src/Pionia/Porm/Database/Aggregation/Agg.php` |
@@ -57,7 +58,15 @@ Operators: `equals`, `not_equal`, `starts_with`, `ends_with`, `includes`, `in`, 
 
 `GenericService` + `CrudContract` / `JoinContract` call `query()` → `table($this->table, $this->baseAlias, $this->connection)`.
 
-Notable service properties: `$baseAlias`, `$maxListRows`, `$allowClientColumns`, `$allowClientFilters`, `$sortableColumns`.
+Notable service properties: `$baseAlias`, `$maxListRows`, `$allowClientColumns`, `$allowClientFilters`, `$sortableColumns`, `$approximatePagination`, `$cacheListTtl`, `$cacheRetrieveTtl`, `$skipUpdatePrefetch`.
+
+`ValidationException` (HTTP 422) is thrown for missing required fields in create/update.
+
+## Security
+
+- Never pass user input into `Piql::raw()` or string ON clauses — use bound parameters and `where()` / `JoinOn::map()`.
+- `[Object]` column casts call `unserialize()` only when `PORM_ALLOW_OBJECT_CAST=true` or `allow_object_cast=1` on the connection.
+- Increment operators (`score[+]` => 3) bind values as prepared parameters.
 
 ## Tests
 

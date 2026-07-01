@@ -55,9 +55,28 @@ class DefaultRoutesTest extends PioniaTestCase
         $request->attributes->set('path', 'favicon.ico');
 
         $response = $this->routes->staticFilesRouter($request);
+        $response->prepare($request);
 
         $this->assertInstanceOf(BinaryFileResponse::class, $response);
         $this->assertSame(200, $response->getStatusCode());
+        $this->assertGreaterThan(0, strlen($response->getContent()));
+        $this->assertSame(
+            (int) $response->headers->get('Content-Length'),
+            strlen($response->getContent()),
+        );
+    }
+
+    public function testStaticBinaryResponseSendOutputsFileBytes(): void
+    {
+        $path = alias(\DIRECTORIES::STATIC_DIR->name) . DIRECTORY_SEPARATOR . 'favicon.ico';
+        $response = new BinaryFileResponse($path);
+        $response->prepare(Request::create('/static/favicon.ico'));
+
+        ob_start();
+        $response->send();
+        $body = ob_get_clean();
+
+        $this->assertSame(filesize($path), strlen($body));
     }
 
     public function testStaticRouterBlocksPathTraversal(): void

@@ -2,6 +2,7 @@
 
 namespace Pionia\Builtins\Commands;
 
+use Pionia\Builtins\Commands\Concerns\FormatsRoadRunnerLogOutput;
 use Pionia\Builtins\Commands\Concerns\ManagesRoadRunnerProcess;
 use Pionia\Console\BaseCommand;
 use Pionia\Http\Worker\RoadRunnerWorker;
@@ -15,6 +16,7 @@ use Pionia\Process\Process;
  */
 class StartRoadRunnerServer extends BaseCommand
 {
+    use FormatsRoadRunnerLogOutput;
     use ManagesRoadRunnerProcess;
     protected string $name = 'runserver';
 
@@ -113,8 +115,10 @@ class StartRoadRunnerServer extends BaseCommand
         }
 
         $process->run(function (string $type, string $buffer): void {
-            $this->output->write($buffer);
+            $this->writeRoadRunnerLogChunk($buffer);
         });
+
+        $this->flushRoadRunnerLogWriter();
 
         return $process->getExitCode() ?? Command::SUCCESS;
     }
@@ -128,6 +132,7 @@ class StartRoadRunnerServer extends BaseCommand
             ['port', null, InputOption::VALUE_OPTIONAL, 'HTTP port (overrides env/settings/.rr.yaml; default 9000)', null],
             ['detach', 'D', InputOption::VALUE_NONE, 'Run RoadRunner in the background (writes .pid, logs to storage/logs/roadrunner.log)'],
             ['log', null, InputOption::VALUE_OPTIONAL, 'Log file when using --detach', null],
+            ['raw', null, InputOption::VALUE_NONE, 'Print RoadRunner output without formatting'],
         ];
     }
 

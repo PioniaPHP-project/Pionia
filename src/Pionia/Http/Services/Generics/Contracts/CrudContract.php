@@ -3,6 +3,7 @@
 namespace Pionia\Http\Services\Generics\Contracts;
 
 use Exception;
+use Pionia\Exceptions\ValidationException;
 use Pionia\Porm\Core\Porm;
 use Pionia\Porm\Exceptions\BaseDatabaseException;
 use Pionia\Porm\PaginationCore;
@@ -188,12 +189,28 @@ trait CrudContract
         if ($once) {
             return $once;
         }
-        if ($this->weShouldJoin()) {
-            return $this->getOneJoined();
-        }
-        $id = $this->getFieldValue($this->primaryKey()) ?? throw new Exception("Field {$this->primaryKey()} is required");
 
-        return $this->getOneInternal($id, skipCustomHook: true);
+        $id = $this->getFieldValue($this->primaryKey());
+
+        if ($this->cacheRetrieveTtl !== null && $id !== null) {
+            $cached = $this->getCache($this->retrieveCacheKey($id), exact: true);
+            if ($cached !== null) {
+                return is_object($cached) ? $cached : (object) $cached;
+            }
+        }
+
+        if ($this->weShouldJoin()) {
+            $result = $this->getOneJoined();
+        } else {
+            $id = $id ?? throw new ValidationException("Field {$this->primaryKey()} is required");
+            $result = $this->getOneInternal($id, skipCustomHook: true);
+        }
+
+        if ($this->cacheRetrieveTtl !== null && $result !== null && $id !== null) {
+            $this->setCache($this->retrieveCacheKey($id), $result, $this->cacheRetrieveTtl, exact: true);
+        }
+
+        return $result;
     }
 
     /**
@@ -300,19 +317,11 @@ trait CrudContract
     /**
      * @throws Exception
      */
-    protected function checkIfFieldPassesAllValidations($field)
+    protected function checkIfFieldPassesAllValidations(string $column, bool $required = true): mixed
     {
-        $column = $field;
-        $required = true;
-
-        if (is_array($field)) {
-            $column = key($field);
-            $required = isset($field['required']) && $field['required'];
-        }
-
         $dt = $this->getFieldValue($column);
         if ($required && $dt === null) {
-            throw new Exception("Field $column is required");
+            throw new ValidationException("Field {$column} is required");
         }
 
         if ($dt instanceof UploadedFile) {
@@ -320,6 +329,33 @@ trait CrudContract
         }
 
         return $dt;
+    }
+
+    private function listCacheKey(): string
+    {
+        return 'list_' . md5(json_encode([
+            $this->table,
+            $this->connection,
+            $this->baseAlias,
+            $this->getListColumns(),
+            $this->clientFilterWhere(),
+            $this->hasLimit(),
+            $this->hasOffset(),
+            $this->dontRelate,
+            $this->request->getData()->all(),
+        ], JSON_THROW_ON_ERROR));
+    }
+
+    private function retrieveCacheKey(mixed $id): string
+    {
+        return 'retrieve_' . md5(json_encode([
+            $this->table,
+            $this->connection,
+            $this->baseAlias,
+            $id,
+            $this->getListColumns(),
+            $this->dontRelate,
+        ], JSON_THROW_ON_ERROR));
     }
 
     /**
@@ -341,13 +377,7 @@ trait CrudContract
                 $column = trim(str_replace("?", "", $column));
                 $required = false;
             }
-            $dt = $this->getFieldValue($column);
-            if ($dt instanceof UploadedFile) {
-                $dt = $this->handleUpload($dt, $column);
-            }
-            if ($required && $dt === null) {
-                throw new Exception("Field $column is required");
-            }
+            $dt = $this->checkIfFieldPassesAllValidations($column, $required);
             if ($dt !== null) {
                 $sanitizedData[$column] = $dt;
             }
@@ -398,6 +428,10 @@ trait CrudContract
             return $this->applyClientSort($builder);
         });
 
+        if ($this->approximatePagination) {
+            return $prep1->paginateApproximate();
+        }
+
         return $prep1->paginate();
     }
 
@@ -410,7 +444,20 @@ trait CrudContract
         $this->detectAndAddColumns();
         $data = $this->request->getData()->all();
         if ($this->detectPagination($data)) {
-            return $this->paginate();
+            if ($this->cacheListTtl !== null) {
+                $cached = $this->getCache($this->listCacheKey(), exact: true);
+                if ($cached !== null) {
+                    return $cached;
+                }
+            }
+
+            $page = $this->paginate();
+
+            if ($this->cacheListTtl !== null && $page !== null) {
+                $this->setCache($this->listCacheKey(), $page, $this->cacheListTtl, exact: true);
+            }
+
+            return $page;
         }
 
         return $this->allItems();
@@ -463,15 +510,19 @@ trait CrudContract
     protected function updateItem(): object|array|null
     {
         $this->detectAndAddColumns();
-        $id = $this->getFieldValue($this->primaryKey()) ?? throw new Exception("Field {$this->primaryKey()} is required");
+        $id = $this->getFieldValue($this->primaryKey()) ?? throw new ValidationException("Field {$this->primaryKey()} is required");
 
-        $item = $this->query()->get($id, $this->primaryKey());
+        if ($this->skipUpdatePrefetch) {
+            $toArray = [$this->primaryKey() => $id];
+        } else {
+            $item = $this->query()->get($id, $this->primaryKey());
 
-        if (!$item) {
-            throw new Exception("Record with id {$id} not found");
+            if (!$item) {
+                throw new ValidationException("Record with id {$id} not found");
+            }
+
+            $toArray = is_array($item) ? $item : (array) $item;
         }
-
-        $toArray = is_array($item) ? $item : (array) $item;
 
         if ($this->updateColumns) {
             foreach ($this->updateColumns as $column) {
@@ -484,24 +535,19 @@ trait CrudContract
                     continue;
                 }
                 if ($this->getFieldValue($column) !== null || $optional) {
-                    $dt = $this->getFieldValue($column);
-
-                    if ($dt instanceof UploadedFile) {
-                        $dt = $this->handleUpload($dt, $column);
-                    }
-                    if ($dt !== null) {
+                    $dt = $this->checkIfFieldPassesAllValidations($column, !$optional);
+                    if ($dt !== null || $optional) {
                         $toArray[$column] = $dt;
                     }
                 }
             }
         } else {
             foreach ($toArray as $key => $value) {
+                if ($key === $this->primaryKey()) {
+                    continue;
+                }
                 if ($this->getFieldValue($key) !== null) {
-                    $dt = $this->getFieldValue($key);
-
-                    if ($dt instanceof UploadedFile) {
-                        $dt = $this->handleUpload($dt, $key);
-                    }
+                    $dt = $this->checkIfFieldPassesAllValidations($key, false);
                     if ($dt !== null) {
                         $toArray[$key] = $dt;
                     }

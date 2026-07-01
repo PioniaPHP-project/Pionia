@@ -61,11 +61,17 @@ class CategoryService extends Service
      * @moonlight-param int id Skill id
      * @moonlight-example {"service":"category","action":"bulk","id":1}
      * @throws Throwable
+     * @GetOnly
      */
     protected function bulkAction(Arrayable $request): BaseResponse
     {
         $id = $request->get('id');
         $saved = db('skill')->getOrThrow($id, 'Skill not found');
+        async(function () use ($id, $saved) {
+            sleep(2);
+            logger()->info('Logged this later on', ['id'=> $id]);
+        });
+
         return response(0, 'You have reached bulk_save action', $saved);
     }
 

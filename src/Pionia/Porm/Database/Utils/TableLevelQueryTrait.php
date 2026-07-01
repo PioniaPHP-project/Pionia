@@ -25,6 +25,7 @@ use Pionia\Porm\Core\Raw;
 use Pionia\Porm\Database\Aggregation\AggregateTrait;
 use Pionia\Porm\Database\Builders\Builder;
 use Pionia\Porm\Database\Builders\Join;
+use Pionia\Porm\Driver\Connection;
 
 trait TableLevelQueryTrait
 {
@@ -399,7 +400,7 @@ trait TableLevelQueryTrait
      * @throws Exception
      * @since 2.0.3+
      */
-    public function saveOrUpdate(array | Arrayable $data, string $pkField = 'id'): object | array
+    public function saveOrUpdate(array | Arrayable $data, string $pkField = 'id', bool $nativeUpsert = true): object | array
     {
         $this->checkFilterMode("You cannot save at this point in the query, check the usage of the `save()`
          method in the query builder for " . $this->table);
@@ -412,10 +413,18 @@ trait TableLevelQueryTrait
         // if it is an array of arrays, then we save or update each item
         if (is_array($data->at(0))) {
             $items = [];
-            $data->each(function($item) use (&$items, $pkField){
-                $items[] = $this->saveOrUpdate(arr($item), $pkField);
+            $data->each(function($item) use (&$items, $pkField, $nativeUpsert){
+                $items[] = $this->saveOrUpdate(arr($item), $pkField, $nativeUpsert);
             });
             return $items;
+        }
+
+        if ($nativeUpsert && $data->has($pkField)) {
+            $payload = $data->toArray();
+            $upserted = $this->database->upsert($this->table, $payload, $pkField);
+            if ($upserted !== null) {
+                return $this->get($payload[$pkField], $pkField);
+            }
         }
 
         if ($data->has($pkField) && $this->has($id = $data->get($pkField), $pkField)) {
@@ -504,46 +513,21 @@ trait TableLevelQueryTrait
         return $this;
     }
 
-//    /**
-//     * This sets the connection to the CDatabase to use for the current query.
-//     * It can be used to switch between CDatabase connections.
-//     *
-//     * @param string|Database|BaseBuilder|ContainerInterface $connection The connection to use, defaults to 'db'
-//     * @return TableLevelQueryTrait
-//     */
-//    public function using(string|Database|BaseBuilder|ContainerInterface $connection = 'db', ?string $containerDbKey = null): static
-//    {
-//        $this->checkFilterMode('When cannot change the db connection while at this point of the query,
-//        check the usage of `using() method in the query builder of `' . $this->table);
-//
-//        if ($connection instanceof Database) {
-//            $this->database = $connection;
-//        } else if (is_string($connection)) {
-//            $this->database = Database::builder($connection);
-//        } else if ($connection instanceof BaseBuilder) {
-//            $this->database = $connection->database;
-//        } else if ($connection instanceof ContainerInterface && $containerDbKey) {
-//            $this->database = $connection->get($containerDbKey);
-//        }
-//        return $this;
-//    }
+    /**
+     * Switch the active connection for subsequent queries on this Porm instance.
+     */
+    public function using(null | string | array | Connection $connection = 'default'): static
+    {
+        $this->checkFilterMode('using() cannot be called after filter() or join() on ' . $this->table);
 
+        if ($connection instanceof Connection) {
+            $this->database = new \Pionia\Porm\Core\Piql($connection);
+        } else {
+            $this->database = new \Pionia\Porm\Core\Piql(Connection::connect($connection));
+        }
 
-//    /**
-//     * This sets up the CDatabase connection to use internally. It is called when the Porm class is being set up.
-//     * @throws Exception
-//     */
-//    private function reboot(): Core
-//    {
-//        if ($this->database) {
-//            return $this->database;
-//        }
-//        if ($this->using) {
-//            $this->database = CDatabase::builder($this->using);
-//        }
-//        $this->database = CDatabase::builder();
-//        return $this->database;
-//    }
+        return $this;
+    }
 
     /**
      * This deletes all items that match the where clause

@@ -2,7 +2,9 @@
 
 namespace Feature;
 
+use Pionia\Exceptions\ValidationException;
 use Pionia\Http\Request\Request;
+use Pionia\Http\UploadedFile;
 use Pionia\Http\Services\Generics\UniversalGenericService;
 use Pionia\Porm\Driver\Connection;
 use Pionia\TestSuite\PioniaTestCase;
@@ -69,6 +71,77 @@ class GenericServiceCrudTest extends PioniaTestCase
 
         $this->assertCount(1, $items);
         $this->assertSame(2, (int) $items[0]['score']);
+    }
+
+    public function testCreateThrowsValidationExceptionForMissingField(): void
+    {
+        $service = $this->makeService(['action' => 'create']);
+
+        $this->expectException(ValidationException::class);
+        $this->invokeProtected($service, 'createItem');
+    }
+
+    public function testUpdateUploadUsesHandleUpload(): void
+    {
+        $tmp = tempnam(sys_get_temp_dir(), 'pionia');
+        file_put_contents($tmp, 'avatar');
+        $upload = new UploadedFile($tmp, 'avatar.txt', 'text/plain', UPLOAD_ERR_OK, true);
+
+        $request = Request::create('/api/v1/', 'POST', [
+            'service' => 'crud',
+            'action' => 'update',
+            'id' => 1,
+        ], [], ['title' => $upload], [
+            'CONTENT_TYPE' => 'multipart/form-data',
+        ]);
+
+        $service = new class($request) extends UniversalGenericService {
+            public string $table = 'crud_items';
+            public ?string $connection = 'crud_test';
+            public ?array $updateColumns = ['title'];
+            public ?array $fileColumns = ['title'];
+
+            public function handleUpload(UploadedFile $file, string $fileName): mixed
+            {
+                return '/media/' . $fileName;
+            }
+        };
+
+        $updated = $this->invokeProtected($service, 'updateItem');
+        $title = is_array($updated) ? $updated['title'] : $updated->title;
+        $this->assertSame('/media/title', $title);
+    }
+
+    public function testSkipUpdatePrefetchSkipsSelect(): void
+    {
+        $service = $this->makeService(['id' => 1, 'title' => 'Prefetch skip', 'score' => 7]);
+        $service->skipUpdatePrefetch = true;
+        $service->updateColumns = ['title', 'score'];
+
+        $updated = $this->invokeProtected($service, 'updateItem');
+        $this->assertSame('Prefetch skip', is_array($updated) ? $updated['title'] : $updated->title);
+        $this->assertSame(7, (int) (is_array($updated) ? $updated['score'] : $updated->score));
+    }
+
+    public function testConnectionOverrideUsesNamedPool(): void
+    {
+        $alt = Connection::open(['type' => 'sqlite', 'database' => ':memory:']);
+        connectionManager()->register('alt_db', $alt);
+        $alt->getPdo()->exec('CREATE TABLE crud_items (id INTEGER PRIMARY KEY, title TEXT, score INTEGER)');
+        $alt->getPdo()->exec("INSERT INTO crud_items (title, score) VALUES ('Alt', 99)");
+
+        $request = Request::create('/api/v1/', 'POST', ['service' => 'crud', 'action' => 'list']);
+        $service = new class($request) extends UniversalGenericService {
+            public string $table = 'crud_items';
+            public ?string $connection = 'alt_db';
+            public ?array $listColumns = ['title', 'score'];
+        };
+
+        $items = $this->invokeProtected($service, 'allItems');
+        $this->assertCount(1, $items);
+        $this->assertSame('Alt', $items[0]['title'] ?? $items[0]->title);
+
+        connectionManager()->disconnect('alt_db');
     }
 
     private function makeService(array $payload = []): UniversalGenericService

@@ -2,6 +2,7 @@
 
 namespace Pionia\Builtins\Commands;
 
+use Pionia\Builtins\Commands\Concerns\FormatsRoadRunnerLogOutput;
 use Pionia\Builtins\Commands\Concerns\ManagesRoadRunnerProcess;
 use Pionia\Console\BaseCommand;
 use Pionia\Console\Command;
@@ -12,6 +13,7 @@ use Pionia\Console\Input\InputOption;
  */
 class ViewRoadRunnerLogs extends BaseCommand
 {
+    use FormatsRoadRunnerLogOutput;
     use ManagesRoadRunnerProcess;
 
     protected string $name = 'runserver:logs';
@@ -29,6 +31,7 @@ class ViewRoadRunnerLogs extends BaseCommand
             ['lines', null, InputOption::VALUE_OPTIONAL, 'Number of existing lines to show before following', '50'],
             ['no-follow', null, InputOption::VALUE_NONE, 'Print lines and exit without following'],
             ['wait', 'w', InputOption::VALUE_NONE, 'Wait for the log file to be created'],
+            ['raw', null, InputOption::VALUE_NONE, 'Print log lines without formatting'],
         ];
     }
 
@@ -88,8 +91,9 @@ class ViewRoadRunnerLogs extends BaseCommand
         }
 
         foreach (array_slice($content, -$lineCount) as $line) {
-            $this->line($line);
+            $this->roadRunnerLogWriter()->push($line . "\n");
         }
+        $this->flushRoadRunnerLogWriter();
 
         return (int) (filesize($path) ?: 0);
     }
@@ -109,7 +113,7 @@ class ViewRoadRunnerLogs extends BaseCommand
         while (true) {
             $line = fgets($handle);
             if ($line !== false) {
-                $this->output->write($line);
+                $this->writeRoadRunnerLogChunk($line);
 
                 continue;
             }

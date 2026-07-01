@@ -50,4 +50,25 @@ class ViewRoadRunnerLogsCommandTest extends PioniaTestCase
         $this->assertSame(1, $code);
         $this->assertStringContainsString('Log file not found', $this->consoleOutput());
     }
+
+    public function testFormatsHttpAccessLogLines(): void
+    {
+        file_put_contents(
+            $this->logFile,
+            '2026-07-01T13:18:42+0000        INFO    http            http log        '
+            . '{"status": 200, "method": "GET", "URI": "/api/v1/ping", "write_bytes": 128, "elapsed": 4}' . "\n",
+        );
+
+        $code = $this->artisan('runserver:logs', [
+            '--log' => $this->logFile,
+            '--lines' => 1,
+            '--no-follow' => true,
+        ]);
+
+        $this->assertSame(0, $code);
+        $output = $this->consoleOutput();
+        $this->assertStringContainsString('/api/v1/ping', $output);
+        $this->assertStringContainsString('4ms', $output);
+        $this->assertStringNotContainsString('"write_bytes"', $output);
+    }
 }

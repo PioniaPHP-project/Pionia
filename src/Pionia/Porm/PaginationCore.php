@@ -123,6 +123,83 @@ class PaginationCore
     }
 
     /**
+     * Paginate with a cached total count (avoids repeated COUNT(*) on large tables).
+     *
+     * @throws BaseDatabaseException
+     * @throws Exception
+     */
+    public function paginateApproximate(?array $where = null, int $countCacheTtl = 60): ?array
+    {
+        if ($where) {
+            $this->parged['where'] = array_merge($this->parged['where'], $where);
+        }
+
+        $limit = $this->parged['LIMIT'];
+        $offset = $this->parged['OFFSET'];
+
+        if (!$this->baseQuery) {
+            throw new Exception("Query not initiated yet, are you sure you called the `init` method first?");
+        }
+
+        $all = $this->resolveCachedCount($countCacheTtl);
+
+        $resultSet = $this->baseQuery
+            ->limit($limit)
+            ->startAt($offset)
+            ->all();
+
+        $prev = $offset - $limit;
+        $next = $offset + $limit;
+        $nextOffset = $next < $all ? $next : null;
+        $prevOffset = max($prev, 0);
+
+        return [
+            'results' => $resultSet,
+            'current_limit' => $limit,
+            'current_offset' => $offset,
+            'next_offset' => $nextOffset,
+            'prev_offset' => $prevOffset,
+            'results_count' => count($resultSet),
+            'has_next' => $nextOffset !== null,
+            'has_previous' => $prevOffset !== null && $offset > 0,
+            'total_count' => $all,
+            'approximate_count' => true,
+        ];
+    }
+
+    private function resolveCachedCount(int $ttl): int
+    {
+        $key = 'porm_paginate_' . md5(json_encode([
+            $this->table,
+            $this->alias,
+            $this->db,
+            $this->parged['where'],
+            $this->baseQuery instanceof Join ? $this->baseQuery->getJoins() : null,
+        ], JSON_THROW_ON_ERROR));
+
+        try {
+            if (function_exists('app')) {
+                $cache = app()->cacheInstance();
+                if ($cache->has($key)) {
+                    return (int) $cache->get($key);
+                }
+            }
+        } catch (\Throwable) {
+        }
+
+        $all = (int) $this->baseQuery->count();
+
+        try {
+            if (function_exists('app')) {
+                app()->cacheInstance()->set($key, $all, $ttl);
+            }
+        } catch (\Throwable) {
+        }
+
+        return $all;
+    }
+
+    /**
      * Picks the pagination data from the request. Pagination data can be defined in the `PAGINATION` key or the `pagination` key.
      * You can also define them in the `SEARCH` key or the `search` key.
      *

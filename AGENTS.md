@@ -68,6 +68,8 @@ php example/pionia maintenance:off                    # back to normal (alias: u
 
 Porm (`table()`, `connectionManager()`) — see [`docs/PORM.md`](docs/PORM.md) and the [Porm guides](https://pionia.netlify.app/documentation/database/) in pionia-docs.
 
+**Raw SQL:** Never pass user input into `Piql::raw()` or string ON clauses — use bound parameters and `where()` / `JoinOn::map()`. **`[Object]` column casts** call `unserialize()` only when `PORM_ALLOW_OBJECT_CAST=true` or `[db] allow_object_cast=1` in settings.
+
 `ConnectionManager` pools PDO instances per process. `Connection::connect('default')` reuses the pool; `Connection::open()` bypasses it (tests, one-off configs).
 
 ```php

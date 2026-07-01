@@ -60,6 +60,26 @@ abstract class GenericService extends Service
     public array $sortableColumns = [];
 
     /**
+     * When true, paginate() uses cached COUNT totals (see PaginationCore::paginateApproximate).
+     */
+    public bool $approximatePagination = false;
+
+    /**
+     * Skip loading the full row before update (preUpdate receives request fields only).
+     */
+    public bool $skipUpdatePrefetch = false;
+
+    /**
+     * Cache list responses for this many seconds (null = disabled).
+     */
+    public ?int $cacheListTtl = null;
+
+    /**
+     * Cache retrieve/getOne responses for this many seconds (null = disabled).
+     */
+    public ?int $cacheRetrieveTtl = null;
+
+    /**
      * @var string The primary key field name. Default is `id`.
      */
     public string $pk_field = 'id';
