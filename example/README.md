@@ -20,7 +20,7 @@ For production-like local testing with boot-once workers:
 composer install   # includes spiral/roadrunner-http in dev
 cd example
 ./../vendor/bin/rr get -l ./rr   # download RoadRunner binary once
-php pionia runserver              # HTTP port from PORT/.env (8003 here) or default 9000
+php pionia runserver              # HTTP port from PORT/.env (8003 here) or default 8003
 ```
 
 Or run the binary directly: `./rr serve -c .rr.yaml`
@@ -46,9 +46,9 @@ curl -s -X POST http://127.0.0.1:8003/api/v1/ \
   -d '{"service":"auth","action":"list_auth"}' | jq
 ```
 
-Registered services: `auth`, `category`, `sampolo` (`switches/MainSwitch.php`).
+Registered services: `auth`, `category`, `mail`, `sampolo` (`switches/MainSwitch.php`).
 
-`sampolo` is the canonical **generic CRUD** demo (`SampoloService` → `sample_table`).
+`sampolo` is the canonical **generic CRUD** demo (`SampoloService` → `sample_table` with company join).
 
 ## API documentation
 
@@ -59,7 +59,7 @@ composer document:api          # from repo root → example/docs/api/
 composer document:api:check    # CI drift check
 ```
 
-Outputs: `docs/api/openapi.json`, `docs/api/index.md`, and `docs/api/index.html` (Scalar UI).
+Outputs: `example/docs/api/openapi.json`, `example/docs/api/index.md`, and `example/docs/api/index.html` (Scalar UI).
 
 Runtime docs (gated by `DOCS_ENABLED` or `DEBUG=true`):
 

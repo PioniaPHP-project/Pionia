@@ -149,6 +149,11 @@ class WebApplication  implements ApplicationContract
     {
         $request = Request::createFromGlobals();
         $response = $this->handleRequest($request);
+
+        if (\Pionia\Http\Background\DeferredWorkBuffer::hasPending()) {
+            $response->headers->set('Connection', 'close');
+        }
+
         $response->send();
         \Pionia\Http\Background\Background::finishRequestForClient();
         \Pionia\Http\Background\Background::flushDeferredWork();

@@ -35,7 +35,6 @@
         "spiral/roadrunner-cli": "^2.6",
         "nyholm/psr7": "^1.8",
         "spiral/roadrunner-jobs": "^4.0",
-        "react/promise": "^3.2",
         "react/promise": "^3.2"
     },
     "require": {
@@ -76,11 +75,12 @@
         "test:ci": "mkdir -p build && php vendor/bin/phpunit --coverage-clover=build/coverage.xml --coverage-text",
         "document:api": "php example/pionia api:docs --ui",
         "document:api:check": "php example/pionia api:docs --ui --check",
-        "document:framework": "phpDocumentor run --config=phpdoc.dist.xml",
+        "document:framework": "bash bin/document-framework",
         "document": [
             "@document:framework",
             "@document:api"
         ],
+        "clean:docs": "bash bin/clean-stale-docs",
         "changelog": "git log --pretty=format:'- %s' > CHANGELOG.md"
     },
     "archive": {

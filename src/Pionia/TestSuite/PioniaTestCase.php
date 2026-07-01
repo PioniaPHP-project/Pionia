@@ -45,7 +45,7 @@ class PioniaTestCase extends TestCase
     /**
      * @param array<string, mixed> $data
      */
-    public function requestMock(array $data = [], ?string $requestType = 'POST', ?string $url = 'http://localhost:8000/api/v1/'): Request
+    public function requestMock(array $data = [], ?string $requestType = 'POST', ?string $url = 'http://localhost:8003/api/v1/'): Request
     {
         if (!$data) {
             $data['service'] = 'test';

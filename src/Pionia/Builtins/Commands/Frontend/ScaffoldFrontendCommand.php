@@ -100,7 +100,7 @@ class ScaffoldFrontendCommand extends BaseCommand
         file_put_contents($envDir . '/.env.development', "VITE_API_URL=http://127.0.0.1:{$port}/api/v1/\n");
         file_put_contents($envDir . '/.env.production', "VITE_API_URL=/api/v1/\n");
 
-        $this->writeViteConfig($root, $port);
+        $this->writeViteConfig($root, $port, $framework);
         $this->writeApiHelper($root);
 
         $buildCommand = $packageManager === 'npm' ? 'npm run build' : $packageManager . ' run build';
@@ -127,12 +127,16 @@ class ScaffoldFrontendCommand extends BaseCommand
         return Command::SUCCESS;
     }
 
-    private function writeViteConfig(string $root, int $apiPort): void
+    private function writeViteConfig(string $root, int $apiPort, string $framework): void
     {
-        $config = <<<JS
-import { defineConfig } from 'vite'
+        $path = $this->resolveViteConfigPath($root);
+        $isTs = str_ends_with($path, '.ts') || str_ends_with($path, '.mts');
+        $plugin = $this->vitePluginBlock($framework);
+
+        $config = $plugin . <<<JS
 
 export default defineConfig({
+  plugins: [{$this->vitePluginCall($framework)}],
   server: {
     port: 5173,
     proxy: {
@@ -149,7 +153,44 @@ export default defineConfig({
 })
 JS;
 
-        file_put_contents($root . '/vite.config.js', $config);
+        file_put_contents($path, $config);
+
+        $duplicate = $root . '/vite.config.' . ($isTs ? 'js' : 'ts');
+        if ($duplicate !== $path && is_file($duplicate)) {
+            unlink($duplicate);
+        }
+    }
+
+    private function resolveViteConfigPath(string $root): string
+    {
+        foreach (['vite.config.ts', 'vite.config.mts', 'vite.config.js', 'vite.config.mjs'] as $name) {
+            $path = $root . '/' . $name;
+            if (is_file($path)) {
+                return $path;
+            }
+        }
+
+        return $root . '/vite.config.js';
+    }
+
+    private function vitePluginBlock(string $framework): string
+    {
+        return match (true) {
+            str_starts_with($framework, 'react') => "import react from '@vitejs/plugin-react'\n",
+            str_starts_with($framework, 'vue') => "import vue from '@vitejs/plugin-vue'\n",
+            str_starts_with($framework, 'svelte') => "import { svelte } from '@sveltejs/vite-plugin-svelte'\n",
+            default => '',
+        } . "import { defineConfig } from 'vite'\n";
+    }
+
+    private function vitePluginCall(string $framework): string
+    {
+        return match (true) {
+            str_starts_with($framework, 'react') => 'react()',
+            str_starts_with($framework, 'vue') => 'vue()',
+            str_starts_with($framework, 'svelte') => 'svelte()',
+            default => '',
+        };
     }
 
     private function writeApiHelper(string $root): void
@@ -177,6 +218,8 @@ export async function callAction(service, action, payload = {}) {
 }
 PHP;
 
-        file_put_contents($srcDir . '/lib/pionia-api.js', $helper);
+        $libDir = $srcDir . '/lib';
+        (new Filesystem())->mkdir($libDir);
+        file_put_contents($libDir . '/pionia-api.js', $helper);
     }
 }

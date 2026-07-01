@@ -1,6 +1,23 @@
+# Stale phpDocumentor HTML (use build/docs/ via composer document:framework)
+docs/classes/
+docs/css/
+docs/files/
+docs/graphs/
+docs/indices/
+docs/js/
+docs/namespaces/
+docs/packages/
+docs/reports/
+docs/index.html
+
+# Example runtime / frontend
+example/storage/cache/
+example/frontend/node_modules/
+example/public/assets/
+
 vendor
 .idea
-.DM_Store
+.DS_Store
 composer.lock
 src/Core/.DS_Store
 build
@@ -8,11 +25,7 @@ build
 
 **.log
 
-
 *.sqlite3
-example/rr
-example/.pid
-example/storage/metrics/
 example/rr
 example/.pid
 example/storage/metrics/

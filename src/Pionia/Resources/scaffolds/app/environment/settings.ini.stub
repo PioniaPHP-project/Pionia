@@ -22,7 +22,7 @@ credentials=true
 
 [roadrunner]
 HOST=127.0.0.1
-PORT=9000
+PORT=8003
 
 [jobs]
 # Set ENABLED=true when using php pionia runserver with RR jobs pool

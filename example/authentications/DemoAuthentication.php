@@ -2,14 +2,14 @@
 
 namespace Application\Authentications;
 
-use Pionia\Auth\AuthenticationBackend;
+use Pionia\Auth\Authentication;
 use Pionia\Auth\ContextUserObject;
 use Pionia\Http\Request\Request;
 
 /**
  * Demo auth: send header `Authorization: Bearer demo-token` to authenticate.
  */
-class DemoAuthentication extends AuthenticationBackend
+class DemoAuthentication extends Authentication
 {
     public function authenticate(Request $request): ?ContextUserObject
     {

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Remove legacy phpDocumentor HTML committed under docs/ (keep hand-written *.md).
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+DOCS="$ROOT/docs"
+
+keep=(HELPERS.md MOONLIGHT-DOCS.md PORM.md README.md)
+
+for entry in "$DOCS"/*; do
+  base="$(basename "$entry")"
+  skip=false
+  for k in "${keep[@]}"; do
+    if [[ "$base" == "$k" ]]; then
+      skip=true
+      break
+    fi
+  done
+  if [[ "$skip" == false ]]; then
+    rm -rf "$entry"
+  fi
+done
+
+find "$DOCS" -name '.DS_Store' -delete 2>/dev/null || true
+
+echo "Cleaned stale docs/ output. Kept: ${keep[*]}"

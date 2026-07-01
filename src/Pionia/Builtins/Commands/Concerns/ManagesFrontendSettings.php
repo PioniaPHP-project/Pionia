@@ -84,9 +84,7 @@ trait ManagesFrontendSettings
 
     private function resolveApiPort(): int
     {
-        $port = env('PORT') ?? env('SERVER_PORT') ?? 8003;
-
-        return max(1, (int) $port);
+        return (new \Pionia\Http\Server\ServerPortResolver())->resolve();
     }
 
     private function mirrorDirectory(string $source, string $destination): void

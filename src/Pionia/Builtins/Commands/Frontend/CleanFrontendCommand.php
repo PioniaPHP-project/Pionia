@@ -5,6 +5,7 @@ namespace Pionia\Builtins\Commands\Frontend;
 use Pionia\Builtins\Commands\Concerns\ManagesFrontendSettings;
 use Pionia\Console\BaseCommand;
 use Pionia\Console\Command;
+use Pionia\Http\PublicEntryPoint;
 use Pionia\Utils\Filesystem;
 
 class CleanFrontendCommand extends BaseCommand
@@ -28,7 +29,7 @@ class CleanFrontendCommand extends BaseCommand
             return Command::SUCCESS;
         }
 
-        $preserve = ['static', '.htaccess'];
+        $preserve = PublicEntryPoint::PRESERVE_IN_PUBLIC;
         $removed = 0;
 
         foreach (scandir($deployDir) ?: [] as $entry) {

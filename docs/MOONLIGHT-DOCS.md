@@ -9,7 +9,7 @@ This document defines how to annotate services so `pionia api:docs` and `pionia 
 | Layer | Audience | Tool | Output |
 |-------|----------|------|--------|
 | Framework internals | Core contributors | phpDocumentor (`composer document:framework`) | `build/docs/` |
-| Moonlight API | App developers & consumers | `pionia api:docs` | `docs/api/openapi.json`, `index.md`, `index.html` |
+| Moonlight API | App developers & consumers | `pionia api:docs` | `example/docs/api/openapi.json`, `index.md`, `index.html` |
 | Architecture | Humans & agents | Hand-written | `AGENTS.md`, `CONTRIBUTING.md`, `example/README.md` |
 
 ## Service class header

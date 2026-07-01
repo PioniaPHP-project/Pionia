@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Generate phpDocumentor HTML for src/Pionia/ → build/docs/
+# Uses a pinned project-local PHAR (PHP 8.5 compatible), not a global install.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+PHPDOC_VERSION="3.9.1"
+PHAR_DIR="$ROOT/build/tools"
+PHAR="$PHAR_DIR/phpDocumentor.phar"
+VERSION_FILE="$PHAR_DIR/phpdocumentor.version"
+
+if [[ ! -f "$PHAR" ]] || [[ ! -f "$VERSION_FILE" ]] || [[ "$(cat "$VERSION_FILE")" != "$PHPDOC_VERSION" ]]; then
+    mkdir -p "$PHAR_DIR"
+    URL="https://github.com/phpDocumentor/phpDocumentor/releases/download/v${PHPDOC_VERSION}/phpDocumentor.phar"
+    echo "Downloading phpDocumentor v${PHPDOC_VERSION}..."
+    if command -v curl >/dev/null 2>&1; then
+        curl -fsSL -o "$PHAR" "$URL"
+    elif command -v wget >/dev/null 2>&1; then
+        wget -q -O "$PHAR" "$URL"
+    else
+        echo "Need curl or wget to download phpDocumentor." >&2
+        exit 1
+    fi
+    echo "$PHPDOC_VERSION" > "$VERSION_FILE"
+fi
+
+exec php "$PHAR" run --config=phpdoc.dist.xml "$@"

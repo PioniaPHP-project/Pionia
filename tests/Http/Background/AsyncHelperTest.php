@@ -9,6 +9,21 @@ use React\Promise\PromiseInterface;
 
 class AsyncHelperTest extends PioniaTestCase
 {
+    public function testDeferQueuesClosureForFlush(): void
+    {
+        $runs = 0;
+        defer(static function () use (&$runs): void {
+            $runs++;
+        });
+
+        $this->assertSame(0, $runs);
+        $this->assertTrue(DeferredWorkBuffer::hasPending());
+
+        DeferredWorkBuffer::flush();
+
+        $this->assertSame(1, $runs);
+    }
+
     public function testAsyncClosureReturnsPendingPromiseBeforeFlush(): void
     {
         $runs = 0;

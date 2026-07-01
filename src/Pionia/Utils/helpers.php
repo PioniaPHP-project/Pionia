@@ -45,9 +45,13 @@ if (! function_exists('tap')) {
 }
 
 if (! function_exists('route')){
+    /**
+     * @deprecated Use {@see router()} instead.
+     */
+    #[\Deprecated(message: 'Use router() instead', since: '3.0')]
     function route(RealmContract $app): PioniaRouter
     {
-        return new PioniaRouter($app);
+        return router($app);
     }
 }
 
@@ -189,8 +193,9 @@ if (!function_exists('connectionManager')) {
 
 
 /**
- * Get any alias from the application container
- * @return array
+ * Resolve a path alias registered on the realm (e.g. `PUBLIC_DIR`, `STORAGE_DIR`).
+ *
+ * @return mixed
  */
 if (!function_exists('alias')) {
     function alias($key)
@@ -226,8 +231,7 @@ if (!function_exists('yesNo')){
 
 if (!function_exists(function: 'asBool')) {
     /**
-     * convert a value to a boolean
-     * @return array
+     * Coerce a value to boolean (accepts "true", "1", "yes", etc.).
      */
     function asBool(mixed $value): bool
     {
@@ -351,7 +355,6 @@ if (!function_exists('cachedResponse')){
      * Cached key is of the format `service_action` in camel case.
      * If no ttl is defined, caching will happen for only 60 seconds
      * @note This function is only available if the service has caching enabled
-     * @note This is still under rigorous tests
      * @param Service $instance The service we are currently in, just pass `this` here!
      * @param BaseResponse $response The response object to cache, you can use `response()` for this!
      * @param mixed $ttl The time to live for the cache, defaults to 60 seconds
@@ -396,30 +399,11 @@ if (!function_exists('recached')){
         mixed $ttl = 60
     ): BaseResponse
     {
-        return (new class ($instance, $returnCode, $returnMessage, $returnData, $extraData, $ttl) {
-            private Service $instance;
-            private int $returnCode;
-            private string $returnMessage;
-            private mixed $returnData;
-            private mixed $extraData;
-            private mixed $ttl;
-
-            public function __construct(Service $instance, int $returnCode, string $returnMessage, mixed $returnData, mixed $extraData, mixed $ttl)
-            {
-                $this->instance = $instance;
-                $this->returnCode = $returnCode;
-                $this->returnMessage = $returnMessage;
-                $this->returnData = $returnData;
-                $this->extraData = $extraData;
-                $this->ttl = $ttl;
-            }
-
-            public function handle(): BaseResponse
-            {
-                $response = response($this->returnCode, $this->returnMessage, $this->returnData, $this->extraData);
-                return cachedResponse($this->instance, $response, $this->ttl);
-            }
-        })->handle();
+        return cachedResponse(
+            $instance,
+            response($returnCode, $returnMessage, $returnData, $extraData),
+            $ttl
+        );
     }
 }
 
@@ -443,7 +427,7 @@ if (!function_exists('render')){
      *
      * @deprecated Use renderToString() and send the result yourself.
      */
-    #[\Deprecated(message: 'Use renderToString() instead', since: '2.1')]
+    #[\Deprecated(message: 'Use renderToString() instead', since: '3.0')]
     function render($file, ?array $data = []): void
     {
         echo renderToString($file, $data);
@@ -481,10 +465,9 @@ if (!function_exists('allRoutes')){
 
 if (!function_exists('baseUrl')){
     /**
-     * Unversioned API prefix (before the switch version).
+     * Unversioned API prefix from the `API_BASE` environment variable.
      *
-     * To set this, add `API_BASE` in the environment; otherwise defaults to `/api/`.
-     * For versioned URLs use `apiVersionPath()`; for the status endpoint use `apiPingPath()`.
+     * Prefer {@see apiBase()} in application code — it reads the value registered on the realm.
      *
      * @return string e.g. `/api/`
      */
@@ -503,12 +486,11 @@ if (!function_exists('baseUrl')){
 
 if (!function_exists('parseHtml')){
     /**
-     * Get all the builtins
-     * @param $file
-     * @param array|null $data
-     * @return array
+     * Parse a template file into structured data (no output).
+     *
+     * @return array<string, mixed>|null
      */
-    function parseHtml($file, ? array $data = []): array
+    function parseHtml($file, ? array $data = []): ?array
     {
         return app()->getSilently(TemplateEngineInterface::class)?->parse($file, $data);
     }
@@ -857,7 +839,7 @@ if (!function_exists('middlewares')) {
 
 if (!function_exists("apiBase")) {
     /**
-     * Unversioned API prefix from the app context (same as `baseUrl()`).
+     * Unversioned API prefix registered on the realm (default `/api/`).
      *
      * @see apiVersionPath() for `/api/v1/`
      * @see apiPingPath() for `/api/v1/ping`
@@ -1322,13 +1304,57 @@ if (!function_exists('moonlight')) {
     }
 }
 
+if (!function_exists('serverPort')) {
+    /**
+     * Resolve the application HTTP port (serve, RoadRunner, frontend API proxy).
+     */
+    #[\NoDiscard]
+    function serverPort(int|string|null|false $cliOverride = null): int
+    {
+        return (new \Pionia\Http\Server\ServerPortResolver())->resolve($cliOverride);
+    }
+}
+
+if (!function_exists('defer')) {
+    /**
+     * Run a closure after the HTTP response is sent to the client.
+     *
+     * Use this for fire-and-forget post-response work (logging, webhooks, quick cleanup).
+     * The closure runs in the **same PHP process** — not a new thread. Long or CPU-heavy
+     * work still blocks that worker until it finishes; queue a Moonlight job instead.
+     *
+     * Requires `react/promise` in the application (`composer require react/promise`).
+     *
+     * @see async() When you need a Promise or to queue a Moonlight job by service name
+     * @see docs/HELPERS.md#background-work-defer--async
+     */
+    function defer(\Closure $work): void
+    {
+        \Pionia\Http\Background\Background::assertPromiseSupport();
+
+        $deferred = new \React\Promise\Deferred();
+        \Pionia\Http\Background\DeferredWorkBuffer::pushClosure($work, $deferred);
+    }
+}
+
 if (!function_exists('async')) {
     /**
-     * Queue background work (closure after response, or Moonlight job on flush).
+     * Queue background work to run after the HTTP response (or submit a Moonlight job).
      *
-     * @param \Closure|string $target Closure for inline deferred work, or Moonlight service name
+     * **Closure** — same timing as {@see defer()}, but returns a `PromiseInterface` for
+     * `.then()` / `.catch()` / {@see await()}. On PHP 8.5+ you must use the return value
+     * or cast to `(void)`; prefer {@see defer()} when you do not need a promise.
+     *
+     * **String service name** — dispatches a Moonlight action. With RoadRunner Jobs enabled,
+     * the job is queued on a worker pool; otherwise it runs synchronously after the response.
+     *
+     * @param \Closure|string $target Closure for post-response work, or Moonlight service name
      * @param string $action Moonlight action when $target is a service name
      * @param array<string, mixed> $payload Moonlight payload
+     *
+     * @see defer() Fire-and-forget post-response closures (recommended default)
+     * @see moonlight()->async() HTTP-shaped 202 response when a job is accepted
+     * @see docs/HELPERS.md#background-work-defer--async
      *
      * @return \React\Promise\PromiseInterface
      */
@@ -1401,9 +1427,11 @@ if (!function_exists('pionia')) {
     }
 }
 
-if (!function_exists('env_keys')) {
+if (!function_exists('envKeys')) {
     /**
-     * Returns all collected keys as an array
+     * All environment variable names loaded from `.env`.
+     *
+     * @return list<string>
      */
     function envKeys(): array
     {
@@ -1427,17 +1455,6 @@ if (!function_exists('container_path')){
         return $path;
     }
 }
-
-if (!function_exists('env')) {
-    /**
-     * Get the entire environment or get a specific key from the environment
-     */
-    function env(?string $key, mixed $default)
-    {
-        return realm()->env($key, $default);
-    }
-}
-
 
 if (!function_exists('shouldLogResponses')) {
   /**
@@ -1471,9 +1488,10 @@ if (!function_exists('logger')) {
 }
 
 /**
- * @see timeAgo()
+ * @deprecated Use {@see timeAgo()} instead.
  */
 if (!function_exists('time_ago')){
+    #[\Deprecated(message: 'Use timeAgo() instead', since: '3.0')]
     function time_ago(int|float $time): string
     {
         return timeAgo($time);
@@ -1504,25 +1522,6 @@ if (!function_exists('isDebug')) {
     function isDebug(): bool
     {
         return app()->isDebug();
-    }
-}
-
-
-if (!function_exists('indented')) {
-    function indented($key, $value, $indent = 0) {
-        $space = str_repeat('&nbsp;', $indent * 4); // HTML-friendly indent (4 spaces per level)
-
-        if (is_array($value)) {
-//            echo "<p>{$space}<strong>" . htmlspecialchars($key) . ":</strong> </p>";
-            foreach ($value as $subKey => $subValue) {
-                indented($subKey, $subValue, $indent + 1);
-            }
-        } elseif (is_string($value)) {
-            echo "<p>{$space}" . htmlspecialchars($key) . ": " . htmlspecialchars($value)."</p>";
-        } else {
-            // handle int/bool/null, etc.
-            echo "<p>{$space}" . htmlspecialchars($key) . ": " . htmlspecialchars(json_encode($value)) . "</p>";
-        }
     }
 }
 

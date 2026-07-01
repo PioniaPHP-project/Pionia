@@ -11,9 +11,9 @@ use Application\Services\CategoryService;
 use Application\Services\MailService;
 use Application\Services\SampoloService;
 use Pionia\Collections\Arrayable;
-use Pionia\Http\Switches\BaseApiServiceSwitch;
+use Pionia\Http\Switches\ApiSwitch;
 
-class MainSwitch extends BaseApiServiceSwitch
+class MainSwitch extends ApiSwitch
 {
 	/**
 	 * Register services here

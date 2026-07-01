@@ -15,7 +15,7 @@ use Pionia\Console\Input\InputArgument;
 use Pionia\Utils\Filesystem;
 
 /**
- * For Creating a new authentication backend in the authenticationBackends directory by running `pionia gen:auth {name}`
+ * For Creating a new authentication backend by running `php pionia make:auth {name}`
  *
  * @since 1.1.6 This command now writes the generated file to the `authentications` directory in your app
  *

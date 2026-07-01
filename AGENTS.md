@@ -54,7 +54,7 @@ php example/pionia maintenance:off                    # back to normal (alias: u
 ```
 
 - Worker entry: `example/worker.php` (boot once, PSR-7 loop)
-- Config: `example/.rr.yaml` — HTTP listen port resolves as **CLI `--port`** → **`PORT` / `SERVER_PORT` in `.env`** → **`[roadrunner]` or `[server]` in `settings.ini`** → **`.rr.yaml` `http.address`** → **default `9000`**. `runserver` passes `-o http.address=…` when the resolved address differs from the file.
+- Config: `example/.rr.yaml` — HTTP listen port resolves as **CLI `--port`** → **`PORT` / `SERVER_PORT` in `.env`** → **`[roadrunner]` or `[server]` in `settings.ini`** → **`.rr.yaml` `http.address`** → **default `8003`**. `runserver` passes `-o http.address=…` when the resolved address differs from the file.
 - `ConnectionManager` keeps PDO alive across requests; `disconnect()` on worker shutdown only
 - Built-in dev server: `php pionia serve` (PHP `-S`, no RoadRunner)
 
@@ -376,16 +376,20 @@ When jobs are enabled and RR is running, `moonlight()->async()` returns `returnC
 
 Key classes: `MoonlightDispatcher`, `MoonlightJobQueue`, `MoonlightJobConsumer`, `MoonlightFrameHandler`, `PioniaWorker`, `RealtimeGateway`.
 
-### Background work (`async()`)
+### Background work (`defer()` / `async()`)
 
-Developer-facing background API (requires `composer require react/promise` in apps):
+Requires `react/promise` in apps. **Prefer `defer()`** for post-response closures; use `async()` for promises or Moonlight job strings.
 
 ```php
-// Closure — runs after the HTTP response is sent (same PHP process)
+// Closure — after HTTP response (not a new thread; same PHP worker)
+defer(function () use ($user) {
+    logger()->info('Sending welcome', ['email' => $user->email]);
+});
+
+// Promise chaining when needed
 async(function () use ($user) {
     logger()->info('Sending welcome', ['email' => $user->email]);
-})->then(fn () => logger()->info('sent'))
-  ->catch(fn (\Throwable $e) => logger()->error($e->getMessage()));
+})->catch(fn (\Throwable $e) => logger()->error($e->getMessage()));
 
 // Moonlight job — queued on flush when RoadRunner Jobs is enabled
 async('mail', 'send_welcome', ['email' => $user->email]);
@@ -393,15 +397,16 @@ async('mail', 'send_welcome', ['email' => $user->email]);
 
 | Form | When it runs | Best for |
 |------|----------------|----------|
-| `async(Closure)` | After `respond()` / `send()` | Quick post-response work (webhooks, logging) |
+| `defer(Closure)` | After `respond()` / `send()` | Quick post-response work (webhooks, logging) |
+| `async(Closure)` | Same as `defer()` | When you need `.then()` / `await()` |
 | `async('service', 'action', $payload)` | RR Jobs worker when queue available; else sync after response | Email, reports, durable work |
 
 **`async()` vs `moonlight()->async()`** — global `async()` returns a `PromiseInterface` and defers until after the response. `moonlight()->async()` returns an HTTP-shaped `202` immediately when the queue accepts the job (API-style).
 
 **Running without RoadRunner** (`php pionia serve`, nginx/FPM):
 
-- Closure `async()` still works (flush after `send()`; FPM uses `fastcgi_finish_request()` when available).
-- String `async()` falls back to `dispatchSync()` on flush — request still succeeds; work runs after the client gets the response.
+- **`defer()`** / closure **`async()`** run after `send()`; FPM uses `fastcgi_finish_request()`; built-in server flushes output and sets `Connection: close`.
+- String **`async()`** falls back to `dispatchSync()` on flush — request still succeeds; work runs after the client gets the response.
 - Set `[jobs] ENABLED=true` only when `rr` is running with a jobs pool; otherwise you get a warning + sync fallback.
 
 **Config** — PHP `[jobs]` in `settings.ini`; queue driver in `.rr.yaml` (`memory` dev, `redis` prod):

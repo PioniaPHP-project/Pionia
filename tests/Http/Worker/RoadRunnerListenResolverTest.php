@@ -84,7 +84,7 @@ YAML);
 
         try {
             $listen = (new RoadRunnerListenResolver([]))->resolve($configPath);
-            $this->assertSame('9000', $listen['port']);
+            $this->assertSame('8003', $listen['port']);
         } finally {
             if (is_file($configPath)) {
                 unlink($configPath);

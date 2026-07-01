@@ -11,10 +11,34 @@
 namespace Application\Services;
 
 use Pionia\Http\Services\Generics\UniversalGenericService;
+use Pionia\Http\Services\JoinType;
 
 class SampoloService extends UniversalGenericService
 {
-	public string $table = 'company';
+    public string $table = 'sample_table';
 
-    public ?array $createColumns = ['name'];
+    public ?string $baseAlias = 'st';
+
+    public ?array $fileColumns = ['file'];
+
+    public ?array $createColumns = ['name', 'file?', 'company'];
+
+    public ?array $joinAliases = [
+        'company' => 'c',
+    ];
+
+    public ?array $listColumns = [
+        'st.id(id)',
+        'st.name(name)',
+        'st.file',
+        'c.name(company_name)',
+    ];
+
+    public ?array $joins = [
+        'company' => ['company' => 'id'],
+    ];
+
+    public ?array $joinTypes = [
+        'company' => JoinType::LEFT,
+    ];
 }

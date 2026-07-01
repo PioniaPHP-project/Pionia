@@ -2,17 +2,19 @@
 
 namespace Pionia\Http\Worker;
 
+use Pionia\Http\Server\ServerPortResolver;
+
 /**
  * Resolves the HTTP listen address for RoadRunner.
  *
  * Precedence (highest first): CLI options, environment variables, settings.ini,
- * .rr.yaml http.address, then framework defaults (127.0.0.1:9000).
+ * .rr.yaml http.address, then framework defaults (127.0.0.1:8003).
  */
 final class RoadRunnerListenResolver
 {
     public const DEFAULT_HOST = '127.0.0.1';
 
-    public const DEFAULT_PORT = 9000;
+    public const DEFAULT_PORT = ServerPortResolver::DEFAULT_PORT;
 
     /**
      * @param array<string, mixed>|null $environmentOverride When set, used instead of env() (tests).

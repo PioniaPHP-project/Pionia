@@ -81,15 +81,17 @@ Suite: `tests/PormTests/`, `tests/Feature/GenericServiceCrudTest.php`.
 
 | Page | Topic |
 |------|-------|
-| `database/_index.md` | Overview |
-| `database/introduction.md` | Config |
-| `database/basic.md` | CRUD |
-| `database/filtering.md` | Builder |
-| `database/where-dsl.md` | WHERE operators |
-| `database/relationships.md` | Joins (ON formats, JoinOn, GenericService) |
-| `database/functions.md` | Aggregates / Agg |
-| `database/pagination.md` | PaginationCore |
-| `database/connections.md` | Pooling |
-| `database/transactions.md` | Transactions & raw SQL |
-| `database/performance.md` | chunk, random, explain |
-| `database/api-reference.md` | Method cheat sheet |
+| [Overview](https://pionia.netlify.app/documentation/database/) | Guide index |
+| [Getting started](https://pionia.netlify.app/documentation/database/configuration-getting-started/) | Config |
+| [Making queries](https://pionia.netlify.app/documentation/database/making-queries/) | CRUD |
+| [Filtering](https://pionia.netlify.app/documentation/database/queries-with-filtering/) | Builder |
+| [WHERE DSL](https://pionia.netlify.app/documentation/database/where-dsl/) | WHERE operators |
+| [Relationships](https://pionia.netlify.app/documentation/database/relationships/) | Joins |
+| [Aggregation](https://pionia.netlify.app/documentation/database/using-functions-aggregation/) | Aggregates / Agg |
+| [Pagination](https://pionia.netlify.app/documentation/database/pagination/) | PaginationCore |
+| [Connections](https://pionia.netlify.app/documentation/database/connections/) | Pooling |
+| [Transactions & raw SQL](https://pionia.netlify.app/documentation/database/transactions-and-raw-sql/) | Transactions |
+| [Performance](https://pionia.netlify.app/documentation/database/performance/) | chunk, random, explain |
+| [API reference](https://pionia.netlify.app/documentation/database/api-reference/) | Method cheat sheet |
+
+Framework guides (pionia-docs): [Exceptions](/documentation/exceptions/) · [Background work](/documentation/background-work/) · [Caching](/documentation/caching-in-pionia/) · [Maintenance](/documentation/maintenance/) · [Developer stats](/documentation/developer-stats/).

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Category and skill management — custom actions beyond generic CRUD.
+ * Company records — custom actions beyond generic CRUD.
  *
  * @moonlight-service category
  * @moonlight-version v1
@@ -19,75 +19,46 @@ use Throwable;
 class CategoryService extends Service
 {
     /**
-     * Update a company/category row by id.
-     *
      * @moonlight-action update
-     * @moonlight-summary Updates a company record
+     * @moonlight-summary Update a company by id
      * @moonlight-param int id Row id
      * @moonlight-param string name New name
-     * @moonlight-return object updated row in returnData
      * @moonlight-example {"service":"category","action":"update","id":1,"name":"Acme"}
-     * @throws Exception
-     * @throws Throwable
      */
 	protected function updateAction(Arrayable $data, ?FileBag $files = null): BaseResponse
 	{
         $id = $data->get('id');
         $name = $data->getOrThrow('name', 'Name is required');
-        db("company")->update(['name' => $name], $id);
-		return response(0, 'You have reached update_category_action action', db("company")->get($id));
+        db('company')->update(['name' => $name], $id);
+
+		return response(0, 'Company updated', db('company')->get($id));
 	}
 
     /**
-     * List skills linked to categories.
-     *
      * @moonlight-action list
-     * @moonlight-summary Lists skill rows
-     * @moonlight-return array items in returnData
+     * @moonlight-summary List all companies
      * @moonlight-example {"service":"category","action":"list"}
-     * @throws Exception
      */
     protected function listAction(Arrayable $request): BaseResponse
     {
-        return response(0,
-            'You have reached list_company_action action', db("company")->all());
-    }
-
-    /**
-     * Fetch a single skill by id.
-     *
-     * @moonlight-action bulk
-     * @moonlight-summary Returns one skill row by id
-     * @moonlight-param int id Skill id
-     * @moonlight-example {"service":"category","action":"bulk","id":1}
-     * @throws Throwable
-     * @GetOnly
-     */
-    protected function bulkAction(Arrayable $request): BaseResponse
-    {
-        $id = $request->get('id');
-        $saved = db('company')->getOrThrow($id, 'Skill not found');
-        async(function () use ($id, $saved) {
-            sleep(2);
-            logger()->info('Logged this later on', ['id'=> $id]);
+        defer(function () {
+            logger()->info('category.list: deferred log (after response sent to client)');
         });
 
-        return response(0, 'You have reached bulk_save action', $saved);
+        return response(0, null, db('company')->all());
     }
 
     /**
-     * Create or update a skill row.
-     *
      * @moonlight-action save_or_update
-     * @moonlight-summary Upserts a skill record
-     * @moonlight-param object data Row payload
-     * @moonlight-example {"service":"category","action":"save_or_update","data":{"name":"PHP"}}
-     * @throws Exception
+     * @moonlight-summary Create or update a company row
+     * @moonlight-param object data Row payload (name, optional id)
+     * @moonlight-example {"service":"category","action":"save_or_update","data":{"name":"Acme"}}
      */
     protected function saveOrUpdateAction(Arrayable $request): BaseResponse
     {
         $data = $request->get('data');
         $saved = db('company')->saveOrUpdate($data);
+
         return response(0, null, $saved);
     }
 }

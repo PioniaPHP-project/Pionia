@@ -34,13 +34,36 @@ final class Background
     }
 
     /**
-     * Release the HTTP client on PHP-FPM before running deferred work.
+     * Release the HTTP client before running deferred work.
+     *
+     * FPM/LiteSpeed detach the client immediately. On the built-in server (`php pionia serve`)
+     * we flush output buffers so the response body reaches the client before deferred closures run.
      */
     public static function finishRequestForClient(): void
     {
         if (\function_exists('fastcgi_finish_request')) {
             fastcgi_finish_request();
+
+            return;
         }
+
+        if (\function_exists('litespeed_finish_request')) {
+            litespeed_finish_request();
+
+            return;
+        }
+
+        ignore_user_abort(true);
+
+        if (\function_exists('session_write_close') && session_status() === PHP_SESSION_ACTIVE) {
+            session_write_close();
+        }
+
+        while (ob_get_level() > 0) {
+            ob_end_flush();
+        }
+
+        flush();
     }
 
     public static function flushDeferredWork(): void

@@ -3,9 +3,9 @@
 namespace Pionia\Builtins\Commands;
 
 use Pionia\Console\BaseCommand;
+use Pionia\Http\PublicEntryPoint;
 use Pionia\Utils\InteractsWithTime;
 use Pionia\Console\Input\InputOption;
-use Pionia\Utils\Filesystem;
 
 /**
  * For starting the command line server. This should be good choice only in development
@@ -54,18 +54,18 @@ class StartServer extends BaseCommand
 
     /**
      * The port on which to run the server.
-     * If not passed thru the args, will find it in the settings, otherwise  will fallback to 8000
+     * If not passed thru the args, resolves PORT / SERVER_PORT / settings.ini, else 8003.
      * @return int
      */
     private function port(): int
     {
-        $port = $this->option('port');
+        $cli = $this->option('port');
+        $port = (new \Pionia\Http\Server\ServerPortResolver())->resolve(
+            is_scalar($cli) && $cli !== '' && $cli !== false ? $cli : null,
+        );
+        setEnv('SERVER_PORT', (string) $port);
 
-        if (!$port) {
-            $port = env('SERVER_PORT', 8000);
-        }
-        setEnv('SERVER_PORT', $port);
-        return (int) $port;
+        return $port;
     }
 
     protected function handle(?int $port = null): int
@@ -96,14 +96,14 @@ class StartServer extends BaseCommand
      */
     protected function serverCommand($port, $host): array
     {
-        $fileSystem = new Filesystem();
-        $alias= alias(\DIRECTORIES::PUBLIC_DIR->name);
-        $server = $fileSystem->exists($alias) ? $alias.'/index.php': __DIR__.'example/public/index.php';
+        $publicDir = alias(\DIRECTORIES::PUBLIC_DIR->name);
+        PublicEntryPoint::ensure($publicDir);
+
         return [
             realm()->phpPath(),
             '-S',
             $host.':'.$port,
-            $server,
+            PublicEntryPoint::path($publicDir),
         ];
     }
 
@@ -150,7 +150,7 @@ class StartServer extends BaseCommand
     {
         return [
             ['host', null, InputOption::VALUE_OPTIONAL, 'The host address to serve the application on', env('host', '127.0.0.1')],
-            ['port', null, InputOption::VALUE_OPTIONAL, 'The port to serve the application on', env('port')],
+            ['port', null, InputOption::VALUE_OPTIONAL, 'The port to serve the application on', null],
             ['tries', null, InputOption::VALUE_OPTIONAL, 'The max number of ports to attempt to serve from', 10],
             ['no-reload', null, InputOption::VALUE_NONE, 'Do not reload the development server on .env file changes'],
         ];
