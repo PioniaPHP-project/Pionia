@@ -4,7 +4,7 @@ namespace Pionia\Contracts;
 
 use Pionia\Collections\Arrayable;
 
-interface BaseSwitchContract
+interface SwitchContract
 {
 
     /**

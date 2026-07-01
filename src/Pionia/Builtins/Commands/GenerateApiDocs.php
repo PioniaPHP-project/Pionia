@@ -2,7 +2,6 @@
 
 namespace Pionia\Builtins\Commands;
 
-use Pionia\Console\BaseCommand;
 use Pionia\Documentation\ApiDocsUiExporter;
 use Pionia\Documentation\MarkdownExporter;
 use Pionia\Documentation\MoonlightDocCollector;
@@ -11,7 +10,7 @@ use Pionia\Console\Command;
 use Pionia\Console\Input\InputOption;
 use Pionia\Utils\Filesystem;
 
-class GenerateApiDocs extends BaseCommand
+class GenerateApiDocs extends Command
 {
     protected string $name = 'api:docs';
 

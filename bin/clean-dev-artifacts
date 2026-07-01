@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# Remove generated documentation and runtime caches before release or verify.
+#
+# Usage:
+#   bin/clean-dev-artifacts          # full clean
+#   bin/clean-dev-artifacts --docs   # documentation output only
+#   bin/clean-dev-artifacts --cache  # caches only
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+DOCS_ONLY=0
+CACHE_ONLY=0
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --docs) DOCS_ONLY=1; shift ;;
+    --cache) CACHE_ONLY=1; shift ;;
+    -h|--help)
+      sed -n '2,7p' "$0" | sed 's/^# \?//'
+      exit 0
+      ;;
+    *) echo "Unknown option: $1" >&2; exit 1 ;;
+  esac
+done
+
+clean_docs() {
+  echo "  docs/ (stale phpDocumentor HTML)"
+  bash "$ROOT/bin/clean-stale-docs"
+
+  if [[ -d "$ROOT/build/docs" ]]; then
+    echo "  build/docs/ (phpDocumentor output)"
+    rm -rf "$ROOT/build/docs"
+  fi
+
+  if [[ -d "$ROOT/example/docs/api" ]]; then
+    echo "  example/docs/api/ (Moonlight OpenAPI output)"
+    rm -rf "$ROOT/example/docs/api"
+  fi
+}
+
+clean_dir_keep_gitkeep() {
+  local dir="$1"
+  [[ -d "$dir" ]] || return 0
+  find "$dir" -mindepth 1 ! -name '.gitkeep' -print0 2>/dev/null | xargs -0 rm -rf 2>/dev/null || true
+}
+
+clean_caches() {
+  if [[ -d "$ROOT/example/storage/cache" ]]; then
+    echo "  example/storage/cache/"
+    clean_dir_keep_gitkeep "$ROOT/example/storage/cache"
+  fi
+
+  if [[ -d "$ROOT/example/storage/metrics" ]]; then
+    echo "  example/storage/metrics/"
+    clean_dir_keep_gitkeep "$ROOT/example/storage/metrics"
+  fi
+
+  if [[ -f "$ROOT/.phpunit.result.cache" ]]; then
+    echo "  .phpunit.result.cache"
+    rm -f "$ROOT/.phpunit.result.cache"
+  fi
+
+  echo "  build/release/ + build/release-verify/"
+  rm -rf "$ROOT/build/release" "$ROOT/build/release-verify"
+}
+
+echo "==> Cleaning dev artifacts"
+
+if [[ "$DOCS_ONLY" -eq 1 ]]; then
+  clean_docs
+elif [[ "$CACHE_ONLY" -eq 1 ]]; then
+  clean_caches
+else
+  clean_docs
+  clean_caches
+fi
+
+echo "==> Done."

@@ -3,7 +3,7 @@
 namespace Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Utils\Support;
 
 /**
@@ -19,16 +19,16 @@ trait UpdateMixin
      * @moonlight-summary Update an existing row
      * @throws Exception
      */
-    public function updateAction(): BaseResponse
+    public function updateAction(): ApiResponse
     {
-        return BaseResponse::JsonResponse(0, Support::singularize(Support::capitalize($this->table)).' updated successfully', $this->updateItem());
+        return ApiResponse::jsonResponse(0, Support::singularize(Support::capitalize($this->table)).' updated successfully', $this->updateItem());
     }
 
     /**
      * Alias for the `update` action
      * @throws Exception
      */
-    public function editAction(): BaseResponse
+    public function editAction(): ApiResponse
     {
         return $this->updateAction();
     }

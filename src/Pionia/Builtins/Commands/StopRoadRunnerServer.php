@@ -3,7 +3,6 @@
 namespace Pionia\Builtins\Commands;
 
 use Pionia\Builtins\Commands\Concerns\ManagesRoadRunnerProcess;
-use Pionia\Console\BaseCommand;
 use Pionia\Console\Command;
 use Pionia\Console\Input\InputOption;
 use Pionia\Process\Process;
@@ -12,7 +11,7 @@ use Pionia\Process\ProcessSignaledException;
 /**
  * Stop RoadRunner instances for this app (foreground, detached, or orphaned).
  */
-class StopRoadRunnerServer extends BaseCommand
+class StopRoadRunnerServer extends Command
 {
     use ManagesRoadRunnerProcess;
 

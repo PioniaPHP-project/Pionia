@@ -3,7 +3,7 @@
 namespace Http\Background;
 
 use Pionia\Http\Background\DeferredWorkBuffer;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\TestSuite\PioniaTestCase;
 use React\Promise\PromiseInterface;
 
@@ -56,7 +56,7 @@ class AsyncHelperTest extends PioniaTestCase
         $promise = async('auth', 'list_auth');
         $result = await($promise);
 
-        $this->assertInstanceOf(BaseResponse::class, $result);
+        $this->assertInstanceOf(ApiResponse::class, $result);
         $this->assertPioniaOk($result);
     }
 
@@ -65,7 +65,7 @@ class AsyncHelperTest extends PioniaTestCase
         $promise = async('mail', 'send_welcome', ['email' => 'demo@example.com']);
         $result = await($promise);
 
-        $this->assertInstanceOf(BaseResponse::class, $result);
+        $this->assertInstanceOf(ApiResponse::class, $result);
         $this->assertPioniaOk($result);
     }
 

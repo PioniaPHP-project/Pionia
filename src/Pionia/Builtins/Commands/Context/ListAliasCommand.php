@@ -3,9 +3,9 @@
 namespace Pionia\Builtins\Commands\Context;
 
 use Pionia\Collections\Arrayable;
-use Pionia\Console\BaseCommand;
+use Pionia\Console\Command;
 
-class ListAliasCommand extends BaseCommand
+class ListAliasCommand extends Command
 {
 
     protected array $aliases = ['alias', 'aliases', 'list:aliases'];

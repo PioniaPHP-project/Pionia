@@ -4,7 +4,6 @@ namespace Pionia\Builtins\Commands;
 
 use Pionia\Builtins\Commands\Concerns\FormatsRoadRunnerLogOutput;
 use Pionia\Builtins\Commands\Concerns\ManagesRoadRunnerProcess;
-use Pionia\Console\BaseCommand;
 use Pionia\Http\Worker\RoadRunnerWorker;
 use Pionia\Console\Command;
 use Pionia\Console\Input\InputOption;
@@ -14,7 +13,7 @@ use Pionia\Process\Process;
 /**
  * Serve the application via RoadRunner (persistent PHP workers).
  */
-class StartRoadRunnerServer extends BaseCommand
+class StartRoadRunnerServer extends Command
 {
     use FormatsRoadRunnerLogOutput;
     use ManagesRoadRunnerProcess;

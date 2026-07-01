@@ -29,7 +29,7 @@ class Response
         return new self($content, $status, array_merge(self::JSON_HEADERS, $headers));
     }
 
-    public static function fromEnvelope(BaseResponse $envelope, int $status = 200, array $headers = []): self
+    public static function fromEnvelope(ApiResponse $envelope, int $status = 200, array $headers = []): self
     {
         return self::json($envelope->getPrettyResponse() ?? '', $status, $headers);
     }

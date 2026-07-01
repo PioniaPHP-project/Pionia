@@ -3,9 +3,9 @@
 namespace Pionia\Builtins\Commands\Cache;
 
 use Pionia\Cache\PioniaCache;
-use Pionia\Console\BaseCommand;
+use Pionia\Console\Command;
 
-class PruneCacheCommand extends BaseCommand
+class PruneCacheCommand extends Command
 {
     protected array $aliases = ['cache:p', 'c:p', ];
 

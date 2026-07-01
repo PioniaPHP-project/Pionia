@@ -2,7 +2,7 @@
 
 namespace Pionia\Builtins\Commands;
 
-use Pionia\Console\BaseCommand;
+use Pionia\Console\Command;
 use Pionia\Http\PublicEntryPoint;
 use Pionia\Utils\InteractsWithTime;
 use Pionia\Console\Input\InputOption;
@@ -12,7 +12,7 @@ use Pionia\Console\Input\InputOption;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class StartServer extends BaseCommand
+class StartServer extends Command
 {
     use InteractsWithTime;
 

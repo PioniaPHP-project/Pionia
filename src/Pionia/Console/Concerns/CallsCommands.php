@@ -2,16 +2,16 @@
 
 namespace Pionia\Console\Concerns;
 
-use Pionia\Console\Command;
+use Pionia\Console\AbstractCommand;
 use Pionia\Console\Input\ArrayInput;
 use Pionia\Console\Output\NullOutput;
 use Pionia\Console\Output\OutputInterface;
 
 trait CallsCommands
 {
-    abstract protected function resolveCommand(Command|string $command): Command;
+    abstract protected function resolveCommand(AbstractCommand|string $command): AbstractCommand;
 
-    public function call(Command|string $command, array $arguments = []): int
+    public function call(AbstractCommand|string $command, array $arguments = []): int
     {
         return $this->runCommand($command, $arguments, $this->output);
     }
@@ -21,7 +21,7 @@ trait CallsCommands
         return $this->runCommand($command, $arguments, new NullOutput());
     }
 
-    public function callSilently(Command|string $command, array $arguments = []): int
+    public function callSilently(AbstractCommand|string $command, array $arguments = []): int
     {
         return $this->callSilent($command, $arguments);
     }

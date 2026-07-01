@@ -1,0 +1,21 @@
+<?php
+
+namespace Application\Providers;
+
+use Pionia\Base\Provider\Provider;
+
+/**
+ * Application-level hooks: exception maps, logging channels, container bindings.
+ *
+ * Register in bootstrap/application.php:
+ *   pionia()->addAppProvider(AppProvider::class);
+ *
+ * Or in environment/settings.ini under [app_providers].
+ */
+class AppProvider extends Provider
+{
+    public function onBooted(): void
+    {
+        // realm()->set('feature.flags', env('FEATURE_FLAGS', []));
+    }
+}

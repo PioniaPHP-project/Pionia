@@ -2,7 +2,6 @@
 
 namespace Pionia\Builtins\Commands;
 
-use Pionia\Console\BaseCommand;
 use Pionia\Console\Command;
 use Pionia\Console\Input\InputArgument;
 use Pionia\Console\Input\InputOption;
@@ -10,7 +9,7 @@ use Pionia\Process\Process;
 use Pionia\Scaffolding\ApplicationScaffolder;
 use Pionia\Utils\Support;
 
-class NewApplicationCommand extends BaseCommand
+class NewApplicationCommand extends Command
 {
     protected string $name = 'new';
 
@@ -18,7 +17,9 @@ class NewApplicationCommand extends BaseCommand
 
     protected string $description = 'Scaffold a new Pionia application';
 
-    protected string $help = 'Creates a new project directory with bootstrap, environment, services, and composer.json.';
+    protected string $help = 'Creates a new project directory with bootstrap, environment, services, and composer.json. '
+        . 'Requires an existing Pionia install (php pionia from this repo or vendor). '
+        . 'For a fresh machine with only Composer, use: composer create-project pionia/pionia-app my-api';
 
     protected function getArguments(): array
     {
@@ -87,8 +88,9 @@ class NewApplicationCommand extends BaseCommand
         $frontend = $this->option('with-frontend');
         if (is_string($frontend) && $frontend !== '' && $this->option('install')) {
             $this->line('Scaffolding frontend …');
+            $pioniaBin = $target . DIRECTORY_SEPARATOR . 'pionia';
             $scaffold = Process::fromShellCommandline(
-                'php pionia frontend:scaffold --framework=' . escapeshellarg($frontend) . ' --yes',
+                'php ' . escapeshellarg($pioniaBin) . ' frontend:scaffold --framework=' . escapeshellarg($frontend) . ' --yes',
                 $target,
             );
             $scaffold->setTimeout(900);
@@ -106,7 +108,9 @@ class NewApplicationCommand extends BaseCommand
         if (is_string($frontend) && $frontend !== '' && !$this->option('install')) {
             $this->line("  php pionia frontend:scaffold --framework={$frontend} --yes");
         }
-        $this->line('  php pionia serve');
+        $this->line('  php pionia serve   # or: composer run serve');
+        $this->line('');
+        $this->line('Tip: on a machine without Pionia yet, prefer: composer create-project pionia/pionia-app ' . $name);
 
         return Command::SUCCESS;
     }

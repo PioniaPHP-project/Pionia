@@ -6,7 +6,7 @@ use Exception;
 use Pionia\Base\Events\PioniaConsoleStarted;
 use Pionia\Cache\Cacheable;
 use Pionia\Console\Application;
-use Pionia\Console\BaseCommand;
+use Pionia\Console\Command;
 use Pionia\Contracts\ApplicationContract;
 use Pionia\Process\PhpExecutable;
 use Pionia\Realm\AppRealm;
@@ -54,7 +54,7 @@ class Pionia extends Application implements ApplicationContract
         $commands = $this->realm->getOrDefault($this->realm::COMMANDS_TAG, arr([]));
 
         if ($commands->isFilled()) {
-            $commands->each(function (BaseCommand|string $command, $key) {
+            $commands->each(function (Command|string $command, $key) {
                 if (is_string($command)) {
                     $command = new $command($this, $key);
                 }

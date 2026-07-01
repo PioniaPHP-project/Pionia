@@ -2,7 +2,7 @@
 
 namespace Pionia\Http\Moonlight;
 
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 
 /**
  * Parses Moonlight JSON frames (WebSocket RPC, Centrifugo) into service/action dispatch.
@@ -37,7 +37,7 @@ final class MoonlightFrameHandler
     /**
      * @return array<string, mixed>
      */
-    private static function envelopeArray(BaseResponse $response): array
+    private static function envelopeArray(ApiResponse $response): array
     {
         $json = $response->getPrettyResponse();
 

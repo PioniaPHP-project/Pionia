@@ -5,12 +5,11 @@ namespace Pionia\Builtins\Commands\Generators;
 use NAMESPACES;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
-use Pionia\Auth\AuthenticationBackend;
+use Pionia\Auth\Authentication;
 use Pionia\Auth\ContextUserObject;
-use Pionia\Console\BaseCommand;
+use Pionia\Console\Command;
 use Pionia\Http\Request\Request;
 use Pionia\Utils\Support;
-use Pionia\Console\Command;
 use Pionia\Console\Input\InputArgument;
 use Pionia\Utils\Filesystem;
 
@@ -21,7 +20,7 @@ use Pionia\Utils\Filesystem;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class GenerateAuthenticationBackend extends BaseCommand
+class GenerateAuthenticationBackend extends Command
 {
     protected string $title = 'Adds a new authentication backend';
     protected  string $help = 'Generates an authentication backend for pionia app.';
@@ -43,7 +42,7 @@ class GenerateAuthenticationBackend extends BaseCommand
     {
         $service_name = $this->argument("name");
 
-        $this->info("Generating $service_name authentication backend in the authentications directory...");
+        $this->info("Generating $service_name authentication in the authentications directory...");
 
         $this->generate($service_name);
 
@@ -53,8 +52,8 @@ class GenerateAuthenticationBackend extends BaseCommand
     public function generate(string $className): void
     {
         $name = $className;
-        if (!str_contains($className,'AuthBackend')) {
-            $name = Support::classify($className . 'AuthBackend');
+        if (!str_contains($className, 'Authentication')) {
+            $name = Support::classify($className . 'Authentication');
         }
 
         $file = new PhpFile;
@@ -69,13 +68,13 @@ class GenerateAuthenticationBackend extends BaseCommand
 
         $namespace->addUse('Pionia\Auth\ContextUserObject');
 
-        $namespace->addUse('Pionia\Auth\AuthenticationBackend');
+        $namespace->addUse('Pionia\Auth\Authentication');
 
         $namespace->addUse('Pionia\Http\Request\Request');
 
         $klass = $namespace->addClass($name);
 
-        $klass->setExtends(AuthenticationBackend::class);
+        $klass->setExtends(Authentication::class);
 
         $this->addActions($klass);
 
@@ -87,7 +86,7 @@ class GenerateAuthenticationBackend extends BaseCommand
             $fs->mkdir($directory);
         }
         if ($fs->exists($directory . '/' . $name . '.php')) {
-            $this->error("Authentication Backend $name already exists at $directory.");
+            $this->error("Authentication $name already exists at $directory.");
             return;
         }
         $fs->dumpFile($directory.'/'.$name.'.php', $file);
@@ -95,7 +94,7 @@ class GenerateAuthenticationBackend extends BaseCommand
         // update the generated.ini file
         addIniSection('authentications', [$name => $ns.'\\'.$name]);
 
-        $this->info("Authentication Backend $name created at $directory.");
+        $this->info("Authentication $name created at $directory.");
     }
 
     private function addActions(ClassType $class): void

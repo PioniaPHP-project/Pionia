@@ -10,7 +10,7 @@ use Pionia\TestSuite\Concerns\InteractsWithTestEnvironment;
 use Pionia\TestSuite\PioniaTestCase;
 use Pionia\TestSuite\Stubs\ThrowingSwitch;
 
-class BaseApiServiceSwitchTest extends PioniaTestCase
+class SwitchTest extends PioniaTestCase
 {
     use AssertsPioniaResponses;
     use InteractsWithTestEnvironment;

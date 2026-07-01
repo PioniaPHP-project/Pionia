@@ -5,7 +5,7 @@ namespace Auth;
 use Pionia\Auth\AuthenticationChain;
 use Pionia\Collections\Arrayable;
 use Pionia\Realm\AppRealm;
-use Pionia\TestSuite\Mocks\AuthenticationBackendMock;
+use Pionia\TestSuite\Mocks\AuthenticationMock;
 use Pionia\TestSuite\PioniaTestCase;
 
 class AuthenticationChainContextTest extends PioniaTestCase
@@ -15,10 +15,10 @@ class AuthenticationChainContextTest extends PioniaTestCase
         realm()->set(AppRealm::AUTHENTICATIONS_TAG, new Arrayable([]));
         $chain = new AuthenticationChain();
 
-        $chain->addAuthenticationBackend(AuthenticationBackendMock::class);
+        $chain->addAuthentication(AuthenticationMock::class);
 
         $stored = app()->getOrDefault(AppRealm::AUTHENTICATIONS_TAG, new Arrayable([]));
         $this->assertInstanceOf(Arrayable::class, $stored);
-        $this->assertContains(AuthenticationBackendMock::class, array_values($stored->all()));
+        $this->assertContains(AuthenticationMock::class, array_values($stored->all()));
     }
 }

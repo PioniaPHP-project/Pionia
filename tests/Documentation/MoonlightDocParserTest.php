@@ -3,7 +3,7 @@
 namespace Documentation;
 
 use Pionia\Documentation\MoonlightDocParser;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Http\Services\Service;
 use Pionia\TestSuite\PioniaTestCase;
 use Pionia\Collections\Arrayable;
@@ -77,13 +77,13 @@ class SampleMoonlightService extends Service
      * @moonlight-param string name Person to greet
      * @moonlight-example {"service":"demo","action":"greet","name":"Ada"}
      */
-    protected function greetAction(Arrayable $data): BaseResponse
+    protected function greetAction(Arrayable $data): ApiResponse
     {
         return response(0, 'hi');
     }
 
     /** Ping health check. */
-    protected function pingAction(Arrayable $data): BaseResponse
+    protected function pingAction(Arrayable $data): ApiResponse
     {
         return response(0, 'pong');
     }
@@ -95,7 +95,7 @@ class SampleMoonlightService extends Service
 class SampleAttributedMoonlightService extends Service
 {
     #[\Pionia\Documentation\Attributes\MoonlightAction(name: 'status', summary: 'Health check', auth: 'none')]
-    protected function statusAction(Arrayable $data): BaseResponse
+    protected function statusAction(Arrayable $data): ApiResponse
     {
         return response(0, 'ok');
     }

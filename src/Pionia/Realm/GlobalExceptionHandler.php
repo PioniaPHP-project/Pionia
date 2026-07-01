@@ -8,12 +8,12 @@ use Pionia\Exceptions\UserUnauthorizedException;
 use Pionia\Exceptions\ResourceNotFoundException;
 use Pionia\Http\Routing\Exception\RouteNotFoundException;
 use Pionia\Http\Request\Request;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Throwable;
 
 class GlobalExceptionHandler implements ExceptionHandlerContract
 {
-    public function __invoke(Throwable $e, Request $request): BaseResponse
+    public function __invoke(Throwable $e, Request $request): ApiResponse
     {
         $this->report($e);
 
@@ -29,7 +29,7 @@ class GlobalExceptionHandler implements ExceptionHandlerContract
         ]);
     }
 
-    public function render(Throwable $e, Request $request): BaseResponse
+    public function render(Throwable $e, Request $request): ApiResponse
     {
         $statusCode = $this->resolveStatusCode($e);
         $message = realm()->isDebug() ? $e->getMessage() : 'An unexpected error occurred.';

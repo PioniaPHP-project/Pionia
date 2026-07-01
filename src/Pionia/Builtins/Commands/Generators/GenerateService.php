@@ -7,8 +7,7 @@ use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
 use Pionia\Collections\Arrayable;
-use Pionia\Console\BaseCommand;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Http\Services\Service;
 use Pionia\Utils\Support;
 use Pionia\Console\Command;
@@ -23,7 +22,7 @@ use Pionia\Http\Bag\FileBag;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class GenerateService extends BaseCommand
+class GenerateService extends Command
 {
     protected string $title = 'Generate A Pionia Service';
     protected string $description = 'Bootstraps a new service to in the services directory';
@@ -108,7 +107,7 @@ class GenerateService extends BaseCommand
 
         if ($serviceType === 'Basic'){
             $namespace->addUse('Pionia\Http\Services\Service');
-            $namespace->addUse('Pionia\Http\Response\BaseResponse');
+            $namespace->addUse('Pionia\Http\Response\ApiResponse');
             $namespace->addUse('Pionia\Http\Bag\FileBag');
             $namespace->addUse('Pionia\Collections\Arrayable');
         } else {
@@ -191,7 +190,7 @@ class GenerateService extends BaseCommand
 
         $method = $class->addMethod($actionName)
             ->setProtected()
-            ->setReturnType(BaseResponse::class)
+            ->setReturnType(ApiResponse::class)
             ->addComment(ucfirst(Support::toSnakeCase($action)) . ' action.')
             ->addComment('')
             ->addComment('@moonlight-action ' . Support::toSnakeCase($action))

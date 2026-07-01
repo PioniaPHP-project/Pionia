@@ -3,7 +3,7 @@
 namespace Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Utils\Support;
 
 /**
@@ -18,8 +18,8 @@ trait DeleteMixin
      * @moonlight-summary Delete a row by primary key
      * @throws Exception
      */
-    public function deleteAction(): BaseResponse
+    public function deleteAction(): ApiResponse
     {
-        return BaseResponse::JsonResponse(0, Support::singularize(Support::capitalize($this->table)) . ' deleted successfully', $this->deleteItem());
+        return ApiResponse::jsonResponse(0, Support::singularize(Support::capitalize($this->table)) . ' deleted successfully', $this->deleteItem());
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Pionia\Builtins\Commands;
 
-use Pionia\Console\BaseCommand;
 use Pionia\Http\Monitoring\RequestMetrics;
 use Pionia\Http\Pages\DeveloperStatsCollector;
 use Pionia\Http\Request\Request;
@@ -10,7 +9,7 @@ use Pionia\Console\Command;
 use Pionia\Console\Input\InputOption;
 use Pionia\Console\Helper\Table;
 
-class ViewStats extends BaseCommand
+class ViewStats extends Command
 {
     protected string $name = 'stats:view';
 

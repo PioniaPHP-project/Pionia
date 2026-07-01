@@ -6,7 +6,7 @@ use Application\Switches\MainSwitch;
 use Pionia\Http\Request\Request;
 use Pionia\TestSuite\PioniaTestCase;
 
-class BaseApiServiceSwitchLoggingTest extends PioniaTestCase
+class SwitchLoggingTest extends PioniaTestCase
 {
     public function testProcessorDoesNotRequireResponseLoggingWhenDisabled(): void
     {

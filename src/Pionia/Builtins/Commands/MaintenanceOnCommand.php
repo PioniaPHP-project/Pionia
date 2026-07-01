@@ -3,11 +3,10 @@
 namespace Pionia\Builtins\Commands;
 
 use Pionia\Builtins\Commands\Concerns\ManagesMaintenanceSettings;
-use Pionia\Console\BaseCommand;
 use Pionia\Console\Command;
 use Pionia\Console\Input\InputOption;
 
-class MaintenanceOnCommand extends BaseCommand
+class MaintenanceOnCommand extends Command
 {
     use ManagesMaintenanceSettings;
 

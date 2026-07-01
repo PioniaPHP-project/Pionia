@@ -27,25 +27,25 @@ class GlobalExceptionHandlerTest extends PioniaTestCase
     public function testMapsResourceNotFoundTo404(): void
     {
         $response = ($this->handler)(new ResourceNotFoundException('missing'), $this->request);
-        $this->assertSame(404, $this->decodeBaseResponse($response)['returnCode']);
+        $this->assertSame(404, $this->decodeApiResponse($response)['returnCode']);
     }
 
     public function testMapsUnauthenticatedTo401(): void
     {
         $response = ($this->handler)(new UserUnauthenticatedException('login required'), $this->request);
-        $this->assertSame(401, $this->decodeBaseResponse($response)['returnCode']);
+        $this->assertSame(401, $this->decodeApiResponse($response)['returnCode']);
     }
 
     public function testMapsUnauthorizedTo403(): void
     {
         $response = ($this->handler)(new UserUnauthorizedException('forbidden'), $this->request);
-        $this->assertSame(403, $this->decodeBaseResponse($response)['returnCode']);
+        $this->assertSame(403, $this->decodeApiResponse($response)['returnCode']);
     }
 
     public function testMapsGenericExceptionTo500(): void
     {
         $response = ($this->handler)(new Exception('boom'), $this->request);
-        $this->assertSame(500, $this->decodeBaseResponse($response)['returnCode']);
+        $this->assertSame(500, $this->decodeApiResponse($response)['returnCode']);
     }
 
     public function testHidesMessageWhenNotInDebugMode(): void
@@ -55,7 +55,7 @@ class GlobalExceptionHandlerTest extends PioniaTestCase
         try {
             $this->setDebugEnv(false);
             $response = ($this->handler)(new Exception('secret details'), Request::create('/'));
-            $payload = $this->decodeBaseResponse($response);
+            $payload = $this->decodeApiResponse($response);
             $this->assertSame('An unexpected error occurred.', $payload['returnMessage']);
         } finally {
             $this->restoreDebugEnv($previous);
@@ -69,7 +69,7 @@ class GlobalExceptionHandlerTest extends PioniaTestCase
         try {
             $this->setDebugEnv(true);
             $response = ($this->handler)(new Exception('secret details'), Request::create('/'));
-            $payload = $this->decodeBaseResponse($response);
+            $payload = $this->decodeApiResponse($response);
             $this->assertSame('secret details', $payload['returnMessage']);
         } finally {
             $this->restoreDebugEnv($previous);

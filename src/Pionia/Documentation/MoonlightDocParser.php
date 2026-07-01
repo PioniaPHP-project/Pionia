@@ -4,7 +4,7 @@ namespace Pionia\Documentation;
 
 use Pionia\Documentation\Attributes\MoonlightAction;
 use Pionia\Documentation\Contracts\ActionDoc;
-use Pionia\Http\Services\BaseService;
+use Pionia\Http\Services\AbstractService;
 use Pionia\Utils\Support;
 use ReflectionClass;
 use ReflectionMethod;
@@ -181,7 +181,7 @@ class MoonlightDocParser
         $methods = [];
 
         foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC | ReflectionMethod::IS_PROTECTED) as $method) {
-            if ($method->getDeclaringClass()->getName() === BaseService::class) {
+            if ($method->getDeclaringClass()->getName() === AbstractService::class) {
                 continue;
             }
             if (!str_ends_with($method->getName(), 'Action')) {

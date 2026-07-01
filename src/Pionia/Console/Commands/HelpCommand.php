@@ -2,12 +2,12 @@
 
 namespace Pionia\Console\Commands;
 
-use Pionia\Console\Command;
+use Pionia\Console\AbstractCommand;
 use Pionia\Console\Input\InputArgument;
 use Pionia\Console\Input\InputInterface;
 use Pionia\Console\Output\OutputInterface;
 
-final class HelpCommand extends Command
+final class HelpCommand extends AbstractCommand
 {
     public function __construct()
     {

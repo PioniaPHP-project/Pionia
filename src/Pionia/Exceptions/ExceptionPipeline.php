@@ -6,7 +6,7 @@ use Closure;
 use Pionia\Contracts\ExceptionHandlerContract;
 use Pionia\Contracts\RenderableException;
 use Pionia\Http\Request\Request;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Realm\GlobalExceptionHandler;
 use Pionia\Realm\RealmContract;
 use Throwable;
@@ -19,7 +19,7 @@ class ExceptionPipeline
     /** @var list<Closure(Throwable): void> */
     private array $reportables = [];
 
-    /** @var array<class-string<Throwable>, Closure(Throwable): BaseResponse> */
+    /** @var array<class-string<Throwable>, Closure(Throwable): ApiResponse> */
     private array $mappers = [];
 
     private string $handlerClass = GlobalExceptionHandler::class;
@@ -73,7 +73,7 @@ class ExceptionPipeline
         return $this;
     }
 
-    public function handle(Throwable $e, ?Request $request = null): BaseResponse
+    public function handle(Throwable $e, ?Request $request = null): ApiResponse
     {
         if (!$this->shouldntReport($e)) {
             $this->report($e);
@@ -91,7 +91,7 @@ class ExceptionPipeline
         }
     }
 
-    public function render(Throwable $e, Request $request): BaseResponse
+    public function render(Throwable $e, Request $request): ApiResponse
     {
         foreach ($this->mappers as $exceptionClass => $mapper) {
             if ($e instanceof $exceptionClass) {

@@ -33,13 +33,13 @@ class AuthenticationChain implements AuthenticationChainContract
      */
     public function isAuthenticationContract(string $authenticationContract): bool
     {
-        return Support::extends($authenticationContract, AuthenticationBackend::class) || Support::implements($authenticationContract, AuthenticationContract::class);
+        return Support::extends($authenticationContract, Authentication::class) || Support::implements($authenticationContract, AuthenticationContract::class);
     }
 
-    public function addAuthenticationBackend(string $authenticationContract): static
+    public function addAuthentication(string $authenticationContract): static
     {
         if (!$this->isAuthenticationContract($authenticationContract)) {
-            throw new \InvalidArgumentException("The $authenticationContract authentication must extend " . AuthenticationBackend::class);
+            throw new \InvalidArgumentException("The $authenticationContract authentication must extend " . Authentication::class);
         }
         $this->authentications->add($authenticationContract);
         return $this->updateAuthenticationsInContext();
@@ -154,7 +154,7 @@ class AuthenticationChain implements AuthenticationChainContract
         event(new PostAuthRunEvent($this), PostAuthRunEvent::name());
     }
 
-    private function canRunOnCurrentService(AuthenticationBackend $auth, ?string $currentService): bool
+    private function canRunOnCurrentService(Authentication $auth, ?string $currentService): bool
     {
         if ($auth->limitServices) {
             $limits = arr($auth->limitServices);

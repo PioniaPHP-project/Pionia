@@ -25,7 +25,7 @@ HOST=127.0.0.1
 PORT=8003
 
 [jobs]
-# Set ENABLED=true when using php pionia runserver with RR jobs pool
+; Set ENABLED=true when using php pionia runserver with RR jobs pool
 ENABLED=false
 PIPELINE=moonlight
 RPC=tcp://127.0.0.1:6001
@@ -33,3 +33,10 @@ RPC=tcp://127.0.0.1:6001
 [realtime]
 ENABLED=false
 CHANNEL_PREFIX=moonlight
+
+[frontend]
+SPA_FALLBACK=false
+
+; Register service providers (Composer packages or app hooks)
+; [app_providers]
+; app=Application\Providers\AppProvider

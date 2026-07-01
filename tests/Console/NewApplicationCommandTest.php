@@ -36,7 +36,10 @@ class NewApplicationCommandTest extends PioniaTestCase
         $this->assertFileExists($root . '/public/index.php');
         $this->assertFileExists($root . '/switches/MainSwitch.php');
         $this->assertFileExists($root . '/services/WelcomeService.php');
-        $this->assertStringContainsString('DemoApp', file_get_contents($root . '/services/WelcomeService.php'));
+        $welcome = file_get_contents($root . '/services/WelcomeService.php');
+        $this->assertStringContainsString('DemoApp', $welcome);
+        $this->assertStringContainsString('appName()', $welcome);
+        $this->assertStringContainsString('@moonlight-service welcome', $welcome);
     }
 
     public function testApplicationScaffolderThrowsWhenTargetExists(): void

@@ -11,7 +11,7 @@ use Pionia\Exceptions\UserUnauthorizedException;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
 use Pionia\Utils\Microable;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Utils\Support;
 
 /**
@@ -29,7 +29,7 @@ use Pionia\Utils\Support;
  * @internal
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  **/
-class BaseService implements ServiceContract
+class AbstractService implements ServiceContract
 {
     use AuthTrait, RequestActionTrait, Microable;
 
@@ -96,7 +96,7 @@ class BaseService implements ServiceContract
      * @param string $service
      * @internal
      */
-    public function processAction(string $action, string $service): BaseResponse
+    public function processAction(string $action, string $service): ApiResponse
     {
         $data = $this->request->getData();
 
@@ -140,10 +140,10 @@ class BaseService implements ServiceContract
         // load it as a macro or a normal action method
         $response = $this->$action($data, $files, $this->request);
 
-        if (is_a($response, BaseResponse::class)){
+        if (is_a($response, ApiResponse::class)){
             return $response;
         }
 
-        throw new Exception("$action did not return a correct BaseResponse object. Did your return `response()`?");
+        throw new Exception("$action did not return a correct ApiResponse object. Did your return `response()`?");
     }
 }

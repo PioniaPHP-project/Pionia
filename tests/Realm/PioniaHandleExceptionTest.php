@@ -17,7 +17,7 @@ class PioniaHandleExceptionTest extends PioniaTestCase
 
         $response = pionia_handle_exception(new Exception('handled'), Request::create('/api/v1/'));
 
-        $payload = $this->decodeBaseResponse($response);
+        $payload = $this->decodeApiResponse($response);
 
         $this->assertSame(500, $payload['returnCode']);
         $this->assertNotEmpty($payload['returnMessage']);
@@ -30,6 +30,6 @@ class PioniaHandleExceptionTest extends PioniaTestCase
 
         $response = pionia_handle_exception(new Exception('ctx'), $request);
 
-        $this->assertInstanceOf(\Pionia\Http\Response\BaseResponse::class, $response);
+        $this->assertInstanceOf(\Pionia\Http\Response\ApiResponse::class, $response);
     }
 }

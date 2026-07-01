@@ -98,7 +98,7 @@ PHP is **single-threaded**. Neither helper spawns a new OS thread. They schedule
 ### `defer()` — recommended default
 
 ```php
-protected function listAction(Arrayable $request): BaseResponse
+protected function listAction(Arrayable $request): ApiResponse
 {
     defer(function () use ($request) {
         logger()->info('Runs after client got the JSON response', ['id' => $request->get('id')]);
@@ -166,6 +166,16 @@ More detail: [pionia-docs — Background work](https://pionia.netlify.app/docume
 | `get(string $path)` / `post(string $path)` | Route definition helpers |
 | `allRoutes()` | Registered route table |
 
+### App class naming
+
+| Layer | Extend | Generator |
+|-------|--------|-----------|
+| Switch | `Pionia\Http\Switches\ApiSwitch` | `make:switch` |
+| Service | `Pionia\Http\Services\Service` | `make:service` |
+| Authentication | `Pionia\Auth\Authentication` | `make:auth` |
+| Middleware | `Pionia\Middlewares\Middleware` | `make:middleware` |
+| Command | `Pionia\Console\Command` | `make:command` |
+
 ---
 
 ## Templates & assets
@@ -185,8 +195,8 @@ More detail: [pionia-docs — Background work](https://pionia.netlify.app/docume
 | Helper | Purpose |
 |--------|---------|
 | `validate(string $field, Arrayable\|Request\|Service $data)` | Field validator builder |
-| `response(...)` | Moonlight JSON envelope |
-| `cachedResponse(Service $instance, BaseResponse $response, mixed $ttl = 60)` | Cache action response |
+| `response(...)` | Moonlight JSON envelope (`ApiResponse`) |
+| `cachedResponse(Service $instance, ApiResponse $response, mixed $ttl = 60)` | Cache action response |
 | `recached(...)` | Shorthand for `cachedResponse(response(...), ...)` |
 | `yesNo(mixed $cond, ?string $yes, ?string $no)` | Human-readable boolean label |
 | `asBool(mixed $value)` | Coerce to bool |

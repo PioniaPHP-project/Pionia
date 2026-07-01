@@ -9,7 +9,7 @@ interface AuthenticationChainContract
     /**
      * Adds an authentication backend to the chain
      */
-    public function addAuthenticationBackend(string $authenticationContract);
+    public function addAuthentication(string $authenticationContract);
 
     /**
      * Get the authentications in chain

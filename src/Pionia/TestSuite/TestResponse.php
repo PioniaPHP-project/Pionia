@@ -2,7 +2,7 @@
 
 namespace Pionia\TestSuite;
 
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Http\Response\BinaryFileResponse;
 use Pionia\Http\Response\Response;
 
@@ -46,7 +46,7 @@ class TestResponse
         return $this->response->headers->get($name);
     }
 
-    public function toBaseResponse(): ?BaseResponse
+    public function toApiResponse(): ?ApiResponse
     {
         if ($this->response instanceof Response) {
             return $this->response;

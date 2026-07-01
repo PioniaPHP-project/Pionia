@@ -3,13 +3,12 @@
 namespace Pionia\Builtins\Commands\Frontend;
 
 use Pionia\Builtins\Commands\Concerns\ManagesFrontendSettings;
-use Pionia\Console\BaseCommand;
 use Pionia\Console\Command;
 use Pionia\Console\Input\InputOption;
 use Pionia\Process\Process;
 use Pionia\Utils\Filesystem;
 
-class ScaffoldFrontendCommand extends BaseCommand
+class ScaffoldFrontendCommand extends Command
 {
     use ManagesFrontendSettings;
 

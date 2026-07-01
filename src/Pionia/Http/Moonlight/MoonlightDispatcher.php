@@ -4,7 +4,7 @@ namespace Pionia\Http\Moonlight;
 
 use Pionia\Exceptions\ResourceNotFoundException;
 use Pionia\Http\Request\Request;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Http\Routing\SupportedHttpMethods;
 use Pionia\Utils\CachedEndpoints;
 use Throwable;
@@ -21,7 +21,7 @@ final class MoonlightDispatcher
      *
      * @throws Throwable
      */
-    public static function dispatch(Request $request, callable $serviceRegistry): BaseResponse
+    public static function dispatch(Request $request, callable $serviceRegistry): ApiResponse
     {
         try {
             $cached = self::cacheResponse($request);
@@ -82,7 +82,7 @@ final class MoonlightDispatcher
     /**
      * @param array<string, mixed> $payload
      */
-    public static function dispatchPayload(array $payload, callable $serviceRegistry, string $method = 'POST'): BaseResponse
+    public static function dispatchPayload(array $payload, callable $serviceRegistry, string $method = 'POST'): ApiResponse
     {
         return self::dispatch(self::requestFromPayload($payload, $method), $serviceRegistry);
     }

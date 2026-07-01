@@ -3,41 +3,58 @@
 namespace Pionia\Contracts;
 
 use Pionia\Auth\AuthenticationChain;
+use Pionia\Cache\CacheManager;
+use Pionia\Exceptions\ExceptionPipeline;
 use Pionia\Http\Routing\PioniaRouter;
+use Pionia\Logging\LogManager;
 use Pionia\Middlewares\MiddlewareChain;
 
 interface ProviderContract
 {
     /**
-     * Chain your service middlewares to the application's middleware chain.
+     * Register middleware on the application stack.
      */
     public function middlewares(MiddlewareChain $middlewareChain): MiddlewareChain;
 
     /**
-     * Chain your service authentications to the application's authentication chain.
+     * Register authentication backends on the application stack.
      */
     public function authentications(AuthenticationChain $authenticationChain): AuthenticationChain;
 
     /**
-     * Add your service routes to the application's router system.
-     * @param PioniaRouter $router
-     * @return PioniaRouter
+     * Register API switches on the shared router.
      */
     public function routes(PioniaRouter $router): PioniaRouter;
 
     /**
-     * Register your service commands to the application's command system.
+     * Register CLI commands (alias => class).
+     *
+     * @return array<string, class-string>
      */
     public function commands(): array;
 
     /**
-     * Add logic to the application's booted hook.
+     * Configure logging channels after the LogManager is ready.
+     */
+    public function configureLogging(LogManager $log): void;
+
+    /**
+     * Register cache stores or replace the default adapter.
+     */
+    public function configureCaching(CacheManager $cache): void;
+
+    /**
+     * Customize the exception pipeline (handlers, maps, reportables).
+     */
+    public function configureExceptions(ExceptionPipeline $exceptions): void;
+
+    /**
+     * Run after middleware, auth, commands, and routes from all providers are registered.
      */
     public function onBooted(): void;
 
     /**
-     * Add logic to the application's terminating hook.
+     * Run during application shutdown (CLI exit, not worker per-request).
      */
     public function onTerminate(): void;
-
 }

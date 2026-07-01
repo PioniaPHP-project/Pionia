@@ -2,4 +2,7 @@
 
 namespace Pionia\Base\Provider;
 
-class AppProvider extends BaseProvider {}
+/**
+ * @deprecated Extend {@see Provider} instead. Kept for backward compatibility with older packages.
+ */
+class AppProvider extends Provider {}

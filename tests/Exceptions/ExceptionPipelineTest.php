@@ -19,7 +19,7 @@ class ExceptionPipelineTest extends PioniaTestCase
         $pipeline->map(ResourceNotFoundException::class, fn () => response(404, 'mapped'));
 
         $response = $pipeline->handle(new ResourceNotFoundException('missing'));
-        $payload = $this->decodeBaseResponse($response);
+        $payload = $this->decodeApiResponse($response);
 
         $this->assertSame(404, $payload['returnCode']);
         $this->assertSame('mapped', $payload['returnMessage']);
@@ -44,7 +44,7 @@ class ExceptionPipelineTest extends PioniaTestCase
     public function testRenderableExceptionRendersDirectly(): void
     {
         $response = (new ExceptionPipeline(realm()))->handle(new ResourceNotFoundException('gone'));
-        $payload = $this->decodeBaseResponse($response);
+        $payload = $this->decodeApiResponse($response);
 
         $this->assertSame(404, $payload['returnCode']);
         $this->assertSame('gone', $payload['returnMessage']);

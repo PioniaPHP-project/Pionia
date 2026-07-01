@@ -3,7 +3,7 @@
 namespace Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Utils\Support;
 
 /**
@@ -19,16 +19,16 @@ trait CreateMixin
      * @moonlight-summary Create a new row
      * @throws Exception
      */
-    public function createAction(): BaseResponse
+    public function createAction(): ApiResponse
     {
-        return BaseResponse::JsonResponse(0, Support::singularize(Support::capitalize($this->table)).' created successfully', $this->createItem());
+        return ApiResponse::jsonResponse(0, Support::singularize(Support::capitalize($this->table)).' created successfully', $this->createItem());
     }
 
     /**
      * Alias for the `create` action
      * @throws Exception
      */
-    public function saveAction(): BaseResponse
+    public function saveAction(): ApiResponse
     {
         return $this->createAction();
     }

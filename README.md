@@ -62,6 +62,19 @@ composer document:api     # Moonlight OpenAPI from example app
 composer document:framework
 ```
 
+## Releasing (maintainers)
+
+Production zips exclude `example/`, `tests/`, `docs/`, dev `bin/` scripts, and CI config. User-facing documentation is published separately at [pionia.netlify.app](https://pionia.netlify.app) (pionia-docs repo).
+
+```bash
+composer clean:dev                   # docs output + example caches
+composer release:verify              # assert archive is lean
+bin/release v3.0.0 --dry-run         # tests + verify, no tag
+bin/release v3.0.0                   # tag, push, GitHub release zip
+```
+
+See [AGENTS.md — Packagist releases](/AGENTS.md#packagist-releases).
+
 ## Contributing
 
 [CONTRIBUTING.md](/CONTRIBUTING.md) — tests required for feature changes.

@@ -1,0 +1,46 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: pdo_sqlite
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Clean generated docs and caches
+        run: composer clean:dev
+
+      - name: Run tests
+        run: composer test:ci
+
+      - name: Verify production archive
+        run: bash bin/verify-release-archive
+
+      - name: Build release zip
+        run: |
+          mkdir -p build/release
+          composer archive --format=zip --file=build/release/pionia-core
+          cp build/release/pionia-core.zip "build/release/pionia-core-${GITHUB_REF_NAME}.zip"
+
+      - name: Upload GitHub release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/release/pionia-core-${{ github.ref_name }}.zip
+          generate_release_notes: true

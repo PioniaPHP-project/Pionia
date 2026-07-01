@@ -5,7 +5,6 @@ namespace Pionia\Builtins\Commands\Generators;
 use NAMESPACES;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
-use Pionia\Console\BaseCommand;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\Response;
 use Pionia\Middlewares\Middleware;
@@ -19,7 +18,7 @@ use Pionia\Utils\Filesystem;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class CreateMiddleware extends BaseCommand
+class CreateMiddleware extends Command
 {
     protected string $title = 'Adds a new middleware to pionia app';
     protected  string $help = 'Generates a middleware for a pionia app. Middlewares run on every request and response. \n

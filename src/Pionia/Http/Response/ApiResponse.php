@@ -25,7 +25,7 @@ use Pionia\Collections\Arrayable;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class BaseResponse
+class ApiResponse
 {
     private int $returnCode = 0;
     private string | null $returnMessage = null;
@@ -57,11 +57,11 @@ class BaseResponse
      * @param string|null $message - the message to send to the client side
      * @param mixed|null $data - the data to send to the client side
      * @param array|string|null $extraData - any other data to send to the client side
-     * @return BaseResponse
+     * @return ApiResponse
      */
     public static function jsonResponse(?int $code = 0, string|null $message = null, mixed $data = null, array | string | null $extraData = null): static
     {
-        $response = new BaseResponse($data);
+        $response = new ApiResponse($data);
         if ($code === null) {
             $code = 0;
         }
@@ -75,7 +75,7 @@ class BaseResponse
      * This is used to build the response.
      *
      * @param array|null $additionalData
-     * @return BaseResponse
+     * @return ApiResponse
      */
     public function build(?array $additionalData = []): static
     {

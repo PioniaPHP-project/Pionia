@@ -8,6 +8,6 @@ use Pionia\Cache\Cacheable;
 /**
  * Base Service for generic services
  */
-class Service extends BaseService {
+class Service extends AbstractService {
     use Cacheable;
 }

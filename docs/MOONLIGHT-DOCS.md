@@ -2,6 +2,8 @@
 
 Pionia’s public HTTP API is **not** REST resources — it is **Moonlight dispatch**: `{ "service", "action", ...params }` on versioned paths (`/api/v1/`).
 
+**Response types:** Actions return `Pionia\Http\Response\ApiResponse` (the Moonlight JSON envelope). The switch layer converts it to `Pionia\Http\Response\Response` via `Response::fromEnvelope()` before sending HTTP.
+
 This document defines how to annotate services so `pionia api:docs` and `pionia api:catalog` can generate OpenAPI + Markdown.
 
 ## Three documentation layers
@@ -41,7 +43,7 @@ class CategoryService extends Service
  * @moonlight-return object items array of records, total int count
  * @moonlight-example {"service":"category","action":"list","page":1,"limit":20}
  */
-protected function listAction(Arrayable $data): BaseResponse
+protected function listAction(Arrayable $data): ApiResponse
 ```
 
 ## Action method (PHP attribute)
@@ -55,7 +57,7 @@ use Pionia\Documentation\Attributes\MoonlightAction;
     auth: 'none',
     permissions: ['list_category'],
 )]
-protected function listAction(Arrayable $data): BaseResponse
+protected function listAction(Arrayable $data): ApiResponse
 ```
 
 PHPDoc tags and attributes merge; attributes override when both are present.

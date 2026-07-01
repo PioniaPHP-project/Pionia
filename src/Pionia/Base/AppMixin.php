@@ -12,7 +12,9 @@ use Pionia\Contracts\CorsContract;
 use Pionia\Cors\PioniaCors;
 use Pionia\Exceptions\InvalidProviderException;
 use Pionia\Http\Routing\PioniaRouter;
+use Pionia\Logging\LogManager;
 use Pionia\Middlewares\MiddlewareChain;
+use Pionia\Realm\AppRealm;
 use Pionia\Utils\ApplicationLifecycleHooks;
 use Pionia\Utils\PioniaApplicationType;
 use Pionia\Utils\Support;
@@ -106,6 +108,7 @@ trait AppMixin
             // this is where the actual running of the application happens
             $this->registerCorsInstance();
             $this->registerBaseRoutesInstance();
+            $this->bootstrapProviderRoutes();
 
             $this->booted = true;
 
@@ -122,24 +125,33 @@ trait AppMixin
 
     public function boot_internal(): ApplicationContract
     {
-        $this->bootstrapCommands();
-        // collect the app providers
         $this->resolveProviders();
+        $this->bootstrapMiddlewares();
+        $this->bootstrapAuthentications();
+        $this->bootstrapCommands();
         $this->bootProviders();
+        $this->persistBootstrappedProviders();
+
         return $this;
     }
 
     /**
-     * Runs the boot method of each provider
-     * @return void
+     * Runs configure* hooks and onBooted for every registered provider.
      */
     private function bootProviders(): void
     {
         $this->appProviders?->each(function ($provider) {
-            $instance = $this->realm()->contextMakeSilently($provider, ['app' => $this]);
+            $instance = $this->makeProvider($provider);
+            $instance->configureLogging($this->realm()->get(LogManager::class));
             $instance->configureCaching($this->realm()->cache());
+            $instance->configureExceptions($this->realm()->exceptions());
             $instance->onBooted();
         });
+    }
+
+    private function makeProvider(string $provider): ProviderContract
+    {
+        return $this->realm()->contextMakeSilently($provider, ['app' => $this]);
     }
 
     /**
@@ -150,147 +162,140 @@ trait AppMixin
      */
     protected function resolveProviders(bool $considerCached = true): static
     {
-        if ($considerCached){
-            $providersArr = $this->getCache("app_providers", true);
-            if ($providersArr){
-                realm()->set("app_providers", arr($providersArr));
-                $this->appProviders = $providersArr;
+        if ($considerCached) {
+            $providersArr = $this->getCache('app_providers', true);
+            if ($providersArr) {
+                realm()->set('app_providers', arr($providersArr));
+                $this->appProviders = arr($providersArr);
             } else {
-                // if we have no cached providers, then
                 $this->resolveProviders(false);
             }
-            $this->calculateUnresolvedProviders();
+            $this->unResolvedAppProviders = $this->calculateUnresolvedProviders() ?? arr([]);
+
             return $this;
         }
-        // we only come here if our providers weren't cached already
-        // here we re-collect them from the config
-        $providers= env()->has('app_providers') ? env()->get('app_providers', []) : [];
+
+        $providers = env()->has('app_providers') ? env()->get('app_providers', []) : [];
         $fineProviders = arr([]);
         arr($providers)->each(function ($value, $key) use ($fineProviders) {
-            if (!Support::implements($value, ProviderContract::class)){
+            if (!Support::implements($value, ProviderContract::class)) {
                 logger()->warning($value.' is not a valid app provider, therefore skipped.');
+
+                return;
             }
             $fineProviders->add($key, $value);
         });
         $providersArr = $this->builtinProviders()->merge($fineProviders);
-        if ($providersArr->isFilled()){
-            realm()->set("app_providers", $providersArr);
-            $this->setCache("app_providers", $providersArr->toArray(), $this->appItemsCacheTTL, true);
-            $this->appProviders = $providersArr;
-            $this->unResolvedAppProviders = $this->calculateUnresolvedProviders();
-        }
+        realm()->set('app_providers', $providersArr);
+        $this->setCache('app_providers', $providersArr->toArray(), $this->appItemsCacheTTL, true);
+        $this->appProviders = $providersArr;
+        $this->unResolvedAppProviders = $this->calculateUnresolvedProviders() ?? arr([]);
+
         return $this;
     }
 
     /**
-     * Collect all the commands from the environment and the context
+     * Collect all commands from the realm registry and merge provider commands.
      */
     private function bootstrapCommands(): void
     {
-        if ($this->hasCache(realm()::COMMANDS_TAG, true)) {
-            $commands = Arrayable::toArrayable($this->getCache(realm()::COMMANDS_TAG, true));
-        } else {
-            $commands = new Arrayable();
-            // collect all the commands from the environment and the context
+        $existing = realm()->getSilently(AppRealm::COMMANDS_TAG) ?? [];
+        $commands = $existing instanceof Arrayable ? clone $existing : arr((array) $existing);
 
-            if ($scoped = realm()->getSilently(realm()::COMMANDS_TAG)) {
-                $commands->merge($scoped);
-            }
-            // register commands from providers too
-            if ($this->unResolvedAppProviders?->isFilled()) {
-                $commands = $this->bootstrapCommandsFromProviders($commands);
-            }
+        if ($this->unResolvedAppProviders?->isFilled()) {
+            $commands = $this->bootstrapCommandsFromProviders($commands);
         }
 
-        $this->realm()->contextArrAdd($this->realm::COMMANDS_TAG, $commands->all());
+        $this->realm()->set(AppRealm::COMMANDS_TAG, $commands);
     }
 
-//    public function withEndPoints(): ?ApplicationContract
-//    {
-//        if ($this->hasCache("app_routes", true)) {
-//            $routes = $this->getCache("app_routes", true);
-//            $router = new PioniaRouter($routes);
-//        } else {
-//            dd(app()->appRoot(realm()->alias(DIRECTORIES::BOOTSTRAP_DIR->name)  . 'routes.php'));
-//            $router = realm()->appRoot(require realm()->alias(DIRECTORIES::BOOTSTRAP_DIR->name) . DIRECTORY_SEPARATOR . 'routes.php');
-//            // merge all routes from the providers too
-//            if ($this->unResolvedAppProviders?->isFilled()) {
-//                $router = $this->resolveRoutesFromProviders($router);
-//            }
-//            $this->setCache("app_routes", $router->getRoutes(), $this->appItemsCacheTTL, true);
-//        }
-//        $this->realm()->set(PioniaRouter::class, $router);
-//        $this->realm()->set('routes', arr($router->getRoutes()->all()));
-//        return $this;
-//    }
-
     /**
-     * we only want to start resolving only new providers
-     * @return Arrayable|null
+     * Providers registered in config that have not completed a full boot cycle yet.
      */
     private function calculateUnresolvedProviders(): ?Arrayable
     {
-        $cached = arr($this->getCache('app_providers') ?? []);
-        $envProvided = arr(pionia()->env('app_providers', []));
-        $builtIns = $this->builtinProviders();
-        $all = $builtIns->merge($envProvided);
-        if ($cached->isEmpty()){
-            return $all;
+        $registered = $this->builtinProviders()->merge(arr(pionia()->env('app_providers', [])));
+        $bootstrapped = arr($this->getCache('bootstrapped_providers') ?? []);
+
+        if ($bootstrapped->isEmpty()) {
+            $this->unResolvedAppProviders = $registered;
+
+            return $registered;
         }
-        if ($all->isEmpty()){
-            return arr([]);
-        }
-        $this->unResolvedAppProviders = $all->differenceFrom($cached);
+
+        $this->unResolvedAppProviders = $registered->differenceFrom($bootstrapped);
+
         return $this->unResolvedAppProviders;
+    }
+
+    /**
+     * Remember which providers finished boot so only newly added packages re-run hooks.
+     */
+    private function persistBootstrappedProviders(): void
+    {
+        if (!$this->unResolvedAppProviders?->isFilled()) {
+            return;
+        }
+
+        $bootstrapped = arr($this->getCache('bootstrapped_providers') ?? []);
+        $this->unResolvedAppProviders->each(fn (string $provider) => $bootstrapped->add($provider));
+        $this->updateCache('bootstrapped_providers', $bootstrapped->all(), true, $this->appItemsCacheTTL);
+    }
+
+    /**
+     * Register API switches declared by newly added providers.
+     */
+    private function bootstrapProviderRoutes(): void
+    {
+        if (!$this->unResolvedAppProviders?->isFilled()) {
+            return;
+        }
+
+        $router = router($this->realm());
+        $this->resolveRoutesFromProviders($router);
     }
 
     protected function resolveRoutesFromProviders(PioniaRouter $router): PioniaRouter
     {
         $bootstrapped = arr($this->getCache('bootstrapped_routes') ?? []);
-        $this->unResolvedAppProviders?->each(function ($provider) use (&$router, &$bootstrapped){
-            $providerKlass = new $provider($this);
-            $router = $providerKlass->routes($router);
+        $this->unResolvedAppProviders?->each(function ($provider) use (&$router, &$bootstrapped) {
+            if ($this->providerAlreadyBootstrapped($bootstrapped, $provider)) {
+                return;
+            }
+            $this->makeProvider($provider)->routes($router);
             $bootstrapped->add($provider);
         });
         $this->updateCache('bootstrapped_routes', $bootstrapped->all(), true, $this->appItemsCacheTTL);
+
         return $router;
     }
 
-
-
     /**
+     * Merge middleware from unresolved providers into the realm middleware stack.
      */
     private function bootstrapMiddlewares(): void
     {
-        $middlewares = null;
+        if (!$this->unResolvedAppProviders?->isFilled()) {
+            return;
+        }
 
-        if ($this->hasCache('app_middlewares', true)) {
-            $middlewares = arr($this->getCache('app_middlewares', true));
-        } else {
-            $middlewares = new Arrayable();
-            // collect all the middlewares from the environment and the context
-//        $this->env->has('middlewares') && $middlewares->merge($this->env->get('middlewares'));
-            env()->has("middlewares") && $middlewares->merge(env('middlewares'));
+        $chain = new MiddlewareChain();
+        $bootstrapped = arr($this->getCache('bootstrapped_middlewares') ?? []);
 
-            $scopedMiddlewares = realm()->getOrDefault('middlewares', []);
-
-            if ($scopedMiddlewares instanceof Arrayable) {
-                $middlewares->merge($scopedMiddlewares->all());
-            } elseif (is_array($scopedMiddlewares)) {
-                $middlewares->merge($scopedMiddlewares);
+        $this->unResolvedAppProviders->each(function ($provider) use ($chain, &$bootstrapped) {
+            if ($this->providerAlreadyBootstrapped($bootstrapped, $provider)) {
+                return;
             }
-            $middlewares->merge($this->builtInMiddlewares()->all());
-            $this->setCache('app_middlewares', $middlewares->all(), $this->appItemsCacheTTL, true);
+            $this->makeProvider($provider)->middlewares($chain);
+            $bootstrapped->add($provider);
+        });
+
+        if ($stack = $chain->middlewareStack()) {
+            $this->realm()->set(AppRealm::MIDDLEWARE_TAG, $stack);
+            $this->updateCache('app_middlewares', $stack->all(), true, $this->appItemsCacheTTL);
         }
 
-        if ($this->unResolvedAppProviders?->isFilled()) {
-            $chain = $this->bootstrapMiddlewaresInProviders($middlewares);
-            $middlewares->merge($chain->all());
-            $this->updateCache('app_middlewares', $middlewares->all(), true,  $this->appItemsCacheTTL);
-        }
-
-        $this->realm()->set('middlewares', $middlewares);
-
+        $this->updateCache('bootstrapped_middlewares', $bootstrapped->all(), true, $this->appItemsCacheTTL);
     }
 
     /**
@@ -310,27 +315,7 @@ trait AppMixin
     }
 
     /**
-     * Passes the middleware chain in the app providers and caches the process
-     * @param $middlewares
-     * @return MiddlewareChain
-     */
-    private function bootstrapMiddlewaresInProviders($middlewares): MiddlewareChain
-    {
-        $bootstrapped = arr($this->getCache('bootstrapped_middlewares') ?? []);
-        $chain = new MiddlewareChain($this);
-        $chain->addAll($middlewares);
-        $this->unResolvedAppProviders?->each(function($provider) use (&$chain, &$bootstrapped){
-            $providerKlass = new $provider($this);
-            $providerKlass->middlewares($chain);
-            $bootstrapped->add($provider);
-        });
-        $this->updateCache('bootstrapped_middlewares', $bootstrapped, true, $this->appItemsCacheTTL);
-        return $chain;
-    }
-
-    /**
      * Add the cors instance to the context
-     * @return void
      */
     private function registerCorsInstance(): void
     {
@@ -340,65 +325,32 @@ trait AppMixin
         realm()->set(CorsContract::class, static fn () => realm()->make(PioniaCors::class));
     }
 
-
     /**
-     * Adds the collected auths to the context
-     * Can also cache the authentications for future use
-     * @return void
+     * Merge authentications from unresolved providers into the realm auth stack.
      */
     private function bootstrapAuthentications(): void
     {
-        if ($this->hasCache('app_authentications', true)) {
-            $authentications = Arrayable::toArrayable($this->getCache('app_authentications', true));
-        } else {
-            $authentications = new Arrayable();
-            // collect all the middlewares from the environment and the context
-            env()->has('authentications') && $authentications->merge(env('authentications'));
-
-            $scoped = realm()->getOrDefault('authentications', []);
-
-            if ($scoped instanceof Arrayable) {
-                $authentications->merge($scoped->all());
-            } elseif (is_array($scoped)) {
-                $authentications->merge($scoped);
-            }
-            $authentications->merge($this->builtInAuthentications()->all());
-            // cache for future calls
-            $this->setCache('app_authentications', $authentications->all(), $this->appItemsCacheTTL, true);
+        if (!$this->unResolvedAppProviders?->isFilled()) {
+            return;
         }
 
-        // bootstrap authentications from providers
-        if($this->unResolvedAppProviders?->isFilled()) {
-            $chain = $this->bootAuthenticationsInProviders($authentications);
-            $authentications->merge($chain->getAuthentications());
-            $this->updateCache('app_authentications',  $authentications->all(), true, $this->appItemsCacheTTL);
-        }
-
-        $this->realm()->set('authentications', $authentications);
-
-        $this->realm()->set(AuthenticationChain::class, function () {
-            return new AuthenticationChain($this);
-        });
-    }
-
-    /**
-     * Bootstrap authentications coming from providers. This runs post internal authentications
-     * @param $authentications
-     * @return AuthenticationChain
-     */
-    protected function bootAuthenticationsInProviders($authentications): AuthenticationChain
-    {
-        $chain = new AuthenticationChain($this);
-        $chain->addAll($authentications);
+        $chain = new AuthenticationChain();
         $bootstrapped = arr($this->getCache('bootstrapped_authentications') ?? []);
-        $this->unResolvedAppProviders?->each(function ($provider) use (&$chain, &$bootstrapped) {
-            $providerKlass = new $provider($this);
-            $providerKlass->authentications($chain);
+
+        $this->unResolvedAppProviders->each(function ($provider) use ($chain, &$bootstrapped) {
+            if ($this->providerAlreadyBootstrapped($bootstrapped, $provider)) {
+                return;
+            }
+            $this->makeProvider($provider)->authentications($chain);
             $bootstrapped->add($provider);
         });
-        // cache for later
+
         $this->updateCache('bootstrapped_authentications', $bootstrapped->all(), true, $this->appItemsCacheTTL);
-        return $chain;
+    }
+
+    private function providerAlreadyBootstrapped(Arrayable $bootstrapped, string $provider): bool
+    {
+        return $bootstrapped->has($provider) || in_array($provider, $bootstrapped->all(), true);
     }
 
 
@@ -456,15 +408,16 @@ trait AppMixin
      */
     public function bootstrapCommandsFromProviders(Arrayable $commands): Arrayable
     {
-        $bootstrapped = arr($this->getCache(realm()::COMMANDS_TAG) ?? []);
-        $this->unResolvedAppProviders?->each(function($provider) use (&$commands, &$bootstrapped){
-            if (!$this->isCachedIn(realm()::COMMANDS_TAG, $provider)){
-                $providerKlass = new $provider($this);
-                $commands->merge($providerKlass->commands());
-                $bootstrapped->add($provider);
+        $bootstrapped = arr($this->getCache('bootstrapped_commands') ?? []);
+        $this->unResolvedAppProviders?->each(function ($provider) use (&$commands, &$bootstrapped) {
+            if ($this->providerAlreadyBootstrapped($bootstrapped, $provider)) {
+                return;
             }
+            $commands->merge($this->makeProvider($provider)->commands());
+            $bootstrapped->add($provider);
         });
-        $this->updateCache(realm()::COMMANDS_TAG, $bootstrapped->all(), true, $this->appItemsCacheTTL);
+        $this->updateCache('bootstrapped_commands', $bootstrapped->all(), true, $this->appItemsCacheTTL);
+
         return $commands;
     }
 

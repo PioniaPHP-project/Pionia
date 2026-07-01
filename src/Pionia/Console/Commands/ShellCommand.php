@@ -2,13 +2,12 @@
 
 namespace Pionia\Console\Commands;
 
-use Pionia\Console\BaseCommand;
 use Pionia\Console\Command;
 
 /**
  * Interactive Pionia shell — evaluate PHP with full app context.
  */
-final class ShellCommand extends BaseCommand
+final class ShellCommand extends Command
 {
     protected string $name = 'shell';
 

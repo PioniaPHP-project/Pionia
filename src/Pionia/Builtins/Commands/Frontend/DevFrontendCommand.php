@@ -3,12 +3,11 @@
 namespace Pionia\Builtins\Commands\Frontend;
 
 use Pionia\Builtins\Commands\Concerns\ManagesFrontendSettings;
-use Pionia\Console\BaseCommand;
 use Pionia\Console\Command;
 use Pionia\Console\Input\InputOption;
 use Pionia\Process\Process;
 
-class DevFrontendCommand extends BaseCommand
+class DevFrontendCommand extends Command
 {
     use ManagesFrontendSettings;
 

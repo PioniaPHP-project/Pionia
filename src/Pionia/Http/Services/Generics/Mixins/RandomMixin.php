@@ -3,7 +3,7 @@
 namespace Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Porm\Exceptions\BaseDatabaseException;
 
 /**
@@ -19,8 +19,8 @@ trait RandomMixin
      * @throws BaseDatabaseException
      * @throws Exception
      */
-    public function randomAction(): BaseResponse
+    public function randomAction(): ApiResponse
     {
-        return BaseResponse::JsonResponse(0, null, $this->randomItem());
+        return ApiResponse::jsonResponse(0, null, $this->randomItem());
     }
 }

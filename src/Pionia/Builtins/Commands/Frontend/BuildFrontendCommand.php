@@ -3,13 +3,12 @@
 namespace Pionia\Builtins\Commands\Frontend;
 
 use Pionia\Builtins\Commands\Concerns\ManagesFrontendSettings;
-use Pionia\Console\BaseCommand;
 use Pionia\Console\Command;
 use Pionia\Http\PublicEntryPoint;
 use Pionia\Process\Process;
 use Pionia\Utils\Filesystem;
 
-class BuildFrontendCommand extends BaseCommand
+class BuildFrontendCommand extends Command
 {
     use ManagesFrontendSettings;
 

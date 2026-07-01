@@ -1,0 +1,149 @@
+#!/usr/bin/env bash
+# Production release: test, verify lean archive, tag, push, optional GitHub release.
+#
+# Usage:
+#   bin/release v3.0.0              # full release (tests + tag + push + gh release)
+#   bin/release v3.0.0 --dry-run    # verify only, no git/gh changes
+#   bin/release v3.0.0 --skip-tests # maintainers only
+#   bin/release v3.0.0 --no-push    # tag locally only
+#   bin/release v3.0.0 --no-github  # push tag but skip gh release create
+#
+# Requires: composer, git, unzip. Optional: gh (GitHub CLI) for release uploads.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+VERSION=""
+DRY_RUN=0
+SKIP_TESTS=0
+NO_PUSH=0
+NO_GITHUB=0
+
+usage() {
+  sed -n '2,12p' "$0" | sed 's/^# \?//'
+  exit "${1:-0}"
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -h|--help) usage 0 ;;
+    --dry-run) DRY_RUN=1; shift ;;
+    --skip-tests) SKIP_TESTS=1; shift ;;
+    --no-push) NO_PUSH=1; shift ;;
+    --no-github) NO_GITHUB=1; shift ;;
+    v*) VERSION="$1"; shift ;;
+    *)
+      echo "Unknown argument: $1" >&2
+      usage 1
+      ;;
+  esac
+done
+
+if [[ -z "$VERSION" ]]; then
+  echo "Version required (e.g. v3.0.0)" >&2
+  usage 1
+fi
+
+if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?$ ]]; then
+  echo "Version must look like v3.0.0 or v3.0.0-beta.1 (got: $VERSION)" >&2
+  exit 1
+fi
+
+if git rev-parse "$VERSION" >/dev/null 2>&1; then
+  echo "Tag $VERSION already exists." >&2
+  exit 1
+fi
+
+if [[ "$DRY_RUN" -eq 0 && "$NO_PUSH" -eq 0 ]]; then
+  if [[ -n "$(git status --porcelain)" ]]; then
+    echo "Working tree is not clean. Commit or stash changes before releasing." >&2
+    git status --short >&2
+    exit 1
+  fi
+fi
+
+echo "==> Pionia Core release $VERSION"
+
+if [[ "$SKIP_TESTS" -eq 0 ]]; then
+  echo "==> Running test suite"
+  bash bin/test
+else
+  echo "==> Skipping tests (--skip-tests)"
+fi
+
+echo "==> Validating composer.json"
+composer validate --no-check-publish --strict
+
+echo "==> Cleaning generated docs and runtime caches"
+bash bin/clean-dev-artifacts
+
+mkdir -p build/release
+
+echo "==> Verifying production archive (no example/, tests/, docs/, dev tooling)"
+bash bin/verify-release-archive build/release-verify
+
+echo "==> Building release zip"
+composer archive --format=zip --file=build/release/pionia-core
+RELEASE_ZIP="$ROOT/build/release/pionia-core.zip"
+if [[ ! -f "$RELEASE_ZIP" ]]; then
+  echo "Expected $RELEASE_ZIP" >&2
+  exit 1
+fi
+
+cp "$RELEASE_ZIP" "$ROOT/build/release/pionia-core-${VERSION}.zip"
+echo "    $(du -h "$ROOT/build/release/pionia-core-${VERSION}.zip" | cut -f1) → build/release/pionia-core-${VERSION}.zip"
+
+if [[ "$DRY_RUN" -eq 1 ]]; then
+  echo "==> Dry run complete — no tag or push."
+  exit 0
+fi
+
+echo "==> Creating annotated tag $VERSION"
+git tag -a "$VERSION" -m "Release $VERSION"
+
+if [[ "$NO_PUSH" -eq 1 ]]; then
+  echo "==> Tag created locally (--no-push). Push with: git push origin $VERSION"
+  exit 0
+fi
+
+echo "==> Pushing tag to origin"
+git push origin "$VERSION"
+
+if [[ "$NO_GITHUB" -eq 1 ]]; then
+  echo "==> Skipping GitHub release (--no-github)"
+  exit 0
+fi
+
+if ! command -v gh >/dev/null 2>&1; then
+  echo "==> gh CLI not found. Upload manually:"
+  echo "    gh release create $VERSION build/release/pionia-core-${VERSION}.zip --title \"$VERSION\""
+  exit 0
+fi
+
+NOTES_FILE="$ROOT/build/release/${VERSION}-notes.md"
+cat > "$NOTES_FILE" <<EOF
+## Pionia Core $VERSION
+
+Production library archive (no \`example/\`, \`tests/\`, \`docs/\`, or dev tooling).
+
+Install via Composer:
+
+\`\`\`bash
+composer require pionia/pionia-core:${VERSION#v}
+\`\`\`
+
+New application:
+
+\`\`\`bash
+composer create-project pionia/pionia-app my-api
+\`\`\`
+EOF
+
+echo "==> Creating GitHub release"
+gh release create "$VERSION" \
+  "$ROOT/build/release/pionia-core-${VERSION}.zip" \
+  --title "$VERSION" \
+  --notes-file "$NOTES_FILE"
+
+echo "==> Release $VERSION published."

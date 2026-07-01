@@ -4,14 +4,13 @@ namespace Pionia\Builtins\Commands;
 
 use Pionia\Builtins\Commands\Concerns\FormatsRoadRunnerLogOutput;
 use Pionia\Builtins\Commands\Concerns\ManagesRoadRunnerProcess;
-use Pionia\Console\BaseCommand;
 use Pionia\Console\Command;
 use Pionia\Console\Input\InputOption;
 
 /**
  * Tail RoadRunner logs in real time (same file as runserver --detach).
  */
-class ViewRoadRunnerLogs extends BaseCommand
+class ViewRoadRunnerLogs extends Command
 {
     use FormatsRoadRunnerLogOutput;
     use ManagesRoadRunnerProcess;

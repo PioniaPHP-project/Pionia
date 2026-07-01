@@ -4,7 +4,6 @@ namespace Pionia\Builtins\Commands\Generators;
 
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
-use Pionia\Console\BaseCommand;
 use Pionia\Utils\Support;
 use Pionia\Console\Command;
 use Pionia\Console\Input\InputArgument;
@@ -15,7 +14,7 @@ use Pionia\Utils\Filesystem;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class GenerateCommand extends BaseCommand
+class GenerateCommand extends Command
 {
     protected  string $help = 'Bootstraps a new command ready for registration.';
     protected string $name = 'make:command';
@@ -200,14 +199,13 @@ class GenerateCommand extends BaseCommand
 
         $file->addComment('This command is auto-generated from pionia cli.');
 
-        $namespace->addUse('Pionia\Console\BaseCommand');
+        $namespace->addUse('Pionia\Console\Command');
         $namespace->addUse('Pionia\Console\Input\InputArgument');
         $namespace->addUse('Pionia\Console\Input\InputOption');
-        $namespace->addUse('Pionia\Console\Command');
 
         $klass = $namespace->addClass($name);
 
-        $klass->setExtends(BaseCommand::class);
+        $klass->setExtends(Command::class);
 
         $klass->addProperty('aliases')
             ->setProtected()

@@ -5,10 +5,10 @@ namespace Pionia\Http\Routing;
 use Exception;
 use InvalidArgumentException;
 use Pionia\Collections\Arrayable;
-use Pionia\Contracts\BaseSwitchContract;
+use Pionia\Contracts\SwitchContract;
 use Pionia\Http\Routing\Router\RouteObject;
 use Pionia\Http\Routing\SupportedHttpMethods;
-use Pionia\Http\Switches\BaseApiServiceSwitch;
+use Pionia\Http\Switches\ApiSwitch;
 use Pionia\Realm\AppRealm;
 use Pionia\Realm\RealmContract;
 use SebastianBergmann\LinesOfCode\IllogicalValuesException;
@@ -86,7 +86,7 @@ class PioniaRouter implements RouterContract
      */
     public function switch(string $switch, string $version, ?array $schemas = ['https', 'http'], ?array $methods = ['POST', 'GET']): static
     {
-        if (!is_a($switch, BaseSwitchContract::class, true)){
+        if (!is_a($switch, SwitchContract::class, true)){
             throw new InvalidArgumentException($switch . ' is not a valid Pionia switch');
         }
 
@@ -225,8 +225,8 @@ class PioniaRouter implements RouterContract
 
         if ($this->routes->get($name)){
             throw new Exception("Switch for version {$versionName} already exists");
-        } else if (!is_subclass_of($switch, BaseApiServiceSwitch::class)){
-            throw new Exception("Switch {$switch} does not extend BaseApiServiceSwitch");
+        } else if (!is_subclass_of($switch, ApiSwitch::class)){
+            throw new Exception("Switch {$switch} does not extend ApiSwitch");
         }
 
         // add the only post route

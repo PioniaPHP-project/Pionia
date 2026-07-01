@@ -3,7 +3,7 @@
 namespace Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 
 /**
  * This mixin adds the list functionality to the service.
@@ -20,8 +20,8 @@ trait ListMixin
      * @moonlight-summary List rows with optional pagination
      * @throws Exception
      */
-    public function listAction(): BaseResponse
+    public function listAction(): ApiResponse
     {
-        return BaseResponse::JsonResponse(0, null, $this->getAllWithPagination());
+        return ApiResponse::jsonResponse(0, null, $this->getAllWithPagination());
     }
 }

@@ -16,7 +16,8 @@
             "Application\\Switches\\": "example/switches/",
             "Application\\Authentications\\": "example/authentications/",
             "Application\\Middlewares\\": "example/middlewares/",
-            "Application\\Commands\\": "example/commands/"
+            "Application\\Commands\\": "example/commands/",
+            "Application\\Providers\\": "example/providers/"
         }
     },
     "authors": [
@@ -81,17 +82,33 @@
             "@document:api"
         ],
         "clean:docs": "bash bin/clean-stale-docs",
+        "clean:dev": "bash bin/clean-dev-artifacts",
+        "release:verify": "bash bin/verify-release-archive",
         "changelog": "git log --pretty=format:'- %s' > CHANGELOG.md"
     },
     "archive": {
         "exclude": [
             "example",
-            ".phpunit.result.cache",
-            "docs",
             "tests",
+            "docs",
+            "build",
+            "bin",
+            "public",
+            ".github",
+            ".cursor",
+            ".idea",
+            ".phpdoc",
+            "AGENTS.md",
+            "CONTRIBUTING.md",
+            "release.sh",
+            "debug-provider-boot-steps.php",
+            ".phpunit.result.cache",
             "database.sqlite3",
             "phpdoc.dist.xml",
-            "phpunit.xml"
+            "phpunit.xml",
+            "composer.lock",
+            "vendor",
+            ".gitattributes"
         ]
     }
 }

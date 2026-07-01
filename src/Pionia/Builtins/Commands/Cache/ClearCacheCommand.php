@@ -3,10 +3,10 @@
 namespace Pionia\Builtins\Commands\Cache;
 
 use Pionia\Cache\PioniaCache;
-use Pionia\Console\BaseCommand;
+use Pionia\Console\Command;
 use Pionia\Templating\TemplateEngine;
 
-class ClearCacheCommand extends BaseCommand
+class ClearCacheCommand extends Command
 {
     protected array $aliases = ['cache:c', 'c:c', ];
 

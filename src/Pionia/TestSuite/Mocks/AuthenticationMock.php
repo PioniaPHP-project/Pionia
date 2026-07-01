@@ -2,12 +2,12 @@
 
 namespace Pionia\TestSuite\Mocks;
 
-use Pionia\Auth\AuthenticationBackend;
+use Pionia\Auth\Authentication;
 use Pionia\Auth\ContextUserObject;
 use Pionia\Http\Request\Request;
 use Pionia\TestSuite\Helpers\HelperMocksTrait;
 
-class AuthenticationBackendMock extends AuthenticationBackend
+class AuthenticationMock extends Authentication
 {
     use HelperMocksTrait;
 

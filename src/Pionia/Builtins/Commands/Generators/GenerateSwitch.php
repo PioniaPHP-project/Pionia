@@ -5,8 +5,7 @@ namespace Pionia\Builtins\Commands\Generators;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Pionia\Collections\Arrayable;
-use Pionia\Console\BaseCommand;
-use Pionia\Http\Switches\BaseApiServiceSwitch;
+use Pionia\Http\Switches\ApiSwitch;
 use Pionia\Utils\Support;
 use Pionia\Console\Command;
 use Pionia\Console\Input\InputArgument;
@@ -17,7 +16,7 @@ use Pionia\Utils\Filesystem;
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
  */
-class GenerateSwitch extends BaseCommand
+class GenerateSwitch extends Command
 {
     protected  string $help = 'Generates an authentication backend for pionia app.';
     protected string $name = 'make:switch';
@@ -62,12 +61,12 @@ class GenerateSwitch extends BaseCommand
 
         $file->addComment('This switch is auto-generated from pionia cli.');
 
-        $namespace->addUse('Pionia\Http\Switches\BaseApiServiceSwitch');
+        $namespace->addUse('Pionia\Http\Switches\ApiSwitch');
         $namespace->addUse('Pionia\Collections\Arrayable');
 
         $klass = $namespace->addClass($name);
 
-        $klass->setExtends(BaseApiServiceSwitch::class);
+        $klass->setExtends(ApiSwitch::class);
 
         $this->addActions($klass);
 

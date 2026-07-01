@@ -7,6 +7,7 @@ use Pionia\Builtins\Commands\Context\ListAliasCommand;
 use Pionia\Builtins\Commands\Generators\CreateMiddleware;
 use Pionia\Builtins\Commands\Generators\GenerateAuthenticationBackend;
 use Pionia\Builtins\Commands\Generators\GenerateCommand;
+use Pionia\Builtins\Commands\Generators\GenerateProvider;
 use Pionia\Builtins\Commands\Generators\GenerateService;
 use Pionia\Builtins\Commands\Generators\GenerateSwitch;
 use Pionia\Builtins\Commands\Frontend\BuildFrontendCommand;
@@ -36,6 +37,7 @@ enum NAMESPACES {
     case COMMAND_NS;
     case SWITCH_NS;
     case MAIL_NS;
+    case PROVIDER_NS;
 }
 
 enum DIRECTORIES {
@@ -45,6 +47,7 @@ enum DIRECTORIES {
     case COMMANDS_DIR;
     case SERVICES_DIR;
     case SWITCHES_DIR;
+    case PROVIDERS_DIR;
     case FRONTEND_DIR;
     case ENVIRONMENT_DIR;
     case BOOTSTRAP_DIR;
@@ -77,6 +80,7 @@ if (!function_exists('allBuiltins')) {
                 'cache:delete'=>CacheDeleteCommand::class,
                 'make:middleware' => CreateMiddleware::class,
                 'make:command' => GenerateCommand::class,
+                'make:provider' => GenerateProvider::class,
                 'api:docs' => GenerateApiDocs::class,
                 'api:catalog' => GenerateApiCatalog::class,
                 'stats:view' => ViewStats::class,
@@ -102,6 +106,7 @@ if (!function_exists('allBuiltins')) {
                 DIRECTORIES::COMMANDS_DIR->name => 'commands',
                 DIRECTORIES::SERVICES_DIR->name => 'services',
                 DIRECTORIES::SWITCHES_DIR->name => 'switches',
+                DIRECTORIES::PROVIDERS_DIR->name => 'providers',
                 DIRECTORIES::FRONTEND_DIR->name => 'static',
                 DIRECTORIES::ENVIRONMENT_DIR->name => 'environment',
                 DIRECTORIES::BOOTSTRAP_DIR->name => 'bootstrap',
@@ -117,6 +122,7 @@ if (!function_exists('allBuiltins')) {
                 NAMESPACES::SERVICE_NS->name => 'Application\Services',
                 NAMESPACES::SWITCH_NS->name => 'Application\Switches',
                 NAMESPACES::COMMAND_NS->name => 'Application\Commands',
+                NAMESPACES::PROVIDER_NS->name => 'Application\Providers',
                 NAMESPACES::MAIL_NS->name => 'Application\Mails',
                 NAMESPACES::MIDDLEWARE_NS->name => 'Application\Middlewares'
             ],

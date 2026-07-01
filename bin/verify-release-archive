@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+# Verify composer archive excludes dev-only paths (example, tests, docs, CI, dev bin scripts).
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+REL_OUT="${1:-build/release-verify}"
+OUT_DIR="$ROOT/$REL_OUT"
+ARCHIVE="$OUT_DIR/pionia-core.zip"
+LIST="$OUT_DIR/archive-listing.txt"
+
+rm -rf "$OUT_DIR"
+mkdir -p "$OUT_DIR"
+
+bash "$ROOT/bin/clean-dev-artifacts"
+
+if ! composer archive --format=zip --file="${REL_OUT}/pionia-core" >/dev/null 2>&1; then
+  echo "composer archive failed" >&2
+  exit 1
+fi
+
+if [[ ! -f "$ARCHIVE" ]]; then
+  echo "Expected archive at $ARCHIVE" >&2
+  exit 1
+fi
+
+unzip -Z -1 "$ARCHIVE" | sort > "$LIST"
+
+fail=0
+check_forbidden() {
+  local pattern="$1"
+  local label="$2"
+  if grep -qE "$pattern" "$LIST"; then
+    echo "FAIL: archive contains forbidden: ${label}" >&2
+    grep -E "$pattern" "$LIST" | head -5 >&2
+    fail=1
+  fi
+}
+
+for segment in example tests docs build .github bin .idea .phpdoc; do
+  check_forbidden "(^|/)${segment}(/|$)" "path ${segment}/"
+done
+
+# Generated doc paths must not appear even if nested (e.g. stray tracked output)
+for docpath in docs/api example/docs build/docs; do
+  check_forbidden "(^|/)${docpath//\//\\/}(/|$)" "generated docs ${docpath}"
+done
+
+for file in phpunit.xml phpdoc.dist.xml release.sh AGENTS.md CONTRIBUTING.md database.sqlite3 composer.lock debug-provider-boot-steps.php; do
+  check_forbidden "(^|/)${file}$" "file ${file}"
+done
+
+if ! grep -qE '^composer\.json$' "$LIST"; then
+  echo "FAIL: archive missing composer.json" >&2
+  fail=1
+fi
+if ! grep -qE '^README\.md$' "$LIST"; then
+  echo "FAIL: archive missing README.md" >&2
+  fail=1
+fi
+if ! grep -qE '^src/Pionia/' "$LIST"; then
+  echo "FAIL: archive missing src/Pionia/" >&2
+  fail=1
+fi
+
+if [[ "$fail" -ne 0 ]]; then
+  echo "Release archive verification failed. Listing saved to $LIST" >&2
+  exit 1
+fi
+
+echo "Release archive OK ($(wc -l < "$LIST" | tr -d ' ') files)."
+echo "Archive: $ARCHIVE"

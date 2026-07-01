@@ -1,0 +1,29 @@
+# Paths marked export-ignore are omitted from `git archive` (GitHub release tarballs/zip).
+# They remain in the git clone used for development. Packagist uses composer.json archive.exclude.
+
+/example export-ignore
+/tests export-ignore
+/docs export-ignore
+/build export-ignore
+/bin export-ignore
+/.github export-ignore
+/.cursor export-ignore
+/.idea export-ignore
+/.phpdoc export-ignore
+/public export-ignore
+
+/phpunit.xml export-ignore
+/phpdoc.dist.xml export-ignore
+/.phpunit.result.cache export-ignore
+/composer.lock export-ignore
+/vendor export-ignore
+/debug-provider-boot-steps.php export-ignore
+/database.sqlite3 export-ignore
+/release.sh export-ignore
+
+/AGENTS.md export-ignore
+/CONTRIBUTING.md export-ignore
+
+# Normalize line endings for shipped PHP
+*.php text eol=lf
+*.stub text eol=lf

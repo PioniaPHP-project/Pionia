@@ -3,24 +3,24 @@
 namespace Pionia\TestSuite;
 
 use Pionia\Collections\Arrayable;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Realm\AppRealm;
 use PHPUnit\Framework\Assert;
 
 trait AssertsPioniaResponses
 {
-    protected function decodeBaseResponse(BaseResponse $response): array
+    protected function decodeApiResponse(ApiResponse $response): array
     {
         return json_decode($response->getPrettyResponse(), true, 512, JSON_THROW_ON_ERROR);
     }
 
-    protected function assertPioniaOk(TestResponse | BaseResponse $response): void
+    protected function assertPioniaOk(TestResponse | ApiResponse $response): void
     {
         $payload = $this->responsePayload($response);
         Assert::assertSame(0, $payload['returnCode'] ?? null, 'Expected returnCode 0');
     }
 
-    protected function assertPioniaError(TestResponse | BaseResponse $response, int $returnCode): void
+    protected function assertPioniaError(TestResponse | ApiResponse $response, int $returnCode): void
     {
         $payload = $this->responsePayload($response);
         Assert::assertSame($returnCode, $payload['returnCode'] ?? null);
@@ -29,7 +29,7 @@ trait AssertsPioniaResponses
     /**
      * @param list<string> $keys
      */
-    protected function assertJsonStructure(array $keys, TestResponse | BaseResponse $response): void
+    protected function assertJsonStructure(array $keys, TestResponse | ApiResponse $response): void
     {
         $payload = $this->responsePayload($response);
         foreach ($keys as $key) {
@@ -53,12 +53,12 @@ trait AssertsPioniaResponses
     /**
      * @return array<string, mixed>
      */
-    private function responsePayload(TestResponse | BaseResponse $response): array
+    private function responsePayload(TestResponse | ApiResponse $response): array
     {
         if ($response instanceof TestResponse) {
             return $response->pioniaPayload();
         }
 
-        return $this->decodeBaseResponse($response);
+        return $this->decodeApiResponse($response);
     }
 }

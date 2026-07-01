@@ -14,14 +14,14 @@ use Pionia\Utils\Microable;
  * This class provides a way to register middlewares, authentications, routes and commands
  * to the application from a service provider.
  */
-abstract class BaseProvider implements ProviderContract
+abstract class Provider implements ProviderContract
 {
     use Microable;
 
     protected WebApplication $pionia;
 
     /**
-     * BaseProvider constructor.
+     * Provider constructor.
      * @param WebApplication $pionia
      */
     public function __construct(WebApplication $pionia)

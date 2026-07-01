@@ -89,7 +89,26 @@ Register a switch in `bootstrap/routes.php`:
 router($app)->switch(MainSwitch::class, 'v1');
 ```
 
-**API URL helpers** (use these in docs, templates, and clients — not bare `apiBase()`):
+### Naming conventions (v3)
+
+Framework base classes use **short names** — no `Base*` prefix. App classes use descriptive names (`MainSwitch`, `JwtAuthentication`, `RequestIdMiddleware`).
+
+| Layer | Extend / implement | App example | CLI |
+|-------|-------------------|-------------|-----|
+| Switch | `Pionia\Http\Switches\ApiSwitch` | `MainSwitch` | `make:switch` |
+| Service | `Pionia\Http\Services\Service` | `AuthService` | `make:service` |
+| Moonlight envelope | `Pionia\Http\Response\ApiResponse` | `response()` helper | — |
+| HTTP response | `Pionia\Http\Response\Response` | `Response::fromEnvelope()` | — |
+| Authentication | `Pionia\Auth\Authentication` | `JwtAuthentication` | `make:auth` |
+| Middleware | `Pionia\Middlewares\Middleware` | `RequestIdMiddleware` | `make:middleware` |
+| Command | `Pionia\Console\Command` | `SyncOrdersCommand` | `make:command` |
+| Provider | `Pionia\Base\Provider\Provider` | `AppProvider` | `make:provider` |
+
+`ApiSwitch` is named explicitly because `Switch` is a PHP reserved keyword. The contract is `Pionia\Contracts\SwitchContract`.
+
+Empty app directories (`middlewares/`, `authentications/`, `commands/`, `providers/`) are **not** scaffolded — `make:*` creates them on first use.
+
+**API URL helpers**
 
 | Helper | Example |
 |--------|---------|
@@ -252,7 +271,7 @@ RoadRunner workers re-read `settings.ini` on each request (no restart required).
 
 ### Register a custom store (application)
 
-In a `BaseProvider` subclass:
+In a `Provider` subclass:
 
 ```php
 public function configureCaching(\Pionia\Cache\CacheManager $cache): void
@@ -290,7 +309,7 @@ Pionia ships a native console (`Pionia\Console\Application`) — no `symfony/con
 
 ### Commands
 
-- Extend `Pionia\Console\BaseCommand` and implement `handle(): int`.
+- Extend `Pionia\Console\Command` and implement `handle(): int`.
 - Register args/options via `getArguments()` / `getOptions()` tuple arrays, or a `$signature` string (parsed by `Parser`).
 - Styled output: `$this->info()`, `error()`, `warn()`, `table()`, `ask()`, `confirm()`, `choice()`, `withProgressBar()`.
 - Colors use `<info>`, `<comment>`, `<error>`, `<warning>` tags; disable with `--no-ansi`.
@@ -341,12 +360,22 @@ php pionia frontend:build # production — serves from public/
 
 ### New application scaffold (Phase 8)
 
+**New machine (Composer only):**
+
+```bash
+composer create-project pionia/pionia-app my-app
+cd my-app && composer run serve
+```
+
+**From an existing Pionia install** (or PioniaCore dev tree):
+
 ```bash
 php pionia new my-app --install
 php pionia new my-app --install --with-frontend=react-ts
+# PioniaCore monorepo: php example/pionia new my-app --install
 ```
 
-Creates bootstrap, environment, services, switches, and `composer.json` from core stubs (`src/Pionia/Resources/scaffolds/app/`).
+Creates bootstrap, environment, services, switches, and `composer.json` from core stubs (`src/Pionia/Resources/scaffolds/app/`) — same output as `pionia/pionia-app` on Packagist.
 
 ### Moonlight async & realtime (Phase 9)
 
@@ -425,12 +454,46 @@ Key classes: `Async`, `DeferredWorkBuffer`, `Background`, `JobSubmission`, `Prom
 
 ## Extension points
 
+### Service providers (`Provider`)
+
+Extend Pionia from **Composer packages** or your app via `Pionia\Base\Provider\Provider` (implements `ProviderContract`). `AppProvider` is a deprecated alias for backward compatibility.
+
+| Hook | When it runs | Use for |
+|------|----------------|---------|
+| `middlewares(MiddlewareChain)` | Boot, before HTTP | Global middleware (`add`, `addBefore`, `addAfter`) |
+| `authentications(AuthenticationChain)` | Boot | Auth backends (`addAuthentication`) |
+| `commands(): array` | Boot | CLI commands (`alias => Command::class`) |
+| `routes(PioniaRouter)` | Boot (after app routes) | Package API switches (`router($app)->switch(...)`) |
+| `configureLogging(LogManager)` | Boot | Custom log channels |
+| `configureCaching(CacheManager)` | Boot | Custom cache stores |
+| `configureExceptions(ExceptionPipeline)` | Boot | Handlers, maps, `dontReport` |
+| `onBooted()` | After all providers registered stacks | Container bindings, events |
+| `onTerminate()` | CLI shutdown | Cleanup |
+
+**Boot order:** resolve providers → middleware → auth → commands → configure* + `onBooted()` → provider routes.
+
+**Registration** (pick one):
+
+```ini
+; environment/settings.ini
+[app_providers]
+billing=Vendor\Billing\BillingProvider
+```
+
+```php
+// bootstrap/application.php (recommended — chainable)
+pionia()->addAppProvider(\Application\Providers\AppProvider::class);
+```
+
+**Performance:** Pionia caches which providers finished boot (`bootstrapped_providers`). New providers in config boot incrementally; removed providers require `php pionia cache:clear`. Set `$app->appItemsCacheTTL` in bootstrap to control cache lifetime (default `0` = indefinite).
+
+**Scaffold:** `php pionia make:provider AppProvider` → `providers/` + `[app_providers]` entry.
+
 | Hook | Where |
 |------|--------|
-| Routes / switches | `bootstrap/routes.php` |
-| Providers | `BaseProvider`: `routes()`, `middlewares()`, `authentications()`, `configureLogging()`, `configureCaching()`, `configureExceptions()` |
-| Middleware / auth | Environment `settings.ini` or provider chains |
-| Exception handler | `$app->exceptions()` or `error_handler` binding |
+| Routes / switches | `bootstrap/routes.php` (app) or `Provider::routes()` (packages) |
+| Middleware / auth | `settings.ini` sections or provider chains |
+| Exception handler | `$app->exceptions()` or `Provider::configureExceptions()` |
 
 ## Testing policy
 
@@ -510,7 +573,7 @@ Pionia is reducing Symfony surface area. **Removed** from `composer.json`:
 | `symfony/event-dispatcher` | `Pionia\Events\PioniaEventDispatcher` (PSR-14) |
 | `symfony/cache` | `Pionia\Cache\CacheManager` + `CacheAdapterInterface` (PSR-16) |
 | `symfony/process` | `Pionia\Process\Process` + `PhpExecutable` |
-| `symfony/console` | `Pionia\Console\Application` + `BaseCommand` + `shell` REPL |
+| `symfony/console` | `Pionia\Console\Application` + `Command` + `shell` REPL |
 
 **Symfony in dev only:** `spiral/roadrunner-cli` may pull `symfony/console` transitively — not used by Pionia runtime code.
 
@@ -518,4 +581,33 @@ Routing exceptions: `Pionia\Http\Routing\Exception\RouteNotFoundException`, `Met
 
 ## Packagist releases
 
-`composer.json` `archive.exclude` omits `example/` and `tests/`. Consumer apps use `Application\` namespaces in their own repos; the monorepo maps them under `autoload-dev` only.
+Production archives **exclude** dev-only paths via `composer.json` `archive.exclude` and `.gitattributes` `export-ignore` (for GitHub source tarballs):
+
+| Excluded | Why |
+|----------|-----|
+| `example/` | Dev sample app + generated API docs |
+| `tests/` | PHPUnit suite |
+| `docs/` | Contributor markdown (public guides live on [pionia.netlify.app](https://pionia.netlify.app)) |
+| `bin/` | Dev scripts (`test`, `coverage-check`, `document-framework`) |
+| `.github/` | CI workflows |
+| `phpunit.xml`, `AGENTS.md`, etc. | Dev / contributor tooling |
+
+Shipped artifact: **`src/Pionia/`** + `composer.json` + `README.md`.
+
+### Release workflow
+
+```bash
+# Verify archive contents (also run in CI / Documentation suite)
+composer clean:dev          # wipe generated docs + dev caches first
+composer release:verify
+
+# Full release: tests → verify zip → tag → push → GitHub release asset
+bin/release v3.0.0
+
+# Preview without git changes
+bin/release v3.0.0 --dry-run
+```
+
+Pushing a `v*` tag also triggers `.github/workflows/release.yml` (tests, verify, attach zip to GitHub Release).
+
+Consumer apps use `Application\` in their own repos; the monorepo maps that namespace under `autoload-dev` only.

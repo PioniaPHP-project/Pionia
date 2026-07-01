@@ -2,7 +2,7 @@
 
 namespace TestSuite;
 
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\TestSuite\AssertsPioniaResponses;
 use Pionia\TestSuite\PioniaTestCase;
 use Pionia\TestSuite\TestResponse;
@@ -49,10 +49,10 @@ class AssertsPioniaResponsesTest extends PioniaTestCase
         $this->assertJsonStructure(['returnCode', 'returnMessage', 'returnData', 'extraData'], $response);
     }
 
-    public function testDecodeBaseResponseRoundTripsJson(): void
+    public function testDecodeApiResponseRoundTripsJson(): void
     {
         $original = response(0, 'hello', ['n' => 2]);
-        $decoded = $this->decodeBaseResponse($original);
+        $decoded = $this->decodeApiResponse($original);
 
         $this->assertSame(0, $decoded['returnCode']);
         $this->assertSame('hello', $decoded['returnMessage']);

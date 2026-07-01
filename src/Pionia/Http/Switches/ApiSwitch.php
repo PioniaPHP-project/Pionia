@@ -3,37 +3,34 @@
 namespace Pionia\Http\Switches;
 
 use Exception;
-use Pionia\Contracts\BaseSwitchContract;
+use Pionia\Contracts\SwitchContract;
 use Pionia\Documentation\DocsGate;
 use Pionia\Http\Moonlight\MoonlightDispatcher;
 use Pionia\Http\Request\Request;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Http\Response\Response;
 use Throwable;
 
 /**
- * This is the base class for the APIRoute service switch. It is used to switch between different services based on the request data.
+ * Base class for versioned Moonlight API switches.
  *
- * The child class must implement the registerServices method to return an array of services.
- * It requires the request to define the `SERVICE` key in the request data and the `ACTION` key to define the action to be performed.
- *
- * The SERVICE is the class that will be called when the SERVICE_NAME is called.
- * The ACTION is the method that will be called on the SERVICE.
+ * Child classes implement `registerServices()` to map service aliases to service classes.
+ * Requests must include `service` and `action` in the JSON body (or equivalent request data).
  *
  * @author [Jet - ezrajet9@gmail.com](https://www.linkedin.com/in/jetezra/)
- * @see BaseResponse for the response returned by this swicher's processServices method
+ * @see ApiResponse for the response returned by this switcher's processServices method
  *
  */
-abstract class BaseApiServiceSwitch implements BaseSwitchContract
+abstract class ApiSwitch implements SwitchContract
 {
     /**
      * This method checks the request data for the `SERVICE` key and processes the service based on it
      *
      * @param Request $request The request object
-     * @return BaseResponse The response object
+     * @return ApiResponse The response object
      * @throws Throwable
      */
-    private static function processServices(Request $request): BaseResponse
+    private static function processServices(Request $request): ApiResponse
     {
         $controller = get_called_class() . '::processor';
 

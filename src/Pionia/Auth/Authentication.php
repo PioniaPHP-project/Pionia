@@ -7,11 +7,11 @@ use Pionia\Http\Request\Request;
 use Pionia\Utils\Containable;
 
 /**
- * Base class for other Authentication backend to inherit.
+ * Base class for authentication backends.
  *
  * You have access to the application container via `$this->context`
  */
-abstract class AuthenticationBackend implements AuthenticationContract
+abstract class Authentication implements AuthenticationContract
 {
     use Containable;
 

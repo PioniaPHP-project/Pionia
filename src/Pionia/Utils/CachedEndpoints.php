@@ -4,13 +4,13 @@ namespace Pionia\Utils;
 
 use Pionia\Cache\PioniaCache;
 use Pionia\Http\Request\Request;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 /**
  * Checks and returns cached moonlight endpoints.
  */
 trait CachedEndpoints
 {
-    public static function cacheResponse(Request $request):BaseResponse|bool
+    public static function cacheResponse(Request $request):ApiResponse|bool
     {
         try {
             $cache = app()->getSilently(PioniaCache::class);

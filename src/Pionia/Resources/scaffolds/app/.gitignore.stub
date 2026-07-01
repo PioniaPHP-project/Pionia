@@ -9,3 +9,4 @@
 /frontend/dist/
 /public/assets/
 .rr.runtime.json
+.pid

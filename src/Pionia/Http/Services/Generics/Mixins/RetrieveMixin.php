@@ -3,7 +3,7 @@
 namespace Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 
 /**
  * This mixin adds the retrieve method to the class that uses it.
@@ -20,16 +20,16 @@ trait RetrieveMixin
      * @moonlight-summary Fetch one row by primary key
      * @throws Exception
      */
-    public function retrieveAction(): BaseResponse
+    public function retrieveAction(): ApiResponse
     {
-        return BaseResponse::JsonResponse(0, null, $this->getOne());
+        return ApiResponse::jsonResponse(0, null, $this->getOne());
     }
 
     /**
      * Alias for the `retrieve` action
      * @throws Exception
      */
-    public function detailsAction(): BaseResponse
+    public function detailsAction(): ApiResponse
     {
         return $this->retrieveAction();
     }

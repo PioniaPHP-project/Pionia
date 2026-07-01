@@ -13,10 +13,10 @@ use Pionia\Console\Output\OutputInterface;
 
 class Application
 {
-    /** @var array<string, Command> */
+    /** @var array<string, AbstractCommand> */
     private array $commands = [];
 
-    /** @var array<string, Command> */
+    /** @var array<string, AbstractCommand> */
     private array $aliases = [];
 
     private bool $autoExit = true;
@@ -82,7 +82,7 @@ class Application
         return $this->definition;
     }
 
-    public function add(Command $command): ?Command
+    public function add(AbstractCommand $command): ?AbstractCommand
     {
         $command->setApplication($this);
         $this->commands[$command->getName()] = $command;
@@ -94,7 +94,7 @@ class Application
         return $command;
     }
 
-    public function find(string $name): Command
+    public function find(string $name): AbstractCommand
     {
         if (isset($this->commands[$name])) {
             return $this->commands[$name];
@@ -123,7 +123,7 @@ class Application
     }
 
     /**
-     * @return array<string, Command>
+     * @return array<string, AbstractCommand>
      */
     public function all(): array
     {
@@ -155,7 +155,7 @@ class Application
         } catch (\Throwable $e) {
             $output->writeln('<error>' . $e->getMessage() . '</error>');
 
-            return Command::FAILURE;
+            return AbstractCommand::FAILURE;
         }
 
         $this->configureIO($input, $output);
@@ -177,7 +177,7 @@ class Application
         } catch (\Throwable $e) {
             $output->writeln('<error>' . $e->getMessage() . '</error>');
 
-            return Command::FAILURE;
+            return AbstractCommand::FAILURE;
         }
 
         return $this->runBoundCommand($appInput, $output, $input);
@@ -209,7 +209,7 @@ class Application
         if ($input->getOption('version')) {
             $output->writeln($this->name . ' ' . $this->version);
 
-            return Command::SUCCESS;
+            return AbstractCommand::SUCCESS;
         }
 
         if (!isset($this->commands[$commandName]) && !isset($this->aliases[$commandName])) {
@@ -227,7 +227,7 @@ class Application
         } catch (\InvalidArgumentException $e) {
             $output->writeln('<error>' . $e->getMessage() . '</error>');
 
-            return Command::FAILURE;
+            return AbstractCommand::FAILURE;
         }
 
         return $command->run($this->prepareCommandInput($input, $commandArgv), $output);

@@ -3,10 +3,9 @@
 namespace Pionia\Builtins\Commands;
 
 use Pionia\Builtins\Commands\Concerns\ManagesMaintenanceSettings;
-use Pionia\Console\BaseCommand;
 use Pionia\Console\Command;
 
-class MaintenanceOffCommand extends BaseCommand
+class MaintenanceOffCommand extends Command
 {
     use ManagesMaintenanceSettings;
 

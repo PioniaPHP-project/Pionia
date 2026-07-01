@@ -93,7 +93,7 @@ trait AuthTrait
      * Similar to canAny only that this checks if the user has all the passed permissions
      * @param array $permissions The permissions to check for
      * @param string|null $message The message to be returned if the user does not have the required permission
-     * @return bool Returns true if the user has the required permission, else returns a BaseResponse object
+     * @return bool Returns true if the user has the required permission, else returns a ApiResponse object
      * @throws UserUnauthenticatedException If the user is not authenticated
      * @throws UserUnauthorizedException If the user does not have the required permission
      */

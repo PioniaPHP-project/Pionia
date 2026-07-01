@@ -5,7 +5,7 @@ use Pionia\Cache\PioniaCache;
 use Pionia\Collections\Arrayable;
 use Pionia\Collections\HighOrderTapProxy;
 use Pionia\Http\Request\Request;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Http\Routing\PioniaRouter;
 use Pionia\Http\Routing\Router\RouteObject;
 use Pionia\Http\Services\Service;
@@ -110,7 +110,7 @@ if (!function_exists('pionia_handle_exception')) {
     /**
      * Resolve a throwable through the configured global exception handler.
      */
-    function pionia_handle_exception(\Throwable $e, ?Request $request = null): BaseResponse
+    function pionia_handle_exception(\Throwable $e, ?Request $request = null): ApiResponse
     {
         return realm()->exceptions()->handle($e, $request);
     }
@@ -139,9 +139,9 @@ if (!function_exists('response')) {
      * Helper function to return a response
      */
     #[\NoDiscard]
-    function response(int $returnCode = 0, ?string $returnMessage = null, mixed $returnData = null, mixed $extraData = null, ): BaseResponse
+    function response(int $returnCode = 0, ?string $returnMessage = null, mixed $returnData = null, mixed $extraData = null, ): ApiResponse
     {
-        return BaseResponse::jsonResponse($returnCode, $returnMessage, $returnData, $extraData);
+        return ApiResponse::jsonResponse($returnCode, $returnMessage, $returnData, $extraData);
     }
 }
 
@@ -356,13 +356,13 @@ if (!function_exists('cachedResponse')){
      * If no ttl is defined, caching will happen for only 60 seconds
      * @note This function is only available if the service has caching enabled
      * @param Service $instance The service we are currently in, just pass `this` here!
-     * @param BaseResponse $response The response object to cache, you can use `response()` for this!
+     * @param ApiResponse $response The response object to cache, you can use `response()` for this!
      * @param mixed $ttl The time to live for the cache, defaults to 60 seconds
-     * @return BaseResponse The cached response / the response you passed. It's not tampered with
+     * @return ApiResponse The cached response / the response you passed. It's not tampered with
      */
-    function cachedResponse(Service $instance, BaseResponse $response, mixed $ttl= 60): BaseResponse
+    function cachedResponse(Service $instance, ApiResponse $response, mixed $ttl= 60): ApiResponse
     {
-        return tap($response, function (BaseResponse $response) use ($instance, $ttl) {
+        return tap($response, function (ApiResponse $response) use ($instance, $ttl) {
             if ($cacheinstance = app()->getSilently(PioniaCache::class)) {
                 // caching is enabled, let's cache this response.
                 $instance->cacheTtl = $ttl;
@@ -387,7 +387,7 @@ if (!function_exists('recached')){
      * @param mixed|null $returnData The return data for the response, defaults to null
      * @param mixed|null $extraData The extra data for the response, defaults to null
      * @param mixed $ttl The time to live for the cache, defaults to 60 seconds
-     * @return BaseResponse The cached response / the response you passed. It's not tampered with
+     * @return ApiResponse The cached response / the response you passed. It's not tampered with
      * @note This function is only useful if the service has caching enabled
      */
     function recached(
@@ -397,7 +397,7 @@ if (!function_exists('recached')){
         mixed $returnData = null,
         mixed $extraData = null,
         mixed $ttl = 60
-    ): BaseResponse
+    ): ApiResponse
     {
         return cachedResponse(
             $instance,

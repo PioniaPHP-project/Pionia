@@ -5,7 +5,14 @@
     "license": "MIT",
     "require": {
         "php": ">=8.5",
-        "pionia/pionia-core": "^3.0"
+        "ext-pdo": "*",
+        "pionia/pionia-core": "^3.0",
+        "react/promise": "^3.2"
+    },
+    "suggest": {
+        "spiral/roadrunner-http": "Persistent HTTP workers (php pionia runserver)",
+        "spiral/roadrunner-jobs": "Async Moonlight jobs",
+        "nyholm/psr7": "PSR-7 for RoadRunner"
     },
     "autoload": {
         "psr-4": {
@@ -15,8 +22,9 @@
     "scripts": {
         "serve": "php pionia serve",
         "test": "php vendor/bin/phpunit",
+        "pionia": "php pionia",
         "post-create-project-cmd": [
-            "php storage/scripts/rename.php"
+            "@php storage/scripts/rename.php"
         ]
     },
     "minimum-stability": "stable",

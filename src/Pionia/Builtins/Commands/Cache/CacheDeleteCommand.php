@@ -3,11 +3,11 @@
 namespace Pionia\Builtins\Commands\Cache;
 
 use Pionia\Cache\PioniaCache;
-use Pionia\Console\BaseCommand;
+use Pionia\Console\Command;
 use Psr\SimpleCache\InvalidArgumentException;
 use Pionia\Console\Input\InputArgument;
 
-class CacheDeleteCommand extends BaseCommand
+class CacheDeleteCommand extends Command
 {
     protected array $aliases = ['cache:d', 'c:d', 'cache:drop', 'uncache'];
 

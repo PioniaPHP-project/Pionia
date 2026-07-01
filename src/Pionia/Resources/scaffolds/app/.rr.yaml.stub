@@ -19,7 +19,7 @@ jobs:
   pipelines:
     moonlight:
       driver: memory
-      # Production: switch to redis (see docs — background jobs)
+      # Production: switch to redis (see pionia-docs — background work)
       # driver: redis
       # config:
       #   addrs: ["127.0.0.1:6379"]

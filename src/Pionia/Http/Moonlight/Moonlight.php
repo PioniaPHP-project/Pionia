@@ -2,7 +2,7 @@
 
 namespace Pionia\Http\Moonlight;
 
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 
 /**
  * Application-facing Moonlight dispatch API (HTTP, async jobs, WebSocket frames).
@@ -12,7 +12,7 @@ final class Moonlight
     /**
      * @param array<string, mixed> $payload
      */
-    public function dispatch(string $service, string $action, array $payload = [], ?string $switch = null): BaseResponse
+    public function dispatch(string $service, string $action, array $payload = [], ?string $switch = null): ApiResponse
     {
         return MoonlightDispatcher::dispatchPayload(
             array_merge(['service' => $service, 'action' => $action], self::stripReservedKeys($payload)),
@@ -25,7 +25,7 @@ final class Moonlight
      *
      * @param array<string, mixed> $payload
      */
-    public function async(string $service, string $action, array $payload = [], ?string $switch = null): BaseResponse
+    public function async(string $service, string $action, array $payload = [], ?string $switch = null): ApiResponse
     {
         $job = new MoonlightJobPayload(
             $service,
