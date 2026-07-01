@@ -72,6 +72,42 @@ class Join extends ContractBuilder
     }
 
     /**
+     * Merge a Medoo-style WHERE array (alias for clarity when chaining after join()).
+     */
+    public function filter(?array $where = null): static
+    {
+        if ($where !== null && $where !== []) {
+            $this->where($where);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Fetch one joined row.
+     */
+    public function get(array|int|null $where = null): ?object
+    {
+        if (is_array($where)) {
+            $this->where = array_merge($this->where, ['AND' => $where]);
+        } elseif (is_int($where)) {
+            $this->where = array_merge($this->where, ['LIMIT' => [$where, 1]]);
+        }
+
+        $result = $this->runGet();
+
+        return $result ? (object) $result : null;
+    }
+
+  /**
+     * First row of the joined result set.
+     */
+    public function first(): ?object
+    {
+        return $this->get(0);
+    }
+
+    /**
      * @param string|null $column
      * @param array|null $where
      * @return int|null

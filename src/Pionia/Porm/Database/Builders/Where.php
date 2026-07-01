@@ -17,10 +17,13 @@
 namespace Pionia\Porm\Database\Builders;
 
 use Pionia\Porm\Core\ContractBuilder;
+use Pionia\Porm\Database\Utils\FluentWhereTrait;
 use Ramsey\Uuid\Nonstandard\Uuid;
 
 class Where extends ContractBuilder
 {
+    use FluentWhereTrait;
+
     private array $where = [];
 
     public function build(): array
@@ -44,20 +47,4 @@ class Where extends ContractBuilder
     {
         return $hook . ' #' . Uuid::uuid4()->toString();
     }
-
-    /**
-     * Add and clauses
-     *
-     * @example ```php
-     *  Where::builder()->where(['name' => 'Pionia', 'type' => 'Framework'])->builder ---- WHERE name = 'Pionia' AND type = 'Framework'
-     * ```
-     * @param array $where
-     * @return $this
-     */
-    public function where(array $where): static
-    {
-        $this->where = array_merge($this->where, $where);
-        return $this;
-    }
-
 }

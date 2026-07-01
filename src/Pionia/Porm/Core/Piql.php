@@ -1021,7 +1021,11 @@ class Piql
             }
 
             if (is_string($relation)) {
-                $relation = 'USING ("' . $relation . '")';
+                if (str_contains($relation, '=')) {
+                    $relation = 'ON ' . $relation;
+                } else {
+                    $relation = 'USING ("' . $relation . '")';
+                }
             } elseif (is_array($relation)) {
                 // For ['column1', 'column2']
                 if (isset($relation[0])) {

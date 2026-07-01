@@ -20,6 +20,7 @@ use PDOStatement;
 
 trait ParseTrait
 {
+    use FluentWhereTrait;
 
     private function runSelect(?callable $callback): ?array
     {
@@ -59,12 +60,6 @@ trait ParseTrait
     public function all(?callable $callback = null): ?array
     {
         return $this->runSelect($callback);
-    }
-
-    public function where(array $where): static
-    {
-        $this->where = array_merge($this->where, $where);
-        return $this;
     }
 
     /**

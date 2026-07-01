@@ -66,6 +66,8 @@ php example/pionia maintenance:off                    # back to normal (alias: u
 
 ## Database connections
 
+Porm (`table()`, `connectionManager()`) — see [`docs/PORM.md`](docs/PORM.md) and the [Porm guides](https://pionia.netlify.app/documentation/database/) in pionia-docs.
+
 `ConnectionManager` pools PDO instances per process. `Connection::connect('default')` reuses the pool; `Connection::open()` bypasses it (tests, one-off configs).
 
 ```php
