@@ -245,6 +245,8 @@ class Piql
         $this->errorInfo = null;
         $this->error = null;
 
+        $this->prettyQuery = $this->generate($statement, $map);
+
         if ($this->testMode) {
             $this->queryString = $this->generate($statement, $map);
             return null;
@@ -937,8 +939,10 @@ class Piql
                     $columns = $join;
                 }
             } else {
-                $where = $columns;
-                $columns = $join;
+                if ($join !== null) {
+                    $where = $columns;
+                    $columns = $join;
+                }
             }
         }
 
@@ -1728,6 +1732,28 @@ class Piql
         }
 
         return $this->select($table, $join, $columns, $where);
+    }
+
+    /**
+     * Return EXPLAIN output for a SELECT-shaped query.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public function explain(string $table, $join = null, $columns = null, $where = null): array
+    {
+        $map = [];
+        $select = $this->selectContext($table, $map, $join, $columns, $where);
+        $statement = $this->type === 'sqlite'
+            ? 'EXPLAIN QUERY PLAN ' . $select
+            : 'EXPLAIN ' . $select;
+
+        $query = $this->exec($statement, $map);
+
+        if (!$query) {
+            return [];
+        }
+
+        return $query->fetchAll(\PDO::FETCH_ASSOC) ?: [];
     }
 
     /**

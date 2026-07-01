@@ -30,9 +30,7 @@ trait FilterTrait
         }
         $this->preventLimit = true;
 
-        // we probably have a limit already set the limit from the offset
         if (isset($this->where['LIMIT'])) {
-            // if the limit is an array, we will just set the limit part to the above
             if (is_array($this->where['LIMIT'])) {
                 $limit_value = $this->where['LIMIT'][1];
                 $offset_value = $this->where['LIMIT'][0];
@@ -45,6 +43,9 @@ trait FilterTrait
         return $this;
     }
 
+    /**
+     * @throws Exception
+     */
     public function startAt(int $startPoint = 0): static
     {
         if (isset($this->where['LIMIT'])) {
@@ -52,13 +53,12 @@ trait FilterTrait
                 $limit_value = $this->where['LIMIT'][1];
                 $this->where['LIMIT'] = [$startPoint, $limit_value];
             } else {
-                // if we have a limit set, we will set the limit to the start point
                 $this->where['LIMIT'] = [$startPoint, $this->where['LIMIT']];
             }
         } else {
-            // if we did not set a limit, we will set a limit of 100000000, which is a very large number to ensure that we get all the records
-            $this->where['LIMIT'] = [$startPoint, 100000000];
+            throw new Exception('Call limit() before startAt() to avoid unbounded offset scans.');
         }
+
         return $this;
     }
 
@@ -80,13 +80,12 @@ trait FilterTrait
         if ($needle) {
             $column .= "[$needle]";
         }
-        if (isset($this->where['HAVING'])) {
-            $havingArray = $this->where['HAVING'];
-            $havingArray = array_merge($havingArray, [$column => $value]);
-            $this->where = array_merge($this->where, $havingArray);
-        } else {
-            $this->where = array_merge($this->where, ['HAVING' => [$column . "[>]" => $value]]);
+
+        if (!isset($this->where['HAVING'])) {
+            $this->where['HAVING'] = [];
         }
+
+        $this->where['HAVING'][$column] = $value;
 
         return $this;
     }
@@ -107,16 +106,19 @@ trait FilterTrait
      */
     public function orderBy(string|array $value): static
     {
-        if (isset($this->where['ORDER'])) {
-            $orderArray = $this->where['ORDER'];
-            if (is_array($orderArray)) {
-                $orderArray[] = $value;
-                $this->where = array_merge($this->where, $orderArray);
-            } else {
-                $this->where["ORDER"] = $value;
-            }
-        } else {
+        if (!isset($this->where['ORDER'])) {
             $this->where['ORDER'] = $value;
+            return $this;
+        }
+
+        $order = $this->where['ORDER'];
+
+        if (is_array($order) && is_array($value)) {
+            $this->where['ORDER'] = array_merge($order, $value);
+        } elseif (is_array($order)) {
+            $this->where['ORDER'] = array_merge($order, is_array($value) ? $value : [$value => 'ASC']);
+        } else {
+            $this->where['ORDER'] = is_array($value) ? $value : [$value => 'ASC'];
         }
 
         return $this;

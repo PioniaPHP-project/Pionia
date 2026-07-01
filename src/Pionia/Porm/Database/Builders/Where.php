@@ -16,7 +16,7 @@
 
 namespace Pionia\Porm\Database\Builders;
 
-use Porm\Core\ContractBuilder;
+use Pionia\Porm\Core\ContractBuilder;
 use Ramsey\Uuid\Nonstandard\Uuid;
 
 class Where extends ContractBuilder

@@ -73,11 +73,84 @@ trait TableLevelQueryTrait
      * @return array|mixed|object
      * @throws Exception
      */
-    public function random(?int $limit = 1, ?array $where = null): mixed
+    public function random(?int $limit = 1, ?array $where = null, ?string $pkField = 'id', string $strategy = 'sample'): mixed
     {
         $this->checkFilterMode("You cannot fetch random items at this point in the query, check the usage of the `random()`
          method in the query builder for " . $this->table);
 
+        if ($strategy === 'sample' && ($where === null || $where === [])) {
+            $sampled = $this->randomViaIdSample($limit, $where ?? [], $pkField);
+            if ($sampled !== null) {
+                return $sampled;
+            }
+        }
+
+        return $this->randomViaNative($limit, $where);
+    }
+
+    /**
+     * Pick random rows by sampling primary-key values (indexed lookup).
+     *
+     * @throws Exception
+     */
+    private function randomViaIdSample(int $limit, array $where, string $pkField): mixed
+    {
+        $baseWhere = array_merge($this->where, $where);
+        $minRaw = $this->database->min($this->table, null, $pkField, $baseWhere);
+        $maxRaw = $this->database->max($this->table, null, $pkField, $baseWhere);
+
+        if ($minRaw === null || $maxRaw === null) {
+            return null;
+        }
+
+        $min = (int) $minRaw;
+        $max = (int) $maxRaw;
+
+        if ($max < $min) {
+            return null;
+        }
+
+        $results = [];
+        $attempts = 0;
+        $maxAttempts = max($limit * 5, 20);
+        $seen = [];
+
+        while (count($results) < $limit && $attempts < $maxAttempts) {
+            $attempts++;
+            $candidate = random_int($min, $max);
+            if (isset($seen[$candidate])) {
+                continue;
+            }
+            $seen[$candidate] = true;
+            $savedWhere = $this->where;
+            $this->where = array_merge($baseWhere, [$pkField => $candidate]);
+            $row = $this->runGet();
+            $this->where = $savedWhere;
+            if ($row) {
+                $results[] = $row;
+            }
+        }
+
+        if ($results === []) {
+            return null;
+        }
+
+        if ($limit === 1) {
+            $this->resultSet = $results[0];
+
+            return $this->asObject();
+        }
+
+        $this->resultSet = $results;
+
+        return $results;
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function randomViaNative(?int $limit, ?array $where): mixed
+    {
         if ($where === null) {
             $where = [];
         }
@@ -87,11 +160,12 @@ trait TableLevelQueryTrait
         }
 
         $this->where = array_merge($this->where, $where);
-        $result = $this->database->rand($this->table, $this->columns, $this->where);
+        $result = $this->database->rand($this->table, null, $this->columns, $this->where);
         if ($result) {
             $this->resultSet = $result;
             if ($limit === 1 || !$limit) {
                 $this->resultSet = $this->resultSet[0];
+
                 return $this->asObject();
             }
             $this->resultSet = $result;
@@ -112,13 +186,18 @@ trait TableLevelQueryTrait
      * ```
      *
      */
-    public function save(array $data): object
+    public function save(array $data, bool $returnRow = true): object
     {
         $this->checkFilterMode("You cannot save at this point in the query, check the usage of the `save()`
          method in the query builder for " . $this->table);
 
         $this->database->insert($this->table, $data);
         $id = $this->database->id();
+
+        if (!$returnRow) {
+            return (object) array_merge($data, ['id' => $id]);
+        }
+
         return $this->get($id);
     }
 
@@ -170,6 +249,69 @@ trait TableLevelQueryTrait
         }
         $this->where = array_merge($this->where, $where);
         return $this->database->update($this->table, $data, $this->where);
+    }
+
+    /**
+     * Process rows in chunks to avoid loading entire tables into memory.
+     *
+     * @throws Exception
+     */
+    public function chunk(int $size, callable $callback, ?array $where = null, string $pkField = 'id'): void
+    {
+        $this->checkFilterMode('chunk() must be called before filter() on ' . $this->table);
+
+        $offset = 0;
+        while (true) {
+            $rows = $this->filter($where ?? [])
+                ->orderBy([$pkField => 'ASC'])
+                ->limit($size)
+                ->startAt($offset)
+                ->all();
+
+            if ($rows === null || $rows === []) {
+                break;
+            }
+
+            $callback($rows);
+
+            if (count($rows) < $size) {
+                break;
+            }
+
+            $offset += $size;
+        }
+    }
+
+    /**
+     * Return the database EXPLAIN plan for the current table/columns/where.
+     *
+     * @throws Exception
+     */
+    public function explain(?array $where = null): array
+    {
+        $this->checkFilterMode('explain() must be called before filter() on ' . $this->table);
+
+        $merged = array_merge($this->where, $where ?? []);
+
+        return $this->database->explain(
+            $this->table,
+            null,
+            $this->columns,
+            $merged !== [] ? $merged : null
+        );
+    }
+
+    /**
+     * Hint MySQL to use a specific index (no-op on other drivers).
+     *
+     * @throws Exception
+     */
+    public function useIndex(string $index): static
+    {
+        $this->checkFilterMode('useIndex() must be called before filter() on ' . $this->table);
+        $this->where['USE INDEX'] = $index;
+
+        return $this;
     }
 
     /**

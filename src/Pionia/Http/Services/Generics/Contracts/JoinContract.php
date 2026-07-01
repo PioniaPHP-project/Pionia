@@ -124,13 +124,15 @@ trait JoinContract
      */
     private function getOneJoined(): ?object
     {
-        $data = $this->request->getData();
-        $id = $data[$this->pk_field] ?? throw new Exception("Field {$this->pk_field} is required");
+        $id = $this->getFieldValue($this->pk_field) ?? throw new Exception("Field {$this->pk_field} is required");
         $items = $this->attachJoins()->where([$this->pk_field => $id])->limit(1)->all();
 
-        if (count($items) > 0){
-            return json_decode(json_encode($items[0]));
+        if (count($items) > 0) {
+            $row = $items[0];
+
+            return is_object($row) ? $row : (object) $row;
         }
+
         return null;
     }
 
@@ -141,13 +143,16 @@ trait JoinContract
     private function getAllItemsJoined(): array
     {
         $query = $this->attachJoins();
-        if ($this->hasLimit()){
-            $query->limit($this->hasLimit());
+        if ($this->hasLimit()) {
+            $query->limit((int) $this->hasLimit());
+        } else {
+            $query->limit($this->maxListRows);
         }
-        if ($this->hasOffset()){
-            $query->startAt($this->hasOffset());
+        if ($this->hasOffset()) {
+            $query->startAt((int) $this->hasOffset());
         }
-        return $query->all();
+
+        return $this->applyClientSort($query)->all();
     }
 
     /**
@@ -206,8 +211,8 @@ trait JoinContract
     {
         $this->detectAndAddColumns();
         $theJoin = $this->getJoinQuery();
-        if (!$theJoin || empty($theJoin->getJoins())){
-           $theJoin = table($this->table, $this->connection)
+        if (!$theJoin || empty($theJoin->getJoins())) {
+           $theJoin = $this->query()
                 ->columns($this->getListColumns())
                 ->join();
         }

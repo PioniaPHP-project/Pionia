@@ -307,8 +307,8 @@ class Agg extends ContractBuilder
      */
     public function columnsCompare(string $column, string $comparison, string $otherColumn): static
     {
-        if (in_array($comparison, ['=', '>', '<', '!='])) {
-            throw new Exception("While comparing two columns, comparison must be one of '=', '>', '<', '!=, check the comparison between $column and $otherColumn");
+        if (!in_array($comparison, ['=', '>', '<', '!='], true)) {
+            throw new Exception("While comparing two columns, comparison must be one of '=', '>', '<', '!=', check the comparison between $column and $otherColumn");
         }
         $this->aggregated[] = $column . ' ' . $comparison . ' ' . $otherColumn;
         return $this;

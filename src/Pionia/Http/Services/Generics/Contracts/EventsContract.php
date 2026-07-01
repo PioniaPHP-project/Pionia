@@ -9,7 +9,7 @@ namespace Pionia\Http\Services\Generics\Contracts;
  */
 
 use PDOStatement;
-use Porm\Database\Builders\Join;
+use Pionia\Porm\Database\Builders\Join;
 
 trait EventsContract
 {

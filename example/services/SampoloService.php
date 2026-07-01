@@ -17,6 +17,8 @@ class SampoloService extends UniversalGenericService
 {
 	public string $table = 'sample_table';
 
+    public ?string $baseAlias = 'st';
+
     public ?array $fileColumns = ['file'];
 
     public ?array $createColumns = ['name', 'file?', 'company'];

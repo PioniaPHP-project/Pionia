@@ -16,17 +16,17 @@ trait CrudContract
      * It pays respect to aliases defined, so, don't forget to respect them too!
      * @return void
      */
-    private function detectAndAddColumns(): void
+    protected function detectAndAddColumns(): void
     {
-        if ($this->getFieldValue("dontRelate")){
-            $this->dontRelate = $this->getFieldValue("dontRelate");
+        if ($this->getFieldValue("dontRelate")) {
+            $this->dontRelate = (bool) $this->getFieldValue("dontRelate");
         }
 
-        if ($this->getFieldValue("columns") || $this->getFieldValue("COLUMNS")) {
+        if ($this->allowClientColumns && ($this->getFieldValue("columns") || $this->getFieldValue("COLUMNS"))) {
             $this->listColumns = $this->getFieldValue("columns") ?? $this->getFieldValue("COLUMNS");
         }
 
-        if ($this->dontRelate){
+        if ($this->dontRelate) {
             $this->cleanRelationColumns();
         }
     }
@@ -44,21 +44,21 @@ trait CrudContract
      * `category_name` and `id` in the response
      * @return void
      */
-    private function cleanRelationColumns(): void
+    protected function cleanRelationColumns(): void
     {
-        if ($this->getListColumns() !== "*"){
+        if ($this->getListColumns() !== "*") {
             $columns = [];
-            foreach ($this->getListColumns() as $column){
-                if (str_contains($column, ".")){
+            foreach ($this->getListColumns() as $column) {
+                if (str_contains($column, ".")) {
                     $results = explode(".", $column);
                     $column = $results[1];
 
-                    if (str_contains($column, "(")){
+                    if (str_contains($column, "(")) {
                         $checker = explode("(", $column);
                         $final = $checker[0];
-                        array_map(function ($item) use($final, &$column) {
-                            if (str_starts_with($item, $final)){
-                                $column= null;
+                        array_map(function ($item) use ($final, &$column) {
+                            if (str_starts_with($item, $final)) {
+                                $column = null;
                             }
                             return [];
                         }, $columns);
@@ -76,72 +76,81 @@ trait CrudContract
      * Returns the columns we shall query from the db while querying
      * @return array|string
      */
-    private function getListColumns(): array|string
+    protected function getListColumns(): array|string
     {
         return $this->listColumns ?? '*';
     }
 
     /**
+     * Build optional client filter WHERE clauses from whitelisted request fields.
+     */
+    protected function clientFilterWhere(): array
+    {
+        if (!$this->allowClientFilters) {
+            return [];
+        }
+
+        $where = [];
+        foreach ($this->request->getData()->all() as $key => $value) {
+            if (!is_string($key) || $value === null || $value === '') {
+                continue;
+            }
+            if (in_array($key, ['service', 'action', 'limit', 'offset', 'LIMIT', 'OFFSET', 'pagination', 'PAGINATION', 'search', 'SEARCH', 'columns', 'COLUMNS', 'dontRelate'], true)) {
+                continue;
+            }
+            if ($this->sortableColumns !== [] && in_array($key, $this->sortableColumns, true)) {
+                continue;
+            }
+            $where[$key] = $value;
+        }
+
+        return $where;
+    }
+
+    /**
+     * Apply client sort when sortableColumns is configured.
+     */
+    protected function applyClientSort(Porm|\Pionia\Porm\Database\Builders\Builder|\Pionia\Porm\Database\Builders\Join $query): mixed
+    {
+        $orderBy = $this->getFieldValue('orderBy') ?? $this->getFieldValue('ORDER_BY');
+        if ($orderBy === null || $this->sortableColumns === []) {
+            return $query;
+        }
+
+        if (is_string($orderBy) && in_array($orderBy, $this->sortableColumns, true)) {
+            return $query->orderBy($orderBy);
+        }
+
+        if (is_array($orderBy)) {
+            $safe = [];
+            foreach ($orderBy as $column => $direction) {
+                if (is_int($column) && is_string($direction) && in_array($direction, $this->sortableColumns, true)) {
+                    $safe[$direction] = 'ASC';
+                } elseif (is_string($column) && in_array($column, $this->sortableColumns, true)) {
+                    $safe[$column] = is_string($direction) ? strtoupper($direction) : 'ASC';
+                }
+            }
+            if ($safe !== []) {
+                return $query->orderBy($safe);
+            }
+        }
+
+        return $query;
+    }
+
+    /**
      * Detects if we have pagination params anywhere in the request.
-     * For pagination to kick-in, both offset and limit must be defined at any of the levels
-     * defined by `$this->detectPagination()`
-     * @see $this->detectPagination()
-     * @param array $data
-     * @return bool
+     * Pagination kicks in when limit is defined; offset defaults to 0.
      */
     protected function _checkPaginationInternal(array $data): bool
     {
-        $limitSet = false;
-        $offsetSet = false;
-        if (isset($data['limit']) && is_numeric($data['limit']) || isset($data['LIMIT']) && is_numeric($data['LIMIT'])){
-            $limitSet = true;
-        }
-
-        if (isset($data['offset']) && is_numeric($data['offset']) || isset($data['OFFSET']) && is_numeric($data['OFFSET'])){
-            $offsetSet = true;
-        }
-
-        return $limitSet && $offsetSet;
+        return (isset($data['limit']) && is_numeric($data['limit']))
+            || (isset($data['LIMIT']) && is_numeric($data['LIMIT']));
     }
+
     /**
      * Detect if our pagination params are defined anywhere in the request.
-    *
-     * Remember these can in defined in one of the following:-
-     *
-     * On the request root level
-    * @example ```json
-     * {
-     *     SERVICE: "ourService",
-     *     ACTION: "ourAction",
-     *     LIMIT: 10, // can also be `limit: 10`
-     *     OFFSET: 5 // can also be `offset: 5`
-     * }
-     *
-     * Or they can be defined under the PAGINATION/pagination key
-     *
-     * @example ```json
-     * {
-     *     SERVICE: "ourService",
-     *     ACTION: "ourAction",
-     *     PAGINATION:{ // can also be `pagination`
-     *          LIMIT: 10, // can also be `limit: 10`
-     *          OFFSET: 5 // can also be `offset: 5`
-     *      }
-     * }
-     *
-     * Or in the SEARCH/search param
-     *
-     * @example
-     * {
-     *     SERVICE: "ourService",
-     *     ACTION: "ourAction",
-     *     SEARCH:{ // can also be `search`
-     *        LIMIT: 10, // can also be `limit: 10`
-     *        OFFSET: 5 // can also be `offset: 5`
-     *     }
-     *  }
-     * }
-     * */
+     */
     protected function detectPagination(array $reqData): bool
     {
         if ($reqData) {
@@ -164,6 +173,7 @@ trait CrudContract
                 }
             }
         }
+
         return false;
     }
 
@@ -182,17 +192,24 @@ trait CrudContract
             return $this->getOneJoined();
         }
         $id = $this->getFieldValue($this->primaryKey()) ?? throw new Exception("Field {$this->primaryKey()} is required");
-        return $this->getOneInternal($id);
+
+        return $this->getOneInternal($id, skipCustomHook: true);
     }
 
     /**
      * Gets one item from the database. Can be overridden by defining a getOne method in the service
      * @throws Exception
      */
-    private function getOneInternal($id): null | array | object
+    protected function getOneInternal($id, bool $skipCustomHook = false): null | array | object
     {
-        $customQueried = $this->getItem();
-        return $customQueried ??  table($this->table, null, $this->connection)
+        if (!$skipCustomHook) {
+            $customQueried = $this->getItem();
+            if ($customQueried) {
+                return $customQueried;
+            }
+        }
+
+        return $this->query()
             ->columns($this->getListColumns())
             ->get([$this->pk_field => $id]);
     }
@@ -206,6 +223,7 @@ trait CrudContract
     {
         return $this->getFieldValue("OFFSET") ?? $this->getFieldValue("offset") ?? false;
     }
+
     /**
      * Retrieve all in CRUD
      *
@@ -216,33 +234,36 @@ trait CrudContract
      */
     protected function allItems(): ?array
     {
-        if($this->getItems()){
+        if ($this->getItems()) {
             return $this->getItems();
         }
 
         if ($this->weShouldJoin()) {
             return $this->getAllItemsJoined();
         }
-        $query =  table($this->table, null, $this->connection)
+
+        $query = $this->query()
             ->columns($this->getListColumns())
-            ->filter();
+            ->filter($this->clientFilterWhere());
 
-            if ($this->hasLimit()){
-                $query->limit($this->hasLimit());
-            }
+        $query = $this->applyClientSort($query);
 
-            if ($this->hasOffset()){
-                $query->startAt($this->hasOffset());
-            }
+        if ($this->hasLimit()) {
+            $query->limit((int) $this->hasLimit());
+        } else {
+            $query->limit($this->maxListRows);
+        }
+
+        if ($this->hasOffset()) {
+            $query->startAt((int) $this->hasOffset());
+        }
+
         return $query->all();
     }
 
     protected function isInJoinMode(): bool
     {
-        if ($this->joins !== null && count($this->joins) > 0){
-            return true;
-        }
-        return false;
+        return $this->joins !== null && count($this->joins) > 0;
     }
 
     /**
@@ -254,26 +275,25 @@ trait CrudContract
     protected function deleteItem(): mixed
     {
         $pk = $this->pk_field;
-        if ($this->isInJoinMode()){
+        if ($this->isInJoinMode()) {
             $pk = str_contains($this->pk_field, ".") ? explode(".", $this->pk_field)[1] : $this->pk_field;
         }
 
         $id = $this->getFieldValue($this->pk_field) ?? $this->getFieldValue($pk) ?? throw new Exception("Field {$this->pk_field} is required");
-        $item = $this->getOneInternal($id);
+        $item = $this->getOneInternal($id, skipCustomHook: true);
 
         if (!$item) {
             throw new Exception("Record with $this->pk_field $id not found");
         }
         $deleted = null;
-        // run the before delete event and confirm if its not false or null before proceeding
         if ($this->preDelete($item)) {
-            table($this->table, $this->connection)->inTransaction(function () use ($id, &$deleted) {
-                $deleted =  table($this->table, $this->connection)
-                    ->delete([$this->pk_field => $id]);
+            $this->query()->inTransaction(function () use ($id, $pk, &$deleted) {
+                $deleted = $this->query()->delete([$pk => $id]);
             });
-             // run the post delete event
-             return $this->postDelete($deleted, $item);
+
+            return $this->postDelete($deleted, $item);
         }
+
         return null;
     }
 
@@ -285,22 +305,23 @@ trait CrudContract
         $column = $field;
         $required = true;
 
-        if (is_array($field)){
+        if (is_array($field)) {
             $column = key($field);
             $required = isset($field['required']) && $field['required'];
         }
 
         $dt = $this->getFieldValue($column);
-        if ($required && $dt  === null) {
+        if ($required && $dt === null) {
             throw new Exception("Field $column is required");
         }
 
-        if ($dt && is_a(UploadedFile::class, $dt)){
+        if ($dt instanceof UploadedFile) {
             $dt = $this->handleUpload($dt, $column);
         }
 
         return $dt;
     }
+
     /**
      * Create in CRUD
      * Saves in transactions, runs pre and post create events
@@ -316,12 +337,12 @@ trait CrudContract
         $sanitizedData = [];
         foreach ($this->createColumns as $column) {
             $required = true;
-            if(str_ends_with($column, "?")) {
+            if (str_ends_with($column, "?")) {
                 $column = trim(str_replace("?", "", $column));
                 $required = false;
             }
             $dt = $this->getFieldValue($column);
-            if ($dt instanceof UploadedFile){
+            if ($dt instanceof UploadedFile) {
                 $dt = $this->handleUpload($dt, $column);
             }
             if ($required && $dt === null) {
@@ -334,17 +355,16 @@ trait CrudContract
 
         $saved = null;
         if ($toSave = $this->preCreate($sanitizedData)) {
-            table( $this->table, $this->connection)->inTransaction(function () use (&$saved, $toSave) {
-                $saved =  table($this->table, $this->connection)
-                    ->save($toSave);
+            $this->query()->inTransaction(function () use (&$saved, $toSave) {
+                $saved = $this->query()->save($toSave);
             });
         }
         if (!$saved) {
             throw new Exception("Record not saved! Try again later.");
         }
+
         return $this->postCreate($saved);
     }
-
 
     /**
      * @throws BaseDatabaseException
@@ -357,16 +377,27 @@ trait CrudContract
             table: $this->table,
             limit: $this->limit,
             offset: $this->offset,
-            db: $this->connection);
-        $prep1 =  $paginator->columns($this->getListColumns());
+            db: $this->connection,
+            alias: $this->baseAlias,
+        );
+        $prep1 = $paginator->columns($this->getListColumns());
+
+        if ($filters = $this->clientFilterWhere()) {
+            $prep1->where($filters);
+        }
 
         $prep1->init(function (Porm $query) {
             if ($this->weShouldJoin()) {
-                 $join = $query->join();
-                return $this->attachJoins($join);
+                $join = $query->join();
+                $join = $this->attachJoins($join);
+
+                return $this->applyClientSort($join);
             }
-            return $query->filter();
+            $builder = $query->filter();
+
+            return $this->applyClientSort($builder);
         });
+
         return $prep1->paginate();
     }
 
@@ -381,6 +412,7 @@ trait CrudContract
         if ($this->detectPagination($data)) {
             return $this->paginate();
         }
+
         return $this->allItems();
     }
 
@@ -390,21 +422,33 @@ trait CrudContract
     protected function randomItem()
     {
         $this->detectAndAddColumns();
-        $limit = $this->getFieldValue('limit') ?? $this->getFieldValue('size') ?? 1;
+        $limit = (int) ($this->getFieldValue('limit') ?? $this->getFieldValue('size') ?? 1);
+        $where = $this->clientFilterWhere();
 
-        return table($this->table, $this->connection)
-            ->random($limit);
+        if ($this->weShouldJoin()) {
+            $query = $this->attachJoins();
+            if ($where !== []) {
+                $query->where($where);
+            }
+
+            return $query->random($limit);
+        }
+
+        return $this->query()
+            ->columns($this->getListColumns())
+            ->random($limit, $where !== [] ? $where : null);
     }
 
     /**
      * Returns the primary key field
      * @throws Exception
      */
-    private function primaryKey(): bool|string
+    protected function primaryKey(): bool|string
     {
-        if ($this->isInJoinMode() && $this->pk_field){
+        if ($this->isInJoinMode() && $this->pk_field) {
             return str_contains($this->pk_field, ".") ? explode(".", $this->pk_field)[1] : $this->pk_field;
         }
+
         return $this->pk_field;
     }
 
@@ -421,10 +465,7 @@ trait CrudContract
         $this->detectAndAddColumns();
         $id = $this->getFieldValue($this->primaryKey()) ?? throw new Exception("Field {$this->primaryKey()} is required");
 
-        // get the item to be updated
-
-        $item = table($this->table, $this->connection)
-            ->get($id, $this->primaryKey());
+        $item = $this->query()->get($id, $this->primaryKey());
 
         if (!$item) {
             throw new Exception("Record with id {$id} not found");
@@ -432,16 +473,23 @@ trait CrudContract
 
         $toArray = is_array($item) ? $item : (array) $item;
 
-        // if the developer defines the columns to update, we stick to those
         if ($this->updateColumns) {
             foreach ($this->updateColumns as $column) {
-                if ($this->getFieldValue($column) !== null) {
+                $optional = false;
+                if (str_ends_with($column, "?")) {
+                    $column = trim(str_replace("?", "", $column));
+                    $optional = true;
+                }
+                if (!$optional && $this->getFieldValue($column) === null) {
+                    continue;
+                }
+                if ($this->getFieldValue($column) !== null || $optional) {
                     $dt = $this->getFieldValue($column);
 
-                    if (is_a(UploadedFile::class, $dt)){
+                    if ($dt instanceof UploadedFile) {
                         $dt = $this->handleUpload($dt, $column);
                     }
-                    if ($dt) {
+                    if ($dt !== null) {
                         $toArray[$column] = $dt;
                     }
                 }
@@ -451,28 +499,26 @@ trait CrudContract
                 if ($this->getFieldValue($key) !== null) {
                     $dt = $this->getFieldValue($key);
 
-                    if (is_a(UploadedFile::class, $dt)){
+                    if ($dt instanceof UploadedFile) {
                         $dt = $this->handleUpload($dt, $key);
                     }
-                    if ($dt) {
+                    if ($dt !== null) {
                         $toArray[$key] = $dt;
                     }
                 }
             }
         }
         $updated = null;
-        // run the pre update event and confirm if its not false or null before proceeding
         if ($toSave = $this->preUpdate($toArray)) {
-            table($this->table, $this->connection)
-                ->inTransaction(function () use ($toSave, $id, &$updated) {
-                    table($this->table, $this->connection)->update($toSave, [$this->primaryKey() => $id]);
+            $this->query()->inTransaction(function () use ($toSave, $id) {
+                $this->query()->update($toSave, [$this->primaryKey() => $id]);
             });
-            $updated = $this->getOneInternal($id);
+            $updated = $this->getOneInternal($id, skipCustomHook: true);
         }
         if (!$updated) {
             throw new Exception("Update failed for record with id $id");
         }
-        // run the post update event
+
         return $this->postUpdate($updated);
     }
 }

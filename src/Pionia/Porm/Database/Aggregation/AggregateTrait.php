@@ -18,7 +18,6 @@ namespace Pionia\Porm\Database\Aggregation;
 
 
 use Pionia\Porm\Core\Porm;
-use Porm\Core\Database;
 
 trait AggregateTrait
 {
@@ -33,7 +32,8 @@ trait AggregateTrait
         if (is_array($where)) {
             $this->where = array_merge($this->where, $where);
         }
-        return $this->database->count($this->table, $column, $this->where);
+
+        return $this->database->count($this->table, null, $column ?? '*', $this->where);
     }
 
     /**
@@ -42,10 +42,13 @@ trait AggregateTrait
      * @return string|null
      * @see Porm::sum()
      */
-    public function sum(string $column, ?array $where): ?string
+    public function sum(string $column, ?array $where = null): ?string
     {
-        $this->where = array_merge($this->where, $where);
-        return $this->database->sum($this->table, $column, $this->where);
+        if (is_array($where)) {
+            $this->where = array_merge($this->where, $where);
+        }
+
+        return $this->database->sum($this->table, null, $column, $this->where);
     }
 
     /**
@@ -54,10 +57,13 @@ trait AggregateTrait
      * @return string|null
      * @see Porm::avg()
      */
-    public function avg(string $column, ?array $where): ?string
+    public function avg(string $column, ?array $where = null): ?string
     {
-        $this->where = array_merge($this->where, $where);
-        return $this->database->avg($this->table, $column, $this->where);
+        if (is_array($where)) {
+            $this->where = array_merge($this->where, $where);
+        }
+
+        return $this->database->avg($this->table, null, $column, $this->where);
     }
 
     /**
@@ -66,10 +72,13 @@ trait AggregateTrait
      * @return string|null
      * @see Porm::max()
      */
-    public function max(string $column, ?array $where): ?string
+    public function max(string $column, ?array $where = null): ?string
     {
-        $this->where = array_merge($this->where, $where);
-        return $this->database->max($this->table, $column, $this->where);
+        if (is_array($where)) {
+            $this->where = array_merge($this->where, $where);
+        }
+
+        return $this->database->max($this->table, null, $column, $this->where);
     }
 
     /**
@@ -78,9 +87,12 @@ trait AggregateTrait
      * @return string|null
      * @see Porm::min()
      */
-    public function min(string $column, ?array $where): ?string
+    public function min(string $column, ?array $where = null): ?string
     {
-        $this->where = array_merge($this->where, $where);
-        return $this->database->min($this->table, $column, $this->where);
+        if (is_array($where)) {
+            $this->where = array_merge($this->where, $where);
+        }
+
+        return $this->database->min($this->table, null, $column, $this->where);
     }
 }

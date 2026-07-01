@@ -4,7 +4,7 @@ namespace Pionia\Http\Services\Generics\Mixins;
 
 use Exception;
 use Pionia\Http\Response\BaseResponse;
-use Porm\exceptions\BaseDatabaseException;
+use Pionia\Porm\Exceptions\BaseDatabaseException;
 
 /**
  * This mixin adds the random functionality to the service.

@@ -21,15 +21,18 @@ class PaginationCore
 
     private string $table;
 
+    private ?string $alias = null;
+
     private Join | Builder | null $baseQuery = null;
 
-    public function __construct(?array $reqData, string $table,  ?int $limit = 10, ?int $offset = 0, ?string $db = 'db')
+    public function __construct(?array $reqData, string $table, ?int $limit = 10, ?int $offset = 0, ?string $db = null, ?string $alias = null)
     {
         $this->limit = $limit;
         $this->offset = $offset;
         $this->table = $table;
         $this->reqData = $reqData;
         $this->db = $db;
+        $this->alias = $alias;
         $this->parged = array_merge($this->parged, $this->extractPagination());
     }
 
@@ -56,7 +59,7 @@ class PaginationCore
      */
     public function init(callable $callback): PaginationCore
     {
-        $query =  table($this->table, $this->db)
+        $query = table($this->table, $this->alias, $this->db)
             ->columns($this->parged['columns'])
             ->where($this->parged['where']);
 

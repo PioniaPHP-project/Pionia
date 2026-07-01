@@ -3,13 +3,12 @@
 namespace Pionia\Http\Services;
 
 use Exception;
-use Pionia\Base\WebApplication;
-use Pionia\Http\Request\Request;
+use Pionia\Http\UploadedFile;
 use Pionia\Http\Services\Generics\Contracts\CrudContract;
 use Pionia\Http\Services\Generics\Contracts\EventsContract;
 use Pionia\Http\Services\Generics\Contracts\JoinContract;
 use Pionia\Http\Services\Generics\Contracts\UploadsContract;
-use Pionia\Http\UploadedFile;
+use Pionia\Porm\Core\Porm;
 
 abstract class GenericService extends Service
 {
@@ -19,8 +18,12 @@ abstract class GenericService extends Service
     public string $table;
 
     /**
+     * SQL alias for the base table in join queries (e.g. `st` for `sample_table AS st`).
+     */
+    public ?string $baseAlias = null;
+
+    /**
      * Can be mutated by the frontend to turn off relationships and go back to querying the base table again.
-     * @var bool
      */
     private bool $dontRelate = false;
 
@@ -33,6 +36,28 @@ abstract class GenericService extends Service
      * @var int The initial index to start from, can de overridden in the request.
      */
     public int $offset = 0;
+
+    /**
+     * Maximum rows returned when list is called without explicit pagination or limit.
+     */
+    public int $maxListRows = 100;
+
+    /**
+     * When true, clients may override list columns via `columns` / `COLUMNS` in the request.
+     */
+    public bool $allowClientColumns = false;
+
+    /**
+     * When true, clients may pass whitelisted filter fields from the request root.
+     */
+    public bool $allowClientFilters = false;
+
+    /**
+     * Columns clients may sort by when `orderBy` / `ORDER_BY` is sent in the request.
+     *
+     * @var array<int, string>
+     */
+    public array $sortableColumns = [];
 
     /**
      * @var string The primary key field name. Default is `id`.
@@ -70,21 +95,25 @@ abstract class GenericService extends Service
     use EventsContract, CrudContract, JoinContract, UploadsContract;
 
     /**
+     * Start a Porm query against this service table, alias, and connection.
+     */
+    protected function query(): Porm
+    {
+        return table($this->table, $this->baseAlias, $this->connection);
+    }
+
+    /**
      * Picks the value of a field from the request data
      * @param $name
      * @return mixed|UploadedFile|null
      */
-    private function getFieldValue($name): mixed
+    protected function getFieldValue($name): mixed
     {
-        if ($this->fileColumns && in_array($name, $this->fileColumns)){
+        if ($this->fileColumns && in_array($name, $this->fileColumns, true)) {
             return $this->request->getFileByName($name) ?? null;
         }
-        return $this->request->getData()->get($name);
-    }
 
-    public function __construct(WebApplication $app, Request $request)
-    {
-        parent::__construct($app, $request);
+        return $this->request->getData()->get($name);
     }
 
     /**

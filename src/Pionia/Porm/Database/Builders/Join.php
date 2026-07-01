@@ -84,4 +84,30 @@ class Join extends ContractBuilder
         }
         return $this->database->count($this->table, $this->joins, $column, $this->where);
     }
+
+    /**
+     * @throws Exception
+     */
+    public function random(?int $limit = 1, ?array $where = null): mixed
+    {
+        if (is_array($where)) {
+            $this->where = array_merge($this->where, $where);
+        }
+
+        if (!isset($this->where['LIMIT'])) {
+            $this->where['LIMIT'] = $limit;
+        }
+
+        $result = $this->database->rand($this->table, $this->joins, $this->columns, $this->where);
+
+        if (!$result) {
+            return $limit === 1 ? null : [];
+        }
+
+        if ($limit === 1) {
+            return is_array($result[0]) ? (object) $result[0] : $result[0];
+        }
+
+        return $result;
+    }
 }
