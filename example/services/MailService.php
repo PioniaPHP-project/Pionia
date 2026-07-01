@@ -11,7 +11,7 @@ namespace Application\Services;
 
 use Pionia\Collections\Arrayable;
 use Pionia\Http\Bag\FileBag;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Http\Services\Service;
 
 class MailService extends Service
@@ -25,7 +25,7 @@ class MailService extends Service
      * @moonlight-param string email Recipient address
      * @moonlight-example {"service":"mail","action":"send_welcome","email":"user@example.com"}
      */
-    protected function sendWelcomeAction(Arrayable $data, ?FileBag $files = null): BaseResponse
+    protected function sendWelcomeAction(Arrayable $data, ?FileBag $files = null): ApiResponse
     {
         $email = (string) $data->get('email', '');
 

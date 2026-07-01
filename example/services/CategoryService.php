@@ -11,7 +11,7 @@ namespace Application\Services;
 
 use Exception;
 use Pionia\Collections\Arrayable;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Http\Services\Service;
 use Pionia\Http\Bag\FileBag;
 use Throwable;
@@ -25,7 +25,7 @@ class CategoryService extends Service
      * @moonlight-param string name New name
      * @moonlight-example {"service":"category","action":"update","id":1,"name":"Acme"}
      */
-	protected function updateAction(Arrayable $data, ?FileBag $files = null): BaseResponse
+	protected function updateAction(Arrayable $data, ?FileBag $files = null): ApiResponse
 	{
         $id = $data->get('id');
         $name = $data->getOrThrow('name', 'Name is required');
@@ -39,7 +39,7 @@ class CategoryService extends Service
      * @moonlight-summary List all companies
      * @moonlight-example {"service":"category","action":"list"}
      */
-    protected function listAction(Arrayable $request): BaseResponse
+    protected function listAction(Arrayable $request): ApiResponse
     {
         defer(function () {
             logger()->info('category.list: deferred log (after response sent to client)');
@@ -54,7 +54,7 @@ class CategoryService extends Service
      * @moonlight-param object data Row payload (name, optional id)
      * @moonlight-example {"service":"category","action":"save_or_update","data":{"name":"Acme"}}
      */
-    protected function saveOrUpdateAction(Arrayable $request): BaseResponse
+    protected function saveOrUpdateAction(Arrayable $request): ApiResponse
     {
         $data = $request->get('data');
         $saved = db('company')->saveOrUpdate($data);

@@ -10,7 +10,7 @@
 namespace Application\Services;
 
 use Pionia\Collections\Arrayable;
-use Pionia\Http\Response\BaseResponse;
+use Pionia\Http\Response\ApiResponse;
 use Pionia\Http\Services\Service;
 use Pionia\Http\Bag\FileBag;
 
@@ -24,7 +24,7 @@ class AuthService extends Service
 	 * @moonlight-auth required
 	 * @moonlight-example {"service":"auth","action":"get_auth"}
 	 */
-	protected function getAuthAction(Arrayable $data, ?FileBag $files = null): BaseResponse
+	protected function getAuthAction(Arrayable $data, ?FileBag $files = null): ApiResponse
 	{
 		return response(0, 'You have reached get_auth_action action');
 	}
@@ -39,7 +39,7 @@ class AuthService extends Service
 	 * @moonlight-param string password Secret
 	 * @moonlight-example {"service":"auth","action":"create_auth","username":"demo","password":"secret"}
 	 */
-	protected function createAuthAction(Arrayable $data, ?FileBag $files = null): BaseResponse
+	protected function createAuthAction(Arrayable $data, ?FileBag $files = null): ApiResponse
 	{
 		return response(0, 'You have reached create_auth_action action');
 	}
@@ -52,7 +52,7 @@ class AuthService extends Service
 	 * @moonlight-auth none
 	 * @moonlight-example {"service":"auth","action":"list_auth"}
 	 */
-	protected function listAuthAction(Arrayable $data, ?FileBag $files = null): BaseResponse
+	protected function listAuthAction(Arrayable $data, ?FileBag $files = null): ApiResponse
 	{
 		return response(0, 'You have reached list_auth_action action');
 	}
@@ -66,7 +66,7 @@ class AuthService extends Service
 	 * @moonlight-param int id Record id
 	 * @moonlight-example {"service":"auth","action":"delete_auth","id":1}
 	 */
-	protected function deleteAuthAction(Arrayable $data, ?FileBag $files = null): BaseResponse
+	protected function deleteAuthAction(Arrayable $data, ?FileBag $files = null): ApiResponse
 	{
 		return response(0, 'You have reached delete_auth_action action');
 	}
@@ -80,7 +80,7 @@ class AuthService extends Service
 	 * @moonlight-param int id Record id
 	 * @moonlight-example {"service":"auth","action":"update_auth","id":1}
 	 */
-	protected function updateAuthAction(Arrayable $data, ?FileBag $files = null): BaseResponse
+	protected function updateAuthAction(Arrayable $data, ?FileBag $files = null): ApiResponse
 	{
 		return response(0, 'You have reached update_auth_action action');
 	}
