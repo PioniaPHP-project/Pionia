@@ -51,6 +51,7 @@ class DeveloperStatsPage
         $heavyRows = $this->endpointMetricRows($metrics['heavy_endpoints'] ?? []);
         $trafficRows = $this->endpointMetricRows($metrics['high_traffic_endpoints'] ?? []);
         $apiTrafficRows = $this->endpointMetricRows($metrics['api_by_traffic'] ?? []);
+        $trafficPanel = $this->trafficPanel($metricsSummaryRows, $heavyRows, $trafficRows, $apiTrafficRows);
         $themeInit = PioniaTheme::initScript();
         $themeAssets = PioniaTheme::stylesheetTags();
         $themeToggle = PioniaTheme::toggleButton();
@@ -105,7 +106,7 @@ class DeveloperStatsPage
             <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#env-panel" type="button">Environment</button></li>
             <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#routes-panel" type="button">Routes</button></li>
             <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#stack-panel" type="button">Stack</button></li>
-            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#requests-panel" type="button">Requests</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#traffic-panel" type="button">Traffic</button></li>
             <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#services-panel" type="button">Services</button></li>
         </ul>
         <div class="tab-content p-3 p-md-4">
@@ -119,13 +120,7 @@ class DeveloperStatsPage
                 {$this->table('Middlewares', 'Class', $context->keyValueRows(middlewares()))}
                 {$this->table('Authentications', 'Class', $context->keyValueRows(authentications()))}
             </div>
-            <div class="tab-pane fade" id="requests-panel">
-                <p class="text-muted small mb-3">Rolling request metrics from <code>storage/metrics/requests.jsonl</code>. API endpoints are grouped by <code>service::action</code>.</p>
-                {$this->table('Metric', 'Value', $metricsSummaryRows)}
-                {$this->metricsTable('Heaviest endpoints (avg ms)', $heavyRows)}
-                {$this->metricsTable('Highest traffic', $trafficRows)}
-                {$this->metricsTable('API traffic (service · action)', $apiTrafficRows)}
-            </div>
+            <div class="tab-pane fade" id="traffic-panel">{$trafficPanel}</div>
             <div class="tab-pane fade" id="services-panel">{$this->table('Version / Service', 'Class · Actions', $context->serviceRows())}</div>
         </div>
     </div>
@@ -238,11 +233,38 @@ HTML;
     }
 
     /**
-     * @param list<array{0: string, 1: string}> $rows
+     * @param list<array{0: string, 1: string}> $summaryRows
+     * @param list<array{0: string, 1: string}> $heavyRows
+     * @param list<array{0: string, 1: string}> $trafficRows
+     * @param list<array{0: string, 1: string}> $apiTrafficRows
      */
-    private function metricsTable(string $title, array $rows): string
+    private function trafficPanel(array $summaryRows, array $heavyRows, array $trafficRows, array $apiTrafficRows): string
     {
-        return '<h3 class="h6 mt-4 mb-2">' . $this->e($title) . '</h3>' . $this->table('Endpoint', 'Metrics', $rows);
+        $summary = $this->table('Metric', 'Value', $summaryRows);
+        $heavyTable = $this->table('Endpoint', 'Metrics', $heavyRows);
+        $trafficTable = $this->table('Endpoint', 'Metrics', $trafficRows);
+        $apiTable = $this->table('Endpoint', 'Metrics', $apiTrafficRows);
+
+        return <<<HTML
+<p class="text-muted small mb-3">Rolling request metrics from <code>storage/metrics/requests.jsonl</code>. HTTP endpoints and API calls (<code>service · action</code>) are tracked separately below.</p>
+{$summary}
+<ul class="nav nav-pills traffic-subtabs mb-3" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="traffic-heavy-tab" data-bs-toggle="tab" data-bs-target="#traffic-heavy-panel" type="button" role="tab">Heaviest endpoints (avg ms)</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="traffic-volume-tab" data-bs-toggle="tab" data-bs-target="#traffic-volume-panel" type="button" role="tab">Highest traffic</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="traffic-api-tab" data-bs-toggle="tab" data-bs-target="#traffic-api-panel" type="button" role="tab">API traffic (service · action)</button>
+    </li>
+</ul>
+<div class="tab-content traffic-subtab-content">
+    <div class="tab-pane fade show active" id="traffic-heavy-panel" role="tabpanel">{$heavyTable}</div>
+    <div class="tab-pane fade" id="traffic-volume-panel" role="tabpanel">{$trafficTable}</div>
+    <div class="tab-pane fade" id="traffic-api-panel" role="tabpanel">{$apiTable}</div>
+</div>
+HTML;
     }
 
     /**
@@ -268,9 +290,8 @@ HTML;
             ['Memory limit', $this->e((string) ($memory['limit'] ?? ''))],
             ['Disk scope', $this->e('Filesystem volume containing the app (not project folder size)')],
             ['Volume path', '<code>' . $this->e((string) ($volume['path'] ?? '')) . '</code>'],
-            ['Volume total', $this->e((string) ($volume['total_human'] ?? ''))],
+            ['Volume usage', $this->e((string) ($volume['usage_summary'] ?? ''))],
             ['Volume free', $this->e((string) ($volume['free_human'] ?? ''))],
-            ['Volume used %', $this->e((string) ($volume['used_percent'] ?? '')) . '%'],
             ['App storage path', '<code>' . $this->e((string) ($storage['path'] ?? '')) . '</code>'],
             ['App storage size', $this->e((string) ($storage['size_human'] ?? ''))],
         ];

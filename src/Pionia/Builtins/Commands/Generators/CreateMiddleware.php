@@ -58,7 +58,7 @@ class CreateMiddleware extends Command
 
         $file->addComment('This middleware is auto-generated from pionia cli.');
 
-        $file->addComment("Remember to register your middleware in bootstrap/application.php or in any ini environment file under [middlewares] section.");
+        $file->addComment("Remember to register your middleware in environment/settings.ini under [app_middlewares], or via a service provider.");
 
         $namespace->addUse('Pionia\Middlewares\Middleware');
         $namespace->addUse('Pionia\Http\Request\Request');
@@ -84,7 +84,7 @@ class CreateMiddleware extends Command
         $fs->dumpFile($directory.'/'.$name.'.php', $file);
 
         // update the generated.ini file
-        addIniSection('middlewares', [$name => $ns.'\\'.$name]);
+        addIniSection('app_middlewares', [$name => $ns.'\\'.$name]);
 
         $this->info("Middleware $name created at $directory.");
     }
@@ -106,5 +106,8 @@ class CreateMiddleware extends Command
 
         $OnResponseMethod->addParameter('response')
             ->setType(Response::class);
+
+        $OnResponseMethod->addParameter('request')
+            ->setType(Request::class);
     }
 }

@@ -24,6 +24,7 @@ trait InteractsWithConsole
         $this->bootConsoleForTesting($console);
 
         $input = new ArrayInput(array_merge(['command' => $command], $arguments));
+        $input->setInteractive(false);
         $output = new BufferedOutput();
 
         $console->setAutoExit(false);

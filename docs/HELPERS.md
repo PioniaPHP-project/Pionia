@@ -194,7 +194,9 @@ More detail: [pionia-docs — Background work](https://pionia.netlify.app/docume
 
 | Helper | Purpose |
 |--------|---------|
-| `validate(string $field, Arrayable\|Request\|Service $data)` | Field validator builder |
+| `rules(Arrayable\|Request\|Service $data, array $fieldRules)` | Validate multiple fields with pipe rules |
+| `validate(string $field, Arrayable\|Request\|Service $data)` | Single-field validator chain |
+| `validations()` | Shared custom rule registry (`ValidationManager`) |
 | `response(...)` | Moonlight JSON envelope (`ApiResponse`) |
 | `cachedResponse(Service $instance, ApiResponse $response, mixed $ttl = 60)` | Cache action response |
 | `recached(...)` | Shorthand for `cachedResponse(response(...), ...)` |

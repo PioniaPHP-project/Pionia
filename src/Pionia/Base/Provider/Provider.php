@@ -87,4 +87,9 @@ abstract class Provider implements ProviderContract
    * Customize the exception pipeline.
    */
     public function configureExceptions(\Pionia\Exceptions\ExceptionPipeline $exceptions): void {}
+
+  /**
+   * Register custom validation rules on the shared ValidationManager.
+   */
+    public function configureValidations(\Pionia\Validations\ValidationManager $validations): void {}
 }

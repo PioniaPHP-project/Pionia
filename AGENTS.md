@@ -533,7 +533,10 @@ Extend Pionia from **Composer packages** or your app via `Pionia\Base\Provider\P
 | `configureLogging(LogManager)` | Boot | Custom log channels |
 | `configureCaching(CacheManager)` | Boot | Custom cache stores |
 | `configureExceptions(ExceptionPipeline)` | Boot | Handlers, maps, `dontReport` |
+| `configureValidations(ValidationManager)` | Boot | Custom validation rules |
 | `onBooted()` | After all providers registered stacks | Container bindings, events |
+
+**Validation:** Use `#[Validated]` / `#[ValidateField]` on action methods (auto-runs in `processAction`), `rules($data, [...])` inside actions, or `validate('field', $data)->…` for single fields. Custom rules: `validations()->extend('name', callable|ValidationRuleContract)` or `configureValidations()` on a provider.
 | `onTerminate()` | CLI shutdown | Cleanup |
 
 **Boot order:** resolve providers → middleware → auth → commands → configure* + `onBooted()` → provider routes.

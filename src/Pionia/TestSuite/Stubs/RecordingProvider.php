@@ -9,6 +9,7 @@ use Pionia\Exceptions\ExceptionPipeline;
 use Pionia\Http\Routing\PioniaRouter;
 use Pionia\Logging\LogManager;
 use Pionia\Middlewares\MiddlewareChain;
+use Pionia\Validations\ValidationManager;
 
 /**
  * Test double that records which provider hooks ran during boot.
@@ -64,6 +65,11 @@ final class RecordingProvider extends Provider
     public function configureExceptions(ExceptionPipeline $exceptions): void
     {
         self::$bootSteps[] = 'configureExceptions';
+    }
+
+    public function configureValidations(ValidationManager $validations): void
+    {
+        self::$bootSteps[] = 'configureValidations';
     }
 
     public function onBooted(): void

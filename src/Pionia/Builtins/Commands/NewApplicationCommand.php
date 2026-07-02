@@ -5,8 +5,10 @@ namespace Pionia\Builtins\Commands;
 use Pionia\Console\Command;
 use Pionia\Console\Input\InputArgument;
 use Pionia\Console\Input\InputOption;
+use Pionia\Console\Input\ArgvInput;
 use Pionia\Process\Process;
 use Pionia\Scaffolding\ApplicationScaffolder;
+use Pionia\Scaffolding\FrontendFramework;
 use Pionia\Utils\Support;
 
 class NewApplicationCommand extends Command
@@ -19,7 +21,8 @@ class NewApplicationCommand extends Command
 
     protected string $help = 'Creates a new project directory with bootstrap, environment, services, and composer.json. '
         . 'Requires an existing Pionia install (php pionia from this repo or vendor). '
-        . 'For a fresh machine with only Composer, use: composer create-project pionia/pionia-app my-api';
+        . 'For a fresh machine with only Composer: composer create-project pionia/pionia-app my-api '
+        . '(add -- --vue-ts to scaffold a frontend, or answer the prompt).';
 
     protected function getArguments(): array
     {
@@ -33,7 +36,8 @@ class NewApplicationCommand extends Command
         return [
             ['path', null, InputOption::VALUE_OPTIONAL, 'Parent directory for the new app', getcwd() ?: '.'],
             ['vendor', null, InputOption::VALUE_OPTIONAL, 'Composer vendor name', 'app'],
-            ['with-frontend', null, InputOption::VALUE_OPTIONAL, 'Scaffold frontend (react-ts, vue-ts, …)', null],
+            ['with-frontend', null, InputOption::VALUE_OPTIONAL, 'Scaffold frontend (' . FrontendFramework::listForDisplay() . '); use alone to pick from the list', null],
+            ['no-frontend', null, InputOption::VALUE_NONE, 'Skip the frontend scaffold prompt'],
             ['install', null, InputOption::VALUE_NONE, 'Run composer install after scaffold'],
         ];
     }
@@ -70,48 +74,144 @@ class NewApplicationCommand extends Command
 
         $this->info("Application scaffolded at {$target}");
 
-        if ($this->option('install')) {
-            $this->line('Running composer install …');
-            $process = Process::fromShellCommandline('composer install --no-interaction', $target);
-            $process->setTimeout(600);
-            $process->run(function ($type, $buffer): void {
-                $this->output->write($buffer);
-            });
+        $frontend = $this->resolveRequestedFrontend();
+        if ($frontend === false) {
+            return Command::FAILURE;
+        }
+        $shouldInstall = (bool) $this->option('install') || $frontend !== null;
 
-            if (!$process->isSuccessful()) {
-                $this->warn('composer install failed — run it manually in the project directory.');
+        if ($shouldInstall && !$this->option('install')) {
+            $this->line('Running composer install (required for frontend scaffold) …');
+        }
 
+        if ($shouldInstall) {
+            if (!$this->runComposerInstall($target)) {
                 return Command::FAILURE;
             }
         }
 
-        $frontend = $this->option('with-frontend');
-        if (is_string($frontend) && $frontend !== '' && $this->option('install')) {
-            $this->line('Scaffolding frontend …');
-            $pioniaBin = $target . DIRECTORY_SEPARATOR . 'pionia';
-            $scaffold = Process::fromShellCommandline(
-                'php ' . escapeshellarg($pioniaBin) . ' frontend:scaffold --framework=' . escapeshellarg($frontend) . ' --yes',
-                $target,
-            );
-            $scaffold->setTimeout(900);
-            $scaffold->run(function ($type, $buffer): void {
-                $this->output->write($buffer);
-            });
+        if ($frontend !== null) {
+            if (!$this->runFrontendScaffold($target, $frontend)) {
+                return Command::FAILURE;
+            }
         }
 
         $this->line('');
         $this->line('Next steps:');
         $this->line("  cd {$name}");
-        if (!$this->option('install')) {
+        if (!$shouldInstall) {
             $this->line('  composer install');
         }
-        if (is_string($frontend) && $frontend !== '' && !$this->option('install')) {
-            $this->line("  php pionia frontend:scaffold --framework={$frontend} --yes");
+        if ($frontend === null && !$this->option('no-frontend')) {
+            $this->line('  php pionia frontend:scaffold   # optional Vite SPA');
         }
         $this->line('  php pionia serve   # or: composer run serve');
+        if ($frontend !== null) {
+            $this->line('  php pionia frontend:dev   # Vite dev server');
+        }
         $this->line('');
-        $this->line('Tip: on a machine without Pionia yet, prefer: composer create-project pionia/pionia-app ' . $name);
+        $this->line('Tip: on a machine without Pionia yet, prefer: composer create-project pionia/pionia-app ' . $name . ' -- --vue-ts');
 
         return Command::SUCCESS;
+    }
+
+    private function resolveRequestedFrontend(): string|false|null
+    {
+        if ($this->input instanceof ArgvInput) {
+            $fromArgv = FrontendFramework::resolveFromTokens($this->input->getTokens());
+            if ($fromArgv !== null) {
+                return $fromArgv;
+            }
+        }
+
+        $with = $this->option('with-frontend');
+        if (is_string($with) && $with !== '') {
+            $framework = strtolower($with);
+            if (!FrontendFramework::isValid($framework)) {
+                $this->error('Invalid --with-frontend value. Choose: ' . FrontendFramework::listForDisplay());
+
+                return false;
+            }
+
+            return $framework;
+        }
+
+        if ($with === true) {
+            return strtolower((string) $this->choice(
+                'Choose a Vite template',
+                FrontendFramework::ALL,
+                FrontendFramework::DEFAULT,
+            ));
+        }
+
+        if ($this->option('no-frontend') || !$this->canPromptForFrontend()) {
+            return null;
+        }
+
+        if (!$this->confirm('Scaffold a Vite frontend in frontend/?', false)) {
+            return null;
+        }
+
+        return strtolower((string) $this->choice(
+            'Choose a Vite template',
+            FrontendFramework::ALL,
+            FrontendFramework::DEFAULT,
+        ));
+    }
+
+    private function canPromptForFrontend(): bool
+    {
+        if (defined('PIONIA_TESTING') && PIONIA_TESTING) {
+            return false;
+        }
+
+        if (!$this->input->isInteractive()) {
+            return false;
+        }
+
+        return function_exists('posix_isatty') && @posix_isatty(STDIN);
+    }
+
+    private function runComposerInstall(string $target): bool
+    {
+        if ($this->option('install')) {
+            $this->line('Running composer install …');
+        }
+
+        $process = Process::fromShellCommandline('composer install --no-interaction', $target);
+        $process->setTimeout(600);
+        $process->run(function ($type, $buffer): void {
+            $this->output->write($buffer);
+        });
+
+        if (!$process->isSuccessful()) {
+            $this->warn('composer install failed — run it manually in the project directory.');
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private function runFrontendScaffold(string $target, string $frontend): bool
+    {
+        $this->line("Scaffolding {$frontend} frontend …");
+        $pioniaBin = $target . DIRECTORY_SEPARATOR . 'pionia';
+        $scaffold = Process::fromShellCommandline(
+            'php ' . escapeshellarg($pioniaBin) . ' frontend:scaffold --framework=' . escapeshellarg($frontend) . ' --yes',
+            $target,
+        );
+        $scaffold->setTimeout(900);
+        $scaffold->run(function ($type, $buffer): void {
+            $this->output->write($buffer);
+        });
+
+        if (!$scaffold->isSuccessful()) {
+            $this->warn("Frontend scaffold failed — run: php pionia frontend:scaffold --framework={$frontend} --yes");
+
+            return false;
+        }
+
+        return true;
     }
 }

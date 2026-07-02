@@ -17,6 +17,14 @@ class DeveloperStatsCollectorTest extends PioniaTestCase
         $this->assertArrayHasKey('memory', $payload['system']);
         $this->assertArrayHasKey('volume', $payload['system']);
         $this->assertSame('filesystem_volume', $payload['system']['volume']['scope']);
+        $this->assertMatchesRegularExpression(
+            '/^Volume: \d+(\.\d+)?\/\d+(\.\d+)? ~ \d+(\.\d+)?% used$/',
+            $payload['health']['checks']['disk']['message'],
+        );
+        $this->assertSame(
+            $payload['health']['checks']['disk']['message'],
+            $payload['system']['volume']['usage_summary'],
+        );
         $this->assertContains($payload['health']['checks']['database']['status'], ['ok', 'critical']);
     }
 }

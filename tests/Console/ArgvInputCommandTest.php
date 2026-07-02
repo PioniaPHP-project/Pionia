@@ -49,7 +49,7 @@ class ArgvInputCommandTest extends PioniaTestCase
             $console->setAutoExit(false);
             $code = $console->run($input, $output);
 
-            $this->assertSame(0, $code);
+            $this->assertSame(0, $code, $output->fetch());
             $this->assertFileExists($tempDir . '/argv-demo/composer.json');
         } finally {
             $this->removeDirectory($tempDir . '/argv-demo');

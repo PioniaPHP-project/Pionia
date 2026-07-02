@@ -31,7 +31,7 @@
         "test": "php vendor/bin/phpunit",
         "pionia": "php pionia",
         "post-create-project-cmd": [
-            "@php storage/scripts/rename.php"
+            "Pionia\\Scaffolding\\PostCreateProjectHandler::handle"
         ],
         "post-install-cmd": [
             "@php -r \"if (is_file('vendor/bin/rr') && !is_file('rr')) { echo \\\"Run: composer rr:setup to install the RoadRunner binary\\\\n\\\"; }\""

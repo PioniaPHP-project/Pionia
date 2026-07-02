@@ -79,3 +79,27 @@
     color: var(--pionia-purple);
     border-color: var(--pionia-border) var(--pionia-border) #fff;
 }
+
+.stats-page .traffic-subtabs {
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.stats-page .traffic-subtabs .nav-link {
+    font-size: 0.875rem;
+    color: var(--pionia-muted);
+    border: 1px solid var(--pionia-border);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+}
+
+.stats-page .traffic-subtabs .nav-link.active {
+    background: var(--pionia-purple);
+    border-color: var(--pionia-purple);
+    color: #fff;
+}
+
+.stats-page .traffic-subtab-content {
+    border-top: 1px solid var(--pionia-border);
+    padding-top: 1rem;
+}

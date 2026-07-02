@@ -62,6 +62,30 @@ protected function listAction(Arrayable $data): ApiResponse
 
 PHPDoc tags and attributes merge; attributes override when both are present.
 
+## Action validation (PHP attributes)
+
+Validate request fields before the action body runs:
+
+```php
+use Pionia\Validations\Attributes\Validated;
+use Pionia\Validations\Attributes\ValidateField;
+
+#[Validated(rules: [
+    'email' => 'required|email',
+    'page' => 'integer|min:1',
+])]
+protected function listAction(Arrayable $data): ApiResponse
+```
+
+Or repeatable per-field attributes:
+
+```php
+#[ValidateField('email', 'required|email')]
+protected function loginAction(Arrayable $data): ApiResponse
+```
+
+Same pipe syntax as `rules()`; custom rules from `validations()->extend()`. See user docs: Validations guide.
+
 ## Tag reference
 
 | Tag / attribute | Required | Purpose |

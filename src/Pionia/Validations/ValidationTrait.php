@@ -1,264 +1,53 @@
 <?php
-namespace  Pionia\Validations;
 
-use Exception;
+namespace Pionia\Validations;
+
 use Nette\Utils\Validators;
 use Pionia\Collections\Arrayable;
+use Pionia\Exceptions\ValidationException;
 
-/**
- */
 trait ValidationTrait
 {
-    private  string $phone_pattern = "/^[+]{1}(?:[0-9\-\\(\\)\\/.]\s?){6,15}[0-9]{1}$/";
-    private  string $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/";
-    private  string $ip_pattern = "/^(\d{1,3}\.){3}\d{1,3}$/";
-    private  string $slug_pattern = "/^[a-z0-9-]+$/";
-    private bool $throwsExceptions = true;
+    private string $phone_pattern = "/^[+]{1}(?:[0-9\-\\(\\)\\/.]\s?){6,15}[0-9]{1}$/";
+
+    private string $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).{8,}$/";
+
+    private string $slug_pattern = "/^[a-z0-9-]+$/";
+
+    private string $uuid_pattern = '/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i';
 
     /**
-     * Use this to cover scenarios this contract does not cover
-     * @param string $regex - The regular expression to check against
-     * @param string|null $message - The message to throw if the value is invalid and we are in the exceptions mode
-     * @return bool|int
-     * @throws Exception
+     * @throws ValidationException
      */
-    private function _validate(string $regex, ?string $message = 'Invalid data'): bool|int
+    protected function validationFail(string $message): never
+    {
+        throw new ValidationException($message);
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    private function _validate(string $regex, ?string $message = 'Invalid data'): bool
     {
         $value = $this->getOrFail();
-        $checker = filter_var($value, FILTER_VALIDATE_REGEXP,  ['options' => ['regexp' => $regex]]);
-        if (!$checker && $this->throwsExceptions) {
-            throw new Exception($message);
-        }
-        return $checker;
-    }
-
-    /**
-     * @throws Exception
-     */
-    private function getOrFail()
-    {
-        return $this->hayStack->has($this->hook) ? $this->hayStack->get($this->hook) : throw new Exception("$this->hook is undefined in the validation data");
-    }
-
-    /**
-     * Validates emails of all formats
-     * @param string|null $regex
-     * @param string|null $message
-     * @return Validator
-     * @throws Exception
-     */
-    public  function asEmail(string $regex = null, ?string $message = 'Invalid email address'): Validator
-    {
-        if ($regex){
-            $this->_validate($regex, $message);
-            return $this;
+        $checker = filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => $regex]]);
+        if (!$checker) {
+            $this->validationFail($message);
         }
 
-        $email = $this->getOrFail();
-        Validators::isEmail($email) ?: throw new Exception($message);
-        return $this;
+        return true;
     }
 
     /**
-     * Will only validate international numbers if the code is provided, otherwise, will validate local only
-     *
-     * @param string|null $code International country that you want to check against
-     * @param string|null $regex Your custom regular expression we can depend on instead.
-     * @param string|null $message
-     * @return bool|int
-     * @throws Exception
+     * @throws ValidationException
      */
-    public function asInternationalPhone(?string $code = null, ?string $regex = null, ?string $message = 'Invalid phone number'): bool|int
+    private function getOrFail(): mixed
     {
-        $phone = $this->getOrFail();
-        // we have the regex but no code
-        if (!$code){
-            return $this->_validate($regex ?? $this->phone_pattern);
+        if (!$this->hayStack->has($this->hook)) {
+            $this->validationFail("{$this->hook} is undefined in the validation data");
         }
 
-        $copy = $phone;
-        if (!str_starts_with($copy, $code)){
-            throw new Exception($message);
-        }
-        return $this->_validate($regex ?? $this->phone_pattern, $message);
-    }
-
-    /**
-     * Validates the rules as follows
-     *  - At least one integer
-     *  - At least one lowercase alpha letter
-     *  - At least one Uppercase alpha letter
-     *  - At least one special character
-     *
-     * @param string|null $regex Your custom regular expression we can depend on instead.
-     * @throws Exception
-     */
-    public  function asPassword(?string $regex = null, ?string $message = 'Week Password'): static
-    {
-        $this->_validate($regex ?? $this->password_pattern, $message);
-        return $this;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function asNumber(?string $message = 'Invalid Number'): static
-    {
-        $number = $this->getOrFail();
-        Validators::isNumber($number) ?? throw new Exception($message);
-        return $this;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function asNumeric(?string $message = 'Invalid Numeric'): static
-    {
-        $number = $this->getOrFail();
-        Validators::isNumeric($number) ?: throw new Exception($message);
-        return $this;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function asNumericInt(?string $message='Invalid Numeric Integer'): static
-    {
-        $number = $this->getOrFail();
-        if (Validators::isNumericInt($number)){
-            return $this;
-        }
-        throw new Exception($message);
-    }
-
-    /**
-     * @param string|null $regex Your custom regular expression we can depend on instead.
-     * @param string|null $message
-     * @return Validator
-     * @throws Exception
-     */
-    public  function asUrl(?string $regex = null, ?string $message = 'Invalid URL'): Validator
-    {
-        $url = $this->getOrFail();
-        if ($regex){
-            $this->_validate($regex, $message);
-            return $this;
-        }
-        if (Validators::isUrl($url)){
-            return $this;
-        }
-        throw new Exception($message);
-    }
-
-    /**
-     * @param string|null $regex Your custom regular expression we can depend on instead.
-     * @param string|null $message
-     * @return Validator
-     * @throws Exception
-     */
-    public  function asIp(?string $regex = null, ?string $message='Invalid IP address'): Validator
-    {
-        if ($regex) {
-             $this->_validate($regex, $message);
-        } else {
-            $this->_validateFilter(FILTER_VALIDATE_IP, $message);
-        }
-        return $this;
-    }
-
-    /**
-     * @param string|null $regex Your custom regular expression we can depend on instead.
-     * @return Validator
-     * @throws Exception
-     */
-    public function asMac(?string $regex = null): Validator
-    {
-        $mac = $this->getOrFail();
-        if ($regex) {
-            $this->_validate($regex, $mac, 'Invalid MAC Address');
-        } else {
-            $this->_validateFilter($mac, FILTER_VALIDATE_MAC, 'Invalid Mac Address');
-        }
-        return $this;
-    }
-
-    /**
-     * @param string|null $regex Your custom regular expression we can depend on instead.
-     * @return Validator
-     * @throws Exception
-     */
-    public function asDomain(?string $regex = null): Validator
-    {
-        $domain = $this->getOrFail();
-        if ($regex){
-            $this->validate($regex, $domain, 'Invalid domain');
-        } else {
-            $this->_validateFilter($domain, FILTER_VALIDATE_DOMAIN, 'Invalid Domain');
-        }
-        return $this;
-    }
-
-
-    /**
-     * @param string|null $regex Your custom regular expression we can depend on instead.
-     *
-     * @return Validator
-     * @throws Exception
-     * @example ```
-     *      $slug = 'fsjkfjshfsjk-skdhfkjdfsj-skdjfhjskdf'; // valid slug
-     *      $slug2 = 'sfksdfsdskljfhsdhjkfhsdsfsdfsfsd'; // valid slug
-     *      $slug3 = 'dkfl ksjfhsdk/skjdfsk%'; // invalid slug
-     */
-    public  function asSlug(?string $regex = null): Validator
-    {
-        $slug = $this->getOrFail();
-        $this->_validate($regex ?? $this->slug_pattern, $slug, 'Invalid slug');
-        return $this;
-    }
-
-
-    /**
-     * Internal validator based on PHP filter_var validations
-     * @param $filterType
-     * @param string $message
-     * @return int|bool
-     * @throws Exception
-     */
-    private function _validateFilter($filterType, string $message = 'Invalid Data'): int | bool
-    {
-        $value = $this->getOrFail();
-        $checker = filter_var($value, $filterType);
-        if (!$checker && $this->throwsExceptions){
-            throw new Exception($message);
-        }
-        return $checker == $value;
-    }
-
-    /**
-     * Check if the value matches the expected value
-     * @param string $expected
-     * @param string|null $message
-     * @return Validator
-     * @throws Exception
-     */
-    private function is(mixed $expected, ?string $message = 'Invalid data'): Validator
-    {
-        $value = $this->getOrFail();
-        Validators::is($value, $expected) ?? throw new Exception($message);
-        return $this;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function are(string $expected, ?string $message = 'Invalid data'): Validator
-    {
-        $value = $this->getOrFail();
-        if (!is_iterable($value)){
-            return $this->is($expected, $message);
-        }
-        Validators::everyIs($value, $expected) ?: throw new Exception($message);
-        return $this;
+        return $this->hayStack->get($this->hook);
     }
 
     public static function validate(string $keyToValidate, ?Arrayable $data): static
@@ -266,210 +55,553 @@ trait ValidationTrait
         $klass = new static();
         $klass->hook = $keyToValidate;
         $klass->hayStack = $data;
+
         return $klass;
     }
 
     /**
-     * Marks the field as required
-     * @throws Exception
+     * @throws ValidationException
      */
     public function required(?string $message = null): static
     {
-        $message ??= "$this->hook is required";
-        $value = $this->hayStack->get($this->hook) ?? throw new Exception($message);
-        if (blank($value)) {
-            throw new Exception($message);
+        $message ??= "{$this->hook} is required";
+        $value = $this->hayStack->get($this->hook);
+        if ($value === null || blank($value)) {
+            $this->validationFail($message);
         }
+
         return $this;
     }
 
     /**
-     * Ensures that the field is an integer
-     * @throws Exception
+     * Accept integers and numeric strings from JSON bodies.
+     *
+     * @throws ValidationException
+     */
+    public function integer(?string $message = null): static
+    {
+        $message ??= "{$this->hook} must be an integer";
+        $value = $this->hayStack->get($this->hook);
+
+        if (is_int($value)) {
+            return $this;
+        }
+
+        if (is_string($value) && preg_match('/^-?\d+$/', $value)) {
+            return $this;
+        }
+
+        $this->validationFail($message);
+    }
+
+    /**
+     * @throws ValidationException
      */
     public function int(?string $message = null): static
     {
-        $message ??= "$this->hook must be an integer";
-        $value = $this->hayStack->get($this->hook);
-        if (!is_numeric($value) || !is_int($value)) {
-            throw new Exception($message);
-        }
-        return $this;
+        return $this->integer($message);
     }
 
     /**
-     * Ensures that the field is a string
-     * @throws Exception
+     * @throws ValidationException
      */
     public function string(?string $message = null): static
     {
-        $message ??= "$this->hook must be a string";
+        $message ??= "{$this->hook} must be a string";
         $value = $this->hayStack->get($this->hook);
         if (!is_string($value)) {
-            throw new Exception($message);
+            $this->validationFail($message);
         }
+
         return $this;
     }
 
     /**
-     * Ensures that the field is a boolean
-     * @throws Exception
+     * Accepts true/false, 0/1, and "true"/"false" strings.
+     *
+     * @throws ValidationException
+     */
+    public function boolean(?string $message = null): static
+    {
+        $message ??= "{$this->hook} must be a boolean";
+        $value = $this->hayStack->get($this->hook);
+
+        if (is_bool($value)) {
+            return $this;
+        }
+
+        if (in_array($value, [0, 1, '0', '1', 'true', 'false', 'yes', 'no'], true)) {
+            return $this;
+        }
+
+        $this->validationFail($message);
+    }
+
+    /**
+     * @throws ValidationException
      */
     public function bool(?string $message = null): static
     {
-        $message ??= "$this->hook must be a boolean";
-        $value = $this->hayStack->get($this->hook);
-        if (!is_bool($value)) {
-            throw new Exception($message);
-        }
-        return $this;
+        return $this->boolean($message);
     }
 
     /**
-     * Ensures that the field is a float
-     * @throws Exception
+     * @throws ValidationException
      */
     public function float(?string $message = null): static
     {
-        $message ??= "$this->hook must be a float";
+        $message ??= "{$this->hook} must be a float";
         $value = $this->hayStack->get($this->hook);
-        if (!is_float($value)) {
-            throw new Exception($message);
+        if (!is_float($value) && !(is_numeric($value) && str_contains((string) $value, '.'))) {
+            $this->validationFail($message);
         }
+
         return $this;
     }
 
     /**
-     * Ensures that the field is an array
-     * @throws Exception
+     * @throws ValidationException
      */
     public function array(?string $message = null): static
     {
-        $message ??= "$this->hook must be an array";
+        $message ??= "{$this->hook} must be an array";
         $value = $this->hayStack->get($this->hook);
         if (!is_array($value)) {
-            throw new Exception($message);
+            $this->validationFail($message);
         }
+
         return $this;
     }
 
     /**
-     * Ensures that the field is a date
-     * @throws Exception
+     * @throws ValidationException
      */
     public function date(?string $message = null): static
     {
-        $message ??= "$this->hook must be a valid date";
+        $message ??= "{$this->hook} must be a valid date";
         $value = $this->hayStack->get($this->hook);
-        if (!strtotime($value)) {
-            throw new Exception($message);
+        if (!is_string($value) || strtotime($value) === false) {
+            $this->validationFail($message);
         }
+
         return $this;
     }
 
     /**
-     * Ensures that the field is an email
-     * @throws Exception
+     * @throws ValidationException
      */
     public function email(?string $message = null): static
     {
-        $message ??= "$this->hook must be a valid email address";
+        $message ??= "{$this->hook} must be a valid email address";
         $value = $this->hayStack->get($this->hook);
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception($message);
+            $this->validationFail($message);
         }
+
         return $this;
     }
 
     /**
-     * Required if the condition is met by the hook
-     * @param callable $condition The condition to check against. Receives the instance of the validator
-     * @return Validator
-     * @throws Exception
+     * @throws ValidationException
+     */
+    public function asEmail(?string $regex = null, ?string $message = 'Invalid email address'): static
+    {
+        if ($regex) {
+            $this->_validate($regex, $message);
+
+            return $this;
+        }
+
+        return $this->email($message);
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function asInternationalPhone(?string $code = null, ?string $regex = null, ?string $message = 'Invalid phone number'): static
+    {
+        $phone = (string) $this->getOrFail();
+
+        if ($code !== null && $code !== '' && !str_starts_with($phone, $code)) {
+            $this->validationFail($message);
+        }
+
+        $this->_validate($regex ?? $this->phone_pattern, $message);
+
+        return $this;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function asPassword(?string $regex = null, ?string $message = 'Weak password'): static
+    {
+        $this->_validate($regex ?? $this->password_pattern, $message);
+
+        return $this;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function asNumber(?string $message = 'Invalid number'): static
+    {
+        $number = $this->getOrFail();
+        if (!Validators::isNumber($number)) {
+            $this->validationFail($message);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function asNumeric(?string $message = 'Invalid numeric value'): static
+    {
+        $number = $this->getOrFail();
+        if (!Validators::isNumeric($number)) {
+            $this->validationFail($message);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function asNumericInt(?string $message = 'Invalid integer'): static
+    {
+        return $this->integer($message);
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function asUrl(?string $regex = null, ?string $message = 'Invalid URL'): static
+    {
+        if ($regex) {
+            $this->_validate($regex, $message);
+
+            return $this;
+        }
+
+        $url = $this->getOrFail();
+        if (!Validators::isUrl($url)) {
+            $this->validationFail($message);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function asIp(?string $regex = null, ?string $message = 'Invalid IP address'): static
+    {
+        if ($regex) {
+            $this->_validate($regex, $message);
+
+            return $this;
+        }
+
+        $this->_validateFilter(FILTER_VALIDATE_IP, $message);
+
+        return $this;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function asMac(?string $regex = null, ?string $message = 'Invalid MAC address'): static
+    {
+        if ($regex) {
+            $this->_validate($regex, $message);
+
+            return $this;
+        }
+
+        $this->_validateFilter(FILTER_VALIDATE_MAC, $message);
+
+        return $this;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function asDomain(?string $regex = null, ?string $message = 'Invalid domain'): static
+    {
+        if ($regex) {
+            $this->_validate($regex, $message);
+
+            return $this;
+        }
+
+        $this->_validateFilter(FILTER_VALIDATE_DOMAIN, $message);
+
+        return $this;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function asSlug(?string $regex = null, ?string $message = 'Invalid slug'): static
+    {
+        $this->_validate($regex ?? $this->slug_pattern, $message);
+
+        return $this;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function uuid(?string $message = 'Invalid UUID'): static
+    {
+        $this->_validate($this->uuid_pattern, $message);
+
+        return $this;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function regex(string $pattern, ?string $message = 'Invalid format'): static
+    {
+        $this->_validate($pattern, $message);
+
+        return $this;
+    }
+
+    /**
+     * Apply a custom rule registered on the shared ValidationManager.
+     *
+     * @throws ValidationException
+     */
+    public function rule(string $name, ?string $parameter = null): static
+    {
+        app()->get(ValidationManager::class)->apply($name, $this, $this->hook, $parameter, $this->hayStack);
+
+        return $this;
+    }
+
+    /**
+     * Minimum numeric value, string length, or array item count.
+     *
+     * @throws ValidationException
+     */
+    public function min(int|float $minimum, ?string $message = null): static
+    {
+        $value = $this->hayStack->get($this->hook);
+
+        if (is_array($value)) {
+            if (count($value) < $minimum) {
+                $this->validationFail($message ?? "{$this->hook} must have at least {$minimum} items");
+            }
+
+            return $this;
+        }
+
+        if (is_numeric($value)) {
+            if ((float) $value < $minimum) {
+                $this->validationFail($message ?? "{$this->hook} must be at least {$minimum}");
+            }
+
+            return $this;
+        }
+
+        if (is_string($value)) {
+            if (mb_strlen($value) < $minimum) {
+                $this->validationFail($message ?? "{$this->hook} must be at least {$minimum} characters");
+            }
+
+            return $this;
+        }
+
+        $this->validationFail($message ?? "{$this->hook} must be at least {$minimum}");
+    }
+
+    /**
+     * Maximum numeric value, string length, or array item count.
+     *
+     * @throws ValidationException
+     */
+    public function max(int|float $maximum, ?string $message = null): static
+    {
+        $value = $this->hayStack->get($this->hook);
+
+        if (is_array($value)) {
+            if (count($value) > $maximum) {
+                $this->validationFail($message ?? "{$this->hook} must not exceed {$maximum} items");
+            }
+
+            return $this;
+        }
+
+        if (is_numeric($value)) {
+            if ((float) $value > $maximum) {
+                $this->validationFail($message ?? "{$this->hook} must not exceed {$maximum}");
+            }
+
+            return $this;
+        }
+
+        if (is_string($value)) {
+            if (mb_strlen($value) > $maximum) {
+                $this->validationFail($message ?? "{$this->hook} must not exceed {$maximum} characters");
+            }
+
+            return $this;
+        }
+
+        $this->validationFail($message ?? "{$this->hook} must not exceed {$maximum}");
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function between(int|float $minimum, int|float $maximum, ?string $message = null): static
+    {
+        $this->min($minimum, $message ?? "{$this->hook} must be between {$minimum} and {$maximum}");
+        $this->max($maximum, $message ?? "{$this->hook} must be between {$minimum} and {$maximum}");
+
+        return $this;
+    }
+
+    /**
+     * @param list<string> $allowed
+     *
+     * @throws ValidationException
+     */
+    public function in(array $allowed, ?string $message = null): static
+    {
+        $value = $this->hayStack->get($this->hook);
+        if (!in_array((string) $value, $allowed, true)) {
+            $this->validationFail($message ?? "{$this->hook} must be one of: " . implode(', ', $allowed));
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param list<string> $denied
+     *
+     * @throws ValidationException
+     */
+    public function notIn(array $denied, ?string $message = null): static
+    {
+        $value = $this->hayStack->get($this->hook);
+        if (in_array((string) $value, $denied, true)) {
+            $this->validationFail($message ?? "{$this->hook} contains a forbidden value");
+        }
+
+        return $this;
+    }
+
+    /**
+     * @throws ValidationException
      */
     public function requiredIf(string $field, callable $condition): static
     {
         if ($condition($this->valueOf($field))) {
             return $this->required();
         }
+
         return $this;
     }
 
     /**
-     * Required unless the condition is met by the field
-     * @throws Exception
+     * @throws ValidationException
      */
     public function requiredUnless(string $field, callable $condition): static
     {
         if (!$condition($this->valueOf($field))) {
             $this->required();
         }
+
         return $this;
     }
 
     /**
-     * Only required if the field is present/defined
-     * @throws Exception
+     * @throws ValidationException
      */
     public function requiredWith(string $field): static
     {
         if ($this->hayStack->has($field) && !blank($this->hayStack->get($field))) {
             $this->required();
         }
+
         return $this;
     }
 
     /**
-     * Only required if the field is not present/defined
-     * @throws Exception
+     * @throws ValidationException
      */
     public function requiredWithout(string $field): static
     {
         if (!$this->hayStack->has($field) || blank($this->hayStack->get($field))) {
             $this->required();
         }
+
         return $this;
     }
 
     /**
-     * Check if the value of the field is equal to the value of another field
-     * @throws Exception
+     * @throws ValidationException
      */
     public function matches(string $field, ?string $message = null): static
     {
         $value = $this->hayStack->get($this->hook);
         $match = $this->hayStack->get($field);
-        if (!$value) {
-            throw new Exception("$this->hook is required");
+
+        if ($value === null || blank($value)) {
+            $this->validationFail("{$this->hook} is required");
         }
-        if (!$match) {
-            throw new Exception("$field is required");
+
+        if ($match === null || blank($match)) {
+            $this->validationFail("{$field} is required");
         }
 
         if ($value !== $match) {
-            throw new Exception($message ?? "$this->hook does not match $field");
+            $this->validationFail($message ?? "{$this->hook} does not match {$field}");
         }
+
         return $this;
     }
 
     /**
-     * Check if the value of the field is not equal to the value of another field
-     * @throws Exception
+     * @throws ValidationException
      */
     public function doesNotMatch(string $field, ?string $message = null): static
     {
         $value = $this->hayStack->get($this->hook);
         $match = $this->hayStack->get($field);
-        if (!$value) {
-            throw new Exception("$this->hook is not provided");
+
+        if ($value === null || blank($value)) {
+            $this->validationFail("{$this->hook} is not provided");
         }
-        if (!$match) {
-            throw new Exception("$field is not provided");
+
+        if ($match === null || blank($match)) {
+            $this->validationFail("{$field} is not provided");
         }
 
         if ($value === $match) {
-            throw new Exception($message ?? "$this->hook matches $field");
+            $this->validationFail($message ?? "{$this->hook} must not match {$field}");
         }
+
         return $this;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    private function _validateFilter(int $filterType, string $message = 'Invalid data'): bool
+    {
+        $value = $this->getOrFail();
+        $checker = filter_var($value, $filterType);
+        if ($checker === false) {
+            $this->validationFail($message);
+        }
+
+        return true;
     }
 }

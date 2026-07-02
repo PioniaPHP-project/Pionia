@@ -19,6 +19,7 @@ interface MiddlewareContract
      * This method is called to run the middleware against every response. Every middleware must implement this method.
      *
      * @param Response $response - The response object
+     * @param Request $request - The same request instance from the current HTTP cycle
      */
     public function onResponse(Response $response, Request $request);
 

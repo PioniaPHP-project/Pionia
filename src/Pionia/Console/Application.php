@@ -237,7 +237,7 @@ class Application
     {
         $commandInput = $commandArgv ?? $appInput;
 
-        if ($appInput->getOption('no-interaction')) {
+        if ($appInput->getOption('no-interaction') || ($commandArgv !== null && !$commandArgv->isInteractive())) {
             $commandInput->setInteractive(false);
         }
 

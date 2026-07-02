@@ -65,15 +65,18 @@ class DeveloperStatsTest extends PioniaTestCase
         $this->assertArrayHasKey('high_traffic_endpoints', $payload['request_metrics']);
     }
 
-    public function testStatsPageShowsRequestsTab(): void
+    public function testStatsPageShowsTrafficTab(): void
     {
         $this->setDebugEnv(true);
         $this->clearStatsEnv();
 
         $response = $this->get('/stats');
 
-        $this->assertStringContainsString('requests-panel', $response->content());
-        $this->assertStringContainsString('Heaviest endpoints', $response->content());
+        $this->assertStringContainsString('traffic-panel', $response->content());
+        $this->assertStringContainsString('traffic-heavy-panel', $response->content());
+        $this->assertStringContainsString('traffic-api-panel', $response->content());
+        $this->assertStringContainsString('Heaviest endpoints (avg ms)', $response->content());
+        $this->assertStringContainsString('API traffic (service · action)', $response->content());
     }
 
     public function testStatsHiddenWhenNotEnabled(): void

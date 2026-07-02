@@ -8,6 +8,7 @@ use Pionia\Exceptions\ExceptionPipeline;
 use Pionia\Http\Routing\PioniaRouter;
 use Pionia\Logging\LogManager;
 use Pionia\Middlewares\MiddlewareChain;
+use Pionia\Validations\ValidationManager;
 
 interface ProviderContract
 {
@@ -47,6 +48,11 @@ interface ProviderContract
      * Customize the exception pipeline (handlers, maps, reportables).
      */
     public function configureExceptions(ExceptionPipeline $exceptions): void;
+
+    /**
+     * Register custom validation rules on the shared ValidationManager.
+     */
+    public function configureValidations(ValidationManager $validations): void;
 
     /**
      * Run after middleware, auth, commands, and routes from all providers are registered.

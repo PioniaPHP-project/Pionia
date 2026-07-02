@@ -13,6 +13,7 @@ use Pionia\Http\Response\Response;
 use Pionia\Utils\Microable;
 use Pionia\Http\Response\ApiResponse;
 use Pionia\Utils\Support;
+use Pionia\Validations\ActionValidationResolver;
 
 /**
  * This is the main class all other services must extend.
@@ -122,6 +123,11 @@ class AbstractService implements ServiceContract
 
         if (!method_exists($this, $action)){
             throw new ResourceNotFoundException("Action $action not found in the $service context");
+        }
+
+        $validationRules = ActionValidationResolver::resolve(new \ReflectionMethod($this, $action));
+        if ($validationRules !== []) {
+            rules($data, $validationRules);
         }
 
 

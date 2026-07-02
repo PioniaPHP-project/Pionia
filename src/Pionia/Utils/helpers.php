@@ -16,6 +16,8 @@ use Pionia\Realm\RealmContract;
 use Pionia\Runtime\RuntimeMode;
 use Pionia\Templating\TemplateEngineInterface;
 use Pionia\Utils\Support;
+use Pionia\Validations\ValidationManager;
+use Pionia\Validations\ValidationRules;
 use Pionia\Validations\Validator;
 use Psr\Log\LoggerInterface;
 use Pionia\Utils\Filesystem;
@@ -559,10 +561,9 @@ if (! function_exists('blank')) {
 
 if (!function_exists('validate')){
     /**
-     * Validate data
-     * @param string $field
-     * @param Arrayable|Request|Service $data
-     * @return Validator
+     * Validate a single field (chainable).
+     *
+     * @example validate('email', $data)->required()->email();
      */
     function validate(string $field, Arrayable | Request | Service $data): Validator
     {
@@ -572,6 +573,36 @@ if (!function_exists('validate')){
             $data = $data->getData();
         }
         return Validator::validate($field, $data);
+    }
+}
+
+if (!function_exists('rules')) {
+    /**
+     * Validate multiple fields with pipe rules.
+     *
+     * @param array<string, string|array<int, string>> $fieldRules
+     *
+     * @example rules($data, ['email' => 'required|email', 'password' => 'required|password|min:8']);
+     */
+    function rules(Arrayable | Request | Service $data, array $fieldRules): void
+    {
+        if ($data instanceof Service) {
+            $data = $data->request->getData();
+        } elseif ($data instanceof Request) {
+            $data = $data->getData();
+        }
+
+        ValidationRules::check($data, $fieldRules);
+    }
+}
+
+if (!function_exists('validations')) {
+    /**
+     * Shared validation rule registry (singleton per application).
+     */
+    function validations(): ValidationManager
+    {
+        return app()->get(ValidationManager::class);
     }
 }
 

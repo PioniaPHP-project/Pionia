@@ -146,6 +146,7 @@ trait AppMixin
             $instance->configureLogging($this->realm()->get(LogManager::class));
             $instance->configureCaching($this->realm()->cache());
             $instance->configureExceptions($this->realm()->exceptions());
+            $instance->configureValidations($this->realm()->validations());
             $instance->onBooted();
         });
     }

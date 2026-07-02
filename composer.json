@@ -30,6 +30,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require-dev": {
+        "composer/composer": "^2.7",
         "phpunit/phpunit": "^10.0",
         "spiral/roadrunner-http": "^3.5",
         "spiral/roadrunner-cli": "^2.6",

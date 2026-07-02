@@ -28,6 +28,7 @@ use Pionia\Templating\TemplateEngineInterface;
 use Pionia\Utils\AppDatabaseHelper;
 use Pionia\Utils\PathsTrait;
 use Pionia\Utils\FrameworkVersion;
+use Pionia\Validations\ValidationManager;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
@@ -102,6 +103,8 @@ class AppRealm implements RealmContract, ContainerInterface
         });
 
         $this->set(CacheManager::class, fn () => new CacheManager($this));
+
+        $this->set(ValidationManager::class, fn () => new ValidationManager());
 
         $this->context->set(PioniaCache::class, function () {
             $this->resolvingCache = true;
@@ -415,6 +418,11 @@ class AppRealm implements RealmContract, ContainerInterface
     public function cache(): CacheManager
     {
         return $this->get(CacheManager::class);
+    }
+
+    public function validations(): ValidationManager
+    {
+        return $this->get(ValidationManager::class);
     }
 
     /**

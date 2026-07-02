@@ -31,6 +31,8 @@ class NewApplicationCommandTest extends PioniaTestCase
 
         $root = $this->tempDir . '/demo-app';
         $this->assertFileExists($root . '/composer.json');
+        $composer = file_get_contents($root . '/composer.json');
+        $this->assertStringContainsString('PostCreateProjectHandler', $composer);
         $this->assertFileExists($root . '/pionia');
         $this->assertFileExists($root . '/bootstrap/application.php');
         $this->assertFileDoesNotExist($root . '/bootstrap/routes.php');

@@ -316,16 +316,17 @@ class DeveloperStatsCollector
             return ['status' => 'warn', 'message' => 'Volume disk metrics unavailable'];
         }
 
-        $path = $volume['path'];
+        $message = $this->formatVolumeUsageMessage($volume);
+
         if ($usedPercent >= 95) {
-            return ['status' => 'critical', 'message' => "Volume {$usedPercent}% full at {$path}"];
+            return ['status' => 'critical', 'message' => $message];
         }
 
         if ($usedPercent >= 85) {
-            return ['status' => 'warn', 'message' => "Volume {$usedPercent}% full at {$path}"];
+            return ['status' => 'warn', 'message' => $message];
         }
 
-        return ['status' => 'ok', 'message' => "Volume {$usedPercent}% full ({$volume['free_human']} free on disk containing app)"];
+        return ['status' => 'ok', 'message' => $message];
     }
 
     private function appRoot(): string
@@ -349,24 +350,51 @@ class DeveloperStatsCollector
     }
 
     /**
-     * @return array{scope: string, path: string, total_bytes: int, free_bytes: int, used_bytes: int, used_percent: float|null, total_human: string, free_human: string}
+     * @param array{used_bytes?: int, total_bytes?: int, used_percent?: float|null} $volume
+     */
+    private function formatVolumeUsageMessage(array $volume): string
+    {
+        $used = $this->formatVolumeAmount((int) ($volume['used_bytes'] ?? 0));
+        $total = $this->formatVolumeAmount((int) ($volume['total_bytes'] ?? 0));
+        $percent = $volume['used_percent'] ?? 0;
+
+        return "Volume: {$used}/{$total} ~ {$percent}% used";
+    }
+
+    private function formatVolumeAmount(int $bytes): string
+    {
+        $gb = max(0, $bytes) / (1024 ** 3);
+        $rounded = round($gb, 1);
+
+        return fmod($rounded, 1.0) === 0.0 ? (string) (int) $rounded : (string) $rounded;
+    }
+
+    /**
+     * @return array{scope: string, path: string, total_bytes: int, free_bytes: int, used_bytes: int, used_percent: float|null, total_human: string, free_human: string, used_human: string, usage_summary: string}
      */
     private function volumeDiskMetrics(string $root): array
     {
         $resolved = realpath($root) ?: $root;
         $diskTotal = @disk_total_space($resolved) ?: 0;
         $diskFree = @disk_free_space($resolved) ?: 0;
+        $usedBytes = max(0, (int) $diskTotal - (int) $diskFree);
+        $usedPercent = $diskTotal > 0 ? round((1 - $diskFree / $diskTotal) * 100, 1) : null;
 
-        return [
+        $metrics = [
             'scope' => 'filesystem_volume',
             'path' => $resolved,
             'total_bytes' => (int) $diskTotal,
             'free_bytes' => (int) $diskFree,
-            'used_bytes' => max(0, (int) $diskTotal - (int) $diskFree),
-            'used_percent' => $diskTotal > 0 ? round((1 - $diskFree / $diskTotal) * 100, 1) : null,
+            'used_bytes' => $usedBytes,
+            'used_percent' => $usedPercent,
             'total_human' => $this->formatBytes((int) $diskTotal),
             'free_human' => $this->formatBytes((int) $diskFree),
+            'used_human' => $this->formatBytes($usedBytes),
         ];
+
+        $metrics['usage_summary'] = $this->formatVolumeUsageMessage($metrics);
+
+        return $metrics;
     }
 
     private function directorySize(string $dir): int

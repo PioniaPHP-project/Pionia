@@ -150,21 +150,43 @@ class OutputStyle implements OutputInterface, NewLineAware
     {
         $choices = $question->getChoices();
         $labels = array_values($choices);
-        foreach ($labels as $index => $label) {
-            $this->writeln(sprintf(' [%s] %s', $index, $label));
-        }
-
+        $maxAttempts = $question->getMaxAttempts() ?? 3;
         $default = $question->getDefault();
-        $answer = $this->readLine($question->getQuestion() . ': ');
-        if ($answer === '' && $default !== null) {
-            $answer = (string) $default;
+        $defaultLabel = is_string($default) ? $default : (is_int($default) ? ($labels[$default] ?? null) : null);
+
+        for ($attempt = 0; $attempt < $maxAttempts; $attempt++) {
+            foreach ($labels as $index => $label) {
+                $this->writeln(sprintf('  [%d] %s', $index + 1, $label));
+            }
+
+            $defaultIndex = $defaultLabel !== null ? array_search($defaultLabel, $labels, true) : false;
+            $suffix = $defaultIndex !== false ? ' [' . ((int) $defaultIndex + 1) . ']' : '';
+            $answer = trim($this->readLine($question->getQuestion() . $suffix . ': '));
+
+            if ($answer === '' && $defaultLabel !== null) {
+                return $defaultLabel;
+            }
+
+            if ($question->isMultiselect()) {
+                return array_map(fn ($i) => $labels[(int) $i] ?? $i, explode(',', $answer));
+            }
+
+            if (ctype_digit($answer)) {
+                $index = (int) $answer - 1;
+                if (isset($labels[$index])) {
+                    return $labels[$index];
+                }
+            }
+
+            $lower = strtolower($answer);
+            if (in_array($lower, $labels, true)) {
+                return $lower;
+            }
+
+            $this->writeln('<error>Invalid choice. Pick a number from the list.</error>');
         }
 
-        if ($question->isMultiselect()) {
-            return array_map(fn ($i) => $labels[(int) $i] ?? $i, explode(',', $answer));
-        }
-
-        return $labels[(int) $answer] ?? $answer;
+        return $defaultLabel ?? $labels[0];
     }
 
     private function readLine(string $prompt): string

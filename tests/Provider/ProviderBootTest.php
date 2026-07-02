@@ -31,6 +31,7 @@ class ProviderBootTest extends PioniaTestCase
                 'configureLogging',
                 'configureCaching',
                 'configureExceptions',
+                'configureValidations',
                 'onBooted',
                 'routes',
             ],
