@@ -639,6 +639,335 @@ if (!function_exists('validations')) {
     }
 }
 
+if (!function_exists('security')) {
+    /**
+     * Cryptographic helpers for passwords, tokens, OTPs, hashing, and identifiers.
+     */
+    #[\NoDiscard]
+    function security(): \Pionia\Security\Security
+    {
+        return app()->get(\Pionia\Security\Security::class);
+    }
+}
+
+if (!function_exists('secure_random_bytes')) {
+    #[\NoDiscard]
+    function secure_random_bytes(int $length): string
+    {
+        return security()->randomBytes($length);
+    }
+}
+
+if (!function_exists('secure_random_string')) {
+    #[\NoDiscard]
+    function secure_random_string(int $length, string $alphabet = \Pionia\Security\Security::ALPHABET_ALPHANUMERIC): string
+    {
+        return security()->randomString($length, $alphabet);
+    }
+}
+
+if (!function_exists('secure_random_hex')) {
+    #[\NoDiscard]
+    function secure_random_hex(int $bytes = 16): string
+    {
+        return security()->randomHex($bytes);
+    }
+}
+
+if (!function_exists('secure_random_base64')) {
+    #[\NoDiscard]
+    function secure_random_base64(int $bytes = 32, bool $urlSafe = true): string
+    {
+        return security()->randomBase64($bytes, $urlSafe);
+    }
+}
+
+if (!function_exists('secure_uuid')) {
+    /**
+     * Generate a random UUID v4.
+     */
+    #[\NoDiscard]
+    function secure_uuid(): string
+    {
+        return security()->uuid();
+    }
+}
+
+if (!function_exists('secure_ulid')) {
+    /**
+     * Generate a sortable ULID.
+     */
+    #[\NoDiscard]
+    function secure_ulid(): string
+    {
+        return security()->ulid();
+    }
+}
+
+if (!function_exists('secure_otp')) {
+    /**
+     * Generate a numeric or alphanumeric one-time code.
+     */
+    #[\NoDiscard]
+    function secure_otp(int $length = 6, bool $numericOnly = true): string
+    {
+        return security()->otp($length, $numericOnly);
+    }
+}
+
+if (!function_exists('secure_token')) {
+    /**
+     * Generate a URL-safe random token.
+     */
+    #[\NoDiscard]
+    function secure_token(int $bytes = 32): string
+    {
+        return security()->token($bytes);
+    }
+}
+
+if (!function_exists('secure_secret')) {
+    /**
+     * Alias of {@see secure_token()} for API keys and shared secrets.
+     */
+    #[\NoDiscard]
+    function secure_secret(int $bytes = 32): string
+    {
+        return security()->secret($bytes);
+    }
+}
+
+if (!function_exists('secure_password')) {
+    /**
+     * Generate a random password that meets the framework password rule.
+     */
+    #[\NoDiscard]
+    function secure_password(int $length = 16, bool $symbols = true): string
+    {
+        return security()->password($length, $symbols);
+    }
+}
+
+if (!function_exists('hash_password')) {
+    /**
+     * Hash a password for storage.
+     *
+     * @param array<string, mixed> $options
+     */
+    #[\NoDiscard]
+    function hash_password(string $password, array $options = []): string
+    {
+        return security()->hashPassword($password, $options);
+    }
+}
+
+if (!function_exists('verify_password')) {
+    /**
+     * Verify a password against a stored hash.
+     */
+    function verify_password(string $password, string $hash): bool
+    {
+        return security()->verifyPassword($password, $hash);
+    }
+}
+
+if (!function_exists('secure_hash')) {
+    #[\NoDiscard]
+    function secure_hash(string $data, string $algo = 'sha256', bool $binary = false): string
+    {
+        return security()->hash($data, $algo, $binary);
+    }
+}
+
+if (!function_exists('secure_hmac')) {
+    #[\NoDiscard]
+    function secure_hmac(string $data, string $key, string $algo = 'sha256', bool $binary = false): string
+    {
+        return security()->hmac($data, $key, $algo, $binary);
+    }
+}
+
+if (!function_exists('verify_hmac')) {
+    function verify_hmac(string $data, string $key, string $expected, string $algo = 'sha256'): bool
+    {
+        return security()->verifyHmac($data, $key, $expected, $algo);
+    }
+}
+
+if (!function_exists('secure_equals')) {
+    /**
+     * Timing-safe string comparison.
+     */
+    function secure_equals(string $known, string $user): bool
+    {
+        return security()->equals($known, $user);
+    }
+}
+
+if (!function_exists('csrf_token')) {
+    /**
+     * Generate a CSRF token (URL-safe random string).
+     */
+    #[\NoDiscard]
+    function csrf_token(int $bytes = 32): string
+    {
+        return security()->csrfToken($bytes);
+    }
+}
+
+if (!function_exists('encrypt')) {
+    /**
+     * Symmetric encrypt with APP_KEY or an explicit key (requires ext-sodium).
+     */
+    #[\NoDiscard]
+    function encrypt(string $plaintext, ?string $key = null): string
+    {
+        return security()->encrypt($plaintext, $key);
+    }
+}
+
+if (!function_exists('decrypt')) {
+    /**
+     * Symmetric decrypt with APP_KEY or an explicit key (requires ext-sodium).
+     */
+    #[\NoDiscard]
+    function decrypt(string $payload, ?string $key = null): string
+    {
+        return security()->decrypt($payload, $key);
+    }
+}
+
+if (!function_exists('security_key_pair')) {
+    /**
+     * Generate an X25519 key pair for libsodium box encryption.
+     *
+     * @return array{public_key: string, private_key: string}
+     */
+    #[\NoDiscard]
+    function security_key_pair(): array
+    {
+        return security()->keyPair();
+    }
+}
+
+if (!function_exists('encrypt_with_public_key')) {
+    /**
+     * Encrypt a message for a recipient's public key (libsodium box seal).
+     */
+    #[\NoDiscard]
+    function encrypt_with_public_key(string $plaintext, string $publicKey): string
+    {
+        return security()->encryptWithPublicKey($plaintext, $publicKey);
+    }
+}
+
+if (!function_exists('decrypt_with_private_key')) {
+    /**
+     * Decrypt a message sealed with {@see encrypt_with_public_key()}.
+     */
+    #[\NoDiscard]
+    function decrypt_with_private_key(string $payload, string $publicKey, string $privateKey): string
+    {
+        return security()->decryptWithPrivateKey($payload, $publicKey, $privateKey);
+    }
+}
+
+if (!function_exists('encrypt_for_recipient')) {
+    /**
+     * Authenticated encryption from a sender to a recipient (libsodium box).
+     */
+    #[\NoDiscard]
+    function encrypt_for_recipient(string $plaintext, string $recipientPublicKey, string $senderPrivateKey): string
+    {
+        return security()->encryptForRecipient($plaintext, $recipientPublicKey, $senderPrivateKey);
+    }
+}
+
+if (!function_exists('decrypt_from_sender')) {
+    /**
+     * Decrypt a payload from {@see encrypt_for_recipient()}.
+     */
+    #[\NoDiscard]
+    function decrypt_from_sender(string $payload, string $senderPublicKey, string $recipientPrivateKey): string
+    {
+        return security()->decryptFromSender($payload, $senderPublicKey, $recipientPrivateKey);
+    }
+}
+
+if (!function_exists('public_key_from_private')) {
+    /**
+     * Derive a libsodium box public key from a private key.
+     */
+    #[\NoDiscard]
+    function public_key_from_private(string $privateKey): string
+    {
+        return security()->publicKeyFromPrivateKey($privateKey);
+    }
+}
+
+if (!function_exists('rsa_key_pair')) {
+    /**
+     * Generate an RSA key pair (PEM-encoded).
+     *
+     * @return array{public_key: string, private_key: string}
+     */
+    #[\NoDiscard]
+    function rsa_key_pair(int $bits = 2048): array
+    {
+        return security()->rsaKeyPair($bits);
+    }
+}
+
+if (!function_exists('rsa_encrypt')) {
+    /**
+     * RSA-encrypt with a PEM public key (hybrid mode for large payloads).
+     */
+    #[\NoDiscard]
+    function rsa_encrypt(string $plaintext, string $publicKey): string
+    {
+        return security()->rsaEncrypt($plaintext, $publicKey);
+    }
+}
+
+if (!function_exists('rsa_decrypt')) {
+    /**
+     * RSA-decrypt a payload from {@see rsa_encrypt()}.
+     */
+    #[\NoDiscard]
+    function rsa_decrypt(string $payload, string $privateKey): string
+    {
+        return security()->rsaDecrypt($payload, $privateKey);
+    }
+}
+
+if (!function_exists('is_uuid')) {
+    function is_uuid(string $value): bool
+    {
+        return \Pionia\Security\Security::isUuid($value);
+    }
+}
+
+if (!function_exists('is_ulid')) {
+    function is_ulid(string $value): bool
+    {
+        return \Pionia\Security\Security::isUlid($value);
+    }
+}
+
+if (!function_exists('is_otp')) {
+    function is_otp(string $value, int $length = 6, bool $numericOnly = true): bool
+    {
+        return \Pionia\Security\Security::isOtp($value, $length, $numericOnly);
+    }
+}
+
+if (!function_exists('is_token')) {
+    function is_token(string $value, int $minBytes = 16): bool
+    {
+        return \Pionia\Security\Security::isToken($value, $minBytes);
+    }
+}
+
 if (!function_exists('toCamelCase')){
     /**
      * Convert a string to camel case

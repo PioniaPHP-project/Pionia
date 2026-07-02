@@ -28,13 +28,20 @@ use Pionia\Templating\TemplateEngineInterface;
 use Pionia\Utils\AppDatabaseHelper;
 use Pionia\Utils\PathsTrait;
 use Pionia\Utils\FrameworkVersion;
+use Pionia\Security\Security;
 use Pionia\Validations\ValidationManager;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * We need to separate the DI from the app instance itself
- * Any early boot bindings can be added at this level
+ * Application realm — DI container, boot orchestration, and framework services.
+ *
+ * `AppRealm::create()` (in `bootstrap/application.php`) is the single boot entry.
+ * Early bindings (cache, logging, validation, security, console, HTTP app) are
+ * registered in {@see boot()}. Application code extends the realm via providers,
+ * `settings.ini`, and `bootstrap/routes.php`.
+ *
+ * Helpers `app()`, `realm()`, and `container()` return the same singleton after boot.
  */
 class AppRealm implements RealmContract, ContainerInterface
 {
@@ -105,6 +112,8 @@ class AppRealm implements RealmContract, ContainerInterface
         $this->set(CacheManager::class, fn () => new CacheManager($this));
 
         $this->set(ValidationManager::class, fn () => new ValidationManager());
+
+        $this->set(Security::class, fn () => new Security());
 
         $this->context->set(PioniaCache::class, function () {
             $this->resolvingCache = true;
@@ -423,6 +432,11 @@ class AppRealm implements RealmContract, ContainerInterface
     public function validations(): ValidationManager
     {
         return $this->get(ValidationManager::class);
+    }
+
+    public function security(): Security
+    {
+        return $this->get(Security::class);
     }
 
     /**

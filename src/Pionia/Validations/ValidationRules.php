@@ -95,6 +95,9 @@ final class ValidationRules
             'ip' => $validator->asIp(),
             'slug' => $validator->asSlug(),
             'uuid' => $validator->uuid(),
+            'ulid' => $validator->ulid(),
+            'otp' => $validator->asOtp(self::parseOtpLength($parameter)),
+            'token' => $validator->asToken(self::parseTokenMinBytes($parameter)),
             'password' => $validator->asPassword(),
             'phone' => $validator->asInternationalPhone($parameter),
             'min' => $validator->min(self::parseNumericParameter($parameter, 'min')),
@@ -188,5 +191,23 @@ final class ValidationRules
         }
 
         return $parameter;
+    }
+
+    private static function parseOtpLength(?string $parameter): int
+    {
+        if ($parameter === null || $parameter === '') {
+            return 6;
+        }
+
+        return (int) $parameter;
+    }
+
+    private static function parseTokenMinBytes(?string $parameter): int
+    {
+        if ($parameter === null || $parameter === '') {
+            return 16;
+        }
+
+        return (int) $parameter;
     }
 }

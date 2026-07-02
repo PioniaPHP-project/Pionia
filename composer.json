@@ -53,6 +53,7 @@
         "nyholm/psr7": "PSR-7 messages for RoadRunner integration",
         "ext-apcu": "APCu cache store (cache STORE=apcu; ideal for RoadRunner workers)",
         "ext-redis": "Redis cache store (cache STORE=redis)",
+        "ext-sodium": "Symmetric and public-key encryption via security()->encrypt() and security()->encryptWithPublicKey()",
         "react/promise": "Promise chaining for async() background work"
     },
     "scripts": {

@@ -21,7 +21,18 @@ use Pionia\Utils\PioniaApplicationType;
 use Pionia\Utils\Support;
 use Pionia\Http\Response\BinaryFileResponse;
 
-
+/**
+ * HTTP application facade — boot, request handling, and environment access.
+ *
+ * Lifecycle is split for FPM and RoadRunner workers:
+ *
+ * - {@see bootOnce()} / `powerUp()` — providers, routes, middleware (once per process)
+ * - {@see handleRequest()} — match route, return response (no `send()`)
+ * - {@see fly()} — `createFromGlobals()` → `handleRequest()` → `send()` (FPM entry)
+ * - `resetBetweenRequests()` — flush per-request state in worker mode
+ *
+ * Resolve via `app()`, `realm()`, or `container()` after bootstrap.
+ */
 class WebApplication  implements ApplicationContract
 {
     use AppHelpersTrait,
@@ -142,6 +153,8 @@ class WebApplication  implements ApplicationContract
     }
 
     /**
+     * FPM / built-in server entry: read globals, handle, send, flush deferred work.
+     *
      * @throws DependencyException
      * @throws NotFoundException
      */

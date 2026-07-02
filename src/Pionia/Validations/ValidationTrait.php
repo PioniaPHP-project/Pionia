@@ -363,6 +363,60 @@ trait ValidationTrait
     }
 
     /**
+     * Validate a 26-character Crockford ULID via {@see \Pionia\Utils\Ulid::isValid()}.
+     *
+     * Pipe rule: `ulid`
+     *
+     * @throws ValidationException
+     */
+    public function ulid(?string $message = 'Invalid ULID'): static
+    {
+        $value = (string) $this->getOrFail();
+
+        if (!\Pionia\Utils\Ulid::isValid($value)) {
+            $this->validationFail($message);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Validate a one-time code length and charset via {@see \Pionia\Security\Security::isOtp()}.
+     *
+     * Pipe rule: `otp` or `otp:8` (length parameter, default 6)
+     *
+     * @throws ValidationException
+     */
+    public function asOtp(int $length = 6, bool $numericOnly = true, ?string $message = null): static
+    {
+        $value = (string) $this->getOrFail();
+
+        if (!\Pionia\Security\Security::isOtp($value, $length, $numericOnly)) {
+            $this->validationFail($message ?? 'Invalid OTP');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Validate API/session token entropy via {@see \Pionia\Security\Security::isToken()}.
+     *
+     * Pipe rule: `token` or `token:24` (minimum bytes, default 16)
+     *
+     * @throws ValidationException
+     */
+    public function asToken(int $minBytes = 16, ?string $message = 'Invalid token'): static
+    {
+        $value = (string) $this->getOrFail();
+
+        if (!\Pionia\Security\Security::isToken($value, $minBytes)) {
+            $this->validationFail($message);
+        }
+
+        return $this;
+    }
+
+    /**
      * @throws ValidationException
      */
     public function regex(string $pattern, ?string $message = 'Invalid format'): static

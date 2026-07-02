@@ -16,6 +16,21 @@ use Pionia\Utils\Microable;
 use Pionia\Http\Response\BinaryFileResponse;
 use Throwable;
 
+/**
+ * HTTP request kernel — routes, middleware, auth, and exception rendering.
+ *
+ * Entry flow for each request:
+ * 1. {@see handle()} — maintenance gate, CORS preflight, then {@see prepareRequest()}
+ * 2. {@see boot()} — `PreKernelBootEvent`, global middleware, authentication chain
+ * 3. Route match + controller dispatch via {@see WebKernelRuntime}
+ * 4. {@see terminate()} — metrics, response middleware, CORS headers, `prepare()`
+ *
+ * Uncaught throwables in step 3 are converted by {@see HttpExceptionRenderer} — they do
+ * not bubble past {@see handle()}. Callers (FPM, RoadRunner worker, tests) send the
+ * response returned from `handle()` / `terminate()` themselves.
+ *
+ * @see \Pionia\Base\WebApplication::handleRequest() Preferred application-level entry
+ */
 class WebKernel implements KernelContract
 {
     use Microable;
@@ -40,6 +55,11 @@ class WebKernel implements KernelContract
         return $this->runtime->dispatch()->invoke($request);
     }
 
+    /**
+     * Process one HTTP request end-to-end and return a prepared response.
+     *
+     * Does not call `send()` — the caller owns output (FPM, worker loop, or test).
+     */
     public function handle(Request $request): Response | BinaryFileResponse
     {
         $started = hrtime(true);
@@ -61,6 +81,11 @@ class WebKernel implements KernelContract
         return $this->terminate($response, $request, $started);
     }
 
+    /**
+     * Finalize a response: record metrics, run response middleware, apply CORS, prepare headers.
+     *
+     * Safe to call directly when building responses outside the normal dispatch path.
+     */
     public function terminate(Response | BinaryFileResponse $response, Request $request, ?int $startedAt = null): Response | BinaryFileResponse
     {
         if ($startedAt !== null) {
@@ -90,6 +115,11 @@ class WebKernel implements KernelContract
         return $cors instanceof CorsContract ? $cors->handle($request) : null;
     }
 
+    /**
+     * Run global middleware and authentication before route dispatch.
+     *
+     * Fires {@see PreKernelBootEvent} first so listeners can mutate the request.
+     */
     public function boot(Request $request): Request
     {
         event(new PreKernelBootEvent($this, $request), PreKernelBootEvent::name());

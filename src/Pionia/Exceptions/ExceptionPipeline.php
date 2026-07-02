@@ -11,6 +11,19 @@ use Pionia\Realm\GlobalExceptionHandler;
 use Pionia\Realm\RealmContract;
 use Throwable;
 
+/**
+ * Central exception handling for HTTP and programmatic Moonlight dispatch.
+ *
+ * Configure via `$app->exceptions()` or a provider's `configureExceptions()` hook:
+ *
+ * - {@see handler()} — replace the default {@see GlobalExceptionHandler}
+ * - {@see dontReport()} — skip logging for expected exceptions (e.g. validation)
+ * - {@see reportable()} — add Sentry/monitoring callbacks
+ * - {@see map()} — render specific exception classes to API envelopes
+ *
+ * {@see handle()} runs report (unless suppressed) then render. Use `report($e)` from
+ * helpers when you only need logging without a response.
+ */
 class ExceptionPipeline
 {
     /** @var list<class-string<Throwable>> */
@@ -35,6 +48,11 @@ class ExceptionPipeline
         }
     }
 
+    /**
+     * Replace the default exception handler class.
+     *
+     * @param class-string<ExceptionHandlerContract> $handlerClass
+     */
     public function handler(string $handlerClass): static
     {
         $this->handlerClass = $handlerClass;
@@ -46,6 +64,9 @@ class ExceptionPipeline
         return $this;
     }
 
+    /**
+     * Register a callback invoked after the handler's `report()` for every reported exception.
+     */
     public function reportable(Closure $callback): static
     {
         $this->reportables[] = $callback;
@@ -54,6 +75,8 @@ class ExceptionPipeline
     }
 
     /**
+     * Suppress logging for an exception class (and subclasses).
+     *
      * @param class-string<Throwable> $exceptionClass
      */
     public function dontReport(string $exceptionClass): static
@@ -64,6 +87,8 @@ class ExceptionPipeline
     }
 
     /**
+     * Map an exception class to a custom API response (checked before the default handler).
+     *
      * @param class-string<Throwable> $exceptionClass
      */
     public function map(string $exceptionClass, Closure $mapper): static
@@ -73,6 +98,9 @@ class ExceptionPipeline
         return $this;
     }
 
+    /**
+     * Report (if allowed) and render an exception to a Moonlight API envelope.
+     */
     public function handle(Throwable $e, ?Request $request = null): ApiResponse
     {
         if (!$this->shouldntReport($e)) {
@@ -82,6 +110,7 @@ class ExceptionPipeline
         return $this->render($e, $request ?? Request::createFromGlobals());
     }
 
+    /** Log via the resolved handler plus any {@see reportable()} callbacks. */
     public function report(Throwable $e): void
     {
         $this->resolveHandler()->report($e);
@@ -91,6 +120,11 @@ class ExceptionPipeline
         }
     }
 
+    /**
+     * Convert an exception to an API response without reporting.
+     *
+     * Order: registered {@see map()} closures → {@see RenderableException} → handler.
+     */
     public function render(Throwable $e, Request $request): ApiResponse
     {
         foreach ($this->mappers as $exceptionClass => $mapper) {

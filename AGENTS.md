@@ -648,6 +648,26 @@ Pionia is reducing Symfony surface area. **Removed** from `composer.json`:
 
 Routing exceptions: `Pionia\Http\Routing\Exception\RouteNotFoundException`, `MethodNotAllowedException`. HTTP 404 for missing resources: `Pionia\Exceptions\ResourceNotFoundException`.
 
+## Code documentation
+
+Framework code in `src/Pionia/` should help future maintainers without narrating the obvious.
+
+**Do**
+
+- Class-level docblocks: purpose, how it fits in the request/boot lifecycle, and links to related classes (`@see`).
+- Public method PHPDoc: parameters, return types, `@throws`, and non-obvious behaviour (wire formats, extension requirements, PHP version quirks).
+- `@param array<string, mixed>` (and similar) on array shapes; `@return array{key: type}` for structured tuples.
+- Brief notes on security-sensitive code (timing-safe compare, payload framing, key derivation).
+- Section comments (`// ---`) in large classes to group related methods.
+
+**Don't**
+
+- Restate what the method name already says (`// returns the token`).
+- Leave public APIs undocumented — if it's shipped, document it.
+- Use block comments for deleted code or TODOs without a ticket/reference.
+
+Match the tone of `CacheManager`, `Security`, `WebKernel`, and `ExceptionPipeline`. User guides live in [pionia-docs](https://pionia.netlify.app); PHPDoc is for contributors reading source.
+
 ## Packagist releases
 
 Production archives **exclude** dev-only paths via `composer.json` `archive.exclude` and `.gitattributes` `export-ignore` (for GitHub source tarballs):

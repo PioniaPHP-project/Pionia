@@ -75,6 +75,29 @@ class ValidationRulesTest extends PioniaTestCase
         $this->assertTrue(true);
     }
 
+    public function testUlidRule(): void
+    {
+        validate('id', $this->data(['id' => \Pionia\Utils\Ulid::generate()]))->ulid();
+
+        $this->assertTrue(true);
+    }
+
+    public function testOtpRule(): void
+    {
+        rules($this->data(['code' => '123456']), [
+            'code' => 'required|otp:6',
+        ]);
+
+        $this->assertTrue(true);
+    }
+
+    public function testTokenRule(): void
+    {
+        validate('token', $this->data(['token' => secure_token(24)]))->asToken(16);
+
+        $this->assertTrue(true);
+    }
+
     public function testBetweenRuleForStringLength(): void
     {
         validate('code', $this->data(['code' => 'abcd']))->string()->between(2, 6);
