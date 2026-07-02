@@ -8,6 +8,7 @@ use Pionia\Performance\BootstrapCacheGenerator;
 use Pionia\Performance\OptimizationInstaller;
 use Pionia\Performance\PreloadGenerator;
 use Pionia\Performance\PreloadManifest;
+use Pionia\Performance\PreloadStatsResolver;
 use Pionia\Process\Process;
 use Pionia\Realm\AppRealm;
 
@@ -190,16 +191,20 @@ class OptimizeCommand extends Command
 
     private function bootApplication(string $root): ?AppRealm
     {
-        $routes = $root . DIRECTORY_SEPARATOR . 'bootstrap' . DIRECTORY_SEPARATOR . 'routes.php';
-        if (!is_file($routes)) {
-            $this->warn('bootstrap/routes.php not found — skipped bootstrap caches.');
+        $bootstrapDir = $root . DIRECTORY_SEPARATOR . 'bootstrap';
+        $application = $bootstrapDir . DIRECTORY_SEPARATOR . 'application.php';
+        $routes = $bootstrapDir . DIRECTORY_SEPARATOR . 'routes.php';
+        $entry = is_file($application) ? $application : (is_file($routes) ? $routes : null);
+
+        if ($entry === null) {
+            $this->warn('bootstrap/application.php not found — skipped bootstrap caches.');
 
             return null;
         }
 
         try {
             /** @var AppRealm $app */
-            $app = require $routes;
+            $app = require $entry;
 
             return $app instanceof AppRealm ? $app : null;
         } catch (\Throwable $e) {

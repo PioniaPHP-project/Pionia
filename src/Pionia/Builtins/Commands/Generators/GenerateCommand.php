@@ -7,6 +7,7 @@ use Nette\PhpGenerator\PhpFile;
 use Pionia\Utils\Support;
 use Pionia\Console\Command;
 use Pionia\Console\Input\InputArgument;
+use Pionia\Console\Input\InputOption;
 use Pionia\Utils\Filesystem;
 
 /**
@@ -34,7 +35,7 @@ class GenerateCommand extends Command
     public function getOptions(): array
     {
         return [
-            ['group', 'g', InputArgument::OPTIONAL, 'The namespace of the command to generate', 'custom'],
+            ['group', 'g', InputOption::VALUE_OPTIONAL, 'The namespace of the command to generate', 'custom'],
         ];
     }
 
@@ -193,7 +194,7 @@ class GenerateCommand extends Command
 
         $file = new PhpFile;
 
-        $ns = alias(\NAMESPACES::COMMAND_NS->name);
+        $ns = namespaceFor(\NAMESPACES::COMMAND_NS->name);
 
         $namespace = $file->addNamespace($ns);
 
@@ -241,7 +242,7 @@ class GenerateCommand extends Command
         $this->addOptionsAction($klass, $options);
         $this->addHandler($klass, $options, $arguments);
 
-        $directory = alias(\DIRECTORIES::COMMANDS_DIR->name);
+        $directory = directoryPath(\DIRECTORIES::COMMANDS_DIR->name);
 
         $fs = new Filesystem();
 
@@ -255,7 +256,7 @@ class GenerateCommand extends Command
         $fs->dumpFile($directory.'/'.$name.'.php', $file);
 
         // update the generated.ini file
-        addIniSection('commands', [$clean_name => $ns.'\\'.$name]);
+        addIniSection('app_commands', [$clean_name => $ns.'\\'.$name]);
 
         $this->info("Command $name created at $directory.");
     }
@@ -309,7 +310,7 @@ class GenerateCommand extends Command
     private function addHandler($klass, $options, $arguments): void
     {
         $handler = $klass->addMethod('handle')
-            ->setPublic()
+            ->setProtected()
             ->setReturnType('int')
             ->addComment("Execute the console command.");
 

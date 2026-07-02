@@ -41,7 +41,7 @@ class ExampleApiDocsTest extends PioniaTestCase
         $this->assertSame(200, $response->status());
         $spec = $response->json();
         $this->assertSame('3.1.0', $spec['openapi']);
-        $this->assertArrayHasKey('/api/v1', $spec['paths']);
+        $this->assertArrayHasKey('/api/v1/moonlight/auth/list_auth', $spec['paths']);
     }
 
     public function testDocsHiddenWhenNotEnabled(): void

@@ -18,7 +18,7 @@ use Pionia\Utils\Filesystem;
  */
 class GenerateSwitch extends Command
 {
-    protected  string $help = 'Generates an authentication backend for pionia app.';
+    protected  string $help = 'Generates a switch for a pionia app. Switches map requests to services.';
     protected string $name = 'make:switch';
     protected  string $title = 'Adds a new switch to pionia app';
     protected  string $description = 'Generates a switch for a pionia app. Switches map requests to services.';
@@ -55,7 +55,7 @@ class GenerateSwitch extends Command
 
         $file = new PhpFile;
 
-        $ns = alias(\NAMESPACES::SWITCH_NS->name);
+        $ns = namespaceFor(\NAMESPACES::SWITCH_NS->name);
 
         $namespace = $file->addNamespace($ns);
 
@@ -70,7 +70,7 @@ class GenerateSwitch extends Command
 
         $this->addActions($klass);
 
-        $directory = alias(\DIRECTORIES::SWITCHES_DIR->name);
+        $directory = directoryPath(\DIRECTORIES::SWITCHES_DIR->name);
 
         $fs = new Filesystem();
 

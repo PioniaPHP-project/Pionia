@@ -58,7 +58,7 @@ class GenerateAuthenticationBackend extends Command
 
         $file = new PhpFile;
 
-        $ns = alias(NAMESPACES::AUTHENTICATION_NS->name);
+        $ns = namespaceFor(NAMESPACES::AUTHENTICATION_NS->name);
 
         $namespace = $file->addNamespace($ns);
 
@@ -78,7 +78,7 @@ class GenerateAuthenticationBackend extends Command
 
         $this->addActions($klass);
 
-        $directory = alias(\DIRECTORIES::AUTHENTICATION_DIR->name);
+        $directory = directoryPath(\DIRECTORIES::AUTHENTICATION_DIR->name);
 
         $fs = new Filesystem();
 
@@ -92,7 +92,7 @@ class GenerateAuthenticationBackend extends Command
         $fs->dumpFile($directory.'/'.$name.'.php', $file);
 
         // update the generated.ini file
-        addIniSection('authentications', [$name => $ns.'\\'.$name]);
+        addIniSection('app_authentications', [Support::toSnakeCase(str_replace('Authentication', '', $name)) => $ns.'\\'.$name]);
 
         $this->info("Authentication $name created at $directory.");
     }

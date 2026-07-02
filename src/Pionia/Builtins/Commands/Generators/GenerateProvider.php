@@ -52,7 +52,7 @@ class GenerateProvider extends Command
         $file = new PhpFile();
         $file->addComment('Auto-generated Pionia service provider.');
 
-        $namespace = $file->addNamespace(alias(NAMESPACES::PROVIDER_NS->name));
+        $namespace = $file->addNamespace(namespaceFor(NAMESPACES::PROVIDER_NS->name));
         $namespace->addUse(Provider::class);
 
         $klass = $namespace->addClass($name);
@@ -62,7 +62,7 @@ class GenerateProvider extends Command
 
         $this->addStubMethods($klass);
 
-        $directory = alias(DIRECTORIES::PROVIDERS_DIR->name);
+        $directory = directoryPath(DIRECTORIES::PROVIDERS_DIR->name);
         $fs = new Filesystem();
 
         if (!$fs->exists($directory)) {
@@ -78,7 +78,7 @@ class GenerateProvider extends Command
 
         $fs->dumpFile($path, $file);
 
-        $fqcn = alias(NAMESPACES::PROVIDER_NS->name).'\\'.$name;
+        $fqcn = namespaceFor(NAMESPACES::PROVIDER_NS->name).'\\'.$name;
         addIniSection('app_providers', [Support::toSnakeCase($name) => $fqcn]);
 
         $this->info("Provider {$name} created at {$path}.");

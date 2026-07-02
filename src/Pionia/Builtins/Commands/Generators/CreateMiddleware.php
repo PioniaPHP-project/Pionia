@@ -25,7 +25,7 @@ class CreateMiddleware extends Command
     Middlewares are added to the middleware chain automatically. Upon creation, you can add your logic to the middleware class and register it in the middleware sections of the settings file.';
     protected string $description = 'Generates a middleware for a pionia app. Middlewares run on every request and response.';
     protected string $name = 'make:middleware';
-    protected array $aliases = ['g:m', 'gen:mid', 'gen:mid', 'gen:middle', 'gen:middleware'];
+    protected array $aliases = ['g:m', 'gen:mid', 'gen:middle', 'gen:middleware'];
 
 
     public function getArguments(): array
@@ -52,7 +52,7 @@ class CreateMiddleware extends Command
 
         $file = new PhpFile;
 
-        $ns = alias(NAMESPACES::MIDDLEWARE_NS->name);
+        $ns = namespaceFor(NAMESPACES::MIDDLEWARE_NS->name);
 
         $namespace = $file->addNamespace($ns);
 
@@ -70,7 +70,7 @@ class CreateMiddleware extends Command
 
         $this->addActionMethods($klass);
 
-        $directory = alias(\DIRECTORIES::MIDDLEWARE_DIR->name);
+        $directory = directoryPath(\DIRECTORIES::MIDDLEWARE_DIR->name);
 
         $fs = new Filesystem();
 
@@ -84,7 +84,8 @@ class CreateMiddleware extends Command
         $fs->dumpFile($directory.'/'.$name.'.php', $file);
 
         // update the generated.ini file
-        addIniSection('app_middlewares', [$name => $ns.'\\'.$name]);
+        $alias = Support::toSnakeCase(str_replace('Middleware', '', $name));
+        addIniSection('app_middlewares', [$alias => $ns.'\\'.$name]);
 
         $this->info("Middleware $name created at $directory.");
     }

@@ -69,6 +69,7 @@ class GenerateService extends Command
                 return Command::FAILURE;
             }
         } else {
+            $targetTable = null;
             $extends = $this->ask("Provide comma(,) seperated actions you want to add by default, at least one is required", Support::arrayToString($this->defaults));
             if (empty($extends)) {
                 $this->error("You must provide at least one action");
@@ -97,7 +98,7 @@ class GenerateService extends Command
 
         $file = new PhpFile;
 
-        $ns = alias(NAMESPACES::SERVICE_NS->name);
+        $ns = namespaceFor(NAMESPACES::SERVICE_NS->name);
         $namespace = new PhpNamespace($ns);
 
         $file->addNamespace($namespace);
@@ -143,7 +144,7 @@ class GenerateService extends Command
             $this->addActions($klass, $actions, $serviceName);
         }
 
-        $directory = alias(\DIRECTORIES::SERVICES_DIR->name);
+        $directory = directoryPath(\DIRECTORIES::SERVICES_DIR->name);
 
         // create the directory if it doesn't exist and dump the file
         $fs = new Filesystem();
@@ -183,7 +184,8 @@ class GenerateService extends Command
             $baseName = $class->getName();
         }
         if (!str_contains($action, 'Action')) {
-            $action = Support::toSnakeCase($action.'_'.$baseName.'Action');
+            $serviceSlug = Support::toSnakeCase(preg_replace('/Service$/i', '', $baseName));
+            $action = Support::toSnakeCase($action) . '_' . $serviceSlug . '_action';
         }
 
         $actionName = Support::toCamelCase($action);

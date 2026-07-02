@@ -206,6 +206,23 @@ if (!function_exists('alias')) {
     }
 }
 
+if (!function_exists('namespaceFor')) {
+    /**
+     * Resolve a PHP namespace key from app.namespaces (e.g. SERVICE_NS → Application\Services).
+     */
+    function namespaceFor(string $key): string
+    {
+        $namespaces = app()->get(\Pionia\Realm\AppRealm::NAMESPACES_TAG);
+        $ns = is_object($namespaces) ? $namespaces->get($key) : null;
+
+        if (!is_string($ns) || $ns === '') {
+            throw new \InvalidArgumentException("Unknown application namespace [{$key}].");
+        }
+
+        return $ns;
+    }
+}
+
 if (!function_exists('directoryFor')) {
     /**
      * Get any directory from the application container
@@ -214,6 +231,22 @@ if (!function_exists('directoryFor')) {
     {
         $dir = arr(allBuiltins()?->get('directories') ?? []);
         return $dir->get($key);
+    }
+}
+
+if (!function_exists('directoryPath')) {
+    /**
+     * Resolve an absolute application directory path from a DIRECTORIES key (e.g. SERVICES_DIR).
+     */
+    function directoryPath(string $key): string
+    {
+        $path = alias($key);
+
+        if (!is_string($path) || $path === '') {
+            throw new \InvalidArgumentException("Unknown application directory [{$key}].");
+        }
+
+        return $path;
     }
 }
 

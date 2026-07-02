@@ -41,7 +41,7 @@ class ApiDocsCommandTest extends PioniaTestCase
 
         $openapi = json_decode(file_get_contents($this->outputDir . '/openapi.json'), true, 512, JSON_THROW_ON_ERROR);
         $this->assertSame('3.1.0', $openapi['openapi']);
-        $this->assertArrayHasKey('/api/v1', $openapi['paths']);
+        $this->assertArrayHasKey('/api/v1/moonlight/auth/list_auth', $openapi['paths']);
         $this->assertStringContainsString('Documented', $this->consoleOutput());
     }
 

@@ -78,10 +78,10 @@ class StartServer extends Command
         $output = shell_exec(implode(' ', $this->serverCommand($port, $host)));
         print_r($output);
         if (!$output && $this->reattempts > 0) {
-            $this->reattempts -= $this->reattempts;
+            $this->reattempts -= 1;
             $this->portOffset += 1;
-            $newPort = $port+ $this->portOffset;
-            $this->getApp()->logger->info('Server failed to start on port '.$port.'. Trying port '.$newPort.'...');
+            $newPort = $port + $this->portOffset;
+            logger()?->info('Server failed to start on port '.$port.'. Trying port '.$newPort.'...');
             return $this->handle($newPort);
         }
 
@@ -115,7 +115,7 @@ class StartServer extends Command
      */
     protected function getHostAndPort(): array
     {
-        if (preg_match('/(\[.*\]):?([0-9]+)?/', $this->input->getOption('host'), $matches) !== false) {
+        if (preg_match('/(\[.*\]):?([0-9]+)?/', $this->input->getOption('host'), $matches) === 1) {
             return [
                 $matches[1] ?? $this->input->getOption('host'),
                 $matches[2] ?? null,

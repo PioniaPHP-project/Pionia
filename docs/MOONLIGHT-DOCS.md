@@ -121,7 +121,7 @@ Runtime docs use `[docs] ENABLED` / `DOCS_ENABLED` and optional `TOKEN` / `DOCS_
 
 ## OpenAPI profile
 
-Moonlight OpenAPI uses **one POST path per version** with `oneOf` schemas per `{service}.{action}` — not one REST path per endpoint. See `example/docs/api/openapi.json`.
+Moonlight OpenAPI exposes **one documented operation per action** under `/api/{version}/moonlight/{service}/{action}` for Scalar navigation. Request and response shapes are inlined on each action page. The real runtime endpoint is `POST /api/{version}/` with `{ "service", "action", ...params }` — see `x-pionia-dispatch` on each operation.
 
 ## Response envelope
 
