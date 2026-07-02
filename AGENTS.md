@@ -66,25 +66,50 @@ php example/pionia maintenance:off                    # back to normal (alias: u
 
 ## Production performance (OPcache preload)
 
-Pionia ships readable PHP source. Apps **opt in** at deploy time:
+Optimization happens at **two different times** for two different packages:
+
+| When | Command | What gets optimized |
+|------|---------|---------------------|
+| **Framework release** | `bin/release` → `bin/optimize-framework` | `src/Pionia/` → portable `framework-preload.php` **inside the Packagist zip** |
+| **App deploy** | `php pionia optimize` (opt-in) | App scaffold files + `storage/bootstrap/preload.php` (framework manifest + app/vendor paths) |
+
+Pionia ships readable PHP source. OPcache compiles at runtime; preload manifests list which files to warm.
+
+### Framework release (`bin/release`)
+
+Before `composer archive`, release runs:
+
+1. `composer dump-autoload -o` (maintainer workspace)
+2. Generates `src/Pionia/Resources/optimize/framework-preload.php` (gitignored; **included in the release zip only**)
+3. `bin/clean-release-optimize` removes it from the working tree after the archive is built — the branch/tag commit stays source-only; consumers get the manifest from Packagist
+
+That file uses **relative paths** inside `vendor/pionia/pionia-core` so it works on any server.
+
+### Application deploy (template / consumer app)
+
+Not part of `create-project`. Opt in on deploy:
 
 ```bash
 composer install --no-dev -o
-php pionia optimize                    # installs scaffold files + generates preload
-php pionia optimize:clear              # remove generated artifacts
-php pionia optimize:clear --scaffold   # also remove opt-in scaffold files
+php pionia optimize --production
 ```
 
-`php pionia optimize` copies framework-owned stubs from `Resources/optimize/` into the app, then runs autoload + preload generation.
+**`--production` preset:** authoritative classmap, bootstrap caches, hybrid preload (stats snapshot + app paths).
 
-**Framework releases** run `bin/optimize-framework` (autoload classmap + `build/release/framework-preload.php` manifest). `bin/release` calls this automatically.
+**Stats-driven preload:**
 
-| Artifact | Path | When |
-|----------|------|------|
-| Preload entry | `bootstrap/preload.php` | After `php pionia optimize` |
-| Generated preload | `storage/bootstrap/preload.php` | After optimize (gitignored) |
-| PHP ini snippet | `environment/php.ini.production.example` | After optimize |
-| Route cache | `storage/bootstrap/routes.php` | When `BOOTSTRAP_CACHE=true` or `APP_ENV=production` |
+1. Staging/production with `RECORD_OPCACHE_SNAPSHOT=true` writes `storage/metrics/opcache-snapshot.json` from workers
+2. Before cutover: `php pionia optimize:preload --snapshot` or `php pionia optimize --production`
+3. Hybrid strategy merges snapshot hits with minimum app paths; framework manifest ships from Packagist
+
+| Command | Purpose |
+|---------|---------|
+| `php pionia optimize` | Full deploy optimization |
+| `php pionia optimize --production` | Recommended production preset |
+| `php pionia optimize:preload` | Regenerate preload only |
+| `php pionia optimize:preload --snapshot` | Record OPcache snapshot, then regenerate |
+
+`[performance]` keys: `PRELOAD_STRATEGY` (curated\|stats\|hybrid), `RECORD_OPCACHE_SNAPSHOT`, `PRELOAD_AUTHORITATIVE`, `BOOTSTRAP_CACHE`.
 
 **PHP ini (production):** see `environment/php.ini.production.example` in the app template. Key directives:
 

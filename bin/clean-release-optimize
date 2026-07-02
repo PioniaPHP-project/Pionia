@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Remove release-time optimization files from the working tree.
+#
+# framework-preload.php is generated for composer archive / Packagist only.
+# It is gitignored and must not remain on the branch after bin/release.
+#
+# Usage: bin/clean-release-optimize
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+removed=0
+
+remove_if_exists() {
+  local path="$1"
+  local label="$2"
+  if [[ -e "$path" ]]; then
+    rm -rf "$path"
+    echo "  $label"
+    removed=1
+  fi
+}
+
+echo "==> Cleaning release optimization artifacts (branch stays source-only)"
+
+remove_if_exists "$ROOT/src/Pionia/Resources/optimize/framework-preload.php" \
+  "framework-preload.php (ships in release zip only)"
+
+remove_if_exists "$ROOT/example/bootstrap/preload.php" \
+  "example/bootstrap/preload.php"
+
+remove_if_exists "$ROOT/example/storage/bootstrap/preload.php" \
+  "example/storage/bootstrap/preload.php"
+
+remove_if_exists "$ROOT/example/environment/php.ini.production.example" \
+  "example/environment/php.ini.production.example"
+
+if [[ -d "$ROOT/example/storage/bootstrap" ]]; then
+  find "$ROOT/example/storage/bootstrap" -mindepth 1 ! -name '.gitkeep' -print0 2>/dev/null \
+    | xargs -0 rm -rf 2>/dev/null || true
+fi
+
+if [[ "$removed" -eq 0 ]]; then
+  echo "  (nothing to remove)"
+fi
+
+echo "==> Done."

@@ -5,6 +5,7 @@ namespace Pionia\Http\Monitoring;
 use Pionia\Http\Request\Request;
 use Pionia\Http\Response\BinaryFileResponse;
 use Pionia\Http\Response\Response;
+use Pionia\Performance\OpcacheSnapshotRecorder;
 
 /**
  * Records HTTP/API request timing and aggregates for the developer stats dashboard.
@@ -67,6 +68,9 @@ class RequestMetrics
 
         self::appendLines(self::$buffer);
         self::$buffer = [];
+
+        $base = defined('BASE_PATH') ? (string) BASE_PATH : (string) getcwd();
+        OpcacheSnapshotRecorder::maybeRecord($base);
     }
 
     /**

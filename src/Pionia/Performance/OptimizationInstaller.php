@@ -160,6 +160,7 @@ final class OptimizationInstaller
         $rules = [
             '/storage/bootstrap/*',
             '!/storage/bootstrap/.gitkeep',
+            '/storage/metrics/opcache-snapshot.json',
         ];
 
         $missing = false;

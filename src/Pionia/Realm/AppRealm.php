@@ -27,6 +27,7 @@ use Pionia\Templating\TemplateEngine;
 use Pionia\Templating\TemplateEngineInterface;
 use Pionia\Utils\AppDatabaseHelper;
 use Pionia\Utils\PathsTrait;
+use Pionia\Utils\FrameworkVersion;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
@@ -69,7 +70,7 @@ class AppRealm implements RealmContract, ContainerInterface
      * Framework version
      * @var string
      */
-    public string $appVersion = '2.0.2';
+    public string $appVersion = 'dev';
 
     public function __construct(?ContainerInterface $container = new Container())
     {
@@ -87,6 +88,7 @@ class AppRealm implements RealmContract, ContainerInterface
      */
     public function boot(): static
     {
+        $this->appVersion = FrameworkVersion::detect();
         $this->resolveBootingProviders();
         $this->set(self::ALIASES_TAG, $this->builtInAliases());
         $this->set(self::APP_API_BASE_TAG, '/api/');

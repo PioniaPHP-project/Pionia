@@ -1544,7 +1544,7 @@ if (!function_exists('version')) {
      */
     function version(): string
     {
-        return app()->appVersion;
+        return app()->appVersion ?? \Pionia\Utils\FrameworkVersion::detect();
     }
 }
 

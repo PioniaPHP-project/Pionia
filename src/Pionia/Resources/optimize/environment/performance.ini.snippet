@@ -1,9 +1,12 @@
 
 [performance]
 PRELOAD_ENABLED=true
+PRELOAD_STRATEGY=hybrid
+; curated | stats | hybrid — hybrid uses opcache snapshot + minimum app paths
+PRELOAD_AUTHORITATIVE=true
+BOOTSTRAP_CACHE=true
+RECORD_OPCACHE_SNAPSHOT=true
 ; Comma-separated extra app paths to scan (relative to app root)
 PRELOAD_PATHS=
 ; Comma-separated path fragments to exclude from preload scans
 PRELOAD_EXCLUDE=
-; Set true in production to load storage/bootstrap/routes.php and providers.php
-BOOTSTRAP_CACHE=false

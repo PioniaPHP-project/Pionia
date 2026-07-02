@@ -64,6 +64,7 @@ class OptimizeCommandTest extends PioniaTestCase
         $this->assertSame(0, $code);
         $output = $this->consoleOutput();
         $this->assertStringContainsString('optimize', $output);
+        $this->assertStringContainsString('optimize:preload', $output);
         $this->assertStringContainsString('optimize:clear', $output);
     }
 }

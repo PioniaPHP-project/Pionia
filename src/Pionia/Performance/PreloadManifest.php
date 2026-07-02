@@ -83,7 +83,10 @@ final class PreloadManifest
      *     enabled: bool,
      *     paths: list<string>,
      *     exclude: list<string>,
-     *     bootstrap_cache: bool
+     *     bootstrap_cache: bool,
+     *     strategy: string,
+     *     record_opcache_snapshot: bool,
+     *     authoritative: bool
      * }
      */
     public static function fromSettings(string $appRoot): array
@@ -93,6 +96,9 @@ final class PreloadManifest
             'paths' => [],
             'exclude' => [],
             'bootstrap_cache' => false,
+            'strategy' => 'hybrid',
+            'record_opcache_snapshot' => false,
+            'authoritative' => false,
         ];
 
         $ini = $appRoot . DIRECTORY_SEPARATOR . 'environment' . DIRECTORY_SEPARATOR . 'settings.ini';
@@ -115,13 +121,57 @@ final class PreloadManifest
 
         $paths = self::iniList($section['PRELOAD_PATHS'] ?? $section['preload_paths'] ?? '');
         $exclude = self::iniList($section['PRELOAD_EXCLUDE'] ?? $section['preload_exclude'] ?? '');
+        $strategy = strtolower(trim((string) ($section['PRELOAD_STRATEGY'] ?? $section['preload_strategy'] ?? 'hybrid')));
+
+        if (!in_array($strategy, ['curated', 'stats', 'hybrid'], true)) {
+            $strategy = 'hybrid';
+        }
 
         return [
             'enabled' => $enabled,
             'paths' => $paths,
             'exclude' => $exclude,
             'bootstrap_cache' => $bootstrapCache,
+            'strategy' => $strategy,
+            'record_opcache_snapshot' => self::iniBool($section['RECORD_OPCACHE_SNAPSHOT'] ?? $section['record_opcache_snapshot'] ?? false),
+            'authoritative' => self::iniBool($section['PRELOAD_AUTHORITATIVE'] ?? $section['preload_authoritative'] ?? false),
         ];
+    }
+
+    public static function shouldRecordOpcacheSnapshot(string $appRoot): bool
+    {
+        return self::fromSettings($appRoot)['record_opcache_snapshot'];
+    }
+
+    /**
+     * App scan roots — skips pionia-core when the release manifest ships in vendor.
+     *
+     * @return list<string>
+     */
+    public static function resolveAppScanRoots(string $appRoot, array $settings): array
+    {
+        $roots = self::resolveScanRoots($appRoot, $settings);
+
+        if (PreloadGenerator::frameworkPackagePreloadPath($appRoot) === null) {
+            return $roots;
+        }
+
+        $frameworkRoot = $appRoot . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'pionia' . DIRECTORY_SEPARATOR . 'pionia-core';
+        $normalizedFramework = str_replace('\\', '/', realpath($frameworkRoot) ?: $frameworkRoot);
+
+        return array_values(array_filter($roots, static function (string $root) use ($normalizedFramework): bool {
+            $normalized = str_replace('\\', '/', realpath($root) ?: $root);
+
+            return !str_starts_with($normalized, $normalizedFramework);
+        }));
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function minimumAppRelativePaths(): array
+    {
+        return self::defaultApplicationRelativePaths();
     }
 
     /**

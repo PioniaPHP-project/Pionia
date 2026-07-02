@@ -35,7 +35,7 @@ class PreloadGeneratorTest extends TestCase
 
         $generator = new PreloadGenerator($this->tempDir);
         $output = $this->tempDir . '/storage/bootstrap/preload.php';
-        $result = $generator->generate($output);
+        $result = $generator->generate($output, null, 'curated');
 
         $this->assertSame($output, $result['path']);
         $this->assertGreaterThanOrEqual(2, $result['files']);

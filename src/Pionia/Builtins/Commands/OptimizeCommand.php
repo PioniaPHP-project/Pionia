@@ -18,13 +18,15 @@ class OptimizeCommand extends Command
 {
     protected string $name = 'optimize';
 
-    protected string $description = 'Opt in to production performance (scaffold files, autoload, OPcache preload)';
+    protected string $description = 'Production optimization (scaffold, autoload, preload, bootstrap caches)';
 
-    protected string $help = 'Installs bootstrap/preload.php and related config, then generates optimization artifacts. Run on deploy.';
+    protected string $help = 'Run on deploy. Use --production for the recommended production preset.';
 
     protected function handle(): int
     {
         $root = $this->appRoot();
+        $production = (bool) $this->option('production');
+        $settings = PreloadManifest::fromSettings($root);
 
         if (!$this->option('no-scaffold')) {
             $installer = new OptimizationInstaller();
@@ -38,19 +40,29 @@ class OptimizeCommand extends Command
             } else {
                 $this->line('Production optimization files already present.');
             }
+
+            $settings = PreloadManifest::fromSettings($root);
         }
 
-        if (!$this->option('no-autoload')) {
-            $code = $this->dumpAutoload($root);
+        $runAutoload = !$this->option('no-autoload');
+        $authoritative = $this->option('authoritative')
+            || $production
+            || $settings['authoritative'];
+
+        if ($runAutoload) {
+            $code = $this->dumpAutoload($root, $authoritative);
             if ($code !== 0) {
                 return Command::FAILURE;
             }
         }
 
-        if (!$this->option('no-preload') && PreloadManifest::fromSettings($root)['enabled']) {
+        $preloadEnabled = $settings['enabled'] && !$this->option('no-preload');
+        if ($preloadEnabled) {
+            $strategy = $this->resolvePreloadStrategy($root, $settings, $production);
             $generator = new PreloadGenerator($root);
-            $result = $generator->generate();
-            $this->info('Generated OPcache preload script (' . $result['files'] . ' files)');
+            $result = $generator->generate(strategy: $strategy);
+
+            $this->info('Generated OPcache preload (' . $result['strategy'] . ', ' . $result['files'] . ' app files)');
             $this->line($result['path']);
 
             if (!$this->validateGeneratedPhp($result['path'])) {
@@ -59,10 +71,10 @@ class OptimizeCommand extends Command
         } elseif ($this->option('no-preload')) {
             $this->line('Skipped OPcache preload generation.');
         } else {
-            $this->warn('OPcache preload disabled. Run without --no-scaffold or enable [performance] PRELOAD_ENABLED=true.');
+            $this->warn('OPcache preload disabled in [performance] settings.');
         }
 
-        if ($this->shouldGenerateBootstrapCache($root)) {
+        if ($this->shouldGenerateBootstrapCache($root, $production, $settings)) {
             $app = $this->bootApplication($root);
             if ($app instanceof AppRealm) {
                 $bootstrap = new BootstrapCacheGenerator($root);
@@ -79,7 +91,7 @@ class OptimizeCommand extends Command
         }
 
         $this->info('Optimization complete.');
-        $this->line('Point php.ini opcache.preload at bootstrap/preload.php and restart PHP-FPM or RoadRunner workers.');
+        $this->printDeployChecklist();
 
         return Command::SUCCESS;
     }
@@ -87,12 +99,55 @@ class OptimizeCommand extends Command
     protected function getOptions(): array
     {
         return [
+            ['production', 'p', InputOption::VALUE_NONE, 'Production preset: authoritative autoload, bootstrap cache, hybrid preload'],
             ['no-scaffold', null, InputOption::VALUE_NONE, 'Skip installing bootstrap/preload.php and performance settings'],
             ['no-preload', null, InputOption::VALUE_NONE, 'Skip OPcache preload script generation'],
             ['no-autoload', null, InputOption::VALUE_NONE, 'Skip composer dump-autoload -o'],
             ['authoritative', 'a', InputOption::VALUE_NONE, 'Use composer dump-autoload --classmap-authoritative'],
             ['bootstrap-cache', null, InputOption::VALUE_NONE, 'Force bootstrap route/provider caches'],
+            ['from-stats', null, InputOption::VALUE_NONE, 'Prefer stats/snapshot preload strategy'],
         ];
+    }
+
+    /**
+     * @param array<string, mixed> $settings
+     */
+    private function resolvePreloadStrategy(string $root, array $settings, bool $production): string
+    {
+        if ($this->option('from-stats')) {
+            return 'stats';
+        }
+
+        if ($production) {
+            $snapshot = PreloadStatsResolver::snapshotPath($root);
+
+            return is_readable($snapshot) ? 'hybrid' : ($settings['strategy'] ?? 'hybrid');
+        }
+
+        return (string) ($settings['strategy'] ?? 'hybrid');
+    }
+
+    /**
+     * @param array<string, mixed> $settings
+     */
+    private function shouldGenerateBootstrapCache(string $root, bool $production, array $settings): bool
+    {
+        if ($this->option('bootstrap-cache') || $production) {
+            return true;
+        }
+
+        return (bool) ($settings['bootstrap_cache'] ?? false)
+            || BootstrapCacheGenerator::bootstrapCacheEnabled($root);
+    }
+
+    private function printDeployChecklist(): void
+    {
+        $this->line('');
+        $this->line('<comment>Deploy checklist</comment>');
+        $this->line('  1. Point php.ini opcache.preload at bootstrap/preload.php');
+        $this->line('  2. Set opcache.enable_cli=1 for RoadRunner');
+        $this->line('  3. Restart PHP-FPM or RoadRunner workers');
+        $this->line('  4. Enable RECORD_OPCACHE_SNAPSHOT=true in staging, then re-run optimize:preload before prod cutover');
     }
 
     private function appRoot(): string
@@ -104,7 +159,7 @@ class OptimizeCommand extends Command
         return (string) getcwd();
     }
 
-    private function dumpAutoload(string $root): int
+    private function dumpAutoload(string $root, bool $authoritative): int
     {
         $composer = $root . DIRECTORY_SEPARATOR . 'composer.json';
         if (!is_file($composer)) {
@@ -114,7 +169,7 @@ class OptimizeCommand extends Command
         }
 
         $command = ['composer', 'dump-autoload', '-o'];
-        if ($this->option('authoritative')) {
+        if ($authoritative) {
             $command[] = '--classmap-authoritative';
         }
 
@@ -131,16 +186,6 @@ class OptimizeCommand extends Command
         }
 
         return 0;
-    }
-
-    private function shouldGenerateBootstrapCache(string $root): bool
-    {
-        if ($this->option('bootstrap-cache')) {
-            return true;
-        }
-
-        return PreloadManifest::fromSettings($root)['bootstrap_cache']
-            || BootstrapCacheGenerator::bootstrapCacheEnabled($root);
     }
 
     private function bootApplication(string $root): ?AppRealm

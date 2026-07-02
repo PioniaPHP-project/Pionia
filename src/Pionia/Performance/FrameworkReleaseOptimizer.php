@@ -6,9 +6,13 @@ use Pionia\Process\Process;
 
 /**
  * Release-time optimization for the pionia-core package (monorepo root).
+ *
+ * Writes a portable framework-preload.php into the package tree so it ships on Packagist.
  */
 final class FrameworkReleaseOptimizer
 {
+    public const PACKAGE_PRELOAD_RELATIVE = 'src/Pionia/Resources/optimize/framework-preload.php';
+
     public function __construct(
         private readonly string $root,
     ) {
@@ -26,14 +30,9 @@ final class FrameworkReleaseOptimizer
 
         $frameworkSrc = $this->root . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Pionia';
         if (is_dir($frameworkSrc)) {
-            $buildDir = $this->root . DIRECTORY_SEPARATOR . 'build' . DIRECTORY_SEPARATOR . 'release';
-            if (!is_dir($buildDir)) {
-                mkdir($buildDir, 0775, true);
-            }
-
-            $output = $buildDir . DIRECTORY_SEPARATOR . 'framework-preload.php';
+            $output = $this->root . DIRECTORY_SEPARATOR . self::PACKAGE_PRELOAD_RELATIVE;
             $generator = new PreloadGenerator($this->root);
-            $result = $generator->generate($output, [$frameworkSrc]);
+            $result = $generator->generateFrameworkPackagePreload($frameworkSrc, $output);
             $preloadFiles = $result['files'];
             $preloadPath = $result['path'];
         }

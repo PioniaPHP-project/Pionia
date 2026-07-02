@@ -14,6 +14,7 @@ if (!\$result['autoload']) {
 }
 echo 'Autoload optimized.' . PHP_EOL;
 if (\$result['preload_files'] !== null) {
-    echo 'Framework preload manifest: ' . \$result['preload_files'] . ' files → ' . \$result['preload_path'] . PHP_EOL;
+    echo 'Framework package preload: ' . \$result['preload_files'] . ' files → ' . \$result['preload_path'] . PHP_EOL;
+    echo 'This file ships inside the Packagist zip (portable paths).' . PHP_EOL;
 }
 "

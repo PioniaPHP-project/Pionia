@@ -57,6 +57,8 @@ clean_caches() {
     clean_dir_keep_gitkeep "$ROOT/example/storage/metrics"
   fi
 
+  bash "$ROOT/bin/clean-release-optimize" 2>/dev/null | grep -v '^==>' | sed 's/^/  /' || true
+
   if [[ -f "$ROOT/.phpunit.result.cache" ]]; then
     echo "  .phpunit.result.cache"
     rm -f "$ROOT/.phpunit.result.cache"

@@ -13,7 +13,8 @@ LIST="$OUT_DIR/archive-listing.txt"
 rm -rf "$OUT_DIR"
 mkdir -p "$OUT_DIR"
 
-bash "$ROOT/bin/clean-dev-artifacts"
+echo "==> Generating framework package preload for archive"
+bash "$ROOT/bin/optimize-framework"
 
 if ! composer archive --format=zip --file="${REL_OUT}/pionia-core" >/dev/null 2>&1; then
   echo "composer archive failed" >&2
@@ -64,10 +65,19 @@ if ! grep -qE '^src/Pionia/' "$LIST"; then
   fail=1
 fi
 
+if ! grep -qE '^src/Pionia/Resources/optimize/framework-preload\.php$' "$LIST"; then
+  echo "FAIL: archive missing release-generated framework-preload.php" >&2
+  echo "Run bin/optimize-framework before composer archive." >&2
+  fail=1
+fi
+
 if [[ "$fail" -ne 0 ]]; then
   echo "Release archive verification failed. Listing saved to $LIST" >&2
+  bash "$ROOT/bin/clean-release-optimize" >/dev/null 2>&1 || true
   exit 1
 fi
+
+bash "$ROOT/bin/clean-release-optimize" >/dev/null 2>&1 || true
 
 echo "Release archive OK ($(wc -l < "$LIST" | tr -d ' ') files)."
 echo "Archive: $ARCHIVE"

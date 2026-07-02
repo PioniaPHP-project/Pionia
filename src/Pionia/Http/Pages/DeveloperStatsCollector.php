@@ -3,7 +3,7 @@
 namespace Pionia\Http\Pages;
 
 use Pionia\Collections\Arrayable;
-use Pionia\Documentation\MoonlightDocCollector;
+use Pionia\Utils\FrameworkVersion;
 use Pionia\Http\Monitoring\RequestMetrics;
 use Pionia\Http\Request\Request;
 use Pionia\Realm\AppRealm;
@@ -66,7 +66,7 @@ class DeveloperStatsCollector
         return [
             'name' => $this->app->getAppName(),
             'framework' => (string) $this->app->getOrDefault('FRAMEWORK', 'Pionia Framework'),
-            'framework_version' => property_exists($this->app, 'appVersion') ? (string) $this->app->appVersion : '2.x',
+            'framework_version' => FrameworkVersion::detect(),
             'environment' => (string) env('APP_ENV', 'development'),
             'debug' => $this->app->isDebug(),
             'api_base' => apiBase(),

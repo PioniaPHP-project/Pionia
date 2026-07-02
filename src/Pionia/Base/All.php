@@ -22,6 +22,7 @@ use Pionia\Builtins\Commands\MaintenanceOnCommand;
 use Pionia\Builtins\Commands\NewApplicationCommand;
 use Pionia\Builtins\Commands\OptimizeClearCommand;
 use Pionia\Builtins\Commands\OptimizeCommand;
+use Pionia\Builtins\Commands\OptimizePreloadCommand;
 use Pionia\Builtins\Commands\SetupRoadRunner;
 use Pionia\Builtins\Commands\StartRoadRunnerServer;
 use Pionia\Builtins\Commands\StartServer;
@@ -74,6 +75,7 @@ if (!function_exists('allBuiltins')) {
                 'runserver' => StartRoadRunnerServer::class,
                 'rr:setup' => SetupRoadRunner::class,
                 'optimize' => OptimizeCommand::class,
+                'optimize:preload' => OptimizePreloadCommand::class,
                 'optimize:clear' => OptimizeClearCommand::class,
                 'stopserver' => StopRoadRunnerServer::class,
                 'runserver:logs' => ViewRoadRunnerLogs::class,

@@ -78,7 +78,7 @@ composer validate --no-check-publish --strict
 echo "==> Cleaning generated docs and runtime caches"
 bash bin/clean-dev-artifacts
 
-echo "==> Optimizing framework for release"
+echo "==> Optimizing framework for release (embeds framework-preload.php in package)"
 bash bin/optimize-framework
 
 echo "==> Verifying app optimize command (example)"
@@ -99,6 +99,9 @@ fi
 
 cp "$RELEASE_ZIP" "$ROOT/build/release/pionia-core-${VERSION}.zip"
 echo "    $(du -h "$ROOT/build/release/pionia-core-${VERSION}.zip" | cut -f1) → build/release/pionia-core-${VERSION}.zip"
+
+echo "==> Cleaning release optimization from working tree (artifact lives in zip only)"
+bash bin/clean-release-optimize
 
 if [[ "$DRY_RUN" -eq 1 ]]; then
   echo "==> Dry run complete — no tag or push."
