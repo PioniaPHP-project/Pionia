@@ -37,6 +37,9 @@ CHANNEL_PREFIX=moonlight
 [frontend]
 SPA_FALLBACK=false
 
+[app_switches]
+v1=Application\Switches\MainSwitch
+
 ; Register service providers (Composer packages or app hooks)
 ; [app_providers]
 ; app=Application\Providers\AppProvider

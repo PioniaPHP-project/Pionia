@@ -32,9 +32,13 @@ class NewApplicationCommandTest extends PioniaTestCase
         $root = $this->tempDir . '/demo-app';
         $this->assertFileExists($root . '/composer.json');
         $this->assertFileExists($root . '/pionia');
-        $this->assertFileExists($root . '/bootstrap/routes.php');
+        $this->assertFileExists($root . '/bootstrap/application.php');
+        $this->assertFileDoesNotExist($root . '/bootstrap/routes.php');
         $this->assertFileExists($root . '/public/index.php');
         $this->assertFileExists($root . '/switches/MainSwitch.php');
+        $settings = file_get_contents($root . '/environment/settings.ini');
+        $this->assertStringContainsString('[app_switches]', $settings);
+        $this->assertStringContainsString('MainSwitch', $settings);
         $this->assertFileExists($root . '/services/WelcomeService.php');
         $welcome = file_get_contents($root . '/services/WelcomeService.php');
         $this->assertStringContainsString('DemoApp', $welcome);

@@ -24,8 +24,8 @@ Local paths (monorepo): `../JetFramework` (app template), `../pionia-docs`.
 ## Bootstrap & request flow
 
 1. `example/bootstrap/application.php` → `AppRealm::create()` boots the realm (singleton).
-2. `example/bootstrap/routes.php` → registers API switches via `router($app)->switch(...)`.
-3. HTTP entry: `example/public/index.php` requires `routes.php` and dispatches through `WebKernel`.
+2. `example/environment/settings.ini` → `[app_switches]` registers API switches (e.g. `v1=Application\Switches\MainSwitch`).
+3. HTTP entry: `example/public/index.php` requires `bootstrap/application.php` and dispatches through `WebKernel`.
 
 **Helpers:** `app()`, `realm()`, and `container()` return the same booted `AppRealm` instance.
 
@@ -83,10 +83,11 @@ connectionManager()->disconnect(); // worker shutdown only — not per HTTP requ
 - **Service** (`Application\Services\*`) — business logic; registered in `Switch::registerServices()`.
 - **Action** — method on service invoked from POST body: `{ "service": "auth", "action": "list_auth" }`.
 
-Register a switch in `bootstrap/routes.php`:
+Register switches in `environment/settings.ini` (or via a `Provider::routes()` hook for packages):
 
-```php
-router($app)->switch(MainSwitch::class, 'v1');
+```ini
+[app_switches]
+v1=Application\Switches\MainSwitch
 ```
 
 ### Naming conventions (v3)
@@ -491,7 +492,7 @@ pionia()->addAppProvider(\Application\Providers\AppProvider::class);
 
 | Hook | Where |
 |------|--------|
-| Routes / switches | `bootstrap/routes.php` (app) or `Provider::routes()` (packages) |
+| Routes / switches | `[app_switches]` in `settings.ini` (app) or `Provider::routes()` (packages) |
 | Middleware / auth | `settings.ini` sections or provider chains |
 | Exception handler | `$app->exceptions()` or `Provider::configureExceptions()` |
 

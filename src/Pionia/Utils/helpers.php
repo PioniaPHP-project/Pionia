@@ -1450,7 +1450,7 @@ if (!function_exists('container_path')){
         if (defined('CONTAINER_PATH')) {
             return CONTAINER_PATH;
         }
-        $path = BASE_PATH.DIRECTORY_SEPARATOR.'bootstrap'.DIRECTORY_SEPARATOR.'routes.php';
+        $path = BASE_PATH.DIRECTORY_SEPARATOR.'bootstrap'.DIRECTORY_SEPARATOR.'application.php';
         define('CONTAINER_PATH', $path);
         return $path;
     }

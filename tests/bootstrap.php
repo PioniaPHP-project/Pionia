@@ -7,7 +7,7 @@ if (!defined('BASE_PATH')) {
 }
 
 if (!defined('CONTAINER_PATH')) {
-    define('CONTAINER_PATH', BASE_PATH . '/bootstrap/routes.php');
+    define('CONTAINER_PATH', BASE_PATH . '/bootstrap/application.php');
 }
 
 require CONTAINER_PATH;

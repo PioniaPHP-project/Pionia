@@ -37,6 +37,9 @@ use Psr\Log\LoggerInterface;
 class AppRealm implements RealmContract, ContainerInterface
 {
     use ContainableRealm, BuiltInServices, PathsTrait, Cacheable, RoutingTrait, AppDatabaseHelper, HandlesExceptions;
+
+    private static ?self $instance = null;
+
     private array $bootingProviders = [];
     private array $bootedProviders = [];
     private bool $resolvingCache = false;
@@ -244,9 +247,42 @@ class AppRealm implements RealmContract, ContainerInterface
             ->resolveEnvArray(self::PROVIDERS_TAG);
 
         $this->resolveRoutes()
+            ->resolveApiSwitches()
             ->addDefaultStaticFiles();
 
         $this->registerExceptionHandlers();
+    }
+
+    /**
+     * Register API switches declared in environment/settings.ini under [app_switches].
+     *
+     * @example ```ini
+     * [app_switches]
+     * v1=Application\Switches\MainSwitch
+     * ```
+     */
+    private function resolveApiSwitches(): static
+    {
+        $configured = $this->envArrayFromResolver('app_switches');
+        if ($configured === []) {
+            $fromEnv = $this->env('app_switches', []);
+            $configured = is_object($fromEnv) ? $fromEnv->all() : (array) $fromEnv;
+        }
+
+        if ($configured === []) {
+            return $this;
+        }
+
+        $router = router($this);
+        foreach ($configured as $version => $switchClass) {
+            if (!is_string($switchClass) || $switchClass === '') {
+                continue;
+            }
+
+            $router->switch($switchClass, (string) $version);
+        }
+
+        return $this;
     }
 
     private function registerExceptionHandlers(): void
@@ -406,16 +442,20 @@ class AppRealm implements RealmContract, ContainerInterface
      */
     public static function create(string $bootstrapPath): static
     {
+        if (self::$instance !== null) {
+            return self::$instance;
+        }
+
         $path = dirname($bootstrapPath, 1);
         if (!defined('BASE_PATH')) {
             define('BASE_PATH', $path);
         }
 
         if (!defined('CONTAINER_PATH')) {
-            define('CONTAINER_PATH', $bootstrapPath.DIRECTORY_SEPARATOR.'routes.php');
+            define('CONTAINER_PATH', $bootstrapPath.DIRECTORY_SEPARATOR.'application.php');
         }
 
-        return (new AppRealm())->boot();
+        return self::$instance = (new AppRealm())->boot();
     }
 
     /**

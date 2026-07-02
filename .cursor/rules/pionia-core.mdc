@@ -8,7 +8,7 @@ alwaysApply: true
 Read `AGENTS.md` at the repo root before making changes.
 
 - Core code lives in `src/Pionia/`; `example/` is dev-only (`autoload-dev`).
-- API flow: Switch → Service → Action; register switches in `bootstrap/routes.php`.
+- API flow: Switch → Service → Action; register switches in `[app_switches]` (`settings.ini`).
 - Use `ExceptionPipeline` via `$app->exceptions()` / `pionia_handle_exception()` — no ad-hoc catch blocks in kernel/switch.
 - Use `report()` for logging throwables; use `logger()` / `LogManager` for channels.
 - `GET /`: `public/index.html` wins, else `FrameworkWelcomePage`; framework assets at `/__pionia/`.

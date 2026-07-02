@@ -13,7 +13,7 @@ use Pionia\Realm\AppRealm;
 require __DIR__ . '/../vendor/autoload.php';
 
 /** @var AppRealm $app */
-$app = require __DIR__ . '/bootstrap/routes.php';
+$app = require __DIR__ . '/bootstrap/application.php';
 
 $web = $app->make(AppRealm::WEB_APP_TAG);
 (new PioniaWorker($web))->run();

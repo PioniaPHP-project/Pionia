@@ -1,4 +1,4 @@
 <?php
 
-(require __DIR__ . '/../bootstrap/routes.php')
+(require __DIR__ . '/../bootstrap/application.php')
     ->bootHttp();
