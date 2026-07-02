@@ -9,20 +9,31 @@ server:
 
 http:
   address: 127.0.0.1:8003
+  middleware: ["gzip"]
   pool:
     num_workers: 2
+    max_jobs: 0
+    allocate_timeout: 60s
+    destroy_timeout: 60s
 
 jobs:
   consume: ["moonlight"]
   pool:
     num_workers: 2
+    allocate_timeout: 60s
+    destroy_timeout: 60s
   pipelines:
     moonlight:
       driver: memory
-      # Production: switch to redis (see pionia-docs — background work)
-      # driver: redis
-      # config:
-      #   addrs: ["127.0.0.1:6379"]
+      config:
+        priority: 10
+        prefetch: 100
+      # Production: driver: redis + config.addrs (see pionia-docs — background work)
+
+# Centrifugo WebSockets (optional — requires roadrunner-php/centrifugo):
+# centrifuge:
+#   proxy_address: "http://127.0.0.1:8003/api"
+#   grpc_api: true
 
 logs:
   mode: development

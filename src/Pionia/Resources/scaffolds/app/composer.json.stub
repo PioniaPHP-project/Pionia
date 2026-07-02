@@ -9,10 +9,14 @@
         "pionia/pionia-core": "^3.0",
         "react/promise": "^3.2"
     },
+    "require-dev": {
+        "spiral/roadrunner-http": "^3.5",
+        "spiral/roadrunner-cli": "^2.6",
+        "spiral/roadrunner-jobs": "^4.0",
+        "nyholm/psr7": "^1.8"
+    },
     "suggest": {
-        "spiral/roadrunner-http": "Persistent HTTP workers (php pionia runserver)",
-        "spiral/roadrunner-jobs": "Async Moonlight jobs",
-        "nyholm/psr7": "PSR-7 for RoadRunner"
+        "roadrunner-php/centrifugo": "WebSocket RPC via RoadRunner Centrifuge plugin"
     },
     "autoload": {
         "psr-4": {
@@ -21,10 +25,15 @@
     },
     "scripts": {
         "serve": "php pionia serve",
+        "runserver": "php pionia runserver",
+        "rr:setup": "bash bin/setup-roadrunner",
         "test": "php vendor/bin/phpunit",
         "pionia": "php pionia",
         "post-create-project-cmd": [
             "@php storage/scripts/rename.php"
+        ],
+        "post-install-cmd": [
+            "@php -r \"if (is_file('vendor/bin/rr') && !is_file('rr')) { echo \\\"Run: composer rr:setup to install the RoadRunner binary\\\\n\\\"; }\""
         ]
     },
     "minimum-stability": "stable",
