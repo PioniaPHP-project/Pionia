@@ -18,11 +18,6 @@
     "suggest": {
         "roadrunner-php/centrifugo": "WebSocket RPC via RoadRunner Centrifuge plugin"
     },
-    "autoload": {
-        "psr-4": {
-            "Application\\": "./"
-        }
-    },
     "scripts": {
         "serve": "php pionia serve",
         "runserver": "php pionia runserver",

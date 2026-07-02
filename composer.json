@@ -9,17 +9,7 @@
             "Pionia\\": "src/Pionia/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Application\\": "example/",
-            "Application\\Services\\": "example/services/",
-            "Application\\Switches\\": "example/switches/",
-            "Application\\Authentications\\": "example/authentications/",
-            "Application\\Middlewares\\": "example/middlewares/",
-            "Application\\Commands\\": "example/commands/",
-            "Application\\Providers\\": "example/providers/"
-        }
-    },
+    "autoload-dev": {},
     "authors": [
         {
             "name": "jet2018",

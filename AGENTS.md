@@ -679,4 +679,4 @@ bin/release v3.0.0 --dry-run
 
 Pushing a `v*` tag also triggers `.github/workflows/release.yml` (tests, verify, attach zip to GitHub Release).
 
-Consumer apps use `Application\` in their own repos; the monorepo maps that namespace under `autoload-dev` only.
+Consumer apps use `Application\` with lowercase folders (`services/`, `switches/`, …). `ApplicationAutoloader::register()` in `bootstrap/application.php` maps the namespace — no per-folder `composer.json` PSR-4 entries needed.
