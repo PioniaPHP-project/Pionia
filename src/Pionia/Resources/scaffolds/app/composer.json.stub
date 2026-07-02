@@ -26,7 +26,7 @@
     "scripts": {
         "serve": "php pionia serve",
         "runserver": "php pionia runserver",
-        "rr:setup": "bash bin/setup-roadrunner",
+        "rr:setup": "@php pionia rr:setup",
         "test": "php vendor/bin/phpunit",
         "pionia": "php pionia",
         "post-create-project-cmd": [

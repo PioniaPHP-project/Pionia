@@ -44,7 +44,7 @@ Split **boot** from **handle** for FPM today and RoadRunner workers later:
 
 ```bash
 composer require spiral/roadrunner-http nyholm/psr7   # in your app
-./rr get -l ./rr                                     # download binary once
+php example/pionia rr:setup                           # download ./rr binary once (alias: composer rr:setup)
 php example/pionia runserver                          # foreground (alias: roadrunner, rr:serve)
 php example/pionia runserver --detach                 # background; logs to storage/logs/roadrunner.log
 php example/pionia runserver:logs                     # tail logs in real time (Ctrl+C to stop)

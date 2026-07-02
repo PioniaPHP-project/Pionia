@@ -13,6 +13,7 @@ class BuiltinCommandsTest extends PioniaTestCase
         $this->assertSame(0, $code);
         $this->assertStringContainsString('serve', $this->consoleOutput());
         $this->assertStringContainsString('runserver', $this->consoleOutput());
+        $this->assertStringContainsString('rr:setup', $this->consoleOutput());
         $this->assertStringContainsString('runserver:logs', $this->consoleOutput());
         $this->assertStringContainsString('stopserver', $this->consoleOutput());
         $this->assertStringContainsString('stats:view', $this->consoleOutput());
@@ -36,7 +37,7 @@ class BuiltinCommandsTest extends PioniaTestCase
 
             $this->assertSame(1, $code);
             $this->assertStringContainsString('RoadRunner binary (rr) not found', $this->consoleOutput());
-            $this->assertStringContainsString('rr get -l', $this->consoleOutput());
+            $this->assertStringContainsString('php pionia rr:setup', $this->consoleOutput());
         } finally {
             if ($hidden && is_file($backup)) {
                 rename($backup, $rrBinary);

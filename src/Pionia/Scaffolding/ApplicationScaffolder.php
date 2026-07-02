@@ -68,7 +68,7 @@ final class ApplicationScaffolder
 
             file_put_contents($targetPath, $contents);
 
-            if (str_ends_with($targetName, 'pionia') || str_ends_with($targetName, 'setup-roadrunner')) {
+            if (str_ends_with($targetName, 'pionia')) {
                 chmod($targetPath, 0755);
             }
         }

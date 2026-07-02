@@ -114,7 +114,7 @@ trait ManagesRoadRunnerProcess
         return array_merge($env, $extra);
     }
 
-    private function roadRunnerAppRoot(): string
+    protected function roadRunnerAppRoot(): string
     {
         if (defined('BASE_PATH')) {
             return (string) BASE_PATH;

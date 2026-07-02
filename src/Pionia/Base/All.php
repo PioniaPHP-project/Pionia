@@ -20,6 +20,7 @@ use Pionia\Builtins\Commands\GenerateApiDocs;
 use Pionia\Builtins\Commands\MaintenanceOffCommand;
 use Pionia\Builtins\Commands\MaintenanceOnCommand;
 use Pionia\Builtins\Commands\NewApplicationCommand;
+use Pionia\Builtins\Commands\SetupRoadRunner;
 use Pionia\Builtins\Commands\StartRoadRunnerServer;
 use Pionia\Builtins\Commands\StartServer;
 use Pionia\Builtins\Commands\StopRoadRunnerServer;
@@ -69,6 +70,7 @@ if (!function_exists('allBuiltins')) {
             'commands' => [
                 'serve' => StartServer::class,
                 'runserver' => StartRoadRunnerServer::class,
+                'rr:setup' => SetupRoadRunner::class,
                 'stopserver' => StopRoadRunnerServer::class,
                 'runserver:logs' => ViewRoadRunnerLogs::class,
                 'aliases' => ListAliasCommand::class,

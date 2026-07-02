@@ -52,6 +52,8 @@ class StartRoadRunnerServer extends Command
         if ($binary === null) {
             $this->error('RoadRunner binary (rr) not found.');
             $this->line('Install into your app root:');
+            $this->line('  php pionia rr:setup');
+            $this->line('Or: composer rr:setup');
             foreach ($this->rrInstallCommands() as $line) {
                 $this->line('  ' . $line);
             }
@@ -315,8 +317,7 @@ class StartRoadRunnerServer extends Command
         }
 
         if ($lines === []) {
-            $lines[] = 'composer require --dev spiral/roadrunner-cli';
-            $lines[] = 'vendor/bin/rr get -l ' . $root;
+            $lines[] = 'php pionia rr:setup';
         }
 
         return $lines;
