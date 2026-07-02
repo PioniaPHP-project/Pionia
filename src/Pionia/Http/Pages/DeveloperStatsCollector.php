@@ -108,7 +108,19 @@ class DeveloperStatsCollector
                     'memory_used_mb' => isset($status['memory_usage']['used_memory'])
                         ? round($status['memory_usage']['used_memory'] / 1048576, 2)
                         : null,
+                    'preload_enabled' => (bool) ini_get('opcache.preload'),
+                    'preload_user' => ini_get('opcache.preload_user') ?: null,
+                    'jit_enabled' => (bool) ini_get('opcache.jit'),
+                    'jit_buffer_size' => ini_get('opcache.jit_buffer_size') ?: null,
                 ];
+
+                if (isset($status['preload_statistics']) && is_array($status['preload_statistics'])) {
+                    $preload = $status['preload_statistics'];
+                    $data['opcache']['preload_memory_mb'] = isset($preload['memory_consumption'])
+                        ? round((float) $preload['memory_consumption'] / 1048576, 2)
+                        : null;
+                    $data['opcache']['preloaded_scripts'] = $preload['scripts'] ?? null;
+                }
             }
         }
 
@@ -255,7 +267,16 @@ class DeveloperStatsCollector
             return ['status' => 'warn', 'message' => 'OPcache disabled'];
         }
 
-        return ['status' => 'ok', 'message' => 'OPcache enabled'];
+        $message = 'OPcache enabled';
+        if (ini_get('opcache.preload')) {
+            $message .= '; preload configured';
+        }
+
+        if (ini_get('opcache.jit')) {
+            $message .= '; JIT on';
+        }
+
+        return ['status' => 'ok', 'message' => $message];
     }
 
     /**

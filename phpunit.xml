@@ -16,6 +16,7 @@
             <directory>tests/Runtime</directory>
             <directory>tests/TestSuite</directory>
             <directory>tests/Utils</directory>
+            <directory>tests/Performance</directory>
         </testsuite>
         <testsuite name="Feature">
             <directory>tests/Feature</directory>

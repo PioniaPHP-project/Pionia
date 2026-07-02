@@ -14,6 +14,7 @@ use Pionia\Exceptions\InvalidProviderException;
 use Pionia\Http\Routing\PioniaRouter;
 use Pionia\Logging\LogManager;
 use Pionia\Middlewares\MiddlewareChain;
+use Pionia\Performance\BootstrapCacheGenerator;
 use Pionia\Realm\AppRealm;
 use Pionia\Utils\ApplicationLifecycleHooks;
 use Pionia\Utils\PioniaApplicationType;
@@ -163,6 +164,16 @@ trait AppMixin
     protected function resolveProviders(bool $considerCached = true): static
     {
         if ($considerCached) {
+            $bootstrapProviders = $this->loadBootstrapProvidersCache();
+            if ($bootstrapProviders !== null) {
+                $providersArr = arr($bootstrapProviders);
+                realm()->set('app_providers', $providersArr);
+                $this->appProviders = $providersArr;
+                $this->unResolvedAppProviders = $this->calculateUnresolvedProviders() ?? arr([]);
+
+                return $this;
+            }
+
             $providersArr = $this->getCache('app_providers', true);
             if ($providersArr) {
                 realm()->set('app_providers', arr($providersArr));
@@ -207,6 +218,18 @@ trait AppMixin
         }
 
         $this->realm()->set(AppRealm::COMMANDS_TAG, $commands);
+    }
+
+    /**
+     * @return array<string, string>|null
+     */
+    private function loadBootstrapProvidersCache(): ?array
+    {
+        if (!defined('BASE_PATH')) {
+            return null;
+        }
+
+        return BootstrapCacheGenerator::loadProviders((string) BASE_PATH);
     }
 
     /**

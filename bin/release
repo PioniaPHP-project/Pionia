@@ -78,6 +78,12 @@ composer validate --no-check-publish --strict
 echo "==> Cleaning generated docs and runtime caches"
 bash bin/clean-dev-artifacts
 
+echo "==> Optimizing framework for release"
+bash bin/optimize-framework
+
+echo "==> Verifying app optimize command (example)"
+php example/pionia optimize --no-autoload
+
 mkdir -p build/release
 
 echo "==> Verifying production archive (no example/, tests/, docs/, dev tooling)"

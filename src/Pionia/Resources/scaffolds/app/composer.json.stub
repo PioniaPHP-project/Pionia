@@ -27,6 +27,7 @@
         "serve": "php pionia serve",
         "runserver": "php pionia runserver",
         "rr:setup": "@php pionia rr:setup",
+        "optimize": "@php pionia optimize",
         "test": "php vendor/bin/phpunit",
         "pionia": "php pionia",
         "post-create-project-cmd": [

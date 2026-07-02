@@ -2,6 +2,7 @@
 
 namespace Pionia\Http\Routing;
 
+use Pionia\Performance\BootstrapCacheGenerator;
 use Pionia\Realm\AppRealm;
 
 /**
@@ -22,11 +23,26 @@ final class CompiledRouteMatcher
             return self::$matcher;
         }
 
+        $routes = self::resolveRouteTable();
+
+        return self::$matcher = new RouteMatcher($routes);
+    }
+
+    private static function resolveRouteTable(): RouteTable
+    {
+        $appRoot = defined('BASE_PATH') ? (string) BASE_PATH : null;
+        if ($appRoot !== null) {
+            $cached = BootstrapCacheGenerator::loadRoutes($appRoot);
+            if ($cached instanceof RouteTable) {
+                return $cached;
+            }
+        }
+
         $routes = app()->getSilently(AppRealm::APP_ROUTES_TAG);
         if (!$routes instanceof RouteTable) {
             $routes = new RouteTable();
         }
 
-        return self::$matcher = new RouteMatcher($routes);
+        return $routes;
     }
 }

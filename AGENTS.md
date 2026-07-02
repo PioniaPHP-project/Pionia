@@ -64,6 +64,46 @@ php example/pionia maintenance:off                    # back to normal (alias: u
 
 `renderToString()` renders without `exit()`; `render()` exits only outside worker/testing modes.
 
+## Production performance (OPcache preload)
+
+Pionia ships readable PHP source. Apps **opt in** at deploy time:
+
+```bash
+composer install --no-dev -o
+php pionia optimize                    # installs scaffold files + generates preload
+php pionia optimize:clear              # remove generated artifacts
+php pionia optimize:clear --scaffold   # also remove opt-in scaffold files
+```
+
+`php pionia optimize` copies framework-owned stubs from `Resources/optimize/` into the app, then runs autoload + preload generation.
+
+**Framework releases** run `bin/optimize-framework` (autoload classmap + `build/release/framework-preload.php` manifest). `bin/release` calls this automatically.
+
+| Artifact | Path | When |
+|----------|------|------|
+| Preload entry | `bootstrap/preload.php` | After `php pionia optimize` |
+| Generated preload | `storage/bootstrap/preload.php` | After optimize (gitignored) |
+| PHP ini snippet | `environment/php.ini.production.example` | After optimize |
+| Route cache | `storage/bootstrap/routes.php` | When `BOOTSTRAP_CACHE=true` or `APP_ENV=production` |
+
+**PHP ini (production):** see `environment/php.ini.production.example` in the app template. Key directives:
+
+- `opcache.enable_cli=1` — required for RoadRunner workers
+- `opcache.preload=/path/to/app/bootstrap/preload.php`
+- `opcache.preload_user=www-data` — must match the PHP process user
+- `opcache.validate_timestamps=0` — prod only; restart workers on every deploy
+
+**RoadRunner without global php.ini** — override in `.rr.yaml`:
+
+```yaml
+server:
+  command: "php -d opcache.enable_cli=1 -d opcache.preload=./bootstrap/preload.php worker.php"
+```
+
+**`[performance]` in `settings.ini`:** `PRELOAD_ENABLED`, `PRELOAD_PATHS`, `PRELOAD_EXCLUDE`, `BOOTSTRAP_CACHE`.
+
+Monitor OPcache on `/stats` (hit rate, preload status, JIT when enabled).
+
 ## Database connections
 
 Porm (`table()`, `connectionManager()`) — see [`docs/PORM.md`](docs/PORM.md) and the [Porm guides](https://pionia.netlify.app/documentation/database/) in pionia-docs.

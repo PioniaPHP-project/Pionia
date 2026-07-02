@@ -16,6 +16,8 @@ class BuiltinCommandsTest extends PioniaTestCase
         $this->assertStringContainsString('rr:setup', $this->consoleOutput());
         $this->assertStringContainsString('runserver:logs', $this->consoleOutput());
         $this->assertStringContainsString('stopserver', $this->consoleOutput());
+        $this->assertStringContainsString('optimize', $this->consoleOutput());
+        $this->assertStringContainsString('optimize:clear', $this->consoleOutput());
         $this->assertStringContainsString('stats:view', $this->consoleOutput());
         $this->assertStringContainsString('api:docs', $this->consoleOutput());
         $this->assertStringContainsString('api:catalog', $this->consoleOutput());

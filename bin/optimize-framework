@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Optimize pionia-core for release (autoload classmap + framework preload manifest).
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+php -r "
+require 'vendor/autoload.php';
+\$result = (new Pionia\Performance\FrameworkReleaseOptimizer(getcwd()))->optimize();
+if (!\$result['autoload']) {
+    fwrite(STDERR, 'composer dump-autoload -o failed' . PHP_EOL);
+    exit(1);
+}
+echo 'Autoload optimized.' . PHP_EOL;
+if (\$result['preload_files'] !== null) {
+    echo 'Framework preload manifest: ' . \$result['preload_files'] . ' files → ' . \$result['preload_path'] . PHP_EOL;
+}
+"

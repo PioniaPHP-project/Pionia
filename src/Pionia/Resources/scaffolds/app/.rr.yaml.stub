@@ -5,6 +5,8 @@ rpc:
 
 server:
   command: "php worker.php"
+  # Production OPcache preload (when not using global php.ini):
+  # command: "php -d opcache.enable_cli=1 -d opcache.preload=./bootstrap/preload.php worker.php"
   relay: pipes
 
 http:
