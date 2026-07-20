@@ -302,6 +302,11 @@ final class MysqlGrammar extends Grammar
         return 'JSON';
     }
 
+    protected function typeJsonb(ColumnDefinition $column): string
+    {
+        return 'JSON';
+    }
+
     protected function typeBinary(ColumnDefinition $column): string
     {
         return 'BLOB';

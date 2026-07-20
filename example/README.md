@@ -92,8 +92,11 @@ Default connection is **SQLite** (`database.sqlite3` in the example root, gitign
 
 ```bash
 cd example
-php bin/init-db.php    # creates DB from database/schema.sql
+php pionia migrate          # apply database/migrations/
+php pionia migrate:status
 ```
+
+`database/schema.sql` + `bin/init-db.php` are legacy; `init-db.php` now forwards to `migrate`.
 
 PostgreSQL settings remain under `[db_pgsql]` in `settings.ini` if you prefer Postgres.
 

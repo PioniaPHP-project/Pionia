@@ -185,6 +185,14 @@ final class Blueprint
         return $this->addColumn('json', $name);
     }
 
+    /**
+     * JSONB on PostgreSQL; falls back to JSON/TEXT on MySQL/SQLite.
+     */
+    public function jsonb(string $name): ColumnDefinition
+    {
+        return $this->addColumn('jsonb', $name);
+    }
+
     public function binary(string $name): ColumnDefinition
     {
         return $this->addColumn('binary', $name);

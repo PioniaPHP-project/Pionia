@@ -19,6 +19,13 @@ default=true
 ; PATH=database/migrations
 ; TABLE=migrations
 
+[jwt]
+; SECRET=change-me
+; TTL=3600
+; ALG=HS256
+; ISSUER=
+; AUDIENCE=
+
 [cors]
 allowed_origins=http://localhost:5173,http://127.0.0.1:5173
 allowed_headers=*

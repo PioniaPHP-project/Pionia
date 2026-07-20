@@ -101,6 +101,7 @@ Schema::create('posts', function (Blueprint $table) {
     $table->boolean('published')->default(false);
     $table->decimal('price', 10, 2);
     $table->json('meta')->nullable();
+    $table->jsonb('attrs')->nullable(); // JSONB on PostgreSQL
     $table->enum('status', ['draft', 'live']);
     $table->foreignId('user_id')->constrained()->cascadeOnDelete();
     $table->timestamps();

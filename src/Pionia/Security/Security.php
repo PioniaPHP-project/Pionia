@@ -960,18 +960,23 @@ final class Security
         }
 
         if (!isset($claims['exp'])) {
-            $ttl = (int) (function_exists('env') ? env('JWT_TTL', 3600) : 3600);
-            $claims['exp'] = $now + max(1, $ttl);
+            $ttl = (int) $this->jwtConfig('TTL', $this->jwtConfig('ttl', env('JWT_TTL', 3600)));
+            $claims['exp'] = $now + max(1, (int) $ttl);
         }
 
-        $issuer = function_exists('env') ? env('JWT_ISSUER') : null;
+        $issuer = $this->jwtConfig('ISSUER', $this->jwtConfig('issuer', env('JWT_ISSUER')));
         if ($issuer && !isset($claims['iss'])) {
             $claims['iss'] = $issuer;
         }
 
-        $audience = function_exists('env') ? env('JWT_AUDIENCE') : null;
+        $audience = $this->jwtConfig('AUDIENCE', $this->jwtConfig('audience', env('JWT_AUDIENCE')));
         if ($audience && !isset($claims['aud'])) {
             $claims['aud'] = $audience;
+        }
+
+        $configuredAlg = $this->jwtConfig('ALG', $this->jwtConfig('alg', null));
+        if ($configuredAlg && $alg === 'HS256' && empty($headers['alg'])) {
+            $alg = strtoupper((string) $configuredAlg);
         }
 
         $header = array_merge(['typ' => 'JWT', 'alg' => $alg], $headers);
@@ -1060,12 +1065,12 @@ final class Security
             throw new InvalidArgumentException('JWT has expired.');
         }
 
-        $issuer = function_exists('env') ? env('JWT_ISSUER') : null;
+        $issuer = $this->jwtConfig('ISSUER', $this->jwtConfig('issuer', env('JWT_ISSUER')));
         if ($issuer !== null && $issuer !== '' && isset($payload['iss']) && (string) $payload['iss'] !== (string) $issuer) {
             throw new InvalidArgumentException('JWT issuer mismatch.');
         }
 
-        $audience = function_exists('env') ? env('JWT_AUDIENCE') : null;
+        $audience = $this->jwtConfig('AUDIENCE', $this->jwtConfig('audience', env('JWT_AUDIENCE')));
         if ($audience !== null && $audience !== '' && isset($payload['aud'])) {
             $aud = $payload['aud'];
             $ok = is_array($aud) ? in_array($audience, $aud, true) : (string) $aud === (string) $audience;
@@ -1132,15 +1137,37 @@ final class Security
 
     private function resolveJwtSecret(?string $secret): string
     {
-        $secret ??= function_exists('env')
-            ? (string) (env('JWT_SECRET', env('APP_KEY', '')) ?? '')
-            : '';
-
-        if ($secret === '') {
-            throw new RuntimeException('JWT secret is missing. Set JWT_SECRET or APP_KEY.');
+        if ($secret !== null && $secret !== '') {
+            return $secret;
         }
 
-        return $secret;
+        $fromConfig = $this->jwtConfig('SECRET', $this->jwtConfig('secret', null));
+        $resolved = (string) ($fromConfig
+            ?? (function_exists('env') ? env('JWT_SECRET', env('APP_KEY', '')) : '')
+            ?? '');
+
+        if ($resolved === '') {
+            throw new RuntimeException('JWT secret is missing. Set JWT_SECRET, [jwt] SECRET, or APP_KEY.');
+        }
+
+        return $resolved;
+    }
+
+    /**
+     * Read a value from the `[jwt]` settings section, then fall back to `$default`.
+     */
+    private function jwtConfig(string $key, mixed $default = null): mixed
+    {
+        if (!function_exists('env')) {
+            return $default;
+        }
+
+        $section = env('jwt');
+        if (is_array($section) && array_key_exists($key, $section) && $section[$key] !== '' && $section[$key] !== null) {
+            return $section[$key];
+        }
+
+        return $default;
     }
 
     private function jwtBase64UrlEncode(string $data): string

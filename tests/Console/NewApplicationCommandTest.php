@@ -49,6 +49,9 @@ class NewApplicationCommandTest extends PioniaTestCase
         $env = file_get_contents($root . '/environment/.env');
         $this->assertStringContainsString('APP_NAME="Demo App"', $env);
         $this->assertFileExists($root . '/database/migrations');
+        $this->assertFileExists($root . '/README.md');
+        $readme = file_get_contents($root . '/README.md');
+        $this->assertStringContainsString('Workspace Trust', $readme);
         $this->assertStringContainsString('Workspace Trust', $this->consoleOutput());
         $this->assertStringContainsString('make:table', $this->consoleOutput());
     }

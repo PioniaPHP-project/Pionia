@@ -289,6 +289,7 @@ PHP;
             'dateTime' => "\$table->dateTime('{$name}')",
             'timestamp' => "\$table->timestamp('{$name}')",
             'json' => "\$table->json('{$name}')",
+            'jsonb' => "\$table->jsonb('{$name}')",
             'binary' => "\$table->binary('{$name}')",
             'foreignId', 'foreign' => "\$table->foreignId('{$name}')",
             default => "\$table->string('{$name}')",

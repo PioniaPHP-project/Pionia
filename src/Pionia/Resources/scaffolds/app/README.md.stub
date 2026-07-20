@@ -1,0 +1,26 @@
+# {{APP_NAME}}
+
+Pionia application scaffold.
+
+## Quick start
+
+```bash
+composer install
+php pionia serve
+```
+
+## Database
+
+```bash
+php pionia make:table users --columns="email:email:unique,name:string" --timestamps
+php pionia migrate
+```
+
+## IDE trust
+
+VS Code / IntelliJ may prompt to **trust this folder** the first time you open it (Workspace Trust / Safe Mode). That is normal for any new project — accept once to enable full IDE features.
+
+## Docs
+
+- Framework: https://pionia.netlify.app
+- Migrations: see `docs/MIGRATIONS.md` in pionia-core (or your vendor copy)

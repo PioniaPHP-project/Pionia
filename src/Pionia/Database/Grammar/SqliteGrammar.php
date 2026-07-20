@@ -307,6 +307,11 @@ final class SqliteGrammar extends Grammar
         return 'TEXT';
     }
 
+    protected function typeJsonb(ColumnDefinition $column): string
+    {
+        return 'TEXT';
+    }
+
     protected function typeBinary(ColumnDefinition $column): string
     {
         return 'BLOB';

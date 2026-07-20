@@ -300,6 +300,11 @@ final class PgsqlGrammar extends Grammar
 
     protected function typeJson(ColumnDefinition $column): string
     {
+        return 'JSON';
+    }
+
+    protected function typeJsonb(ColumnDefinition $column): string
+    {
         return 'JSONB';
     }
 

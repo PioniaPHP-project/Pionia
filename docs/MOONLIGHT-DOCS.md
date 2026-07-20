@@ -121,7 +121,7 @@ Runtime docs use `[docs] ENABLED` / `DOCS_ENABLED` and optional `TOKEN` / `DOCS_
 
 ## OpenAPI profile
 
-Moonlight OpenAPI exposes **one documented operation per action** under `/api/{version}#{service}.{action}` (path fragment for Scalar navigation only). Request and response shapes are inlined on each action page. Try-it-out and runtime both use `POST /api/{version}/` with `{ "service", "action", ...params }` — see `x-pionia-dispatch` on each operation.
+Moonlight OpenAPI exposes **one documented operation per action** under `/api/{version}#{service}.{action}` (path fragment for Scalar navigation only). Request and response shapes are inlined on each action page. Try-it-out uses Scalar `onBeforeRequest` (plus a fetch fallback) to POST to `x-pionia-dispatch.url` — the real `POST /api/{version}/` with `{ "service", "action", ...params }`.
 
 ## Response envelope
 

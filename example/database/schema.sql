@@ -1,5 +1,6 @@
--- Example schema for SampoloService (sample_table + company join demo)
--- Run: php bin/init-db.php  (from example/)
+-- Legacy one-shot schema (kept for reference). Prefer:
+--   php pionia migrate
+-- See database/migrations/2024_01_01_000000_create_sample_tables.php
 
 CREATE TABLE IF NOT EXISTS company (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

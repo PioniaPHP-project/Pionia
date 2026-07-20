@@ -113,4 +113,27 @@ final class SchemaBlueprintTest extends PioniaTestCase
         Schema::dropIfExists('tmp_b');
         $this->assertFalse(Schema::hasTable('tmp_b'));
     }
+
+    public function testRenameColumnAndRaw(): void
+    {
+        Schema::create('widgets', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->jsonb('meta')->nullable();
+        });
+
+        Schema::table('widgets', function (Blueprint $table) {
+            $table->renameColumn('title', 'name');
+        });
+        $this->assertTrue(Schema::hasColumn('widgets', 'name'));
+        $this->assertFalse(Schema::hasColumn('widgets', 'title'));
+        $this->assertTrue(Schema::hasColumn('widgets', 'meta'));
+
+        Schema::raw('CREATE INDEX widgets_name_idx ON widgets (name)');
+        $pdo = $this->testPdo;
+        $this->assertNotNull($pdo);
+        $indexes = $pdo->query("SELECT name FROM sqlite_master WHERE type = 'index' AND tbl_name = 'widgets'")
+            ->fetchAll(\PDO::FETCH_COLUMN);
+        $this->assertContains('widgets_name_idx', $indexes);
+    }
 }

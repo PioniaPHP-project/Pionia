@@ -88,6 +88,7 @@ abstract class Grammar
             'dateTime' => $this->typeDateTime($column),
             'timestamp', 'timestampTz' => $this->typeTimestamp($column),
             'json' => $this->typeJson($column),
+            'jsonb' => $this->typeJsonb($column),
             'binary' => $this->typeBinary($column),
             'enum' => $this->typeEnum($column),
             'foreignId' => $this->typeForeignId($column),
@@ -128,6 +129,8 @@ abstract class Grammar
     abstract protected function typeTimestamp(ColumnDefinition $column): string;
 
     abstract protected function typeJson(ColumnDefinition $column): string;
+
+    abstract protected function typeJsonb(ColumnDefinition $column): string;
 
     abstract protected function typeBinary(ColumnDefinition $column): string;
 

@@ -23,8 +23,12 @@ use Pionia\Utils\Filesystem;
 class GenerateAuthenticationBackend extends Command
 {
     protected string $title = 'Adds a new authentication backend';
-    protected  string $help = 'Generates an authentication backend for pionia app.';
-    protected string $description = 'Generates an authentication backend for pionia app.';
+    protected string $help = 'Generates an authentication backend for a Pionia app. '
+        . 'For JWT Bearer auth out of the box, register Pionia\\Auth\\JwtAuthentication '
+        . 'in [app_authentications] (or extend it) and set JWT_SECRET / [jwt] SECRET.';
+
+    protected string $description = 'Generates an authentication backend (or use Pionia\\Auth\\JwtAuthentication for JWT)';
+
     protected string $name = 'make:auth';
     protected array $aliases = ['g:a', 'gen:auth'];
 
@@ -43,6 +47,7 @@ class GenerateAuthenticationBackend extends Command
         $service_name = $this->argument("name");
 
         $this->info("Generating $service_name authentication in the authentications directory...");
+        $this->line('Tip: for JWT, you can register Pionia\\Auth\\JwtAuthentication instead of scaffolding a custom class.');
 
         $this->generate($service_name);
 
@@ -63,8 +68,8 @@ class GenerateAuthenticationBackend extends Command
         $namespace = $file->addNamespace($ns);
 
         $file->addComment('This authentication backend is auto-generated from pionia cli.');
-
-        $file->addComment("Remember to register your backend in index.php.");
+        $file->addComment('Register it under [app_authentications] in environment/settings.ini.');
+        $file->addComment('For JWT Bearer tokens, prefer Pionia\\Auth\\JwtAuthentication + JWT_SECRET / [jwt] SECRET.');
 
         $namespace->addUse('Pionia\Auth\ContextUserObject');
 

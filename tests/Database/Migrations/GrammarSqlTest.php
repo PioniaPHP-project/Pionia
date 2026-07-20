@@ -58,7 +58,7 @@ final class GrammarSqlTest extends PioniaTestCase
         $this->assertStringContainsString('CREATE TABLE "users"', $sql[0]);
         $this->assertStringContainsString('"id" BIGSERIAL PRIMARY KEY', $sql[0]);
         $this->assertStringContainsString('"email" VARCHAR(255)', $sql[0]);
-        $this->assertStringContainsString('JSONB', $sql[0]);
+        $this->assertStringContainsString('"meta" JSON', $sql[0]);
         $this->assertStringContainsString('NULL', $sql[0]);
     }
 
@@ -85,5 +85,18 @@ final class GrammarSqlTest extends PioniaTestCase
         $sql = (new MysqlGrammar())->compile($alter);
 
         $this->assertStringContainsString('AFTER `email`', $sql[0]);
+    }
+
+    public function testPgsqlJsonbType(): void
+    {
+        $blueprint = new Blueprint('docs');
+        $blueprint->creating(true);
+        $blueprint->id();
+        $blueprint->json('payload');
+        $blueprint->jsonb('attrs');
+
+        $sql = (new PgsqlGrammar())->compile($blueprint);
+        $this->assertStringContainsString('"payload" JSON', $sql[0]);
+        $this->assertStringContainsString('"attrs" JSONB', $sql[0]);
     }
 }
