@@ -6,6 +6,13 @@ use Pionia\Documentation\Contracts\ActionDoc;
 use Pionia\Documentation\Contracts\MoonlightApiCatalog;
 use Pionia\Documentation\Contracts\ServiceDoc;
 
+/**
+ * Exports a Moonlight catalog as OpenAPI 3.1.
+ *
+ * Runtime truth: one `POST` per version (`/api/v1/`) with `{ service, action, … }`.
+ * OpenAPI permits only one operation for a method/path pair, so actions are represented
+ * as request schemas and named examples on the real version dispatch operation.
+ */
 class OpenApiExporter
 {
     public function export(MoonlightApiCatalog $catalog): string
@@ -14,60 +21,71 @@ class OpenApiExporter
         $tagDefinitions = [];
 
         foreach ($catalog->versions as $version => $services) {
-            $dispatchPath = rtrim(apiVersionPath($version), '/');
-
+            $dispatchPath = apiVersionPath($version);
             ksort($services);
 
-            foreach ($services as $service) {
-                $tag = $service->alias;
+            $oneOf = [];
+            $examples = [];
+            $catalogLines = [
+                'Send `POST ' . $dispatchPath . '` with `{ "service", "action", ...params }`.',
+                '',
+                'Choose a named request example for the action you want to call.',
+                '',
+            ];
 
-                $tagDefinitions[] = [
-                    'name' => $tag,
-                    'description' => $service->summary ?? ('`' . $tag . '` service'),
-                    'x-displayName' => $this->displayName($tag),
-                ];
+            foreach ($services as $service) {
+                $catalogLines[] = '### ' . $this->displayName($service->alias);
+                $catalogLines[] = '';
 
                 foreach ($service->actions as $action) {
-                    $docPath = $this->documentPath($version, $service->alias, $action->name);
-                    $paths[$docPath] = [
-                        'post' => [
-                            'operationId' => $this->operationId($service->alias, $action->name),
-                            'summary' => $action->summary ?? $action->name,
-                            'description' => $this->operationDescription($service, $action, $dispatchPath, $version),
-                            'tags' => [$tag],
-                            'requestBody' => [
-                                'required' => true,
-                                'content' => [
-                                    'application/json' => [
-                                        'schema' => $this->requestSchema($service, $action),
-                                        'examples' => $this->requestExamples($service, $action),
-                                    ],
-                                ],
-                            ],
-                            'responses' => [
-                                '200' => [
-                                    'description' => 'Pionia JSON envelope',
-                                    'content' => [
-                                        'application/json' => [
-                                            'schema' => $this->responseSchema($service, $action),
-                                        ],
-                                    ],
-                                ],
-                            ],
-                            'x-pionia-dispatch' => [
-                                'method' => 'POST',
-                                'url' => $dispatchPath,
-                                'service' => $service->alias,
-                                'action' => $action->name,
+                    $key = $service->alias . '.' . $action->name;
+                    $schema = $this->requestSchema($service, $action);
+                    $schema['title'] = $key;
+                    $oneOf[] = $schema;
+                    $examples[$key] = [
+                        'summary' => ($action->summary ?? $action->name) . ' (`' . $key . '`)',
+                        'value' => $this->requestExampleValue($service, $action),
+                    ];
+                    $catalogLines[] = '- `' . $key . '`'
+                        . ($action->summary ? ' — ' . $action->summary : '');
+                }
+                $catalogLines[] = '';
+            }
+
+            $tag = 'API ' . $version;
+            $tagDefinitions[] = [
+                'name' => $tag,
+                'description' => 'Dispatch endpoint for API version `' . $version . '`.',
+                'x-displayName' => $tag,
+            ];
+
+            $paths[$dispatchPath] = [
+                'post' => [
+                    'operationId' => $this->sanitizeKey('moonlight_' . $version),
+                    'summary' => 'Dispatch ' . $version . ' action',
+                    'description' => implode("\n", $catalogLines),
+                    'tags' => [$tag],
+                    'requestBody' => [
+                        'required' => true,
+                        'content' => [
+                            'application/json' => [
+                                'schema' => ['oneOf' => $oneOf],
+                                'examples' => $examples,
                             ],
                         ],
-                    ];
-
-                    if ($action->deprecated) {
-                        $paths[$docPath]['post']['deprecated'] = true;
-                    }
-                }
-            }
+                    ],
+                    'responses' => [
+                        '200' => [
+                            'description' => 'Pionia JSON envelope',
+                            'content' => [
+                                'application/json' => [
+                                    'schema' => $this->responseSchema(),
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ];
         }
 
         $spec = [
@@ -75,9 +93,8 @@ class OpenApiExporter
             'info' => [
                 'title' => $catalog->title . ' Moonlight API',
                 'version' => '1.0.0',
-                'description' => 'Browse services and actions in the sidebar. Each page documents one Moonlight action with inline request and response shapes. '
-                    . 'Dispatch all actions with `POST` to the versioned API base and body `{ "service", "action", ...params }`. '
-                    . 'Path fragments (`#service.action`) are for documentation navigation only; the sandbox posts to the real base URL.',
+                'description' => 'Moonlight exposes one POST endpoint per API version. '
+                    . 'Select a named request example for a service action, then send it to the versioned API path.',
             ],
             'tags' => $tagDefinitions,
             'paths' => $paths,
@@ -123,38 +140,18 @@ class OpenApiExporter
     /**
      * @return array<string, mixed>
      */
-    private function responseSchema(ServiceDoc $service, ActionDoc $action): array
+    private function responseSchema(): array
     {
-        $returnData = ['type' => 'object', 'nullable' => true];
-
-        if ($action->returnShape) {
-            $returnData['description'] = $action->returnShape;
-        }
-
         return [
             'type' => 'object',
             'required' => ['returnCode', 'returnMessage'],
             'properties' => [
                 'returnCode' => ['type' => 'integer'],
                 'returnMessage' => ['type' => 'string'],
-                'returnData' => $returnData,
+                'returnData' => ['type' => 'object', 'nullable' => true],
                 'extraData' => ['type' => 'object', 'nullable' => true],
             ],
         ];
-    }
-
-    /**
-     * Unique OpenAPI path key: real dispatch URL + fragment for per-action navigation.
-     * Fragments are not sent over HTTP; Scalar try-it-out rewrites to x-pionia-dispatch.url.
-     */
-    private function documentPath(string $version, string $service, string $action): string
-    {
-        return rtrim(apiVersionPath($version), '/') . '#' . $service . '.' . $action;
-    }
-
-    private function operationId(string $service, string $action): string
-    {
-        return $this->sanitizeKey($service . '_' . $action);
     }
 
     private function sanitizeKey(string $value): string
@@ -167,44 +164,10 @@ class OpenApiExporter
         return ucwords(str_replace(['_', '-'], ' ', $alias));
     }
 
-    private function operationDescription(ServiceDoc $service, ActionDoc $action, string $dispatchPath, string $version): string
-    {
-        $lines = [
-            $action->summary ?? ('Invoke `' . $action->name . '` on `' . $service->alias . '`.'),
-            '',
-            '**Dispatch**',
-            '',
-            '| | |',
-            '|---|---|',
-            '| URL | `' . $dispatchPath . '` |',
-            '| Method | `POST` |',
-            '| `service` | `' . $service->alias . '` |',
-            '| `action` | `' . $action->name . '` |',
-            '| Auth | `' . ($action->auth ?? $service->auth ?? 'none') . '` |',
-        ];
-
-        if ($action->permissions !== []) {
-            $lines[] = '| Permissions | `' . implode('`, `', $action->permissions) . '` |';
-        }
-
-        if ($service->className) {
-            $lines[] = '| PHP class | `' . $service->className . '` |';
-        }
-
-        if ($service->table) {
-            $lines[] = '| Table | `' . $service->table . '` |';
-        }
-
-        $lines[] = '';
-        $lines[] = 'Health check: `GET ' . apiPingPath($version) . '`.';
-
-        return implode("\n", $lines);
-    }
-
     /**
-     * @return array<string, array{summary?: string, value: mixed}>
+     * @return array<string, mixed>
      */
-    private function requestExamples(ServiceDoc $service, ActionDoc $action): array
+    private function requestExampleValue(ServiceDoc $service, ActionDoc $action): array
     {
         $value = [
             'service' => $service->alias,
@@ -227,12 +190,7 @@ class OpenApiExporter
             }
         }
 
-        return [
-            'default' => [
-                'summary' => $action->name,
-                'value' => $value,
-            ],
-        ];
+        return $value;
     }
 
     private function placeholderForType(string $type): mixed

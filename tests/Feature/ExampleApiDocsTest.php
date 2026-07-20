@@ -27,6 +27,11 @@ class ExampleApiDocsTest extends PioniaTestCase
         $this->assertStringContainsString('scalar/api-reference', $response->content());
         $this->assertStringNotContainsString('data-pionia-theme-toggle', $response->content());
         $this->assertStringContainsString('/docs/openapi.json', $response->content());
+        $this->assertStringContainsString('data-url=', $response->content());
+        $this->assertStringContainsString('pionia-service-navigation', $response->content());
+        $this->assertStringContainsString('data-example-key="auth.list_auth"', $response->content());
+        $this->assertStringContainsString('data-example-key="auth.create_auth"', $response->content());
+        $this->assertStringContainsString('data-testid="example-picker"', $response->content());
     }
 
     public function testOpenApiSpecEndpointReturnsValidOpenApi(): void
@@ -41,7 +46,10 @@ class ExampleApiDocsTest extends PioniaTestCase
         $this->assertSame(200, $response->status());
         $spec = $response->json();
         $this->assertSame('3.1.0', $spec['openapi']);
-        $this->assertArrayHasKey('/api/v1#auth.list_auth', $spec['paths']);
+        $this->assertSame(['/api/v1/'], array_keys($spec['paths']));
+        $examples = $spec['paths']['/api/v1/']['post']['requestBody']['content']['application/json']['examples'];
+        $this->assertArrayHasKey('auth.list_auth', $examples);
+        $this->assertArrayHasKey('auth.create_auth', $examples);
     }
 
     public function testDocsHiddenWhenNotEnabled(): void

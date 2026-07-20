@@ -3,13 +3,10 @@
 namespace Pionia\Http\Services;
 
 use Exception;
+use Pionia\Auth\ActionAuthResolver;
 use Pionia\Exceptions\ResourceNotFoundException;
-use Pionia\Base\WebApplication;
 use Pionia\Contracts\ServiceContract;
-use Pionia\Exceptions\UserUnauthenticatedException;
-use Pionia\Exceptions\UserUnauthorizedException;
 use Pionia\Http\Request\Request;
-use Pionia\Http\Response\Response;
 use Pionia\Utils\Microable;
 use Pionia\Http\Response\ApiResponse;
 use Pionia\Utils\Support;
@@ -20,6 +17,7 @@ use Pionia\Validations\ActionValidationResolver;
  * It contains the basic methods that all services will need for authentication and request processing
  *
  * Document actions with `@moonlight-*` PHPDoc tags or `#[MoonlightAction]` — see `docs/MOONLIGHT-DOCS.md`.
+ * Protect actions with `#[Authenticated]`, `#[Can]`, `#[CanAny]` — see `Pionia\Auth\Attributes`.
  * Generate API reference: `pionia api:docs`.
  *
  * @property Request $request The request object
@@ -100,17 +98,10 @@ class AbstractService implements ServiceContract
     public function processAction(string $action, string $service): ApiResponse
     {
         $data = $this->request->getData();
-
-        if ($this->serviceRequiresAuth) {
-            $this->mustAuthenticate($this->authMessage ?? "Service $service requires authentication");
-        }
+        $requestAction = $action;
 
         if (in_array($action, $this->deactivatedActions)) {
             throw new Exception("Action $action is currently deactivated.");
-        }
-
-        if (in_array($action, $this->actionsRequiringAuth)) {
-            $this->mustAuthenticate("Action $action requires authentication");
         }
 
         $files = $this->request->files;
@@ -125,22 +116,13 @@ class AbstractService implements ServiceContract
             throw new ResourceNotFoundException("Action $action not found in the $service context");
         }
 
-        $validationRules = ActionValidationResolver::resolve(new \ReflectionMethod($this, $action));
+        $method = new \ReflectionMethod($this, $action);
+        $authRequirement = ActionAuthResolver::resolve($this, $method, $requestAction, $service);
+        ActionAuthResolver::enforce($this, $authRequirement);
+
+        $validationRules = ActionValidationResolver::resolve($method);
         if ($validationRules !== []) {
             rules($data, $validationRules);
-        }
-
-
-        // its a normal here, we do the checks and load it normally
-        if (isset($this->actionPermissions[$action])) {
-            $toCheck = $this->actionPermissions[$action];
-            if (is_array($toCheck)){
-                $this->canAll($toCheck);
-            }
-            // from version 1.1.4, we started checking permissions that are also strings, not arrays
-            if (is_string($toCheck)){
-                $this->can($toCheck);
-            }
         }
 
         // load it as a macro or a normal action method

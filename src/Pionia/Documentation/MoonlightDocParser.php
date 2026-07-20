@@ -2,6 +2,7 @@
 
 namespace Pionia\Documentation;
 
+use Pionia\Auth\ActionAuthResolver;
 use Pionia\Documentation\Attributes\MoonlightAction;
 use Pionia\Documentation\Contracts\ActionDoc;
 use Pionia\Http\Services\AbstractService;
@@ -43,8 +44,20 @@ class MoonlightDocParser
             }
 
             $summary = $tags['summary'] ?? $this->firstLine($method->getDocComment() ?: '');
-            $auth = $tags['auth'] ?? $this->inferAuth($actionName, $actionsRequiringAuth, $serviceRequiresAuth);
-            $permissions = $tags['perm'] ?? ($actionPermissions[$actionName] ?? $actionPermissions[$methodName] ?? []);
+            $auth = $tags['auth'] ?? null;
+            if ($auth === null) {
+                $auth = ActionAuthResolver::infersRequiredAuth($reflection, $method, $actionName)
+                    ? 'required'
+                    : $this->inferAuth($actionName, $actionsRequiringAuth, $serviceRequiresAuth);
+            }
+
+            $permissions = $tags['perm'] ?? [];
+            if ($permissions === []) {
+                $fromAttrs = ActionAuthResolver::inferredPermissions($reflection, $method, $actionName);
+                $permissions = $fromAttrs !== []
+                    ? $fromAttrs
+                    : ($actionPermissions[$actionName] ?? $actionPermissions[$methodName] ?? []);
+            }
             if (is_string($permissions)) {
                 $permissions = [$permissions];
             }

@@ -1,48 +1,9 @@
-<?php
-
-namespace Pionia\Documentation;
-
-use Pionia\Documentation\Contracts\MoonlightApiCatalog;
-
-/**
- * Renders a Swagger-like interactive API reference (Scalar) for Moonlight OpenAPI specs.
- *
- * Scalar manages its own light/dark toggle — no Pionia theme scripts on this page.
- * The OpenAPI document contains only real Moonlight dispatch paths, so Scalar can
- * submit its generated JSON request directly without URL interception.
- */
-class ApiDocsUiExporter
-{
-    public function render(MoonlightApiCatalog $catalog, string $specUrl = '/docs/openapi.json'): string
-    {
-        $title = htmlspecialchars($catalog->title . ' API', ENT_QUOTES, 'UTF-8');
-        $specUrl = htmlspecialchars($specUrl, ENT_QUOTES, 'UTF-8');
-        $favicon = '/__pionia/favicon.ico';
-        $serviceNavigation = $this->renderServiceNavigation($catalog);
-
-        // Static JSON config (functions cannot live in data-configuration JSON)
-        $scalarConfig = htmlspecialchars(
-            json_encode([
-                'theme' => 'purple',
-                'layout' => 'modern',
-                'hideDownloadButton' => false,
-                'darkMode' => true,
-                'hideModels' => true,
-                'tagsSorter' => 'alpha',
-                'operationsSorter' => 'alpha',
-                'defaultOpenAllTags' => false,
-            ], JSON_THROW_ON_ERROR),
-            ENT_QUOTES,
-            'UTF-8',
-        );
-
-        return <<<HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{$title}</title>
+    <title>Sample App API</title>
     <style>
         body { margin: 0; font-family: Inter, system-ui, -apple-system, sans-serif; }
         .pionia-docs-toolbar {
@@ -139,18 +100,18 @@ class ApiDocsUiExporter
 <body>
 <div class="pionia-docs-toolbar">
     <div style="display:flex;align-items:center;gap:0.5rem;">
-        <img src="{$favicon}" alt="" width="24" height="24">
-        <span class="pionia-docs-toolbar-title">{$title}</span>
+        <img src="/__pionia/favicon.ico" alt="" width="24" height="24">
+        <span class="pionia-docs-toolbar-title">Sample App API</span>
     </div>
     <a href="/">Home</a>
 </div>
 <aside class="pionia-catalog-sidebar" aria-label="API services and actions">
-{$serviceNavigation}
+<div class="pionia-service-navigation"><div class="pionia-service-version">v1</div><details open><summary>auth</summary><button type="button" class="pionia-action-link" data-example-key="auth.create_auth" data-operation-index="0" title="Creates an auth record">create_auth</button><button type="button" class="pionia-action-link" data-example-key="auth.delete_auth" data-operation-index="0" title="Deletes an auth record">delete_auth</button><button type="button" class="pionia-action-link" data-example-key="auth.get_auth" data-operation-index="0" title="Returns auth context for the current request">get_auth</button><button type="button" class="pionia-action-link" data-example-key="auth.list_auth" data-operation-index="0" title="Lists auth records (demo stub)">list_auth</button><button type="button" class="pionia-action-link" data-example-key="auth.update_auth" data-operation-index="0" title="Updates an auth record">update_auth</button></details><details open><summary>category</summary><button type="button" class="pionia-action-link" data-example-key="category.list" data-operation-index="0" title="List all companies">list</button><button type="button" class="pionia-action-link" data-example-key="category.save_or_update" data-operation-index="0" title="Create or update a company row">save_or_update</button><button type="button" class="pionia-action-link" data-example-key="category.update" data-operation-index="0" title="Update a company by id">update</button></details><details open><summary>mail</summary><button type="button" class="pionia-action-link" data-example-key="mail.send_welcome" data-operation-index="0" title="Queued welcome email demo">send_welcome</button></details><details open><summary>sampolo</summary><button type="button" class="pionia-action-link" data-example-key="sampolo.create" data-operation-index="0" title="Create a new row">create</button><button type="button" class="pionia-action-link" data-example-key="sampolo.delete" data-operation-index="0" title="Delete a row by primary key">delete</button><button type="button" class="pionia-action-link" data-example-key="sampolo.details" data-operation-index="0" title="Alias for the `retrieve` action">details</button><button type="button" class="pionia-action-link" data-example-key="sampolo.edit" data-operation-index="0" title="Alias for the `update` action">edit</button><button type="button" class="pionia-action-link" data-example-key="sampolo.list" data-operation-index="0" title="List rows with optional pagination">list</button><button type="button" class="pionia-action-link" data-example-key="sampolo.random" data-operation-index="0" title="Return random row(s)">random</button><button type="button" class="pionia-action-link" data-example-key="sampolo.retrieve" data-operation-index="0" title="Fetch one row by primary key">retrieve</button><button type="button" class="pionia-action-link" data-example-key="sampolo.save" data-operation-index="0" title="Alias for the `create` action">save</button><button type="button" class="pionia-action-link" data-example-key="sampolo.update" data-operation-index="0" title="Update an existing row">update</button></details></div>
 </aside>
 <script
     id="api-reference"
-    data-url="{$specUrl}"
-    data-configuration='{$scalarConfig}'></script>
+    data-url="openapi.json"
+    data-configuration='{&quot;theme&quot;:&quot;purple&quot;,&quot;layout&quot;:&quot;modern&quot;,&quot;hideDownloadButton&quot;:false,&quot;darkMode&quot;:true,&quot;hideModels&quot;:true,&quot;tagsSorter&quot;:&quot;alpha&quot;,&quot;operationsSorter&quot;:&quot;alpha&quot;,&quot;defaultOpenAllTags&quot;:false}'></script>
 <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
 <script>
 (function () {
@@ -192,45 +153,8 @@ class ApiDocsUiExporter
 </script>
 <noscript>
     <p style="font-family: system-ui, sans-serif; padding: 2rem;">
-        API docs require JavaScript. OpenAPI spec: <a href="{$specUrl}">{$specUrl}</a>
+        API docs require JavaScript. OpenAPI spec: <a href="openapi.json">openapi.json</a>
     </p>
 </noscript>
 </body>
 </html>
-HTML;
-    }
-
-    private function renderServiceNavigation(MoonlightApiCatalog $catalog): string
-    {
-        $html = '<div class="pionia-service-navigation">';
-        $operationIndex = 0;
-
-        foreach ($catalog->versions as $version => $services) {
-            ksort($services);
-            $html .= '<div class="pionia-service-version">'
-                . htmlspecialchars((string) $version, ENT_QUOTES, 'UTF-8')
-                . '</div>';
-
-            foreach ($services as $service) {
-                $alias = htmlspecialchars($service->alias, ENT_QUOTES, 'UTF-8');
-                $html .= '<details open><summary>' . $alias . '</summary>';
-
-                foreach ($service->actions as $action) {
-                    $key = $service->alias . '.' . $action->name;
-                    $html .= '<button type="button" class="pionia-action-link"'
-                        . ' data-example-key="' . htmlspecialchars($key, ENT_QUOTES, 'UTF-8') . '"'
-                        . ' data-operation-index="' . $operationIndex . '"'
-                        . ' title="' . htmlspecialchars($action->summary ?? $key, ENT_QUOTES, 'UTF-8') . '">'
-                        . htmlspecialchars($action->name, ENT_QUOTES, 'UTF-8')
-                        . '</button>';
-                }
-
-                $html .= '</details>';
-            }
-
-            $operationIndex++;
-        }
-
-        return $html . '</div>';
-    }
-}

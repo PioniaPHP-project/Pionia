@@ -1,0 +1,546 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Sample App Moonlight API",
+        "version": "1.0.0",
+        "description": "Moonlight exposes one POST endpoint per API version. Select a named request example for a service action, then send it to the versioned API path."
+    },
+    "tags": [
+        {
+            "name": "API v1",
+            "description": "Dispatch endpoint for API version `v1`.",
+            "x-displayName": "API v1"
+        }
+    ],
+    "paths": {
+        "/api/v1/": {
+            "post": {
+                "operationId": "moonlight_v1",
+                "summary": "Dispatch v1 action",
+                "description": "Send `POST /api/v1/` with `{ \"service\", \"action\", ...params }`.\n\nChoose a named request example for the action you want to call.\n\n### Auth\n\n- `auth.create_auth` \u2014 Creates an auth record\n- `auth.delete_auth` \u2014 Deletes an auth record\n- `auth.get_auth` \u2014 Returns auth context for the current request\n- `auth.list_auth` \u2014 Lists auth records (demo stub)\n- `auth.update_auth` \u2014 Updates an auth record\n\n### Category\n\n- `category.list` \u2014 List all companies\n- `category.save_or_update` \u2014 Create or update a company row\n- `category.update` \u2014 Update a company by id\n\n### Mail\n\n- `mail.send_welcome` \u2014 Queued welcome email demo\n\n### Sampolo\n\n- `sampolo.create` \u2014 Create a new row\n- `sampolo.delete` \u2014 Delete a row by primary key\n- `sampolo.details` \u2014 Alias for the `retrieve` action\n- `sampolo.edit` \u2014 Alias for the `update` action\n- `sampolo.list` \u2014 List rows with optional pagination\n- `sampolo.random` \u2014 Return random row(s)\n- `sampolo.retrieve` \u2014 Fetch one row by primary key\n- `sampolo.save` \u2014 Alias for the `create` action\n- `sampolo.update` \u2014 Update an existing row\n",
+                "tags": [
+                    "API v1"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "oneOf": [
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "auth"
+                                            },
+                                            "action": {
+                                                "const": "create_auth"
+                                            },
+                                            "username": {
+                                                "type": "string",
+                                                "description": "Login name"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "Secret"
+                                            }
+                                        },
+                                        "description": "Creates an auth record",
+                                        "title": "auth.create_auth"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "auth"
+                                            },
+                                            "action": {
+                                                "const": "delete_auth"
+                                            },
+                                            "id": {
+                                                "type": "integer",
+                                                "description": "Record id"
+                                            }
+                                        },
+                                        "description": "Deletes an auth record",
+                                        "title": "auth.delete_auth"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "auth"
+                                            },
+                                            "action": {
+                                                "const": "get_auth"
+                                            }
+                                        },
+                                        "description": "Returns auth context for the current request",
+                                        "title": "auth.get_auth"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "auth"
+                                            },
+                                            "action": {
+                                                "const": "list_auth"
+                                            }
+                                        },
+                                        "description": "Lists auth records (demo stub)",
+                                        "title": "auth.list_auth"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "auth"
+                                            },
+                                            "action": {
+                                                "const": "update_auth"
+                                            },
+                                            "id": {
+                                                "type": "integer",
+                                                "description": "Record id"
+                                            }
+                                        },
+                                        "description": "Updates an auth record",
+                                        "title": "auth.update_auth"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "category"
+                                            },
+                                            "action": {
+                                                "const": "list"
+                                            }
+                                        },
+                                        "description": "List all companies",
+                                        "title": "category.list"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "category"
+                                            },
+                                            "action": {
+                                                "const": "save_or_update"
+                                            },
+                                            "data": {
+                                                "type": "object",
+                                                "description": "Row payload (name, optional id)"
+                                            }
+                                        },
+                                        "description": "Create or update a company row",
+                                        "title": "category.save_or_update"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "category"
+                                            },
+                                            "action": {
+                                                "const": "update"
+                                            },
+                                            "id": {
+                                                "type": "integer",
+                                                "description": "Row id"
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "description": "New name"
+                                            }
+                                        },
+                                        "description": "Update a company by id",
+                                        "title": "category.update"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "mail"
+                                            },
+                                            "action": {
+                                                "const": "send_welcome"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "description": "Recipient address"
+                                            }
+                                        },
+                                        "description": "Queued welcome email demo",
+                                        "title": "mail.send_welcome"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "sampolo"
+                                            },
+                                            "action": {
+                                                "const": "create"
+                                            }
+                                        },
+                                        "description": "Create a new row",
+                                        "title": "sampolo.create"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "sampolo"
+                                            },
+                                            "action": {
+                                                "const": "delete"
+                                            }
+                                        },
+                                        "description": "Delete a row by primary key",
+                                        "title": "sampolo.delete"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "sampolo"
+                                            },
+                                            "action": {
+                                                "const": "details"
+                                            }
+                                        },
+                                        "description": "Alias for the `retrieve` action",
+                                        "title": "sampolo.details"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "sampolo"
+                                            },
+                                            "action": {
+                                                "const": "edit"
+                                            }
+                                        },
+                                        "description": "Alias for the `update` action",
+                                        "title": "sampolo.edit"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "sampolo"
+                                            },
+                                            "action": {
+                                                "const": "list"
+                                            }
+                                        },
+                                        "description": "List rows with optional pagination",
+                                        "title": "sampolo.list"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "sampolo"
+                                            },
+                                            "action": {
+                                                "const": "random"
+                                            }
+                                        },
+                                        "description": "Return random row(s)",
+                                        "title": "sampolo.random"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "sampolo"
+                                            },
+                                            "action": {
+                                                "const": "retrieve"
+                                            }
+                                        },
+                                        "description": "Fetch one row by primary key",
+                                        "title": "sampolo.retrieve"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "sampolo"
+                                            },
+                                            "action": {
+                                                "const": "save"
+                                            }
+                                        },
+                                        "description": "Alias for the `create` action",
+                                        "title": "sampolo.save"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "required": [
+                                            "service",
+                                            "action"
+                                        ],
+                                        "properties": {
+                                            "service": {
+                                                "const": "sampolo"
+                                            },
+                                            "action": {
+                                                "const": "update"
+                                            }
+                                        },
+                                        "description": "Update an existing row",
+                                        "title": "sampolo.update"
+                                    }
+                                ]
+                            },
+                            "examples": {
+                                "auth.create_auth": {
+                                    "summary": "Creates an auth record (`auth.create_auth`)",
+                                    "value": {
+                                        "service": "auth",
+                                        "action": "create_auth",
+                                        "username": "demo",
+                                        "password": "secret"
+                                    }
+                                },
+                                "auth.delete_auth": {
+                                    "summary": "Deletes an auth record (`auth.delete_auth`)",
+                                    "value": {
+                                        "service": "auth",
+                                        "action": "delete_auth",
+                                        "id": 1
+                                    }
+                                },
+                                "auth.get_auth": {
+                                    "summary": "Returns auth context for the current request (`auth.get_auth`)",
+                                    "value": {
+                                        "service": "auth",
+                                        "action": "get_auth"
+                                    }
+                                },
+                                "auth.list_auth": {
+                                    "summary": "Lists auth records (demo stub) (`auth.list_auth`)",
+                                    "value": {
+                                        "service": "auth",
+                                        "action": "list_auth"
+                                    }
+                                },
+                                "auth.update_auth": {
+                                    "summary": "Updates an auth record (`auth.update_auth`)",
+                                    "value": {
+                                        "service": "auth",
+                                        "action": "update_auth",
+                                        "id": 1
+                                    }
+                                },
+                                "category.list": {
+                                    "summary": "List all companies (`category.list`)",
+                                    "value": {
+                                        "service": "category",
+                                        "action": "list"
+                                    }
+                                },
+                                "category.save_or_update": {
+                                    "summary": "Create or update a company row (`category.save_or_update`)",
+                                    "value": {
+                                        "service": "category",
+                                        "action": "save_or_update",
+                                        "data": {
+                                            "name": "Acme"
+                                        }
+                                    }
+                                },
+                                "category.update": {
+                                    "summary": "Update a company by id (`category.update`)",
+                                    "value": {
+                                        "service": "category",
+                                        "action": "update",
+                                        "id": 1,
+                                        "name": "Acme"
+                                    }
+                                },
+                                "mail.send_welcome": {
+                                    "summary": "Queued welcome email demo (`mail.send_welcome`)",
+                                    "value": {
+                                        "service": "mail",
+                                        "action": "send_welcome",
+                                        "email": "user@example.com"
+                                    }
+                                },
+                                "sampolo.create": {
+                                    "summary": "Create a new row (`sampolo.create`)",
+                                    "value": {
+                                        "service": "sampolo",
+                                        "action": "create"
+                                    }
+                                },
+                                "sampolo.delete": {
+                                    "summary": "Delete a row by primary key (`sampolo.delete`)",
+                                    "value": {
+                                        "service": "sampolo",
+                                        "action": "delete"
+                                    }
+                                },
+                                "sampolo.details": {
+                                    "summary": "Alias for the `retrieve` action (`sampolo.details`)",
+                                    "value": {
+                                        "service": "sampolo",
+                                        "action": "details"
+                                    }
+                                },
+                                "sampolo.edit": {
+                                    "summary": "Alias for the `update` action (`sampolo.edit`)",
+                                    "value": {
+                                        "service": "sampolo",
+                                        "action": "edit"
+                                    }
+                                },
+                                "sampolo.list": {
+                                    "summary": "List rows with optional pagination (`sampolo.list`)",
+                                    "value": {
+                                        "service": "sampolo",
+                                        "action": "list"
+                                    }
+                                },
+                                "sampolo.random": {
+                                    "summary": "Return random row(s) (`sampolo.random`)",
+                                    "value": {
+                                        "service": "sampolo",
+                                        "action": "random"
+                                    }
+                                },
+                                "sampolo.retrieve": {
+                                    "summary": "Fetch one row by primary key (`sampolo.retrieve`)",
+                                    "value": {
+                                        "service": "sampolo",
+                                        "action": "retrieve"
+                                    }
+                                },
+                                "sampolo.save": {
+                                    "summary": "Alias for the `create` action (`sampolo.save`)",
+                                    "value": {
+                                        "service": "sampolo",
+                                        "action": "save"
+                                    }
+                                },
+                                "sampolo.update": {
+                                    "summary": "Update an existing row (`sampolo.update`)",
+                                    "value": {
+                                        "service": "sampolo",
+                                        "action": "update"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pionia JSON envelope",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "returnCode",
+                                        "returnMessage"
+                                    ],
+                                    "properties": {
+                                        "returnCode": {
+                                            "type": "integer"
+                                        },
+                                        "returnMessage": {
+                                            "type": "string"
+                                        },
+                                        "returnData": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "extraData": {
+                                            "type": "object",
+                                            "nullable": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

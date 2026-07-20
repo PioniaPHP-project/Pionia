@@ -5,7 +5,7 @@ use Pionia\Database\Migrations\Migration;
 use Pionia\Database\Schema;
 
 /**
- * Initial schema from example/database/schema.sql (company + sample_table).
+ * Sample tables for the example app (company + sample_table).
  */
 return new class extends Migration
 {

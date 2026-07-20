@@ -96,8 +96,6 @@ php pionia migrate          # apply database/migrations/
 php pionia migrate:status
 ```
 
-`database/schema.sql` + `bin/init-db.php` are legacy; `init-db.php` now forwards to `migrate`.
-
 PostgreSQL settings remain under `[db_pgsql]` in `settings.ini` if you prefer Postgres.
 
 Connections are pooled per process via `ConnectionManager` — `db()` / `table()` reuse the same PDO until the worker exits.

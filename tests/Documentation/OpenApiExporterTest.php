@@ -8,7 +8,7 @@ use Pionia\TestSuite\PioniaTestCase;
 
 class OpenApiExporterTest extends PioniaTestCase
 {
-    public function testExportProducesServiceActionNavigationOnly(): void
+    public function testExportUsesOnlyRealDispatchPathWithEveryActionAsAnExample(): void
     {
         $catalog = (new MoonlightDocCollector())->collect();
         $json = (new OpenApiExporter())->export($catalog);
@@ -17,21 +17,30 @@ class OpenApiExporterTest extends PioniaTestCase
         $this->assertSame('3.1.0', $spec['openapi']);
         $this->assertStringContainsString('Moonlight API', $spec['info']['title']);
         $this->assertArrayNotHasKey('x-tagGroups', $spec);
-        $this->assertArrayNotHasKey('components', $spec);
-        $this->assertArrayNotHasKey('/api/v1', $spec['paths']);
-        $this->assertArrayHasKey('/api/v1#auth.list_auth', $spec['paths']);
+        $this->assertSame(['/api/v1/'], array_keys($spec['paths']));
 
-        $operation = $spec['paths']['/api/v1#auth.list_auth']['post'];
-        $this->assertSame(['auth'], $operation['tags']);
-        $this->assertSame('auth_list_auth', $operation['operationId']);
-        $this->assertArrayHasKey('x-pionia-dispatch', $operation);
-        $this->assertSame('/api/v1', $operation['x-pionia-dispatch']['url']);
+        $operation = $spec['paths']['/api/v1/']['post'];
+        $this->assertSame(['API v1'], $operation['tags']);
+        $this->assertSame('moonlight_v1', $operation['operationId']);
 
-        $requestSchema = $operation['requestBody']['content']['application/json']['schema'];
-        $this->assertSame('auth', $requestSchema['properties']['service']['const']);
-        $this->assertSame('list_auth', $requestSchema['properties']['action']['const']);
+        $content = $operation['requestBody']['content']['application/json'];
+        $this->assertArrayHasKey('oneOf', $content['schema']);
+        $this->assertArrayHasKey('auth.list_auth', $content['examples']);
+        $this->assertArrayHasKey('auth.create_auth', $content['examples']);
+        $this->assertArrayHasKey('auth.delete_auth', $content['examples']);
+        $this->assertArrayHasKey('auth.get_auth', $content['examples']);
+        $this->assertArrayHasKey('auth.update_auth', $content['examples']);
+        $this->assertSame('auth', $content['examples']['auth.list_auth']['value']['service']);
+        $this->assertSame('list_auth', $content['examples']['auth.list_auth']['value']['action']);
 
-        $responseSchema = $operation['responses']['200']['content']['application/json']['schema'];
-        $this->assertArrayHasKey('returnData', $responseSchema['properties']);
+        $actionCount = 0;
+        foreach ($catalog->versions as $services) {
+            foreach ($services as $service) {
+                $actionCount += count($service->actions);
+            }
+        }
+        $this->assertSame($actionCount, count($content['schema']['oneOf']));
+        $this->assertSame($actionCount, count($content['examples']));
+        $this->assertGreaterThan(1, $actionCount);
     }
 }

@@ -177,6 +177,7 @@ Framework base classes use **short names** — no `Base*` prefix. App classes us
 | Moonlight envelope | `Pionia\Http\Response\ApiResponse` | `response()` helper | — |
 | HTTP response | `Pionia\Http\Response\Response` | `Response::fromEnvelope()` | — |
 | Authentication | `Pionia\Auth\Authentication` | `JwtAuthentication` | `make:auth` |
+| Auth attributes | `#[Authenticated]`, `#[Can]`, `#[CanAny]` | Service / action | — |
 | Middleware | `Pionia\Middlewares\Middleware` | `RequestIdMiddleware` | `make:middleware` |
 | Command | `Pionia\Console\Command` | `SyncOrdersCommand` | `make:command` |
 | Provider | `Pionia\Base\Provider\Provider` | `AppProvider` | `make:provider` |

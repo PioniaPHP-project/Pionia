@@ -86,6 +86,31 @@ protected function loginAction(Arrayable $data): ApiResponse
 
 Same pipe syntax as `rules()`; custom rules from `validations()->extend()`. See user docs: Validations guide.
 
+## Auth enforcement (PHP attributes)
+
+Runtime auth (not just docs) — run before validation in `processAction`:
+
+```php
+use Pionia\Auth\Attributes\Authenticated;
+use Pionia\Auth\Attributes\Can;
+use Pionia\Auth\Attributes\CanAny;
+
+#[Authenticated(except: ['login'])]
+class MemberService extends Service
+{
+    #[Can('member.profile')]
+    protected function profileAction(Arrayable $data): ApiResponse { … }
+
+    #[Can(['member.update', 'admin'])]       // all required
+    protected function updateAction(Arrayable $data): ApiResponse { … }
+
+    #[CanAny(['member.edit', 'admin'])]      // any one
+    protected function patchAction(Arrayable $data): ApiResponse { … }
+}
+```
+
+When `@moonlight-auth` / `@moonlight-perm` are omitted, the catalog infers `required` and permissions from these attributes.
+
 ## Tag reference
 
 | Tag / attribute | Required | Purpose |
@@ -121,7 +146,7 @@ Runtime docs use `[docs] ENABLED` / `DOCS_ENABLED` and optional `TOKEN` / `DOCS_
 
 ## OpenAPI profile
 
-Moonlight OpenAPI exposes **one documented operation per action** under `/api/{version}#{service}.{action}` (path fragment for Scalar navigation only). Request and response shapes are inlined on each action page. Try-it-out uses Scalar `onBeforeRequest` (plus a fetch fallback) to POST to `x-pionia-dispatch.url` — the real `POST /api/{version}/` with `{ "service", "action", ...params }`.
+Moonlight OpenAPI exposes the real **`POST /api/{version}/`** dispatch operation. Every service action appears as a named request example and a `oneOf` request schema; `service` and `action` remain in the JSON body. OpenAPI permits only one operation for each method/path pair, so actions are not represented as synthetic paths.
 
 ## Response envelope
 

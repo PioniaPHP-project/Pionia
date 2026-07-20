@@ -33,7 +33,7 @@ trait AuthTrait
     public function canAny( string | array $permission, ?string $message = 'You do not have access to this resource'): bool
     {
         // check if the user is authenticated even before checking for permissions
-        $this->mustAuthenticate($this->request);
+        $this->mustAuthenticate();
 
         $message = $message ?? 'You do not have access to this resource';
 
