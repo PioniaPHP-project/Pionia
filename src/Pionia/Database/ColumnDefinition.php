@@ -5,7 +5,15 @@ namespace Pionia\Database;
 /**
  * Fluent column modifiers for {@see Blueprint}.
  *
- * Methods return `$this` so callers can chain `nullable()`, `default()`, `unique()`, etc.
+ * Chain constraints after the column type, e.g.:
+ *
+ * ```php
+ * $table->string('first_name')->nonNullable()->unique();
+ * $table->email()->unique()->comment('Login identity');
+ * $table->integer('age')->nullable()->default(0)->unsigned();
+ * ```
+ *
+ * Columns are **NOT NULL** by default; call `nullable()` to allow NULL.
  */
 final class ColumnDefinition
 {
@@ -83,6 +91,9 @@ final class ColumnDefinition
         }
     }
 
+    // --- Nullability -------------------------------------------------------------
+
+    /** Allow NULL values. */
     public function nullable(bool $value = true): self
     {
         $this->nullable = $value;
@@ -90,12 +101,38 @@ final class ColumnDefinition
         return $this;
     }
 
+    /** Require NOT NULL (default for new columns). Alias of `nullable(false)`. */
+    public function nonNullable(): self
+    {
+        return $this->nullable(false);
+    }
+
+    /** Alias of {@see nonNullable()}. */
+    public function notNull(): self
+    {
+        return $this->nonNullable();
+    }
+
+    /** Alias of {@see nonNullable()} — column must be present / NOT NULL. */
+    public function required(): self
+    {
+        return $this->nonNullable();
+    }
+
+    // --- Defaults & indexes ------------------------------------------------------
+
     public function default(mixed $value): self
     {
         $this->default = $value;
         $this->hasDefault = true;
 
         return $this;
+    }
+
+    /** Alias of {@see default()}. */
+    public function defaultsTo(mixed $value): self
+    {
+        return $this->default($value);
     }
 
     public function unique(bool $value = true): self
@@ -133,6 +170,11 @@ final class ColumnDefinition
         return $this;
     }
 
+    public function signed(): self
+    {
+        return $this->unsigned(false);
+    }
+
     public function comment(string $text): self
     {
         $this->comment = $text;
@@ -140,6 +182,7 @@ final class ColumnDefinition
         return $this;
     }
 
+    /** Place column after another (MySQL). */
     public function after(string $column): self
     {
         $this->after = $column;
@@ -147,6 +190,7 @@ final class ColumnDefinition
         return $this;
     }
 
+    /** Mark this column definition as an ALTER … MODIFY / CHANGE. */
     public function change(): self
     {
         $this->change = true;
@@ -177,6 +221,33 @@ final class ColumnDefinition
     public function check(string $expression): self
     {
         $this->check = $expression;
+
+        return $this;
+    }
+
+    /** Alias of {@see check()}. */
+    public function constraint(string $expression): self
+    {
+        return $this->check($expression);
+    }
+
+    /** Adjust VARCHAR/string length after `string($name)`. */
+    public function length(int $length): self
+    {
+        $this->length = max(1, $length);
+
+        return $this;
+    }
+
+    /** Adjust DECIMAL precision/scale after `decimal()` / `money()`. */
+    public function precision(int $precision, ?int $scale = null): self
+    {
+        $this->precision = $precision;
+        $this->total = $precision;
+        if ($scale !== null) {
+            $this->scale = $scale;
+            $this->places = $scale;
+        }
 
         return $this;
     }

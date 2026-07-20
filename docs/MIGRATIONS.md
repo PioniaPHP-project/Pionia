@@ -61,6 +61,33 @@ return new class extends Migration
 };
 ```
 
+## Column constraints (fluent chaining)
+
+Columns are **NOT NULL by default**. Chain modifiers in any order:
+
+```php
+$table->string('first_name')->nonNullable()->unique();
+$table->string('middle_name')->nullable();
+$table->email()->unique()->comment('Login identity');
+$table->integer('age')->unsigned()->defaultsTo(0);
+$table->string('code', 10)->required()->index()->check("{column} LIKE 'X%'");
+$table->foreignId('org_id')->nonNullable()->constrained('orgs')->cascadeOnDelete();
+```
+
+| Modifier | Purpose |
+|----------|---------|
+| `nullable()` / `nonNullable()` / `notNull()` / `required()` | NULL vs NOT NULL |
+| `unique()` / `index()` / `primary()` | Indexes / keys |
+| `default($v)` / `defaultsTo($v)` | Default value |
+| `unsigned()` / `signed()` | Numeric sign |
+| `length($n)` / `precision($p, $s)` | Size after the type call |
+| `comment($text)` | Column comment (MySQL) |
+| `after($col)` | Column order (MySQL) |
+| `check($sql)` / `constraint($sql)` | CHECK (`{column}` placeholder) |
+| `useCurrent()` / `useCurrentOnUpdate()` | Timestamp defaults |
+| `constrained()` | FK from `foreignId` |
+| `change()` | Alter existing column |
+
 ## Blueprint reference
 
 ```php
