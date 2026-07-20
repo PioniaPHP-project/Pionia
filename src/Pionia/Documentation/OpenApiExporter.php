@@ -76,7 +76,8 @@ class OpenApiExporter
                 'title' => $catalog->title . ' Moonlight API',
                 'version' => '1.0.0',
                 'description' => 'Browse services and actions in the sidebar. Each page documents one Moonlight action with inline request and response shapes. '
-                    . 'Dispatch all actions with `POST` to the versioned API base and body `{ "service", "action", ...params }`.',
+                    . 'Dispatch all actions with `POST` to the versioned API base and body `{ "service", "action", ...params }`. '
+                    . 'Path fragments (`#service.action`) are for documentation navigation only; the sandbox posts to the real base URL.',
             ],
             'tags' => $tagDefinitions,
             'paths' => $paths,
@@ -142,13 +143,13 @@ class OpenApiExporter
         ];
     }
 
+    /**
+     * Unique OpenAPI path key: real dispatch URL + fragment for per-action navigation.
+     * Fragments are not sent over HTTP; Scalar try-it-out rewrites to x-pionia-dispatch.url.
+     */
     private function documentPath(string $version, string $service, string $action): string
     {
-        return rtrim(apiVersionPath($version), '/')
-            . '/moonlight/'
-            . $service
-            . '/'
-            . $action;
+        return rtrim(apiVersionPath($version), '/') . '#' . $service . '.' . $action;
     }
 
     private function operationId(string $service, string $action): string
@@ -196,8 +197,6 @@ class OpenApiExporter
 
         $lines[] = '';
         $lines[] = 'Health check: `GET ' . apiPingPath($version) . '`.';
-        $lines[] = '';
-        $lines[] = 'Documentation path `' . $this->documentPath($service->version, $service->alias, $action->name) . '` is for reference only — the runtime endpoint is `' . $dispatchPath . '`.';
 
         return implode("\n", $lines);
     }
@@ -207,22 +206,24 @@ class OpenApiExporter
      */
     private function requestExamples(ServiceDoc $service, ActionDoc $action): array
     {
-        $payload = $action->example;
+        $value = [
+            'service' => $service->alias,
+            'action' => $action->name,
+        ];
 
+        $payload = $action->example;
         if (is_string($payload) && $payload !== '') {
             $decoded = json_decode($payload, true);
-            $value = is_array($decoded) ? $decoded : [
-                'service' => $service->alias,
-                'action' => $action->name,
-            ];
-        } else {
-            $value = [
-                'service' => $service->alias,
-                'action' => $action->name,
-            ];
+            if (is_array($decoded)) {
+                $value = array_merge($value, $decoded);
+                $value['service'] = $decoded['service'] ?? $service->alias;
+                $value['action'] = $decoded['action'] ?? $action->name;
+            }
+        }
 
-            foreach (array_keys($action->params) as $param) {
-                $value[$param] = '…';
+        foreach ($action->params as $param => $meta) {
+            if (!array_key_exists($param, $value)) {
+                $value[$param] = $this->placeholderForType($meta['type'] ?? 'string');
             }
         }
 
@@ -232,6 +233,18 @@ class OpenApiExporter
                 'value' => $value,
             ],
         ];
+    }
+
+    private function placeholderForType(string $type): mixed
+    {
+        return match (strtolower($type)) {
+            'int', 'integer' => 0,
+            'float', 'double', 'number' => 0.0,
+            'bool', 'boolean' => true,
+            'array', 'list' => [],
+            'object' => (object) [],
+            default => '',
+        };
     }
 
     private function openApiType(string $type): string

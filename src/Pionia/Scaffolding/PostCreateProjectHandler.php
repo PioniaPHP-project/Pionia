@@ -3,6 +3,7 @@
 namespace Pionia\Scaffolding;
 
 use Composer\Script\Event;
+use Pionia\Utils\Support;
 
 /**
  * Runs after composer create-project: rename app from folder, optional frontend scaffold.
@@ -93,7 +94,7 @@ final class PostCreateProjectHandler
             return;
         }
 
-        $name = basename($appDir);
+        $name = Support::titleize(basename($appDir));
         $out = [];
 
         foreach ($lines as $line) {

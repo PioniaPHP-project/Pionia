@@ -726,6 +726,45 @@ if (!function_exists('secure_token')) {
     }
 }
 
+if (!function_exists('jwt_encode')) {
+    /**
+     * @param array<string, mixed> $claims
+     * @param array<string, mixed> $headers
+     */
+    #[\NoDiscard]
+    function jwt_encode(array $claims, ?string $secret = null, array $headers = [], string $alg = 'HS256'): string
+    {
+        return security()->jwtEncode($claims, $secret, $headers, $alg);
+    }
+}
+
+if (!function_exists('jwt_decode')) {
+    /**
+     * @return array{header: array<string, mixed>, payload: array<string, mixed>}
+     */
+    #[\NoDiscard]
+    function jwt_decode(string $token, bool $verify = true, ?string $secret = null): array
+    {
+        return security()->jwtDecode($token, $verify, $secret);
+    }
+}
+
+if (!function_exists('jwt_verify')) {
+    #[\NoDiscard]
+    function jwt_verify(string $token, ?string $secret = null): bool
+    {
+        return security()->jwtVerify($token, $secret);
+    }
+}
+
+if (!function_exists('jwt_refresh_token')) {
+    #[\NoDiscard]
+    function jwt_refresh_token(int $bytes = 32): string
+    {
+        return security()->jwtRefreshToken($bytes);
+    }
+}
+
 if (!function_exists('secure_secret')) {
     /**
      * Alias of {@see secure_token()} for API keys and shared secrets.
@@ -1015,6 +1054,14 @@ if (!function_exists('slugify')){
     function slugify(string $value): string
     {
         return Support::slugify($value);
+    }
+}
+
+if (!function_exists('titleize')) {
+    /** Human display title: my-shop → My Shop */
+    function titleize(string $value): string
+    {
+        return Support::titleize($value);
     }
 }
 

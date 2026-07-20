@@ -45,21 +45,26 @@ class EnvResolver
 
     /**
      * Absolute path to the environment directory (settings.ini, .env, etc.).
+     * Prefer BASE_PATH when defined so CWD-relative decoy environment/ dirs cannot win.
      */
     private function environmentDirectory(): string
     {
-        $path = $this->path;
+        $path = $this->path !== '' ? $this->path : 'environment';
+
+        if (defined('BASE_PATH')) {
+            $candidate = BASE_PATH . DIRECTORY_SEPARATOR . $path;
+            if (is_dir($candidate)) {
+                return $candidate;
+            }
+
+            $default = BASE_PATH . DIRECTORY_SEPARATOR . 'environment';
+            if (is_dir($default)) {
+                return $default;
+            }
+        }
 
         if ($path !== '' && is_dir($path)) {
             return rtrim($path, DIRECTORY_SEPARATOR);
-        }
-
-        if ($path !== '' && defined('BASE_PATH') && is_dir(BASE_PATH . DIRECTORY_SEPARATOR . $path)) {
-            return BASE_PATH . DIRECTORY_SEPARATOR . $path;
-        }
-
-        if (defined('BASE_PATH')) {
-            return BASE_PATH . DIRECTORY_SEPARATOR . 'environment';
         }
 
         return 'environment';

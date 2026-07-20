@@ -35,6 +35,13 @@ interface ProviderContract
     public function commands(): array;
 
     /**
+     * Absolute paths to directories containing migration files for this provider.
+     *
+     * @return list<string>
+     */
+    public function migrations(): array;
+
+    /**
      * Configure logging channels after the LogManager is ready.
      */
     public function configureLogging(LogManager $log): void;

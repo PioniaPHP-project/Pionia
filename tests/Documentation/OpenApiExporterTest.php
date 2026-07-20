@@ -19,9 +19,9 @@ class OpenApiExporterTest extends PioniaTestCase
         $this->assertArrayNotHasKey('x-tagGroups', $spec);
         $this->assertArrayNotHasKey('components', $spec);
         $this->assertArrayNotHasKey('/api/v1', $spec['paths']);
-        $this->assertArrayHasKey('/api/v1/moonlight/auth/list_auth', $spec['paths']);
+        $this->assertArrayHasKey('/api/v1#auth.list_auth', $spec['paths']);
 
-        $operation = $spec['paths']['/api/v1/moonlight/auth/list_auth']['post'];
+        $operation = $spec['paths']['/api/v1#auth.list_auth']['post'];
         $this->assertSame(['auth'], $operation['tags']);
         $this->assertSame('auth_list_auth', $operation['operationId']);
         $this->assertArrayHasKey('x-pionia-dispatch', $operation);

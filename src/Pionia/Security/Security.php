@@ -19,6 +19,7 @@ use RuntimeException;
  * **Digests** — `hash()`, `hmac()`, timing-safe `equals()` / `verifyHmac()`.
  * **Symmetric encryption** — libsodium secretbox using `APP_KEY` or an explicit key.
  * **Asymmetric encryption** — libsodium box seal/box (X25519) and RSA-OAEP (hybrid).
+ * **JWT** — `jwtEncode` / `jwtDecode` / `jwtVerify` (HS256/384/512, RS256) and opaque `jwtRefreshToken()`.
  * **Validators** — static `isUuid()`, `isUlid()`, `isOtp()`, `isToken()` for validation.
  *
  * Extension requirements:
@@ -928,5 +929,237 @@ final class Security
         }
 
         return sodium_crypto_generichash($key, '', SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
+    }
+
+    // -------------------------------------------------------------------------
+    // JWT
+    // -------------------------------------------------------------------------
+
+    /**
+     * Create a signed JWT (HS256/HS384/HS512 or RS256).
+     *
+     * Default secret: `[jwt] SECRET` / `JWT_SECRET` / `APP_KEY`.
+     * Adds `iat` when missing; adds `exp` from `[jwt] TTL` (seconds, default 3600) when missing.
+     *
+     * @param array<string, mixed> $claims
+     * @param array<string, mixed> $headers
+     *
+     * @throws InvalidArgumentException|RuntimeException
+     */
+    public function jwtEncode(
+        array $claims,
+        ?string $secret = null,
+        array $headers = [],
+        string $alg = 'HS256',
+    ): string {
+        $alg = strtoupper($alg);
+        $now = time();
+
+        if (!isset($claims['iat'])) {
+            $claims['iat'] = $now;
+        }
+
+        if (!isset($claims['exp'])) {
+            $ttl = (int) (function_exists('env') ? env('JWT_TTL', 3600) : 3600);
+            $claims['exp'] = $now + max(1, $ttl);
+        }
+
+        $issuer = function_exists('env') ? env('JWT_ISSUER') : null;
+        if ($issuer && !isset($claims['iss'])) {
+            $claims['iss'] = $issuer;
+        }
+
+        $audience = function_exists('env') ? env('JWT_AUDIENCE') : null;
+        if ($audience && !isset($claims['aud'])) {
+            $claims['aud'] = $audience;
+        }
+
+        $header = array_merge(['typ' => 'JWT', 'alg' => $alg], $headers);
+        $header['alg'] = $alg;
+
+        $segments = [
+            $this->jwtBase64UrlEncode(json_encode($header, JSON_THROW_ON_ERROR)),
+            $this->jwtBase64UrlEncode(json_encode($claims, JSON_THROW_ON_ERROR)),
+        ];
+        $signingInput = implode('.', $segments);
+        $segments[] = $this->jwtBase64UrlEncode($this->jwtSign($signingInput, $alg, $secret));
+
+        return implode('.', $segments);
+    }
+
+    /**
+     * Decode a JWT. When `$verify` is true, signature and exp/nbf/iss/aud are checked.
+     *
+     * @return array{header: array<string, mixed>, payload: array<string, mixed>}
+     *
+     * @throws InvalidArgumentException|RuntimeException
+     */
+    public function jwtDecode(string $token, bool $verify = true, ?string $secret = null): array
+    {
+        $parts = explode('.', $token);
+        if (count($parts) !== 3) {
+            throw new InvalidArgumentException('JWT must have three segments.');
+        }
+
+        [$headerB64, $payloadB64, $sigB64] = $parts;
+        $headerJson = $this->jwtBase64UrlDecode($headerB64);
+        $payloadJson = $this->jwtBase64UrlDecode($payloadB64);
+        $header = json_decode($headerJson, true);
+        $payload = json_decode($payloadJson, true);
+
+        if (!is_array($header) || !is_array($payload)) {
+            throw new InvalidArgumentException('JWT header or payload is not valid JSON.');
+        }
+
+        if ($verify) {
+            $alg = strtoupper((string) ($header['alg'] ?? 'HS256'));
+            if (!$this->jwtVerifySignature($headerB64 . '.' . $payloadB64, $this->jwtBase64UrlDecode($sigB64), $alg, $secret)) {
+                throw new InvalidArgumentException('JWT signature is invalid.');
+            }
+
+            $this->jwtValidateClaims($payload);
+        }
+
+        return ['header' => $header, 'payload' => $payload];
+    }
+
+    /**
+     * Verify signature and standard claims; returns false instead of throwing.
+     */
+    public function jwtVerify(string $token, ?string $secret = null): bool
+    {
+        try {
+            $this->jwtDecode($token, true, $secret);
+
+            return true;
+        } catch (\Throwable) {
+            return false;
+        }
+    }
+
+    /**
+     * Opaque refresh token (CSPRNG). Store/hash server-side; not a JWT.
+     */
+    public function jwtRefreshToken(int $bytes = 32): string
+    {
+        return $this->token($bytes);
+    }
+
+    /**
+     * @param array<string, mixed> $payload
+     */
+    private function jwtValidateClaims(array $payload): void
+    {
+        $now = time();
+
+        if (isset($payload['nbf']) && (int) $payload['nbf'] > $now + 60) {
+            throw new InvalidArgumentException('JWT is not valid yet (nbf).');
+        }
+
+        if (isset($payload['exp']) && (int) $payload['exp'] < $now) {
+            throw new InvalidArgumentException('JWT has expired.');
+        }
+
+        $issuer = function_exists('env') ? env('JWT_ISSUER') : null;
+        if ($issuer !== null && $issuer !== '' && isset($payload['iss']) && (string) $payload['iss'] !== (string) $issuer) {
+            throw new InvalidArgumentException('JWT issuer mismatch.');
+        }
+
+        $audience = function_exists('env') ? env('JWT_AUDIENCE') : null;
+        if ($audience !== null && $audience !== '' && isset($payload['aud'])) {
+            $aud = $payload['aud'];
+            $ok = is_array($aud) ? in_array($audience, $aud, true) : (string) $aud === (string) $audience;
+            if (!$ok) {
+                throw new InvalidArgumentException('JWT audience mismatch.');
+            }
+        }
+    }
+
+    private function jwtSign(string $input, string $alg, ?string $secret): string
+    {
+        return match ($alg) {
+            'HS256' => hash_hmac('sha256', $input, $this->resolveJwtSecret($secret), true),
+            'HS384' => hash_hmac('sha384', $input, $this->resolveJwtSecret($secret), true),
+            'HS512' => hash_hmac('sha512', $input, $this->resolveJwtSecret($secret), true),
+            'RS256' => $this->jwtRsaSign($input, $secret),
+            default => throw new InvalidArgumentException("Unsupported JWT algorithm: {$alg}"),
+        };
+    }
+
+    private function jwtVerifySignature(string $input, string $signature, string $alg, ?string $secret): bool
+    {
+        if (str_starts_with($alg, 'HS')) {
+            return $this->equals($this->jwtSign($input, $alg, $secret), $signature);
+        }
+
+        if ($alg === 'RS256') {
+            $publicKey = $secret
+                ?? (function_exists('env') ? (string) env('JWT_PUBLIC_KEY', env('JWT_PRIVATE_KEY', '')) : '');
+            if ($publicKey === '') {
+                return false;
+            }
+            $resource = openssl_pkey_get_public($publicKey) ?: openssl_pkey_get_private($publicKey);
+            if ($resource === false) {
+                return false;
+            }
+
+            return openssl_verify($input, $signature, $resource, OPENSSL_ALGO_SHA256) === 1;
+        }
+
+        return false;
+    }
+
+    private function jwtRsaSign(string $input, ?string $privateKeyPem): string
+    {
+        $key = $privateKeyPem ?? (function_exists('env') ? (string) env('JWT_PRIVATE_KEY', '') : '');
+        if ($key === '') {
+            throw new RuntimeException('RS256 requires a private key (JWT_PRIVATE_KEY).');
+        }
+
+        $resource = openssl_pkey_get_private($key);
+        if ($resource === false) {
+            throw new InvalidArgumentException('Invalid RSA private key for JWT.');
+        }
+
+        $signature = '';
+        $ok = openssl_sign($input, $signature, $resource, OPENSSL_ALGO_SHA256);
+        if (!$ok) {
+            throw new RuntimeException('RS256 signing failed.');
+        }
+
+        return $signature;
+    }
+
+    private function resolveJwtSecret(?string $secret): string
+    {
+        $secret ??= function_exists('env')
+            ? (string) (env('JWT_SECRET', env('APP_KEY', '')) ?? '')
+            : '';
+
+        if ($secret === '') {
+            throw new RuntimeException('JWT secret is missing. Set JWT_SECRET or APP_KEY.');
+        }
+
+        return $secret;
+    }
+
+    private function jwtBase64UrlEncode(string $data): string
+    {
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
+
+    private function jwtBase64UrlDecode(string $data): string
+    {
+        $remainder = strlen($data) % 4;
+        if ($remainder > 0) {
+            $data .= str_repeat('=', 4 - $remainder);
+        }
+
+        $decoded = base64_decode(strtr($data, '-_', '+/'), true);
+        if ($decoded === false) {
+            throw new InvalidArgumentException('Invalid JWT base64url encoding.');
+        }
+
+        return $decoded;
     }
 }

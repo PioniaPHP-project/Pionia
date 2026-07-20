@@ -8,6 +8,8 @@ use Pionia\Documentation\Contracts\MoonlightApiCatalog;
  * Renders a Swagger-like interactive API reference (Scalar) for Moonlight OpenAPI specs.
  *
  * Scalar manages its own light/dark toggle — no Pionia theme scripts on this page.
+ * OpenAPI path keys use `#service.action` fragments for navigation; a fetch patch
+ * strips fragments so try-it-out posts to the real Moonlight dispatch URL.
  */
 class ApiDocsUiExporter
 {
@@ -70,6 +72,19 @@ class ApiDocsUiExporter
     </div>
     <a href="/">Home</a>
 </div>
+<script>
+(function () {
+    var origFetch = window.fetch.bind(window);
+    window.fetch = function (input, init) {
+        if (typeof input === 'string' && input.indexOf('#') !== -1) {
+            input = input.split('#')[0];
+        } else if (input instanceof Request && input.url.indexOf('#') !== -1) {
+            input = new Request(input.url.split('#')[0], input);
+        }
+        return origFetch(input, init);
+    };
+})();
+</script>
 <script
     id="api-reference"
     data-url="{$specUrl}"

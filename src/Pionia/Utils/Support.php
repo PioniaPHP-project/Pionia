@@ -152,6 +152,17 @@ class Support
     }
 
     /**
+     * Human display title: my-shop / my_shop → My Shop.
+     */
+    public static function titleize(string $value): string
+    {
+        $normalized = str_replace(['-', '_'], ' ', trim($value));
+        $normalized = preg_replace('/\s+/', ' ', $normalized) ?? $normalized;
+
+        return $normalized === '' ? '' : ucwords(strtolower($normalized));
+    }
+
+    /**
      * Grabs all keys of an array. But ignores nested keys
      * Converts ['name' => 'John', 'age' => 20, 'address' => ['city' => 'Lagos', 'state' => 'Lagos']] to ['name', 'age', 'address']
      * @param array $array

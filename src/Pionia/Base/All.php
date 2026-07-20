@@ -1,9 +1,19 @@
 <?php
 
+use Pionia\Builtins\Commands\BenchCommand;
 use Pionia\Builtins\Commands\Cache\CacheDeleteCommand;
 use Pionia\Builtins\Commands\Cache\ClearCacheCommand;
 use Pionia\Builtins\Commands\Cache\PruneCacheCommand;
 use Pionia\Builtins\Commands\Context\ListAliasCommand;
+use Pionia\Builtins\Commands\Database\MakeAddColumnCommand;
+use Pionia\Builtins\Commands\Database\MakeAddForeignCommand;
+use Pionia\Builtins\Commands\Database\MakeAddIndexCommand;
+use Pionia\Builtins\Commands\Database\MakeMigrationCommand;
+use Pionia\Builtins\Commands\Database\MakeTableCommand;
+use Pionia\Builtins\Commands\Database\MigrateCommand;
+use Pionia\Builtins\Commands\Database\MigrateFreshCommand;
+use Pionia\Builtins\Commands\Database\MigrateRollbackCommand;
+use Pionia\Builtins\Commands\Database\MigrateStatusCommand;
 use Pionia\Builtins\Commands\Generators\CreateMiddleware;
 use Pionia\Builtins\Commands\Generators\GenerateAuthenticationBackend;
 use Pionia\Builtins\Commands\Generators\GenerateCommand;
@@ -62,6 +72,7 @@ enum DIRECTORIES {
     case STATIC_DIR;
     case WELCOME_PAGE;
     case LOGS_DIR;
+    case MIGRATIONS_DIR;
 }
 
 // register here all builtins. These can be commands, Middleware, Authentications, etc.
@@ -92,6 +103,7 @@ if (!function_exists('allBuiltins')) {
                 'api:docs' => GenerateApiDocs::class,
                 'api:catalog' => GenerateApiCatalog::class,
                 'stats:view' => ViewStats::class,
+                'bench' => BenchCommand::class,
                 'maintenance:on' => MaintenanceOnCommand::class,
                 'maintenance:off' => MaintenanceOffCommand::class,
                 'new' => NewApplicationCommand::class,
@@ -100,6 +112,15 @@ if (!function_exists('allBuiltins')) {
                 'frontend:dev' => DevFrontendCommand::class,
                 'frontend:clean' => CleanFrontendCommand::class,
                 'frontend:drop' => DropFrontendCommand::class,
+                'make:migration' => MakeMigrationCommand::class,
+                'make:table' => MakeTableCommand::class,
+                'make:migration:column' => MakeAddColumnCommand::class,
+                'make:migration:index' => MakeAddIndexCommand::class,
+                'make:migration:foreign' => MakeAddForeignCommand::class,
+                'migrate' => MigrateCommand::class,
+                'migrate:rollback' => MigrateRollbackCommand::class,
+                'migrate:status' => MigrateStatusCommand::class,
+                'migrate:fresh' => MigrateFreshCommand::class,
             ],
             'authentications' => [
             ],
@@ -124,6 +145,7 @@ if (!function_exists('allBuiltins')) {
                 DIRECTORIES::LOGS_DIR->name => 'storage/logs',
                 DIRECTORIES::STORAGE_DIR->name => 'storage',
                 DIRECTORIES::STATIC_DIR->name => 'public/static',
+                DIRECTORIES::MIGRATIONS_DIR->name => 'database/migrations',
             ],
             'namespaces' => [
                 NAMESPACES::AUTHENTICATION_NS->name =>'Application\Authentications',

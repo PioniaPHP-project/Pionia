@@ -55,7 +55,7 @@ class NewApplicationCommand extends Command
         }
 
         $target = rtrim($parent, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name;
-        $appName = Support::classify(str_replace(['-', '_'], ' ', $name));
+        $appName = Support::titleize(str_replace(['-', '_'], ' ', $name));
         $slug = Support::slugify($name);
 
         $replacements = [
@@ -109,6 +109,10 @@ class NewApplicationCommand extends Command
         if ($frontend !== null) {
             $this->line('  php pionia frontend:dev   # Vite dev server');
         }
+        $this->line('  php pionia make:table users --columns="email:string:unique,name:string" --timestamps');
+        $this->line('  php pionia migrate');
+        $this->line('');
+        $this->line('Note: VS Code / IntelliJ may prompt to trust this new folder (Workspace Trust) — that is normal; accept once to enable full IDE features.');
         $this->line('');
         $this->line('Tip: on a machine without Pionia yet, prefer: composer create-project pionia/pionia-app ' . $name . ' -- --vue-ts');
 

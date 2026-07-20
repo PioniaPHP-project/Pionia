@@ -136,18 +136,13 @@ class MarkdownExporter
             $lines[] = '';
         }
 
-        $example = $action->example ?? json_encode([
-            'service' => $service->alias,
-            'action' => $action->name,
-        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-
         $lines[] = '**Example**';
         $lines[] = '';
         $lines[] = '```http';
         $lines[] = 'POST ' . $base . ' HTTP/1.1';
         $lines[] = 'Content-Type: application/json';
         $lines[] = '';
-        $lines[] = $example;
+        $lines[] = $this->examplePayload($service, $action);
         $lines[] = '```';
         $lines[] = '';
         $lines[] = '#### Response';
@@ -169,5 +164,42 @@ class MarkdownExporter
         $lines[] = '';
 
         return $lines;
+    }
+
+    private function examplePayload(ServiceDoc $service, ActionDoc $action): string
+    {
+        $value = [
+            'service' => $service->alias,
+            'action' => $action->name,
+        ];
+
+        if (is_string($action->example) && $action->example !== '') {
+            $decoded = json_decode($action->example, true);
+            if (is_array($decoded)) {
+                $value = array_merge($value, $decoded);
+                $value['service'] = $decoded['service'] ?? $service->alias;
+                $value['action'] = $decoded['action'] ?? $action->name;
+            }
+        }
+
+        foreach ($action->params as $param => $meta) {
+            if (!array_key_exists($param, $value)) {
+                $value[$param] = $this->placeholderForType($meta['type'] ?? 'string');
+            }
+        }
+
+        return json_encode($value, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?: '{}';
+    }
+
+    private function placeholderForType(string $type): mixed
+    {
+        return match (strtolower($type)) {
+            'int', 'integer' => 0,
+            'float', 'double', 'number' => 0.0,
+            'bool', 'boolean' => true,
+            'array', 'list' => [],
+            'object' => (object) [],
+            default => '',
+        };
     }
 }

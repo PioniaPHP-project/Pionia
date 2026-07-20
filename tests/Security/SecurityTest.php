@@ -186,4 +186,35 @@ class SecurityTest extends PioniaTestCase
         $this->assertSame('short message', $this->security->rsaDecrypt($small, $keys['private_key']));
         $this->assertSame(str_repeat('x', 512), $this->security->rsaDecrypt($large, $keys['private_key']));
     }
+
+    public function testJwtEncodeVerifyDecodeRoundTrip(): void
+    {
+        $token = $this->security->jwtEncode(['sub' => 'user-1', 'permissions' => ['read']], 'test-secret', alg: 'HS256');
+
+        $this->assertTrue($this->security->jwtVerify($token, 'test-secret'));
+        $decoded = $this->security->jwtDecode($token, true, 'test-secret');
+        $this->assertSame('user-1', $decoded['payload']['sub']);
+        $this->assertSame(['read'], $decoded['payload']['permissions']);
+        $this->assertArrayHasKey('iat', $decoded['payload']);
+        $this->assertArrayHasKey('exp', $decoded['payload']);
+    }
+
+    public function testJwtRejectsTamperedAndExpiredTokens(): void
+    {
+        $token = $this->security->jwtEncode(['sub' => 'u'], 'secret');
+        $this->assertFalse($this->security->jwtVerify($token . 'x', 'secret'));
+        $this->assertFalse($this->security->jwtVerify($token, 'other-secret'));
+
+        $expired = $this->security->jwtEncode(['sub' => 'u', 'exp' => time() - 10], 'secret');
+        $this->assertFalse($this->security->jwtVerify($expired, 'secret'));
+    }
+
+    public function testJwtRefreshTokenIsOpaque(): void
+    {
+        $a = $this->security->jwtRefreshToken(16);
+        $b = $this->security->jwtRefreshToken(16);
+
+        $this->assertNotSame($a, $b);
+        $this->assertTrue(Security::isToken($a));
+    }
 }

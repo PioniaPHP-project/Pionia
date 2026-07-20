@@ -133,6 +133,16 @@ Monitor OPcache on `/stats` (hit rate, preload status, JIT when enabled).
 
 Porm (`table()`, `connectionManager()`) — see [`docs/PORM.md`](docs/PORM.md) and the [Porm guides](https://pionia.netlify.app/documentation/database/) in pionia-docs.
 
+**Migrations (schema only, no models):** see [`docs/MIGRATIONS.md`](docs/MIGRATIONS.md).
+
+```bash
+php pionia make:table users --columns="email:string:unique,name:string" --timestamps
+php pionia migrate
+php pionia migrate:status
+```
+
+Providers may return migration directories from `Provider::migrations()`; they are collected with the app’s `database/migrations/` and applied in filename order.
+
 **Raw SQL:** Never pass user input into `Piql::raw()` or string ON clauses — use bound parameters and `where()` / `JoinOn::map()`. **`[Object]` column casts** call `unserialize()` only when `PORM_ALLOW_OBJECT_CAST=true` or `[db] allow_object_cast=1` in settings.
 
 `ConnectionManager` pools PDO instances per process. `Connection::connect('default')` reuses the pool; `Connection::open()` bypasses it (tests, one-off configs).

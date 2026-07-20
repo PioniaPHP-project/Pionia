@@ -88,8 +88,8 @@ class FrameworkWelcomePage
         <div class="d-flex align-items-center gap-3">
             <img src="{$favicon}" alt="" width="36" height="36">
             <div>
-                <div class="navbar-brand mb-0 p-0">{$framework}</div>
-                <div class="small text-white-50">{$appName}</div>
+                <div class="navbar-brand mb-0 p-0">{$appName}</div>
+                <div class="small text-white-50">{$framework}</div>
             </div>
         </div>
         <div class="d-none d-md-flex gap-2 ms-auto align-items-center">

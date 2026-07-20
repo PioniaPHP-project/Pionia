@@ -17,6 +17,7 @@
             <directory>tests/TestSuite</directory>
             <directory>tests/Utils</directory>
             <directory>tests/Performance</directory>
+            <directory>tests/Database</directory>
         </testsuite>
         <testsuite name="Feature">
             <directory>tests/Feature</directory>

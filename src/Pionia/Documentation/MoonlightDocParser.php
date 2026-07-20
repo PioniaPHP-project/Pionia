@@ -137,11 +137,11 @@ class MoonlightDocParser
             $result['perm'] = array_map('trim', $perms[1]);
         }
 
-        if (preg_match_all('/@moonlight-param\s+(\S+)\s+(\S+)\s+(.+)/i', $doc, $params, PREG_SET_ORDER)) {
+        if (preg_match_all('/@moonlight-param\s+(\S+)\s+(\S+)(?:\s+(.+))?/i', $doc, $params, PREG_SET_ORDER)) {
             foreach ($params as $param) {
                 $result['params'][trim($param[2])] = [
                     'type' => trim($param[1]),
-                    'description' => trim($param[3]),
+                    'description' => isset($param[3]) ? trim($param[3]) : '',
                 ];
             }
         }

@@ -64,6 +64,16 @@ abstract class Provider implements ProviderContract
     }
 
     /**
+     * Absolute paths to directories containing package / provider migrations.
+     *
+     * @return list<string>
+     */
+    public function migrations(): array
+    {
+        return [];
+    }
+
+    /**
      * Add logic to the application's booted hook.
      */
     public function onBooted(): void {}
