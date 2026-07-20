@@ -151,6 +151,15 @@ abstract class Grammar
             $sql .= ' UNIQUE';
         }
 
+        if ($column->getCheck() !== null && $column->getCheck() !== '') {
+            $expr = str_replace(
+                '{column}',
+                $this->wrap($column->getName()),
+                $column->getCheck(),
+            );
+            $sql .= ' CHECK (' . $expr . ')';
+        }
+
         return $sql;
     }
 

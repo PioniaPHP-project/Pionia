@@ -167,6 +167,27 @@ final class MigrationStubBuilder
         return self::write($name ?? ("add_{$column}_foreign_to_{$table}_table"), $up, $down);
     }
 
+    /**
+     * Scaffold a many-to-many pivot migration using {@see Schema::manyToMany()}.
+     */
+    public static function writeManyToMany(
+        string $leftTable,
+        string $rightTable,
+        bool $timestamps = false,
+        ?string $pivot = null,
+        ?string $name = null,
+    ): string {
+        $pivotArg = $pivot !== null ? ", table: '{$pivot}'" : '';
+        $ts = $timestamps ? 'true' : 'false';
+
+        $up = self::indent("Schema::manyToMany('{$leftTable}', '{$rightTable}', timestamps: {$ts}{$pivotArg});");
+        $down = self::indent("Schema::dropManyToMany('{$leftTable}', '{$rightTable}'" . ($pivot !== null ? ", '{$pivot}'" : '') . ');');
+
+        $basename = $name ?? ('create_' . ($pivot ?? ($leftTable . '_' . $rightTable . '_pivot')) . '_table');
+
+        return self::write($basename, $up, $down);
+    }
+
     public static function writeBlank(?string $name = null): string
     {
         $up = self::indent('// Schema::create(…);');
@@ -246,6 +267,15 @@ PHP;
             'id' => "\$table->id('{$name}')",
             'uuid' => "\$table->uuid('{$name}')",
             'ulid' => "\$table->ulid('{$name}')",
+            'email' => "\$table->email('{$name}')",
+            'phone' => "\$table->phone('{$name}')",
+            'url' => "\$table->url('{$name}')",
+            'slug' => "\$table->slug('{$name}')",
+            'ip', 'ipAddress', 'ip_address' => "\$table->ipAddress('{$name}')",
+            'mac', 'macAddress', 'mac_address' => "\$table->macAddress('{$name}')",
+            'year' => "\$table->year('{$name}')",
+            'money' => "\$table->money('{$name}')",
+            'currency' => "\$table->currency('{$name}')",
             'text' => "\$table->text('{$name}')",
             'integer' => "\$table->integer('{$name}')",
             'bigInteger' => "\$table->bigInteger('{$name}')",

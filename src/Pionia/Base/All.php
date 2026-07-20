@@ -7,6 +7,7 @@ use Pionia\Builtins\Commands\Cache\PruneCacheCommand;
 use Pionia\Builtins\Commands\Context\ListAliasCommand;
 use Pionia\Builtins\Commands\Database\MakeAddColumnCommand;
 use Pionia\Builtins\Commands\Database\MakeAddForeignCommand;
+use Pionia\Builtins\Commands\Database\MakePivotCommand;
 use Pionia\Builtins\Commands\Database\MakeAddIndexCommand;
 use Pionia\Builtins\Commands\Database\MakeMigrationCommand;
 use Pionia\Builtins\Commands\Database\MakeTableCommand;
@@ -117,6 +118,7 @@ if (!function_exists('allBuiltins')) {
                 'make:migration:column' => MakeAddColumnCommand::class,
                 'make:migration:index' => MakeAddIndexCommand::class,
                 'make:migration:foreign' => MakeAddForeignCommand::class,
+                'make:pivot' => MakePivotCommand::class,
                 'migrate' => MigrateCommand::class,
                 'migrate:rollback' => MigrateRollbackCommand::class,
                 'migrate:status' => MigrateStatusCommand::class,

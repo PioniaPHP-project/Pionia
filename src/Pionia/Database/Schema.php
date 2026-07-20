@@ -111,11 +111,104 @@ final class Schema
     }
 
     /**
+     * Create a many-to-many pivot table between two tables (Django/Laravel style).
+     *
+     * Default pivot name is alphabetical singulars joined with `_` (e.g. `posts`+`tags` → `post_tag`).
+     * Adds `{left}_id` / `{right}_id` foreign keys with cascade delete and a composite primary key.
+     *
+     * @param Closure(Blueprint): void|null $callback Extra pivot columns (e.g. `role`, `sort_order`)
+     * @return string Created pivot table name
+     */
+    public static function manyToMany(
+        string $leftTable,
+        string $rightTable,
+        ?Closure $callback = null,
+        bool $timestamps = false,
+        ?string $table = null,
+        ?string $connection = null,
+    ): string {
+        $leftSingular = self::singularizeTable($leftTable);
+        $rightSingular = self::singularizeTable($rightTable);
+        $pairs = [
+            [$leftSingular, $leftTable],
+            [$rightSingular, $rightTable],
+        ];
+        usort($pairs, static fn (array $a, array $b) => $a[0] <=> $b[0]);
+
+        $pivot = $table ?? ($pairs[0][0] . '_' . $pairs[1][0]);
+        $firstCol = $pairs[0][0] . '_id';
+        $secondCol = $pairs[1][0] . '_id';
+        $firstRef = $pairs[0][1];
+        $secondRef = $pairs[1][1];
+
+        self::create($pivot, function (Blueprint $blueprint) use (
+            $callback,
+            $timestamps,
+            $firstCol,
+            $secondCol,
+            $firstRef,
+            $secondRef,
+        ): void {
+            $blueprint->foreignId($firstCol)->constrained($firstRef)->cascadeOnDelete();
+            $blueprint->foreignId($secondCol)->constrained($secondRef)->cascadeOnDelete();
+            $blueprint->primary([$firstCol, $secondCol]);
+
+            if ($timestamps) {
+                $blueprint->timestamps();
+            }
+
+            if ($callback !== null) {
+                $callback($blueprint);
+            }
+        }, $connection);
+
+        return $pivot;
+    }
+
+    /**
+     * Drop a many-to-many pivot inferred the same way as {@see manyToMany()}.
+     */
+    public static function dropManyToMany(
+        string $leftTable,
+        string $rightTable,
+        ?string $table = null,
+        ?string $connection = null,
+    ): void {
+        $leftSingular = self::singularizeTable($leftTable);
+        $rightSingular = self::singularizeTable($rightTable);
+        $names = [$leftSingular, $rightSingular];
+        sort($names);
+        $pivot = $table ?? ($names[0] . '_' . $names[1]);
+        self::dropIfExists($pivot, $connection);
+    }
+
+    /**
      * Scope subsequent Schema calls to a named connection (or pass null to reset).
      */
     public static function connection(?string $name): void
     {
         self::$connection = $name;
+    }
+
+    private static function singularizeTable(string $table): string
+    {
+        if (function_exists('singularize')) {
+            return (string) singularize($table);
+        }
+
+        if (str_ends_with($table, 'ies')) {
+            return substr($table, 0, -3) . 'y';
+        }
+
+        if (str_ends_with($table, 'ses') || str_ends_with($table, 'xes') || str_ends_with($table, 'zes')) {
+            return substr($table, 0, -2);
+        }
+
+        if (str_ends_with($table, 's') && !str_ends_with($table, 'ss')) {
+            return substr($table, 0, -1);
+        }
+
+        return $table;
     }
 
     public static function getConnectionName(): ?string

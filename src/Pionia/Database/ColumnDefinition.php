@@ -35,6 +35,9 @@ final class ColumnDefinition
 
     private bool $useCurrentOnUpdate = false;
 
+    /** SQL CHECK expression; use `{column}` for the wrapped column name. */
+    private ?string $check = null;
+
     /** @var list<string>|null */
     private ?array $allowed = null;
 
@@ -166,6 +169,19 @@ final class ColumnDefinition
     }
 
     /**
+     * Attach a SQL CHECK constraint. Use `{column}` as a placeholder for the column name
+     * (grammars wrap it for the active driver).
+     *
+     * Example: `->check("{column} LIKE '%@%'")`
+     */
+    public function check(string $expression): self
+    {
+        $this->check = $expression;
+
+        return $this;
+    }
+
+    /**
      * Infer referenced table from column name (`user_id` → `users`) when `$table` is null.
      */
     public function constrained(?string $table = null, string $column = 'id'): ForeignKeyDefinition
@@ -255,6 +271,11 @@ final class ColumnDefinition
     public function usesCurrentOnUpdate(): bool
     {
         return $this->useCurrentOnUpdate;
+    }
+
+    public function getCheck(): ?string
+    {
+        return $this->check;
     }
 
     /** @return list<string>|null */

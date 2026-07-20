@@ -54,13 +54,25 @@ final class MigrationConsoleTest extends PioniaTestCase
 
     public function testColumnDslParser(): void
     {
-        $cols = MigrationStubBuilder::parseColumns('email:string:unique,org_id:foreignId:orgs,bio:text:nullable');
+        $cols = MigrationStubBuilder::parseColumns('email:email:unique,org_id:foreignId:orgs,bio:text:nullable');
 
         $this->assertCount(3, $cols);
         $this->assertSame('email', $cols[0]['name']);
+        $this->assertSame('email', $cols[0]['type']);
         $this->assertContains('unique', $cols[0]['modifiers']);
         $this->assertSame('orgs', $cols[1]['constrained']);
         $this->assertSame('text', $cols[2]['type']);
+    }
+
+    public function testWriteManyToManyStub(): void
+    {
+        $path = MigrationStubBuilder::writeManyToMany('posts', 'tags', true, null, 'create_post_tag_pivot');
+        $this->assertFileExists($path);
+        $contents = (string) file_get_contents($path);
+        $this->assertStringContainsString("Schema::manyToMany('posts', 'tags'", $contents);
+        $this->assertStringContainsString('timestamps: true', $contents);
+        $this->assertStringContainsString("Schema::dropManyToMany('posts', 'tags')", $contents);
+        @unlink($path);
     }
 
     public function testMigrateCommandRunsPending(): void

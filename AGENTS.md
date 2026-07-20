@@ -136,7 +136,8 @@ Porm (`table()`, `connectionManager()`) — see [`docs/PORM.md`](docs/PORM.md) a
 **Migrations (schema only, no models):** see [`docs/MIGRATIONS.md`](docs/MIGRATIONS.md).
 
 ```bash
-php pionia make:table users --columns="email:string:unique,name:string" --timestamps
+php pionia make:table users --columns="email:email:unique,name:string,phone:phone:nullable" --timestamps
+php pionia make:pivot posts tags --timestamps
 php pionia migrate
 php pionia migrate:status
 ```

@@ -203,6 +203,124 @@ final class Blueprint
         return $this->addColumn('foreignId', $name, ['unsigned' => true]);
     }
 
+    // --- Django-style / pragmatic specialized fields -----------------------------
+
+    /**
+     * Email address: VARCHAR(254) + CHECK that the value looks like an email.
+     * DB-level soft validation (not a full RFC parser).
+     */
+    public function email(string $name = 'email'): ColumnDefinition
+    {
+        return $this->string($name, 254)
+            ->check("{column} LIKE '%_@_%.__%'");
+    }
+
+    /**
+     * Phone number: VARCHAR(32) + length/charset CHECK (digits and common punctuation).
+     */
+    public function phone(string $name = 'phone'): ColumnDefinition
+    {
+        return $this->string($name, 32)
+            ->check("length({column}) BETWEEN 7 AND 32");
+    }
+
+    /**
+     * URL: VARCHAR(2048) + CHECK that it starts with http:// or https://.
+     */
+    public function url(string $name = 'url'): ColumnDefinition
+    {
+        return $this->string($name, 2048)
+            ->check("({column} LIKE 'http://%' OR {column} LIKE 'https://%')");
+    }
+
+    /**
+     * URL-safe slug: lowercase letters, digits, hyphens; no spaces.
+     */
+    public function slug(string $name = 'slug'): ColumnDefinition
+    {
+        return $this->string($name, 255)
+            ->check("length({column}) > 0 AND {column} NOT LIKE '% %'");
+    }
+
+    /**
+     * IPv4 or IPv6 address storage (VARCHAR(45)).
+     */
+    public function ipAddress(string $name = 'ip_address'): ColumnDefinition
+    {
+        return $this->string($name, 45)
+            ->check("length({column}) >= 7");
+    }
+
+    /**
+     * MAC address: XX:XX:XX:XX:XX:XX style length.
+     */
+    public function macAddress(string $name = 'mac_address'): ColumnDefinition
+    {
+        return $this->string($name, 17)
+            ->check("length({column}) = 17");
+    }
+
+    /**
+     * Calendar year as a small integer with a sensible range CHECK.
+     */
+    public function year(string $name = 'year'): ColumnDefinition
+    {
+        return $this->smallInteger($name)
+            ->check('{column} BETWEEN 1900 AND 2200');
+    }
+
+    /**
+     * Monetary amount: DECIMAL(19, 4) by default.
+     */
+    public function money(string $name, int $precision = 19, int $scale = 4): ColumnDefinition
+    {
+        return $this->decimal($name, $precision, $scale);
+    }
+
+    /**
+     * ISO-ish currency code (USD, UGX, …).
+     */
+    public function currency(string $name = 'currency'): ColumnDefinition
+    {
+        return $this->string($name, 3)
+            ->check("length({column}) = 3");
+    }
+
+    /**
+     * Laravel-style remember-me token column.
+     */
+    public function rememberToken(string $name = 'remember_token'): ColumnDefinition
+    {
+        return $this->string($name, 100)->nullable();
+    }
+
+    public function unsignedInteger(string $name): ColumnDefinition
+    {
+        return $this->integer($name)->unsigned();
+    }
+
+    public function unsignedBigInteger(string $name): ColumnDefinition
+    {
+        return $this->bigInteger($name)->unsigned();
+    }
+
+    /**
+     * `*_type` + `*_id` morph columns for polymorphic relations (no FK).
+     */
+    public function morphs(string $name): void
+    {
+        $this->string($name . '_type');
+        $this->unsignedBigInteger($name . '_id')->index();
+        $this->index([$name . '_type', $name . '_id']);
+    }
+
+    public function nullableMorphs(string $name): void
+    {
+        $this->string($name . '_type')->nullable();
+        $this->unsignedBigInteger($name . '_id')->nullable()->index();
+        $this->index([$name . '_type', $name . '_id']);
+    }
+
     // --- Alter helpers -----------------------------------------------------------
 
     /**

@@ -30,8 +30,9 @@ php pionia migrate:fresh
 | `make:migration:column` | `migrate:add-column` | Add columns |
 | `make:migration:index` | `migrate:add-index` | Add index / unique |
 | `make:migration:foreign` | `migrate:add-foreign` | Add foreign id |
+| `make:pivot` | `make:migration:pivot` | Many-to-many pivot table |
 
-Column DSL: `email:string:unique,name:string,org_id:foreignId:orgs`
+Column DSL: `email:email:unique,name:string,phone:phone:nullable,org_id:foreignId:orgs`
 
 ## Migration file shape
 
@@ -101,6 +102,43 @@ Schema::raw('CREATE INDEX …');
 $table->foreign('author_id')->references('id')->on('users')->cascadeOnDelete();
 $table->foreignId('org_id')->constrained('orgs')->nullOnDelete();
 ```
+
+### Many-to-many (pivot tables)
+
+```bash
+php pionia make:pivot posts tags --timestamps
+```
+
+```php
+Schema::create('posts', fn ($t) => $t->id() && $t->string('title'));
+Schema::create('tags', fn ($t) => $t->id() && $t->string('name'));
+
+// Creates `post_tag` with post_id, tag_id, composite PK, cascade deletes
+Schema::manyToMany('posts', 'tags', function (Blueprint $table) {
+    $table->string('role')->nullable(); // optional pivot data
+}, timestamps: true);
+
+Schema::dropManyToMany('posts', 'tags');
+```
+
+### Specialized fields (Django-style, with DB CHECK where useful)
+
+```php
+$table->email();              // VARCHAR(254) + email-like CHECK
+$table->phone();              // VARCHAR(32) + length CHECK
+$table->url('website');       // must start with http(s)://
+$table->slug()->unique();     // no spaces
+$table->ipAddress();
+$table->macAddress();
+$table->year('founded');
+$table->money('price');       // DECIMAL(19,4)
+$table->currency();           // CHAR-ish length 3
+$table->rememberToken();
+$table->morphs('taggable');   // taggable_type + taggable_id
+$table->string('code')->check("{column} LIKE 'X%'"); // custom CHECK
+```
+
+These are **database soft constraints**, not a replacement for app-level validation (`#[ValidateField]`, etc.).
 
 Drivers: SQLite, MySQL/MariaDB, PostgreSQL (via `ConnectionManager` + grammar).
 
